@@ -1,0 +1,54 @@
+---
+description: Vetinity zorunlu ürün geliştirme akışı — büyük değişiklikler önce product repo'da kararlaştırılır
+alwaysApply: true
+---
+
+# Vetinity Product Workflow
+
+Ana kaynak: [WORKFLOW.md](../../WORKFLOW.md)
+
+## Kesin kural
+
+Vetinity'de yeni bir ürün fikri veya büyük ürün değişikliği **doğrudan kodlanmaz**.
+
+## Agent davranışı
+
+### Yeni ürün özelliği istendiğinde
+
+1. İsteğin product workflow'a tabi olup olmadığını değerlendir.
+2. Büyük ürün değişikliğinde, kod yazmaya başlamadan önce ilgili backlog / ADR / roadmap kayıtlarının varlığını kontrol et.
+3. Kayıt yoksa kullanıcıyı **vetinity-product** repository'sinde önce karar ve kapsam oluşturmaya yönlendir.
+4. Product repository dışında ürün kararlarının ana kopyasını oluşturma.
+
+### Workflow'a tabi işler (önce product repo)
+
+- Yeni modül, ana ekran, menü/navigasyon değişikliği
+- Kullanıcı akışını değiştiren özellik
+- Trial, abonelik, fiyatlandırma politikası
+- AI özelliği, harici entegrasyon
+- Klinik veri modelini etkileyen ürün kararı
+- Rakipten alınması düşünülen özellik
+- Birden fazla modülü etkileyen büyük UX kararı
+
+### Workflow'a tabi olmayan işler (doğrudan kod)
+
+- Bug düzeltmeleri
+- Yazım ve basit görünüm hataları
+- Küçük erişilebilirlik iyileştirmeleri
+- Mevcut ve kabul edilmiş tasarımın tamamlanması
+- Davranışı değiştirmeyen teknik bakım
+
+Bu küçük işler için gereksiz ürün dokümantasyonu talep etme.
+
+### Koruma kuralları
+
+- Çalışan auth, route, clinic veya tenant akışlarını gereksiz refactor etme.
+- Rakip özelliğini doğrudan kopyalama; çözdüğü problemi analiz et.
+- Geliştirme tamamlandığında backlog, roadmap ve release notlarının güncellenmesini hatırlat.
+
+### Product repo referansları
+
+- Backlog: `backlog/feature-backlog.md`
+- Roadmap: `roadmap/roadmap.md`
+- ADR: `decisions/`
+- Rakip analizi: `competitors/`

@@ -12,6 +12,31 @@ Bu repository, **Vetinity** veteriner klinik yönetim platformunun merkezi ürü
 
 Teknik dokümantasyon kendi kod repository'lerinde kalır. Bu repository teknik belgeleri tekrar üretmez veya kopyalamaz.
 
+## Zorunlu Ürün Geliştirme Akışı
+
+> **Kesin kural:** Vetinity'de yeni bir ürün fikri veya büyük ürün değişikliği doğrudan kodlanmaz.
+
+Tüm ekip ve agent'lar için geçerli standart süreç:
+
+```
+Kullanıcı içgörüsü veya rakip gözlemi
+  → Problem ve kullanıcı değeri
+  → Rakip analizi gerekiyorsa competitors/
+  → Feature backlog
+  → Stratejik karar gerekiyorsa ADR
+  → Roadmap önceliklendirmesi
+  → UX ve teknik kapsam
+  → Frontend/backend geliştirme
+  → Doğrulama
+  → Backlog, roadmap ve release notlarının güncellenmesi
+```
+
+**Doğrudan kodlanabilir:** bug düzeltmeleri, yazım/görünüm hataları, küçük erişilebilirlik iyileştirmeleri, kabul edilmiş tasarımın tamamlanması, davranışı değiştirmeyen teknik bakım.
+
+**Önce bu repository'de kararlaştırılmalı:** yeni modül, ana ekran, menü değişikliği, akış değişikliği, trial/abonelik, AI, entegrasyon, veri modeli kararı, rakip özelliği, büyük UX kararı.
+
+Tam kurallar, kapanış kontrol listesi ve ayrım tabloları: **[WORKFLOW.md](WORKFLOW.md)**
+
 ### Teknik kaynakların konumu
 
 - **Frontend:** `vetinity-web` → `docs/` (ör. `FRONTEND-INTEGRATION-HANDOVER.md`, `BACKEND-INTEGRATION.md`)
@@ -21,6 +46,7 @@ Teknik dokümantasyon kendi kod repository'lerinde kalır. Bu repository teknik 
 
 ```
 README.md                          ← Bu sayfa; giriş ve süreç rehberi
+WORKFLOW.md                        ← Zorunlu ürün geliştirme akışı
 vision/vision.md                   ← Uzun vadeli ürün vizyonu
 roadmap/roadmap.md                 ← Önceliklendirilmiş ürün yol haritası
 roadmap/release-plan.md            ← Aşamalı yayın planı ve metrikler
@@ -35,30 +61,15 @@ decisions/                         ← Architecture Decision Records (ADR)
 release-notes/                     ← Sürüm notları (gelecek)
 ```
 
-## Yeni bir fikir geldiğinde izlenecek süreç
+## Süreç kuralları (özet)
 
-```
-Rakip gözlemi veya kullanıcı içgörüsü
-  → Problem analizi
-  → Backlog
-  → Stratejik karar gerekiyorsa ADR
-  → Roadmap önceliklendirmesi
-  → UX ve teknik tasarım (ilgili kod repo'larında)
-  → Geliştirme
-  → Doğrulama
-  → Release notu
-```
+Detaylı akış, istisnalar ve kapanış kontrol listesi için [WORKFLOW.md](WORKFLOW.md) kullanılır.
 
-### Kurallar
-
-- **Her fikir doğrudan roadmap'e girmez.** Önce backlog'da problem ve değer netleştirilir.
-- **Roadmap ile backlog aynı şey değildir.** Backlog tüm fikirleri ve detayları tutar; roadmap önceliklendirilmiş, zaman dilimli hedefleri gösterir.
-- **Her küçük karar ADR gerektirmez.** Stratejik, geri dönüşü maliyetli veya birçok alanı etkileyen kararlar ADR olarak tutulur.
-- **Rakip özellikleri doğrudan kopyalanmaz.** Önce hangi problemi çözdüğü değerlendirilir.
-- **Kod ile belge çelişirse** gerçek uygulama durumu doğrulanır ve belge güncellenir.
-- **Geçersiz hale gelen kararlar** sessizce silinmez; durum ve gerekçe ile güncellenir.
-- **Tamamlanan işlerin** roadmap ve backlog durumları güncellenir.
-- **Ürün dokümanları** teknik dokümanların kopyası haline gelmez.
+- **Her fikir roadmap'e girmez;** önce backlog'a alınır.
+- **Her küçük değişiklik ADR gerektirmez.** ADR stratejik ve geri dönüşü maliyetli kararlar içindir.
+- **Rakip özelliği kopyalanmaz;** çözdüğü problem analiz edilir.
+- **Geliştirme tamamlandığında** backlog, roadmap ve release notları güncellenmeden iş kapanmış sayılmaz.
+- **Product repository** neyi ve neden yaptığımızın kaynağıdır; frontend/backend nasıl uyguladığımızın kaynağıdır.
 
 ## Roadmap ve backlog farkı
 
@@ -104,6 +115,7 @@ Mevcut ADR'ler: [decisions/](decisions/)
 
 ## Hızlı bağlantılar
 
+- [Ürün geliştirme akışı (WORKFLOW)](WORKFLOW.md)
 - [Ürün vizyonu](vision/vision.md)
 - [Roadmap](roadmap/roadmap.md)
 - [Feature backlog](backlog/feature-backlog.md)
