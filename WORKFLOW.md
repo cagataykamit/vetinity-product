@@ -12,7 +12,7 @@ Bu belge, Vetinity'de yeni ürün fikirleri ve büyük ürün değişikliklerini
 |---|---|
 | **vetinity-product** (bu repo) | Neyi ve neden yaptığımızın kaynağı |
 | **vetinity-web** (frontend) | Nasıl uyguladığımızın kaynağı (UI, entegrasyon) |
-| **Backend repository** | Nasıl uyguladığımızın kaynağı (mimari, API, deploy) |
+| **Vetinity backend repository** | Nasıl uyguladığımızın kaynağı (mimari, API, deploy) |
 
 Ürün kararlarının ana kopyası yalnızca bu repository'de tutulur. Frontend ve backend repository'lerinde ürün kararlarının ikinci bir ana kopyası oluşturulmaz.
 
@@ -100,6 +100,7 @@ Bu işler için en az **backlog maddesi** gerekir. Stratejik kararlarda **ADR** 
 
 - **Rakip özelliği doğrudan kopyalanmaz;** çözdüğü problem analiz edilir.
 - Vetinity'nin kendi UX ve iş akışı felsefesiyle ele alınır.
+- Benchmark değerlendirme kuralları: [Benchmark değerlendirme prensipleri](#benchmark-değerlendirme-prensipleri)
 
 ### Geliştirme sonrası
 
@@ -110,6 +111,88 @@ Bu işler için en az **backlog maddesi** gerekir. Stratejik kararlarda **ADR** 
 - Kod ile belge çelişirse gerçek uygulama durumu doğrulanır ve belge güncellenir.
 - Geçersiz hale gelen kararlar sessizce silinmez; durum ve gerekçe ile güncellenir.
 - Ürün dokümanları teknik dokümanların kopyası haline gelmez.
+
+---
+
+## Benchmark değerlendirme prensipleri
+
+Vetinity'nin amacı hiçbir rakibi kopyalamak değildir. Amaç; dünyanın en iyi veteriner yazılımlarını inceleyerek onların çözdüğü problemleri anlamak, güçlü yönlerini analiz etmek ve Vetinity için daha iyi çözümler üretmektir.
+
+### Benchmark Philosophy
+
+Vetinity benchmark çalışmaları;
+
+- rakip ekranlarını birebir kopyalamak için yapılmaz.
+- rakiplerin çözdüğü kullanıcı problemlerini anlamak için yapılır.
+- aynı problemi daha iyi UX, daha sade akış ve daha güçlü mimari ile çözmek hedeflenir.
+
+### Benchmark Filtering Rules
+
+Benchmark sırasında görülen her özellik backlog'a eklenmez.
+
+Yeni kayıt yalnızca aşağıdaki durumlarda oluşturulur:
+
+- gerçekten yeni bir kullanıcı problemi çözüyorsa,
+- Vetinity için rekabet avantajı oluşturabilecekse,
+- mevcut IDEA veya PATTERN ile açıklanamıyorsa,
+- gelecekte uygulanması gerçekçi görünüyorsa.
+
+Aksi durumda:
+
+- mevcut IDEA genişletilir,
+- mevcut PATTERN genişletilir,
+- competitor notes altında bırakılır,
+- hiçbir kayıt oluşturulmaz.
+
+### Product Quality Principle
+
+**Amaç:**
+
+> Dünyanın en çok özelliğe sahip ürünü olmak değil,
+> dünyanın en iyi kullanıcı deneyimine sahip veteriner platformunu oluşturmak.
+
+Bu nedenle;
+
+- Feature Count hiçbir zaman başarı metriği değildir.
+- Workflow kalitesi Feature sayısından önemlidir.
+- Basitlik, tutarlılık ve hız önceliklidir.
+- Yeni modül eklemek yerine mevcut akışı iyileştirmek tercih edilir.
+- Her yeni özellik bakım maliyeti oluşturduğu için gerekliliği sorgulanmalıdır.
+
+İlgili ürün prensibi: [Consistency Over Feature Count](vision/product-principles.md#10-consistency-over-feature-count)
+
+### Benchmark Decision Flow
+
+Her benchmark gözleminde aşağıdaki sıra uygulanır:
+
+**1. Bu gerçekten yeni bir problem mi?**
+
+Hayır → mevcut kayıt genişlet.
+
+**2. Yeni bir pattern mi?**
+
+Hayır → competitor notes.
+
+**3. Vetinity bunu gerçekten yapmalı mı?**
+
+Hayır → backlog oluşturma.
+
+**4. Rakip bunu iyi yapmış olsa bile biz daha iyi bir çözüm üretebilir miyiz?**
+
+Evet → Vetinity çıkarımı oluştur.
+
+Hayır → yalnızca referans olarak bırak.
+
+### Repository Rule
+
+Repository'nin amacı özellik toplamak değil, ürün bilgisini rafine etmektir.
+
+Her yeni benchmark sonunda;
+
+- mevcut kayıtlar genişletilmeye çalışılır,
+- gereksiz yeni backlog oluşturulmaz,
+- tekrar eden fikirler birleştirilir,
+- repository zaman içinde büyümek yerine olgunlaşır.
 
 ---
 
@@ -129,6 +212,7 @@ Geliştirme tamamlandığında:
 - [README — Giriş](README.md)
 - [Feature backlog](backlog/feature-backlog.md)
 - [Roadmap](roadmap/roadmap.md)
-- [Stratejik kararlar (ADR)](decisions/ADR-001-self-service-trial-strategy.md)
+- [Stratejik kararlar (ADR)](decisions/)
 - [Rakip analizleri](competitors/README.md)
+- [Benchmark değerlendirme prensipleri](#benchmark-değerlendirme-prensipleri)
 - [UX ilkeleri](ux/ux-principles.md)

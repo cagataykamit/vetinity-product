@@ -43,7 +43,8 @@ Bu küçük işler için gereksiz ürün dokümantasyonu talep etme.
 ### Koruma kuralları
 
 - Çalışan auth, route, clinic veya tenant akışlarını gereksiz refactor etme.
-- Rakip özelliğini doğrudan kopyalama; çözdüğü problemi analiz et.
+- Rakip özelliğini doğrudan kopyalama; çözdüğü problemi analiz et. Benchmark kuralları: [WORKFLOW.md — Benchmark değerlendirme prensipleri](../../WORKFLOW.md#benchmark-değerlendirme-prensipleri)
+- Görülen her rakip özelliğini backlog'a ekleme; önce mevcut IDEA/PATTERN genişlet veya competitor notes'ta bırak.
 - Geliştirme tamamlandığında backlog, roadmap ve release notlarının güncellenmesini hatırlat.
 
 ### Product repo referansları

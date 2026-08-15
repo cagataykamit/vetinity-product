@@ -12,35 +12,62 @@ Vetinity rakip ürünlerini problem odaklı inceler. Özellik kopyalamak yerine 
 
 ---
 
-## Standart değerlendirme şablonu
+## Primary Competitors
 
-Her rakip analizi aşağıdaki alanları içermelidir:
+Vetinity'nin hedef kalite seviyesi ve ürün stratejisi için ana referanslardır.
 
-| Alan | Açıklama |
-|---|---|
-| **Ürün** | Rakip ürün adı |
-| **İncelenen alan** | Analiz kapsamı (muayene, timeline, entegrasyon vb.) |
-| **Kullanıcı problemi** | Rakip özelliğinin çözdüğü problem |
-| **Güçlü yön** | Rakibin iyi yaptığı alan |
-| **Zayıf yön** | Rakibin zayıf kaldığı alan |
-| **Vetinity için çıkarım** | Vetinity'nin nasıl yaklaşması gerektiği |
-| **Kopyalanmaması gereken unsur** | Bilinçli olarak kopyalanmayacak detay |
-| **İlgili backlog maddesi** | Feature backlog referansı |
-| **İlgili ADR** | Stratejik karar referansı (varsa) |
-| **Kanıt / ekran / kaynak notu** | Gözlem kaynağı |
-| **Analiz durumu** | Tamamlandı / Kısmi / Beklemede |
+### Global
+
+| Rakip | Analiz durumu | Belge |
+|---|---|---|
+| ezyVet | Beklemede | [ezyvet.md](ezyvet.md) |
+| Provet Cloud | Kısmi | [provet-cloud.md](provet-cloud.md) |
+| Digitail | Beklemede | [digitail.md](digitail.md) |
+| DaySmart Vet | Kısmi | [daysmart.md](daysmart.md) |
+
+### Türkiye
+
+| Rakip | Analiz durumu | Belge |
+|---|---|---|
+| E-vet Smart Plus | Beklemede | — |
 
 ---
 
-## Mevcut analizler
+## Legacy Competitors
 
-| Rakip | Pazar | Analiz durumu | Belge |
-|---|---|---|---|
-| DaySmart Vet | Uluslararası | Kısmi | [daysmart.md](daysmart.md) |
-| ezyVet | Uluslararası | Beklemede | [ezyvet.md](ezyvet.md) |
-| Digitail | Uluslararası | Beklemede | [digitail.md](digitail.md) |
-| Provet Cloud | Uluslararası | Beklemede | [provet-cloud.md](provet-cloud.md) |
-| Bulutvet | Türkiye | Kısmi | [bulutvet.md](bulutvet.md) |
+Modern ürün vizyonunu belirleyen ana referans değildir. Eski iş akışlarını, güçlü yönleri ve Türkiye pazarındaki tarihsel yaklaşımları anlamak için değerlendirilir.
+
+| Rakip | Analiz durumu | Belge |
+|---|---|---|
+| Bulutvet | Kısmi | [bulutvet.md](bulutvet.md) |
+
+---
+
+## Standart analiz şablonu
+
+Tüm rakip analizlerinde aşağıdaki bölümler kullanılır:
+
+| Bölüm | Açıklama |
+|---|---|
+| **Ürün özeti** | Rakip ürünün kısa tanımı ve pazar konumu |
+| **Hedef müşteri kitlesi** | Hangi klinik tipine ve ölçeğe hitap ettiği |
+| **Güçlü yönler** | Rakibin iyi yaptığı alanlar |
+| **Zayıf yönler** | Rakibin zayıf kaldığı alanlar |
+| **Dikkat çekici özellikler** | Öne çıkan veya farklılaştırıcı yetenekler |
+| **UX değerlendirmesi** | Arayüz, navigasyon ve iş akışı gözlemleri |
+| **AI ve otomasyon** | Yapay zeka ve otomasyon yaklaşımı (varsa) |
+| **Entegrasyonlar** | SMS, POS, e-Fatura, cihaz vb. entegrasyonlar |
+| **Vetinity için çıkarımlar** | Vetinity'nin problem odaklı nasıl yaklaşması gerektiği |
+| **Backlog adayları** | İlgili feature backlog maddeleri veya aday fikirler |
+
+Ek meta alanlar (gerekirse):
+
+| Alan | Açıklama |
+|---|---|
+| **Kopyalanmaması gereken unsur** | Bilinçli olarak kopyalanmayacak detay |
+| **İlgili ADR** | Stratejik karar referansı (varsa) |
+| **Kanıt / ekran / kaynak notu** | Gözlem kaynağı |
+| **Analiz durumu** | Tamamlandı / Kısmi / Beklemede |
 
 ---
 
@@ -56,8 +83,31 @@ Her rakip analizi aşağıdaki alanları içermelidir:
 
 ---
 
+## Araştırma Süreci
+
+Her rakip için aşağıdaki adımlar standart yöntem olarak izlenir:
+
+1. **Ürün erişimi** — Demo hesabı, trial veya halka açık kaynak
+2. **Demo** — Canlı veya kayıtlı ürün gösterimi
+3. **Dökümantasyon** — Resmi yardım, API veya pazarlama materyalleri
+4. **Video** — Eğitim, demo veya kullanıcı kayıtları
+5. **Screenshot** — Ekran görüntüsü arşivi
+6. **Doğrudan gözlemler** — Kaynaktan doğrulanabilir davranışlar (yorumdan ayrı)
+7. **Güçlü yönler** — Ürün değerlendirmesi
+8. **Zayıf yönler** — UX ve operasyonel riskler
+9. **Vetinity çıkarımları** — Değerlendirme adayları (kesin karar değil)
+10. **Ideas** — Tekil fikirler → [research/ideas.md](../research/ideas.md)
+11. **Patterns** — Tekrar eden kalıplar → [research/patterns.md](../research/patterns.md)
+
+Bu akış, rakip notlarının ötesinde uzun vadeli ürün araştırma merkezine aktarımı sağlar. Backlog'a geçiş [WORKFLOW.md](../WORKFLOW.md) sürecine tabidir.
+
+---
+
 ## İlgili belgeler
 
 - [UX ilkeleri — Rakip kopyalama ilkesi](../ux/ux-principles.md)
 - [Feature backlog](../backlog/feature-backlog.md)
 - [Ürün vizyonu](../vision/vision.md)
+- [Product Research Ideas](../research/ideas.md)
+- [Product Patterns](../research/patterns.md)
+- [Research README](../research/README.md)

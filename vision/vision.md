@@ -30,6 +30,12 @@ AI, ayrı bir gösteri modülü veya izole sidebar menüsü olarak değil; muaye
 
 Rakip özellikleri doğrudan kopyalamak yerine çözdükleri problem anlaşılır ve Vetinity'nin kendi UX ve iş akışı felsefesiyle ele alınır. Detaylar: [Rakip analizleri](../competitors/README.md).
 
+## Hedef Pazar
+
+Vetinity ilk aşamada companion animal kliniklerine odaklanır. Ürün mimarisi gelecekte üniversite hastaneleri, büyükbaş ve diğer veteriner segmentlerini destekleyecek şekilde modüler tasarlanır.
+
+Detaylar: [target-markets.md](target-markets.md)
+
 ## Mevcut ürün kapsamı
 
 Platform şu anda aşağıdaki modülleri kapsamaktadır. Bu liste ürün bağlamı içindir; teknik uygulama detayları frontend ve backend repository'lerinde tutulur.
