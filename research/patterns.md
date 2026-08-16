@@ -352,7 +352,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Record satırında edit, duplicate, delete; view changes / audit history; lot, expiry, route, site detayları |
 | **Avantajları** | Denetlenebilirlik; klinik güvenlik; itiraz yönetimi |
 | **Riskleri** | Audit veri hacmi; retention |
-| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route alanları ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); **Inventory Module** stock adjustment audit (Current/Actual balance, reason, Created By) — ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)) |
+| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route alanları ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); **Inventory Module** stock adjustment audit ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)); **Reports Module** Staff > Deleted Transactions ([reports-deleted-transactions](../competitors/daysmart.md#reports-deleted-transactions)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | P1 temel audit history; P2 attachment/duplicate |
 | **Durum** | Research |
 

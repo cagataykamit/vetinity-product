@@ -193,7 +193,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | → [ADR-003](../decisions/ADR-003-report-center.md). **Clients Module:** Client Dashboard analytics P3. **Contacts Module:** Contact Dashboard analytics (New/Total Active Contacts) P3 — → [daysmart.md](../competitors/daysmart.md#contact-dashboard--contact-list) |
+| **Notlar** | → [ADR-003](../decisions/ADR-003-report-center.md). **Clients Module:** Client Dashboard analytics P3. **Contacts Module:** Contact Dashboard analytics P3 — → [daysmart.md](../competitors/daysmart.md#contact-dashboard--contact-list). **Reports Module:** Reports Dashboard KPIs (Active Patients/Clients/Appointments); 9 category predefined catalog — → [daysmart.md](../competitors/daysmart.md#reports-dashboard) |
 
 ### REPORT-002 — Rapor kategorileri
 
@@ -209,7 +209,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001 |
-| **Notlar** | Ödeme, randevu, muayene, aşı raporları kategoriler altında |
+| **Notlar** | Ödeme, randevu, muayene, aşı raporları kategoriler altında. **Reports Module:** DaySmart 9 category catalog (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan) — predefined reports not generic builder — → [daysmart.md](../competitors/daysmart.md#reports-dashboard) |
 
 ### REPORT-003 — Rapor favorileri
 
@@ -257,7 +257,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001 |
-| **Notlar** | Gelecekte değerlendirilecek |
+| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** As Of, range period, location, provider/staff, date range — report-specific subset — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior) |
 
 ### REPORT-006 — Claim bazlı rapor görünürlüğü
 
@@ -289,7 +289,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
-| **Notlar** | Gelecekte değerlendirilecek |
+| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior) |
 
 ---
 
@@ -717,7 +717,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-005, RECORD-001 |
-| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing read-models — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** clinic-wide Invoices/Estimates/Payments/Returns/Credits/Refunds/Write-offs/Cash; invoice workspace tabs; multi-invoice payment allocation; Return≠Refund; returned≠restocked; credits; write-offs; cash reconciliation — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator) |
+| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator) |
 
 ---
 
@@ -753,7 +753,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | RECORD-001 |
-| **Notlar** | DaySmart view changes gözlemlendi — sandbox doğrulanmadı → [IDEA-025](../research/ideas.md#idea-025--auditable-clinical-record-lifecycle), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions). **Inventory Module:** stock adjustment Current vs Actual balance + reason + Created By — auditable movement prensibi → [daysmart.md](../competitors/daysmart.md#inventory-adjustments) |
+| **Notlar** | DaySmart view changes gözlemlendi — sandbox doğrulanmadı → [IDEA-025](../research/ideas.md#idea-025--auditable-clinical-record-lifecycle), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions). **Inventory Module:** stock adjustment audit — → [daysmart.md](../competitors/daysmart.md#inventory-adjustments). **Reports Module:** Staff > Deleted Transactions report — deleted financial/transaction visibility — → [daysmart.md](../competitors/daysmart.md#reports-deleted-transactions) |
 
 ### RECORD-003 — Record attachment
 
@@ -801,7 +801,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | RECORD-001 |
-| **Notlar** | DaySmart record satırı gözlemi. **Canlı sandbox — Patients Module:** Pharmacy/Vaccines History Lot, Route, Location; Records Summary — → [daysmart.md](../competitors/daysmart.md#pharmacy--labs--images--vaccines--vitals--communications). **Inventory Module:** Purchases/Transactions/Alerts lot+expiration; item master controlled/concentration/route — → [daysmart.md](../competitors/daysmart.md#inventory-purchases), [daysmart.md](../competitors/daysmart.md#inventory-transactions), [daysmart.md](../competitors/daysmart.md#inventory-alerts) |
+| **Notlar** | DaySmart record satırı gözlemi. **Patients Module:** Pharmacy/Vaccines lot/route. **Inventory Module:** Purchases/Transactions/Alerts — → [daysmart.md](../competitors/daysmart.md#inventory-purchases). **Reports Module:** Controlled Substances Log (audit trail report); US benchmark only — TR regulatory TBD — → [daysmart.md](../competitors/daysmart.md#reports-controlled-substances-log) |
 
 ### RECORD-006 — Birleşik record modeli ve tip-bazlı dinamik form
 
@@ -921,7 +921,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | — |
-| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). **Clients Module:** Client Profile Communications; Communication Preferences; Contact Details (client multi-contact). **Contacts Module:** Contact/Company Communications; Log Communication; shared source client/patient/contact scopes — → [daysmart.md](../competitors/daysmart.md#contact-communications). **Patients Module:** Patient History Communications. Reminders Log call — [daysmart.md](../competitors/daysmart.md#log-call--communication-record) |
+| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). **Clients/Contacts/Patients Module** comm scopes. **Reports Module:** Failed Emails (Bounce/Transient), Email And SMS Reminders Sent — delivery diagnostics — → [daysmart.md](../competitors/daysmart.md#reports-communications) |
 
 ### MSG-002 — İki yönlü mesajlaşma
 
@@ -969,7 +969,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | MSG-001 |
-| **Notlar** | v1.0 dışı aday. **Clients Module:** Client Tasks. **Contacts Module:** Person Contact Tasks (aynı task domain; Staff, Repeat, Contact auto-bind); Company Tasks **gözlemlenmedi** — → [daysmart.md](../competitors/daysmart.md#contact-tasks). Reminder **değil**; inbox görevinden farklı — internal task/work-management domain adayı |
+| **Notlar** | v1.0 dışı aday. **Clients Module:** Client Tasks. **Contacts Module:** Person Contact Tasks (Staff, Repeat, Contact auto-bind); Company Tasks **gözlemlenmedi** — → [daysmart.md](../competitors/daysmart.md#contact-tasks). **Reports Module:** Completed/Open Tasks, Tasks Summary — shared task source — → [daysmart.md](../competitors/daysmart.md#reports-staff). Reminder **değil**; inbox görevinden farklı |
 
 ### MSG-005 — Konuşmayı hasta ile ilişkilendirme
 
@@ -1037,7 +1037,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | Ayrı kopya yok. **Patients Module:** patient-scoped vs clinic-scoped. **Clients Module:** client-scoped vs patient-scoped. **Contacts Module:** contact/company-scoped Communication, Task, Relationship (external directory ≠ Customer) — → [daysmart.md](../competitors/daysmart.md#contact-cross-module-read-models), [ADR-006](../decisions/ADR-006-patient-timeline.md). **Inventory Module:** item usage/transactions/purchases/adjustments — same stock movement → patient timeline, invoice, item detail read-models → [daysmart.md](../competitors/daysmart.md#inventory-cross-module) |
+| **Notlar** | Ayrı kopya yok. **Patients/Clients/Contacts/Inventory Modules** — scoped read-models. **Reports Module:** operational → entity read-model → clinic-wide report → dashboard KPI; report-only duplicate source yok — → [daysmart.md](../competitors/daysmart.md#reports-architecture), [ADR-006](../decisions/ADR-006-patient-timeline.md) |
 
 ### TIMELINE-003 — Timeline filtreleri
 
@@ -1737,7 +1737,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-013 |
-| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. **Reminders Detail** (clinic-wide) — [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **Patient + Client Profile Reminders** patient-scoped/client-scoped — [Patients Module](../competitors/daysmart.md#documents--notes--relationships--reminders--wellness--tasks), [Clients Module Reminders](../competitors/daysmart.md#client-reminders). Reminder Bundle + multi schedule rule. Reminder ≠ Task. → [EXAM-014](#exam-014--item-rules-bundle-ve-record-oluşturma) |
+| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. **Reminders Detail** — [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **Patient + Client Profile Reminders** — [Patients Module](../competitors/daysmart.md#documents--notes--relationships--reminders--wellness--tasks), [Clients Module](../competitors/daysmart.md#client-reminders). **Reports Module:** Reminders Created, Reminders Detail report — same reminder source — → [daysmart.md](../competitors/daysmart.md#reports-communications). Reminder ≠ Task. → [EXAM-014](#exam-014--item-rules-bundle-ve-record-oluşturma) |
 
 ### APPT-015 — Bildirim merkezi
 

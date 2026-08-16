@@ -6,11 +6,11 @@ DaySmart Vet (uluslararası veteriner klinik yönetim platformu)
 
 ## İncelenen alan
 
-Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, **Billing / Financial Operations**, Treatment Board, Boarding, Reminders
+Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, **Reports / Reporting Module**, Treatment Board, Boarding, Reminders
 
 ## Analiz durumu
 
-**Kısmi** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (takvim, randevu, ilk giriş, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, **Billing / Financial Operations**, Treatment Board, Boarding, Reminders) mevcuttur. Sandbox doğrulaması bekleyen noktalar açıkça işaretlenmiştir.
+**Kısmi** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (takvim, randevu, ilk giriş, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, **Reports / Reporting Module**, Treatment Board, Boarding, Reminders) mevcuttur. Sandbox doğrulaması bekleyen noktalar açıkça işaretlenmiştir.
 
 ---
 
@@ -669,6 +669,7 @@ Veteriner hekimler muayene sırasında dağınık ekranlar arasında gezinmek, h
 - **Contacts altı:** List (Contact Dashboard + Contact List)
 - **Inventory altı:** List, Alerts, Categories, Orders, Receipts
 - **Billing altı:** Invoices, Estimates, Payments, Returns, Credits, Refunds, Write-offs, Cash
+- **Reports altı:** kategori bazlı predefined report kataloğu (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan)
 - Eski ve yenilenmiş hasta profili birlikte; “Switch to Previous Layout” benzeri geçiş
 - **Değerlendirme:** Aşamalı yeniden tasarım ve eski-yeni ekran birlikte yaşama tutarlılık riski — doğrudan kopyalanacak UX değil
 
@@ -2459,6 +2460,353 @@ Invoice item / Estimate item ──► Patient, Provider, service/product/item
 - Cash reconciliation vs payment ledger ilişkisi
 - Late fee otomatik mi manuel mi uygulanıyor
 - Declined Items → invoice line ilişkisi
+
+---
+
+## Sandbox — Reports / Reporting Module
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** (gerçek ürün ekranları)
+
+> Tüm maddeler **sandbox gözlemi**dir. Generic report builder olduğu **doğrulanmadı** — gözlem, domain bazlı **predefined report kataloğu**. Inventory/Billing/Patient/Client/Contact/Reminder domain tanımları tekrar edilmez; cross-ref kullanılır. US tax/controlled-substance varsayımları kopyalanmaz.
+
+**Temel pattern (benchmark):**
+
+```
+report category → select predefined report → report-specific filters → Generate/Refresh
+→ table and/or chart → Export → (some) entity drill-down
+```
+
+**Prensip:** same transactional/domain source → operational screen → entity-scoped read-model → clinic-wide report → dashboard/KPI — **report-only duplicate entity yok** → [TIMELINE-002](../backlog/feature-backlog.md), [ADR-006](../decisions/ADR-006-patient-timeline.md)
+
+→ [Inventory Module](#sandbox--inventory--inventory-module), [Billing Module](#sandbox--billing--financial-operations), [Patients Module](#sandbox--patients-module), [Clients Module](#sandbox--clients--client-module), [Contacts Module](#sandbox--contacts--contact-module), [Reminders](#sandbox--reminders-reminders-detail)
+
+### Reports Dashboard {#reports-dashboard}
+
+**Ekran:** Reports ana modülü
+
+**Dashboard KPI'lar (sandbox gözlemi):** Total Active Patients, Total Active Clients, Total Appointments
+
+**Report kategorileri (sandbox gözlemi):** Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan
+
+**Gözlem:** Tek generic builder değil; geniş **predefined operational/clinical/financial/management** report kataloğu.
+
+### Shared Report Behavior {#reports-shared-behavior}
+
+**Ortak davranışlar (sandbox gözlemi — tüm raporlarda garanti değil):**
+- Report-specific filters
+- Date range / **As Of** / range period
+- Clinic/home location (where relevant)
+- Provider/staff dimensions (where relevant)
+- **Generate / Refresh**
+- Tabular results; selected reports → charts
+- Summary KPI values
+- **Export** (exact format **doğrulanmadı**)
+- Entity drill-down (ör. Deceased Patient List → Patient Profile)
+
+**Vetinity aday shell (çıkarım — rakip gözlemi değil):** title, description, filters, KPIs, visualization, table, drill-down, export — DaySmart desktop catalog UI kopyalanmamalı → [REPORT-001](../backlog/feature-backlog.md), [REPORT-005](../backlog/feature-backlog.md)
+
+### Schedule Reports {#reports-schedule}
+
+**Gözlemlenen rapor adları:**
+- Appointment Duration
+- Appointment Log
+- Appointments By Status
+- Pending Appointments
+- Referral Source Summary
+- Sales By Appointment Type
+
+**Pending Appointments:** Operasyonel tablo; export destekli — pending appointment listesi.
+
+**Appointment Duration / Log / By Status:** Süre, geçmiş ve lifecycle/status raporlaması.
+
+**Referral Source Summary:** Randevu/müşteri edinim kaynağı.
+
+**Sales By Appointment Type:** Schedule/appointment type → finansal çıktı bağlantısı.
+
+**Vetinity aday boyutlar (çıkarım):** appointment type, provider, status, duration, referral source, revenue — her biri ayrı mimari sistem değil.
+
+### Patient Reports {#reports-patients}
+
+**Gözlemlenen rapor adları:**
+- Active Engaged Patients
+- Active Patient List
+- Deceased Patient List
+- Diagnosis Summary
+- In Process Medical Notes
+- Inactive Patient List
+- New Patients
+
+**Active Engaged Patients — filtreler:** As Of, Range Period (ör. 18 months), Home Location. "Active" vs "engaged/recently active" ayrımı; engagement kuralı **tam doğrulanmadı**.
+
+**Deceased Patient List:** Date range; kolonlar — patient, breed/species-type, chip, owner/client, deceased date, home location; **patient name drill-down** → Patient Profile.
+
+**Diagnosis Summary:** Diagnosis dağılım/özet → [Patients Module Diagnoses](#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics).
+
+**In Process Medical Notes:** Tamamlanmamış klinik dokümantasyon — reporting **operasyonel eksik iş** yüzeyi olabilir; ayrı worklist ile overlap değerlendirilmeli.
+
+### Client Reports {#reports-clients}
+
+**Gözlemlenen rapor adları:**
+- Active Client List
+- Active Clients Summary
+- Active Engaged Clients
+- Cards Stored On File
+- Inactive Client List
+- Lapsed Clients
+- New Clients
+
+**Active Client List:** Operasyonel/export raporu; client master + communication preferences — Primary Reminder Preference, Referred By, Transactional Email, Transactional SMS. **Duplicate Client entity yok** → [Clients Module](#client-communications).
+
+**Active Engaged Clients:** Engaged patient raporuna paralel; hesaplama kuralı **doğrulanmadı**.
+
+**Lapsed Clients:** Retention/churn odaklı — P2/P3 aday.
+
+### Communication Reports {#reports-communications}
+
+**Gözlemlenen rapor adları:**
+- Email And SMS Reminders Sent
+- Failed Emails
+- Reminders Created
+- Reminders Detail
+
+**Failed Emails — kolonlar:** recipient, email, status (ör. Bounce), failure type (ör. Transient), subject. Operasyonel **delivery diagnostics** — volume-only değil.
+
+**Reminders Detail:** Clinic-wide reminder operasyon listesi ile **aynı source** → [Reminders Detail](#reminders-detail-ana-tablo), [APPT-014](../backlog/feature-backlog.md). Duplicate reminder tanımı yok.
+
+→ [MSG-001](../backlog/feature-backlog.md), [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline)
+
+### Contact / Referral Reports {#reports-contacts}
+
+**Gözlemlenen rapor adları:**
+- Referred Patients by RDVM
+- Referring Doctors by Clinic
+- Referring Veterinarians List
+
+**Referring Doctors by Clinic:** Clinic gruplu; doctor/contact, phone, email. Contacts referral network → [Contacts Module Relationships](#contact-relationships). **Ayrı referral entity yok.**
+
+**Vetinity relevance:** Referral hospital/specialty — universal MVP **değil**; P2/P3 benchmark.
+
+### Inventory Reports {#reports-inventory}
+
+**Gözlemlenen rapor adları (tam liste):**
+- Best Selling Inventory Items
+- Controlled Substances Log
+- Inventory Adjustments
+- Inventory Alerts
+- Inventory Log
+- Inventory Summary
+- Inventory Value / Cost Of Goods Sold
+- Items By Price Type
+- Profit Margins
+- Purchases From Supplier
+- Sales By Category
+- Sales By Item
+- Unique Dispensing Log
+
+Domain detay → [Inventory Module](#sandbox--inventory--inventory-module). Stok kaynağı **auditable ledger** read-model olmalı; sessiz quantity overwrite **değil**.
+
+**Best Selling Inventory Items:** Product mix / commercial analysis — date range, qty, amount, category, item (alanlar **kısmen gözlemlendi**).
+
+**Controlled Substances Log {#reports-controlled-substances-log}:** En kritik inventory raporlarından biri. Controlled-drug **audit trail** — starting balance, patient, owner/client, prescription, invoice, ordered by, administered by, quantity used, remaining balance, purchases, ending balance. Stock ↔ purchase ↔ prescription ↔ patient ↔ provider ↔ usage ↔ invoice ↔ running balance. **US-oriented** — Türkiye controlled medicine → **requires Turkey-specific regulatory research**. NDC/US semantics kopyalanmaz → [RECORD-005](../backlog/feature-backlog.md).
+
+**Inventory Adjustments / Log / Summary:** Adjustment reason/audit cross-ref → [inventory-adjustments](#inventory-adjustments). Log = movement activity. Summary = current stock state.
+
+**Inventory Alerts:** Low stock, expiring — **aynı source** as operational alerts → [inventory-alerts](#inventory-alerts).
+
+**Inventory Value / COGS:** Finansal envanter değerleme/cost analysis. Costing method (FIFO/highest/avg) **doğrulanmadı** — item pricing'te "highest cost" gözlemi COGS formülünü kanıtlamaz.
+
+**Profit Margins:** Selling price vs cost; low-margin item identification — margin formülü **doğrulanmadı**. Procurement/cost data dependency.
+
+**Purchases From Supplier:** Supplier spend/procurement analysis → [inventory-purchases](#inventory-purchases), [inventory-purchase-orders](#inventory-purchase-orders).
+
+**Sales By Category / Item:** Invoice/sales source → [Billing Module](#billing-invoices), [Inventory Transactions](#inventory-transactions).
+
+**Unique Dispensing Log:** Dispensing-focused report; semantics **doğrulanmadı** — pharmacy/medication traceability adayı.
+
+### Billing Reports {#reports-billing}
+
+**Gözlemlenen rapor adları (tam liste):**
+- Account Receivable Reconciliation
+- Accounts Receivable
+- Accounts Receivable Out Of Period Sales
+- Annual Billing Comparison
+- Average Client Transaction
+- Billing Detail By Invoice
+- Cash Reconciliation
+- Collections Detail By Type
+- Declined Items
+- Discount Details
+- Discount Summary
+- Donations
+- End Of Day Detail
+- End Of Day Reconciliation
+- Monthly Billing Summary
+- Monthly Payments Summary
+- Payment By Provider
+- Production Credit based on Payments
+- Production Credit based on Sales
+- Returns
+- Sales By Provider Detail
+- Sales By Provider Summary
+- Sales Tax Summary
+- Transactions By Provider
+- Write Off
+
+Domain detay → [Billing Module](#sandbox--billing--financial-operations). **Return ≠ Refund; Write-off ≠ Discount** — tekrar tanımlanmaz.
+
+**Account Receivable Reconciliation {#reports-ar-reconciliation}:** Starting/ending receivable balance, change/delta, financial/provider breakdown, list price, discounts, taxes, late fees, total. **Uyarı:** Reopened invoices period tutarlılığını bozabilir — reconciliation güvenilir olmayabilir. Finansal integrity prensibi: reopened/backdated/late adjustment disclosure → [CHECKOUT-001](../backlog/feature-backlog.md).
+
+**Accounts Receivable:** Outstanding customer balances — customer balance, invoice, payment allocation, credits, write-offs **aynı source**.
+
+**Accounts Receivable Out Of Period Sales:** Period dışı etkileyen işlemler — financial control P2/P3.
+
+**Annual / Monthly summaries:** Trend/period comparison — her period chart için ayrı backlog **değil**.
+
+**Average Client Transaction:** Client economics KPI — düşük öncelik vs transactional correctness.
+
+**Billing Detail By Invoice:** Invoice read-model export/audit.
+
+**Cash Reconciliation / End Of Day:** → [billing-cash-reconciliation](#billing-cash-reconciliation). Same ledger/reconciliation source.
+
+**Collections Detail By Type:** Tahsilat by payment/collection type — TR: cash, card, transfer, POS (integration ayrı → [INT-006](../backlog/feature-backlog.md)).
+
+**Declined Items:** → [client-billing](#client-billing) Declined Items + Patient History — **shared source** → [TIMELINE-003](../backlog/feature-backlog.md).
+
+**Discount Details / Summary:** Invoice line + item/client discount policies — single rule engine **varsayılmaz**.
+
+**Returns / Write Off reports:** Billing entity cross-ref only.
+
+**Sales / Payment / Transactions By Provider:** Provider/staff revenue/production dimensions. **Attribution rules doğrulanmadı** — invoice creator ≠ clinical provider ≠ revenue owner olabilir.
+
+**Production Credit (Payments / Sales):** Item-level Production Credit tab ile ilişkili olabilir; semantics **doğrulanmadı** — P3/unresolved.
+
+**Sales Tax Summary:** US tax taxonomy kopyalanmaz; generic tax summary — KDV/e-belge → [INT-005](../backlog/feature-backlog.md), **requires Turkey-specific regulatory/accounting research**.
+
+### Staff Reports {#reports-staff}
+
+**Gözlemlenen rapor adları:**
+- Completed Tasks
+- Deleted Transactions
+- Open Tasks
+- Tasks Summary
+- Time Sheets
+
+**Completed Tasks:** Chart + staff × period/month matrix — internal task performance → [MSG-004](../backlog/feature-backlog.md), [Client Tasks](#client-tasks), [Contact Tasks](#contact-tasks). **Task source shared.**
+
+**Open Tasks / Tasks Summary:** Workload reporting.
+
+**Deleted Transactions {#reports-deleted-transactions}:** Silinen finansal/transactional activity — audit/security surface. Voided/reversed/deleted financial ops visibility → [RECORD-002](../backlog/feature-backlog.md), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions).
+
+**Time Sheets:** Staff time report — workflow/source **doğrulanmadı**; attendance/payroll **varsayılmaz**.
+
+### Wellness Plan Reports {#reports-wellness}
+
+**Gözlemlenen rapor adları:**
+- Billing Transactions
+- Enrollment Detail
+- Enrollment Summary
+- New Enrollments
+- New Enrollments By Staff
+- Wellness Plan Production
+- Wellness Plan Production Summary
+
+**New Enrollments By Staff:** Chart + staff breakdown table. Enrollment + billing + staff attribution + production.
+
+**Vetinity:** Wellness Plans **P3/future** → [Patients Module Wellness](#documents--notes--relationships--reminders--wellness--tasks). Benchmark evidence only; current backlog requirement **değil**.
+
+### Reporting Architecture {#reports-architecture}
+
+| Domain source | Operational | Entity read-model | Clinic report | Dashboard |
+|---|---|---|---|---|
+| Appointment | Schedule/Census | Patient/Client Appointments | Schedule reports | Total Appointments KPI |
+| Communication | Comm history, Reminders | Client/Patient comm | Failed Email, Reminders | — |
+| Inventory movement | Item tabs, Alerts | Item Transactions | Inventory Log, COGS, Controlled Log | Inventory dashboard |
+| Invoice/Payment | Billing module, Client Billing | Invoice/payment scoped | AR, EOD, Sales by Provider | Billing dashboard |
+| Task | Client/Contact Tasks | Task optional patient ref | Staff Task reports | — |
+| Contact referral | Relationships | Contact profile | Referring Doctors by Clinic | — |
+
+**CQRS/read-model:** Report-specific source table **oluşturulmaz** → [ADR-006](../decisions/ADR-006-patient-timeline.md)
+
+### Operational Worklist vs Report {#reports-worklist-vs-report}
+
+| Surface | DaySmart örnek | Vetinity değerlendirmesi |
+|---|---|---|
+| **Report** | Annual Billing Comparison, Diagnosis Summary | Historical/analytic/export |
+| **Worklist/queue** | Pending Appointments, In Process Medical Notes, Inventory Alerts, Open Tasks, Failed Emails | Proactive operational — report **veya** dedicated queue |
+
+Her operasyonel kuyruk ayrı "report" olmak zorunda değil.
+
+### Vetinity Implications {#reports-vetinity-implications}
+
+> **Vetinity ürün çıkarımı** — DaySmart sandbox gözlemi değildir.
+
+**A) Categorized Report Center** — Clinical, Clients, Appointments, Communications, Inventory, Finance, Staff/Operations, Advanced/future → [REPORT-001](../backlog/feature-backlog.md), [REPORT-002](../backlog/feature-backlog.md), [ADR-003](../decisions/ADR-003-report-center.md)
+
+**B) Shared filter framework** — date, location, provider, staff, patient, client, status, category, item, payment method — report-relevant subset only → [REPORT-005](../backlog/feature-backlog.md)
+
+**C) Consistent result structure** — filters → KPI → viz → table → drill-down → export
+
+**D) Export policy** — [REPORT-007](../backlog/feature-backlog.md); format TBD
+
+**E) Financial integrity** — AR reconciliation warnings; deleted transaction visibility; period consistency
+
+**F) Turkey** — KDV, e-Fatura/e-Arşiv/e-SMM, POS, controlled medicine — **requires Turkey-specific regulatory/accounting research** → [INT-005](../backlog/feature-backlog.md)
+
+### Strengths / Weaknesses {#reports-strengths-weaknesses}
+
+**DaySmart güçlü yönler (sandbox gözlemi):**
+- Broad domain coverage; predefined clinic-relevant reports
+- Cross-domain reporting; financial reconciliation depth
+- Stock/controlled substance auditability; staff/task reporting; referral reporting
+- Export; entity drill-down; operational + management in one module
+
+**Zayıf / fırsat (değerlendirme):**
+- Very long static catalog; discovery zor
+- Many narrowly named reports; legacy desktop IA
+- Similar reports → parameterized variants potential
+- Charts functional but dated; limited favorites/scheduling **gözlemlenmedi**
+- Several operational queues surfaced as "reports" not proactive workflows
+
+**Vetinity hedefi:** Depth koru; modern IA, search/filter, favorites → [REPORT-003](../backlog/feature-backlog.md), [REPORT-004](../backlog/feature-backlog.md)
+
+### Reports Gap Analysis {#reports-gap-analysis}
+
+| Capability | DaySmart Observation | Vetinity State | Backlog/Pattern | Gap | Priority |
+|---|---|---|---|---|---|
+| Report Center + categories | 9 domain categories | Planlı | REPORT-001/002, ADR-003, v1 Reports Center | Framework | P0/P1 |
+| Shared filters + export | Per-report filters, Export | Planlı | REPORT-005/007 | Shell | P0/P1 |
+| Report permissions | Not fully observed | Planlı | REPORT-006 | Access control TBD | P1 |
+| Dashboard KPIs | Active patients/clients/appts | Kısmi | REPORT-001, AI-101 | Metrics layer | P1/P3 |
+| AR / receivables | Accounts Receivable | Kısmi | CHECKOUT-001, Billing | AR read-model | P1 |
+| AR reconciliation + warnings | Reopened invoice warning | Yok | CHECKOUT-001 | Period integrity | P1/P2 |
+| EOD / cash reconciliation | EOD + Cash reports | Yok | CHECKOUT-001, Billing | Daily close | P1/P2 |
+| Invoice/payment summaries | Monthly/annual | Yok | REPORT-001 | Period reports | P1/P2 |
+| Inventory summary/movements | Log, Summary, Adjustments | Planlı | v1 Stock Mgmt | Ledger-based reports | P1 |
+| Critical stock / alerts report | Inventory Alerts report | Yok | AI-101, Inventory | Shared alert source | P1 |
+| Controlled substance log | Full audit trail report | Yok | RECORD-005 | TR regulatory TBD | P1/P2 |
+| COGS / inventory value | Financial inventory | Yok | — | Costing TBD | P1/P2 |
+| Profit margins | Margin report | Yok | — | Depends on cost data | P2 |
+| Failed email diagnostics | Bounce/transient | Yok | MSG-001 | Delivery ops | P1/P2 |
+| Deleted transactions report | Staff report | Yok | RECORD-002, PATTERN-019 | Audit | P1 |
+| Provider sales/production | By provider reports | Yok | — | Attribution TBD | P2 |
+| Referral reports | RDVM/clinic | Yok | Contacts Module | P2/P3 |
+| In-process medical notes | Incomplete docs | Yok | EXAM-015 lock? | Worklist vs report | P1/P2 |
+| Wellness plan analytics | 7 reports | Yok | P3 wellness | Future | P3 |
+| Production credit reports | Payments/Sales based | Yok | Inventory P3 | Unresolved | P3 |
+| Favorites / saved filters | Not observed | Planlı | REPORT-003/004 | UX | P1/P2 |
+
+### Açık doğrulama soruları (Reports Module)
+
+- Active Engaged Patient/Client exact calculation rules
+- Inventory Value/COGS costing methodology
+- Unique Dispensing Log vs Inventory Log distinction
+- Production Credit report vs item-level tab semantics
+- Provider attribution rules (sales/payment/transactions by provider)
+- Time Sheets data source and workflow
+- Export formats (Excel/CSV/PDF) per report
+- Saved filters / favorites / scheduled reports — **gözlemlenmedi**
+- Report-level permission/access controls — **kısmen doğrulanmadı**
+- Donations report business semantics
 
 ---
 

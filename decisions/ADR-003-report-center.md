@@ -62,6 +62,7 @@ Vetinity'de ödeme raporu, randevu raporu, muayene raporu ve aşı raporu gibi r
 - Sidebar'dan ayrı rapor menü öğeleri kaldırılmalı ([REPORT-001](../backlog/feature-backlog.md))
 - Rapor Merkezi iç navigasyonu tasarlanmalı ([REPORT-002](../backlog/feature-backlog.md))
 - Gelecek özellikler backlog'da planlanmıştır ([REPORT-003](../backlog/feature-backlog.md)–[REPORT-007](../backlog/feature-backlog.md))
+- DaySmart sandbox: predefined report catalog by domain category — generic builder değil; benchmark → [Reports Module](../competitors/daysmart.md#sandbox--reports--reporting-module)
 
 ## İlgili belgeler
 

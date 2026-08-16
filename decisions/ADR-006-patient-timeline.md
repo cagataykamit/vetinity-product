@@ -54,7 +54,7 @@ Rakip analizi (DaySmart) hasta timeline'ının değerini doğrulamaktadır ([Day
 - Timeline olay modeli tasarlanmalı ([TIMELINE-002](../backlog/feature-backlog.md))
 - Filtreler ve derin linkler ([TIMELINE-003](../backlog/feature-backlog.md), [TIMELINE-004](../backlog/feature-backlog.md))
 - Görüntüleme modülü timeline ile bağlanacak ([IMG-008](../backlog/feature-backlog.md))
-- DaySmart sandbox: aynı domain kaynağı (communication, appointment, reminder, billing, **inventory item usage/stock movement** vb.) patient-scoped, client-scoped, **item-scoped** ve **contact/company-scoped** read-model olarak tekrar gösterilebilir; ayrı entity kopyası oluşturulmamalı ([Clients Module](../competitors/daysmart.md#client-scoped-vs-patient-scoped-read-models), [Patients Module](../competitors/daysmart.md#patient-scoped-vs-clinic-scoped-read-models), [Contacts Module](../competitors/daysmart.md#contact-cross-module-read-models), [Inventory Module](../competitors/daysmart.md#inventory-cross-module))
+- DaySmart sandbox: aynı domain kaynağı (communication, appointment, reminder, billing, **inventory item usage/stock movement**, **reporting read-models** vb.) patient-scoped, client-scoped, **item-scoped**, **contact/company-scoped** ve **clinic-wide report** olarak tekrar gösterilebilir; ayrı entity kopyası oluşturulmamalı ([Clients Module](../competitors/daysmart.md#client-scoped-vs-patient-scoped-read-models), [Patients Module](../competitors/daysmart.md#patient-scoped-vs-clinic-scoped-read-models), [Contacts Module](../competitors/daysmart.md#contact-cross-module-read-models), [Inventory Module](../competitors/daysmart.md#inventory-cross-module), [Reports Module](../competitors/daysmart.md#reports-architecture))
 
 ## İlgili belgeler
 
