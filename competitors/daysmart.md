@@ -6,11 +6,11 @@ DaySmart Vet (uluslararası veteriner klinik yönetim platformu)
 
 ## İncelenen alan
 
-Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, **Reports / Reporting Module**, Treatment Board, Boarding, Reminders
+Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, Reports / Reporting Module, **Settings / Configuration**, **Templates / Template System**, Treatment Board, Boarding, Reminders
 
 ## Analiz durumu
 
-**Kısmi** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (takvim, randevu, ilk giriş, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, **Reports / Reporting Module**, Treatment Board, Boarding, Reminders) mevcuttur. Sandbox doğrulaması bekleyen noktalar açıkça işaretlenmiştir.
+**Kısmi** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (takvim, randevu, ilk giriş, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, Reports / Reporting Module, **Settings / Configuration**, **Templates / Template System**, Treatment Board, Boarding, Reminders) mevcuttur. Sandbox doğrulaması bekleyen noktalar açıkça işaretlenmiştir.
 
 ---
 
@@ -670,6 +670,7 @@ Veteriner hekimler muayene sırasında dağınık ekranlar arasında gezinmek, h
 - **Inventory altı:** List, Alerts, Categories, Orders, Receipts
 - **Billing altı:** Invoices, Estimates, Payments, Returns, Credits, Refunds, Write-offs, Cash
 - **Reports altı:** kategori bazlı predefined report kataloğu (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan)
+- **Settings altı:** Configurations, Templates, Add-ons, PetCare, Payments, Permissions, Subscriptions (sandbox erişimine göre)
 - Eski ve yenilenmiş hasta profili birlikte; “Switch to Previous Layout” benzeri geçiş
 - **Değerlendirme:** Aşamalı yeniden tasarım ve eski-yeni ekran birlikte yaşama tutarlılık riski — doğrudan kopyalanacak UX değil
 
@@ -2807,6 +2808,382 @@ Her operasyonel kuyruk ayrı "report" olmak zorunda değil.
 - Saved filters / favorites / scheduled reports — **gözlemlenmedi**
 - Report-level permission/access controls — **kısmen doğrulanmadı**
 - Donations report business semantics
+
+---
+
+## Sandbox — Settings / Configuration
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** (gerçek ürün ekranları)
+
+> Tüm maddeler **sandbox gözlemi**dir. Settings = clinic-wide operational configuration merkezi; **tek dev ayarlar tablosu değil**. Domain ownership korunur. US tax/jurisdiction/terminology kopyalanmaz.
+
+**Domain ownership (Vetinity çıkarımı — rakip gözlemi değil):**
+
+| DaySmart Settings alanı | Önerilen bounded context |
+|---|---|
+| Appointment Types, Clinic Hours, Blocked Time, Schedule Columns | Scheduling |
+| Rooms | Resource / Boarding / Census operations |
+| Discounts, Taxes, Payment Types | Billing / Catalog |
+| Production Credits | Staff performance — P3 |
+| Email/SMS Defaults, Marketing | Messaging |
+| Printers | Clinic ops / printing — P2/P3 |
+| Permissions | Authorization |
+| PetCare, Payments, Subscriptions, Add-ons | Platform/account/SaaS — benchmark only |
+
+→ [Schedule sandbox](#sandbox--i̇lk-giriş-takvim-ve-randevu-oluşturma), [Boarding](#sandbox--boarding), [Billing](#sandbox--billing--financial-operations), [Inventory](#sandbox--inventory--inventory-module)
+
+### Configurations catalog {#settings-configurations}
+
+**Settings > Configurations** altında gözlemlenen başlıklar:
+
+- Appointment Types
+- Configurations (general)
+- Clinic Hours
+- Discounts
+- Email Defaults
+- SMS Defaults
+- Marketing Campaigns
+- Payment Types
+- Printers
+- Production Credits
+- Rooms
+- Schedule Columns
+- Taxes
+
+**Vetinity:** Birebir Settings IA zorunlu değil → [UX-002](../backlog/feature-backlog.md) Ayarlar > Tanımlar merkezi.
+
+### Other Settings top-level areas {#settings-top-level}
+
+Sandbox'ta Configuration dışında gözlemlenen üst seviye alanlar:
+
+- Add-ons
+- PetCare
+- Payments
+- Permissions
+- Subscriptions
+- **Templates** (ayrı modül — aşağıda)
+
+**Ayrım (çıkarım):** A) clinic product config · B) platform admin · C) commercial subscription · D) integrations/add-ons · E) portal · F) authorization — hepsi Vetinity feature sayılmaz.
+
+### Appointment Types {#settings-appointment-types}
+
+**Liste kolonları (sandbox gözlemi):** Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules
+
+**Workflow/template bağlantıları (type başına yapılandırılabilir):**
+- Medical Note template
+- Bundle
+- Checkout Documents
+- Confirmation / Reminder
+- Check-In Letters / Forms
+- Pre-visit communication / Letters / Forms
+
+**Eligibility rules (sandbox gözlemi):** Species, Weight, Age
+
+**Örnek type adları:** Annual Wellness Exam & Vaccination, Equine Wellness Exam, Spay/Neuter, Block, Euthanasia, Behaviour, Dental Exam, Urgent Care, Feline Wellness Exam, Sick Patient, Emergency Exam, Anesthesia/Procedure Drop-Off, Feline Spay Drop-Off, Mass Removal, Recheck, Vaccine Clinic
+
+**Benchmark noktası:** Appointment Type yalnızca scheduling metadata değil — **appointment workflow preset** adayı.
+
+**Vetinity:** Tam preset MVP değil → [APPT-005](../backlog/feature-backlog.md), [APPT-006](../backlog/feature-backlog.md), [CHECKIN-001](../backlog/feature-backlog.md), [EXAM-006](../backlog/feature-backlog.md), [EXAM-014](../backlog/feature-backlog.md)
+
+### Clinic Hours / Blocked Time {#settings-clinic-hours-blocked}
+
+**Clinic Hours:** Çalışma saatleri configuration.
+
+**Blocked Time:** Schedule availability/capacity kısıtı — **Appointment ≠ Blocked Time**. Recurring block desteği gözlemlendi.
+
+→ [APPT-008](../backlog/feature-backlog.md), [Schedule sandbox](#takvim-ana-görünümü)
+
+### Schedule Columns {#settings-schedule-columns}
+
+**Kavramlar:** Staff, Non-Staff, schedule'da gösterilen resource/column, online appointment type ilişkileri.
+
+**Kritik ayrım:** **Schedule Column ≠ Room** — column = takvimde görünen mantıksal/personel/resource kolonu.
+
+→ [Schedule sandbox](#takvim-ana-görünümü), [Census](#census-operasyon-kuyruğu)
+
+### Rooms {#settings-rooms}
+
+**Alanlar:** Name, Type, Description
+
+**Room type örnekleri:**
+- **BOARDING:** Boarding, Cat condo, Dog run, Grooming, Kennel — Max Guests, Daily Rate, **Divisible**
+- **CENSUS / IN ROOM:** Reception, Treatment
+
+**Ayrımlar:** Room ≠ Schedule Column; **Boarding ≠ Hospitalization** → [Boarding Module](#sandbox--boarding), [Treatment Board](#sandbox--treatment-board)
+
+**Divisible:** P3 benchmark — MVP zorunlu değil.
+
+### Discounts {#settings-discounts}
+
+**Form:** Name, Applies To, Amount, Notes
+
+**Amount types:** Percentage (%) · Fixed monetary amount (US $ benchmark — currency hard-code etme)
+
+**Applies To:** Inventory/catalog kategorileri
+
+**Lifecycle:** Kullanılmış discount'ta delete yerine **Disable** — finansal geçmiş bütünlüğü
+
+→ [Billing discounts](#billing-discounts), [Inventory discounts](#inventory-discounts)
+
+### Taxes {#settings-taxes}
+
+**Form:** Tax, Rate (%), Type, Jurisdiction, Applies To
+
+**US-specific:** country/state/county/city jurisdiction — **Türkiye'ye taşınmaz**
+
+**Reusable concept:** tax definition → rate → category applicability → [INT-005](../backlog/feature-backlog.md), **requires Turkey-specific regulatory/accounting research**
+
+### Payment Types {#settings-payment-types}
+
+**Gözlem:** Liste mevcut; sandbox'ta yeni payment type oluşturma **erişilemedi/gözlemlenmedi**.
+
+**Problem (çıkarım):** Ödeme yöntemlerinin checkout/payment'ta kontrollü sınıflandırılması → [CHECKOUT-001](../backlog/feature-backlog.md), [INT-006](../backlog/feature-backlog.md)
+
+### Production Credits {#settings-production-credits}
+
+**Form:** Name, Applies To (all/specific inventory categories), Amount (%), Notes
+
+**Vetinity:** Staff production/commission benzeri — **P3 benchmark**; DaySmart terminolojisi kopyalanmaz → [Inventory Production Credit](#inventory-production-credit), [Reports production credit](#reports-billing)
+
+### Email Defaults {#settings-email-defaults}
+
+**Event/workflow bazlı default communication templates.**
+
+**Örnek use-case alanları:** Appointment Accept/Confirmation/Decline/Reminder/Reschedule, Boarding, Certificate, Checkout Documents, Deposit, Estimate, Invoice, Labs, Medical Note
+
+**Pattern:** communication template → event binding → [IDEA-013](../research/ideas.md#idea-013--template-based-appointment-communications), [APPT-012](../backlog/feature-backlog.md), [PATTERN-011](../research/patterns.md#pattern-011--template-first-communication)
+
+Template domain ≠ delivery domain.
+
+### SMS Defaults {#settings-sms-defaults}
+
+**Merge tokens (sandbox gözlemi):** Clinic Name, Clinic Phone, Client First Name, Patient Name, Appointment Date, Appointment Time, Appointment Type
+
+**Capability:** reusable template + controlled merge fields + event binding
+
+**Vetinity:** Typed token catalog vs serbest string — KVKK transactional vs marketing → [MSG-001](../backlog/feature-backlog.md), [Clients communication preferences](#client-communications)
+
+### Marketing Campaigns {#settings-marketing}
+
+**Settings > Marketing Campaigns** gözlemlendi.
+
+**Ayrım:** Marketing ≠ transactional clinical communication → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). Türkiye ticari elektronik ileti/onay — **requires regulatory research**. MVP değil.
+
+### Printers {#settings-printers}
+
+Fiziksel clinic printing configuration — certificate, invoice, label cross-ref.
+
+**Vetinity cloud-first:** Dedicated printer management erken roadmap değil; ihtiyaç doğrulanınca değerlendirilir.
+
+### Settings Gap Analysis {#settings-gap-analysis}
+
+| Capability | DaySmart | Vetinity | Backlog | Priority |
+|---|---|---|---|---|
+| Configurations hub | Settings > Configurations | Kısmi | UX-002 | P0/P1 |
+| Appointment types + duration/color | List + rules | Kısmi | APPT-005/006 | P1 |
+| Appointment workflow preset | Templates/bundle/forms on type | Yok | CHECKIN, EXAM-006, EXAM-014 | P1/P2 |
+| Clinic hours / blocked time | Yes | Belirsiz | APPT-008 | P1 |
+| Schedule columns | Staff/non-staff | Kısmi | Schedule sandbox | P1 |
+| Rooms (boarding + census) | Types + rates | Kısmi | Boarding, CHECKIN-005 | P1/P2 |
+| Discounts config | %/fixed + category | Yok | Billing | P1/P2 |
+| Tax config | US jurisdiction | Planlı TR | INT-005 | P1/P2 |
+| Payment types | List only observed | Belirsiz | CHECKOUT, INT-006 | P1 |
+| Email/SMS defaults + tokens | Event templates | Kısmi | APPT-012, MSG-001, IDEA-013 | P1/P2 |
+| Production credits | % on categories | Yok | P3 | P3 |
+| Marketing campaigns | Settings | Yok | MSG, KVKK TBD | P3 |
+| Printers | Settings | Yok | P2/P3 | P2/P3 |
+
+### Açık doğrulama soruları (Settings)
+
+- Appointment type Rules tam kapsamı ve tetiklenme anı
+- Blocked Time vs Appointment conflict kuralları
+- Schedule Column ↔ online booking resource mapping
+- Room Divisible semantics
+- Payment type create/edit yetkisi sandbox'ta neden yok
+- Email/SMS default template versioning
+- Permissions granularity per Settings area
+
+---
+
+## Sandbox — Templates / Template System
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** (gerçek ürün ekranları)
+
+> Templates Configuration içindeki sıradan key/value **değil** — ayrı **reusable content/workflow capability family**. Template definition ≠ runtime record. Yüzlerce Objective field DB kolonu olarak kopyalanmaz.
+
+**Gözlemlenen template kategorileri:**
+- Attachments
+- Bundles (Invoice)
+- Bundles (Estimates)
+- Custom Fields
+- Letters
+- Snippets
+- Purchase Orders
+- Medical Notes
+- Forms
+- Wellness Plans
+- **All Templates** (unified catalog navigation/read-model)
+
+→ [Settings](#sandbox--settings--configuration), [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [EXAM-006](../backlog/feature-backlog.md), [EXAM-007](../backlog/feature-backlog.md)
+
+### Template common metadata / lifecycle {#templates-lifecycle}
+
+**Ortak metadata (sandbox gözlemi):** Name, Type, Description, Created, Updated, Last Used, Total Use
+
+**Aksiyonlar:** Edit Template, Duplicate, Delete
+
+**Risk (çıkarım):** Template değişikliği geçmiş medical record'u sessizce değiştirmemeli — version/snapshot ihtiyacı → [IDEA-025](../research/ideas.md#idea-025--auditable-clinical-record-lifecycle), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions), [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability)
+
+**Açık sorular:** clinic vs multi-clinic scope; disable vs hard delete; used template delete; permissions by template type — **doğrulanmadı**
+
+### Medical Note Templates {#templates-medical-notes}
+
+**Structured clinical note template/builder** — basit hazır metin değil.
+
+**Sections (enable/disable):** Subjective, Objective, Assessment, Plan, Holistic, Client Communication — SOAP hard-coded tek yapı değil; additional/custom sections.
+
+**Nested structure:** Template → Section → Group/Subsection → Field (reorder edilebilir)
+
+**Objective field behaviors (representative — full field catalog kopyalanmaz):**
+
+| Behavior | Örnek |
+|---|---|
+| Single-line / long text | Free clinical notes |
+| Dropdown / multi-select / chips | Clinical/behavioral observations |
+| Numeric + unit | Temperature (C), Weight (Kg), Respiration (rpm) |
+| Controlled score | BCS (3/9) |
+| Controlled value | MM Color (Pink), Reflex (absent) |
+| Dental indices | Tooth Condition, Calculus Index |
+| Species-specific | Equine Hoof Tester |
+| Structured value + optional note | Many clinical fields |
+
+**System-bound components ≠ generic custom field:** Assessment → Diagnoses picker; medication selector; patient status vb.
+
+→ [EXAM-006](../backlog/feature-backlog.md), [ADR-005](../decisions/ADR-005-modern-examination-experience.md), [RECORD-006](../backlog/feature-backlog.md)
+
+### Custom Fields {#templates-custom-fields}
+
+Templates altında **ayrı capability** — Medical Note structured fields ile **karıştırılmaz**.
+
+Generic custom fields vs domain-bound components ayrımı korunur.
+
+### Forms — Designer / Preview / Logic {#templates-forms}
+
+**Örnek:** Emergency Intake Form
+
+**Sekmeler:** Designer · Preview · Logic
+
+**Designer:** drag/drop; multi-page; Page structure; title; description; rich text; variable insertion (@); properties panel
+
+**Field/component örnekleri (MVP requirement değil):** Formatted Text, Single-Line Input, Long Text, Multiple Textboxes, Radio, Yes/No, Checkboxes, Dropdown, Multi-Select, File Upload, Image Picker, Rating Scale
+
+**Preview:** multi-page; progress; Next; required (*); Yes/No + conditional detail (ör. trauma/allergy açıklama)
+
+**Logic tab:** IF question/condition/value → THEN field behavior/action — örnek: Yes → başka soruyu required yap. **Form Logic ≠ Bundle Action.**
+
+→ [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PORTAL-005](../backlog/feature-backlog.md), [Clients Documents Forms](#documents)
+
+### Letters / Snippets / Attachments {#templates-letters-snippets-attachments}
+
+**Letters:** Reusable document/communication templates — Medical Note/Form değil → checkout/consent cross-ref
+
+**Snippets:** Reusable kısa içerik; hashtag/shortcut hızlı kullanım → [EXAM-011](../backlog/feature-backlog.md), [PATTERN-017](../research/patterns.md#pattern-017--structured-clinical-snippets)
+
+**Attachments:** Template catalog type; bundle/appointment/workflow ile hazır attachment ilişkilendirme — attachment template ≠ uploaded patient document → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow)
+
+### Bundles — Items / Activities / Actions {#templates-bundles}
+
+**İki katalog:** Bundles (Invoice) · Bundles (Estimates) — ayrı entity mi shared template farklı context mi **kesin doğrulanmadı**
+
+**Üç katman (benchmark):**
+
+| Katman | Rol |
+|---|---|
+| **A) Items** | Ticari/faturalandırılabilir içerik |
+| **B) Activities** | Klinik uygulama/protokol |
+| **C) Actions** | Workflow automation side effects |
+
+**Items (ör. Canine Neuter):** Name, Type, Quantity, Total, Print On Estimate, Added — quantity/price **range** (ör. Rimadyl 1–2 Tablets $10; Anesthesia 5–10 min $50–100; total $210–$260)
+
+**Activities types:** Medical · Vitals · Other
+
+**Medical activity form:** Medication, Quantity, Route, Location, Due, timing (offset from treatment start / specific time), Occurrence (Not recurring / Recurring). Route catalog geniş (IV, IM, SC, PO, intranasal, intraosseous…)
+
+**KRİTİK ayrım:** Catalog/billable **Item** ≠ **Clinical Activity** (administration). Ör: Midazolam item ≠ Midazolam 5mg/mL + route + location + time administration.
+
+Activity template → runtime clinical activity; uygun bounded context'te yaşamalı (treatment, hospitalization, anesthesia protocol) — bundle içinde gömülü runtime record varsayımı yapma.
+
+**Actions types:** Add attachment, Change Patient Status, Create form, Create letter, Create reminder, Create task, Disable reminder, Print certificate, Set patient sex to desexed
+
+**Action binding örneği:** When Using: Midazolam 5mg/mL → Create form → Boarding Waiver and Consent
+
+**Ayrım:** Bundle Action (operational side-effect) ≠ Form Logic (UI during fill) ≠ Item Action ([inventory-item-actions](#inventory-item-actions))
+
+→ [EXAM-007](../backlog/feature-backlog.md), [EXAM-013](../backlog/feature-backlog.md), [EXAM-014](../backlog/feature-backlog.md), [IDEA-023](../research/ideas.md#idea-023--configurable-clinical-bundles), [PATTERN-018](../research/patterns.md#pattern-018--bundle-to-record-expansion), [PATTERN-021](../research/patterns.md#pattern-021--item-rule-field-population)
+
+### Purchase Order Templates {#templates-purchase-orders}
+
+Templates > Purchase Orders — reusable PO preset → [inventory-purchase-orders](#inventory-purchase-orders). Duplicate procurement entity **açılmaz**.
+
+### Wellness Plans {#templates-wellness-plans}
+
+Templates > Wellness Plans — Reports'ta wellness analytics de gözlemlendi.
+
+**Bundle ≠ Wellness Plan:** Bundle tek işlem/estimate/protocol paketi olabilir; Wellness Plan zaman yayılmış preventive/subscription lifecycle — sandbox lifecycle **doğrulanmadı** — **P3** → [reports-wellness](#reports-wellness)
+
+### Template vs Runtime {#templates-vs-runtime}
+
+| Template definition | Runtime record |
+|---|---|
+| Medical Note Template | Completed Medical Note |
+| Form Template | Submitted Form |
+| Bundle Template | Estimate / Invoice / applied protocol |
+| Activity (in bundle) | Performed medication administration |
+| Letter Template | Generated/sent Letter |
+| Appointment Type preset | Concrete Appointment |
+
+**Prensip:** Template sonradan değiştirildiğinde geçmiş hasta kaydı **değişmemeli** → snapshot/version ihtiyacı.
+
+### Vetinity Implications {#templates-vetinity-implications}
+
+> **Vetinity ürün çıkarımı** — sandbox gözlemi değildir.
+
+**P0/P1 aday:** temel clinic config; appointment types; clinic hours; payment/tax/discount config (TR); temel medical note templates
+
+**P1/P2:** appointment workflow presets; structured note builder; reusable forms; bundles; comm defaults/tokens; room/resource config
+
+**P2:** advanced form builder; conditional form logic; bundle clinical activities; workflow actions; snippets; document generation
+
+**P3:** production credits; wellness plans; advanced marketing; generic automation engine; room divisibility
+
+Mevcut roadmap/backlog **üstün gelir** — otomatik taşınmaz.
+
+### Templates Gap Analysis {#templates-gap-analysis}
+
+| Capability | DaySmart | Vetinity | Backlog | Priority |
+|---|---|---|---|---|
+| Template catalog + lifecycle | All Templates; metadata | Kısmi | EXAM-006, UX-002 | P1 |
+| Structured medical note builder | Sections/groups/field types | Yok | EXAM-006, ADR-005 | P1/P2 |
+| System-bound clinical components | Diagnoses picker etc. | Kısmi | EXAM-004, RECORD-006 | P1 |
+| Form builder + logic | Designer/Preview/Logic | Yok | IDEA-018, PORTAL-005 | P2 |
+| Bundle Items (ranges) | Estimate/Invoice bundles | Kısmi | EXAM-007/013 | P1/P2 |
+| Bundle Activities (clinical protocol) | Medical/Vitals activities | Yok | — conceptual | P2 |
+| Bundle Actions | Workflow side effects | Araştırılacak | EXAM-014, PATTERN-021 | P2/P3 |
+| Snippets | Templates > Snippets | Planlı | EXAM-011 | P1/P2 |
+| Letters/Attachments templates | Separate types | Araştırılacak | IDEA-018 | P2 |
+| Template immutability/versioning | Usage count; edit risk | Yok | IDEA-025, PATTERN-023 | P1/P2 |
+| PO templates | Purchase Orders | Yok | Inventory PO | P2 |
+| Wellness plan templates | Templates + Reports | Yok | P3 | P3 |
+
+### Açık doğrulama soruları (Templates)
+
+- Invoice vs Estimate bundle aynı template entity mi
+- Activity runtime nerede persist ediliyor
+- Form Logic rule engine kapsamı
+- Template delete vs disable when Total Use > 0
+- Multi-clinic template sharing
+- Custom Fields applicable entities
+- Medical note template change → historical note behavior
 
 ---
 

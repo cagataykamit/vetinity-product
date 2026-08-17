@@ -68,7 +68,7 @@ Aşağıdaki maddeler stratejik hedef veya backlog olarak sınıflandırılır; 
 
 ## İlgili belgeler
 
-- [DaySmart rakip analizi](../competitors/daysmart.md)
+- [DaySmart rakip analizi — Medical Note Templates](../competitors/daysmart.md#templates-medical-notes)
 - [UX ilkeleri](../ux/ux-principles.md)
 - [Feature backlog — EXAM maddeleri](../backlog/feature-backlog.md)
 - [Roadmap P0](../roadmap/roadmap.md#p0--çıkış-öncesi-ürün-deneyimi)

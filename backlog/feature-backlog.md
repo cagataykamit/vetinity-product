@@ -325,7 +325,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | UX-003, UX-004, UX-005 |
-| **Notlar** | Kabul edilmiş hedef; henüz uygulanmadı |
+| **Notlar** | Kabul edilmiş hedef; henüz uygulanmadı. **Settings Module:** DaySmart Settings ≠ tek ayar tablosu; domain ownership (Scheduling, Billing, Messaging, Templates, Authorization) — → [daysmart.md](../competitors/daysmart.md#sandbox--settings--configuration). Vetinity UX-002 Tanımlar merkezi ile birebir Settings IA kopyalanmaz |
 
 ### UX-003 — Türlerin Tanımlar altına alınması
 
@@ -371,7 +371,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | UX-002 |
-| **Notlar** | Derin linkler korunmalı. **Inventory Module:** DaySmart Category Type Inventory vs Service; subcategory; paylaşılan katalog — kategori isimleri kopyalanmaz → [daysmart.md](../competitors/daysmart.md#inventory-categories) |
+| **Notlar** | Derin linkler korunmalı. **Settings Module:** DaySmart Settings > Configurations catalog (Appointment Types, Clinic Hours, Discounts, Taxes, Rooms, Schedule Columns, Email/SMS Defaults vb.) — domain ownership ayrımı — → [daysmart.md](../competitors/daysmart.md#settings-configurations). **Templates Module:** ayrı template family — → [daysmart.md](../competitors/daysmart.md#sandbox--templates--template-system) |
 
 ---
 
@@ -471,7 +471,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | Stratejik hedef. Muayene şablonları + check-in medical note şablonu. DaySmart: "within normal limit" varsayılanları — sandbox doğrulanmadı |
+| **Notlar** | Stratejik hedef. **Settings/Templates Module:** Medical Note Templates — structured builder (Section→Group→Field); SOAP + Holistic + Client Communication; field types (numeric+unit, controlled score, multi-select); system-bound components (Diagnoses) — → [daysmart.md](../competitors/daysmart.md#templates-medical-notes). Template definition ≠ completed note — → [daysmart.md](../competitors/daysmart.md#templates-vs-runtime) |
 
 ### EXAM-007 — Tedavi bundle/paketleri
 
@@ -487,7 +487,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | DaySmart (2026-08-02 bölüm 2): check-in ve medical note'tan seçim; kalem dahil/hariç; miktar; invoice bağlantısı; records+billing yansıması — sandbox doğrulanmadı. → [IDEA-023](../research/ideas.md#idea-023--configurable-clinical-bundles), [PATTERN-018](../research/patterns.md#pattern-018--bundle-to-record-expansion). **Canlı sandbox — Treatment Board:** New Bundle sihirbazı — [daysmart.md](../competitors/daysmart.md#new-bundle-sihirbaz). **Canlı sandbox — Boarding Check In:** Boarding + medical bundle listesi — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı). **Inventory Module:** item detail Bundles tab; estimate/invoice bundle örnekleri — → [daysmart.md](../competitors/daysmart.md#inventory-bundles) |
+| **Notlar** | DaySmart (2026-08-02 bölüm 2): check-in ve medical note'tan seçim. **Templates Module:** Bundle Items/Activities/Actions üç katman; quantity/price ranges; clinical activity ≠ billable item; Bundle Action ≠ Form Logic — → [daysmart.md](../competitors/daysmart.md#templates-bundles). **Inventory/Boarding/Treatment Board** cross-ref korunur — → [daysmart.md](../competitors/daysmart.md#inventory-bundles), [daysmart.md](../competitors/daysmart.md#new-bundle-sihirbaz) |
 
 ### EXAM-008 — Doz hesaplayıcı
 
@@ -551,7 +551,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | EXAM-002 |
-| **Notlar** | **AI değildir**; snippet ile voice/AI karıştırılmamalı. DaySmart `#vomiting` örneği — sandbox doğrulanmadı → [IDEA-021](../research/ideas.md#idea-021--clinical-snippet-library), [PATTERN-017](../research/patterns.md#pattern-017--structured-clinical-snippets) |
+| **Notlar** | **AI değildir**. **Templates Module:** Snippets template catalog + hashtag/shortcut — Settings > Templates > Snippets — → [daysmart.md](../competitors/daysmart.md#templates-letters-snippets-attachments) |
 
 ### EXAM-012 — Klinik bazlı snippet yönetimi
 
@@ -583,7 +583,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | EXAM-007 |
-| **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı |
+| **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
 ### EXAM-014 — Item rules (bundle ve record oluşturma)
 
@@ -599,7 +599,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | EXAM-013, RECORD-006 |
-| **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3): record oluşturmada Apply Item Rule; next due, reminder, quantity, route, invoice, stok. Bundle bağlamı bölüm 2'de gözlemlendi. Kural motoru doğrulanmadı → [PATTERN-021](../research/patterns.md#pattern-021--item-rule-field-population). **Boarding Check In** Apply Item Rule — [daysmart.md](../competitors/daysmart.md#apply-item-rule-check-in-bağlamı). **Reminders** due-date kaynakları — [daysmart.md](../competitors/daysmart.md#reminders-detail-ana-tablo). **Patients Module** Overview sağ panel due list (Given/Due) — [daysmart.md](../competitors/daysmart.md#patient-profile--header--overview). **Inventory Module** Item Actions tab (usage → reminder/task/status/certificate); Rules tab (species/weight/age eligibility); Low Balance action örneği — → [daysmart.md](../competitors/daysmart.md#inventory-item-actions), [daysmart.md](../competitors/daysmart.md#inventory-rules) |
+| **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3): record oluşturmada Apply Item Rule; next due, reminder, quantity, route, invoice, stok. Kural motoru doğrulanmadı → [PATTERN-021](../research/patterns.md#pattern-021--item-rule-field-population). **Inventory Module** Item Actions; Rules (species/weight/age). **Templates Module:** Bundle Actions (Create form/reminder/task, Change patient status, Print certificate vb.); When Using item binding; **Bundle Action ≠ Form Logic** — → [daysmart.md](../competitors/daysmart.md#templates-bundles), [daysmart.md](../competitors/daysmart.md#inventory-item-actions) |
 
 ### EXAM-015 — Medical note lock
 
@@ -651,12 +651,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-001, EXAM-006 |
-| **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Canlı sandbox — Boarding Check In:** Boarding Form template (Intake, Cage Card/Instructions, Behavior Observation vb.); Medical Note — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-form-template) |
+| **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Canlı sandbox — Boarding Check In:** Boarding Form template (Intake, Cage Card/Instructions, Behavior Observation vb.); Medical Note — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-form-template). **Settings Module:** Appointment Type preset → default medical note / check-in forms — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
 
-| Alan | Değer |
-|---|---|
-| **Kimlik** | CHECKIN-003 |
-| **Başlık** | Check-in sırasında bundle seçimi |
+### CHECKIN-003 — Check-in sırasında bundle seçimi
 | **Kategori** | Check-in |
 | **Problem** | Paket uygulama check-in aşamasında atlanabiliyor |
 | **Önerilen çözüm** | Check-in formunda bundle seçimi ve invoice ilişkilendirme |
@@ -665,7 +662,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-001, EXAM-007 |
-| **Notlar** | **Canlı sandbox — Boarding Check In:** Boarding Bundle + diğer medical bundle'lar — yansıma **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı) |
+| **Notlar** | **Canlı sandbox — Boarding Check In:** Boarding Bundle + diğer medical bundle'lar — yansıma **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı). **Templates Module:** Bundle Items/Activities/Actions; appointment type preset bundle binding — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
 ### CHECKIN-004 — Check-in sırasında invoice/estimate seçimi veya oluşturma
 
@@ -901,7 +898,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | PORTAL-003 |
-| **Notlar** | v1.0 dışı aday; Türkiye hukuki geçerlilik araştırılmalı → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-014](../research/patterns.md#pattern-014--document-to-signature-continuity). DaySmart sandbox observation (bölüm 3): Draw/Type Signature; Lock Letter after sign → [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability). Checkout belge paketi teslimi → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package) |
+| **Notlar** | v1.0 dışı aday; Türkiye hukuki geçerlilik araştırılmalı → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-014](../research/patterns.md#pattern-014--document-to-signature-continuity). DaySmart sandbox observation (bölüm 3): Draw/Type Signature; Lock Letter after sign → [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability). **Templates Module:** Forms — Designer/Preview/Logic; conditional form logic; multi-page — → [daysmart.md](../competitors/daysmart.md#templates-forms). **Clients Module** form template örnekleri — → [daysmart.md](../competitors/daysmart.md#documents) |
 
 ---
 
@@ -921,7 +918,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | — |
-| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). **Clients/Contacts/Patients Module** comm scopes. **Reports Module:** Failed Emails (Bounce/Transient), Email And SMS Reminders Sent — delivery diagnostics — → [daysmart.md](../competitors/daysmart.md#reports-communications) |
+| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). **Settings Module:** Email/SMS Defaults — event template binding + merge tokens; template delivery domain ≠ template definition — → [daysmart.md](../competitors/daysmart.md#settings-email-defaults), [daysmart.md](../competitors/daysmart.md#settings-sms-defaults). **Clients/Contacts/Patients Module** comm scopes. **Reports Module:** Failed Emails (Bounce/Transient), Email And SMS Reminders Sent — delivery diagnostics — → [daysmart.md](../competitors/daysmart.md#reports-communications) |
 
 ### MSG-002 — İki yönlü mesajlaşma
 
@@ -1593,7 +1590,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | Equine vb. segmentler target-markets ile uyumlu değerlendirilmeli |
+| **Notlar** | Equine vb. segmentler target-markets ile uyumlu değerlendirilmeli. **Settings Module:** Appointment Types = workflow preset (medical note, bundle, forms, reminders, eligibility) — metadata-only değil — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
 
 ### APPT-006 — Randevu nedeni varsayılan süre
 
@@ -1609,7 +1606,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-005 |
-| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness) — sandbox gözlemi, doğrulanmadı |
+| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
 
 ### APPT-007 — Neden ile hekim/kaynak eşleştirmesi
 
@@ -1705,7 +1702,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-011, APPT-013 |
-| **Notlar** | → [IDEA-013](../research/ideas.md#idea-013--template-based-appointment-communications), [PATTERN-011](../research/patterns.md#pattern-011--template-first-communication). **Canlı sandbox — Boarding:** reservation kaydı sonrası HTML transactional e-posta şablonu — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#notification-flow) |
+| **Notlar** | → [IDEA-013](../research/ideas.md#idea-013--template-based-appointment-communications), [PATTERN-011](../research/patterns.md#pattern-011--template-first-communication). **Settings Module:** Email Defaults — event/workflow template binding (Appointment Accept/Confirmation/Decline/Reminder, Invoice, Labs, Medical Note vb.) — → [daysmart.md](../competitors/daysmart.md#settings-email-defaults) |
 
 ### APPT-013 — E-posta bildirimleri
 
@@ -1737,7 +1734,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-013 |
-| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. **Reminders Detail** — [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **Patient + Client Profile Reminders** — [Patients Module](../competitors/daysmart.md#documents--notes--relationships--reminders--wellness--tasks), [Clients Module](../competitors/daysmart.md#client-reminders). **Reports Module:** Reminders Created, Reminders Detail report — same reminder source — → [daysmart.md](../competitors/daysmart.md#reports-communications). Reminder ≠ Task. → [EXAM-014](#exam-014--item-rules-bundle-ve-record-oluşturma) |
+| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. **Settings Module:** SMS Defaults — merge tokens (Clinic Name, Client First Name, Appointment Date/Time/Type vb.); Email Defaults event binding — → [daysmart.md](../competitors/daysmart.md#settings-sms-defaults), [daysmart.md](../competitors/daysmart.md#settings-email-defaults). **Reminders Detail** — [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **Patient + Client Profile Reminders** — [Patients Module](../competitors/daysmart.md#documents--notes--relationships--reminders--wellness--tasks), [Clients Module](../competitors/daysmart.md#client-reminders). **Reports Module:** Reminders Created, Reminders Detail report — same reminder source — → [daysmart.md](../competitors/daysmart.md#reports-communications). Reminder ≠ Task. → [EXAM-014](#exam-014--item-rules-bundle-ve-record-oluşturma) |
 
 ### APPT-015 — Bildirim merkezi
 
@@ -2171,7 +2168,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
-| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Inventory Module:** item-level tax applicability (US VAT/GST benchmark); Vetinity KDV/e-belge ürün vergi config — US taksonomisi kopyalanmaz → [daysmart.md](../competitors/daysmart.md#inventory-taxes) |
+| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes) |
 
 ### INT-006 — POS ve online ödeme
 

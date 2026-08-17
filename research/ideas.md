@@ -248,6 +248,8 @@ Buradaki maddeler:
 
 **DaySmart sandbox gözlemi (Boarding):** Reservation kaydı → otomatik transactional HTML e-posta (client, patient, check-in/out, klinik iletişim); event tetikleyici — şablon yönetimi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#notification-flow)
 
+**Settings Module:** Email Defaults — operasyonel event/use-case bazlı varsayılan şablon kataloğu (Appointment Accept/Confirmation/Decline/Reminder, Invoice, Labs, Medical Note vb.) — → [daysmart.md](../competitors/daysmart.md#settings-email-defaults). SMS Defaults — merge tokens — → [daysmart.md](../competitors/daysmart.md#settings-sms-defaults)
+
 **DaySmart sandbox gözlemi (Reminders):** Reminders Detail operasyon listesi; Resend selected toplu gönderim; Type kanal seçimi (Email/Phone/SMS/No Reminder); relatif Send kuralı — şablon içeriği **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail)
 
 → [PATTERN-011](patterns.md#pattern-011--template-first-communication)
@@ -338,6 +340,8 @@ Buradaki maddeler:
 | **Durum** | Research |
 
 **DaySmart sandbox gözlemi (Treatment Board):** Kart Documents popup; consent, rapor, invoice, treatment summary örnekleri — tam liste **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#documents-treatment-bağlamı)
+
+**Templates Module:** Forms — Designer/Preview/Logic sekmeleri; multi-page; conditional form logic (IF question/value THEN required/behavior) — → [daysmart.md](../competitors/daysmart.md#templates-forms). Form Logic ≠ Bundle Action
 
 **DaySmart gözlemi (2026-08-02 bölüm 3 — sandbox observation):**
 
@@ -455,7 +459,7 @@ Buradaki maddeler:
 | **Riskler** | Item rule opaklığı; stok/fatura senkronizasyonu |
 | **Durum** | Research |
 
-**DaySmart sandbox gözlemi:** Treatment Board → New Bundle sihirbazı (template, invoice, provider, medical note) — kalem düzenleme ve kayıt yansıması **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#new-bundle-sihirbaz). **Boarding Check In:** Boarding Bundle + medical bundle'lar — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı). **Inventory Module:** item ↔ bundle mapping; Print on Invoice/Estimate — → [daysmart.md](../competitors/daysmart.md#inventory-bundles)
+**DaySmart sandbox gözlemi:** Treatment Board → New Bundle sihirbazı (template, invoice, provider, medical note) — kalem düzenleme ve kayıt yansıması **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#new-bundle-sihirbaz). **Boarding Check In:** Boarding Bundle + medical bundle'lar — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı). **Inventory Module:** item ↔ bundle mapping; Print on Invoice/Estimate — → [daysmart.md](../competitors/daysmart.md#inventory-bundles). **Templates Module:** Bundle Items (billable) / Activities (clinical protocol) / Actions (workflow side-effects) ayrımı; quantity/price ranges; clinical activity ≠ billable item — → [daysmart.md](../competitors/daysmart.md#templates-bundles)
 
 → [EXAM-007](../backlog/feature-backlog.md) · [PATTERN-018](patterns.md#pattern-018--bundle-to-record-expansion)
 
@@ -494,6 +498,8 @@ Buradaki maddeler:
 | **Durum** | Research |
 
 **DaySmart gözlemi (2026-08-02 bölüm 3 — sandbox observation):** Tek Record kavramı altında Vaccine, Medication, Procedure, Diagnostic, Vital tipleri; tip değişince form dinamik. → [IDEA-026](#idea-026--unified-dynamic-record-model)
+
+**Templates Module:** Template definition ≠ runtime record — template lifecycle (Created/Updated/Last Used/Total Use); edit/duplicate/delete; geçmiş kayıt immutability riski — → [daysmart.md](../competitors/daysmart.md#templates-vs-runtime), [daysmart.md](../competitors/daysmart.md#templates-lifecycle)
 
 **DaySmart gözlemi (Inventory Module — sandbox):** Stock adjustment Current vs Actual balance + reason + audit — auditable movement prensibi record lifecycle ile paralel → [daysmart.md](../competitors/daysmart.md#inventory-adjustments)
 

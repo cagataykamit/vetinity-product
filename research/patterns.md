@@ -206,7 +206,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Onay, red, hatırlatma için şablon varsayılan; önizleme ve isteğe bağlı düzenleme |
 | **Avantajları** | Tutarlı iletişim; hız; marka dili korunur |
 | **Riskleri** | Şablon bakımı; kişiselleştirme ihtiyacı; çok kanallı senkronizasyon |
-| **Rakipte gözlenen uygulama** | DaySmart — hazır onay/red e-postası, hatırlatma günü ([2026-08-02](../competitors/daysmart.md#2026-08-02--randevu-online-booking-ve-petcare-akışı)); **canlı sandbox — Boarding** reservation transactional HTML e-posta ([Notification flow](../competitors/daysmart.md#notification-flow)); **canlı sandbox — Reminders** Resend selected, çok kanallı Type (Email/Phone/SMS), relatif Send kuralı ([Reminders](../competitors/daysmart.md#send-kuralı-relatif-reminder-rule)) |
+| **Rakipte gözlenen uygulama** | DaySmart — hazır onay/red e-postası, hatırlatma günü ([2026-08-02](../competitors/daysmart.md#2026-08-02--randevu-online-booking-ve-petcare-akışı)); **canlı sandbox — Boarding** reservation transactional HTML e-posta ([Notification flow](../competitors/daysmart.md#notification-flow)); **canlı sandbox — Reminders** Resend selected, çok kanallı Type (Email/Phone/SMS), relatif Send kuralı ([Reminders](../competitors/daysmart.md#send-kuralı-relatif-reminder-rule)); **Settings Module** Email Defaults — event/workflow template binding (Appointment Accept/Confirmation/Decline/Reminder, Invoice, Labs, Medical Note vb.) ([settings-email-defaults](../competitors/daysmart.md#settings-email-defaults)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | Randevu oluşturma ve kabul/red akışlarında şablon + önizleme değerlendirilebilir |
 | **Anti-pattern / dikkat** | Her seferinde tam WYSIWYG editör; şablon olmadan zorunlu metin girişi |
 | **Durum** | Research |
@@ -316,7 +316,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Tetikleyici (`#`) ile snippet listesi açılır; seçilen snippet yapılandırılmış metni ilgili alana yerleştirir; **AI değildir** |
 | **Avantajları** | Hız; tutarlılık; düşük maliyet |
 | **Riskleri** | Snippet ile AI karıştırılması; güncel olmayan şablonlar |
-| **Rakipte gözlenen uygulama** | DaySmart — `#vomiting` → Subjective alanına soru seti ([2026-08-02 bölüm 2](../competitors/daysmart.md#snippet-ve-sesle-not)) |
+| **Rakipte gözlenen uygulama** | DaySmart — `#vomiting` → Subjective alanına soru seti ([2026-08-02 bölüm 2](../competitors/daysmart.md#snippet-ve-sesle-not)); **Templates Module** Snippets catalog + hashtag/shortcut ([templates-letters-snippets-attachments](../competitors/daysmart.md#templates-letters-snippets-attachments)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | P1 aday; klinik bazlı snippet yönetimi |
 | **Durum** | Research |
 
@@ -334,7 +334,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Bundle seçimi → kalem dahil/hariç ve miktar düzenleme → kayıt → records ve billing'e otomatik yansıma |
 | **Avantajları** | Hız; tutarlı paket uygulama; klinik-finans köprüsü |
 | **Riskleri** | Item rule opaklığı; stok senkronizasyonu |
-| **Rakipte gözlenen uygulama** | DaySmart — check-in ve medical note'tan bundle; invoice bağlantısı ([2026-08-02 bölüm 2](../competitors/daysmart.md#bundle-ve-doz-hesaplayıcı)); **canlı sandbox — Treatment Board** New Bundle sihirbazı ([Treatment Board](../competitors/daysmart.md#new-bundle-sihirbaz)); **Boarding Check In** bundle seçimi ([Bundle](../competitors/daysmart.md#bundle-check-in-bağlamı)); **Inventory Module** item detail Bundles tab ([inventory-bundles](../competitors/daysmart.md#inventory-bundles)) |
+| **Rakipte gözlenen uygulama** | DaySmart — check-in ve medical note'tan bundle; invoice bağlantısı ([2026-08-02 bölüm 2](../competitors/daysmart.md#bundle-ve-doz-hesaplayıcı)); **canlı sandbox — Treatment Board** New Bundle sihirbazı ([Treatment Board](../competitors/daysmart.md#new-bundle-sihirbaz)); **Boarding Check In** bundle seçimi ([Bundle](../competitors/daysmart.md#bundle-check-in-bağlamı)); **Inventory Module** item detail Bundles tab ([inventory-bundles](../competitors/daysmart.md#inventory-bundles)); **Templates Module** Bundle Items/Activities/Actions üç katman; quantity/price ranges; clinical activity ≠ billable item ([templates-bundles](../competitors/daysmart.md#templates-bundles)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | [EXAM-007](../backlog/feature-backlog.md) genişletmesi |
 | **Durum** | Research |
 
@@ -352,7 +352,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Record satırında edit, duplicate, delete; view changes / audit history; lot, expiry, route, site detayları |
 | **Avantajları** | Denetlenebilirlik; klinik güvenlik; itiraz yönetimi |
 | **Riskleri** | Audit veri hacmi; retention |
-| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route alanları ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); **Inventory Module** stock adjustment audit ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)); **Reports Module** Staff > Deleted Transactions ([reports-deleted-transactions](../competitors/daysmart.md#reports-deleted-transactions)) |
+| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route alanları ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); **Inventory Module** stock adjustment audit ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)); **Reports Module** Staff > Deleted Transactions ([reports-deleted-transactions](../competitors/daysmart.md#reports-deleted-transactions)); **Templates Module** template definition ≠ runtime record — template değişikliği geçmiş medical note/form/bundle snapshot'ını sessizce değiştirmemeli ([templates-vs-runtime](../competitors/daysmart.md#templates-vs-runtime)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | P1 temel audit history; P2 attachment/duplicate |
 | **Durum** | Research |
 
@@ -388,7 +388,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Ürün veya kalem seçiminde "Apply Item Rule" ile yapılandırılmış kurallar ilgili alanları otomatik doldurur |
 | **Avantajları** | Hız; tutarlılık; stok-finans-klinik senkronizasyon adayı |
 | **Riskleri** | Opak kurallar; yanlış otomatik doldurma; kural bakım yükü |
-| **Rakipte gözlenen uygulama** | DaySmart — record oluşturmada Apply Item Rule; next due, reminder, quantity, route, invoice, stok ([2026-08-02 bölüm 3](../competitors/daysmart.md#item-rules), sandbox observation); **Boarding Check In** Apply Item Rule ([Apply Item Rule](../competitors/daysmart.md#apply-item-rule-check-in-bağlamı)); **Reminders Detail** Reminder For = klinik item due-date kayıtları (aşı, lab, follow-up vb.) operasyon listesinde ([Reminders](../competitors/daysmart.md#reminders-detail-ana-tablo)); **Inventory Module** Item Actions tab — usage → create alert/reminder/task, change patient status, print certificate; Low Balance threshold örneği ([inventory-item-actions](../competitors/daysmart.md#inventory-item-actions)) |
+| **Rakipte gözlenen uygulama** | DaySmart — record oluşturmada Apply Item Rule; next due, reminder, quantity, route, invoice, stok ([2026-08-02 bölüm 3](../competitors/daysmart.md#item-rules), sandbox observation); **Boarding Check In** Apply Item Rule ([Apply Item Rule](../competitors/daysmart.md#apply-item-rule-check-in-bağlamı)); **Reminders Detail** Reminder For = klinik item due-date kayıtları (aşı, lab, follow-up vb.) operasyon listesinde ([Reminders](../competitors/daysmart.md#reminders-detail-ana-tablo)); **Inventory Module** Item Actions tab — usage → create alert/reminder/task, change patient status, print certificate; Low Balance threshold örneği ([inventory-item-actions](../competitors/daysmart.md#inventory-item-actions)); **Templates Module** Bundle Actions (Create form/reminder/task, Change patient status, Print certificate vb.); When Using item binding; **Bundle Action ≠ Form Logic** ([templates-bundles](../competitors/daysmart.md#templates-bundles)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | [EXAM-014](../backlog/feature-backlog.md) kapsamında; kural özeti görünür olmalı → [Explainable Assistance](../vision/product-principles.md) |
 | **Durum** | Research |
 
