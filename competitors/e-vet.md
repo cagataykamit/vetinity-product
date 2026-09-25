@@ -10,8 +10,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 
 - Platform shell / navigation ve IA envanteri (**navigation discovery tamamlandı**, 2026-09-23); login sonrası Hasta Kabul landing (alan etiketleri; kısmi — bkz. [Review Tracker](#review-tracker)).
 - **Hasta Kartı / Patient Workspace** — planlanan görsel/product review kapsamı **REVIEWED / CLOSED** (2026-09-24 – 2026-09-25); [kapsam](#hasta-kartı--patient-workspace) ve [tracker](#review-tracker).
+- **Global Hospitalizasyon modülü** — sol menü **Hospitalizasyon** / **Hospitalizasyonlar** operasyon yüzeyi **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-hospitalizasyon-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** Global/operasyonel modüller (Hospitalizasyon operasyon yüzeyi, Takvim global, Doğrudan Satış, vb.) — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** Takvim (global), Doğrudan Satış, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -20,8 +21,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **E-Vet SMART genel competitor review** | **Devam ediyor (IN PROGRESS)** — gözlemlenen sürüm **v4.12.0** |
 | **Navigation / IA discovery** | Tamamlandı (2026-09-23) |
 | **Hasta Kartı / Patient Workspace** | **REVIEWED / CLOSED** (2026-09-25) |
+| **Global Hospitalizasyon modülü** | **REVIEWED / CLOSED** (2026-09-25) |
 
-> **CLOSED (Hasta Kartı):** Planlanan Hasta Kartı görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics veya tüm E-Vet ürün kapsamının incelenmiş olması.
+> **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
 ---
 
@@ -55,7 +57,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED) |
 
 ---
 
@@ -446,7 +448,105 @@ Hasta kartı Anasayfa alt sekmeleri incelendi (Ana, Özel, Bilgi).
 
 ---
 
+## Global Hospitalizasyon (modül)
+
+**Review status:** **REVIEWED / CLOSED** (planlanan global Hospitalizasyon product review kapsamı).
+
+**OBSERVED — giriş:** Sol operasyonel menü **Hospitalizasyon** → global sayfa başlığı **Hospitalizasyonlar**.
+
+### Liste (Hospitalizasyonlar)
+
+**OBSERVED — üst filtreler:** Tarih Aralığı, Arama Metni, **Ara**, **Temizle**.
+
+**OBSERVED — aksiyon:** **+ Yeni Kayıt**.
+
+**OBSERVED — tablo kolonları:** İşlemler, Müşteri, Hasta, Bölüm, Veteriner, Oda, Giriş Tarihi, Çıkış Tarihi, Günler, Tedavisi var mı?
+
+**OBSERVED — satır gruplama:** Yatış durumuna göre gruplar. Gözlemlenen grup etiketleri: **Yatan**, **Taburcu**.
+
+**OBSERVED:** Sorgu/tarih filtresi sonuç kümesi içinde yalnızca aktif yatan listesi değil; **Yatan** ve **Taburcu** grupları birlikte görüntülenebilir. Kayıt **Yatan** → **Taburcu** düzenlendiğinde aynı kayıt **Yatan** grubundan **Taburcu** grubuna taşındı.
+
+**TBD:** Gözlemlenen **Yatan** / **Taburcu** dışında tam status enum **uydurulmaz**.
+
+### Hospitalizasyon Tanımı (+ Yeni Kayıt / Düzenle)
+
+**OBSERVED — form başlığı:** Hospitalizasyon Tanımı.
+
+**OBSERVED — kırmızı/zorunlu etiketli alanlar:** Müşteri, Hasta, Durum, Giriş Tarihi, Bölüm.
+
+**OBSERVED — diğer alanlar:** Çıkış Tarihi, Oda, Veteriner, Tedavi Şekli, Uygulamalar, Açıklama.
+
+**OBSERVED — aksiyonlar:** Kaydet, Geri Dön.
+
+**OBSERVED — Durum (örnek):** varsayılan/mevcut **Yatan**; düzenlemede **Taburcu** kaydedildi.
+
+**OBSERVED — konum örnekleri (requirement değil):** Bölüm: Klinik, Hasta Odası; Oda: Kafes, Kedi Kafes - 4, Kedi Kafes 7, Yoğun Bakım 4, vb.
+
+**TBD:** Kaynak hiyerarşisi, kapasite, yatak/kafes lifecycle.
+
+**Competitor evidence → Vetinity backlog (kaynak V1 scope; E-Vet requirement değil):** [HOSP-001](../backlog/feature-backlog.md#hosp-001--yatış-yaşam-döngüsü-ve-aktif-yatışlar) (yeni kayıt, durum grupları, giriş/çıkış, düzenleme, global operasyon yüzeyi), [HOSP-002](../backlog/feature-backlog.md#hosp-002--yatış-konum-ataması) (Bölüm, Oda).
+
+### Satır genişletme (inline)
+
+**OBSERVED:** Sol ok ile satır genişletme; **Bilgi | İçerik** tablosu:
+
+- Tedavi Şekli
+- Uygulamalar
+- Açıklama
+
+**OBSERVED:** Gerçek kayıtlarda çok satırlı klinik metin (ör. ilaç/tedavi talimatı, sıvı/uygulama, serbest not).
+
+**TBD / NOT OBSERVED:** Yapılandırılmış MAR, doz zamanlama, hemşirelik görev panosu, uygulama tamamlama/atlandı logları, vital flowsheet — bu ekran kanıtı **free/multi-line text** davranışıdır; structured inpatient administration **iddia edilmez**.
+
+### İşlemler menüsü
+
+**OBSERVED (dropdown):** İncele, Düzenle, Sil.
+
+**NOT OBSERVED (bu menüde):** Ayrı Taburcu, Treatment, Medication administration aksiyonları — başka yüzeylerde olabilir; **bilinmiyor**.
+
+### İncele (read-only modal)
+
+**OBSERVED:** Owner/müşteri + hasta bağlamı; Durum, Giriş Tarihi, Çıkış Tarihi, Bölüm, Oda, Veteriner; Tedavi Şekli, Uygulamalar, Açıklama (read-only). Genişletilmiş satır içeriği ile **substantially mirror**.
+
+### Düzenle
+
+**OBSERVED:** Hospitalizasyon Tanımı dolu form; alanlar yeni kayıt ile aynı set. Test: Durum **Yatan** → **Taburcu**, **Çıkış Tarihi** boş bırakılarak kaydedildi.
+
+### Taburcu lifecycle (doğrudan test)
+
+**OBSERVED — başlangıç:** Kayıt **Yatan** grubunda; Giriş Tarihi dolu; Çıkış Tarihi boş.
+
+**OBSERVED — aksiyon:** Düzenle → Durum = **Taburcu**, Çıkış Tarihi boş → Kaydet.
+
+**OBSERVED — sonuç:**
+
+1. Kayıt **Yatan** grubundan kayboldu; **Taburcu** grubunda göründü.
+2. Global **Hospitalizasyonlar** sayfasında erişilebilir kaldı.
+3. **Hasta Kartı > Hospitalizasyon Geçmişi**'nde görünür kaldı.
+4. Hasta geçmişi / İncele modal: Durum = Taburcu; Giriş Tarihi = mevcut; Çıkış Tarihi = **"-"** (boş gösterim).
+5. Global **Taburcu** satırında Çıkış Tarihi hâlâ boş; **Günler** boş.
+
+**OBSERVED:** Test edilen akışta **Taburcu** durumuna geçiş **Çıkış Tarihi'ni otomatik doldurmadı**. UI düzeyinde Durum ile Çıkış Tarihi bağımsız alanlar; **Taburcu** + boş çıkış tarihi birlikte mümkün.
+
+**TBD:** Günler hesaplama; çıkış tarihi validasyon kuralları. Bu competitor davranışı otomatik Vetinity requirement **değil**.
+
+### Sil (onay)
+
+**OBSERVED:** İşlemler > Sil → “Silme İşlemi - Onay” / “Seçili kaydı silmek istediğinizden emin misiniz?” → Evet / Hayır. Yatış kaydı **silinmedi** (yalnızca onay UI).
+
+**TBD:** Delete persistence semantics.
+
+### Ürün karakterizasyonu (yalnızca gözlem)
+
+**OBSERVED — görece hafif inpatient operasyon yüzeyi:** yatış lifecycle + durum gruplama + bölüm/oda + veteriner + giriş/çıkış tarih alanları + tedavi/uygulama serbest metin + not + hasta geçmişi sürekliliği.
+
+**NOT OBSERVED / TBD (feature absent iddiası değil):** medication administration record, scheduled dose administration, nursing task board, completion/skipped events, inpatient vital flowsheet, occupancy/capacity enforcement, structured bed/cage resource lifecycle.
+
+---
+
 ## Hospitalizasyon geçmişi
+
+*(Hasta kartı — patient-scoped; Patient Card review kapsamında CLOSED.)*
 
 **OBSERVED — hasta bazında Hospitalizasyon Geçmişi kolonları:**
 
@@ -460,11 +560,13 @@ Hasta kartı Anasayfa alt sekmeleri incelendi (Ana, Özel, Bilgi).
 
 **OBSERVED — örnek değerler (UI):** Bölüm: Hasta Odası; Oda: Kafes (tek örnek; oda/kafes veri modeli **uydurulmaz**).
 
-**TBD:** Yatış başlat/bitir ekran akışı (E-Vet iç workflow incelenmedi); global Hospitalizasyon menüsü ile hasta kartı geçmişi ilişkisi.
+**OBSERVED — global ↔ hasta sürekliliği:** Global Hospitalizasyon kaydı **Taburcu** yapıldıktan sonra **Hospitalizasyon Geçmişi**'nde görünür kaldı ([Taburcu lifecycle testi](#taburcu-lifecycle-doğrudan-test)). Patient-scoped yatış geçmişi read surface kanıtı — duplicate storage **varsayılmaz**.
 
-**Vetinity requirement kaynağı (PRIMARY):** [v1-release-scope.md](../roadmap/v1-release-scope.md), [ux/navigation.md](../ux/navigation.md), [ux/design-decisions.md](../ux/design-decisions.md) — backlog: [HOSP-001](../backlog/feature-backlog.md#hosp-001--yatış-yaşam-döngüsü-ve-aktif-yatışlar), [HOSP-002](../backlog/feature-backlog.md#hosp-002--yatış-konum-ataması), [HOSP-003](../backlog/feature-backlog.md#hosp-003--hasta-yatış-geçmişi-ve-klinik-bağlam).
+**Competitor evidence → Vetinity backlog:** [HOSP-003](../backlog/feature-backlog.md#hosp-003--hasta-yatış-geçmişi-ve-klinik-bağlam) (global → patient history continuity; tedavi/uygulama/bağlam görünürlüğü). [TIMELINE-001](../backlog/feature-backlog.md#timeline-001--hasta-timeline) ile read-model hizalması değerlendirmesi (bu belgede karar yok).
 
-> Bu E-Vet listesi/kolonları Vetinity requirement değildir; rakipte benzer yüzeyin bulunduğunu gösteren **competitor evidence**dır.
+**Vetinity requirement kaynağı (PRIMARY):** [v1-release-scope.md](../roadmap/v1-release-scope.md), [ux/navigation.md](../ux/navigation.md), [ux/design-decisions.md](../ux/design-decisions.md).
+
+> E-Vet kolonları/listeleri Vetinity requirement değildir; **competitor evidence**dır.
 
 ---
 
@@ -822,12 +924,22 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 - “Beni Uyar” cross-workflow visibility
 - Özel Form-4 inconsistent content root cause
 
+### Global Hospitalizasyon — REVIEWED / CLOSED
+
+Planlanan global modül review kapsamında **incelendi** (tekrar inceleme gerekmez):
+
+Global Hospitalization list · Tarih/arama filtreleri · Durum gruplama (Yatan/Taburcu) · + Yeni Kayıt · Satır genişletme · İncele · Düzenle · Sil onayı · Bölüm/Oda ataması · Tedavi Şekli/Uygulamalar/Açıklama · Yatan → Taburcu geçişi · Taburcu kaydın global listede kalması · Hasta Hospitalizasyon Geçmişi sürekliliği
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- Tam status enum · Günler hesaplama · çıkış tarihi validasyon kuralları · yapılandırılmış inpatient ilaç uygulama · hemşirelik workflow · vital/flowsheet · oda/kafes kapasite modeli · doluluk zorunluluğu · backend delete semantics · structured bed/cage lifecycle
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
 |---|---|---|
-| **Hospitalizasyon** (global operasyon modülü) | **NOT REVIEWED** | Hasta Hospitalizasyon Geçmişi reviewed; admission/active/location/inpatient/discharge **görülmedi** — **sıradaki ana alan** |
-| **Takvim** (global) | **PARTIAL** | Hasta bağlamında randevu reviewed |
+| **Hospitalizasyon** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) |
+| **Takvim** (global) | **PARTIAL** | Hasta bağlamında randevu reviewed — **sıradaki ana alan** ([Next Review Queue](#next-review-queue)) |
 | **Doğrudan Satış** | **NOT REVIEWED** | Visit Sales ≠ global Direct Sale |
 | **Muayene Odası** | **PARTIAL / NOT SYSTEMATIC** | Patient muayene reviewed |
 | **Lab / Xray / Pacs İstekleri** (global kuyruk) | **PARTIAL / NOT SYSTEMATIC** | Patient history/new request reviewed |
@@ -856,8 +968,8 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-1. Hospitalizasyon
-2. Takvim
+1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül))
+2. **Takvim** — **NEXT** (global modül; patient-context randevu **PARTIAL**)
 3. Doğrudan Satış
 4. Muayene Odası
 5. Lab İstekleri
@@ -917,7 +1029,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; **Hasta Kartı REVIEWED / CLOSED**. Genel E-Vet özeti, güçlü/zayıf ve modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; **Hasta Kartı** ve **Global Hospitalizasyon** **REVIEWED / CLOSED**. Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
