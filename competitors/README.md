@@ -23,13 +23,13 @@ Vetinity'nin hedef kalite seviyesi ve ürün stratejisi için ana referanslardı
 | ezyVet | Beklemede | [ezyvet.md](ezyvet.md) |
 | Provet Cloud | Kısmi | [provet-cloud.md](provet-cloud.md) |
 | Digitail | Beklemede | [digitail.md](digitail.md) |
-| DaySmart Vet | Kısmi | [daysmart.md](daysmart.md) |
+| DaySmart Vet | Tamamlandı (visual/product review closed) | [daysmart.md](daysmart.md) |
 
 ### Türkiye
 
 | Rakip | Analiz durumu | Belge |
 |---|---|---|
-| E-vet Smart Plus | Beklemede | — |
+| E-Vet SMART | Devam ediyor (IN PROGRESS) — canlı ürün incelemesi | [e-vet.md](e-vet.md) |
 
 ---
 

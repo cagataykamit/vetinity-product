@@ -6,11 +6,13 @@ DaySmart Vet (uluslararası veteriner klinik yönetim platformu)
 
 ## İncelenen alan
 
-Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, Reports / Reporting Module, **Settings / Configuration**, **Templates / Template System**, Treatment Board, Boarding, Reminders
+Muayene deneyimi (SOAP / Medical Note), hasta geçmişi, klinik yardımcılar, mobil, randevu/online booking (2026-08-02 webinar), PetCare portal, check-in, bundle, klinik iletişim (2026-08-02 bölüm 2), birleşik record modeli, belge yaşam döngüsü, ziyaret durumu, finans cross-navigation (2026-08-02 bölüm 3), checkout, belge paketi, bağlamsal AI (2026-08-02 ~28:13–35:25), **canlı sandbox** — ilk giriş, erişilebilirlik, takvim, randevu, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, Reports / Reporting Module, Settings / Configuration, Templates / Template System, Treatment Board, Boarding, Reminders, **Platform / Global UX**, **Global Search**, **Configuration Registry** (2026-08-17 final batch)
 
 ## Analiz durumu
 
-**Kısmi** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (takvim, randevu, ilk giriş, Census, Patients Module, Clients Module, Contacts Module, Inventory Module, Billing / Financial Operations, Reports / Reporting Module, **Settings / Configuration**, **Templates / Template System**, Treatment Board, Boarding, Reminders) mevcuttur. Sandbox doğrulaması bekleyen noktalar açıkça işaretlenmiştir.
+**Tamamlandı (visual/product review closed)** — 2026-08-02 webinar benchmark (3 bölüm) ve **canlı sandbox** gözlemleri (sol menü modülleri, Settings/Templates, Platform/Global UX, Global Search, Configuration Registry; 2026-08-17 05:11+ final batch dahil) Vetinity ürün dokümantasyonuna işlendi. Sandbox doğrulanmamış noktalar açıkça işaretlenmiştir.
+
+> **CLOSED anlamı:** DaySmart'ın teknik implementasyonu reverse-engineer edildi **anlamına gelmez**. Anlamı: planlanan görsel/product competitor review tamamlandı ve kaynak dokümantasyon oluşturuldu. → [Final Assessment](#daysmart-final-assessment)
 
 ---
 
@@ -934,7 +936,9 @@ Appointments & Reservations / Appointments / Reservations filtreleri. Status ör
 
 ### Quick Create / "+" menu
 
-New History (Bundle, Medical Note, Record, Communication, Diagnosis, Diagnostic, Problem, Vital), Appointment, Document, Note, Relationship, Task, Reminder Bundle, Reminder, Wellness Plan → [PATTERN-007](../research/patterns.md#pattern-007--context-preserving-creation)
+**OBSERVED IN DAYSMART (Patients Module context):** New History (Bundle, Medical Note, Record, Communication, Diagnosis, Diagnostic, Problem, Vital), Appointment, Document, Note, Relationship, Task, Reminder Bundle, Reminder, Wellness Plan → [PATTERN-007](../research/patterns.md#pattern-007--context-preserving-creation)
+
+**OBSERVED IN DAYSMART (global top bar — 2026-08-17 batch):** New Patient, New Medical Note, New Client, New Inventory Item, New Estimate, New Invoice, New Payment — modüle navigate etmeden global oluşturma → [Platform Quick Create](#platform-quick-create)
 
 ### Clinic-wide: Labs / Images / Rx Requests / Custom Diagnoses / Analytics
 
@@ -3184,6 +3188,498 @@ Mevcut roadmap/backlog **üstün gelir** — otomatik taşınmaz.
 - Multi-clinic template sharing
 - Custom Fields applicable entities
 - Medical note template change → historical note behavior
+
+---
+
+## Sandbox — Platform / Global UX
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** (gerçek ürün ekranları)
+
+**Review batch:** Screens reviewed after **2026-08-17 05:11 Europe/Istanbul**
+
+> Kanıt sınıflandırması: **OBSERVED** = ekranda görülen · **INFERRED** = makul çıkarım · **VETINITY IMPLICATION** = öneri · **TBD** = doğrulanması gerekir. API/schema/event/permission implementasyonu **uydurulmaz**.
+
+→ [Global Search](#sandbox--global-search) · [Configuration Registry](#sandbox--configuration-registry) · [Settings / Configuration](#sandbox--settings--configuration) · [Inbox (2026-08-02)](#klinik-inbox-ve-müşteri-i̇letişim-geçmişi)
+
+### Global Quick Create {#platform-quick-create}
+
+**OBSERVED IN DAYSMART:** Üst bar global "+" menüsü:
+
+- New Patient
+- New Medical Note
+- New Client
+- New Inventory Item
+- New Estimate
+- New Invoice
+- New Payment
+
+**VETINITY IMPLICATION:** Global Quick Create = navigation-independent sık kullanılan kayıt başlatma. Role/permission-aware olmalı; clinic context korunmalı. Menü birebir kopyalanmaz — Vetinity operasyon önceliklerine göre aksiyon kümesi seçilir.
+
+→ [PATTERN-007](../research/patterns.md#pattern-007--context-preserving-creation) · [UX-001](../backlog/feature-backlog.md)
+
+### Global Inbox {#platform-inbox}
+
+**OBSERVED IN DAYSMART:** Global/utility Inbox yüzeyi:
+
+- Solda conversation/kişi listesi
+- Sağda seçilen conversation
+- Müşteriyle iki yönlü iletişim (Two-Way SMS bağlamı)
+
+**Domain ayrımı (VETINITY IMPLICATION):**
+
+| Yüzey | Rol |
+|---|---|
+| **Inbox** | Aktif iletişim çalışma yüzeyi / conversation worklist |
+| **Communication History** | Client/Contact scoped kalıcı geçmiş read-model |
+
+Aynı communication domain'in farklı yüzeyleri olabilir — duplicate entity değil.
+
+→ [MSG-001](../backlog/feature-backlog.md) · [MSG-002](../backlog/feature-backlog.md) · [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline) · [PATTERN-015](../research/patterns.md#pattern-015--conversation-to-patient-context) · [Clients Communications](#client-communications)
+
+**TBD:** SMS/WhatsApp/provider stratejisi (Türkiye). DaySmart provider yaklaşımı kopyalanmaz.
+
+### Global Tasks {#platform-global-tasks}
+
+**OBSERVED IN DAYSMART:** Global Tasks worklist filtreleri:
+
+- Assigned to Me
+- Created by Me
+- All Open & In Progress
+- All Completed
+
+**OBSERVED IN DAYSMART (New Task):** Task, Priority, Staff/assignee, Due date, Due time, Contact, Patient, Item(s), Repeat, Notes
+
+**VETINITY IMPLICATION:** Client, Contact ve global görev yüzeylerinin bağımsız modellenmesi duplicate davranış ve tutarsız workflow riski yaratabilir. Vetinity için ortak Task capability'sinden scoped/global worklist/read-model yüzeyleri üretme yaklaşımı değerlendirilir.
+
+→ [MSG-004](../backlog/feature-backlog.md) · [Client Tasks](#client-tasks) · [Contact Tasks](#contact-tasks) · [Reports Staff Tasks](#reports-staff) · [PATTERN-026](../research/patterns.md#pattern-026--unified-task-worklist)
+
+**OBSERVED:** Recurring/repeat task alanı mevcut. **TBD:** Repeat semantics.
+
+### Notification Center {#platform-notification-center}
+
+**OBSERVED IN DAYSMART:** Üst bar bell/zil → sağ drawer/panel; yakın dönem bildirim listesi; yaklaşık son **30 gün** kapsamı.
+
+**Ayrım:** **Notification** = bilgilendirme/sinyal · **Task** = eylem gerektiren iş — aynı kavram değil.
+
+→ [APPT-015](../backlog/feature-backlog.md) · [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center) · [PATTERN-010](../research/patterns.md#pattern-010--event-to-notification-continuity)
+
+### User vs Global Notification Settings {#platform-notification-settings}
+
+**OBSERVED IN DAYSMART:**
+
+| Yüzey | Kapsam |
+|---|---|
+| **Global Notification Settings** | Klinik/sistem seviyesi notification workflow davranışı |
+| **User Notification Settings** (profile menüsü) | Bireysel kullanıcı notification tercihleri |
+
+Karıştırılmamalı. Global config → [Configuration Registry](#config-global-notification-settings).
+
+### Global Notification → Task {#platform-notification-to-task}
+
+**OBSERVED IN DAYSMART (Configuration açıklaması):** Lab, pharmacy ve diagnostic image bildirimlerinin otomatik **task**'a dönüştürülebilmesi.
+
+**VETINITY IMPLICATION — cross-module pattern:**
+
+```
+EXTERNAL / CLINICAL RESULT EVENT → NOTIFICATION → ACTIONABLE STAFF TASK
+```
+
+Lab sonuçları, görüntüleme, eczane/ilaç, entegrasyon sonuçları için future use-case. Implementasyon tasarımı **bu görevde yapılmaz**.
+
+→ [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center) · [MSG-004](../backlog/feature-backlog.md) · [INT-001](../backlog/feature-backlog.md)
+
+### What's New {#platform-whats-new}
+
+**OBSERVED IN DAYSMART:** Uygulama içi What’s New — ürün yenilikleri, release/feature duyuruları, Schedule/Settings/Clients vb. alanlara linkli eğitim içeriği.
+
+**VETINITY IMPLICATION:** In-app product updates / release notes / product education — **core veterinary domain değil**; P2/P3 veya launch sonrası değerlendirme.
+
+### Help / Support / Education {#platform-help-support}
+
+**OBSERVED IN DAYSMART:**
+
+- Help Desk
+- E-Learning
+- Merck Vet Manual
+- Uygulama içi support/help widget/paneli
+
+**VETINITY IMPLICATION — underlying ihtiyaçlar (ayrı core modül değil):**
+
+| İhtiyaç | Not |
+|---|---|
+| Product help | In-app yardım |
+| Onboarding/education | E-Learning benzeri |
+| Support access | Help desk / ticket |
+| External clinical reference | Merck = DaySmart-specific örnek; Vetinity birebir entegrasyon **önerilmez** |
+
+### User / Profile Menu {#platform-profile-menu}
+
+**OBSERVED IN DAYSMART:** Lock Screen · My Profile · Notification Settings · Change Password · Log Out
+
+Global account/navigation UX benchmark. Mevcut Vetinity account/change-password çalışmalarıyla duplicate açılmaz.
+
+### Lock Screen {#platform-lock-screen}
+
+**OBSERVED IN DAYSMART:** Lock Screen ayrı capability — **logout değil**.
+
+**VETINITY IMPLICATION:** Shared clinic workstation'ta kısa süreli ayrılma — session/context tamamen kapatılmadan erişim kilidi; privacy / unauthorized access prevention.
+
+**Ayrımlar:** LOGOUT ≠ WORKSTATION LOCK ≠ SESSION TIMEOUT ≠ IP RESTRICTION
+
+**TBD:** Unlock flow, timeout interaction. P2/P3 aday.
+
+### Staff Profile / My Profile {#platform-staff-profile}
+
+**OBSERVED IN DAYSMART (kapsam örnekleri):** Kullanıcı/personel bilgileri, provider ilişkisi, role, mesleki/license bilgileri, after-hours access, timezone, production credit ilişkisi, signature, password/reset
+
+**VETINITY IMPLICATION:**
+
+```
+USER ACCOUNT ≠ STAFF / PROVIDER PROFESSIONAL PROFILE
+```
+
+US-specific professional/regulatory alanları (DEA, pharmacy license vb.) **doğrudan taşınmaz** → [Legacy Account](#config-legacy-account)
+
+### Time Sheets / Time Clock {#platform-time-sheets}
+
+**OBSERVED IN DAYSMART:** Staff Time Sheets yüzeyi — çalışma/giriş-çıkış saatleri kaydı.
+
+**OBSERVED IN DAYSMART (Configuration):** Time Clock = **Enabled** → cross-reference.
+
+**VETINITY IMPLICATION:** Workforce / attendance / time tracking — **core clinical workflow değil**; P2/P3/deferred.
+
+→ [Reports Time Sheets](#reports-staff) · [config-observed-rows](#config-observed-rows) (Time Clock row)
+
+### Platform Gap Analysis {#platform-gap-analysis}
+
+| Capability | DaySmart | Vetinity | Backlog/Pattern | Priority |
+|---|---|---|---|---|
+| Global Quick Create | Top bar "+" | Yok | PATTERN-007, UX-001 | P1 |
+| Global Search | Persistent search panel | Yok | UX-006, PATTERN-025 | P1 |
+| Inbox (active workspace) | Global + client context | v1.0 dışı | MSG-001, PATTERN-015 | P2 |
+| Unified Task model | Global + client/contact | Kısmi | MSG-004, PATTERN-026 | P1/P2 |
+| Notification Center | Bell drawer ~30d | Planlı | APPT-015, IDEA-015 | P1 |
+| Notification → Task | Global config | Yok | IDEA-015, MSG-004 | P1/P2 |
+| Lock Screen | Profile menu | Yok | — research | P2/P3 |
+| Time Clock / Sheets | Staff + config | Yok | — deferred | P3 |
+| What's New / Help | In-app | Yok | — deferred | P3 |
+| Workstation security layers | Lock/timeout/IP | Belirsiz | UX-002 config | P2/P3 |
+
+---
+
+## Sandbox — Global Search
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** · **Review batch:** 2026-08-17 05:11+ Europe/Istanbul
+
+> Global Search = search + navigation launcher + recent history — yalnız "search input" değil.
+
+### Search panel structure {#global-search-structure}
+
+**OBSERVED IN DAYSMART:** Üst bar persistent/global search. Top-level kategoriler:
+
+- Schedule
+- Patients
+- Clients
+- Contacts
+- Inventory
+- Billing
+
+**OBSERVED IN DAYSMART (initial/empty state):**
+
+- Search Results
+- Start typing to see results
+- **Recently Viewed**
+
+Sonuç satırları: icon, title, entity/type. Panel scroll edilebilir.
+
+→ [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) · [UX-006](../backlog/feature-backlog.md)
+
+### Recently Viewed {#global-search-recently-viewed}
+
+**OBSERVED IN DAYSMART:** Recently Viewed — **seçili search kategorisine tek entity tipiyle sınırlı görünmüyor**.
+
+Örnekler: Inbox · Acupuncture SOAP — Template · Canine Neuter — Template · Emergency Intake Form — Template · Canine spay package — Template · Neuter — Item · Anesthesia Waiver and Consent — Template · New Enrollments By Staff — Report · Enrollment Summary — Report · Billing Transactions — Report
+
+**VETINITY IMPLICATION:** Recently Viewed / Recent Object Navigation pattern — cross-entity recent history.
+
+### Patient global search {#global-search-patients}
+
+**OBSERVED IN DAYSMART:** Patients alt filtreleri: All · Name · Chip · Tag
+
+**OBSERVED IN DAYSMART:** `Abbott Winkler` araması → `Abbott Winkler (1049)` Patient
+
+**VETINITY IMPLICATION:** Patient search yalnız name ile sınırlı olmamalı — microchip, karne/küpe no, protokol no vb. mevcut/planned identifier'larla ilişkilendir.
+
+→ [Patients Module](#sandbox--patients-module) · [APPT-018](../backlog/feature-backlog.md)
+
+### Client search — competitor weakness {#global-search-client-weakness}
+
+**OBSERVED IN DAYSMART (weakness):**
+
+| Sorgu | Sonuç |
+|---|---|
+| `Alleva, DeAnna` (ekranda görünen tam format) | **No matches found** |
+| `Alleva` (partial) | `DeAnna Alleva (759)` Client ✓ |
+
+**VETINITY IMPLICATION / OPPORTUNITY:** DaySmart search normalization zayıflığı — **kopyalanmamalı**. Toleranslı arama:
+
+- FirstName LastName
+- LastName FirstName
+- LastName, FirstName
+- Partial name
+
+**TBD (Türkiye):** Büyük/küçük harf, Türkçe karakter, boşluk/noktalama normalizasyonu. Telefon format normalizasyonu — DaySmart ekranında gözlenmedi; Vetinity research gereksinimi olarak ayrı değerlendirilir.
+
+→ [Clients Module](#sandbox--clients-module) · [UX-006](../backlog/feature-backlog.md)
+
+### Global Search Gap Analysis {#global-search-gap-analysis}
+
+| Capability | DaySmart | Vetinity | Priority |
+|---|---|---|---|
+| Entity-aware global search | 6 categories | Yok | P1 |
+| Recently Viewed (cross-entity) | Yes | Yok | P1/P2 |
+| Patient identifier search | Name/Chip/Tag | Kısmi | P1 |
+| Tolerant person name search | Weak (comma fail) | Fırsat | P1 |
+| Search as navigation launcher | Yes | Yok | P1 |
+
+---
+
+## Sandbox — Configuration Registry
+
+**Kaynak türü:** DaySmart Vet **canlı sandbox** · **Review batch:** 2026-08-17 05:11+ Europe/Istanbul
+
+> Settings navigasyonu (Add-ons, Configurations, PetCare, Integrations, Payments, Permissions, Subscriptions, Templates) önceki [Settings / Configuration](#sandbox--settings--configuration) bölümünde dokümante edildi — **duplicate IA bölümü açılmaz**. Bu bölüm: legacy account, migration signal, **List of Configurations** registry ve gözlemlenen policy satırları.
+
+### Legacy organization / account settings {#config-legacy-account}
+
+**OBSERVED IN DAYSMART (legacy Settings/account):**
+
+**Clinic info:** Name, Phone, Fax, Website, Email, Facebook, Twitter, About Us, **DEA Number**, **Pharmacy License Number** (US-specific)
+
+**Account/capacity:** Account ID, Users/capacity, Patients/capacity, Next Payment, Business Registration Information
+
+**VETINITY IMPLICATION:** Clinic / company / legal / regulatory information — Türkiye-specific alanlar **requires regulatory research**. DEA/Pharmacy License universal field **değil**.
+
+### Legacy → new configuration migration {#config-migration-notice}
+
+**OBSERVED IN DAYSMART:**
+
+> Configuration Update — Configuration has been moved to a new page. Click here to go to the new page.
+
+**VETINITY IMPLICATION:** Competitor UX/technical debt signal — legacy + modern Settings birlikte yaşıyor. **Kopyalanacak pattern değil.**
+
+### List of Configurations {#config-list}
+
+**OBSERVED IN DAYSMART:** Settings > List of Configurations — kolonlar: **Option · Value · Description** + **Search Configuration** alanı.
+
+**VETINITY IMPLICATION:** Searchable, discoverable clinic policy/configuration registry. DaySmart alfabetik tablo UI = capability benchmark, **UX hedefi değil**. Domain grouping adayı (Randevu, Klinik İşleyişi, Finans, Stok, İletişim, Güvenlik, Bölgesel) — **kesin IA kararı değil**.
+
+→ [UX-002](../backlog/feature-backlog.md)
+
+### Observed configuration rows {#config-observed-rows}
+
+| Option | Observed Value | Domain | Vetinity cross-ref | TR / Priority note |
+|---|---|---|---|---|
+| Account Balance on Invoice | (toggle) | Billing | [Billing invoices](#billing-invoices) | P1/P2 |
+| Account Statement Footer | (configurable) | Billing/Documents | Document footer pattern | P2 |
+| After Hours Markup | 0% | Billing + Hours | Clinic-hours policy | TR applicability TBD · P2/P3 |
+| Appointment Confirmation | Email | APPT/MSG | [APPT-012](../backlog/feature-backlog.md), [settings-email-defaults](#settings-email-defaults) | P1 |
+| Appointment Hover Over | Enable hover-overs | Schedule UX | Schedule sandbox | Minor UX · notes only |
+| Appointment Pre-Visit Confirmation | Enabled | APPT/PORTAL/FORM | [APPT-014](../backlog/feature-backlog.md), [PORTAL-005](../backlog/feature-backlog.md), [CHECKIN-002](../backlog/feature-backlog.md) | P1/P2 |
+| Appointment Reminder | Email 2 weeks before due | Reminders | [APPT-014](../backlog/feature-backlog.md) | P1 |
+| Auto-Inactivate Clients | Off | Client lifecycle | Client module | P2; reactivation manual |
+| BCC Forwarding | (generated BCC) | Messaging/audit | [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline) | P1/P2; BCC tekniği zorunlu değil |
+| Check In Billing | Create invoice | CHECKIN/Billing | [CHECKIN-004](../backlog/feature-backlog.md) | P1 |
+| Cost Plus Pricing | Include shipping and tax | Inventory/Billing | [Inventory](#sandbox--inventory--inventory-module) | US accounting · TR research |
+| Date Format | M DD, YYYY | Localization | [config-locale](#config-locale) | P1 foundation |
+| Default Clinic Provider | (value) | Staff/Scheduling | Provider context TBD | P1/P2 |
+| Estimate Expiration | 14 days from estimate date | Billing | [billing-estimates](#billing-estimates) | P1/P2 |
+| Estimate Footer | (configurable) | Documents/Templates | [templates-forms](#templates-forms) | P2 |
+| Form Footer | (configurable) | Templates/Forms | [templates-forms](#templates-forms) | P2 |
+| Global Notification Settings | (see description) | Notifications/Tasks | [platform-notification-to-task](#platform-notification-to-task) | P1/P2 |
+| Inventory Shelf Management | Soonest expiring | Inventory | [RECORD-005](../backlog/feature-backlog.md) | P1; FIFO vs FEFO |
+| Invoice & Estimate Template | Template with unit price | Billing/Templates | Billing + Templates | P1/P2 |
+| Invoice Footer | (configurable) | Billing/Documents | Billing | P2 |
+| Invoice Note | (configurable header/note) | Billing | Billing | P2 |
+| IP Address Login Restriction | No restriction | Security | Enterprise P2/P3 | Not P0 |
+| Label Printer Manager | Enabled | Pharmacy/printing | P2/P3 | Cloud-first defer |
+| Label Settings | 2-1/8" x 4", Default, Prescription Footer | Pharmacy/printing | US dimensions not hard req | P2/P3 |
+| Link Expiration | Expire links in 7 days | Security/Portal | [PORTAL-003](../backlog/feature-backlog.md) | P1/P2; 0=disabled |
+| Locale | United States | Localization | Turkey-first + i18n-ready | P1 foundation |
+| Lock Medical Notes | Do not automatically lock notes | Clinical integrity | [EXAM-015](../backlog/feature-backlog.md), [RECORD-002](../backlog/feature-backlog.md) | **P1 high** |
+| Lock Open Invoices | Do not automatically lock invoices | Billing integrity | [CHECKOUT-001](../backlog/feature-backlog.md) | P1/P2 |
+| Patient History Default View | Medical Records | Patients/Timeline | [ADR-006](../decisions/ADR-006-patient-timeline.md) | Configurable default only |
+| Payment Terms | Net 30; 2% per month | Billing | US semantics · TR legal research | P2/P3 |
+| Postcard Message | (default message) | Reminders/legacy | Legacy channel · not Vetinity priority | Reject |
+| Rabies Certificate Footer | (configurable) | Documents | Certificate templates | P2; TR docs TBD |
+| Remote View | Schedule/Treatment Board/Census | Security/display | Anonymous access **reject** | P3/deferred |
+| Schedule Increments | 15 minutes | Scheduling | [APPT-006](../backlog/feature-backlog.md), Schedule | P1 |
+| Services Location | Both; Do not default to clinic tax rate | Billing/Tax | US tax · [INT-005](../backlog/feature-backlog.md) | TR research |
+| Session Timeout | 12 hours | Security | Exact value not requirement | P1/P2 |
+| Sync Appointment To Calendar | Disable | Portal/APPT | Personal calendar sync | P3 |
+| Time Clock | Enabled | Workforce | [platform-time-sheets](#platform-time-sheets) | P3 |
+| Timezone | (UTC-07:00) America/Los_Angeles | Localization | Multi-clinic future | P1 foundation |
+| Vaccine Certificate Footer | (configurable) | Documents | Certificate templates | P2 |
+| Weights & Measures | Standard | Localization | Metric/imperial clinic config | P1/P2 |
+
+#### Appointment Pre-Visit Confirmation (detail) {#config-pre-visit-confirmation}
+
+**OBSERVED IN DAYSMART:** Enabled — client telefonundan appointment öncesi: contact info update, letters/forms signing. Tamamlanınca appointment **Pre-visit confirmed** durumu.
+
+**VETINITY IMPLICATION:** APPOINTMENT + COMMUNICATION + CLIENT SELF-SERVICE + FORM/CONSENT + STATUS cross-module workflow.
+
+#### Auto-Inactivate Clients (detail) {#config-auto-inactivate-clients}
+
+**OBSERVED IN DAYSMART:** Off — qualifying visit veya billing activity olmayan client'lar belirli süre sonra otomatik inactive. **Reactivation manual** — otomatik ACTIVE dönüş yok.
+
+#### BCC Forwarding (detail) {#config-bcc-forwarding}
+
+**OBSERVED IN DAYSMART:** Generated BCC email — client/contact outbound email'in BCC kopyası bu adrese gelince **Communication Log**'a otomatik aktarım.
+
+**VETINITY IMPLICATION:** Outbound communication → automatic history capture. Generated-BCC tekniği zorunlu mimari değil.
+
+#### Inventory Shelf Management (detail) {#config-inventory-shelf}
+
+**OBSERVED IN DAYSMART:** Soonest expiring — alternatif: purchase-date FIFO vs expiration-date soonest-expiring consumption.
+
+**VETINITY IMPLICATION:** Medication/vaccine/pharmaceutical/expiring inventory için yüksek değer — FEFO/FIFO policy.
+
+#### Lock Medical Notes (detail) {#config-lock-medical-notes}
+
+**OBSERVED IN DAYSMART:** Do not automatically lock notes — belirli gün sonra otomatik/permanent lock seçeneği. Locked notes: unlock/edit/delete **yok** (DaySmart model).
+
+**VETINITY IMPLICATION:** Exact irreversible model otomatik karar değil. Değerlendir: DRAFT → FINALIZED/LOCKED → AUDIT-SAFE CORRECTION/ADDENDUM.
+
+→ [EXAM-015](../backlog/feature-backlog.md) · [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions)
+
+#### Remote View (detail) {#config-remote-view}
+
+**OBSERVED IN DAYSMART:** External read-only links — Schedule, Treatment Board, Census — **login olmadan** görüntüleme.
+
+**VETINITY IMPLICATION:** Security-sensitive — anonymous clinical access **önerilmez**. İleride: scoped token, expiration, revocation, minimum-data exposure, audit.
+
+#### Global Notification Settings (detail) {#config-global-notification-settings}
+
+**OBSERVED IN DAYSMART:** Lab/pharmacy/diagnostic image bildirimleri → otomatik task. → [platform-notification-to-task](#platform-notification-to-task)
+
+### Configuration product principle {#config-product-principle}
+
+**VETINITY IMPLICATION (özet):**
+
+> Clinic behavior should be **policy/configuration driven** where appropriate — ancak configuration sprawl yaratılmamalı.
+
+Settings büyüdükçe: domain grouping, search, descriptions, sensible defaults, permissions, discoverability kritik. DaySmart uzun alfabetik tablo = benchmark, **UX hedefi değil**.
+
+### Açık doğrulama soruları (Configuration Registry)
+
+- Default Clinic Provider assignment semantics
+- Lock Medical Notes: auto-lock day count; addendum vs unlock policy
+- Remote View: token scope and audit (sandbox'ta test edilmedi)
+- Cost Plus Pricing: TR accounting applicability
+- Global Notification Settings: tam tetikleyici listesi
+
+---
+
+## DaySmart Vet — Final Assessment / Review Closure {#daysmart-final-assessment}
+
+**Status:** **DAYSMART VET VISUAL / PRODUCT COMPETITOR REVIEW = COMPLETE / CLOSED**
+
+**Traceability:** Planlanan sandbox modülleri + Platform/Global UX + Global Search + Configuration Registry (2026-08-17 05:11+ batch) Vetinity product repo'ya işlendi. Teknik reverse-engineering **kapsam dışı**.
+
+### 1. En güçlü capability alanları
+
+- Birleşik SOAP/Medical Note workspace + structured templates
+- Check-in / visit lifecycle orkestrasyonu
+- Bundle (Items/Activities/Actions) — klinik-finans köprüsü
+- Patient timeline + scoped read-models
+- Inventory depth (categories, bundles, item rules, controlled substances reporting)
+- Billing/financial operations + AR reconciliation awareness
+- Reports breadth + cross-domain filtering
+- Appointment type as workflow preset
+- Configuration-driven clinic policy registry
+- Global search + recent navigation
+- Communication inbox + history + BCC capture pattern
+
+### 2. UX / product zayıflıkları
+
+- Legacy + modern Settings fragmentation
+- Giant alphabetic configuration table (discoverability zayıf)
+- Client search normalization failure (`LastName, FirstName`)
+- Arayüz bilgi yoğunluğu / dated SaaS IA
+- Operational queues sometimes surfaced as static reports
+- Remote View anonymous access (security concern)
+- US-centric tax/regulatory assumptions surfaced globally
+
+### 3. Vetinity'de mevcut / planlanan karşılıklar
+
+- SOAP muayene deneyimi → ADR-005, EXAM-*
+- Tanımlar/Settings hub → UX-002
+- Patient timeline → ADR-006, TIMELINE-*
+- Report Center → ADR-003, REPORT-*
+- Check-in/checkout → CHECKIN-*, CHECKOUT-*
+- Communication templates → APPT-012/014, MSG-*, IDEA-013
+- Clinical-financial traceability → RECORD-001, PATTERN-005
+- Inventory/stock → v1 scope, RECORD-005
+
+### 4. Kapatılması gereken önemli gap'ler
+
+| Priority | Gap |
+|---|---|
+| **P0/P1** | Global Search architecture; tolerant person/identifier search; clinic configuration registry (grouped, searchable); medical note finalization/locking policy; expiry-aware inventory consumption |
+| **P1/P2** | Global Quick Create; unified Task capability/model approach; notification center + notification→task; pre-visit confirmation workflow; communication history auto-capture; link expiration |
+| **P2** | Advanced form builder; bundle activities/actions; BCC/alternative comm capture; invoice/note lock policies |
+
+### 5. Bilinçli kopyalanmaması gerekenler
+
+- Legacy/modern Settings split
+- Alphabetic config table as final UX
+- Exact client comma-name search behavior
+- US DEA/pharmacy license/jurisdiction/tax as universal fields
+- Anonymous Remote View without strong controls
+- Postcard legacy channel as modern priority
+- DaySmart terminology and menu IA birebir
+- Her capability için disconnected entity/module
+
+### 6–8. Priority buckets
+
+**P1 adayları:** Global Search; patient identifier search; normalized person search; Global Quick Create; unified Task capability/model approach; notification center; notification→task; configuration architecture; medical note lock/finalization; appointment reminder/confirmation defaults; communication history capture; link expiration; timezone/date/locale foundations; inventory shelf (FEFO/FIFO)
+
+**P2 adayları:** Pre-visit confirmation; auto-inactivate clients; document footers; session timeout; lock open invoices; label printing; IP restriction; after-hours markup; cost-plus pricing
+
+**P3/deferred:** Time Clock/Sheets; Remote View; What's New; Help/E-Learning; Merck reference; personal calendar sync; production credits; wellness plans; marketing campaigns; postcard
+
+### 9. Architecture implications
+
+- Shared domain + scoped read-models (patient/client/contact/task/communication/report)
+- Template definition ≠ runtime record (immutability)
+- Task ≠ Reminder ≠ Notification
+- Inbox ≠ Communication History
+- Configuration ownership by bounded context (UX-002 hub, not monolith)
+- Clinical activity ≠ billable item (bundles)
+- Potential future ADR: Task domain/model architecture; clinical record finalization; configuration registry — **not opened in this batch**
+
+### 10. Security implications
+
+- Lock Screen vs Session Timeout vs IP Restriction — ayrı katmanlar
+- Link expiration / revocation for client-facing documents
+- Remote View = high risk if copied
+- BCC forwarding = audit convenience, not security boundary
+
+### 11. Turkey / localization implications
+
+- KDV, e-Fatura/e-Arşiv/e-SMM → INT-005
+- KVKK, transactional vs marketing comm, ticari elektronik ileti
+- Turkish character / name normalization in search
+- US payment terms, tax location, DEA/license fields — **requires TR research**
+- Date format, timezone, weights/measures — localization foundation
+
+### 12. Açık doğrulama soruları (cross-cutting)
+
+- DaySmart unified task persistence model (inferred only)
+- Notification center real-time delivery mechanism
+- Pre-visit confirmation portal vs SMS deep link
+- Production credit ↔ staff profile linkage
+- Multi-location configuration inheritance
 
 ---
 

@@ -94,7 +94,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Her finansal kalem mümkün olduğunda kaynak klinik kaydıyla (muayene, prosedür, lab istemi, reçete, görüntüleme vb.) ilişkilendirilir; konsültasyondan faturaya süreklilik korunur |
 | **Avantajları** | Denetlenebilirlik; eksik ücret tespiti; raporlama; müşteri itirazlarında açıklanabilirlik |
 | **Riskleri** | İptal, iade, paket fiyat ve manuel düzenlemelerde veri modeli karmaşıklığı; ilişki kopukluğu senaryoları |
-| **Hangi rakiplerde görüldü** | Provet Cloud (konsültasyon → taslak fatura — doğrudan gözlem), ezyVet (değerlendirme adayı — detaylı analiz bekliyor), DaySmart Vet (record satırında bağlı invoice; SOAP/Record → Invoice cross-navigation — [2026-08-02 bölüm 3](../competitors/daysmart.md#soap--record--invoice-cross-navigation)); **Clients Module** customer-scoped read-models ([sandbox](../competitors/daysmart.md#client-billing)); **Inventory Module** item Transactions ([sandbox](../competitors/daysmart.md#inventory-transactions)); **Billing Module** invoice workspace, payment allocation, Return/Refund ayrımı ([sandbox](../competitors/daysmart.md#sandbox--billing--financial-operations)) |
+| **Hangi rakiplerde görüldü** | Provet Cloud (konsültasyon → taslak fatura — doğrudan gözlem), ezyVet (değerlendirme adayı — detaylı analiz bekliyor), DaySmart Vet (record satırında bağlı invoice; SOAP/Record → Invoice cross-navigation — [2026-08-02 bölüm 3](../competitors/daysmart.md#soap--record--invoice-cross-navigation)); **Clients Module** customer-scoped read-models ([sandbox](../competitors/daysmart.md#client-billing)); **Inventory Module** item Transactions ([sandbox](../competitors/daysmart.md#inventory-transactions)); **Billing Module** invoice workspace, payment allocation, Return/Refund ayrımı ([sandbox](../competitors/daysmart.md#sandbox--billing--financial-operations)); **E-Vet SMART** Yeni Ziyaret > Satış + Ziyaret Geçmişi fatura/ödeme kolonları ([e-vet](../competitors/e-vet.md#yeni-ziyaret), [e-vet](../competitors/e-vet.md#ziyaret-geçmişi)) |
 | **Vetinity değerlendirmesi** | Ödeme ve muayene modülleri arasında izlenebilir bağlantı değerlendirilebilir. Türkiye fatura/e-belge gereksinimleri ayrıca araştırılmalıdır |
 | **Durum** | Research |
 
@@ -130,7 +130,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Kullanıcı aktif iş akışı içinde (ör. randevu) yeni varlık oluşturur; sistem oluşturulan kaydı otomatik olarak ana forma bağlar |
 | **Avantajları** | Akış kesintisiz devam eder; duplicate arama azalır; hızlı operasyonel giriş |
 | **Riskleri** | Üst üste modal yığını; minimum alan ile veri kalitesi dengesi; yetki ve duplicate kontrolü |
-| **Rakipte gözlenen uygulama** | DaySmart — takvim/randevu akışında Add Client/Patient ([2026-08-02](../competitors/daysmart.md#2026-08-02--randevu-online-booking-ve-petcare-akışı)); canlı sandbox: takvim hücresi + Add Patient modal ([sandbox](../competitors/daysmart.md#randevu-i̇çinden-hızlı-hasta-oluşturma)); **Boarding reservation** Add Client/Patient ([Boarding](../competitors/daysmart.md#new-reservation)); **Boarding Check In** inline Item oluşturma — inventory ([Inline Item](../competitors/daysmart.md#inline-item-creation)) |
+| **Rakipte gözlenen uygulama** | DaySmart — takvim/randevu akışında Add Client/Patient ([2026-08-02](../competitors/daysmart.md#2026-08-02--randevu-online-booking-ve-petcare-akışı)); canlı sandbox: takvim hücresi + Add Patient modal ([sandbox](../competitors/daysmart.md#randevu-i̇çinden-hızlı-hasta-oluşturma)); **Boarding reservation** Add Client/Patient ([Boarding](../competitors/daysmart.md#new-reservation)); **Boarding Check In** inline Item oluşturma — inventory ([Inline Item](../competitors/daysmart.md#inline-item-creation)); **Platform Module (2026-08-17)** global top bar Quick Create — New Patient/Client/Medical Note/Inventory Item/Estimate/Invoice/Payment ([platform-quick-create](../competitors/daysmart.md#platform-quick-create)); **E-Vet SMART** hasta kartı sol nav **"+"** ile yeni kayıt ([e-vet](../competitors/e-vet.md#hasta-kartı--patient-workspace)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | Inline oluşturma drawer/stepper ile değerlendirilebilir; takvim hücresinden tarih/saat/kolon tohumu korunmalı; normal CRUD ekranları korunur |
 | **Anti-pattern / dikkat** | Modal üstüne modal; uzun formların inline açılması; bağlam geri dönüşünün kırılması |
 | **Durum** | Research |
@@ -187,7 +187,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Olay oluştuğunda anlık uyarı + kalıcı bildirim kaydı + rozet; tür bazlı filtreleme |
 | **Avantajları** | Hiçbir talep gözden kaçmaz; geçmiş olaylara dönülebilir |
 | **Riskleri** | Bildirim yorgunluğu; gerçek zamanlı altyapı maliyeti (teknik çözüm kesinleştirilmemeli) |
-| **Rakipte gözlenen uygulama** | DaySmart — online talep sonrası anlık bildirim + bildirim merkezi (sandbox doğrulanmadı); **canlı sandbox — Reminders** operasyonel reminder listesi, Last Sent, bulk resend/export — olay-sonrası iletişim izlenebilirliği paraleli ([Reminders](../competitors/daysmart.md#actions)) |
+| **Rakipte gözlenen uygulama** | DaySmart — online talep sonrası anlık bildirim + bildirim merkezi (sandbox doğrulanmadı); **canlı sandbox — Reminders** operasyonel reminder listesi, Last Sent, bulk resend/export — olay-sonrası iletişim izlenebilirliği paraleli ([Reminders](../competitors/daysmart.md#actions)); **Platform Module (2026-08-17)** bell drawer ~30 gün ([platform-notification-center](../competitors/daysmart.md#platform-notification-center)); Global Notification → Task ([platform-notification-to-task](../competitors/daysmart.md#platform-notification-to-task)) |
 | **Vetinity'de uygulanabilecek yaklaşım** | Toast + badge + merkez birlikte değerlendirilebilir; randevu dışı operasyonel olaylara genişletilebilir |
 | **Anti-pattern / dikkat** | Yalnızca toast; rozet sayacının güncellenmemesi; filtresiz gürültü |
 | **Durum** | Research |
@@ -262,7 +262,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Belge listesi → görüntüleme → ekran imzası → durum etiketi (open/approved/paid) sürekliliği |
 | **Avantajları** | Dijital süreç; durum görünürlüğü; resepsiyon tasarrufu |
 | **Riskleri** | Hukuki geçerlilik; KVKK; sahtecilik |
-| **Rakipte gözlenen uygulama** | DaySmart PetCare — consent form, estimate, invoice; imza belgeye işleniyor ([2026-08-02 bölüm 2](../competitors/daysmart.md#belge-ve-dijital-imza)); Draw/Type Signature; Lock Letter ([2026-08-02 bölüm 3](../competitors/daysmart.md#dijital-imza), sandbox observation) |
+| **Rakipte gözlenen uygulama** | DaySmart PetCare — consent form, estimate, invoice; imza belgeye işleniyor ([2026-08-02 bölüm 2](../competitors/daysmart.md#belge-ve-dijital-imza)); Draw/Type Signature; Lock Letter ([2026-08-02 bölüm 3](../competitors/daysmart.md#dijital-imza), sandbox observation); **E-Vet SMART** Anestezi İzin Formu — auto-fill, imza, PDF/print ([e-vet](../competitors/e-vet.md#hasta-formları); TR hukuki şablon **TBD**) |
 | **Vetinity'de uygulanabilecek yaklaşım** | v1.0 dışı aday; Türkiye hukuki gereksinimleri ayrı araştırılmalı |
 | **Durum** | Research |
 
@@ -280,7 +280,7 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Pattern açıklaması** | Inbox konuşması yanında iletişim, adres, bakiye ve hayvan bilgileri panelde görünür; konuşma bir hasta ile ilişkilendirilebilir |
 | **Avantajları** | Bağlam korunur; hızlı yanıt; hasta odaklı iletişim |
 | **Riskleri** | Panel karmaşıklığı; KVKK; kanal parçalanması |
-| **Rakipte gözlenen uygulama** | DaySmart inbox — sağ panel müşteri bağlamı ([2026-08-02 bölüm 2](../competitors/daysmart.md#klinik-inbox-ve-müşteri-i̇letişim-geçmişi)); **Clients Module** Client Profile ([sandbox](../competitors/daysmart.md#client-profile-header)); **Contacts Module** external person/company directory ([sandbox](../competitors/daysmart.md#person-contact-profile)) |
+| **Rakipte gözlenen uygulama** | DaySmart inbox — sağ panel müşteri bağlamı ([2026-08-02 bölüm 2](../competitors/daysmart.md#klinik-inbox-ve-müşteri-i̇letişim-geçmişi)); **Platform Module (2026-08-17)** global Inbox — active workspace vs Communication History ([platform-inbox](../competitors/daysmart.md#platform-inbox)); BCC auto capture ([config-bcc-forwarding](../competitors/daysmart.md#config-bcc-forwarding)); **Clients/Contacts Module** scoped comm read-models |
 | **Vetinity'de uygulanabilecek yaklaşım** | v1.0 dışı aday; birleşik müşteri iletişim geçmişi ile birlikte değerlendirilebilir |
 | **Durum** | Research |
 
@@ -349,14 +349,14 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **ID** | PATTERN-019 |
 | **Başlık** | Auditable Record Actions |
 | **Problem** | Klinik kayıt değişiklikleri izlenemezse denetim ve güvenlik zayıflar |
-| **Pattern açıklaması** | Record satırında edit, duplicate, delete; view changes / audit history; lot, expiry, route, site detayları |
-| **Avantajları** | Denetlenebilirlik; klinik güvenlik; itiraz yönetimi |
-| **Riskleri** | Audit veri hacmi; retention |
-| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route alanları ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); **Inventory Module** stock adjustment audit ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)); **Reports Module** Staff > Deleted Transactions ([reports-deleted-transactions](../competitors/daysmart.md#reports-deleted-transactions)); **Templates Module** template definition ≠ runtime record — template değişikliği geçmiş medical note/form/bundle snapshot'ını sessizce değiştirmemeli ([templates-vs-runtime](../competitors/daysmart.md#templates-vs-runtime)) |
-| **Vetinity'de uygulanabilecek yaklaşım** | P1 temel audit history; P2 attachment/duplicate |
+| **Pattern açıklaması** | Record satırında edit, duplicate, delete; view changes / audit history; lot, expiry, route, site detayları. Opsiyonel lifecycle: Draft → Finalized/Locked → audit-safe correction/addendum |
+| **Avantajları** | Denetlenebilirlik; klinik güvenlik; itiraz yönetimi; immutable historical record korunabilir |
+| **Riskleri** | Audit veri hacmi; retention; yanlış kilitleme; addendum vs unlock policy |
+| **Rakipte gözlenen uygulama** | DaySmart — view changes; lot/expiry/route ([2026-08-02 bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)); stock adjustment audit ([inventory-adjustments](../competitors/daysmart.md#inventory-adjustments)); deleted transactions report ([reports-deleted-transactions](../competitors/daysmart.md#reports-deleted-transactions)); Lock Medical Notes / Lock Open Invoices ([config-lock-medical-notes](../competitors/daysmart.md#config-lock-medical-notes)); template ≠ runtime ([templates-vs-runtime](../competitors/daysmart.md#templates-vs-runtime)) |
+| **Vetinity'de uygulanabilecek yaklaşım** | P1 audit history; P2 finalization/lock + addendum model — DaySmart irreversible auto-lock otomatik karar değil |
 | **Durum** | Research |
 
-→ [IDEA-025](ideas.md#idea-025--auditable-clinical-record-lifecycle) · [RECORD-002](../backlog/feature-backlog.md)
+→ [IDEA-025](ideas.md#idea-025--auditable-clinical-record-lifecycle) · [RECORD-002](../backlog/feature-backlog.md) · [EXAM-015](../backlog/feature-backlog.md)
 
 ---
 
@@ -447,6 +447,42 @@ Tekil fikir kayıtları için: [ideas.md](ideas.md)
 | **Durum** | Research |
 
 → [IDEA-018](ideas.md#idea-018--consent-and-document-signature-workflow) · [IDEA-027](ideas.md#idea-027--checkout-as-visit-completion-orchestrator) · [CHECKOUT-001](../backlog/feature-backlog.md)
+
+---
+
+## PATTERN-025 — Global Search and Recent Navigation
+
+| Alan | Değer |
+|---|---|
+| **ID** | PATTERN-025 |
+| **Başlık** | Global Search and Recent Navigation |
+| **Problem** | Modül menüsü üzerinden entity bulma günlük işlem hızını düşürür |
+| **Pattern açıklaması** | Persistent global search = entity-aware search + navigation launcher + Recently Viewed cross-entity history |
+| **Avantajları** | Navigation maliyeti düşer; sık kayıtlara hızlı dönüş; operasyonel hız |
+| **Riskleri** | Search quality/normalization; permission filtering; stale recent items |
+| **Rakipte gözlenen uygulama** | DaySmart — Schedule/Patients/Clients/Contacts/Inventory/Billing categories; Recently Viewed (template, report, item, inbox); Patient All/Name/Chip/Tag; client `LastName, FirstName` search **failure** ([Global Search](../competitors/daysmart.md#sandbox--global-search)) |
+| **Vetinity'de uygulanabilecek yaklaşım** | Toleranslı person name search; patient identifier search; TR character normalization |
+| **Durum** | Research |
+
+→ [UX-006](../backlog/feature-backlog.md)
+
+---
+
+## PATTERN-026 — Unified Task Worklist
+
+| Alan | Değer |
+|---|---|
+| **ID** | PATTERN-026 |
+| **Başlık** | Unified Task Worklist |
+| **Problem** | Client, Contact ve global görev yüzeyleri bağımsız modellenirse duplicate task davranışı ve tutarsız workflow riski oluşur |
+| **Pattern açıklaması** | Ortak Task capability'sinden Client/Contact/global bağlama göre scoped worklist/read-model yüzeyleri üretme yaklaşımı |
+| **Avantajları** | Tek kaynak; staff reporting |
+| **Riskleri** | Scope/permission karmaşıklığı; Task ≠ Reminder ≠ Notification |
+| **Rakipte gözlenen uygulama** | DaySmart Global Tasks + Client/Contact tasks ([platform-global-tasks](../competitors/daysmart.md#platform-global-tasks)) — **persistence inferred** |
+| **Vetinity'de uygulanabilecek yaklaşım** | [MSG-004](../backlog/feature-backlog.md) |
+| **Durum** | Research |
+
+→ [MSG-004](../backlog/feature-backlog.md)
 
 ---
 

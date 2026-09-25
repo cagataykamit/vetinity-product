@@ -142,6 +142,8 @@ Buradaki maddeler:
 
 **DaySmart sandbox gözlemi (Billing Module):** Clinic-wide Billing workspace; invoice finansal aggregate; Estimate→Invoice conversion workflow; Return≠Refund; returned≠restocked qty; credit Amount+Balance; write-off per invoice — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations)
 
+**E-Vet SMART gözlemi (2026-09-24):** Ziyaret Geçmişi (Fatura No, Toplam, Ödeme); Ekstreler + müşteri/hasta hareket raporları; owner vs patient financial visibility — muhasebe entity modeli **uydurulmaz** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler)
+
 → [Provet Cloud analizi](../competitors/provet-cloud.md) · [DaySmart Vet — bölüm 2](../competitors/daysmart.md#record-lifecycle-ve-finansal-i̇zlenebilirlik)
 
 ---
@@ -179,6 +181,8 @@ Buradaki maddeler:
 | **Durum** | Research |
 
 **Canlı sandbox gözlemi:** Takvim hücresinden New Appointment; Add Patient ikinci modal açıyor — bağlam korunuyor ancak **iç içe modal önerilen UX değil**; drawer/stepper değerlendirilmeli → [APPT-018](../backlog/feature-backlog.md)
+
+**E-Vet SMART gözlemi (2026-09-24):** Hasta kartından randevu oluşturma; sol nav **"+"** aksiyonları → [e-vet.md](../competitors/e-vet.md#randevular), [e-vet.md](../competitors/e-vet.md#hasta-kartı--patient-workspace)
 
 → [PATTERN-007](patterns.md#pattern-007--context-preserving-creation)
 
@@ -288,6 +292,8 @@ Buradaki maddeler:
 | **Kapsam dışı / risk** | Gerçek zamanlı bildirimin teknik çözümü ürün belgesinde kesinleştirilmemelidir. Push/mobil kapsam dışı olabilir |
 | **Durum** | Research |
 
+**Platform (2026-08-17):** Bell drawer; notification→task cross-module workflow — → [daysmart.md](../competitors/daysmart.md#platform-notification-center), [daysmart.md](../competitors/daysmart.md#platform-notification-to-task)
+
 → [PATTERN-010](patterns.md#pattern-010--event-to-notification-continuity)
 
 ---
@@ -359,6 +365,8 @@ Buradaki maddeler:
 
 **DaySmart sandbox gözlemi (Clients Module):** Client Documents — Attachments/Letters/Forms/Certificates; form template örnekleri (Intake, Waiver, Consent) — → [daysmart.md](../competitors/daysmart.md#documents)
 
+**E-Vet SMART gözlemi (2026-09-24):** Hasta Formları — Anestezi İzin Formu; owner/patient auto-fill; imza; PDF/print — TR hukuki/onam metni **ayrı araştırma** → [e-vet.md](../competitors/e-vet.md#hasta-formları)
+
 → [PORTAL-005](../backlog/feature-backlog.md) · [PATTERN-014](patterns.md#pattern-014--document-to-signature-continuity) · [CHECKOUT-001](../backlog/feature-backlog.md)
 
 ---
@@ -377,7 +385,7 @@ Buradaki maddeler:
 | **Riskler** | Kanal parçalanması; bildirim gürültüsü; KVKK |
 | **Durum** | Research |
 
-**DaySmart sandbox gözlemi:** Client profili Patient profilinden ayrı; Communication Preferences Transactional/Marketing ayrımı — kanal davranışı **doğrulanmadı**. **Patients/Clients Module:** scoped communication read-models. **Contacts Module:** Contact/Company Communications; Contact ≠ Client; referral relationships (Referred Patient); manual Log Communication — → [daysmart.md](../competitors/daysmart.md#sandbox--contacts--contact-module). **Reminders:** Log call — [daysmart.md](../competitors/daysmart.md#log-call--communication-record)
+**Platform (2026-08-17):** Inbox ≠ Communication History; outbound auto history capture — → [daysmart.md](../competitors/daysmart.md#platform-inbox), [daysmart.md](../competitors/daysmart.md#config-bcc-forwarding)
 
 → [MSG-001](../backlog/feature-backlog.md) · [PATTERN-015](patterns.md#pattern-015--conversation-to-patient-context)
 
@@ -404,6 +412,8 @@ Buradaki maddeler:
 **DaySmart sandbox gözlemi (Census):** Operasyon kuyruğu görünümü; satır bazlı status değişimi (Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — tam durum kümesi **doğrulanmadı**
 
 **DaySmart sandbox gözlemi (Boarding):** Reservation → Check In sihirbazı (billing, boarding form, apply item rule, daily rate, bundle, weight, cage card, medical note); inline item oluşturma — tamamlama **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#check-in-wizard)
+
+**E-Vet SMART gözlemi (2026-09-24):** UI'da Randevular ≠ Ziyaret Geçmişi; randevu durumu örneği `Gelmedi` — E-Vet backend ayrımı **iddia edilmez** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [CHECKIN-005](../backlog/feature-backlog.md#checkin-005--ziyaret-yaşam-döngüsü-ve-durum-geçişleri)
 
 → [CHECKIN-001](../backlog/feature-backlog.md) · [PATTERN-016](patterns.md#pattern-016--check-in-as-workflow-orchestrator) · [CHECKOUT-001](../backlog/feature-backlog.md)
 

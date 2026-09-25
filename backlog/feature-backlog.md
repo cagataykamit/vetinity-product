@@ -14,6 +14,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | UX- | Kullanıcı deneyimi ve navigasyon |
 | REPORT- | Raporlama |
 | EXAM- | Muayene deneyimi |
+| HOSP- | Hospitalization (yatış) |
 | CHECKIN- | Check-in orkestrasyonu |
 | CHECKOUT- | Ziyaret kapanışı ve tahsilat |
 | RECORD- | Klinik kayıt yaşam döngüsü |
@@ -289,7 +290,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
-| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior) |
+| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler) |
 
 ---
 
@@ -309,7 +310,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | UX-002 |
-| **Notlar** | → [ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md) |
+| **Notlar** | → [ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md). **Platform Module:** Global Quick Create top bar — → [daysmart.md](../competitors/daysmart.md#platform-quick-create) |
 
 ### UX-002 — Ayarlar > Tanımlar merkezi
 
@@ -325,7 +326,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | UX-003, UX-004, UX-005 |
-| **Notlar** | Kabul edilmiş hedef; henüz uygulanmadı. **Settings Module:** DaySmart Settings ≠ tek ayar tablosu; domain ownership (Scheduling, Billing, Messaging, Templates, Authorization) — → [daysmart.md](../competitors/daysmart.md#sandbox--settings--configuration). Vetinity UX-002 Tanımlar merkezi ile birebir Settings IA kopyalanmaz |
+| **Notlar** | Kabul edilmiş hedef; henüz uygulanmadı. **DaySmart (observed):** Settings ≠ tek key/value tablosu; searchable List of Configurations (Option/Value/Description). **Vetinity (implication):** Tanımlar merkezi domain ownership ile büyümeli; policy registry searchable + discoverable olmalı — alfabetik dev tablo UX hedefi değil. → [daysmart.md](../competitors/daysmart.md#config-list), [daysmart.md](../competitors/daysmart.md#sandbox--settings--configuration) |
 
 ### UX-003 — Türlerin Tanımlar altına alınması
 
@@ -359,6 +360,8 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | UX-002 |
 | **Notlar** | Derin linkler korunmalı. DaySmart sandbox: breed aramada tür/grup etiketi birlikte; Vetinity species + breed ayrı model korunmalı |
 
+### UX-005 — Ürün kategorilerinin Tanımlar altına alınması
+
 | Alan | Değer |
 |---|---|
 | **Kimlik** | UX-005 |
@@ -371,7 +374,23 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | UX-002 |
-| **Notlar** | Derin linkler korunmalı. **Settings Module:** DaySmart Settings > Configurations catalog (Appointment Types, Clinic Hours, Discounts, Taxes, Rooms, Schedule Columns, Email/SMS Defaults vb.) — domain ownership ayrımı — → [daysmart.md](../competitors/daysmart.md#settings-configurations). **Templates Module:** ayrı template family — → [daysmart.md](../competitors/daysmart.md#sandbox--templates--template-system) |
+| **Notlar** | Derin linkler korunmalı |
+
+### UX-006 — Global search ve recent navigation
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | UX-006 |
+| **Başlık** | Global search ve recent navigation |
+| **Kategori** | UX |
+| **Problem** | Modüller arası geçiş ve entity bulma yavaş; hasta/müşteri araması günlük operasyonu yavaşlatır |
+| **Önerilen çözüm** | Persistent global search yüzeyi; entity-aware sonuç gruplama/filtreleme; Recently Viewed; arama sonucundan doğrudan navigation |
+| **Kullanıcı değeri** | Navigation maliyeti düşer; sık kullanılan kayıtlara hızlı dönüş |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Araştırılacak |
+| **Bağımlılıklar** | UX-001 |
+| **Notlar** | **DaySmart (observed):** kategori ör. Schedule/Patients/Clients/Contacts/Inventory/Billing; Patient All/Name/Chip/Tag; Recently Viewed cross-entity; `LastName, FirstName` tam sorgu fail / partial success — → [daysmart.md](../competitors/daysmart.md#sandbox--global-search). **Vetinity (implication):** toleranslı kişi araması — ad-soyad sırası, soyad-ad, `Soyad, Ad`, partial, fazla/eksik boşluk, TR karakter, case-insensitive. → [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) |
 
 ---
 
@@ -615,7 +634,60 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | DaySmart lock aksiyonu gözlemlendi — sandbox doğrulanmadı. **Canlı sandbox — Patients Module:** Medical Notes History listesinde lock icon; signed/finalized anlamı **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#medical-notes) |
+| **Notlar** | DaySmart lock aksiyonu gözlemlendi — sandbox doğrulanmadı. **Patients Module:** Medical Notes History lock icon — finalized anlamı **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#medical-notes). **DaySmart (observed):** Lock Medical Notes clinic policy — → [daysmart.md](../competitors/daysmart.md#config-lock-medical-notes). **Vetinity (implication):** Draft → Finalized/Locked → audit-safe correction/addendum; DaySmart irreversible auto-lock otomatik requirement değil — → [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions) |
+
+---
+
+## HOSP — Hospitalization (Yatış)
+
+> **Kaynak:** [v1-release-scope](../roadmap/v1-release-scope.md) (Release Blocker #14), [ux/navigation](../ux/navigation.md) (Yatışlar), [design-decisions](../ux/design-decisions.md) (Yatış ≠ pansiyon). Pansiyon/boarding kapsam dışı.
+
+### HOSP-001 — Yatış yaşam döngüsü ve aktif yatışlar
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | HOSP-001 |
+| **Başlık** | Yatış yaşam döngüsü ve aktif yatışlar |
+| **Kategori** | Hospitalization |
+| **Problem** | Tıbbi yatış (hospitalization) kaydı oluşturulamıyor; klinikte aktif yatan hastalar operasyonel olarak görülemiyor |
+| **Önerilen çözüm** | Hasta için yatış kaydı: kabul/başlangıç → aktif yatış → taburcu/çıkış; hasta, giriş/çıkış zamanı, durum. Sidebar **Yatışlar** modülünde aktif yatış listesi; satırdan hasta/yatış bağlamına geçiş |
+| **Kullanıcı değeri** | v1 yatış modülü; resepsiyon/hekim operasyon görünürlüğü |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | v1 Release Blocker → [v1-release-scope](../roadmap/v1-release-scope.md). Navigasyon → [ux/navigation.md](../ux/navigation.md). Raporlama: ayrı HOSP rapor epic değil; yatış verisi [REPORT-001](#report-001--rapor-merkezi) / [REPORT-002](#report-002--rapor-kategorileri) üzerinden erişilebilir olmalı (aktif/geçmiş yatış listesi — detay TBD). **TBD (v1 dışı / future):** medication administration, nursing sheet, treatment schedule gibi inpatient alt workflow'lar. **Competitor evidence (requirement değil):** E-Vet Hospitalizasyon Geçmişi listesi — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi) |
+
+### HOSP-002 — Yatış konum ataması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | HOSP-002 |
+| **Başlık** | Yatış konum ataması |
+| **Kategori** | Hospitalization |
+| **Problem** | Aktif yatışın klinik içi yeri (bölüm/oda) takip edilemiyor |
+| **Önerilen çözüm** | Yatış kaydına klinik tanımlı konum bağlantısı; minimum abstraction: bölüm/alan + oda veya klinik tarafından tanımlanan yatış konumu. Kaynak hiyerarşisi (oda/kafes/locate) **TBD** |
+| **Kullanıcı değeri** | Yatış operasyonu; ekip koordinasyonu |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | HOSP-001 |
+| **Notlar** | E-Vet UI örneği (Bölüm/Oda kolonları) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD** |
+
+### HOSP-003 — Hasta yatış geçmişi ve klinik bağlam
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | HOSP-003 |
+| **Başlık** | Hasta yatış geçmişi ve klinik bağlam |
+| **Kategori** | Hospitalization |
+| **Problem** | Hasta kaydından aktif/geçmiş yatışlar ve yatış süresince klinik kayıtlara erişim dağınık |
+| **Önerilen çözüm** | Patient-scoped read surface: aktif yatış + geçmiş yatış listesi ([TIMELINE-001](#timeline-001--hasta-timeline) read-model ile hizalanabilir; duplicate storage önerilmez). Yatış bağlamından ilgili muayene/tedavi/klinik kayıtlara geçiş — [EXAM-001](#exam-001--modern-muayene-çalışma-alanı), [RECORD-001](#record-001--recordfinans-bağlantısı-görünürlüğü) capability'lerini duplicate etmeden bağlam sağlar |
+| **Kullanıcı değeri** | Hasta merkezli yatış geçmişi; yatış–klinik süreklilik |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Bağımlılıklar** | HOSP-001, TIMELINE-001 |
+| **Notlar** | Filtre/tarih aralığı → [TIMELINE-003](#timeline-003--timeline-filtreleri). **Competitor evidence:** E-Vet hasta kartı Hospitalizasyon Geçmişi — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi). **TBD:** “Tedavisi var mı?” benzeri göstergenin veri kaynağı; inpatient treatment schedule |
 
 ---
 
@@ -678,7 +750,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-001 |
-| **Notlar** | → [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Boarding Check In** New Invoice — [daysmart.md](../competitors/daysmart.md#check-in-wizard). **Clients Module:** Client-scoped Estimates — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** Estimate list/detail; Convert to Invoice (medical records, wellness plan, tax location); Approve/Duplicate/Email/Print — → [daysmart.md](../competitors/daysmart.md#billing-estimates) |
+| **Notlar** | → [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Boarding Check In** New Invoice — [daysmart.md](../competitors/daysmart.md#check-in-wizard). **Clients Module:** Client-scoped Estimates — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** Estimate list/detail — → [daysmart.md](../competitors/daysmart.md#billing-estimates). **DaySmart (observed):** Check In Billing default = Create invoice — → [daysmart.md](../competitors/daysmart.md#config-observed-rows) |
 
 ### CHECKIN-005 — Ziyaret yaşam döngüsü ve durum geçişleri
 
@@ -694,7 +766,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-001 |
-| **Notlar** | Kapsam durumları: Booked, Checked In, In Room, Visit Complete, Check Out. Bu kayıt yalnızca check-in işlemini değil, randevudan tamamlanmaya kadar tüm ziyaret/encounter yaşam döngüsünü temsil eder. DaySmart sandbox observation (~28:13–35:25): Visit Complete iken ayrı Check Out başlatılabiliyor → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu). Mevcut backlog ID'si CHECKIN-005 olarak korunur. İleride ziyaret/encounter alanı bağımsız bir ürün alanına dönüşürse kategori ve ID yapısı ayrıca değerlendirilebilir. DaySmart sandbox observation (2026-08-02 bölüm 3); SOAP ekranından durum değişimi gözlemlendi — doğrulanmadı. **Canlı sandbox — Census:** operasyon kuyruğu görünümü; satır bazlı status değişimi (gözlemlenen örnek: Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — gözlemlenen seçeneklerin tam durum kümesi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--census-profiller-ve-operasyon-kuyruğu). **Canlı sandbox — Treatment Board:** aktif tedavi operasyon panosu — [daysmart.md](../competitors/daysmart.md#sandbox--treatment-board). **Canlı sandbox — Boarding Dashboard:** Checking In/Out/Checked In kolonları + durum legend — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-dashboard). **Patients Module:** Patient Profile Appointments + Boarding Reservation birleşik liste; domain ayrı — [daysmart.md](../competitors/daysmart.md#appointments-patient-profile). **Clients Module:** Client Appointments/Reservations unified query — [daysmart.md](../competitors/daysmart.md#appointments--reservations) |
+| **Notlar** | Kapsam durumları: Booked, Checked In, In Room, Visit Complete, Check Out. Bu kayıt yalnızca check-in işlemini değil, randevudan tamamlanmaya kadar tüm ziyaret/encounter yaşam döngüsünü temsil eder. DaySmart sandbox observation (~28:13–35:25): Visit Complete iken ayrı Check Out başlatılabiliyor → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu). Mevcut backlog ID'si CHECKIN-005 olarak korunur. İleride ziyaret/encounter alanı bağımsız bir ürün alanına dönüşürse kategori ve ID yapısı ayrıca değerlendirilebilir. DaySmart sandbox observation (2026-08-02 bölüm 3); SOAP ekranından durum değişimi gözlemlendi — doğrulanmadı. **Canlı sandbox — Census:** operasyon kuyruğu görünümü; satır bazlı status değişimi (gözlemlenen örnek: Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — gözlemlenen seçeneklerin tam durum kümesi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--census-profiller-ve-operasyon-kuyruğu). **Canlı sandbox — Treatment Board:** aktif tedavi operasyon panosu — [daysmart.md](../competitors/daysmart.md#sandbox--treatment-board). **Canlı sandbox — Boarding Dashboard:** Checking In/Out/Checked In kolonları + durum legend — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-dashboard). **Patients Module:** Patient Profile Appointments + Boarding Reservation birleşik liste; domain ayrı — [daysmart.md](../competitors/daysmart.md#appointments-patient-profile). **Clients Module:** Client Appointments/Reservations unified query — [daysmart.md](../competitors/daysmart.md#appointments--reservations). **E-Vet SMART (2026-09-24):** UI'da **Randevular** ile **Ziyaret Geçmişi** ayrı yüzeyler; randevu listesinde örnek durum `Gelmedi` — tam enum/backend modeli **doğrulanmadı** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#randevular) |
 
 ---
 
@@ -714,7 +786,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-005, RECORD-001 |
-| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator) |
+| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator). **E-Vet SMART:** Yeni Ziyaret > Satış **Kaydet / Öde** — UI kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#yeni-ziyaret) |
 
 ---
 
@@ -734,7 +806,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | → [IDEA-007](../research/ideas.md#idea-007--clinical-to-financial-traceability), [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Patients Module:** History Invoice + Reference. **Clients Module:** customer-scoped invoice list — → [daysmart.md](../competitors/daysmart.md#client-billing). **Inventory Module:** Item Transactions — → [daysmart.md](../competitors/daysmart.md#inventory-transactions). **Billing Module:** Invoice workspace (Items/Payments/Credits/Returns/Late Fees tabs); line-level Patient/Provider; finansal özet (Subtotal…Balance) — → [daysmart.md](../competitors/daysmart.md#billing-invoices) |
+| **Notlar** | → [IDEA-007](../research/ideas.md#idea-007--clinical-to-financial-traceability), [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Patients Module:** History Invoice + Reference. **Clients Module:** customer-scoped invoice list — → [daysmart.md](../competitors/daysmart.md#client-billing). **Inventory Module:** Item Transactions — → [daysmart.md](../competitors/daysmart.md#inventory-transactions). **Billing Module:** Invoice workspace (Items/Payments/Credits/Returns/Late Fees tabs); line-level Patient/Provider; finansal özet (Subtotal…Balance) — → [daysmart.md](../competitors/daysmart.md#billing-invoices). **E-Vet SMART (2026-09-24):** Ziyaret Geçmişi (Fatura No, Toplam, Ödeme); Yeni Ziyaret > Satış fatura satırları — backend entity ayrımı **iddia edilmez** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#yeni-ziyaret) |
 
 ### RECORD-002 — Record audit history
 
@@ -766,7 +838,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | RECORD-001 |
-| **Notlar** | |
+| **Notlar** | **E-Vet SMART:** Hasta kartı **Dosyalarım** — generic dosya satırları (tarih, bilgi, dosya seç, liste arama); lab/PACS/clinical document ile aynı capability sayılmamalı — → [e-vet.md](../competitors/e-vet.md#dosyalarım-attachments) |
 
 ### RECORD-004 — Record duplicate
 
@@ -798,7 +870,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | RECORD-001 |
-| **Notlar** | DaySmart record satırı gözlemi. **Patients Module:** Pharmacy/Vaccines lot/route. **Inventory Module:** Purchases/Transactions/Alerts — → [daysmart.md](../competitors/daysmart.md#inventory-purchases). **Reports Module:** Controlled Substances Log (audit trail report); US benchmark only — TR regulatory TBD — → [daysmart.md](../competitors/daysmart.md#reports-controlled-substances-log) |
+| **Notlar** | DaySmart record satırı gözlemi. **Patients Module:** Pharmacy/Vaccines lot/route. **Inventory Module:** Purchases/Transactions/Alerts — → [daysmart.md](../competitors/daysmart.md#inventory-purchases). **Reports Module:** Controlled Substances Log — TR regulatory TBD — → [daysmart.md](../competitors/daysmart.md#reports-controlled-substances-log). **DaySmart (observed):** Inventory Shelf Management = Soonest Expiring vs purchase-date FIFO — → [daysmart.md](../competitors/daysmart.md#config-inventory-shelf). **Vetinity (implication):** expiring inventory için FEFO/FIFO policy değerlendirilebilir |
 
 ### RECORD-006 — Birleşik record modeli ve tip-bazlı dinamik form
 
@@ -866,7 +938,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | PORTAL-001 |
-| **Notlar** | v1.0 dışı aday. **Canlı sandbox — Reminders:** Klinik operasyon Reminders Detail listesi PetCare portal reminder yüzeyinden ayrı modül; portal tarafı bu sandbox oturumunda **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail) |
+| **Notlar** | v1.0 dışı aday. **Reminders:** Klinik Reminders Detail ≠ portal reminder yüzeyi — → [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **DaySmart (observed):** Link Expiration policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). **Vetinity (implication):** scoped access + expiration + revocation |
 
 ### PORTAL-004 — Açık fatura görüntüleme
 
@@ -898,7 +970,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | PORTAL-003 |
-| **Notlar** | v1.0 dışı aday; Türkiye hukuki geçerlilik araştırılmalı → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-014](../research/patterns.md#pattern-014--document-to-signature-continuity). DaySmart sandbox observation (bölüm 3): Draw/Type Signature; Lock Letter after sign → [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability). **Templates Module:** Forms — Designer/Preview/Logic; conditional form logic; multi-page — → [daysmart.md](../competitors/daysmart.md#templates-forms). **Clients Module** form template örnekleri — → [daysmart.md](../competitors/daysmart.md#documents) |
+| **Notlar** | v1.0 dışı aday; Türkiye hukuki geçerlilik araştırılmalı → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-014](../research/patterns.md#pattern-014--document-to-signature-continuity). DaySmart sandbox observation (bölüm 3): Draw/Type Signature; Lock Letter after sign → [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability). **Templates Module:** Forms — Designer/Preview/Logic; conditional form logic; multi-page — → [daysmart.md](../competitors/daysmart.md#templates-forms). **Clients Module** form template örnekleri — → [daysmart.md](../competitors/daysmart.md#documents). **E-Vet SMART:** Anestezi İzin Formu — auto-fill owner/patient; imza + PDF/print; metin nihai şablon değil — → [e-vet.md](../competitors/e-vet.md#hasta-formları) |
 
 ---
 
@@ -918,7 +990,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | — |
-| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). **Settings Module:** Email/SMS Defaults — event template binding + merge tokens; template delivery domain ≠ template definition — → [daysmart.md](../competitors/daysmart.md#settings-email-defaults), [daysmart.md](../competitors/daysmart.md#settings-sms-defaults). **Clients/Contacts/Patients Module** comm scopes. **Reports Module:** Failed Emails (Bounce/Transient), Email And SMS Reminders Sent — delivery diagnostics — → [daysmart.md](../competitors/daysmart.md#reports-communications) |
+| **Notlar** | **v1.0 dışı aday** → [IDEA-019](../research/ideas.md#idea-019--unified-client-communication-timeline). Inbox (active workspace) ≠ Communication History — → [daysmart.md](../competitors/daysmart.md#platform-inbox), [PATTERN-015](../research/patterns.md#pattern-015--conversation-to-patient-context). Outbound auto history capture (BCC örneği) — → [daysmart.md](../competitors/daysmart.md#config-bcc-forwarding) |
 
 ### MSG-002 — İki yönlü mesajlaşma
 
@@ -934,7 +1006,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | MSG-001 |
-| **Notlar** | v1.0 dışı aday; SMS/e-posta entegrasyonu ayrı |
+| **Notlar** | v1.0 dışı aday. **DaySmart (observed):** global Inbox + Two-Way SMS — → [daysmart.md](../competitors/daysmart.md#platform-inbox) |
 
 ### MSG-003 — Konuşmaya attachment
 
@@ -966,7 +1038,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | MSG-001 |
-| **Notlar** | v1.0 dışı aday. **Clients Module:** Client Tasks. **Contacts Module:** Person Contact Tasks (Staff, Repeat, Contact auto-bind); Company Tasks **gözlemlenmedi** — → [daysmart.md](../competitors/daysmart.md#contact-tasks). **Reports Module:** Completed/Open Tasks, Tasks Summary — shared task source — → [daysmart.md](../competitors/daysmart.md#reports-staff). Reminder **değil**; inbox görevinden farklı |
+| **Notlar** | v1.0 dışı aday. Client/Contact/Global task read-models — shared Task domain (**implementation inferred**) — → [daysmart.md](../competitors/daysmart.md#platform-global-tasks), [PATTERN-026](../research/patterns.md#pattern-026--unified-task-worklist). Reminder **değil** |
 
 ### MSG-005 — Konuşmayı hasta ile ilişkilendirme
 
@@ -1018,7 +1090,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TIMELINE-002 |
-| **Notlar** | → [ADR-006](../decisions/ADR-006-patient-timeline.md). **Canlı sandbox — Patients Module:** Patient Dashboard klinik kayıt merkezi; Overview due list + snapshot vitals; History filtreleri (Records…Communications, More); patient-scoped read-models → [daysmart.md](../competitors/daysmart.md#sandbox--patients-module) |
+| **Notlar** | → [ADR-006](../decisions/ADR-006-patient-timeline.md). **Canlı sandbox — Patients Module:** Patient Dashboard klinik kayıt merkezi; Overview due list + snapshot vitals; History filtreleri (Records…Communications, More); patient-scoped read-models → [daysmart.md](../competitors/daysmart.md#sandbox--patients-module). **E-Vet SMART (2026-09-24):** hasta bağlamında sol nav (randevu/ziyaret, muayene/aşı, lab/xray/pacs, hospitalizasyon, ekstre, dosya, form); E-Vet IA kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#hasta-kartı--patient-workspace) |
 
 ### TIMELINE-002 — Timeline olay modeli
 
@@ -1050,7 +1122,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TIMELINE-001 |
-| **Notlar** | DaySmart sandbox — History filtreleri… **Clients Module:** Declined Items client billing + patient History More — shared source — → [daysmart.md](../competitors/daysmart.md#client-billing) |
+| **Notlar** | DaySmart sandbox — History filtreleri… **Clients Module:** Declined Items client billing + patient History More — shared source — → [daysmart.md](../competitors/daysmart.md#client-billing). **E-Vet SMART:** Ziyaret Geçmişi tarih aralığı filtresi — → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi) |
 
 | Alan | Değer |
 |---|---|
@@ -1606,7 +1678,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-005 |
-| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
+| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types). **E-Vet SMART:** Yeni Randevu **Süre (dk)**; 30 dk slot ızgarası — kapasite kuralları **TBD** → [e-vet.md](../competitors/e-vet.md#randevular) |
 
 ### APPT-007 — Neden ile hekim/kaynak eşleştirmesi
 
@@ -1734,7 +1806,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-013 |
-| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. **Settings Module:** SMS Defaults — merge tokens (Clinic Name, Client First Name, Appointment Date/Time/Type vb.); Email Defaults event binding — → [daysmart.md](../competitors/daysmart.md#settings-sms-defaults), [daysmart.md](../competitors/daysmart.md#settings-email-defaults). **Reminders Detail** — [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **Patient + Client Profile Reminders** — [Patients Module](../competitors/daysmart.md#documents--notes--relationships--reminders--wellness--tasks), [Clients Module](../competitors/daysmart.md#client-reminders). **Reports Module:** Reminders Created, Reminders Detail report — same reminder source — → [daysmart.md](../competitors/daysmart.md#reports-communications). Reminder ≠ Task. → [EXAM-014](#exam-014--item-rules-bundle-ve-record-oluşturma) |
+| **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. Default reminder/confirmation clinic policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). Pre-visit workflow — → [CHECKIN-002](#checkin-002--check-in-sırasında-medical-note-şablonu), [PORTAL-005](#portal-005--dijital-onam-ve-imza). Reminder ≠ Task |
 
 ### APPT-015 — Bildirim merkezi
 
@@ -1750,7 +1822,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-009 |
-| **Notlar** | Gerçek zamanlı teknik çözüm kesinleştirilmedi → [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center) |
+| **Notlar** | → [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center). **DaySmart (observed):** bell drawer ~30 gün — → [daysmart.md](../competitors/daysmart.md#platform-notification-center). Notification ≠ Task; notification→task workflow ayrı — → [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center) |
 
 ### APPT-016 — Takvimde filtrelenebilir pending görünüm
 
@@ -1910,7 +1982,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar) |
+| **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar). **E-Vet SMART:** Yeni Randevu — Bölüm + Veteriner seçimi; slot ızgarası — → [e-vet.md](../competitors/e-vet.md#randevular) |
 
 ### APPT-026 — Kayıtlı filtreler ve talep görünüm tercihleri
 
