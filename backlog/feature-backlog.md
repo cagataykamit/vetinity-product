@@ -786,7 +786,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-005, RECORD-001 |
-| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator). **E-Vet SMART:** Yeni Ziyaret > Satış **Kaydet / Öde** — UI kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#yeni-ziyaret) |
+| **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator). **E-Vet SMART:** Yeni Ziyaret > Satış **Kaydet / Öde** — UI kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#yeni-ziyaret). Global **Doğrudan Satış** **Kaydet / Öde** → Fatura Ödemesi; split tender (ör. Nakit + Kredi Kartı); linked payment blocks Direct Sale deletion; related payment removed → same sale record deletable (UI/product — FK/cascade **iddia edilmez**) — → [e-vet.md](../competitors/e-vet.md#ödeme-bağımlılığı-ve-silme-canlı-test) |
 
 ---
 
@@ -1678,7 +1678,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | APPT-005 |
-| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types). **E-Vet SMART:** Yeni Randevu **Süre (dk)**; 30 dk slot ızgarası — kapasite kuralları **TBD** → [e-vet.md](../competitors/e-vet.md#randevular) |
+| **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types). **E-Vet SMART:** Yeni Randevu **Süre (dk)**; 30 dk slot ızgarası — kapasite kuralları **TBD** → [e-vet.md](../competitors/e-vet.md#randevular). Global Takvim Düzenle / **+ Yeni Randevu** **Süre (dk)** — slot ızgarası **gözlemlenmedi** → [e-vet.md](../competitors/e-vet.md#mevcut-randevu--düzenle-modal) |
 
 ### APPT-007 — Neden ile hekim/kaynak eşleştirmesi
 
@@ -1982,7 +1982,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar). **E-Vet SMART:** Yeni Randevu — Bölüm + Veteriner seçimi; slot ızgarası — → [e-vet.md](../competitors/e-vet.md#randevular) |
+| **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar). **E-Vet SMART:** Yeni Randevu — Bölüm + Veteriner seçimi; slot ızgarası — → [e-vet.md](../competitors/e-vet.md#randevular). Global **Randevular** Ay/Hafta/Gün + Bölüm/Veteriner filtre — → [e-vet.md](../competitors/e-vet.md#randevular--global-calendar) |
 
 ### APPT-026 — Kayıtlı filtreler ve talep görünüm tercihleri
 
@@ -2208,7 +2208,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
-| **Notlar** | Trial'da gerçek SMS sınırlandırılır |
+| **Notlar** | Trial'da gerçek SMS sınırlandırılır. **E-Vet SMART:** Takvim SMS bakiye; Hatırlatma / Düzenle modal gönder / Sms Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-takvim-modül) |
 
 ### INT-004 — WhatsApp entegrasyonu
 
@@ -2224,7 +2224,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | |
+| **Notlar** | **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma) |
 
 ### INT-005 — e-Fatura / e-SMM
 
@@ -2240,7 +2240,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
-| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes) |
+| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes). **E-Vet SMART (2026-09-27):** Doğrudan Satış e-Fatura\|SMM Notu alanları; **VIDEO OBSERVED** gelgeç müşteride e-Fatura düzenlenememe anlatımı — live kural **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#ana-satış-ekranı) |
 
 ### INT-006 — POS ve online ödeme
 

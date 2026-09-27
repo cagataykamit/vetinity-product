@@ -11,8 +11,10 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - Platform shell / navigation ve IA envanteri (**navigation discovery tamamlandı**, 2026-09-23); login sonrası Hasta Kabul landing (alan etiketleri; kısmi — bkz. [Review Tracker](#review-tracker)).
 - **Hasta Kartı / Patient Workspace** — planlanan görsel/product review kapsamı **REVIEWED / CLOSED** (2026-09-24 – 2026-09-25); [kapsam](#hasta-kartı--patient-workspace) ve [tracker](#review-tracker).
 - **Global Hospitalizasyon modülü** — sol menü **Hospitalizasyon** / **Hospitalizasyonlar** operasyon yüzeyi **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-hospitalizasyon-modül) ve [tracker](#review-tracker).
+- **Global Takvim modülü** — Randevular + Hatırlatma/iletişim batch **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-takvim-modül) ve [tracker](#review-tracker).
+- **Global Doğrudan Satış modülü** — walk-in satış, ödeme, miat/expiry seçimi ve destekleyici Ürün/Stok kanıtları **REVIEWED / CLOSED** (2026-09-27); [kapsam](#global-doğrudan-satış-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** Takvim (global), Doğrudan Satış, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** Muayene Odası (global), tam Stok/Ürün modül review, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -22,6 +24,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Navigation / IA discovery** | Tamamlandı (2026-09-23) |
 | **Hasta Kartı / Patient Workspace** | **REVIEWED / CLOSED** (2026-09-25) |
 | **Global Hospitalizasyon modülü** | **REVIEWED / CLOSED** (2026-09-25) |
+| **Global Takvim modülü** | **REVIEWED / CLOSED** (2026-09-25) |
+| **Global Doğrudan Satış modülü** | **REVIEWED / CLOSED** (2026-09-27) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -34,6 +38,7 @@ Kanıt sınıflandırması:
 | Etiket | Anlam |
 |---|---|
 | **OBSERVED** | Canlı UI'da doğrudan görülen |
+| **VIDEO OBSERVED** | E-Vet eğitim/yönlendirme videosundan; aynı iddia canlı UI ile ayrı doğrulanmadı |
 | **INFERRED** | Menü/etiketlerden makul ama doğrulanmamış çıkarım |
 | **VETINITY IMPLICATION** | Vetinity için değerlendirme adayı (kesin karar değil) |
 | **TBD** | İleride doğrulanacak |
@@ -57,7 +62,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED) |
 
 ---
 
@@ -105,16 +110,11 @@ Bu belgede **yapılmaz:**
 
 #### Takvim
 
-**OBSERVED:**
+**OBSERVED — alt menü (IA envanteri):** Randevular · Hatırlatma · Doğum Günü Hatırlatma · Toplu Sms · Toplu Bildirim · Sms Geçmişi · Kara Liste · Şablonlar.
 
-- Randevular
-- Hatırlatma
-- Doğum Günü Hatırlatma
-- Toplu Sms
-- Toplu Bildirim
-- Sms Geçmişi
-- Kara Liste
-- Şablonlar
+**INFERRED:** Takvim yalnız scheduling değil; reminder ve outbound communication yüzeyleri de içerir (menü co-location).
+
+**TBD:** Tek backend Task/Communication domain **uydurulmaz**. Ekran detayı → [Global Takvim (modül)](#global-takvim-modül) (**REVIEWED / CLOSED**).
 
 #### VKY
 
@@ -294,6 +294,10 @@ Hasta kartı Anasayfa alt sekmeleri incelendi (Ana, Özel, Bilgi).
 
 ## Randevular
 
+*(Hasta Kartı — patient-context; Patient Card **CLOSED**.)*
+
+Global klinik takvimi ayrı yüzeydir → [Global Takvim (modül)](#global-takvim-modül) · [Patient-context vs global Takvim](#patient-context-vs-global-takvim).
+
 **OBSERVED — hasta kartı Randevular listesi kolonları:**
 
 - İşlemler
@@ -360,6 +364,8 @@ Hasta kartı Anasayfa alt sekmeleri incelendi (Ana, Özel, Bilgi).
 - Aşı Listesi
 - Muayene
 - Notlar
+
+**Context:** Hasta/ziyaret bağlamı **Satış** ≠ sol menü **Doğrudan Satış** (global walk-in). Alan benzerliği var; aynı ekran **değil** → [Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül).
 
 **OBSERVED — Satış sekmesi (form / liste öğeleri):**
 
@@ -541,6 +547,420 @@ Hasta kartı Anasayfa alt sekmeleri incelendi (Ana, Özel, Bilgi).
 **OBSERVED — görece hafif inpatient operasyon yüzeyi:** yatış lifecycle + durum gruplama + bölüm/oda + veteriner + giriş/çıkış tarih alanları + tedavi/uygulama serbest metin + not + hasta geçmişi sürekliliği.
 
 **NOT OBSERVED / TBD (feature absent iddiası değil):** medication administration record, scheduled dose administration, nursing task board, completion/skipped events, inpatient vital flowsheet, occupancy/capacity enforcement, structured bed/cage resource lifecycle.
+
+---
+
+## Global Takvim (modül)
+
+**Review status:** **REVIEWED / CLOSED** (planlanan Global Takvim / randevu / hatırlatma / iletişim batch review kapsamı; edge kanıtları 2026-09-27 ile finalize).
+
+**OBSERVED — giriş:** Sol menü **Takvim**; alt yüzeyler bu pass'te incelendi (nav envanteri yukarıda).
+
+### Patient-context vs global Takvim
+
+| Yüzey | Kapsam | Belge |
+|---|---|---|
+| **Patient Card** | Randevular listesi, **Yeni Randevu**, hasta-scoped geçmiş, slot/yoğunluk ızgarası (create) | [Randevular](#randevular) |
+| **Global Takvim** | Klinik geneli **Randevular** takvimi (Ay/Hafta/Gün), filtreler, durum renklendirme, mevcut randevu **Düzenle** modalı; Hatırlatma/Doğum Günü/Toplu SMS-Bildirim/Geçmiş/Kara Liste/Şablonlar | Bu bölüm |
+
+Aynı ekran **değildir**; ilişkili randevu capability'sinin farklı context yüzeyleri.
+
+---
+
+### Randevular — global calendar
+
+**OBSERVED — sayfa:** Randevular.
+
+**OBSERVED — görünümler:** Ay, Hafta, Gün.
+
+**OBSERVED — navigasyon:** Seçili/güncel tarih kontrolü; önceki/sonraki dönem; haftalık tarih aralığı başlığı.
+
+**OBSERVED — filtreler:** Tarih, Görev Tipi, Bölüm, Veteriner, **Filtrele**.
+
+**OBSERVED — takvim kartları:** Kompakt randevu/görev bilgisi; kart/hover'da (her kartta her alan **garanti değil**) örnekler: başlangıç/bitiş saati, durum, müşteri/hasta, bölüm, veteriner, açıklama/detay.
+
+#### Durum renklendirme (legend)
+
+**OBSERVED legend:**
+
+- Tamamlanmamış Randevular
+- Bugünkü Randevular
+- Tamamlanan Randevular
+- Gelecek Randevular
+
+**OBSERVED:** Temporal/durum renklendirmesi **≠** Görev Tipi tanımlarındaki renk işaretleri — karıştırılmaz.
+
+**TBD:** Renk kalıcılığı / config modeli.
+
+#### Görev Tipi filtresi
+
+**OBSERVED:** Filtrede heterojen **Görev Tipi** değerleri (renk kodlu; tam enum **değil**). Örnekler (klinik-özel girişler dahil): Aşılama; Check Up / Check Up 1 / Check Up 2; Kontrol Muayenesi; Biyokimya; Hemogram; Vcheck Test; Doppler Ultrason Muayenesi; Kemoterapi; Kısırlaştırma; Operasyon; Dikiş Alınması; Diş Temizliği; Reçete; Tedavi; Taburcu; Traş; Otel; Randevu; Randevu Talep; Hatırlatma; Borç Hatırlatma; Çek-Senet Hatırlatması; Ödeme Sözü; Hasta Sahibi Doğum Günü; Uyarı; tohumlama ile ilgili girişler; diğer klinik-özel görünümler.
+
+**INFERRED:** Görev Tipi yalnız muayene randevusu değil; operasyonel/hatırlatma kategorilerini de kapsayan geniş yüzey.
+
+**TBD:** Unified Task backend, config mimarisi — UI'dan **çıkarılmaz**.
+
+#### Bölüm filtresi
+
+**OBSERVED örnekler (requirement değil):** Dış Klinik, Hasta Odası, Klinik, Muayene Odası - 2, Traş.
+
+---
+
+### Mevcut randevu — Düzenle modal
+
+**OBSERVED:** Takvim kartına tıklanınca doğrudan **Düzenle** modalı.
+
+**OBSERVED alanlar:** Durum, Görev Tipi, Tarih, Süre (dk), Bölüm, Veteriner, Müşteri, Hasta, Aşı Paketi, Bilgi, Açıklama. **Kaydet**.
+
+**OBSERVED örnek kayıt:** Durum = Tamamlandı; Süre = 30 dk.
+
+#### Düzenle modal — alt aksiyonlar (footer)
+
+**OBSERVED — doğrulanmış:**
+
+| Aksiyon | Davranış |
+|---|---|
+| **+** | **Yeni Randevu** modalını açar (global calendar-context **create**). |
+| **Yeşil gönder / paper-plane** | SMS gönderimi; başarıda “SMS Gönderimi Tamamlandı” (Toplam / Başarılı / Başarısız); teslimat ayrıntıları için **SMS Geçmişi** yönlendirmesi — aynı geri bildirim/desen [Doğum Günü Hatırlatma](#doğum-günü-hatırlatma) ve kayıt yüzeyi [Sms Geçmişi](#sms-geçmişi) ile uyumlu (**duplicate SMS spec yok**). |
+| **Mavi kişi** | İlgili **Müşteri Kartı**'na contextual navigation/handoff (Müşteri Kartı benchmark bu pass'te genişletilmedi). |
+
+**OBSERVED — + → Yeni Randevu alanları:** Durum, Görev Tipi, Tarih, Süre (dk), Bölüm, Veteriner, Müşteri, Hasta, Aşı Paketi, Bilgi, Açıklama, **Kaydet**.
+
+**Product distinction:** Patient Card > [Yeni Randevu](#randevular) ile aynı temel appointment capability'sine **yakın** alan seti; **aynı ekran değil** — global create modalında patient-context **availability / slot-density grid** **gözlemlenmedi**. Related capability, different context surface.
+
+**OBSERVED — çöp ikonu:** Görünür.
+
+**NOT OBSERVED / TBD:** Çöp ikonu tıklanınca silme onayı, persistence veya tam delete workflow — ikon görselinden **çıkarılmaz**.
+
+**NOT OBSERVED / TBD:** Drag/drop ile randevu taşıma (gerçek veri değiştirmemek için **test edilmedi**); var/yok **iddia edilmez**.
+
+---
+
+### Hatırlatma
+
+**OBSERVED filtreler:** Tarih Aralığı, Arama Metni, Ara, Temizle.
+
+**OBSERVED üst alan:** SMS bakiye; şablon seçimi; şablon önizleme (göz ikonu).
+
+**OBSERVED listeler:** Sms Gönderim Listesi, Email Gönderim Listesi.
+
+**OBSERVED aksiyonlar (gözlemlenen satırlarda):** Seçili kişiye SMS / OTP SMS (uygun olduğunda), Email Gönder, WhatsApp (Hatırlatma satırı).
+
+**OBSERVED alan örnekleri:** Gönderildi, Tarih, Müşteri, GSM, Email, Hasta, Aşı Paketi, İncele.
+
+**OBSERVED:** Satırlar hatırlatma/görev bağlamına göre gruplanabilir (ör. **Aşılama** grubu).
+
+#### WhatsApp Web handoff (Hatırlatma)
+
+**OBSERVED (test):** Hatırlatma satırındaki yeşil WhatsApp aksiyonu → **WhatsApp Web** açılır; ilgili sohbet/composer; mesaj alanı **önceden doldurulmuş**.
+
+**OBSERVED prefilled örnek metin:** “Randevunuzu hatırlatmak istedik. İyi Günler dileriz.”
+
+**Characterization:** Reminder surface → WhatsApp Web handoff/deep-link → prefilled reminder text → nihai gönderim **WhatsApp tarafında kullanıcı** (E-Vet içi otomatik “sent” kanıtı **yok**).
+
+**NOT inferred / NOT OBSERVED:** Official WhatsApp Business API; server-side WhatsApp send; delivery webhook; WhatsApp delivery tracking; message history sync; provider/vendor; E-Vet içinde WhatsApp gönderim logu.
+
+**TBD / NOT OBSERVED (CLOSED'ı engellemez):** Prefilled metnin şablon/config kaynağı; telefon normalizasyon/routing; WhatsApp'ta gönderilen mesajın E-Vet communication history'ye yazılıp yazılmaması; delivery/read sync; API vs basit web deep-link implementasyonu.
+
+---
+
+### Doğum Günü Hatırlatma
+
+**OBSERVED — sayfa:** Doğum Günü Listesi.
+
+**OBSERVED filtreler:** Tarih Aralığı, Arama Metni.
+
+**OBSERVED sekmeler:** Müşteri Listesi, Hasta Listesi.
+
+**OBSERVED müşteri listesi:** checkbox, Müşteri, GSM, Email, Doğum Tarihi.
+
+**OBSERVED üst:** SMS bakiye, Şablon, önizleme.
+
+**OBSERVED aksiyonlar:** Sms Gönder, Bildirim Gönder.
+
+**OBSERVED — SMS doğrulama:** Şablon seçilmeden → “Lütfen şablon seçiniz.”
+
+**OBSERVED — başarılı SMS testi:** “SMS Gönderimi Tamamlandı” — toplam, Başarılı, Başarısız; detay için **SMS Geçmişi** yönlendirmesi.
+
+**OBSERVED workflow:** Doğum Günü Listesi → alıcı seçimi → şablon → SMS → sonuç → SMS Geçmişi.
+
+**TBD — Bildirim Gönder:** “Durum” modalı / hesap satırı gözlemlendi; alıcı uygunluğu, hedef uygulama, kanal, push **kanıtlanmadı**.
+
+---
+
+### Toplu Sms
+
+**OBSERVED hedef sekmeleri:** Müşteri Listesi · Bakiyesi Olan Müşteri Listesi · Müşteri Grubu · Manuel Liste.
+
+**Müşteri Listesi:** seçim, Müşteri, GSM, Email, arama, sayfalama.
+
+**Bakiyesi Olan Müşteri Listesi:** Müşteri, GSM, Bakiye; Tümüne Gönder / Seçili OTP SMS / Seçili SMS (parantez içi adetler). **TBD:** “Bakiyesi Olan” iş kuralı.
+
+**Müşteri Grubu:** seçilebilir gruplar — Adı, Kod (örnekler requirement değil).
+
+**Manuel Liste:** GSM listesi, Sil, + Yeni; “Kayıt bulunamadı”. **TBD:** import/toplu yapıştırma.
+
+**OBSERVED composer:** Ticari Evet/Hayır; Şablon; Sms Mesajı + sayaç. **TBD:** Ticari = KVKK/ETK/IYS semantiği; OTP iş use-case.
+
+---
+
+### Toplu Bildirim
+
+**OBSERVED:** Basit composer — zorunlu **Başlık**, **Mesaj**; **Gönder**.
+
+**TBD:** Alıcı kümesi, kanal, mobil uygulama bağımlılığı, push sağlayıcı — push **kesinleştirilmez**.
+
+---
+
+### Kara Liste
+
+**OBSERVED:** arama, checkbox, GSM, Hesap Adı, **Kaldır**; ortamda “Kayıt bulunamadı”.
+
+**NOT OBSERVED / TBD:** Kara listeye ekleme akışı.
+
+---
+
+### Şablonlar
+
+**OBSERVED — liste (~35 kayıt / sayfalama):** İşlemler, Adı, Kullanım Yeri, Ticari, Durum; **+ Yeni Kayıt**. Örnek Durum: Aktif; Ticari: Hayır.
+
+**OBSERVED Kullanım Yeri (çoklu yüzey):** Hatırlatma Listesi, Doğum Günü Listesi, Toplu Sms, Müşteri Kartı, Hasta Kartı, vb.
+
+**OBSERVED — Şablon Tanımı (+ Yeni):** Adı, Kullanım Yeri, Durum, Ticari; kanallar **SMS**, **Email**; SMS editör; dinamik token/placeholder.
+
+**OBSERVED token etiketleri (tam liste değil):** Aşı, Çip No, Hasta, Hasta Doğum Tarihi, Hasta Kart No, İlgili Kişi, Klinik Koordinatları; render örnekleri `{Vaccine}`, `{Chip Nr}`, `{Patient}`, `{Patient BirthDate}` vb.
+
+**INFERRED:** Şablonlar statik metin değil; hasta/klinik bağlamlı placeholder destekler.
+
+**TBD:** Template storage implementasyonu.
+
+---
+
+### Sms Geçmişi
+
+**OBSERVED — sayfa:** Sms Geçmişi Listesi.
+
+**OBSERVED filtreler:** Tarih Aralığı, Gönderildi Durumu, Arama Metni, Ara, Temizle.
+
+**OBSERVED üst:** SMS bakiye; OTP Sms Gönder; Sms Gönder.
+
+**OBSERVED kolonlar:** checkbox, İşlem Tarihi, Müşteri, GSM, Mesaj, Gönderildi, Durum.
+
+**OBSERVED:** Başarılı — Gönderildi/Gönderildi; başarısız/gönderilmedi — Gönderilmedi; Durum alanında **sayısal kod/değer** (provider error/message ID **iddia edilmez**, anlam **TBD**).
+
+**OBSERVED:** Geçmişte gönderilen/denenen mesaj içeriği görüntülenir.
+
+---
+
+### Stale / geçmiş tarihli SMS gözlemi
+
+**OBSERVED (tek test):** 25.09.2026'da gönderilen SMS mesaj gövdesinde 22.09.2026 randevu/hatırlatma tarihi; gönderim başarılı; SMS Geçmişi'nde sent; gönderim öncesi stale/geçmiş tarih **uyarısı veya blok yok**.
+
+**VETINITY IMPLICATION:** Stale-reminder uyarı/onay değerlendirilebilir — otomatik requirement, güvenlik bug'ı veya tüm SMS yüzeyleri için genelleme **değil**.
+
+---
+
+### Ürün sentezi — Takvim
+
+**OBSERVED — en az üç görünür concern (co-location):**
+
+1. **Scheduling** — global takvim, Ay/Hafta/Gün, filtreler, düzenleme; randevu bağlamından hızlı aksiyonlar: **+ → Yeni Randevu**, **SMS gönder**, **Müşteri Kartı** handoff
+2. **Reminder worklists** — hatırlatma listesi, doğum günü, hasta/müşteri bağlamı; Hatırlatma → **WhatsApp Web** prefilled-message handoff
+3. **Outbound communication** — SMS, Email, toplu bildirim, OTP SMS aksiyonu, şablonlar, placeholder, SMS geçmişi, kara liste, alıcı segmentasyonu
+
+**TBD:** Ortak backend mimarisi — **UNKNOWN** (UI co-location ≠ domain birliği; unified task architecture **çıkarılmaz**).
+
+---
+
+## Global Doğrudan Satış (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-27 — planlanan global direct sale / checkout / payment / destekleyici miat-stok kanıtı kapsamı).
+
+**OBSERVED — giriş:** Sol operasyonel menü **Doğrudan Satış**.
+
+**OBSERVED — bağlam:** Ekran başlığı/ müşteri bağlamı **Doğrudan Satış Müşterisi**; kayıtlı müşteri zorunluluğu olmadan walk-in / gelgeç kullanım yüzeyi.
+
+**Related capability, different context surface:** [Yeni Ziyaret > Satış](#yeni-ziyaret) ile benzer satır/fiyat/depo/barkod alanları paylaşılabilir; ziyaret vs global walk-in **ayrı yüzeyler**.
+
+---
+
+### Ana satış ekranı
+
+**OBSERVED — üst alanlar:**
+
+- İşlem Tarihi
+- Fatura No
+- Veteriner
+- Açılır bölüm: **e-Fatura|SMM Notu & Açıklama** → açıldığında **e-Fatura|SMM Notu**, **Açıklama**
+
+**VIDEO OBSERVED:** Gelgeç / kimliksiz müşteri senaryosunda e-Fatura **düzenlenemediği**, yalnızca e-Fatura/SMM **notu** ve açıklama girilebildiği anlatıldı.
+
+**TBD / NOT VERIFIED (live UI):** Walk-in e-Fatura kısıtının tam hukuki/sistem kuralı; kayıtlı müşteri ile farklı save/e-Fatura davranışı (video: kayıtlı satışta bakiyeye yazma vs gelgeçte kırmızı **Kaydet / Öde** — **VIDEO OBSERVED**; mavi/kırmızı buton evrensel kural **uydurulmaz**).
+
+---
+
+### Barkod, depo, ürün arama
+
+**OBSERVED:**
+
+- Barkod alanı + QR/barkod tarama yüzeyi
+- **Depo** seçimi (ör. Ana Depo, Depo - Kerimler)
+
+**VIDEO OBSERVED:** Barkod/QR yüzeyinin barkodlu ürün satışı için kullanıldığı anlatıldı.
+
+**NOT OBSERVED / TBD:** Barkod backend/protokol; tarama sonrası satır ekleme davranışı (canlı test yok).
+
+**OBSERVED — ürün arama:** Boş durumda “Lütfen arama yapınız”; yazınca dropdown; sonuçlarda ürün adı yanında depo etiketi (ör. `| Ana Depo`).
+
+**OBSERVED ANOMALY / TBD:** **Depo - Kerimler** seçiliyken arama sonuçlarında yine `| Ana Depo` etiketi görüldü — yanlış filtre mi, stok kaynağı etiketi mi, başka UI semantiği mi **doğrulanmadı** (**BUG iddiası yok**).
+
+---
+
+### Satış satırları
+
+**OBSERVED kolonlar:** Ürün · Miktar · Fiyat · İskonto · Toplam.
+
+**OBSERVED:** Ürün yanında küçük action/document ikonu (semantik **TBD / NOT CLASSIFIED**). Miktar yanında kırmızı sayısal değer; hover → **Stok Miktarı** + mevcut miktar (**stok quantity visibility OBSERVED**).
+
+**OBSERVED — satır İşlemler:** Bilgiyi göster · Sil.
+
+**OBSERVED — Bilgiyi göster:** Serbest metin **Bilgi** alanı; sağda satır **KDV oranı** (ör. %10, %20); kullanıcı Bilgi’ye metin yazabiliyor. **Bilgi** = line note/information surface (**lot/batch alanı değil**).
+
+---
+
+### İndirim, stopaj, toplamlar
+
+**OBSERVED:** Toplam · Genel İndirim · Genel Toplam.
+
+**OBSERVED — ek + menüsü:** İndirimi kaldır · Stopaj ekle.
+
+**INFERRED:** Line + genel indirim + stopaj aksiyonu olan direct-sale checkout finans yüzeyi.
+
+**TBD:** Stopaj hesaplama/formül; Türkiye vergi semantiği **çıkarılmaz**.
+
+---
+
+### Kaydet / Öde ve ödeme ekranı
+
+**OBSERVED:** Kırmızı **Kaydet / Öde** aksiyonu.
+
+**VIDEO OBSERVED:** Gelgeç **Doğrudan Satış Müşterisi** senaryosunda **Kaydet / Öde** akışı; kayıtlı müşteride farklı save/bakiye davranışı anlatımı (**live UI doğrulanmadı**).
+
+**OBSERVED:** **Kaydet / Öde** → **Doğrudan Satış Fatura Ödemesi** ekranı.
+
+**OBSERVED — özet:** Ziyaret Toplamı · Ödeme Toplamı.
+
+**OBSERVED — alanlar:** İşlem No · Açıklama.
+
+**OBSERVED — Ödeme Detayları (satır bazlı, çoklu satır):** Ödeme Tipi · İşlem Tarihi · Makbuz No · Tutar; satıra bağlı örnekler: Ana Kasa · Belge No · Kart Sahibi · Açıklama.
+
+**OBSERVED ödeme tipleri:** Nakit Ödeme · Kredi Kartı Ödeme · Çek Ödeme · Senet Ödeme · Banka Transferi Ödeme.
+
+**OBSERVED (canlı test):** 100 TL toplam → 50 TL Nakit + 50 TL Kredi Kartı — **split tender / mixed payment**.
+
+**NOT inferred:** Banka/POS terminal entegrasyonu · settlement.
+
+---
+
+### Doğrudan Satış Geçmişi ve İncele
+
+**OBSERVED — Doğrudan Satış Geçmişi:** Tarih aralığı filtresi; tablo kolonları ör. Veteriner · Oluşturan · Fatura No · Ödeme · Toplam.
+
+**OBSERVED — İşlemler menüsü (isimler):** İncele · Düzenle · Ödeme · Sms Gönder · Kopyala · Fatura (3 lü) · Fatura · Bilgi Fişi · Hesap Ekstresi · Hesap Ekstresi (Detaylı) · Sil.
+
+**TBD / NOT VERIFIED:** Kopyala · fatura çıktıları · Bilgi Fişi · SMS — uçtan uca davranış.
+
+**OBSERVED — İncele modal satır kolonları:** Ürün · Depo · Miktar · Fiyat · KDV Oranı · İskonto · Toplam Fiyat · **Miat** · **Seri No** · Açıklama; sağda sale totals / indirim / stopaj özeti.
+
+**OBSERVED:** Tamamlanmış direct sale read surface — ürün + depo + finans + expiry metadata birlikte.
+
+---
+
+### Ödeme bağımlılığı ve silme (canlı test)
+
+**OBSERVED (100 TL walk-in / Doğrudan Satış Müşterisi):**
+
+1. Satış + bağlı **100 TL payment** kaydı oluşturuldu.
+2. **Doğrudan Satış Geçmişi > Sil** → “Bu kayıt silinemez, ilişkisi vardır”.
+3. **Ödeme Geçmişi** — İşlem Tipi: Doğrudan Satış Fatura; İşlemler: Düzenle · Ödeme Fişi · Sil.
+4. İlişkili payment kaydı kaldırıldı/silindi → **Ödeme Geçmişi’nde artık görünmüyor** (doğrulandı).
+5. Aynı Direct Sale kaydında **Sil tekrar denendi** → **başarıyla silindi**; kayıt ilgili geçmişte **artık yok** (doğrulandı).
+
+**OBSERVED — UI/product lifecycle:** Sale → payment dependency (Sil engeli) → payment removal → sale deletion.
+
+**OBSERVED:** İlişkili payment varken Direct Sale silme **engelleniyor**; payment **ayrı financial record**; payment kaldırıldıktan sonra **aynı satış silinebiliyor**.
+
+**TBD / NOT VERIFIED:** Direct Sale silindikten sonra **stok miktarının otomatik geri gelmesi** (test edilmedi — “stok kesin geri geldi” **yazılmaz**); hard vs soft delete; audit/event history; e-Fatura/e-SMM bağlı kayıtlarda delete guard; diğer finansal ilişki türlerinde guard kuralları.
+
+---
+
+### Direct sale — miat / expiry seçimi
+
+**OBSERVED:** Miat kontrollü ürün satırında expiry/date **dropdown**; aynı ürün için örn. `12 Ocak 2029 - Ana Depo` · `28 Şubat 2029 - Ana Depo`; erken tarih listede önce ve seçili göründü.
+
+**NOT VERIFIED / TBD:** FEFO/FIFO otomatik seçim · enforce · hangi bucket’tan düşüldüğü · sıralama = policy mi yalnızca UI sort mu.
+
+---
+
+### Lot / batch / Seri No
+
+**NOT OBSERVED (bu pass):** Alış Faturası · Stok Giriş · Doğrudan Satış compose yüzeylerinde açık **lot/batch numarası** giriş alanı.
+
+**OBSERVED:** İncele’de **Seri No** kolonu.
+
+**TBD:** Seri No giriş kaynağı · ürün kapsamı · barkod ilişkisi · lot/batch ile aynı kavram mı · unique serial tracking — **Seri No = Lot/Batch çıkarımı YAPILMAZ**.
+
+---
+
+### Destekleyici inceleme — Ürün Tanımı (PARTIAL, modül CLOSED değil)
+
+**Amaç:** Direct sale miat davranışını anlamak; **Global Ürün modülü review kapatılmadı**.
+
+**OBSERVED — Ürün Tanımı (seçilmiş alanlar):** İçerik Tipi · Ürün Tipi · Ürün Grubu · Ürün Alt Grubu · Adı · Durum · Birim · Çarpan · Barkod-1 · Barkod-2 · Hasvet Kodu · Reçete Ürünü mü? · Alış/Satış fiyatları · Alış/Satış KDV · KDV dahil bayrakları · **Stok Durum Kontrolü** · **Miat Kontrolü** (Evet/Hayır) · Minimum/Maksimum/Alarm Miktarı · Aşı Paketi Var Mı · Fiyat Aralık Listesi.
+
+**OBSERVED:** **Miat Kontrolü** ürün bazında — expiry zorunluluğu **conditional** (her ürün için zorunlu değil).
+
+---
+
+### Destekleyici inceleme — Stok Giriş / Alış Faturası / Depo Stok Durumu (PARTIAL)
+
+**Global Stok modülü CLOSED değil** — yalnızca direct sale expiry kanıtı için:
+
+**OBSERVED — Stok Giriş:** İşlem Tarihi · İşlem No · Açıklama · Barkod · Depo · Ürün · Faktör|Çarpan & Miktar · Birim · + Yeni. Miat kontrollü ürün → satır **Miat** zorunlu (“Bu alan zorunludur!”); kontrolsüz üründe **Miat** alanı yok.
+
+**OBSERVED — Alış Faturası (özet):** İşlem Tarihi · Satıcı Firma · Fatura No · Stok Hareketini Engelle · Teslim/Vade/Depo Çıkış/Açıklama · Barkod · Depo · KDV Dahil · ürün satırları · Faktör|Çarpan & Miktar · Fiyat · KDV · İskonto · Toplam; miat kontrollü üründe satır **Miat** zorunlu.
+
+**OBSERVED — Stok > Depo Stok Durumu kolonları:** İçerik Tipi · Ürün Tipi · Barkod-1 · Barkod-2 · Ürün · Birim · **Miat** · **Miktar**.
+
+**OBSERVED:** Aynı ürün + aynı depoda farklı **Miat** değerleriyle **ayrı satırlar** (ör. 12.01.2029 ve 28.02.2029) — UI-level **expiry-separated quantity rows** (**lot/batch entity iddiası yok**).
+
+**NOT REVIEWED (Stok menüsü — systematic değil):** İade/Sipariş faturası · Stok Çıkış · Sayım · Sıfırlama · Transfer · satıcı ödemeleri · Depolar tanımı vb.
+
+---
+
+### Ürün sentezi — Doğrudan Satış
+
+**OBSERVED — bir arada:**
+
+1. Walk-in **Doğrudan Satış Müşterisi** checkout (depo + arama + satır + KDV/indirim/stopaj)
+2. **Kaydet / Öde** → dedicated payment screen · **split tender**
+3. Stok miktarı görünürlüğü · **miat bucket** seçimi satışta
+4. Geçmiş · çoklu belge/ödeme aksiyonları · **İncele** read model
+5. Sale → payment dependency → payment removal → sale deletion (canlı test)
+
+**TBD:** Ortak checkout backend ziyaret satışı ile **UNKNOWN** — UI alan benzerliği ≠ tek domain aggregate.
+
+---
+
+### VETINITY IMPLICATION (Doğrudan Satış pass)
+
+*(Competitor architecture claim değil; değerlendirme adayları.)*
+
+- Direct Sale ile clinical visit sale **ortak checkout/payment primitive’leri** paylaşabilir → [CHECKOUT-001](../backlog/feature-backlog.md#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu).
+- Satış sırasında **stok miktarı** ve **expiry bucket** seçimi görünür olmalı (miat ürün bazında opsiyonel).
+- Aynı SKU’nun farklı expiry envanter satırları anlaşılır sunulmalı (**FEFO enforce iddiası yok**).
+- Payment relation varken destructive sale action **finansal bütünlük** korumalı.
+- **Split payment** first-class ödeme capability adayı.
 
 ---
 
@@ -934,14 +1354,34 @@ Global Hospitalization list · Tarih/arama filtreleri · Durum gruplama (Yatan/T
 
 - Tam status enum · Günler hesaplama · çıkış tarihi validasyon kuralları · yapılandırılmış inpatient ilaç uygulama · hemşirelik workflow · vital/flowsheet · oda/kafes kapasite modeli · doluluk zorunluluğu · backend delete semantics · structured bed/cage lifecycle
 
+### Global Takvim — REVIEWED / CLOSED
+
+Planlanan Global Takvim / randevu / hatırlatma / iletişim batch **incelendi** (tekrar inceleme gerekmez):
+
+Takvim navigation · Randevular global calendar · Ay / Hafta / Gün · date navigation · Görev Tipi filter · Bölüm filter · Veteriner filter · calendar status coloring · appointment card/hover details · existing appointment edit modal · edit modal + → global Yeni Randevu create · edit modal SMS send · edit modal → Müşteri Kartı handoff · Hatırlatma · SMS reminder list · Email reminder list · Hatırlatma WhatsApp Web handoff + prefilled message · Doğum Günü Hatırlatma · customer/patient birthday tabs · birthday SMS validation/send/result · Toplu Sms · customer list · balance customer list · customer groups · manual list · Toplu Bildirim · Sms Geçmişi · Kara Liste · Şablon Listesi · Şablon Tanımı · dynamic template placeholders · stale/past-date SMS observation
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- drag/drop appointment rescheduling · complete Görev Tipi semantics/config architecture · complete appointment status enum · edit modal trash/delete confirmation and persistence · OTP SMS exact business use case · Ticari exact regulatory/consent semantics · Toplu Bildirim exact recipient/channel · Doğum Günü Bildirim exact recipient/channel · blacklist add flow · SMS failed numeric status meaning · Email delivery history semantics beyond observed surface · complete template token catalog · WhatsApp prefilled-text source · WhatsApp phone routing · WhatsApp send logging back into E-Vet · WhatsApp delivery/read sync · WhatsApp API vs deep-link implementation
+
+### Global Doğrudan Satış — REVIEWED / CLOSED
+
+Planlanan global direct sale batch **incelendi** (2026-09-27; tekrar inceleme gerekmez):
+
+Doğrudan Satış navigation · Doğrudan Satış Müşterisi walk-in context · ana satış alanları · e-Fatura|SMM notu bölümü · barkod/QR yüzey · depo seçimi · ürün arama · satır kolonları · stok miktarı hover · Bilgiyi göster/KDV/Bilgi · genel indirim/stopaj · Kaydet/Öde · Doğrudan Satış Fatura Ödemesi · split payment · ödeme tipleri · geçmiş listesi · İncele read model · payment-blocked delete then post-payment-removal sale delete (canlı test) · destekleyici Ürün Tanımı miat flag · Stok Giriş/Alış Faturası miat validation · Depo Stok Durumu expiry-separated rows · direct sale expiry dropdown
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- barcode exact scan semantics · selected depot vs product-result depot anomaly · FEFO/FIFO enforcement · lot/batch support · Seri No creation/source · Kopyala exact behavior · invoice / 3-copy / Bilgi Fişi details · SMS from sale history · delete persistence (hard/soft) · sale delete stock reversal · audit/event history on delete · e-Fatura/e-SMM linked delete guard · other financial relation delete guards · registered-customer blue-save/balance (**VIDEO OBSERVED**, live UI) · e-Fatura walk-in exact legal/system rules · line document icon semantics · stopaj calculation · POS/bank integration
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
 |---|---|---|
 | **Hospitalizasyon** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) |
-| **Takvim** (global) | **PARTIAL** | Hasta bağlamında randevu reviewed — **sıradaki ana alan** ([Next Review Queue](#next-review-queue)) |
-| **Doğrudan Satış** | **NOT REVIEWED** | Visit Sales ≠ global Direct Sale |
-| **Muayene Odası** | **PARTIAL / NOT SYSTEMATIC** | Patient muayene reviewed |
+| **Takvim** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Takvim (modül)](#global-takvim-modül) |
+| **Doğrudan Satış** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül); [Yeni Ziyaret > Satış](#yeni-ziyaret) ayrı yüzey |
+| **Muayene Odası** | **PARTIAL / NOT SYSTEMATIC** | **Sıradaki ana hedef** ([Next Review Queue](#next-review-queue)); patient muayene reviewed |
 | **Lab / Xray / Pacs İstekleri** (global kuyruk) | **PARTIAL / NOT SYSTEMATIC** | Patient history/new request reviewed |
 | **HBS** | NOT REVIEWED | |
 | **VKY** | NOT REVIEWED | |
@@ -952,9 +1392,9 @@ Global Hospitalization list · Tarih/arama filtreleri · Durum gruplama (Yatan/T
 | **Mobil Uygulamalar** | NOT REVIEWED | |
 | **Katalog / Dokümanlar** | NOT REVIEWED | |
 | **Rapor** (üst domain, sistematik) | **PARTIAL** | Nav isimleri + patient/financial outputs |
-| **Stok** | NOT REVIEWED | Nav envanteri only |
-| **Finansal** (üst domain) | **PARTIAL** | Nav + patient ekstre |
-| **Ürün** | NOT REVIEWED | Nav envanteri only |
+| **Stok** | **PARTIAL** | Direct Sale pass: Stok Giriş, Alış Faturası (özet), Depo Stok Durumu — [destek](#destekleyici-inceleme--stok-giriş--alış-faturası--depo-stok-durumu-partial); tam menü **NOT REVIEWED** |
+| **Finansal** (üst domain) | **PARTIAL** | Nav + patient ekstre + direct sale ödeme geçmişi (kısmi) |
+| **Ürün** | **PARTIAL** | Direct Sale pass: Ürün Tanımı (destek) — [destek](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil); tam modül **NOT REVIEWED** |
 | **Müşteri** (global) | **PARTIAL / NOT SYSTEMATIC** | |
 | **Hasta** (üst domain, global) | **PARTIAL** | Patient Card **CLOSED**; master-data ekranları ayrı |
 | **Muayene** (üst domain config) | **PARTIAL** | |
@@ -969,9 +1409,9 @@ Global Hospitalization list · Tarih/arama filtreleri · Durum gruplama (Yatan/T
 Ürün inceleme önceliği (architecture kararı **değil**):
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül))
-2. **Takvim** — **NEXT** (global modül; patient-context randevu **PARTIAL**)
-3. Doğrudan Satış
-4. Muayene Odası
+2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
+3. ~~Doğrudan Satış~~ — **CLOSED** ([Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül))
+4. **Muayene Odası** — **NEXT**
 5. Lab İstekleri
 6. Xray İstekleri
 7. Pacs İstekleri
@@ -1029,7 +1469,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; **Hasta Kartı** ve **Global Hospitalizasyon** **REVIEWED / CLOSED**. Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; **Hasta Kartı**, **Global Hospitalizasyon**, **Global Takvim** ve **Global Doğrudan Satış** **REVIEWED / CLOSED**. Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
