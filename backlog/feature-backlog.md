@@ -1156,7 +1156,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | → [ADR-007](../decisions/ADR-007-imaging-module.md). **Canlı sandbox — Patients Module:** Patient History > Images; clinic-wide Images worklist (View Online NON_INTEGRATED) — patient vs clinic scope → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
+| **Notlar** | → [ADR-007](../decisions/ADR-007-imaging-module.md). **Canlı sandbox — Patients Module:** Patient History > Images; clinic-wide Images worklist (View Online NON_INTEGRATED) — patient vs clinic scope → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics). **E-Vet SMART (2026-09-29):** Ayrı global **Pacs İstekleri** populated worklist + patient **Pacs Geçmişi** / **Yeni Pacs İstek**; **Xray İstekleri** ayrı yüzey ([PARTIAL](../competitors/e-vet.md#global-xray-i̇stekleri-partial)). Imaging operasyon ≠ generic **Dosyalarım** — → [e-vet.md](../competitors/e-vet.md#global-pacs-i̇stekleri-modül) |
 
 ### IMG-002 — Röntgen yükleme ve görüntüleme
 
@@ -1220,7 +1220,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | IMG-001 |
-| **Notlar** | |
+| **Notlar** | **E-Vet SMART (2026-09-29):** **Pacs İstekleri** > **İncele** on a **CR** record opened **Fujifilm Synapse Mobility** in a separate web viewer; real radiographic images and **DICOM-style** study/series/image metadata visible in the external viewer. Exact integration protocol / storage ownership **not verified** — → [e-vet.md](../competitors/e-vet.md#cr--external-pacs-viewer-handoff) |
 
 ### IMG-006 — Dijital röntgen cihazı entegrasyonu araştırması
 

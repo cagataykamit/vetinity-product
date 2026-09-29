@@ -13,8 +13,12 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Global Hospitalizasyon modülü** — sol menü **Hospitalizasyon** / **Hospitalizasyonlar** operasyon yüzeyi **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-hospitalizasyon-modül) ve [tracker](#review-tracker).
 - **Global Takvim modülü** — Randevular + Hatırlatma/iletişim batch **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-takvim-modül) ve [tracker](#review-tracker).
 - **Global Doğrudan Satış modülü** — walk-in satış, ödeme, miat/expiry seçimi ve destekleyici Ürün/Stok kanıtları **REVIEWED / CLOSED** (2026-09-27); [kapsam](#global-doğrudan-satış-modül) ve [tracker](#review-tracker).
+- **Global Muayene Odası modülü** — klinik worklist / patient-routing yüzeyi **REVIEWED / CLOSED** (2026-09-28); [kapsam](#global-muayene-odası-modül) ve [tracker](#review-tracker).
+- **Global Lab İstekleri modülü** — lab worklist, patient-context request creation, structured results **REVIEWED / CLOSED** (2026-09-28); [kapsam](#global-lab-i̇stekleri-modül) ve [tracker](#review-tracker).
+- **Global Xray İstekleri** — request/configuration yüzeyleri **PARTIAL** (2026-09-29); [kapsam](#global-xray-i̇stekleri-partial) ve [tracker](#review-tracker).
+- **Global Pacs İstekleri modülü** — populated worklist, CR/US modalities, external Fujifilm Synapse Mobility viewer handoff **REVIEWED / CLOSED** (2026-09-29); [kapsam](#global-pacs-i̇stekleri-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** Muayene Odası (global), tam Stok/Ürün modül review, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** tam Stok/Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -26,6 +30,10 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Global Hospitalizasyon modülü** | **REVIEWED / CLOSED** (2026-09-25) |
 | **Global Takvim modülü** | **REVIEWED / CLOSED** (2026-09-25) |
 | **Global Doğrudan Satış modülü** | **REVIEWED / CLOSED** (2026-09-27) |
+| **Global Muayene Odası modülü** | **REVIEWED / CLOSED** (2026-09-28) |
+| **Global Lab İstekleri modülü** | **REVIEWED / CLOSED** (2026-09-28) |
+| **Global Xray İstekleri** | **PARTIAL** (2026-09-29) |
+| **Global Pacs İstekleri modülü** | **REVIEWED / CLOSED** (2026-09-29) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -62,7 +70,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED) |
 
 ---
 
@@ -87,10 +95,10 @@ Bu belgede **yapılmaz:**
 - Hasta Kabul
 - Takvim
 - Doğrudan Satış
-- Muayene Odası
-- Lab İstekleri
-- Xray İstekleri
-- Pacs İstekleri
+- Muayene Odası *(global modül — [Global Muayene Odası (modül)](#global-muayene-odası-modül) **CLOSED**)*
+- Lab İstekleri *(global modül — [Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül) **CLOSED**)*
+- Xray İstekleri *(global — [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial))*
+- Pacs İstekleri *(global modül — [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül) **CLOSED**)*
 - Hospitalizasyon
 - HBS (Hayvan Bilgi Sistemi)
 - VKY
@@ -964,6 +972,586 @@ Aynı ekran **değildir**; ilişkili randevu capability'sinin farklı context y�
 
 ---
 
+## Global Muayene Odası (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-28 — planlanan global **Muayene Odası** product review kapsamı).
+
+**OBSERVED — giriş:** Sol operasyonel menü **Muayene Odası**.
+
+**NOT:** Bu yüzey klasik **clinical examination form** / SOAP muayene kaydı **değildir**. Patient-card [Muayene Geçmişi](#hasta-kartı--patient-workspace) · [Yeni Muayene](#hasta-kartı--patient-workspace) · [Yeni Ziyaret > Muayene](#yeni-ziyaret) ile **birleştirilmez** — ilişkili klinik bağlam, farklı operasyonel yüzeyler.
+
+---
+
+### Global liste / worklist
+
+**OBSERVED:** Liste/worklist yüzeyi.
+
+**OBSERVED — filtreler:** Tarih Aralığı · Veteriner · Bölüm · Durum · Arama Metni.
+
+**OBSERVED — kolonlar:** İşlemler · Bölüm · İşlem Tarihi · Müşteri · Hasta · Açıklama · Yönlendir · Durum.
+
+**OBSERVED:** Satırlar **veteriner/assignee** başlığı altında gruplanabiliyor.
+
+**INFERRED (sınırlı karakterizasyon):** Operasyonel hasta yönlendirme / clinic **work queue** niteliği — fiziksel “muayene odası” oda yönetimi **iddia edilmez**.
+
+---
+
+### Yeni kayıt — Muayene Odası Tanımlama
+
+**OBSERVED alanlar:** Durum · İşlem Tarihi · Müşteri · Hasta · Bölüm · Veteriner · Açıklama · **Kaydet** · **Kaydet / Yeni**.
+
+#### İki ayrı “Durum” kavramı (UI semantiği)
+
+Backend’de ayrı field/entity **iddia edilmez**. UI’da **iki farklı state concept** gözlemlendi:
+
+| Kavram | Gözlemlenen değerler | Yüzey |
+|---|---|---|
+| **A) Record state** | Aktif · Pasif | Tanımlama formu **Durum** dropdown |
+| **B) Operational workflow state** | Beklemede · Tamamlandı | Global liste **Durum** filtresi · satır **Durum** · inline toggle |
+
+**NOT:** Aktif/Pasif ile Beklemede/Tamamlandı **birleştirilmez**.
+
+---
+
+### Workflow status lifecycle (canlı test)
+
+**OBSERVED — Durum filtresi:** Beklemede · Tamamlandı.
+
+**OBSERVED — inline hızlı aksiyon:**
+
+- **Beklemede** → satırda yeşil check/tick → tıklanınca **Tamamlandı**
+- **Tamamlandı** → satır aksiyonu **circular-arrow / reopen-like** ikona dönüşür → tıklanınca **Beklemede**
+
+**OBSERVED:** İki yönlü status toggle **çalışıyor**.
+
+**NOT OBSERVED:** Status değişiminde confirmation modal; success toast / notification.
+
+**NOT:** Circular-arrow için resmi “undo” / “reopen” ürün adı **verilmez** — yalnızca **reopen-like / circular-arrow action** betimlemesi.
+
+---
+
+### Yönlendir / routing
+
+**OBSERVED:** Satır **Yönlendir** → modal.
+
+**OBSERVED modal alanları:** İşlem Tarihi · Bölüm · Veteriner · Açıklama · **Güncelle**.
+
+**OBSERVED Bölüm örnekleri (requirement değil):** Dış Klinik · Hasta Odası · Klinik · Muayene Odası - 2 · Traş.
+
+**OBSERVED assignee dropdown örnekleri (UI label = Veteriner):** Aslı · Doğuş · Kıvanç · **Klinik** (generic/non-person-looking entry).
+
+**NOT inferred:** Dropdown yalnızca gerçek veteriner kullanıcılarından oluşur. Güvenli betimleme: **assignee/provider selector** (UI etiketi: Veteriner).
+
+**NOT OBSERVED / TBD:** Routing history · audit trail · notification · yeni queue item yaratma · ownership transfer domain model · backend workflow engine.
+
+---
+
+### Routing — canlı test
+
+**OBSERVED başlangıç:** Bölüm = Dış Klinik; workflow state = Beklemede.
+
+**OBSERVED aksiyon:** Yönlendir modal — Bölüm **Dış Klinik → Hasta Odası**; **Güncelle**.
+
+**OBSERVED sonuç:**
+
+- Aynı kayıt worklist’te **kaldı**
+- **Bölüm** = Hasta Odası
+- Workflow state = **Beklemede** (otomatik **Tamamlandı** **olmadı**)
+
+**OBSERVED:** Routing mevcut kaydın **bölüm** bilgisini güncelleyebiliyor; test edilen örnekte routing ile **Beklemede/Tamamlandı** lifecycle **ayrı aksiyonlar**.
+
+---
+
+### Sil
+
+**OBSERVED:** Satırda delete/trash aksiyonu.
+
+**OBSERVED:** Sil → “Silme İşlemi - Onay” / “Seçili kaydı silmek istediğinizden emin misiniz?” (onay UI).
+
+**NOT OBSERVED / TBD (CLOSED’ı engellemez):** Actual delete persistence · dependency guard · hard vs soft delete · audit/history.
+
+---
+
+### Ürün karakterizasyonu (OBSERVED UI’dan, sınırlı)
+
+**OBSERVED UI davranışından çıkarım:** Global Muayene Odası, müşteri/hasta kayıtlarını **bölüm** ve **assignee** bağlamında operasyonel olarak sıraya alan, **Beklemede/Tamamlandı** lifecycle’ı ve manuel **Yönlendir** ile yeniden yönlendirme sağlayan **lightweight clinic worklist / patient-routing surface** gibi davranır.
+
+**NOT:** Asıl **clinical examination record** ile aynı şey **değildir**.
+
+---
+
+### VETINITY IMPLICATION (Muayene Odası pass)
+
+*(E-Vet davranışı olarak sunulmaz; değerlendirme adayları.)*
+
+- Inline **Beklemede ↔ Tamamlandı** geçişi hızlı olabilir; kısa **feedback** ve **undo** imkânı güvenlik/UX açısından değerlendirilebilir.
+- **Patient routing / clinic work queue** ihtiyacı [v1-release-scope.md](../roadmap/v1-release-scope.md) ve [ux/navigation.md](../ux/navigation.md) ile ayrı hizalanmalı — competitor kopyası **değil**.
+
+**Backlog cross-ref (bu pass’te ID evidence eklenmedi):** [EXAM-001](../backlog/feature-backlog.md#exam-001--modern-muayene-çalışma-alanı)–[EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) muayene **kaydı** odaklı; [CHECKIN-005](../backlog/feature-backlog.md#checkin-005--ziyaret-yaşam-döngüsü-ve-durum-geçişleri) **ziyaret/encounter** yaşam döngüsü — global worklist semantiği **doğrudan eşleşmedi** (POTENTIAL GAP — rapor).
+
+---
+
+## Global Lab İstekleri (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-28 — planlanan global **Lab İstekleri** product review kapsamı).
+
+**OBSERVED — giriş:** Sol operasyonel menü **Lab İstekleri**.
+
+**Cross-ref (patient-context, Hasta Kartı CLOSED):** Yeni istek **global listede değil** — [Lab Geçmişi](#hasta-kartı--patient-workspace) **`+` → Yeni Lab İstek** (Patient Card review’da **New Lab flow** olarak geçer; bu pass’te form detayı doğrulandı).
+
+---
+
+### Global worklist
+
+**NOT OBSERVED:** Global ekranda **Yeni Kayıt** / global create butonu.
+
+**OBSERVED — filtreler:** Tarih Aralığı · Arama Metni · Ara · Temizle.
+
+**NOT OBSERVED:** Beklemede / İşleniyor / Tamamlandı için ayrı **status filter**, quick filter veya tab (canlı örnekte ~1.400+ kayıt).
+
+**OBSERVED — aksiyon:** **Yazdır** (liste düzeyi).
+
+**OBSERVED — kolonlar:** İşlemler · İstek ID · İstek Tarihi · İstek No · Test Grubu · Bölüm · Veteriner · Müşteri · Hasta Protokol No · Hasta · Doğum Tarihi.
+
+**INFERRED:** Merkezi **operational worklist** — yeni istek oluşturma yüzeyi **değil**.
+
+**OBSERVED — gruplama:** Status başlıkları altında (ör. **Beklemede**, **Tamamlandı**).
+
+**NOT OBSERVED / TBD:** Global listede ayrı **İşleniyor** group heading (enum detail ekranında var — aşağıda).
+
+**OBSERVED — sıralama (görünür gruplar içinde):** İstek Tarihi **yeni → eski** (default sort/backend implementation **iddia edilmez**).
+
+---
+
+### Patient-context request creation — Yeni Lab İstek
+
+**OBSERVED yol:** Hasta kartı **Lab & Xray & Pacs → Lab Geçmişi → `+`** → **Yeni Lab İstek**.
+
+**OBSERVED alanlar:** İstek Tarihi · İstek No · Hasta Durumu · SmartVette İzin Ver · Açıklama & Analiz Yorumu (expandable) · Test Grubu · Test Grup Panel · Test Kalemleri · İstek Kalemleri · Ekle · **Kaydet**.
+
+**OBSERVED:** Müşteri/hasta formda yeniden seçilmez — **patient context** içinde oluşturma.
+
+**OBSERVED — Hasta Durumu:** Ayakta Tedavi · Baygın · Hospitalizasyon · Uyanık.
+
+**OBSERVED — SmartVette İzin Ver:** Evet · Hayır (**TBD:** exact business rule; entegrasyon/data sharing **doğrulanmadı**).
+
+---
+
+### Test group & panel selection
+
+**OBSERVED Test Grubu örnekleri (tam enum değil):** ABL 9 KAN GAZI · AU10V HORMON ANALİZ · FUJI DRI-CHEM 4000i BİYOKİMYA ANALİZİ · HASVET VH-3 · HASVET VH-5 · HIZLI TEST KİTLERİ · MINDRAY BC-2800 VET KAN SAYIM · MINDRAY BC-5000 VET KAN SAYIM · vb.
+
+**OBSERVED Test Grup Panel örnekleri:** COMPREHENSIVE S-PANEL · KIDNEY PANEL · LIVER PANEL · PLUS PANEL · PRE-SURGICAL S-PANEL.
+
+**INFERRED:** Tekil test kalemleri ile hazır panel/grup seçimi **ayrı UI kavramları**; panel seçiminin auto-add davranışı **TBD**. Cihaz/analiz tipi adları grupta geçebilir — **device/LIS architecture çıkarımı yok**.
+
+---
+
+### Request lifecycle / status
+
+**OBSERVED — Lab Sonuçları / detail `İstek Durumu` enum:** Beklemede · **İşleniyor** · Tamamlandı.
+
+**OBSERVED — global group headings (bu pass):** Beklemede · Tamamlandı (**İşleniyor** group **NOT OBSERVED**).
+
+**OBSERVED — detail üst:** İstek ID & İstek No · İstek Tarihi · Hasta Durumu.
+
+**OBSERVED — detail alanlar:** İstek Durumu · Analiz Başlangıç Tarihi · Analiz Bitiş Tarihi · Analiz Yorumu · Açıklama.
+
+**OBSERVED — alt aksiyonlar:** Geri Dön · **Kaydet** (**NOT OBSERVED:** ayrı **Tamamla** butonu).
+
+**NOT inferred:** Status dropdown + Kaydet = otomatik completion semantics.
+
+---
+
+### Lab Results — structured analytes
+
+**OBSERVED result tablosu kolonları:** Test Adı · Lab Değeri · Açıklama · Sonuç · Datavet · Min. Ref · Maks. Ref · Birim · Ref. Açıklaması.
+
+**OBSERVED analyte örnekleri (CBC benzeri):** Lökosit · Bazofil · Nötrofil · Eozinofil · Lenfosit · Monosit · Eritrosit · Hemoglobin · MCV · MCH · MCHC · RDW-CV · RDW-SD · Hematokrit · Trombosit · MPV · PDW · PCT · vb.
+
+**OBSERVED:** Reference min/max ve **Birim** görüntülenebilir; **Lab Değeri** structured input; placeholder örneği `0,00 / + / -`.
+
+**TBD / INFERRED:** Placeholder’dan tüm testlerde numeric + positive/negative semantiği **kesin çıkarılmaz**.
+
+---
+
+### Completed ≠ populated results
+
+**OBSERVED (Tamamlandı grubu — gerçek kayıt):** Status = **Tamamlandı**; inline expanded table’da analyte satırları ve referans aralıkları var; **Lab Değeri alanları boş** göründü.
+
+**OBSERVED:** **Tamamlandı** status’u **`structured result values populated`** anlamına **gelmez**. Completion lifecycle ≠ result population (**birleştirilmez**).
+
+---
+
+### Reference ranges
+
+**OBSERVED:** Aynı analyte (ör. Lökosit) farklı kayıtlarda farklı aralıklar (ör. 5.5–19.5 vs 6–17).
+
+**Characterization:** Context-dependent / configurable-looking reference ranges; species · breed · age · sex · device · profile **TBD** (derivation **doğrulanmadı**).
+
+---
+
+### Inline expand
+
+**OBSERVED:** Satır sol ok → expand.
+
+**OBSERVED expanded:** Test group başlığı · Test Adı · Lab Değeri · Referans · ek Lab Değeri sütunu · **Test Sayısı** · DataVet.
+
+**TBD:** Test Sayısı chart-like icon + numeric badge anlamı.
+
+---
+
+### Row actions & sharing (tooltip doğrulandı)
+
+| UI | Tooltip / davranış |
+|---|---|
+| Kalem | **Düzenle** |
+| Bulut/down | **İndir** |
+| Yazıcı | **Yazdır** |
+| Kare/barcode benzeri | **Barkod Yazdır** |
+| WhatsApp | **Whatsapp ile paylaş** (share action only) |
+| Gri mail | **Email ile paylaş** |
+| Kırmızı çöp | **Sil** |
+
+**OBSERVED — Email ile paylaş validation:** “Tanımlı email adresi bulunmamaktadır!” (customer/contact email dependency — UI seviyesi).
+
+**TBD:** İndir / Yazdır / Barkod Yazdır çıktı formatları; Sil confirmation/dependency/audit; WhatsApp/email delivery logging.
+
+**NOT inferred:** WhatsApp API · server send · delivery/read tracking.
+
+---
+
+### DataVet (analyte-level)
+
+**OBSERVED:** Result grid’de analyte **DataVet** ikonu → modal (ör. Lökosit): analyte açıklaması · klinik bilgi/yorum · artış/azalış nedenleri · kaynakça/referanslar.
+
+**OBSERVED characterization:** **Analyte-level veterinary reference / interpretation content surface**.
+
+**NOT OBSERVED / TBD:** Lab device integration · result import · LIS · bidirectional sync · automatic analyzer feed · cloud sync · DataVet dışı entegrasyon fonksiyonları.
+
+*(Sol menü **DataVet** modülü ayrı — bu pass **NOT REVIEWED**.)*
+
+---
+
+### UX observations
+
+**OBSERVED gap:** Büyük worklist’te status yalnızca **visual grouping**; dedicated status filter yok.
+
+**VETINITY IMPLICATION:** Lab worklist’te open work’ü ayırmak için status filter / quick segments / tabs **değerlendirilebilir** (E-Vet weakness olarak; otomatik backlog ID **yok**).
+
+---
+
+### Ürün sentezi — Lab (UI lifecycle, architecture iddiası yok)
+
+**OBSERVED:** Patient context içinden **Yeni Lab İstek** formu açılır; global **Lab İstekleri** mevcut request’leri **operational worklist** olarak listeler (detail/result/share kanıtları bu pass’te — yukarıda).
+
+**NOT LIVE-VERIFIED:** Patient-context **Kaydet** → kaydın global worklist’te görünmesi (Lab pass’te yeni request **kaydedilmedi**).
+
+**OBSERVED (mevcut kayıtlar üzerinden):** Worklist → **Lab Sonuçları** structured entry → reference ranges → inline expand → print/download/barcode/share → DataVet interpretation modal.
+
+**TBD:** Backend entity model · billing linkage · specimen model · patient save → global list continuity.
+
+---
+
+### VETINITY IMPLICATION (Lab pass)
+
+- Patient-context create yüzeyi + global worklist read continuity değerlendirilebilir ([v1-release-scope.md](../roadmap/v1-release-scope.md) Laboratory Results satırı ile hizalama **karar değil**); save→queue **canlı doğrulanmadı**.
+- Structured analyte + reference range + completion≠values ayrımı product modelinde net olmalı.
+- Status filter eksikliği operasyonel risk adayı.
+
+**Backlog (bu pass):** Dedicated **LAB-*** epic yok; zayıf eşleşmelere evidence **eklenmedi** — audit raporu.
+
+---
+
+### TBD / NOT OBSERVED (CLOSED’ı engellemez)
+
+Test Grup Panel auto-add · Test Grubu → kalem population · SmartVette İzin Ver semantics · global **İşleniyor** grouping · populated completed example · out-of-range visual flags · İndir/Yazdır/Barkod formatları · Test Sayısı badge · DataVet beyond reference content · reference derivation rules · delete guard/audit · share delivery tracking · lab billing · specimen/sample fields · external analyzer architecture · patient-context lab request save → global worklist appearance.
+
+---
+
+## Global Xray İstekleri (PARTIAL)
+
+**Review status:** **PARTIAL** (2026-09-29 — request/configuration yüzeyleri incelendi; **CLOSED değil**).
+
+**Characterization:** Request/configuration surfaces were reviewed, but the **current reviewed clinic/account** had no selectable Xray **Test Grubu** and no Xray request records in the searched period; real request/result lifecycle **could not be validated**.
+
+**NOT inferred:** “E-Vet Xray modülü kullanılmıyor” (global ürün iddiası yok).
+
+**Cross-ref:** Patient **Xray Geçmişi → + → Yeni Xray İstek** (Hasta Kartı **CLOSED** — form yapısı bu pass’te doğrulandı). [Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül) ile **shared diagnostic request/configuration pattern at UI level** (domain model / backend engine **iddia edilmez**).
+
+---
+
+### Global worklist shell
+
+**OBSERVED — giriş:** Sol menü **Xray İstekleri**; breadcrumb **Anasayfa > Xray İstekleri**.
+
+**NOT OBSERVED:** Global **Yeni Kayıt** butonu.
+
+**OBSERVED — filtreler:** Tarih Aralığı · Arama Metni · Ara · Temizle.
+
+**OBSERVED — kolonlar:** İşlemler · İstek ID · İstek Tarihi · İstek No · Bölüm · Veteriner · Müşteri · Hasta Protokol No · Hasta.
+
+**OBSERVED (incelenen klinik/hesap):** Tarih aralığı 28.09.2019 – 28.09.2026 → **Kayıt bulunamadı**.
+
+**OBSERVED:** Current reviewed clinic/account had **no Xray request records** in the searched 2019–2026 date range.
+
+---
+
+### Patient-context — Yeni Xray İstek
+
+**OBSERVED yol:** **Lab & Xray & Pacs → Xray Geçmişi → `+`** → **Yeni Xray İstek**.
+
+**OBSERVED alanlar:** İstek Tarihi · İstek No · Hasta Durumu · SmartVette İzin Ver · Açıklama & Analiz Yorumu · Test Grubu · Test Grup Panel · Test Kalemleri · İstek Kalemleri · Ekle · **Kaydet**.
+
+**OBSERVED — Hasta Durumu:** Ayakta Tedavi · Baygın · Hospitalizasyon · Uyanık.
+
+**OBSERVED — SmartVette İzin Ver:** Evet · Hayır (**TBD:** business/integration semantics).
+
+**NOT LIVE-VERIFIED:** Request **Kaydet** · global listede görünme · result/status lifecycle.
+
+---
+
+### Test Grubu / Test Grup Panel (request form)
+
+**OBSERVED — Test Grubu dropdown:** **Kayıt bulunamadı** (incelenen klinikte seçilebilir Xray test grubu yok).
+
+**OBSERVED — Test Grup Panel dropdown (aynı form):** COMPREHENSIVE S-PANEL · KIDNEY PANEL · LIVER PANEL · PLUS PANEL · PRE-SURGICAL S-PANEL (Lab pass’te görülen panel adlarıyla aynı terminoloji).
+
+**NOT VERIFIED:** Intentional shared catalog vs config leakage vs irrelevant options; gerçek Xray request’te kullanım.
+
+**NOT:** Bug iddiası yok.
+
+---
+
+### Test Grubu Tanımı (shared configuration surface)
+
+**OBSERVED yol:** **Test Grupları > Test Grubu Tanımı** (configuration; tam üst-domain IA bu pass’te **PARTIAL**).
+
+**OBSERVED alanlar:** Tür · Test Tipi · Adı · Serbest Parametreli · Laboratuvar · Cihaz · Durum · **Test Kalemleri** grid (Kod · Sıra No · Test Adı · Cihaz Kodu · Test Grup Panelleri · Durum) · Ekle · Geri Dön · Kaydet.
+
+**OBSERVED — Tür:** **Lab** · **Röntgen**.
+
+**Characterization:** Shared/generic **configuration surface at UI level** (single table / backend entity **iddia edilmez**).
+
+---
+
+### Tür / Test Tipi behavior
+
+**OBSERVED — Tür = Röntgen iken Test Tipi örnekleri:** Hemogram · Arteriyel K.G. · Biyokimya · Diğer · Hormon · İdrar · Venüs Kan Gazı · **Röntgen** (lab-oriented seçenekler de listede).
+
+**OBSERVED:** Strict type filtering **gözlemlenmedi**. **TBD:** Exact filtering/business rule (frontend/config bug **iddia edilmez**).
+
+---
+
+### Serbest Parametreli
+
+**OBSERVED:** Test Grubu seviyesinde **Serbest Parametreli** Evet/Hayır. **TBD:** Exact semantics (free-text result builder **varsayılmaz**).
+
+---
+
+### Laboratuvar / Cihaz (Tür=Röntgen, Test Tipi=Röntgen)
+
+**OBSERVED:** **Laboratuvar** ve **Cihaz** alanları görünür kaldı.
+
+**OBSERVED — Laboratuvar örneği:** Lab - 1.
+
+**OBSERVED — Cihaz dropdown örnekleri:** Mindray BC5000 · Nx600 · VCHECK V200 (Lab bağlamında da gözlemlenen isimler).
+
+**NOT VERIFIED:** Tür bazlı filtreleme · Röntgen-only cihaz kataloğu · bu cihazların Xray workflow’unda kullanılabilirliği · klinik Röntgen config tamamlığı.
+
+**NOT inferred:** “Röntgen cihaz desteği yok” · “Lab cihazlarını Xray’de kullanıyor”.
+
+---
+
+### Test Kalemi required validation
+
+**OBSERVED save attempt:** Tür = Röntgen · Test Tipi = Röntgen · Adı = Test1 → **Kaydet** → **“Kalem girişi yapmadınız, lütfen kalem(ler) ekleyiniz.”**
+
+**OBSERVED:** En az bir **Test Kalemi** olmadan Test Grubu kaydı **validation ile bloklandı**.
+
+**OBSERVED:** Kaydet denemesi validation ile bloklandı; başarılı kayıt / persistence kanıtı **gözlemlenmedi**. Test kalemi eklenmedi.
+
+---
+
+### Product characterization
+
+**PARTIAL —** workflow surface observed; current reviewed clinic/account appears **without usable Xray test group selection and without Xray request rows** in searched range → **result/processing lifecycle not validated**.
+
+---
+
+### VETINITY IMPLICATION (Xray pass)
+
+- Lab/Xray **shared request form + Test Grubu Tanımı** pattern’i Vetinity’de diagnostic request/config tasarımında ayrıştırılabilir ([ADR-007](../decisions/ADR-007-imaging-module.md) imaging ≠ generic file — **karar değil**, bağlam).
+- Tür/Test Tipi/Cihaz catalog tutarlılığı ve modality-specific filtering değerlendirilebilir.
+- Xray **CLOSED** sayılmadan önce en az bir configured clinic + request + (varsa) result/image yüzeyi gerekir.
+
+**Backlog:** Bu pass’te IMG/DICOM/PACS evidence **eklenmedi** (görülmedi).
+
+---
+
+### TBD / NOT OBSERVED (PARTIAL — competitor’da varmış gibi yazılmaz)
+
+Gerçek Xray request lifecycle · status enum/grouping · result/detail screen · image upload/attachment · DICOM · PACS handoff · viewer · radiology report · interpretation fields · annotations · image count/series · modalities · Xray device integration · usable Xray Test Group in reviewed clinic · billing · delete dependency · print/download/share · SmartVette semantics · Test Grup Panel meaningfulness for Xray · Laboratuvar/Cihaz catalog filtering · patient save → global queue.
+
+**NOT:** [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül) ayrı operasyon yüzeyi; PACS kanıtı Xray **PARTIAL** durumunu **değiştirmez**.
+
+---
+
+## Global Pacs İstekleri (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29).
+
+**Characterization:** Patient-context PACS request surface, populated global worklist, **CR** external viewer handoff and real image viewing were validated. Reviewed **US** records existed in the worklist but returned **“Pacs Görüntüsü mevcut değil..”**; the cause remains **unresolved** (CLOSED = planned visual/product workflow review completed — **not** full integration semantics).
+
+**Distinction vs Xray:** **Xray İstekleri** and **Pacs İstekleri** are **separate** global modules. Xray remains **[PARTIAL](#global-xray-i̇stekleri-partial)**; PACS evidence does **not** close Xray.
+
+**Diagnostic surfaces synthesis (UI level, backend iddiası yok):** En az üç ayrı operasyon yüzeyi — **Lab İstekleri** · **Xray İstekleri** · **Pacs İstekleri** — **shared patient-context navigation** (**Lab & Xray & Pacs**) altında; PACS tarafı gerçek imaging study/viewer continuity gösterirken Xray request/configuration incelenen klinikte doğrulanamadı.
+
+---
+
+### Global PACS worklist
+
+**OBSERVED — giriş:** Sol menü **Pacs İstekleri**; breadcrumb **Anasayfa > Pacs İstekleri**.
+
+**NOT OBSERVED:** Global **Yeni Kayıt** butonu.
+
+**OBSERVED — filtreler:** Tarih Aralığı · Arama Metni · Ara · Temizle.
+
+**OBSERVED — kolonlar:** İstek Tarihi · İstek No · **Modalite** · Adı · Müşteri · Hasta · Veteriner · **İncele**.
+
+**OBSERVED:** Reviewed account contained a **large populated PACS history/worklist** (exact count **not** treated as product spec).
+
+**INFERRED:** Merkezi **operational worklist / imaging history** — global create yüzeyi **gözlemlenmedi** (patient-context create — aşağıda).
+
+---
+
+### Modalities
+
+**OBSERVED — Modalite values (same list surface):** at least **CR** and **US**.
+
+**OBSERVED — anatomy/procedure-oriented `Adı` examples (generic, no PII):**
+
+| Modalite | Örnek `Adı` kategorileri |
+|---|---|
+| **CR** | ABDOMEN - FVS · ARKA EXTREMITE - FVS · GOGUS - FVS · KAFATASI - FVS · ON EXTREMITE - FVS · SIRT EXTREMITE - FVS |
+| **US** | ABDOMEN |
+
+**OBSERVED:** PACS worklist can show **different imaging modalities** on one list surface.
+
+**NOT inferred:** universal modality support · all DICOM modalities · modality-neutral backend architecture.
+
+---
+
+### Patient-context — Yeni Pacs İstek
+
+**OBSERVED yol:** **Lab & Xray & Pacs → Pacs Geçmişi → `+`** → **Yeni Pacs İstek**.
+
+**OBSERVED alanlar:** İstek Tarihi · Veteriner · **Pacs Grubu** · SmartVette İzin Ver · İstek Nedeni · Açıklama · **Kaydet**.
+
+**OBSERVED:** Create form opens from **patient context**; global **Yeni Kayıt** **not** observed.
+
+**NOT LIVE-VERIFIED:** **Kaydet** · save → global PACS queue appearance · viewer availability after new request · downstream acquisition lifecycle.
+
+---
+
+### PACS Group catalog
+
+**OBSERVED — `Pacs Grubu` dropdown:** populated.
+
+**OBSERVED örnek gruplar (configuration labels, no PII):**
+
+**CR:** CR - ABDOMEN - FVS · CR - ARKA EXTREMITE - FVS · CR - GOGUS - FVS · CR - KAFATASI - FVS · CR - ON EXTREMITE - FVS · CR - SIRT EXTREMITE - FVS
+
+**US:** US - ABDOMEN · US - CARDIOLOGY
+
+**OBSERVED:** PACS request creation exposes a **modality/anatomy-purpose oriented** configured group catalog.
+
+**NOT VERIFIED:** configuration admin screen · modality/device mapping · AE Title · DICOM node · worklist mapping · billing mapping.
+
+---
+
+### SmartVette İzin Ver
+
+**OBSERVED** on patient PACS form (also on Lab/Xray request forms — **TBD** exact semantics / integration behavior).
+
+---
+
+### CR → external PACS viewer handoff
+
+**OBSERVED (live):** Global PACS list, **Modalite = CR** row → **İncele** → E-Vet UI **separate browser tab/context** → **Fujifilm Synapse Mobility** web viewer.
+
+**OBSERVED:** **External PACS viewer handoff**; **CR** radiographic images **displayed successfully**.
+
+**NOT inferred / TBD:** E-Vet native image storage · E-Vet as DICOM server · API/protocol (DICOMweb/WADO/QIDO/STOW) · SSO/token · iframe embed · exact integration mechanism.
+
+---
+
+### Fujifilm Synapse Mobility — viewer observations
+
+**OBSERVED — structure/navigation:** study/worklist side · modality/date filter UI · multiple image/series-like entries under a study · thumbnail/image navigator · **side-by-side multi-image** layout · radiographic images.
+
+**OBSERVED — toolbar:** rich diagnostic imaging toolbar (navigation/pan/zoom-like · measurement/drawing-like icons · layout/view · window/level-like · series/image navigation).
+
+**NOT VERIFIED per control:** exact annotation tools · export · download · print · share · persistable measurements/annotations (icon appearance alone **does not** imply behavior).
+
+**Characterization:** **External viewer exposes a rich diagnostic imaging toolbar.**
+
+---
+
+### DICOM-style metadata (external viewer)
+
+**OBSERVED — overlay/metadata fields (examples):** Görüntü Tipi · Erişim Numarası · Seri Numarası · Görüntü Numarası · Seri Tarihi · Modalite (**CR**) · institution/clinic text.
+
+**Characterization:** **DICOM-style metadata visible in the external viewer** (Synapse).
+
+**NOT inferred:** E-Vet parses/stores DICOM metadata (display may be **viewer-side**).
+
+---
+
+### US records — image unavailable
+
+**OBSERVED:** Global list contains **Modalite = US** rows.
+
+**OBSERVED (live, multiple US samples):** **İncele** → message **“Pacs Görüntüsü mevcut değil..”** (all reviewed US examples).
+
+**Characterization:** US request/worklist **metadata was present**, but reviewed US records did **not** provide an accessible PACS image.
+
+**NOT written as product defect:** “E-Vet cannot do ultrasound” · “Synapse lacks US” · “US integration broken” · “US not stored”.
+
+**TBD — possible explanations (inference only, not root cause):** image never associated · historical/migrated data · unavailable/deleted study · mapping/access issue.
+
+---
+
+### Request metadata ≠ accessible imaging study
+
+**OBSERVED:** US rows exist in worklist while **İncele** reports no accessible image — **PACS request/history metadata record ≠ accessible imaging study**.
+
+**VETINITY IMPLICATION:** Where possible, separate **request/study metadata** from **image availability** in product UX (e.g. evaluate explicit feedback such as görüntü mevcut · görüntü bekleniyor · görüntü erişilemiyor — **design evaluation**, not implementation decision).
+
+---
+
+### Observed limitation / unresolved behavior (CLOSED scope)
+
+Reviewed **US** PACS list entries → **“Pacs Görüntüsü mevcut değil..”** on **İncele**; **root cause unresolved** (does **not** downgrade module to PARTIAL for this pass).
+
+---
+
+### VETINITY IMPLICATION (PACS pass)
+
+- Patient-context create + global populated imaging worklist + **external viewer handoff** continuity değerlendirilebilir ([ADR-007](../decisions/ADR-007-imaging-module.md) — imaging ≠ generic file; **karar değil**).
+- **Image availability state** ayrı gösterim (US observation).
+- **Xray** vs **PACS** ayrı modül/yüzey olarak benchmark edilmeli; kanıtları birleştirme.
+
+**Backlog cross-ref (this pass):** [IMG-001](../backlog/feature-backlog.md#img-001--görüntüleme-kayıtları) · [IMG-005](../backlog/feature-backlog.md#img-005--dicom-desteği-araştırması) — conservative E-Vet notes added where exact semantic match.
+
+---
+
+### TBD / NOT OBSERVED (CLOSED ≠ all verified)
+
+PACS Group admin/configuration · exact DICOM protocol · DICOMweb · modality worklist integration · AE Title · device acquisition · upload/import · image↔request association mechanics · CR acquisition lifecycle · US missing-image root cause · reporting/radiologist workflow · report signing · persisted annotations/measurements · export/download/print/share · image/study delete · audit · permissions · billing · patient save → global queue · SmartVette semantics.
+
+---
+
 ## Hospitalizasyon geçmişi
 
 *(Hasta kartı — patient-scoped; Patient Card review kapsamında CLOSED.)*
@@ -1374,6 +1962,50 @@ Doğrudan Satış navigation · Doğrudan Satış Müşterisi walk-in context ·
 
 - barcode exact scan semantics · selected depot vs product-result depot anomaly · FEFO/FIFO enforcement · lot/batch support · Seri No creation/source · Kopyala exact behavior · invoice / 3-copy / Bilgi Fişi details · SMS from sale history · delete persistence (hard/soft) · sale delete stock reversal · audit/event history on delete · e-Fatura/e-SMM linked delete guard · other financial relation delete guards · registered-customer blue-save/balance (**VIDEO OBSERVED**, live UI) · e-Fatura walk-in exact legal/system rules · line document icon semantics · stopaj calculation · POS/bank integration
 
+### Global Muayene Odası — REVIEWED / CLOSED
+
+Planlanan global Muayene Odası batch **incelendi** (2026-09-28; tekrar inceleme gerekmez):
+
+Muayene Odası navigation · global worklist · filtreler · kolonlar · assignee gruplama · Muayene Odası Tanımlama · record state Aktif/Pasif · workflow Beklemede/Tamamlandı · inline iki yönlü toggle · Yönlendir modal · routing live test (Dış Klinik → Hasta Odası) · delete confirmation UI
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- delete persistence / hard-soft delete · routing history / audit trail · routing notification · assignee dropdown exact semantics · Aktif/Pasif backend/domain anlamı · hidden workflow states · multi-user concurrency / queue ownership · SLA / wait-time · routing reason/history · backend ilişki clinical examination record ↔ worklist entry
+
+### Global Lab İstekleri — REVIEWED / CLOSED
+
+Planlanan global Lab İstekleri batch **incelendi** (2026-09-28; tekrar inceleme gerekmez):
+
+Lab İstekleri navigation · global worklist (no global create) · filtreler · kolonlar · status grouping Beklemede/Tamamlandı · date sort within groups · patient Lab Geçmişi + Yeni Lab İstek form · Test Grubu/Panel · Hasta Durumu · SmartVette İzin Ver field · Lab Sonuçları detail · status enum incl. İşleniyor · structured analyte grid · reference ranges · completed-with-empty-values observation · inline expand · row actions (edit/download/print/barcode/WhatsApp/email/delete) · email validation · DataVet analyte modal · status filter gap observation
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- panel auto-add · test population on group select · SmartVette semantics · global İşleniyor group · populated completed UI · abnormal flags · output formats · Test Sayısı meaning · DataVet integration beyond content · reference derivation · delete persistence · share logging · lab billing · specimen model · analyzer/LIS architecture · patient-context lab request save → global worklist appearance
+
+### Global Xray İstekleri — PARTIAL (CLOSED değil)
+
+Planlanan global Xray + Test Grubu Tanımı batch **kısmen incelendi** (2026-09-29):
+
+Xray İstekleri navigation · global worklist shell (no global create) · filtreler/kolonlar · empty worklist in searched range · patient Xray Geçmişi + Yeni Xray İstek form · Test Grubu empty · Test Grup Panel populated (lab panel names) · Test Grupları > Test Grubu Tanımı · Tür Lab/Röntgen · Test Tipi catalog behavior · Serbest Parametreli · Laboratuvar/Cihaz fields when Tür=Röntgen · test kalem required validation (save blocked)
+
+**TBD / NOT OBSERVED** (PARTIAL — CLOSED **yapılmaz**):
+
+- gerçek request save · global queue appearance · status/result lifecycle · imaging upload/DICOM/PACS/viewer · radiology report · Xray-specific device catalog rules · SmartVette semantics · configured Xray Test Group in reviewed clinic · billing · share/print/download
+
+### Global Pacs İstekleri — REVIEWED / CLOSED
+
+Planlanan global PACS batch **incelendi** (2026-09-29; tekrar inceleme gerekmez):
+
+Pacs İstekleri navigation · populated global worklist (no global create) · filtreler/kolonlar incl. Modalite · CR and US modalities · patient Pacs Geçmişi + Yeni Pacs İstek form · Pacs Grubu catalog (CR/US groups) · SmartVette field · CR **İncele** → Fujifilm Synapse Mobility external viewer · real CR images · study/series/image navigation · DICOM-style metadata in viewer · rich viewer toolbar (behaviors partly NOT VERIFIED) · US **İncele** → “Pacs Görüntüsü mevcut değil..” (reviewed samples)
+
+**Observed limitation / unresolved (CLOSED’ı engellemez):**
+
+- reviewed US records: no accessible image on **İncele** · root cause **TBD**
+
+**TBD / NOT OBSERVED** (CLOSED kapsamını **engellemez**):
+
+- PACS group admin · DICOM/integration protocol · acquisition/upload association · save → global queue · reporting/signing · annotation persistence · export/print/share/delete · billing · SmartVette semantics
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
@@ -1381,8 +2013,10 @@ Doğrudan Satış navigation · Doğrudan Satış Müşterisi walk-in context ·
 | **Hospitalizasyon** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) |
 | **Takvim** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Takvim (modül)](#global-takvim-modül) |
 | **Doğrudan Satış** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül); [Yeni Ziyaret > Satış](#yeni-ziyaret) ayrı yüzey |
-| **Muayene Odası** | **PARTIAL / NOT SYSTEMATIC** | **Sıradaki ana hedef** ([Next Review Queue](#next-review-queue)); patient muayene reviewed |
-| **Lab / Xray / Pacs İstekleri** (global kuyruk) | **PARTIAL / NOT SYSTEMATIC** | Patient history/new request reviewed |
+| **Muayene Odası** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Muayene Odası (modül)](#global-muayene-odası-modül); patient muayene geçmişi ayrı (Hasta Kartı **CLOSED**) |
+| **Lab İstekleri** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül); patient Lab Geçmişi (Hasta Kartı **CLOSED**) |
+| **Xray İstekleri** (global kuyruk) | **PARTIAL** (2026-09-29) | Bkz. [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); current clinic: no request rows / no selectable Xray Test Grubu; result lifecycle **not validated** |
+| **Pacs İstekleri** (global modül) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül); US image unavailable on reviewed samples — limitation documented |
 | **HBS** | NOT REVIEWED | |
 | **VKY** | NOT REVIEWED | |
 | **e-Fatura / e-SMM** | PARTIAL | Nav + patient finans alanları |
@@ -1411,11 +2045,11 @@ Doğrudan Satış navigation · Doğrudan Satış Müşterisi walk-in context ·
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül))
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
 3. ~~Doğrudan Satış~~ — **CLOSED** ([Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül))
-4. **Muayene Odası** — **NEXT**
-5. Lab İstekleri
-6. Xray İstekleri
-7. Pacs İstekleri
-8. Rapor
+4. ~~Muayene Odası~~ — **CLOSED** ([Global Muayene Odası (modül)](#global-muayene-odası-modül))
+5. ~~Lab İstekleri~~ — **CLOSED** ([Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül))
+6. ~~Xray İstekleri~~ — **PARTIAL** ([Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); result lifecycle incelenen klinikte doğrulanamadı — **CLOSED değil**)
+7. ~~Pacs İstekleri~~ — **CLOSED** ([Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül))
+8. **Rapor** — **NEXT**
 9. Stok
 10. Finansal
 11. Ürün
@@ -1469,7 +2103,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; **Hasta Kartı**, **Global Hospitalizasyon**, **Global Takvim** ve **Global Doğrudan Satış** **REVIEWED / CLOSED**. Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; **Hasta Kartı**, **Global Hospitalizasyon**, **Global Takvim**, **Global Doğrudan Satış**, **Global Muayene Odası**, **Global Lab İstekleri** ve **Global Pacs İstekleri** **REVIEWED / CLOSED**; **Global Xray İstekleri** **PARTIAL** (2026-09-29). Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
