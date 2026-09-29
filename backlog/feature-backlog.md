@@ -210,7 +210,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001 |
-| **Notlar** | Ödeme, randevu, muayene, aşı raporları kategoriler altında. **Reports Module:** DaySmart 9 category catalog (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan) — predefined reports not generic builder — → [daysmart.md](../competitors/daysmart.md#reports-dashboard) |
+| **Notlar** | Ödeme, randevu, muayene, aşı raporları kategoriler altında. **Reports Module:** DaySmart 9 category catalog (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan) — predefined reports not generic builder — → [daysmart.md](../competitors/daysmart.md#reports-dashboard). **E-Vet SMART (2026-09-29):** Üst menü **Rapor** altında kategorize predefined report catalog — Genel, Randevu, Resmi, Depo, Finansal (+ Rapor Özellikleri layout/print config); custom report builder gözlemlenmedi — → [e-vet.md](../competitors/e-vet.md#rapor) |
 
 ### REPORT-003 — Rapor favorileri
 
@@ -258,7 +258,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001 |
-| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** As Of, range period, location, provider/staff, date range — report-specific subset — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior) |
+| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** As Of, range period, location, provider/staff, date range — report-specific subset — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART (2026-09-29):** Rapor ekranlarında sol report-specific filtre paneli + sağ print-oriented report preview shell; filtre seti rapora göre değişiyor — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
 ### REPORT-006 — Claim bazlı rapor görünürlüğü
 
@@ -274,7 +274,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001 |
-| **Notlar** | Gelecekte değerlendirilecek |
+| **Notlar** | Gelecekte değerlendirilecek. **E-Vet SMART (2026-09-29):** **Laboratuvar Test Sayısı Raporu** menüde görünür; reviewed account navigasyon sonrası **403** — page/report-level access enforcement observed; exact role/permission model ve permission administration UI **not verified**. Depo altındaki dört rapor için kullanıcı erişim engelini doğruladı; ayrı 403 ekranı gözlemlenmedi — → [e-vet.md](../competitors/e-vet.md#rapor--open--access-limited-items) |
 
 ### REPORT-007 — Excel/PDF dışa aktarma politikası
 
@@ -290,7 +290,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
-| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler) |
+| **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler). **E-Vet SMART (2026-09-29):** Rapor ekranlarında shared shell — print-oriented preview + **Pdf** dropdown + download-like action + **Yazdır...**; Excel/CSV support not observed — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
 ---
 

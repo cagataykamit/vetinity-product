@@ -17,6 +17,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Global Lab İstekleri modülü** — lab worklist, patient-context request creation, structured results **REVIEWED / CLOSED** (2026-09-28); [kapsam](#global-lab-i̇stekleri-modül) ve [tracker](#review-tracker).
 - **Global Xray İstekleri** — request/configuration yüzeyleri **PARTIAL** (2026-09-29); [kapsam](#global-xray-i̇stekleri-partial) ve [tracker](#review-tracker).
 - **Global Pacs İstekleri modülü** — populated worklist, CR/US modalities, external Fujifilm Synapse Mobility viewer handoff **REVIEWED / CLOSED** (2026-09-29); [kapsam](#global-pacs-i̇stekleri-modül) ve [tracker](#review-tracker).
+- **Rapor (üst domain)** — Rapor Özellikleri, Genel, Randevu, Resmi, Depo, Finansal **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti ve yetki sınırları içinde; ACCESS-BLOCKED alt raporlar explicit); [kapsam](#rapor) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** tam Stok/Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -34,6 +35,13 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Global Lab İstekleri modülü** | **REVIEWED / CLOSED** (2026-09-28) |
 | **Global Xray İstekleri** | **PARTIAL** (2026-09-29) |
 | **Global Pacs İstekleri modülü** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor Özellikleri** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor → Genel** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor → Randevu** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor → Resmi** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor → Depo** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Rapor → Finansal** | **REVIEWED / CLOSED** (2026-09-29) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -70,7 +78,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED) |
 
 ---
 
@@ -1678,18 +1686,40 @@ Hukuki metinler Vetinity requirement **olarak kopyalanmaz**; kişisel veri örne
 
 ---
 
-## Rapor navigation
+## Rapor
 
-**OBSERVED — ana gruplar:**
+**Review status (üst domain):** **REVIEWED / CLOSED** (2026-09-29).
 
-- Genel
-- Randevu
-- Resmi
-- Depo
-- Finansal
-- Rapor Özellikleri
+| Kategori | Status |
+|---|---|
+| Rapor Özellikleri | **REVIEWED / CLOSED** |
+| Rapor → Genel | **REVIEWED / CLOSED** |
+| Rapor → Randevu | **REVIEWED / CLOSED** |
+| Rapor → Resmi | **REVIEWED / CLOSED** |
+| Rapor → Depo | **REVIEWED / CLOSED** |
+| Rapor → Finansal | **REVIEWED / CLOSED** |
+| **Rapor overall** | **REVIEWED / CLOSED** |
 
-**OBSERVED — Rapor > Genel:**
+**CLOSED anlamı:** Mevcut **erişilebilir ekran seti ve yetki sınırları içinde** competitor review tamamlandı. **“Her raporun içeriği gözlemlendi” anlamına gelmez.** ACCESS-BLOCKED alt raporlar (bkz. [Rapor — Open / access-limited items](#rapor--open--access-limited-items)) kategori closure’ını bozmaz. E-Vet genel review **IN PROGRESS** kalır.
+
+**Privacy:** Gerçek müşteri/hasta/GSM/kimlik/finansal toplamlar dokümana taşınmadı; yalnızca alan adı, yapı ve capability.
+
+---
+
+### Report navigation / inventory
+
+**OBSERVED — üst menü `Rapor` ana kategoriler:**
+
+- Genel *(detay — [Rapor → Genel](#rapor--genel-reviewed--closed))*
+- Randevu *(detay — [Rapor → Randevu](#rapor--randevu-reviewed--closed))*
+- Resmi *(detay — [Rapor → Resmi](#rapor--resmi-reviewed--closed))*
+- Depo *(detay — [Rapor → Depo](#rapor--depo-reviewed--closed))*
+- Finansal *(detay — [Rapor → Finansal](#rapor--finansal-reviewed--closed))*
+- Rapor Özellikleri *(detay — [Rapor Özellikleri](#rapor-özellikleri))*
+
+**OBSERVED:** Geniş rapor menü ağacı; çok sayıda hazır (predefined) rapor. Custom report builder **gözlemlenmedi**.
+
+**OBSERVED — Rapor > Genel (menü envanteri):**
 
 - Müşteri Listesi
 - Hasta Listesi
@@ -1734,10 +1764,10 @@ Hukuki metinler Vetinity requirement **olarak kopyalanmaz**; kişisel veri örne
 - Ürün Listesi
 - Aktif Stok
 - Gelecek Aşılar
-- Hareket Olmayan Ürünler
-- Stok Analiz
-- ABC Analizi (Ürün Bazlı) – Pareto Prensibi
-- ABC Analizi (Ürün Tipi Bazlı) – Pareto Prensibi
+- Hareket Olmayan Ürünler *(ACCESS-BLOCKED / NOT OBSERVED)*
+- Stok Analiz *(ACCESS-BLOCKED / NOT OBSERVED)*
+- ABC Analizi (Ürün Bazlı) – Pareto Prensibi *(ACCESS-BLOCKED / NOT OBSERVED)*
+- ABC Analizi (Ürün Tipi Bazlı) – Pareto Prensibi *(ACCESS-BLOCKED / NOT OBSERVED)*
 
 **OBSERVED — Rapor > Finansal alt grupları:**
 
@@ -1780,7 +1810,375 @@ Hukuki metinler Vetinity requirement **olarak kopyalanmaz**; kişisel veri örne
 - Günlük İşlem Dökümü
 - Gider Türü Dağılım Raporu
 
-**TBD:** Rapor ekranlarının filtreleri, kolonları, export davranışı, hesaplama semantiği ve drill-down davranışı (bu pass'te yalnızca navigation isimleri gözlemlendi).
+*(Menü görünürlüğü içerik incelemesi anlamına gelmez; ekran bazlı durum aşağıdaki kategori bölümlerinde.)*
+
+---
+
+### Shared report presentation shell
+
+**OBSERVED (Genel pass — tekrarlayan UI):**
+
+- Sol: rapora özel filtreler
+- Sağ: document/report **preview**
+- Üst sağ: **Pdf** dropdown · download/cloud-like action · **Yazdır...**
+
+**Characterization:** **Shared report presentation shell** — filter → preview → export/download/print.
+
+**OBSERVED (Rapor genel):** Kategorize **predefined report catalog** (üst menü); bazı raporlar tablo, bazıları chart, bazıları tablo + chart; bazı raporlarda sayfalama; filtre seti rapora göre değişiyor.
+
+**NOT inferred:** Tek generic report engine / backend architecture (shell aynı görünse de).
+
+---
+
+### Rapor Özellikleri
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29).
+
+**OBSERVED — ekran:** **Rapor Özellik Listesi**.
+
+**OBSERVED (reviewed account):** ~92 report property definition; tablo kolonları en az **İşlemler** · **Adı**; satır aksiyonu **İşlemler → Düzenle**.
+
+**OBSERVED — örnek düzenleme (`Alış Faturası`):** **Rapor Özellik Tanımı** alanları — Yukarıdan/Alttan/Sağdan/Soldan Ayırma · **Satır Sayısı** · **Antetli Kağıt Yolu** · Dosya Seç · **Kaydet**.
+
+**Characterization:** İncelenen Rapor Özellikleri ekranında custom report builder gözlemlenmedi; rapor bazında **output/layout/print template** (margins, satır sayısı, antetli kağıt asset) ayarları.
+
+**NOT OBSERVED:** custom SQL/query builder · kolon seçme builder · formula builder · chart designer · dynamic report creation · per-report permissions UI · filter schema editor.
+
+**TBD:** URL’de report-specific code parametresi (backend semantics **iddia edilmez**).
+
+---
+
+### Rapor → Genel (REVIEWED / CLOSED)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29). **15/16** rapor içerik olarak incelendi; **Laboratuvar Test Sayısı Raporu** **ACCESS-BLOCKED** (aşağıda).
+
+| # | Rapor | Status |
+|---|---|---|
+| 1 | Müşteri Listesi | **REVIEWED** |
+| 2 | Hasta Listesi | **REVIEWED** |
+| 3 | İstatistik | **REVIEWED** |
+| 4 | Hasta Veri İstatistiği | **REVIEWED** |
+| 5 | Sahiplenme Listesi | **REVIEWED** |
+| 6 | Çiftleştirilecek Hastalar | **REVIEWED** |
+| 7 | Takipteki Hastalar | **REVIEWED** |
+| 8 | Hospitalizasyon Listesi | **REVIEWED** |
+| 9 | Ziyaret Geçmişi | **REVIEWED** |
+| 10 | Ziyarete Gelmeyen Müşteriler | **REVIEWED** |
+| 11 | Z. Gelmeyen Müşteri Detaylı | **REVIEWED** |
+| 12 | Test Sonuç Karşılaştır | **REVIEWED** |
+| 13 | Anket Sonuçları | **REVIEWED** |
+| 14 | Bugün Uygulanacak Tedaviler | **REVIEWED** |
+| 15 | En Yoğun Dönemler | **REVIEWED** |
+| 16 | Laboratuvar Test Sayısı Raporu | **ACCESS-BLOCKED / NOT OBSERVED** |
+
+#### Müşteri Listesi
+
+**OBSERVED filters:** Müşteri Grubu · Durum (default **Aktif**) · Ülke · Şehir · İlçe · Köy - Mahalle (geniş ülke kataloğu).
+
+**OBSERVED columns (en az):** Müşteri · Kayıt · Grup · Kimlik No · Gsm · Email · İlçe · Köy/Mah. · Borç · Ödeme.
+
+**OBSERVED:** Bazı filtre kombinasyonları **0** sonuç. **NOT OBSERVED:** drill-down.
+
+#### Hasta Listesi
+
+**OBSERVED filters:** Müşteri · Hasta Türü · Irk · Hasta Grubu · Yaş Aralığı Min/Max.
+
+**OBSERVED layout:** Müşteri-level header/row + altında hasta detail.
+
+**OBSERVED patient columns (en az):** Hasta Adı · Protokol · Tür · Hasta Irkı · Cinsiyet · Doğum Tarihi · Kayıt Tarihi.
+
+**OBSERVED summary:** Filtrelenen Hasta Sayısı · Toplam Hasta Sayısı. *(Gerçek isim/protokol dokümana taşınmadı.)*
+
+#### İstatistik
+
+**OBSERVED filter:** Tarih Aralığı.
+
+**OBSERVED:** Summary **KPI document** (tablo/list değil) — gruplar **Müşteri** / **Hasta** / **Genel** (Yeni/Toplam/Yeni Oranı %, Ortalama Ziyaret Sayısı/Tutarı, Ortalama Uygulanan Aşı Sayısı; Genel: Uygulanan Aşı, Toplam Aşı, Uygulanan Aşı Oranı %). **NOT OBSERVED:** chart/dashboard/drill-down. *(Klinik KPI sayıları dokümana taşınmadı.)*
+
+#### Hasta Veri İstatistiği
+
+**NOT OBSERVED:** görünür filtre.
+
+**OBSERVED overview:** Aktif · Pasif + Ölü · Toplam.
+
+**OBSERVED distributions:** Tür/Cinsiyet/Irk bazında Aktif/Pasif — pie charts + % labels; ırk listesi geniş kategori/count formatında da.
+
+**Characterization:** **Patient population segmentation/distribution analytics**.
+
+#### Sahiplenme Listesi
+
+**OBSERVED filters:** Hasta Türü · Irk · Cinsiyet (Dişi/Erkek/Kısır/Kısırlaştırılmış…/Bilinmiyor).
+
+**OBSERVED dependency:** Tür seçilmeden Irk **Kayıt bulunamadı**; Köpek seçilince köpek ırkları — **tür→ırk dependent filter**.
+
+**OBSERVED output title:** `SAHİPLENDİRİLMEK İSTENEN HASTA LİSTESİ`. Columns: Sahip · Gsm · Hasta · Tür · Irk · Cinsiyet · Doğum Tarihi. Pagination.
+
+**OBSERVED — report failure (filter scenario):** Hasta Türü = Köpek · Irk = Golden Retriever → UI’da ham teknik mesaj: `The conversion of the varchar value '1024371' overflowed an INT2 column. Use a larger integer column.` → report generation **failed**; internal/database-style error **end user’a exposed**.
+
+**OBSERVED — recovery:** Irk kaldırılıp yalnız Köpek → report **başarılı**.
+
+**NOT inferred:** Schema/table root cause · “report tamamen bozuk”.
+
+**VETINITY IMPLICATION:** Unexpected report errors → user-safe feedback + server-side logging; raw DB exception text **surface edilmemeli**.
+
+#### Çiftleştirilecek Hastalar
+
+**OBSERVED filters:** Hasta Türü · Irk · Cinsiyet. Title: `ÇİFTLEŞTİRİLMEK İSTENEN HASTA LİSTESİ`. Aynı column family; **Toplam Kayıt Sayısı**. İncelenen kombinasyon **0** sonuç. **NOT OBSERVED:** mating flag/workflow source.
+
+#### Takipteki Hastalar
+
+**OBSERVED filters:** Hasta Türü · Irk · Cinsiyet. Title: `TAKİPTEKİ HASTA LİSTESİ`. Columns aynı family; **Toplam Kayıt Sayısı**. İncelenen örnek **0** sonuç. **NOT OBSERVED:** “Takipte” state nasıl set edilir.
+
+#### Hospitalizasyon Listesi
+
+**OBSERVED filters:** Tarih Aralığı · Durum (**required**) · Müşteri · Hasta. Boş Durum → `Bu alanın doldurulması zorunludur.`
+
+**OBSERVED Durum:** Yatan Hasta · Taburcu.
+
+**OBSERVED columns (en az):** Sahip Adı · Hasta Adı · Bölüm · Oda · Yatış Tar. · Taburcu Tar. · Yatış Bilgisi · Hosp. Gün · Veteriner. Rows species/category altında grouped; duration text örn. `x gündür bekliyor` benzeri.
+
+**Cross-ref:** [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) ile complementary (Yatan/Taburcu semantics).
+
+#### Ziyaret Geçmişi
+
+**OBSERVED filters:** Tarih Aralığı · Veteriner · Müşteri · Hasta.
+
+**OBSERVED:** `ZİYARET GEÇMİŞİ RAPORU` — header (Hasta Sahibi, Hasta Adı, Veteriner, Tarih) + line items (Ürün, Miat, Birim, Fiyat, Miktar, Toplam, satır/genel indirim, Net, Kdv%, KDV, Genel) + financial summary (KDV’siz Toplam, iskonto toplamları, KDV, Toplam Tutar) + ödeme (Ödeme Tipi, Miktar, Ödenen, Kalan).
+
+**Characterization:** Visit context + billable lines + payment summary (accounting architecture **iddia edilmez**).
+
+#### Ziyarete Gelmeyen Müşteriler
+
+**OBSERVED filters:** Gün · Bakiye >=. Title: `ZİYARETE GELMEYEN MÜŞTERİLER VE SON ZİYARET BİLGİSİ`. Large paginated result (ör. Gün=5). Columns en az: Tarih · Kayıt Tarihi · Müşteri · Gün · Bakiye · Hasta · Toplam · İskonto · indirim alanları + yatay devam.
+
+**Characterization:** Lapsed/inactive client by days since last visit, optional balance floor.
+
+#### Z. Gelmeyen Müşteri Detaylı
+
+**OBSERVED filters:** Gün · Bakiye >=. Title: `ZİYARETE GELMEYEN MÜŞTERİ LİSTESİ VE SON ZİYARET BİLGİSİ`. Per-customer blocks (Gün, Tarih, Müşteri, Bakiye, Hasta, Ziyareti Giren Kişi, financial summary, visit description).
+
+**OBSERVED vs önceki rapor:** önceki = tabular summary; bu = **detailed per-customer presentation**.
+
+#### Test Sonuç Karşılaştır
+
+**OBSERVED filters:** Müşteri · Hasta · Tarih Aralığı · Test Grubu · Test — **required validation** (Müşteri sonrası boş alanlar için Hasta/Test Grubu/Test uyarıları).
+
+**OBSERVED:** Müşteri → hasta → test grubu → analyte seçimi; output `TEST SONUÇLARI KARŞILAŞTIRMA` + **chart**.
+
+**OBSERVED:** Longitudinal comparison **surface** exists.
+
+**NOT VERIFIED:** Seçilen aralıkta görünür multi-date trend noktaları · reference-range overlay · abnormal flags · cross-test semantics (incelenen sorguda chart’ta belirgin data point **gözlemlenmedi**).
+
+#### Anket Sonuçları
+
+**NOT OBSERVED:** filtre. Title: `Anket Sonuçları`. Hierarchy: survey → section → questions; her soruda Şık · Sayı · Oran(%) · Cevap aggregates.
+
+**Characterization:** Aggregate survey results reporting (survey creation workflow **not inferred**).
+
+#### Bugün Uygulanacak Tedaviler
+
+**NOT OBSERVED:** filtre. Title: `Bugün Uygulanacak Tedaviler`. Sections: Müşteri · Hasta · Açıklama · Ürün · Miktar · Birim · Toplam. İncelenen anda satır **gözlemlenmedi**.
+
+**Characterization:** Daily operational treatments report — full treatment-plan lifecycle **not inferred**.
+
+#### En Yoğun Dönemler
+
+**OBSERVED filters:** Tarih Aralığı · İşlem Tipi · Veteriner · Personel.
+
+**OBSERVED metrics (en az):** **Ziyaret/Satış**, **Tamamlanan Randevu**, **Muayene** — each: Toplam · Ortalama · En Yoğun · En Sakin.
+
+**OBSERVED visualization:** Aylık **multi-series bar chart** (değerler ay bazında; klinik-specific sayılar dokümana taşınmadı).
+
+**Characterization:** Period-based **operational workload/activity analytics**.
+
+#### Laboratuvar Test Sayısı Raporu
+
+**Status:** **ACCESS-BLOCKED / NOT OBSERVED**.
+
+**OBSERVED:** Menüde görünür; navigasyon sonrası **403 – Erişim reddedildi!** / `Bu sayfaya erişim yetkiniz bulunmamaktadır.`
+
+**OBSERVED:** Page/report-level **access enforcement**; reviewed account **yetkisiz**.
+
+**NOT inferred:** Role model · permission schema · hangi rol verir.
+
+**UX observation (bug iddiası değil):** Menü görünür kalıyor; tıklayınca 403 — discoverability/permission UX adayı.
+
+**NOT OBSERVED:** filters · columns · metrics (içerik erişilemedi).
+
+---
+
+### Rapor → Randevu (REVIEWED / CLOSED)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29). Menü: Yapılacak İşler · Yapılacak Aşı Çizelgesi · Yapılan Aşı Çizelgesi (rapor başlıkları menü adından farklı görünebilir: “Ay Bazında … Aşı Randevu Çizelgesi”).
+
+#### Yapılacak İşler
+
+**OBSERVED filters:** Tarih Aralığı · Görev Tipi · Veteriner · coğrafi filtreler (Ülke/Şehir/İlçe vb.).
+
+**OBSERVED:** Görevler personel/veteriner ve **görev türüne göre gruplanabiliyor**; aşılama ve kontrol muayenesi gibi iş türleri görülebiliyor.
+
+#### Ay Bazında Yapılacak Aşı Randevu Çizelgesi
+
+**OBSERVED:** Tarih Aralığı filtresi · satırlarda **aşı paketleri** · sütunlarda **ayın günleri** · hücrelerde yapılacak randevu/adet dağılımı (**matrix**).
+
+#### Ay Bazında Yapılan Aşı Randevu Çizelgesi
+
+**OBSERVED:** Aynı **matrix** yaklaşımı; tamamlanan/yapılan aşı randevuları.
+
+**Characterization:** Operational **planning/reporting** evidence.
+
+**NOT inferred:** Takvim task engine ile aynı domain modeli · scheduled vaccine lifecycle · yeni capability/ID gerekliliği.
+
+---
+
+### Rapor → Resmi (REVIEWED / CLOSED)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29). Çoğu rapor **tarih aralığı** ile filtrelenen, **resmi kayıt defteri benzeri / kayıt defteri formatında sunulan print-oriented** çıktı (mevzuatla ilişkili görünebilecek alan/format gözlemi; hukuki geçerlilik veya zorunluluk iddiası yok).
+
+| Rapor | OBSERVED alan/yapı (örnek) |
+|---|---|
+| **Muayene Kayıt Defteri** | muayene tarihi · hasta sahibi bilgileri · hasta bilgileri · şikayet · teşhis vb. klinik kayıt alanları (tablo) |
+| **Aşı Kayıt Defteri** | ticari ad · seri no · son kullanma tarihi · miktar · satın alınan firma · nakil/soğuk zincir ile ilgili kolonlar |
+| **İlaç Kayıt Defteri** | ürün · farmakolojik şekil · takdim şekli · adet/birim/firma |
+| **Reçete Kayıt Defteri** | reçete bilgileri · veteriner · hayvan sahibi · hayvan bilgileri |
+| **Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri** | stok ve sarf hareketlerini resmi kayıt formatında sunan kolon yapısı |
+| **Aşı Bilgi** | tarih · hasta/hasta sahibi · tür · çip no · ürün · seri no · SKT · miktar/fiyat/toplam |
+
+**TBD:** Official veterinary record/report requirements require **independent Turkey regulatory validation**. Bu ekranlar hukuki/mevzuat kapsamı **kanıtı değildir**.
+
+---
+
+### Rapor → Depo (REVIEWED / CLOSED)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29) — erişilebilir raporlar; 4 rapor **ACCESS-BLOCKED** (kullanıcı-doğrulamalı erişim engeli; ayrı 403 ekranı gözlemlenmedi — aşağıda + [access-limited list](#rapor--open--access-limited-items)).
+
+| Rapor | Status | OBSERVED yapı |
+|---|---|---|
+| **Depo Stok Durumu** | REVIEWED | Filtre: Depo · Ürün Tipi · Ürün Grubu · Alt Grubu · Ürün; birden fazla depo. Kolonlar: depo · ürün tipi · ürün · barkod · seri no · SKT · toplam stok · birim · ortalama birim alış maliyeti · alış KDV · toplam alış stok tutarı · birim satış · toplam satış tutarı · **muhtemel kâr**; alt bölümde aggregate totals |
+| **Ürün Alışı** | REVIEWED | tarih · firma · ürün · seri no · SKT · miktar · fiyat · KDV · indirim; ürün/depo/kategori filtreleri |
+| **MS Altına Düşen Ürünler** | REVIEWED | minimum stok altındaki ürünler; depo bazlı stok görünümü |
+| **SKT Geçen Ürünler** | REVIEWED | depo · ürün · miktar · SKT · geçen gün benzeri süre alanı |
+| **SKT Yaklaşan Ürünler** | REVIEWED | kullanıcı **gün eşiği** girer; SKT + kalan gün; birden fazla depo |
+| **Ürün Hareketleri** | REVIEWED | Filtre: tarih · ürün · barkod · satıcı firma · işlem tipi. Alanlar: işlem tarihi · işlem tipi · müşteri · depo · ürün · miat · stok kontrol · birim |
+| **Ürün Listesi** | REVIEWED | Filtre: ürün tipi · grup · alt grup · durum; barkod · alış/satış KDV/fiyat/durum (product master alanları raporlanıyor) |
+| **Aktif Stok** | REVIEWED | Geçmiş **işlem tarihi** seçilebilir · depo · ürün tipi filtreleri; **belirli tarihteki aktif stok snapshot benzeri** rapor yüzeyi |
+| **Gelecek Aşılar** | REVIEWED | Tarih aralığı · toplam aşı · yetersiz stok özeti · aşı paketi bazında mevcut stok / yapılacak / kalan stok karşılaştırması |
+| Hareket Olmayan Ürünler | **ACCESS-BLOCKED / NOT OBSERVED** | — |
+| Stok Analiz | **ACCESS-BLOCKED / NOT OBSERVED** | — |
+| ABC Analizi (Ürün Bazlı) | **ACCESS-BLOCKED / NOT OBSERVED** | — |
+| ABC Analizi (Ürün Tipi Bazlı) | **ACCESS-BLOCKED / NOT OBSERVED** | — |
+
+**NOT inferred:** “Muhtemel kâr” accounting-grade realized profit · Aktif Stok backend historical snapshot implementation · Gelecek Aşılar için otomatik replenishment/sipariş önerisi (**gözlemlenmedi**) · ACCESS-BLOCKED raporların içeriği.
+
+---
+
+### Rapor → Finansal (REVIEWED / CLOSED)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-29). Alt gruplar: Bakiye · Kasa · Satış · Gelir - Gider (+ Günlük İşlem Dökümü). Gerçek tutar/isim/ciro/tahsilat değerleri dokümana **taşınmadı**.
+
+#### A. Receivables / balances
+
+- **Bakiyesi Olan Müşteriler:** filtre — tarih aralığı · müşteri grubu · iletişim tipi · ülke/şehir/ilçe vb.; alanlar — müşteri · son ziyaret · borç · ödeme · bakiye.
+- **Bakiye İndirimi:** tarih · müşteri · iletişim bilgileri · indirim · bakiye.
+- **Yaşlandırma:** müşteri seçimi · borç/ödeme/bakiye özeti · geçmiş faturalar ve kalan tutarlar (invoice/balance history yapısı). **NOT inferred:** klasik aging bucket (30/60/90) yapısı.
+- **Bakiyesi Olan Firmalar:** satıcı firma filtresi ekranı gözlemlendi; **incelenen hesapta firma seçeneği/data bulunmadı** (boşluk ≠ capability yok).
+
+#### B. Cash / bank reporting
+
+- **Günlük Kasa:** gün içi hareketler · açıklama · işlem tipi · nakit / kredi kartı / banka transferi · ödeme toplamı.
+- **Tarihler Arası Kasa:** başlangıç/bitiş tarih-zaman · kullanıcı · devreden bakiye · açık hesap filtreleri · devir/giriş vb. hareket grupları · nakit/kredi kartı/banka transferi/ödeme/açık hesap kolonları.
+- **Tarihler Arası Kasa Son 3 Gün:** benzer kasa hareket raporu; daha kısa tarih penceresi preset/use-case.
+- **Kasa ve Banka Hareketleri:** tarih aralığı · kasa · banka hesabı · devreden bakiye · hesap bazında giriş/çıkış/durum hareketleri.
+
+**NOT inferred:** Accounting ledger architecture.
+
+#### C. Sales
+
+- **Ürün Satışı:** tarih aralığı · ürün tipi/grubu/alt grubu/ürün · veteriner vb. filtreler · depo/ürün bazlı aggregate sales output.
+- **Ürün Satışı (Detaylı):** işlem tarihi · depo · ürün tipi/grubu · ürün · müşteri/hasta ilişkisi · miktar · tutar · indirim; yüksek hacimli **paginated** detay.
+- **Ürün Tipi Bazında Satış:** payment summary (nakit · kredi kartı · havale · toplam) · satış/tahsilat/kalan tahsilat özetleri · ürün tipi bazında **bar chart** + **percentage pie chart** (product-type composition).
+- **Kullanıcı Bazında Satış (Veteriner):** satış toplamı · ödeme toplamı · veteriner bazlı karşılaştırmalı chart; ekranda raporun yalnızca **doğrudan satış ve ziyaret** tutarları/ödemelerini kapsadığına dair açıklama var. **NOT inferred:** genel personel productivity score.
+- **Ürün Tipi Bazında Aylık Satış:** ürün tipleri satır · aylar sütun (**monthly matrix**).
+- **Aylık Satış:** tarih aralığı · ay bazlı **bar chart**.
+
+#### D. Cost / profitability
+
+- **Ürün Tipi Bazında Kâr:** ürün · miktar · birim maliyet · maliyet · satış tutarı · kâr tutarı · kâr oranı.
+- **OBSERVED data-quality note:** Bazı satırlarda maliyet 0 iken kâr tutarı satış tutarına eşit görünebiliyor (competitor report calculation/data-quality evidence). **NOT inferred:** backend formül implementasyonu veya muhasebesel doğruluk.
+- **Ortalama Maliyet:** depo · ürün tipi · ürün · birim · toplam miktar · ortalama net birim fiyat · net toplam benzeri maliyet alanları.
+
+#### E. Collection / revenue
+
+- **Yıllık Tahsilat:** nakit · kredi kartı · havale · iade · toplam ciro summary · aylık chart.
+- **Aylık Tahsilat:** aynı payment-channel summary · daha dar tarih aralığında günlük/periyodik chart.
+
+#### F. Expense / income-expense
+
+- **Gider:** tarih aralığı · klinik gider grubu · klinik gider tipi · tarih/açıklama/ödeme tipi/tutar · toplam / grup toplam / genel toplam.
+- **Gider Türü Dağılım Raporu:** gider grubu/tipi filtreleri · **chart yüzeyi**; incelenen sorguda görünür data olmayabilir (chart capability ≠ data availability).
+- **Yıllık Gelir - Gider:** aylık gelir · gider · kazanç tablosu · aggregate genel toplam · chart alanı.
+
+**NOT inferred:** Sistemin gider takibi yapmadığı (incelenen ekranda giderlerin sıfır olması competitor **data state**).
+
+#### G. Daily transaction audit
+
+- **Günlük İşlem Dökümü:** belirli işlem tarihi · müşteri satış dökümü · müşteri · hasta/direct sale · satış kalemleri · tutar · ödeme · bakiye. **Characterization:** Operational audit / day-closing review evidence.
+
+---
+
+### Rapor — Cross-category synthesis
+
+**Product characterization (Rapor genel):** Kategorize **predefined report catalog**; ortak **filter → print-oriented preview → Pdf/download-like/Yazdır** shell; çoğu rapor document/print-oriented, bazıları chart veya calculated analytics. Aile örnekleri: **operational** (Randevu, Genel listeleri) · **official/record-book** (Resmi) · **inventory** (Depo: expiry, low-stock, movement, purchase, active-stock, future-vaccine demand) · **financial** (receivables, cash/bank, sales, cost/profit, collections, income-expense, daily audit).
+
+**Genel sınıflandırma (detay):**
+
+E-Vet **Genel** raporları en az şu sınıfları gösterir: (1) master/entity lists — Müşteri/Hasta; (2) KPI statistics — İstatistik; (3) population segmentation — Hasta Veri İstatistiği; (4) operational patient lists — Sahiplenme/Çiftleştirme/Takipte/Hospitalizasyon; (5) clinical+commercial detail — Ziyaret Geçmişi; (6) lapsed-client — Ziyarete Gelmeyen (+ detaylı); (7) longitudinal lab chart — Test Sonuç Karşılaştır; (8) survey aggregates — Anket; (9) daily ops — Bugün Uygulanacak Tedaviler; (10) workload analytics — En Yoğun Dönemler; (11) restricted — Lab Test Count **403** in reviewed account.
+
+**OBSERVED tendency:** Çoğu rapor **document/print-oriented** preview; bazıları chart/calculated analytics içerir. Interactive dashboard-first **dominant değil**.
+
+---
+
+### VETINITY IMPLICATION (Rapor — tüm kategoriler)
+
+*(Değerlendirme adayları; mimari/requirement kararı değil — dashboard, custom builder, Excel requirement üretilmez.)*
+
+- **Operational reports** ile **management analytics** birbirinden ayrılabilir; predefined catalog küçük/orta klinikler için güçlü olabilir ([ADR-003](../decisions/ADR-003-report-center.md) bağlam).
+- Rapor filtreleri **domain-aware** olmalı (tür→ırk, Durum zorunlu, depo/ürün grubu vb.); ortak shell ([REPORT-005](../backlog/feature-backlog.md#report-005--ortak-rapor-filtre-çubuğu)) ile uyum değerlendirilebilir.
+- **Report errors:** raw backend/DB exception → user-safe message + server-side logging (Sahiplenme Listesi senaryosu).
+- **Permission UX:** report permissions navigation ile tutarlı olmalı; menüde görünüp 403 dönen raporlar (erişim kontrolü çalışıyor) vs gizleme/disable + açıklama değerlendirilebilir ([REPORT-006](../backlog/feature-backlog.md#report-006--claim-bazlı-rapor-görünürlüğü)).
+- **Print/PDF** çıktıları veteriner iş akışları için değerli ([REPORT-007](../backlog/feature-backlog.md#report-007--excelpdf-dışa-aktarma-politikası) bağlam).
+- **Inventory reporting** yalnız stock-on-hand değil: expiry, low-stock, movement, purchase, active-stock, future-demand gibi operasyonel sorulara da cevap veriyor.
+- **Financial reporting** ayrı karar sorularına cevap veriyor: receivables, collection channels, cash/bank movements, sales, cost/profit, expenses.
+- **Longitudinal clinical comparison** (Test Sonuç Karşılaştır) değeri mevcut Vetinity scope/backlog kontrol edilmeden feature’a çevrilmemeli.
+
+---
+
+### Rapor — Open / access-limited items
+
+**ACCESS-BLOCKED / NOT OBSERVED** (içerik hakkında varsayım yok; kategori closure’ını bozmaz):
+
+| Rapor | Kategori | Status |
+|---|---|---|
+| Laboratuvar Test Sayısı Raporu | Genel | **ACCESS-BLOCKED / NOT OBSERVED** (menüde görünür; **403**) |
+| Hareket Olmayan Ürünler | Depo | **ACCESS-BLOCKED / NOT OBSERVED** |
+| Stok Analiz | Depo | **ACCESS-BLOCKED / NOT OBSERVED** |
+| ABC Analizi (Ürün Bazlı) | Depo | **ACCESS-BLOCKED / NOT OBSERVED** |
+| ABC Analizi (Ürün Tipi Bazlı) | Depo | **ACCESS-BLOCKED / NOT OBSERVED** |
+
+*(403 = page/report-level erişim kontrolü gözlemi; role/claim/report-based model **iddia edilmez**.)*
+
+**Evidence düzeyi ayrımı:**
+
+- **Laboratuvar Test Sayısı Raporu:** 403 ekranı **doğrudan OBSERVED**.
+- **Depo’daki dört rapor** (Hareket Olmayan Ürünler · Stok Analiz · ABC Analizi Ürün Bazlı · ABC Analizi Ürün Tipi Bazlı): kullanıcı canlı sistemde erişim/yetki engeli olduğunu **doğruladı**; bu dört rapor için ayrı 403 ekranı **gözlemlendi/capture edildi iddiası yoktur**.
+
+**Empty-data observations (capability yok değil):** Bakiyesi Olan Firmalar (firma verisi yok) · Gider Türü Dağılım chart (görünür data yok) · Test Sonuç Karşılaştır chart (görünür trend noktası yok) · Bugün Uygulanacak Tedaviler (satır yok) · Çiftleştirilecek/Takipteki Hastalar (0 sonuç).
+
+---
+
+### TBD / NOT OBSERVED (Rapor — kapanış sonrası)
+
+Exact export format list (PDF dışı) · cloud/download icon semantics · Excel/CSV support not observed · scheduled/emailed reports · saved filter presets · custom SQL/query/formula builder / drag-drop designer (**gözlemlenmedi**) · report-level column configuration · role/permission model ve admin UI · row drill-down · chart tooltips/drill-down · caching/refresh timing · multi-clinic aggregation · dashboard home · survey creation workflow · treatment source workflow · Turkey regulatory validation of Resmi reports · ACCESS-BLOCKED rapor içerikleri.
 
 ---
 
@@ -2006,6 +2404,24 @@ Pacs İstekleri navigation · populated global worklist (no global create) · fi
 
 - PACS group admin · DICOM/integration protocol · acquisition/upload association · save → global queue · reporting/signing · annotation persistence · export/print/share/delete · billing · SmartVette semantics
 
+### Rapor — REVIEWED / CLOSED
+
+Rapor üst domain **erişilebilir ekran seti ve yetki sınırları içinde** incelendi (2026-09-29; tekrar inceleme gerekmez). **Anlamına gelmez:** her raporun içeriği gözlemlendi.
+
+| Kategori | Status | Not |
+|---|---|---|
+| Rapor Özellikleri | **REVIEWED / CLOSED** | ~92 definition · layout/print config; custom builder gözlemlenmedi |
+| Rapor → Genel | **REVIEWED / CLOSED** | 15/16 içerik; Lab Test Sayısı **ACCESS-BLOCKED** |
+| Rapor → Randevu | **REVIEWED / CLOSED** | Yapılacak İşler + aşı çizelgeleri (matrix) |
+| Rapor → Resmi | **REVIEWED / CLOSED** | 6 kayıt defteri/bilgi raporu; mevzuat doğrulaması **TBD** |
+| Rapor → Depo | **REVIEWED / CLOSED** | 9 erişilebilir · 4 **ACCESS-BLOCKED** |
+| Rapor → Finansal | **REVIEWED / CLOSED** | Bakiye · Kasa · Satış · Maliyet/Kâr · Tahsilat · Gider · Günlük İşlem Dökümü |
+| **Rapor overall** | **REVIEWED / CLOSED** | E-Vet genel review **IN PROGRESS** |
+
+**ACCESS-BLOCKED / NOT OBSERVED** (kategori closure’ını bozmaz): Laboratuvar Test Sayısı Raporu · Hareket Olmayan Ürünler · Stok Analiz · ABC Analizi (Ürün Bazlı) · ABC Analizi (Ürün Tipi Bazlı) — [detay](#rapor--open--access-limited-items).
+
+**TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** Excel/CSV · scheduled/emailed reports · saved filters · custom builder · role/permission model · drill-down · chart interactions · dashboard home · Turkey regulatory validation.
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
@@ -2025,7 +2441,7 @@ Pacs İstekleri navigation · populated global worklist (no global create) · fi
 | **Nekropsi** | NOT REVIEWED | |
 | **Mobil Uygulamalar** | NOT REVIEWED | |
 | **Katalog / Dokümanlar** | NOT REVIEWED | |
-| **Rapor** (üst domain, sistematik) | **PARTIAL** | Nav isimleri + patient/financial outputs |
+| **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** | **PARTIAL** | Direct Sale pass: Stok Giriş, Alış Faturası (özet), Depo Stok Durumu — [destek](#destekleyici-inceleme--stok-giriş--alış-faturası--depo-stok-durumu-partial); tam menü **NOT REVIEWED** |
 | **Finansal** (üst domain) | **PARTIAL** | Nav + patient ekstre + direct sale ödeme geçmişi (kısmi) |
 | **Ürün** | **PARTIAL** | Direct Sale pass: Ürün Tanımı (destek) — [destek](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil); tam modül **NOT REVIEWED** |
@@ -2049,8 +2465,8 @@ Pacs İstekleri navigation · populated global worklist (no global create) · fi
 5. ~~Lab İstekleri~~ — **CLOSED** ([Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül))
 6. ~~Xray İstekleri~~ — **PARTIAL** ([Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); result lifecycle incelenen klinikte doğrulanamadı — **CLOSED değil**)
 7. ~~Pacs İstekleri~~ — **CLOSED** ([Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül))
-8. **Rapor** — **NEXT**
-9. Stok
+8. ~~Rapor~~ — **CLOSED** ([Rapor](#rapor); erişilebilir ekran seti içinde; ACCESS-BLOCKED alt raporlar explicit)
+9. **Stok** — **NEXT**
 10. Finansal
 11. Ürün
 12. Müşteri / global Hasta
@@ -2103,7 +2519,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; **Hasta Kartı**, **Global Hospitalizasyon**, **Global Takvim**, **Global Doğrudan Satış**, **Global Muayene Odası**, **Global Lab İstekleri** ve **Global Pacs İstekleri** **REVIEWED / CLOSED**; **Global Xray İstekleri** **PARTIAL** (2026-09-29). Genel E-Vet özeti, güçlü/zayıf ve kalan modül deep-dive'lar ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
