@@ -18,8 +18,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Global Xray İstekleri** — request/configuration yüzeyleri **PARTIAL** (2026-09-29); [kapsam](#global-xray-i̇stekleri-partial) ve [tracker](#review-tracker).
 - **Global Pacs İstekleri modülü** — populated worklist, CR/US modalities, external Fujifilm Synapse Mobility viewer handoff **REVIEWED / CLOSED** (2026-09-29); [kapsam](#global-pacs-i̇stekleri-modül) ve [tracker](#review-tracker).
 - **Rapor (üst domain)** — Rapor Özellikleri, Genel, Randevu, Resmi, Depo, Finansal **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti ve yetki sınırları içinde; ACCESS-BLOCKED alt raporlar explicit); [kapsam](#rapor) ve [tracker](#review-tracker).
+- **Stok (üst domain)** — 12 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında; side-effect davranışları NOT OBSERVED); [kapsam](#stok-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** tam Stok/Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** tam Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -42,6 +43,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Rapor → Resmi** | **REVIEWED / CLOSED** (2026-09-29) |
 | **Rapor → Depo** | **REVIEWED / CLOSED** (2026-09-29) |
 | **Rapor → Finansal** | **REVIEWED / CLOSED** (2026-09-29) |
+| **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -78,7 +80,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED) |
 
 ---
 
@@ -938,9 +940,9 @@ Aynı ekran **değildir**; ilişkili randevu capability'sinin farklı context y�
 
 ---
 
-### Destekleyici inceleme — Stok Giriş / Alış Faturası / Depo Stok Durumu (PARTIAL)
+### Destekleyici inceleme — Stok Giriş / Alış Faturası / Depo Stok Durumu (öncül destek notu)
 
-**Global Stok modülü CLOSED değil** — yalnızca direct sale expiry kanıtı için:
+**Not:** Bu bölüm direct sale expiry kanıtı için yazılmış öncül destek notudur; Stok menüsünün tam incelemesi → [Stok (modül)](#stok-modül).
 
 **OBSERVED — Stok Giriş:** İşlem Tarihi · İşlem No · Açıklama · Barkod · Depo · Ürün · Faktör|Çarpan & Miktar · Birim · + Yeni. Miat kontrollü ürün → satır **Miat** zorunlu (“Bu alan zorunludur!”); kontrolsüz üründe **Miat** alanı yok.
 
@@ -950,7 +952,7 @@ Aynı ekran **değildir**; ilişkili randevu capability'sinin farklı context y�
 
 **OBSERVED:** Aynı ürün + aynı depoda farklı **Miat** değerleriyle **ayrı satırlar** (ör. 12.01.2029 ve 28.02.2029) — UI-level **expiry-separated quantity rows** (**lot/batch entity iddiası yok**).
 
-**NOT REVIEWED (Stok menüsü — systematic değil):** İade/Sipariş faturası · Stok Çıkış · Sayım · Sıfırlama · Transfer · satıcı ödemeleri · Depolar tanımı vb.
+*(Diğer Stok menü öğeleri — İade/Sipariş faturası, Stok Çıkış, Sayım, Sıfırlama, Transfer, satıcı ödemeleri, Depolar vb. — bu öncül notta yoktu; sonradan [Stok (modül)](#stok-modül) altında incelendi.)*
 
 ---
 
@@ -2199,6 +2201,198 @@ Exact export format list (PDF dışı) · cloud/download icon semantics · Excel
 - Satıcı Firmalar
 - Depolar
 
+*(Ekran bazlı inceleme ve status → [Stok (modül)](#stok-modül).)*
+
+---
+
+## Stok (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-30).
+
+**CLOSED anlamı:** Erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında tamamlandı; destructive actions veya gerçek kayıt oluşturma/tamamlama gerektiren side-effect davranışları NOT OBSERVED olarak bırakıldı.
+
+**Kanıt notu:** Bu bölüm canlı UI gözlemidir; backend entity/table/architecture çıkarımı yoktur. Benzer ekranlar (ör. Alış/İade/Sipariş Faturası formları, Rapor > Depo raporları) shared backend kanıtı değildir. Gerçek müşteri/satıcı/ticari değerler dokümana taşınmadı.
+
+### Ekran durumu
+
+| Alt ekran | Reviewed clinic/account durumu | Gözlem düzeyi |
+|---|---|---|
+| Alış Faturası | Liste **empty in reviewed clinic/account** | Liste + Yeni form + **AI ile içeri aktar** modalı |
+| İade Faturası | **Empty in reviewed clinic/account** | Liste + form |
+| Sipariş Faturası | **Empty in reviewed clinic/account** | Liste + form |
+| Stok Giriş | Çok sayıda kayıt | Liste + Yeni + İncele + Düzenle (save doğrulanmadı) |
+| Stok Çıkış | Kayıt var | İncele + Yazdır (mevcut kayıt üzerinde) |
+| Sayım | **Empty in reviewed clinic/account** | Liste + Yeni form |
+| Stok Sıfırlama | Filtre sonrası satırlar | Filtre + grid + satır seçimi; **Sıfırla basılmadı** |
+| Stok Transferi | Kayıt var (İşleniyor) | Liste + Yeni + mevcut kayıt Düzenle |
+| Depo Stok Durumu | Çok sayıda satır | On-hand stock view (arama + yazdır gözlendi) |
+| Satıcı Firmaya Ödeme | **Empty in reviewed clinic/account** | Liste + Yeni form |
+| Satıcı Firmalar | **Empty in reviewed clinic/account** | Liste + Satıcı Firma Tanımı |
+| Depolar | Birden fazla depo (Aktif + Pasif) | Liste + Depo Tanımı |
+
+### Alış Faturası
+
+**OBSERVED — liste (empty in reviewed clinic/account):** Tarih Aralığı · Arama Metni · Ara · Temizle · **Faturayı AI ile İçeri Aktar** · Yeni Kayıt. Kolonlar: İşlemler · İşlem Tarihi · Satıcı Firma · Oluşturan · Bakiye · Fatura · Teslim Tarihi · Genel Toplam · Ödeme Toplamı.
+
+**OBSERVED — Yeni Alış Faturası:** İşlem Tarihi · Satıcı Firma · Fatura No · **Stok Hareketini Engelle** (Evet/Hayır) · *Açıklama & Tarihler* accordion (Teslim Tarihi · Vade Tarihi · Depo Çıkış Tarihi · Açıklama) · Barkod/QR tarama · Depo · KDV Dahil · ürün satırları (Faktör/Çarpan & Miktar · Fiyat · KDV · İskonto · Toplam) · Genel İndirim · Net Toplam · KDV Top. · Genel Toplam · Kaydet · Kaydet / Öde. Miat kontrollü üründe satır Miat alanı ([öncül not](#destekleyici-inceleme--stok-giriş--alış-faturası--depo-stok-durumu-öncül-destek-notu)).
+
+**OBSERVED — Faturayı AI ile İçeri Aktar (modal; UI metni):** Modal metnine göre XML, PDF, JPG ve PNG formatları destekleniyor; UI, yapay zekânın belgeyi analiz edip fatura bilgilerini otomatik içeri aktardığını ifade ediyor. Alanlar: Dosya Seç · Satıcı Firma · Depo · **İçe Aktar ve Eşleştir**.
+
+**NOT VERIFIED (live):** Gerçek dosya yükleme, analiz, alan eşleştirme, validation ve başarılı import/save sonucu live olarak doğrulanmadı. Ayrıca: AI import doğruluğu · mapping kuralları · duplicate handling · accounting/stock posting · model/provider/OCR pipeline (UI açıklamasının ötesinde çıkarım yok).
+
+**Stok Hareketini Engelle:** `Stok Hareketini Engelle` = Evet/Hayır alanı OBSERVED; seçimin stok miktarı/hareket oluşturma üzerindeki gerçek etkisi NOT VERIFIED.
+
+### İade Faturası
+
+**OBSERVED:** Liste (**empty in reviewed clinic/account**; kolonlar İşlemler · İşlem Tarihi · Satıcı Firma · Bakiye · Fatura No · Teslim Tarihi · Genel Toplam · Ödeme Toplamı). Form Alış Faturası ile **çok benzer shell**: İşlem Tarihi · Satıcı Firma · Fatura No · Stok Hareketini Engelle · Açıklama & Tarihler · Barkod · Depo · KDV Dahil · satırlar (Faktör/Çarpan & Miktar · Fiyat · KDV · **Stok** kolonu · İskonto · Toplam) · Genel İndirim · totals · Kaydet · Kaydet / Öde.
+
+**INFERRED (isim + form):** Purchase return / vendor credit / stock decrease niyeti. **NOT VERIFIED:** gerçek save ile stok azalması · accounting credit-note davranışı.
+
+### Sipariş Faturası
+
+**OBSERVED:** Liste (**empty in reviewed clinic/account**) kolonları İşlemler · İşlem Tarihi · İşlem No · Satıcı Firma · Açıklama. Form: purchase-benzeri alanlar · **Geçmiş Satın Alımlar** · totals · Kaydet (alan bazında ayrıntı doğrulanmadı).
+
+**NOT VERIFIED:** Purchase order / proforma / draft invoice / procurement order semantiği (menü adı olduğu gibi kaydedildi) · stok hareketi yaptığı · supplier order lifecycle · siparişe karşı teslim alma · alış faturasına dönüşüm.
+
+### Stok Giriş
+
+**OBSERVED — liste:** Tarih Aralığı · Arama Metni · Ara · Temizle · Yeni Kayıt; kolonlar İşlemler · İşlem Tarihi · İşlem No · Açıklama. **İşlemler:** İncele · Düzenle · Yazdır · Sil.
+
+**OBSERVED — Yeni Stok Giriş:** İşlem Tarihi · İşlem No · Açıklama · Barkod · Depo · ürün satırı (Faktör/Çarpan & Miktar · Birim) · Ekle · Kaydet · Kaydet / Yeni.
+
+**OBSERVED — İncele (mevcut kayıt; `Stok Giriş - İncele` modalı):** İşlem Tarihi · İşlem No · Açıklama · Ürün · Depo · Faktör & Çarpan · Miktar · Birim · **Ortalama Maliyet (KDV hariç)** · **Seri No** · **Miat** · Açıklama.
+
+**OBSERVED — Düzenle (mevcut kayıt):** Ürün + depo aynı seçim metninde; miktar/faktör · birim; miat izlenen üründe **Miat** alanı görünür (mevcut miatlı ürün düzenlenebilir formda açıldı). Ortalama Maliyet ve Seri No bu bağlamda ayrıca gözlemlenmedi (yalnızca İncele modalında görüldü); düzenleme sonrası save doğrulanmadı.
+
+**Bağlam (öncül gözlemlerle tutarlı):** Ürün tanımında Miat Kontrolü Evet/Hayır; miat izlenen ürünlerde purchase-side/stok ekranlarında Miat alanı ([Ürün Tanımı](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil)). Bu turda lot/batch alanı doğrulanmadı; **Seri No ≠ lot/batch**; FEFO/FIFO enforcement iddiası yok.
+
+### Stok Çıkış
+
+**OBSERVED:** Mevcut kayıtlar; **İşlemler:** İncele · Yazdır. **İncele (`Stok Çıkış - İncele`):** İşlem Tarihi · İşlem No · Açıklama · Ürün · Depo · **Çıkış Miktarı** · Birim · Seri No · Miat. Mevcut bir stok çıkış kaydında `Depolar Arası Stok Transferi` açıklaması gözlemlendi; bu kayıt transferle ilişkili olabilir, ancak transfer lifecycle / otomatik movement üretimi **doğrulanmadı**.
+
+**NOT VERIFIED:** Bağımsız Yeni Kayıt · Düzenle · Sil aksiyonları (doğrulanmadı) · backend transaction ilişkisi / atomicity / ledger.
+
+### Sayım
+
+**OBSERVED — liste (empty in reviewed clinic/account):** **İç / Dışa Aktar** · Yeni Kayıt; kolonlar İşlemler · İşlem Tarihi · İşlem No · Açıklama · **Durum**.
+
+**OBSERVED — Yeni Sayım:** İşlem Tarihi · Durum (**İşleniyor** · **Tamamlandı**) · İşlem No · Açıklama · Barkod · Depo · ürün · **Miktar | Stok** · Birim · Ekle · Kaydet · Kaydet / Yeni.
+
+**NOT OBSERVED:** Mevcut sayım kaydı yoktu → fiziksel sayım vs sistem stoku karşılaştırma sonucu · fark hesabı · **Tamamlandı** sonrası stok düzeltmesi · onay/kilit · varyans posting · İç/Dışa Aktar dosya formatı/şema/yön/validation.
+
+### Stok Sıfırlama
+
+**OBSERVED:** Filtre — Depo · Ürün Tipi · Ürün Grubu · Ara · Temizle. Grid — satır checkbox · Depo · Ürün · Miat · Miktar · pagination/arama · **Sıfırla** aksiyonu. Depo filtresi sonrası mevcut stok satırları görüldü; satır checkbox ile tekil seçim yapılabildi.
+
+**Güvenlik:** Destructive olduğundan **Sıfırla basılmadı.**
+
+**NOT OBSERVED:** onay diyaloğu · seçili satır vs filtrelenmiş tüm satır semantiği · sıfırlama yöntemi · stok ledger kaydı · audit · geri alma/reversal · yetki koruması · nihai yan etkiler.
+
+### Stok Transferi
+
+**OBSERVED — liste:** mevcut kayıtlar, grup etiketi **İşleniyor**; kolonlar İşlemler · İşlem Tarihi · İşlem No · Açıklama.
+
+**OBSERVED — Yeni Transfer:** Durum · İşlem Tarihi · İşlem No · Açıklama · Barkod · Depo · Ürün · Miktar · **Giriş Deposu** · Birim · Ekle · Kaydet.
+
+**OBSERVED — mevcut transfer (Düzenle):** Kaynak-depo bağlamlı ürün satırı · miktar girişi · yanında mevcut stok/referans miktarı benzeri (kırmızı) sayısal değer · ayrı **Giriş Deposu** · Birim · miat bazlı secondary satır/expiry bucket · tek transferde birden fazla ürün satırı ve farklı miatlar · kaynak ve hedef ayrı depo · açıklama `Depolar Arası Stok Transferi` · kayıtlar **İşleniyor**.
+
+**UI-level evidence:** Transfer formu kaynak envanter satırı + miktar + hedef depo taşıyor; [Stok Çıkış](#stok-çıkış) İncele’de transfer açıklamalı çıkış hareketi görüldü.
+
+**NOT OBSERVED / iddia edilmez:** Transfer atomicity · kaynak azalışı + hedef artışı aynı transaction · tamamlanınca iki tarafın otomatik post edilmesi · **İşleniyor → Tamamlandı** geçiş kuralı · reservation/in-transit muhasebesi · onay workflow’u · negatif stok koruması.
+
+### Depo Stok Durumu
+
+**OBSERVED:** Arama Metni · Ara · Temizle · Yazdır; depo bazlı gruplama; kolonlar İçerik Tipi · Ürün Tipi · Barkod-1 · Barkod-2 · Ürün · Birim · **Miat** · **Miktar**. Reviewed hesapta çok sayıda satır; aynı ürün/depo için farklı expiry bucket satırları ([öncül not](#destekleyici-inceleme--stok-giriş--alış-faturası--depo-stok-durumu-öncül-destek-notu)).
+
+**Karakter:** Availability/on-hand görünümü. **NOT inferred:** FEFO allocation engine · lot ledger. *(Rapor > Depo > Depo Stok Durumu raporu ayrı yüzey — [Rapor → Depo](#rapor--depo-reviewed--closed).)*
+
+### Satıcı Firmaya Ödeme
+
+**OBSERVED — liste (empty in reviewed clinic/account):** Tarih Aralığı · Arama Metni · Ara · Temizle · Yeni Kayıt; kolonlar İşlemler · İşlem Tipi · İşlem Tarihi · Satıcı Firma · İşlem No · Ödeme.
+
+**OBSERVED — Yeni payment:** Başlık — İşlem No · Satıcı Firma · Açıklama · Ödeme Toplamı. Ödeme detay satırları — **Ödeme Tipi** · İşlem Tarihi · Makbuz No · Tutar · tipe göre secondary alan · satır ekle/kaldır benzeri kontroller · Kaydet.
+
+**OBSERVED — Ödeme Tipi:** Nakit Ödeme · Kredi Kartı Ödeme · Çek Ödeme · Senet Ödeme · Banka Transferi Ödeme. Koşullu detay örnekleri: nakit → kasa seçimi + Belge No; kredi kartı → kartla ilgili secondary alan (Kart Sahibi).
+
+**Karakter:** Tender seti daha önce müşteri/direct-sale ödemesinde görülene benzer; **shared backend Payment model iddiası yok**. Ödeme detay satırlarında ekle/kaldır benzeri kontroller görüldü (UI gözlemi); multi-tender kaydın çalıştığı veya backend’de nasıl işlendiği çıkarılmaz.
+
+**NOT OBSERVED:** gerçek save/posting yapılmadı · kasa hareketi etkisi · banka hesabı hareketi etkisi · muhasebe/ledger posting · vendor balance update · ödeme→fatura tahsisi · silme/reversal lifecycle.
+
+### Satıcı Firmalar
+
+**OBSERVED — liste (empty in reviewed clinic/account):** Arama Metni · Ara · Temizle · Yeni Kayıt; kolonlar İşlemler · Adı · İlgili Kişi · GSM · Email · Borç · Ödeme · Bakiye · Durum.
+
+**OBSERVED — Satıcı Firma Tanımı:** *Genel Bilgiler* — Adı · Durum · Pasif Nedeni · İlgili Kişi · Vade Gün Sayısı · Kod · Kimlik No · Ülke · Şehir · İlçe · Köy - Mahalle · Adres. *İletişim Bilgileri* — GSM · Tel 1 · Tel 2 · Faks · Email · Posta Kodu · Vergi Dairesi · Vergi No · Web Adresi. *Diğer Bilgiler* — Bilgi · Açıklama. Kaydet.
+
+**NOT VERIFIED:** Kimlik/vergi alanlarının etiket ötesi hukuki/vergisel anlamı. Gerçek değerler dokümana alınmadı.
+
+### Depolar
+
+**OBSERVED:** **Depo Listesi** — Yeni Kayıt · arama · kolonlar İşlemler · Kod · Adı · Durum; birden fazla depo; **Aktif** ve **Pasif** durumları. **Depo Tanımı** — Durum · Kod · Adı · Kaydet · Kaydet / Yeni.
+
+**NOT OBSERVED:** depo hiyerarşisi · raf/bölge (bin/location) hiyerarşisi · şube kapsamı · valuation scope · yetkiler.
+
+---
+
+### Stok — Cross-module synthesis
+
+**OBSERVED capability families (UI level; tek generic inventory engine/backend iddiası yok):**
+
+1. Vendor master (Satıcı Firmalar)
+2. Warehouse/depot master (Depolar)
+3. Purchase-side documents (Alış · İade · Sipariş Faturası)
+4. Manual inventory movement (Stok Giriş · Stok Çıkış)
+5. Physical inventory count (Sayım)
+6. Destructive stock reset (Stok Sıfırlama)
+7. Inter-warehouse transfer (Stok Transferi)
+8. Warehouse on-hand / expiry view (Depo Stok Durumu)
+9. Vendor payments (Satıcı Firmaya Ödeme)
+10. Barcode/QR-supported item entry
+11. Expiry-aware stock rows (Miat)
+12. AI-assisted supplier invoice import (yalnız modal/UI düzeyi)
+
+**OBSERVED UI / workflow capabilities:** Depo bazlı miktar gösterimi · Stok Giriş/Çıkış/Transfer/Sayım ayrı menü/ekranlar · ayrı vendor payment ekranı · transfer formunda kaynak depo ve ayrı **Giriş Deposu** alanı · ayrı stok sıfırlama ekranı · Alış Faturası’nda **Stok Hareketini Engelle** alanı (etkisi NOT VERIFIED) · ayrı AI import modalı (yalnız UI metni).
+
+**INFERRED (dikkatli):** Inventory domain’i basit ürün miktarından daha geniş operasyonel envanter/procurement kapsamına sahip görünüyor · Miat birden fazla ekranda görünür alan olarak yer alıyor ve stok izlenebilirliğinin önemli parçası olabilir · purchase belge formlarında Satıcı Firma ve Depo alanlarının birlikte bulunması, belge–satıcı–depo ilişkisi olabileceğini düşündürüyor (backend ilişkisi doğrulanmadı) · vendor, envanter ve ödeme akışları yakın operasyonel ailede konumlanmış.
+
+---
+
+### Stok — VETINITY IMPLICATION
+
+*(Competitor’dan kopyalama değil; yeniden kullanılabilir dersler. Yeni feature ID yok, karar değil.)*
+
+- Envanter **depo + ürün + miktar**ı açıkça modellemeli.
+- Expiry-sensitive ürünler expiry-aware stok görünürlüğü ve hareket yönetimi ister.
+- Stok Giriş / Çıkış / Transfer / Sayım operasyonel olarak ayrı workflow’lardır (altta ortak domain primitive’leri paylaşsalar bile).
+- Destructive envanter işlemleri (ör. stok sıfırlama) açık izin/onay/audit/geri alma tasarımı gerektirir; competitor’da onay diyaloğu **gözlemlenmedi**.
+- Transfer UX’i kaynak vs hedef depoyu belirsizliğe yer bırakmadan göstermeli.
+- Purchase belge posting ile envanter posting ayrıştırılabilir/konfigüre edilebilir olabilir; E-Vet’in **Stok Hareketini Engelle** kontrolü competitor evidence’dır, otomatik Vetinity requirement değil.
+- Satıcı yönetimi ve satıcı ödemeleri procurement/accounting sınırına aittir; mimari sahiplik bağımsız kararlaştırılmalı.
+- AI fatura okuma gelecekte ilginç bir verimlilik yeteneği olabilir; yalnızca E-Vet’te var diye MVP’ye çekilmemeli.
+- Ekran çoğalmasından kaçınılıp tutarlı tek envanter workspace/workflow modeli daha net olabilir.
+
+---
+
+### Stok — Backlog cross-reference
+
+Mevcut backlog’da envanter/stok/satıcı/procurement domain’ine ait ID yok. **Exact-match bulunamadığı için backlog’a E-Vet Stok evidence’ı eklenmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| RECORD-005 (lot/expiry/route/site) | NO MATCH | Klinik kayıt seviyesinde lot/uygulama izlenebilirliği; E-Vet’te stok tarafı Miat gözlemlendi, lot/batch doğrulanmadı |
+| CHECKOUT-001 (ziyaret kapanışı/tahsilat) | NO MATCH | Müşteri checkout ≠ satıcı ödemesi |
+| INT-005 (e-Fatura / e-SMM) | NO MATCH | AI fatura import ≠ e-belge entegrasyonu; e-belge linkage NOT OBSERVED |
+| AI-* | NO MATCH | Mevcut AI kayıtları klinik/iletişim odaklı; fatura ingest yok |
+| REPORT-* | Dokunulmadı | Rapor turu CLOSED |
+
+**Potential backlog gaps (kayıt açılmadı):** envanter/procurement domain’i · depo/warehouse master · stok hareketi (giriş/çıkış/transfer/sayım) · satıcı master ve satıcı ödemesi · destructive stock action güvenliği · AI supplier invoice ingestion.
+
+---
+
+### Stok — TBD / NOT OBSERVED
+
+lot/batch · FEFO/FIFO · valuation yöntemi · ortalama maliyet formülü · negatif stok politikası · transfer atomicity · stock ledger mimarisi · rezervasyon · purchase order lifecycle · approval/finalized state · audit trail · reversal · sayım düzeltme semantiği · stok sıfırlama güvenlik önlemleri · AI fatura import teknik uygulaması ve sonucu · depo hiyerarşisi/şube mimarisi · seri takibi semantiği · fatura→ödeme tahsis lifecycle · gerçek Alış Faturası save lifecycle · **Stok Hareketini Engelle = Evet** etkisi · Alış/İade/Sipariş silme/reversal/audit · e-belge linkage · Kaydet / Öde sonrası ödeme bağımlılığı · Sayım İç/Dışa Aktar detayı · Stok Çıkış bağımsız oluşturma/düzenleme/silme.
+
 ---
 
 ## Finansal navigation (üst domain)
@@ -2422,6 +2616,16 @@ Rapor üst domain **erişilebilir ekran seti ve yetki sınırları içinde** inc
 
 **TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** Excel/CSV · scheduled/emailed reports · saved filters · custom builder · role/permission model · drill-down · chart interactions · dashboard home · Turkey regulatory validation.
 
+### Stok — REVIEWED / CLOSED
+
+Stok üst domain menüsü (12 öğe) **erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** destructive action veya gerçek kayıt oluşturma/tamamlama gerektiren side-effect davranışları gözlemlendi.
+
+Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş Faturası · Stok Giriş · Stok Çıkış · Sayım · Stok Sıfırlama · Stok Transferi · Depo Stok Durumu · Satıcı Firmaya Ödeme · Satıcı Firmalar · Depolar
+
+**Empty in reviewed clinic/account** (capability yok değil): Alış/İade/Sipariş Faturası, Sayım, Satıcı Firmaya Ödeme, Satıcı Firmalar listeleri.
+
+**TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** [Stok — TBD](#stok--tbd--not-observed) listesi.
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
@@ -2442,7 +2646,7 @@ Rapor üst domain **erişilebilir ekran seti ve yetki sınırları içinde** inc
 | **Mobil Uygulamalar** | NOT REVIEWED | |
 | **Katalog / Dokümanlar** | NOT REVIEWED | |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
-| **Stok** | **PARTIAL** | Direct Sale pass: Stok Giriş, Alış Faturası (özet), Depo Stok Durumu — [destek](#destekleyici-inceleme--stok-giriş--alış-faturası--depo-stok-durumu-partial); tam menü **NOT REVIEWED** |
+| **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **PARTIAL** | Nav + patient ekstre + direct sale ödeme geçmişi (kısmi) |
 | **Ürün** | **PARTIAL** | Direct Sale pass: Ürün Tanımı (destek) — [destek](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil); tam modül **NOT REVIEWED** |
 | **Müşteri** (global) | **PARTIAL / NOT SYSTEMATIC** | |
@@ -2466,8 +2670,8 @@ Rapor üst domain **erişilebilir ekran seti ve yetki sınırları içinde** inc
 6. ~~Xray İstekleri~~ — **PARTIAL** ([Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); result lifecycle incelenen klinikte doğrulanamadı — **CLOSED değil**)
 7. ~~Pacs İstekleri~~ — **CLOSED** ([Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül))
 8. ~~Rapor~~ — **CLOSED** ([Rapor](#rapor); erişilebilir ekran seti içinde; ACCESS-BLOCKED alt raporlar explicit)
-9. **Stok** — **NEXT**
-10. Finansal
+9. ~~Stok~~ — **CLOSED** ([Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED)
+10. **Finansal** — **NEXT**
 11. Ürün
 12. Müşteri / global Hasta
 13. e-Fatura / e-SMM
@@ -2519,7 +2723,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
