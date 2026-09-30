@@ -19,6 +19,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Global Pacs İstekleri modülü** — populated worklist, CR/US modalities, external Fujifilm Synapse Mobility viewer handoff **REVIEWED / CLOSED** (2026-09-29); [kapsam](#global-pacs-i̇stekleri-modül) ve [tracker](#review-tracker).
 - **Rapor (üst domain)** — Rapor Özellikleri, Genel, Randevu, Resmi, Depo, Finansal **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti ve yetki sınırları içinde; ACCESS-BLOCKED alt raporlar explicit); [kapsam](#rapor) ve [tracker](#review-tracker).
 - **Stok (üst domain)** — 12 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında; side-effect davranışları NOT OBSERVED); [kapsam](#stok-modül) ve [tracker](#review-tracker).
+- **Finansal (üst domain)** — 7 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında; save/posting ve bakiye/ledger etkileri NOT VERIFIED); [kapsam](#finansal-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** tam Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -44,6 +45,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Rapor → Depo** | **REVIEWED / CLOSED** (2026-09-29) |
 | **Rapor → Finansal** | **REVIEWED / CLOSED** (2026-09-29) |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
+| **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -80,7 +82,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED) |
 
 ---
 
@@ -2407,6 +2409,143 @@ lot/batch · FEFO/FIFO · valuation yöntemi · ortalama maliyet formülü · ne
 - Klinik Gider Grupları
 - Klinik Gider Tipleri
 
+*(Ekran bazlı inceleme ve status → [Finansal (modül)](#finansal-modül).)*
+
+---
+
+## Finansal (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-09-30).
+
+**CLOSED anlamı:** Erişilebilir Finansal menü ekranları ve güvenli/read-only UI incelemesi kapsamında tamamlandı. Gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve Raporlara Dahil Et/Etme seçiminin gerçek rapor etkisi live olarak doğrulanmadı.
+
+**Kanıt notu:** Bu bölüm canlı UI gözlemidir; backend entity/table/architecture çıkarımı yoktur. Banka ve Kasa ekranlarının benzerliği UI/workflow benzerliğidir; ortak backend/model kanıtı değildir. Gerçek banka/hesap/kasa adı, IBAN, hesap no, gider kalemi adı ve tutar dokümana taşınmadı. Rapor > Finansal raporları ([Rapor → Finansal](#rapor--finansal-reviewed--closed)) ve hasta ekstre yüzeyleri ayrı yüzeylerdir.
+
+### Ekran durumu (7/7)
+
+| Alt ekran | Reviewed clinic/account durumu | Gözlem düzeyi |
+|---|---|---|
+| Banka Giriş/Çıkış | Liste **empty in reviewed clinic/account** | Liste + Yeni Kayıt formu (save edilmedi) |
+| Kasa Giriş/Çıkış | Liste **empty in reviewed clinic/account** | Liste + Yeni Kayıt formu (save edilmedi) |
+| Bankalar | En az bir aktif tanım | Liste + Banka Tanımı |
+| Banka Hesapları | Birden fazla aktif hesap/POS niteliğinde kayıt | Liste + Banka Hesabı Tanımı |
+| Kasalar | En az bir aktif tanım | Liste + Kasa Tanımı |
+| Klinik Gider Grupları | Liste **empty in reviewed clinic/account** | Liste + Grup Tanımı |
+| Klinik Gider Tipleri | Çok sayıda tanım | Liste + Tip Tanımı |
+
+### Banka Giriş/Çıkış
+
+**OBSERVED — liste (empty in reviewed clinic/account; `Kayıt bulunamadı`):** Tarih Aralığı · Arama Metni · Ara · Temizle · Yeni Kayıt; kolonlar İşlemler · İşlem Tarihi · İşlem Tipi · Oluşturan · Giriş/Çıkış · Banka Hesabı · Tutar · Klinik Gider Tipi · Raporlara Dahil Et / Etme · Açıklama.
+
+**OBSERVED — Yeni Kayıt formu:** Giriş/Çıkış · İşlem Tarihi · Banka Hesabı · Raporlara Dahil Et / Etme · Tutar · Klinik Gider Tipi · Açıklama · Kaydet · Kaydet / Yeni. `Giriş/Çıkış` seçimi yön alanıdır (form/UI’dan `Giriş` ve `Çıkış` anlaşılıyor; başka enum üyesi belgelenmedi). `Raporlara Dahil Et / Etme`: **Evet** · **Hayır**. `Banka Hesabı` seçimi tanımlı banka hesaplarından, `Klinik Gider Tipi` seçimi konfigüre edilmiş gider tiplerinden geliyor (configurable expense type selection).
+
+**NOT VERIFIED:** gerçek save/posting · banka hesabı bakiyesinin değişmesi · double-entry muhasebe · external accounting integration · reconciliation · delete/reversal lifecycle · `Raporlara Dahil Et / Etme` seçiminin hangi raporlara ve nasıl etki ettiği · audit trail / immutable ledger · kullanıcı/rol bazlı financial authorization.
+
+### Kasa Giriş/Çıkış
+
+**OBSERVED — liste (empty in reviewed clinic/account; `Kayıt bulunamadı`):** Tarih Aralığı · Arama Metni · Ara · Temizle · Yeni Kayıt; kolonlar İşlemler · İşlem Tarihi · İşlem Tipi · Oluşturan · Giriş/Çıkış · Kasalar · Tutar · Klinik Gider Tipi · Raporlara Dahil Et / Etme · Açıklama.
+
+**OBSERVED — Yeni Kayıt formu:** Giriş/Çıkış · İşlem Tarihi · Kasa · Raporlara Dahil Et / Etme · Tutar · Klinik Gider Tipi · Açıklama · Kaydet · Kaydet / Yeni. Kasa dropdown’ında tanımlı kasa seçilebiliyor.
+
+**OBSERVED (UI/workflow):** Banka Giriş/Çıkış ile alan ve akış olarak çok benzer; fark hesap/kasa seçim alanıdır. **Aynı backend entity/table, generic accounting engine veya shared domain model iddiası yoktur.**
+
+**NOT VERIFIED:** save/posting sonucu · kasa bakiyesi etkisi · transaction reversal/delete · cash ledger · accounting posting · report inclusion davranışı · reconciliation.
+
+### Bankalar
+
+**OBSERVED — liste:** Yeni Kayıt · arama; kolonlar İşlemler · Kod · Adı · Durum. Reviewed hesapta en az bir aktif banka tanımı vardı.
+
+**OBSERVED — Banka Tanımı:** Durum · Kod · Adı · Kaydet · Kaydet / Yeni. Bank master/configuration capability.
+
+**NOT VERIFIED:** delete/deactivate lifecycle · bank master’ın başka kayıtlarla dependency kuralları · external banking integration.
+
+### Banka Hesapları
+
+**OBSERVED — liste:** Yeni Kayıt · arama; kolonlar İşlemler · Banka · Adı · Hesap No · Hesap Kodu · IBAN No · Banka Şubesi · Banka Şube No · Pos Mu · Durum. Reviewed hesapta birden fazla aktif banka hesabı / POS niteliğinde kayıt vardı.
+
+**OBSERVED — Banka Hesabı Tanımı:** Durum · Banka · Adı · Banka Şubesi · Banka Şube No · Iban No · Hesap No · Hesap Kodu · Pos Mu · Kaydet · Kaydet / Yeni. `Pos Mu` bir boolean/choice alanı; `Hesap Kodu` alanı mevcut.
+
+**Not:** `Pos Mu` alanı gerçek POS entegrasyonu, terminal bağlantısı veya ödeme gateway entegrasyonu anlamına **gelmez**; `Hesap Kodu` alanı muhasebe entegrasyonu kanıtı **değildir**.
+
+**NOT VERIFIED:** IBAN validation · POS settlement · bank feed · payment processor linkage · accounting/chart-of-accounts linkage · bank reconciliation.
+
+### Kasalar
+
+**OBSERVED — liste:** Yeni Kayıt · arama; kolonlar İşlemler · Kod · Adı · Hesap Kodu · Durum. Reviewed hesapta en az bir aktif kasa tanımı vardı.
+
+**OBSERVED — Kasa Tanımı:** Durum · Kod · Adı · Hesap Kodu · Kaydet · Kaydet / Yeni.
+
+**NOT VERIFIED:** `Hesap Kodu` alanının muhasebe bağlantısı / ledger mapping’i.
+
+### Klinik Gider Grupları
+
+**OBSERVED — liste (empty in reviewed clinic/account; `Kayıt bulunamadı`):** Yeni Kayıt · arama; kolonlar İşlemler · Adı · Durum.
+
+**OBSERVED — Klinik Gider Grup Tanımı:** Durum · Adı · Kaydet · Kaydet / Yeni. Configurable expense grouping capability.
+
+**NOT VERIFIED:** group hierarchy · nested groups · delete/deactivate dependency rules · report behavior.
+
+### Klinik Gider Tipleri
+
+**OBSERVED — liste:** Yeni Kayıt · arama; kolonlar İşlemler · Adı · Klinik Gider Grubu · Hesap Kodu · Durum. Reviewed hesapta çok sayıda configured expense type vardı (tek tek belgelenmedi).
+
+**OBSERVED — Klinik Gider Tip Tanımı:** Durum · Adı · Hesap Kodu · Klinik Gider Grubu · Kaydet · Kaydet / Yeni. Yeni kayıt formunda `Klinik Gider Grubu` dropdown’ı reviewed account’ta seçilebilir grup göstermedi (`Kayıt bulunamadı`); bu yalnızca reviewed account’ta selectable group bulunmadığını gösterir, group desteği hakkında sonuç değildir.
+
+**NOT VERIFIED:** `Hesap Kodu` alanının muhasebe entegrasyonu veya chart-of-accounts mapping davranışı.
+
+---
+
+### Finansal — Cross-module synthesis
+
+**OBSERVED UI / workflow capabilities:**
+
+- Banka bazlı giriş/çıkış hareket ekranı
+- Kasa bazlı giriş/çıkış hareket ekranı
+- Giriş/Çıkış yön alanı · işlem tarihi · tutar · açıklama
+- Configurable Klinik Gider Tipi seçimi
+- Hareketin raporlara dahil edilip edilmemesine yönelik Evet/Hayır alanı (etkisi NOT VERIFIED)
+- Banka, Banka Hesabı, Kasa, Klinik Gider Grubu ve Klinik Gider Tipi master/tanım ekranları
+- Banka Hesabı üzerinde POS niteliğini belirten alan
+- Banka Hesabı, Kasa ve Gider Tipi tanımlarında `Hesap Kodu` alanları
+
+**INFERRED / PRODUCT INTERPRETATION:** Gözlenen UI kapsamında Finansal alan, full accounting suite’ten ziyade operational cash/bank movement + financial masters + expense classification yapısına benziyor. Bu bir Vetinity product yorumudur; E-Vet backend mimarisi veya muhasebe kapsamı hakkında hüküm değildir.
+
+**Observed olarak yazılmaz:** çift taraflı muhasebe · general ledger · muhasebe fişi · chart of accounts entegrasyonu · banka entegrasyonu · banka ekstre importu · reconciliation · settlement · POS gateway · finansal kapanış · mutabakat · tahakkuk muhasebesi · VAT/accounting posting · immutable journal · atomic posting · audit-compliant ledger.
+
+---
+
+### Finansal — VETINITY IMPLICATION
+
+*(Competitor’dan kopyalama değil; ders adayları. Yeni feature ID yok, karar değil.)*
+
+- Operasyonel kasa/banka hareketi, finansal master’lar (banka, hesap, kasa) ve gider sınıflandırması birbirinden ayrı düşünülebilir; tam muhasebe kapsamı ayrı bir karar konusudur.
+- Gider sınıflandırması (grup/tip) konfigüre edilebilir olabilir; ancak hiyerarşi ihtiyacı bu kanıttan çıkmaz.
+- Bir hareketin raporlara dahil edilip edilmemesi kontrolü ancak rapor etkisi açıkça tanımlanırsa güvenli olur; E-Vet’te etkisi doğrulanmadı.
+- Hesap kodu alanları muhasebe entegrasyonu kararı verilmeden eklenirse yanlış beklenti yaratabilir.
+- POS niteliği alanı ile gerçek POS/ödeme entegrasyonu ayrı değerlendirilmelidir.
+
+---
+
+### Finansal — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog’a E-Vet Finansal evidence’ı eklenmedi.** Backlog’da banka/kasa hareketi, gider sınıflandırması, kasa/banka hesabı master’ı, muhasebe/ledger, hesap kodu eşlemesi veya rapora dahil etme kontrolü ID’si yok.
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| CHECKOUT-001 | NO MATCH | Ziyaret kapanışı ve müşteri tahsilatı; banka/kasa hareketi değil |
+| INT-006 (POS ve online ödeme) | NO MATCH | `Pos Mu` alanı POS/online ödeme entegrasyonu kanıtı değil |
+| INT-005 (e-Fatura / e-SMM) | NO MATCH | Yasal e-belge; `Hesap Kodu` accounting integration değil |
+| PORTAL-004 (açık fatura görüntüleme) | NO MATCH | Hasta sahibi portalı; ilgisiz |
+| REPORT-* | NO MATCH | Rapor Merkezi yapısı; `Raporlara Dahil Et/Etme` Report Center capability değil |
+
+**Potential backlog gaps (kayıt açılmadı):** operasyonel kasa/banka hareketi · finansal master’lar (banka/hesap/kasa) · gider sınıflandırma (grup/tip) · muhasebe/ledger kapsamı · hareketin rapora dahil edilmesi kontrolü.
+
+---
+
+### Finansal — TBD / NOT OBSERVED
+
+gerçek save/posting · banka/kasa bakiye etkisi · double-entry muhasebe · external accounting integration · chart-of-accounts/hesap kodu eşlemesi · general ledger · reconciliation · bank feed/ekstre import · POS settlement · payment processor linkage · IBAN validation · delete/reversal lifecycle · audit trail / immutable ledger · rol bazlı finansal yetki · `Raporlara Dahil Et / Etme` gerçek rapor etkisi · gider grup hiyerarşisi/dependency kuralları · banka/hesap/kasa deactivate ve dependency kuralları · `Giriş/Çıkış` tam enum listesi.
+
 ---
 
 ## Ürün navigation (üst domain)
@@ -2626,6 +2765,16 @@ Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş 
 
 **TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** [Stok — TBD](#stok--tbd--not-observed) listesi.
 
+### Finansal — REVIEWED / CLOSED
+
+Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
+
+Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları · Kasalar · Klinik Gider Grupları · Klinik Gider Tipleri
+
+**Empty in reviewed clinic/account** (capability yok değil): Banka Giriş/Çıkış, Kasa Giriş/Çıkış, Klinik Gider Grupları listeleri.
+
+**TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** [Finansal — TBD](#finansal--tbd--not-observed) listesi.
+
 ### E-Vet genel — kalan ana alanlar
 
 | Alan | Durum | Not |
@@ -2647,7 +2796,7 @@ Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş 
 | **Katalog / Dokümanlar** | NOT REVIEWED | |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
-| **Finansal** (üst domain) | **PARTIAL** | Nav + patient ekstre + direct sale ödeme geçmişi (kısmi) |
+| **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
 | **Ürün** | **PARTIAL** | Direct Sale pass: Ürün Tanımı (destek) — [destek](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil); tam modül **NOT REVIEWED** |
 | **Müşteri** (global) | **PARTIAL / NOT SYSTEMATIC** | |
 | **Hasta** (üst domain, global) | **PARTIAL** | Patient Card **CLOSED**; master-data ekranları ayrı |
@@ -2671,8 +2820,8 @@ Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş 
 7. ~~Pacs İstekleri~~ — **CLOSED** ([Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül))
 8. ~~Rapor~~ — **CLOSED** ([Rapor](#rapor); erişilebilir ekran seti içinde; ACCESS-BLOCKED alt raporlar explicit)
 9. ~~Stok~~ — **CLOSED** ([Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED)
-10. **Finansal** — **NEXT**
-11. Ürün
+10. ~~Finansal~~ — **CLOSED** ([Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting ve bakiye/ledger etkileri NOT VERIFIED)
+11. **Ürün** — **NEXT**
 12. Müşteri / global Hasta
 13. e-Fatura / e-SMM
 14. HBS
@@ -2723,7 +2872,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam); **Finansal** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only UI kapsamı). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
