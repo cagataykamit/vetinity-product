@@ -23,6 +23,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Ürün (üst domain)** — 6 menü öğesi **REVIEWED / CLOSED** (2026-10-01; tüm ana menü ekranları incelendi; davranışsal side-effect ve uygulama semantiği çoğu alanda NOT VERIFIED); [kapsam](#ürün-modül) ve [tracker](#review-tracker).
 - **Müşteri (üst domain)** — 6 menü öğesi + Müşteri Kartı derin inceleme **REVIEWED / CLOSED** (2026-10-01; global menü ve kart shell kapsamında; çoğu save/posting ve entegrasyon semantiği NOT VERIFIED); [kapsam](#müşteri-modül) ve [tracker](#review-tracker).
 - **Hasta** (üst domain — reference data) — 8 menü öğesi **REVIEWED / CLOSED** (2026-10-01; global üst menü configuration/owner-transfer yüzeyleri; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#hasta-modül) ve [tracker](#review-tracker).
+- **Muayene** (üst domain) — 13 menü öğesi **REVIEWED / CLOSED** (2026-10-01; reçete/aşı config, klinik vocabulary, paket/template ve treatment-monitoring configuration; [Global Muayene Odası](#global-muayene-odası-modül) ve [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#muayene-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -52,6 +53,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) |
+| **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -88,7 +90,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED) |
 
 ---
 
@@ -3079,6 +3081,263 @@ Owner transfer side-effects · reference-data tenant/clinic scope · delete refe
 - Tedavi Takip Parametreleri
 - Tedavi Takip Parametre Paketleri
 
+*(Ekran bazlı inceleme ve status → [Muayene (modül)](#muayene-modül). Operasyonel worklist → [Global Muayene Odası (modül)](#global-muayene-odası-modül). Patient muayene/aşı workspace → [Hasta Kartı / Patient Workspace](#hasta-kartı--patient-workspace).)*
+
+---
+
+## Muayene (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-01).
+
+**Kapsam notu:** Bu bölüm **üst menü Muayene** alanını kapsar (13/13). **[Global Muayene Odası](#global-muayene-odası-modül)** sol menü worklist/routing yüzeyidir (**ayrı CLOSED**). **[Hasta Kartı](#hasta-kartı--patient-workspace)** içindeki Muayene Geçmişi, Yeni Muayene ve hasta-bazlı Aşı Programı UI **ayrı** patient workspace kanıtıdır — bu pass global üst menü configuration ve seçili operasyon listelerini kapsar.
+
+**CLOSED anlamı:** 13/13 ekran incelendi (çoğunda save/posting veya resmi entegrasyon **çalıştırılmadı**). **Anlamına gelmez:** e-Reçete/ATS/HBS resmi gönderim, otomasyon motorları, stok/fatura side-effect, clinical decision support veya reminder delivery doğrulanmıştır.
+
+**UI organization (OBSERVED):** Üst menü Muayene, yalnızca encounter ekranı değil; operasyonel listeler (reçete, aşılanmamış takip, ATS görünümü) ile reusable clinical vocabulary, aşı/tedavi paket-template tanımları ve treatment-monitoring parameter configuration’ı aynı navigation altında topluyor (rakip IA observation; Vetinity mimari kararı değil).
+
+### Global menü envanteri (13/13)
+
+| # | Ekran | Reviewed clinic/account | Not |
+|---|---|---|---|
+| 1 | Reçete | ~662 mevcut kayıt | Mevcut detay + yeni form açıldı; **yeni reçete Kaydet çalıştırılmadı**; print **InternalServerError** |
+| 2 | ATS Listesi | 0 kayıt (geniş tarih) | Yeni Kayıt **gözlemlenmedi** |
+| 3 | Aşı Paketleri | ~58 kayıt | Template + İlgili Aşı Paketi linkage |
+| 4 | Aşı Programları | 0 configured | Form açıldı; **kaydedilmedi** |
+| 5 | Aşılanmamış Hasta Takibi | ~1948 kayıt | → patient Aşı Programı handoff |
+| 6 | Muayene Özellikleri | ~29 kayıt | Özellik Tipi grupları |
+| 7 | Semptomlar | ~1435 kayıt | Reference vocabulary |
+| 8 | Teşhisler | ~1170 kayıt | Reference vocabulary |
+| 9 | Operasyon Paketleri | 0 configured | Form; **kaydedilmedi** |
+| 10 | Tedavi Paketleri | 0 configured | Form; **kaydedilmedi** |
+| 11 | Tedavi Şablonları | 1 kayıt | Serbest metin İçerik |
+| 12 | Tedavi Takip Parametreleri | 15 kayıt | Veri tipleri + conditional fields |
+| 13 | Tedavi Takip Parametre Paketleri | 0 configured | Form; **kaydedilmedi** |
+
+### Cross-surface grouping (UI)
+
+| Grup | Ekranlar |
+|---|---|
+| **A — Operational / patient-facing handoffs** | Reçete · ATS Listesi · Aşılanmamış Hasta Takibi → [Hasta Kartı](#hasta-kartı--patient-workspace) Aşı Programı |
+| **B — Reusable clinical configuration** | Aşı Paketleri · Aşı Programları · Muayene Özellikleri · Semptomlar · Teşhisler · Operasyon Paketleri · Tedavi Paketleri · Tedavi Şablonları · Tedavi Takip Parametreleri · Tedavi Takip Parametre Paketleri |
+
+---
+
+### Reçete
+
+**OBSERVED — Global Reçete Listesi (reviewed clinic/account, ~662 mevcut kayıt):** Tarih Aralığı · Arama Metni · kolonlar İşlemler · İşlem Tarihi · e-Reçete No · Veteriner · Müşteri · Hasta · Seri No · Cilt No · Sıra No · Yazdırıldı; satır **Düzenle** · **Yazdır** · **Sil**; **Yeni Kayıt**.
+
+**OBSERVED — mevcut reçete:** Listeden bir kayıt açıldı; **Reçete Tanımı** form alanları incelendi — Reçete Tipi · İşlem Tarihi · Seri No · Cilt No · Sıra No · Bölüm · Veteriner · Müşteri · Hasta · e-Reçete No · Yazdırıldı · Onayla · Açıklama (expandable). Ürün satırı: Ürün · Miktar · Birim · Yazdır · Bilgi · Doz · Kullanım Yeri · Tedavi Süresi · Periyodik Kullanım Süresi · Sık Kullanılanlara Ekle · Ekle; **Sık Kullanılanlar...** · **Kayıtsız Ürünler...** aksiyonları.
+
+**OBSERVED — yeni reçete:** **Yeni Kayıt** ile boş/yeni **Reçete Tanımı** ekranı da açıldı (aynı form yüzeyi).
+
+**OBSERVED — Kayıtsız Ürünler modalı:** Ürün · Kullanım Miktarı; incelenen kayıtta `Kayıt bulunamadı`.
+
+**OBSERVED — Bölüm dropdown örnekleri (tam enum değil):** Dış Klinik · Hasta Odası · Klinik · Muayene Odası - 2 · Traş.
+
+**OBSERVED — Birim dropdown:** Adet · Damla ve laboratuvar/sayısal görünümlü diğer unit etiketleri; UI’da geniş unit vocabulary görünür (**shared backend unit table iddiası yok**).
+
+**NOT live:** Yeni reçete için **Kaydet çalıştırılmadı** — review sırasında **yeni prescription create/save doğrulanmadı** (mevcut ~662 kayıt listesi ve açılan mevcut detay bununla çelişmez).
+
+**OBSERVED — Yazdır:** Reçete rapor ekranı açıldı; sol tarafta Seri/Cilt/Sıra + **Onayla**; PDF/download/Yazdır UI; rapor içerik alanı yüklenirken **“Request failed with status code InternalServerError”** — successful prescription report rendering/printing bu oturumda **VERIFIED DEĞİL**.
+
+**NOT VERIFIED:** başarılı e-Reçete gönderimi · resmi entegrasyon · elektronik imza · HBS/ATS submission · regulator acceptance · print-state persistence · Onayla approval semantics · billing/stock effects.
+
+---
+
+### ATS Listesi
+
+**OBSERVED:** Tarih Aralığı · Arama Metni · kolonlar İşlemler · İşlem Tarihi · Aşı Uygulama Belgesi Seri No · Veteriner · Müşteri · Hasta Adı · HBS Kimlik No. İncelenen geniş tarih aralığında **kayıt yok**. Görünür **Yeni Kayıt** aksiyonu **gözlemlenmedi**.
+
+ATS kısaltmasının teknik açılımı **tahmin edilmedi**. HBS Kimlik No kolonundan otomatik entegrasyon/submission **çıkarılmadı**.
+
+**NOT VERIFIED:** ATS veri gönderimi · resmi servis entegrasyonu · belge oluşturma akışı · retry/error handling · status lifecycle · successful submission.
+
+---
+
+### Aşı Paketleri
+
+**OBSERVED — liste (reviewed clinic/account, ~58):** İşlemler · Adı · İlgili Aşı Paketi · Günler · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Aşı Paketi Tanımı:** Durum · Adı · Şablon · İlgili Aşı Paketi · Günler · Kaydet · Kaydet / Yeni. Mevcut örneklerde gün değerleri ve bir paketin başka **İlgili Aşı Paketi** ile ilişkilendirilebildiği görüldü; Şablon dropdown clinic-configured template kayıtları listeler.
+
+**OBSERVED (UI):** Package definition supports template selection and optional linkage to another vaccine package with a day interval (UI-level wording).
+
+**NOT VERIFIED:** recurrence engine · automatic future appointment creation · reminder engine · dependency enforcement · chain execution semantics.
+
+---
+
+### Aşı Programları
+
+**OBSERVED — liste:** Yeni Kayıt; reviewed account’ta `Kayıt bulunamadı`.
+
+**OBSERVED — Aşı Program Tanımı:** Durum · Adı · satır tablosu Aşı Paketi · Günler · Sil · **Ekle** · Kaydet. Aşı Paketi dropdown mevcut paketleri gösterir.
+
+**NOT live:** Yeni program **kaydedilmedi**.
+
+**NOT VERIFIED:** programa bağlı hasta planı yayılımı · otomatik takvim/randevu · reminder generation · package chain expansion · conflict resolution.
+
+---
+
+### Aşılanmamış Hasta Takibi
+
+**OBSERVED — global liste (reviewed clinic/account, ~1948):** Arama Metni · kolonlar İşlemler · Hasta · Yaş · Tür / Irk · Müşteri · GSM; satır aksiyonu **Aşı Programı...** (gerçek ad/telefon dokümana **taşınmadı**).
+
+**OBSERVED — handoff:** Aksiyon hasta workspace **Hasta Aşı Programı** ekranına yönlendirdi ([Hasta Kartı](#hasta-kartı--patient-workspace) patient-context Aşı Programı UI ile ilişkili yüzey; ayrı pass).
+
+**OBSERVED — Hasta Aşı Programı formu:** Bölüm · Veteriner · Süre (dk) · Tarih · Aşı Programı selector · **Oluştur** · alt grid Tarih · Aşı Paketi · Sil · Ekle · Kaydet.
+
+**NOT live:** **Oluştur** ve **Kaydet** **çalıştırılmadı**.
+
+**OBSERVED (UI handoff):** Global unvaccinated-patient tracking surface → patient-scoped vaccine program workflow handoff at UI level.
+
+**NOT VERIFIED:** aşısız sayılma algoritması · age/species eligibility · missed-dose detection · automatic campaign · SMS generation · schedule persistence.
+
+---
+
+### Muayene Özellikleri
+
+**OBSERVED — liste (reviewed clinic/account, ~29):** Kayıtlar **Özellik Tipi** başlıkları altında gruplanmış (ör. Dehidrasyon Derecesi · Lenf Yumruları); İşlemler · Adı · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Muayene Özellik Tanımı:** Durum · Özellik Tipi · Adı.
+
+**OBSERVED — Özellik Tipi dropdown örnekleri (tam enum değil):** Kıl Örtüsü Yapısı · Mukus Membranları · Lenf Yumruları · Dehidrasyon Derecesi · Genel Durum · Semptomlar · Hastalık Teşhisi · Bulaşıcı Hastalık.
+
+**OBSERVED (UI):** Configurable examination-property vocabulary grouped by visible examination property types.
+
+**NOT VERIFIED:** patient examination form render · scoring · required-field rules · diagnosis automation · clinical decision support.
+
+---
+
+### Semptomlar
+
+**OBSERVED — liste (reviewed clinic/account, ~1435):** Adı · Durum; Düzenle · Sil; Yeni Kayıt; search · pagination. Configurable reference-data management surface; list + **Yeni Kayıt** + **Düzenle** / **Sil** controls observed.
+
+**OBSERVED — Semptom Tanımı:** Durum · Adı · Kaydet · Kaydet / Yeni.
+
+**NOT live / NOT VERIFIED:** create · update · delete mutation behavior **exercised değil** · symptom–diagnosis mapping · coding standard · SNOMED.
+
+---
+
+### Teşhisler
+
+**OBSERVED — liste (reviewed clinic/account, ~1170):** Adı · Durum; Düzenle · Sil; Yeni Kayıt; search · pagination. Configurable reference-data management surface; list + **Yeni Kayıt** + **Düzenle** / **Sil** controls observed.
+
+**OBSERVED — Teşhis Tanımı:** Durum · Adı.
+
+**NOT live / NOT VERIFIED:** create · update · delete mutation behavior **exercised değil** · ICD/SNOMED/code mapping · structured coding · diagnosis hierarchy · symptom-to-diagnosis recommendation · automatic decision support.
+
+---
+
+### Operasyon Paketleri
+
+**OBSERVED — liste:** Yeni Kayıt; reviewed account’ta `Kayıt bulunamadı`.
+
+**OBSERVED — Operasyon Paket Tanımı:** Durum · Adı · satır grid Ürün · Miktar · Ücretsiz (checkbox) · Sil · Ekle · Kaydet.
+
+**NOT live:** Yeni paket **kaydedilmedi**.
+
+**OBSERVED (UI):** Operation package definition can bundle product/service lines with quantity and per-line free-of-charge flag.
+
+**NOT VERIFIED:** surgery workflow auto-population · stock deduction · invoice creation · package pricing · package execution semantics.
+
+---
+
+### Tedavi Paketleri
+
+**OBSERVED — liste:** Yeni Kayıt; reviewed account’ta `Kayıt bulunamadı`.
+
+**OBSERVED — Tedavi Paketi Tanımı:** Durum · Adı · satır alanları Ürün · Miktar · Birim · Periyodik Kullanım Süresi · Tedavi Süresi · Başlangıç Günü · Uygulama Yolu · Ücretsiz · Sil · Ekle · Kaydet. Süre alanlarında sayı + süre unit selector görünür.
+
+**NOT live:** Yeni kayıt **kaydedilmedi**.
+
+**OBSERVED (UI):** Treatment package definition supports reusable treatment-line configuration including quantity, unit, periodic-use duration, total treatment duration, start day, route and free-of-charge flag.
+
+**NOT VERIFIED:** schedule generation · medication administration record · nurse task creation · stock/billing effects · clinical validation · dose calculation.
+
+---
+
+### Tedavi Şablonları
+
+**OBSERVED — liste (reviewed clinic/account, 1 configured):** Adı · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Tedavi Şablonu Tanımı:** Durum · Adı · **İçerik** (büyük serbest metin) · Kaydet · Kaydet / Yeni.
+
+**OBSERVED (UI):** Reusable named text treatment template.
+
+**NOT VERIFIED:** rich-text structure · variable/token interpolation · automatic treatment creation · template versioning · smart fields.
+
+---
+
+### Tedavi Takip Parametreleri
+
+**OBSERVED — liste (reviewed clinic/account, 15 kayıt):** İşlemler · Adı · Veri Tipi · Birim · Normal Aralık / Seçenekler · Durum; **kategori/group header** gruplama (ör. Vital · Klinik · Lab · Diğer).
+
+**OBSERVED — örnek yapılar:** numeric vital + unit + normal range · selectable parameter + visible option values · text parameters · explanation-type parameter (liste örneklerinden; her tipin formu ayrıca doğrulanmadı).
+
+**OBSERVED — Tedavi Takip Parametre Tanımı:** Durum · Adı · Kategori · İkon · Veri Tipi · Kaydet · Kaydet / Yeni.
+
+**OBSERVED — Kategori dropdown:** Vital · Klinik · Lab · Davranış · Diğer.
+
+**OBSERVED — Veri Tipi dropdown:** Sayısal · Seçimli · Metin · Açıklama.
+
+**OBSERVED — İkon selector:** çeşitli clinic/medical style icon seçenekleri (backend kaynağı **tahmin edilmedi**).
+
+**OBSERVED — Sayısal seçildiğinde:** Birim · Min Değer · Max Değer alanları görünür.
+
+**OBSERVED — Seçimli seçildiğinde:** seçenek grid Sil · Metin · **Ekle**; yeni kayıt ekranında seçenek yokken `Kayıt bulunamadı`. Seçimli kayıt **kaydedilmedi**.
+
+**OBSERVED — Metin / Açıklama:** Veri tipi seçenekleri mevcut; Açıklama tipi kayıt formunda base fields + Veri Tipi görüldü; ek validation/rendering behavior **türetilmedi**.
+
+**OBSERVED (UI):** Configurable treatment-monitoring parameter model supports category, icon and multiple visible data types; numeric parameters expose unit/min/max, selectable parameters expose configurable option rows.
+
+**NOT VERIFIED:** patient chart rendering · alerting from min/max · abnormal-value flags · trend charts · automatic lab ingestion · scoring · package application persistence.
+
+---
+
+### Tedavi Takip Parametre Paketleri
+
+**OBSERVED — liste:** Yeni Kayıt; reviewed account’ta `Kayıt bulunamadı`.
+
+**OBSERVED — Paket Tanımı:** Durum · Adı · line grid Parametre · Gün · Günde Kaç Kez · Başlangıç Günü · Sil · Ekle · Kaydet.
+
+**NOT live:** Yeni kayıt **kaydedilmedi**.
+
+**OBSERVED (UI):** Parameter-package configuration can group treatment-monitoring parameters with day, frequency-per-day and start-day values.
+
+**NOT VERIFIED:** automatic schedule generation · observation task creation · treatment assignment behavior · reminders · patient persistence.
+
+---
+
+### Muayene — VETINITY IMPLICATION
+
+*(Nötr ders; backlog kararı veya MVP commitment değil.)*
+
+- Klinik vocabulary (semptom/teşhis/muayene özelliği) ve paket/template tanımlarının üst menü altında configurable master-data olarak sunulması, encounter ekranından ayrı admin yüzey ihtiyacını gösterir (E-Vet enforcement doğrulanmadı).
+- Treatment-monitoring parameter tipi (sayısal min/max, seçimli option grid) structured observation config ihtiyacına işaret eder (chart/alert engine iddiası yok).
+- Global reçete listesi + hasta bağlamı alanları, reçetenin hem registry hem clinical document yüzeyi olarak ele alındığını gösterir (resmi e-Reçete doğrulanmadı).
+
+---
+
+### Muayene — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog değiştirilmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| EXAM-001–015 | NO MATCH | Vetinity muayene **çalışma alanı** / encounter kaydı; E-Vet üst menü admin + global reçete listesi |
+| EXAM-006 | NO MATCH | Muayene şablonları (structured exam note); E-Vet **Tedavi Şablonları** serbest metin |
+| EXAM-007 | NO MATCH | Encounter-time bundle **uygulama**; E-Vet Tedavi/Operasyon **paket tanım** CRUD |
+| EXAM-010 | NO MATCH | In-exam quick link; global Reçete modülü değil |
+| RECORD-006 | NO MATCH | Unified dynamic record model; reference-data admin değil |
+
+**Potential gaps (kayıt açılmadı):** global prescription registry · ATS/HBS linkage · vaccine package/program admin · unvaccinated tracking handoff · treatment monitoring parameter schema · e-Reçete print/report reliability.
+
+---
+
+### Muayene — TBD / NOT OBSERVED
+
+e-Reçete successful print/PDF · Onayla persistence · ATS create/submit · aşı program rollout to patients · reminder/automation engines · reçete billing/stock · ICD/SNOMED · treatment package execution · monitoring alerts/trends · tenant scope · delete guards · audit guarantees.
+
 ---
 
 ## Laboratuvar navigation (üst domain)
@@ -3275,6 +3534,22 @@ Hasta Sahibi Değiştirme · Hasta Türleri · Hasta Irkları · Renkler · Hast
 
 **TBD:** [Hasta — TBD](#hasta--tbd--not-observed).
 
+### Muayene — REVIEWED / CLOSED
+
+Muayene üst domain (**13/13** global menü) **REVIEWED / CLOSED** (2026-10-01). **Anlamına gelmez:** e-Reçete/ATS resmi entegrasyon, successful prescription print, automation/reminder engines, stok/fatura side-effects veya clinical decision support doğrulanmıştır.
+
+Reçete · ATS Listesi · Aşı Paketleri · Aşı Programları · Aşılanmamış Hasta Takibi · Muayene Özellikleri · Semptomlar · Teşhisler · Operasyon Paketleri · Tedavi Paketleri · Tedavi Şablonları · Tedavi Takip Parametreleri · Tedavi Takip Parametre Paketleri.
+
+**Empty (reviewed account):** ATS (geniş tarih) · Aşı Programları · Operasyon/Tedavi paketleri · Tedavi Takip Parametre Paketleri listeleri.
+
+**NOT live:** Yeni reçete **Kaydet** (create/save) · Aşı Programı Oluştur/Kaydet · boş paket/parameter paket kayıtları · seçimli takip parametresi kaydı. **Reçete:** ~662 mevcut kayıt listelenmiş; mevcut detay + yeni form açıldı.
+
+**Reçete print caveat:** Yazdır rapor içeriği **InternalServerError** — successful rendering **not verified**.
+
+**Ayrı yüzeyler:** [Global Muayene Odası](#global-muayene-odası-modül) worklist **CLOSED**; [Hasta Kartı](#hasta-kartı--patient-workspace) muayene/aşı patient UI **CLOSED**.
+
+**TBD:** [Muayene — TBD](#muayene--tbd--not-observed).
+
 ### Finansal — REVIEWED / CLOSED
 
 Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
@@ -3310,7 +3585,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Ürün (modül)](#ürün-modül); 6/6 menü; Hızlı Fiyatlandırma live zam/rollback; davranışsal semantikler çoğunlukla NOT VERIFIED |
 | **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Müşteri (modül)](#müşteri-modül); 6/6 menü + Müşteri Kartı |
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Hasta (modül)](#hasta-modül); 8/8 menü; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı |
-| **Muayene** (üst domain config) | **PARTIAL** | |
+| **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Muayene (modül)](#muayene-modül); 13/13; [Global Muayene Odası](#global-muayene-odası-modül) ayrı |
 | **Laboratuvar** (üst domain config) | **PARTIAL** | |
 | **Genel / configuration** | NOT REVIEWED | |
 | **Hasta Kabul** (global landing) | **PARTIAL** | Landing alanları; tam operasyon **TBD** |
