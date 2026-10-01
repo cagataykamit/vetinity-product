@@ -21,9 +21,10 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Stok (üst domain)** — 12 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında; side-effect davranışları NOT OBSERVED); [kapsam](#stok-modül) ve [tracker](#review-tracker).
 - **Finansal (üst domain)** — 7 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında; save/posting ve bakiye/ledger etkileri NOT VERIFIED); [kapsam](#finansal-modül) ve [tracker](#review-tracker).
 - **Ürün (üst domain)** — 6 menü öğesi **REVIEWED / CLOSED** (2026-10-01; tüm ana menü ekranları incelendi; davranışsal side-effect ve uygulama semantiği çoğu alanda NOT VERIFIED); [kapsam](#ürün-modül) ve [tracker](#review-tracker).
-- **Müşteri (üst domain)** — 6 menü öğesi + Müşteri Kartı derin inceleme **REVIEWED / CLOSED** (2026-10-01; global menü ve kart shell kapsamında; çoğu save/posting ve entegrasyon semantiği NOT VERIFIED); [kapsam](#müşteri-modül) ve [tracker](#review-tracker). **global Hasta** üst menüsü bu turda **CLOSED değil** — [Next Review Queue](#next-review-queue).
+- **Müşteri (üst domain)** — 6 menü öğesi + Müşteri Kartı derin inceleme **REVIEWED / CLOSED** (2026-10-01; global menü ve kart shell kapsamında; çoğu save/posting ve entegrasyon semantiği NOT VERIFIED); [kapsam](#müşteri-modül) ve [tracker](#review-tracker).
+- **Hasta** (üst domain — reference data) — 8 menü öğesi **REVIEWED / CLOSED** (2026-10-01; global üst menü configuration/owner-transfer yüzeyleri; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#hasta-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** global Hasta üst menü review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -50,6 +51,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
+| **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -86,7 +88,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED) |
 
 ---
 
@@ -2915,6 +2917,148 @@ Ledger/accounting engine · payment settlement/gateway · bank reconciliation ·
 - Cinsiyetler
 - Hasta Grupları
 
+*(Ekran bazlı inceleme ve status → [Hasta (modül)](#hasta-modül). Patient clinical workspace → [Hasta Kartı / Patient Workspace](#hasta-kartı--patient-workspace).)*
+
+---
+
+## Hasta (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-01).
+
+**Kapsam notu:** Bu bölüm **üst menü Hasta** alanını kapsar (reference/configuration + owner transfer). **Hasta Kartı / Patient Workspace** ayrı pass’te **REVIEWED / CLOSED**; klinik hasta bulma/liste davranışı [Hasta Kabul](#landing--hasta-kabul) ve müşteri bağlantılı workspace’lerde ayrı ele alınmıştır.
+
+**CLOSED anlamı:** 8/8 global menü ekranı incelendi. **Anlamına gelmez:** owner transfer side-effect’leri, reference-data scope (tenant/clinic), delete dependency, age-group auto-classification, breed predisposition clinical rules veya patient-group business semantics doğrulanmıştır.
+
+**UI organization (OBSERVED):** Bu üst menüde doğrudan **Hasta Listesi** ekranı gözlemlenmedi; menü ağırlıklı olarak patient reference/configuration data ve **Hasta Sahibi Değiştirme** operasyonundan oluşuyor.
+
+### Global menü envanteri (8/8)
+
+| # | Ekran | Reviewed clinic/account | Not |
+|---|---|---|---|
+| 1 | Hasta Sahibi Değiştirme | Form açıldı; **Kaydet çalıştırılmadı** | Owner transfer operation UI |
+| 2 | Hasta Türleri | ~13 kayıt | Species/type config |
+| 3 | Hasta Irkları | ~503 kayıt | Tür altında gruplu |
+| 4 | Renkler | ~43 kayıt | Simple reference data |
+| 5 | Hasta Yaş Grupları | ~24 kayıt | Tür altında gruplu; gün aralığı |
+| 6 | Besin Tipleri | 9 kayıt | Nutrition type config |
+| 7 | Cinsiyetler | 6 kayıt | Gender vocabulary |
+| 8 | Hasta Grupları | **0 configured** (`Kayıt bulunamadı`) | Form açıldı; kayıt oluşturulmadı |
+
+### Hasta Sahibi Değiştirme
+
+**OBSERVED:** Ayrı operasyon ekranı — **Eski Sahip** (searchable/selectable) · **Hasta** (eski sahip bağlamında seçim) · **Yeni Sahip** (searchable/selectable) · **Kaydet** · **Geri Dön**. Canlı sahip değişikliği **yapılmadı**.
+
+**OBSERVED (UI):** Owner change, sıradan patient-profile edit alanı değil; explicit operasyon ekranı.
+
+**NOT VERIFIED:** ownership history · effective date · transfer reason · audit trail · approval · undo/reversal · old-owner access · clinical history transfer semantics · financial balance/invoice ownership · consent · notification · duplicate-owner handling · patient status transition · related records moving with the animal.
+
+### Hasta Türleri
+
+**OBSERVED — liste (reviewed clinic/account, ~13):** İşlemler · Adı · Öncelik No · Durum (Aktif/Pasif örnekleri); **Düzenle** · **Sil**; Yeni Kayıt.
+
+**OBSERVED — Hasta Tür Tanımı:** Durum · Adı · **İkon** · Öncelik No · Kaydet · Kaydet / Yeni.
+
+**NOT VERIFIED:** tenant/clinic/system-global scope · built-in values deletable · delete blocked by existing patient dependency. Bireysel tür adları katalog olarak kopyalanmadı.
+
+### Hasta Irkları
+
+**OBSERVED — liste (~503):** Patient type/species **grup başlıkları** altında breed satırları; İşlemler · Adı · Öncelik No · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Irk Tanımı:** Durum · **Hasta Türü** (configured types) · Adı · Öncelik No · **Predispozisyon Irkı** (selectable field) · Kaydet · Kaydet / Yeni.
+
+Breed definition contains a selectable field labelled **Predispozisyon Irkı**; the downstream clinical/business semantics were **not verified** (genetic predisposition · disease-risk mapping · clinical alerts · synonym mapping — iddia edilmez).
+
+### Renkler
+
+**OBSERVED — liste (~43):** İşlemler · Adı · Öncelik No · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Renk Tanımı:** Durum · Adı · Öncelik No · Kaydet · Kaydet / Yeni. Simple configurable patient reference data. Species-specific filtering · genetic/pedigree mapping NOT VERIFIED.
+
+### Hasta Yaş Grupları
+
+**OBSERVED — liste (~24):** Tür/species altında gruplu; kolonlar İşlemler · **Cinsiyet** · Adı · **Alt Gün** · **Üst Gün** · Öncelik No · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Hasta Yaş Grubu Tanımı:** Durum · Hasta Türü · Cinsiyet · Adı · Alt Gün · Üst Gün · Öncelik No · Kaydet · Kaydet / Yeni. Mevcut kayıt örnekleri yapısal olarak configured type + gender + label + lower/upper day boundary gösteriyor.
+
+**OBSERVED (configuration surface):** Species/gender/day-range based age-group configuration UI (`Hasta Türü + Cinsiyet + Ad + Alt Gün + Üst Gün`); basit enum değil.
+
+**OBSERVED — Cinsiyet dropdown (Yaş Grubu formu):** Bilinmiyor · Dişi · Erkek · Kısır · Kısırlaştırılmış Dişi · Kısırlaştırılmış Erkek (aynı vocabulary [Cinsiyetler](#cinsiyetler) ekranında da görüldü; shared backend/FK iddiası yok).
+
+**NOT VERIFIED:** automatic patient classification from birth date · age-group drives pricing/vaccination/protocols · recalculation rules.
+
+### Besin Tipleri
+
+**OBSERVED — liste (9 kayıt; görünen örnekler aktif):** İşlemler · Adı · Öncelik No · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Besin Tipi Tanımı:** Durum · Adı · Öncelik No · Kaydet · Kaydet / Yeni. Nutrition/feeding type reference data UI. Patient card linkage · dietary plan · product linkage NOT VERIFIED.
+
+### Cinsiyetler
+
+**OBSERVED — liste (6 kayıt, aktif):** İşlemler · Adı · Öncelik No · Durum; Yeni Kayıt. Visible vocabulary: Bilinmiyor · Dişi · Erkek · Kısır · Kısırlaştırılmış Dişi · Kısırlaştırılmış Erkek.
+
+**OBSERVED — Cinsiyet Tanımı:** Durum · Adı · Öncelik No · Kaydet · Kaydet / Yeni.
+
+**OBSERVED (UI model):** Gender/reproductive-status-like labels aynı reference listesinde sunuluyor; biological sex vs reproductive status ayrımı **yeniden yorumlanmadı** — E-Vet UI modeli olduğu gibi kaydedildi.
+
+### Hasta Grupları
+
+**OBSERVED — liste (reviewed clinic/account):** `Kayıt bulunamadı` (0 configured group). Kolonlar İşlemler · Kod · Adı · Durum; Yeni Kayıt.
+
+**OBSERVED — Hasta Grup Tanımı:** Durum · Kod · Adı · Kaydet · Kaydet / Yeni — **kayıt oluşturulmadı**.
+
+**NOT VERIFIED:** membership assignment · automatic grouping · reporting/pricing/reminder/campaign/clinical/hospitalization use · customer-group relation · permissions. Müşteri Grupları ile **aynı semantics varsayılmaz**.
+
+---
+
+### Hasta — Reference-data pattern (cross-screen)
+
+**OBSERVED UI pattern** (Türler · Irklar · Renkler · Besin Tipleri · Cinsiyetler · benzeri):
+
+- Liste: Yeni Kayıt · arama · pagination · İşlemler · Düzenle · Sil · Adı · Öncelik No · Durum
+- Tanım: Durum · Adı · (çoğunda) Öncelik No · Kaydet · Kaydet / Yeni
+- Domain-specific: Tür → İkon; Irk → Hasta Türü + Predispozisyon Irkı; Yaş Grubu → Hasta Türü + Cinsiyet + Alt/Üst Gün; Hasta Grubu → Kod
+
+Rakip UI/configuration observation; yeni `PATTERN-*` veya Vetinity implementation kararı değil.
+
+---
+
+### Hasta — Global menü vs Patient Workspace
+
+| Yüzey | Bu tur (üst menü Hasta) | Önceden CLOSED ([Hasta Kartı](#hasta-kartı--patient-workspace)) |
+|---|---|---|
+| Odak | Owner transfer · species/breed/color/age-group/nutrition/gender/patient-group **configuration** | Clinical/operational patient workspace (ziyaret, muayene, lab, PACS, aşı, dosya, ekstre, vb.) |
+| Hasta listesi | Üst menüde **gözlemlenmedi** | Hasta Kabul / müşteri bağlamı / kart navigasyonu |
+
+---
+
+### Hasta — VETINITY IMPLICATION
+
+*(Nötr ders; backlog kararı veya MVP commitment değil.)*
+
+- Species/breed/color gibi veterinary reference data için configurable master-data, hard-coded enum’lara göre tenant/domain flexibility sağlayabilir (E-Vet scope/enforcement doğrulanmadı).
+- Ownership transfer, normal patient editing’den farklı lifecycle/audit ihtiyaçları taşıyan **explicit operation** olarak ele alınabilir (E-Vet transfer semantics doğrulanmadı).
+- Age-group configuration, species ve gender vocabulary’sine bağlı rule-like reference data ihtiyacını gösteriyor (auto-classification engine iddiası yok).
+
+---
+
+### Hasta — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog değiştirilmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| UX-003 / UX-004 | NO MATCH | Vetinity IA (Türler/Irklar Tanımlar altında); E-Vet üst menü Hasta yapısı kanıtı değil |
+| PORTAL-002 | NO MATCH | Portal hayvan profili; global reference-data admin değil |
+| (owner transfer) | NO MATCH | Backlog’da dedicated owner-transfer ID yok; profile edit ≠ transfer operation |
+
+**Potential gaps (kayıt açılmadı):** owner transfer operation · species/breed/color/age-group/gender reference admin · patient groups · breed predisposition field semantics.
+
+---
+
+### Hasta — TBD / NOT OBSERVED
+
+Owner transfer side-effects · reference-data tenant/clinic scope · delete referential integrity · breed predisposition downstream use · age-group auto-calculation · nutrition type clinical linkage · patient group business use · retroactive config propagation · built-in vs custom value lifecycle.
+
 ---
 
 ## Muayene navigation (üst domain)
@@ -3115,9 +3259,21 @@ Müşteriler · Müşteri Ödemeleri · Müşteri Ekstreleri · Müşteri Satı�
 
 **Live:** Doğrudan Satış → Sms Gönder → Durum modal (SMS Id + success indicator; delivery NOT VERIFIED).
 
-**global Hasta** üst menü bu pass’te **CLOSED değil** — sıradaki ana alan.
-
 **TBD:** [Müşteri — TBD](#müşteri--tbd--not-observed).
+
+### Hasta — REVIEWED / CLOSED
+
+Hasta üst domain (**8/8** global menü) **REVIEWED / CLOSED** (2026-10-01). **Anlamına gelmez:** owner transfer audit/financial semantics, reference-data scope, delete guards, age-group automation, breed predisposition clinical rules veya patient-group business use doğrulanmıştır.
+
+Hasta Sahibi Değiştirme · Hasta Türleri · Hasta Irkları · Renkler · Hasta Yaş Grupları · Besin Tipleri · Cinsiyetler · Hasta Grupları.
+
+**Empty (reviewed account):** Hasta Grupları listesi (0 configured); üst menüde Hasta Listesi **gözlemlenmedi**.
+
+**NOT live:** Owner transfer Kaydet çalıştırılmadı; Hasta Grup kaydı oluşturulmadı.
+
+**Patient Workspace ayrı:** [Hasta Kartı](#hasta-kartı--patient-workspace) **CLOSED** — bu tracker global reference-data menüsünü kapsar.
+
+**TBD:** [Hasta — TBD](#hasta--tbd--not-observed).
 
 ### Finansal — REVIEWED / CLOSED
 
@@ -3152,8 +3308,8 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Ürün (modül)](#ürün-modül); 6/6 menü; Hızlı Fiyatlandırma live zam/rollback; davranışsal semantikler çoğunlukla NOT VERIFIED |
-| **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Müşteri (modül)](#müşteri-modül); 6/6 menü + Müşteri Kartı; global **Hasta** menüsü ayrı |
-| **Hasta** (üst domain, global) | **NOT REVIEWED** (NEXT) | Patient Card **CLOSED**; üst menü Hasta master/config **henüz systematic review yok** |
+| **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Müşteri (modül)](#müşteri-modül); 6/6 menü + Müşteri Kartı |
+| **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Hasta (modül)](#hasta-modül); 8/8 menü; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı |
 | **Muayene** (üst domain config) | **PARTIAL** | |
 | **Laboratuvar** (üst domain config) | **PARTIAL** | |
 | **Genel / configuration** | NOT REVIEWED | |
@@ -3177,8 +3333,8 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 10. ~~Finansal~~ — **CLOSED** ([Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting ve bakiye/ledger etkileri NOT VERIFIED)
 11. ~~Ürün~~ — **CLOSED** ([Ürün (modül)](#ürün-modül); 6/6 menü; davranışsal TBD'ler CLOSED kapsamını engellemez)
 12. ~~Müşteri~~ — **CLOSED** ([Müşteri (modül)](#müşteri-modül); 6/6 + Müşteri Kartı)
-13. **Hasta** (üst domain, global) — **NEXT** (Patient Card ayrı **CLOSED**; üst menü master-data henüz systematic değil)
-14. e-Fatura / e-SMM
+13. ~~Hasta~~ (üst domain — reference data) — **CLOSED** ([Hasta (modül)](#hasta-modül); 8/8; Patient Card ayrı **CLOSED**)
+14. **e-Fatura / e-SMM** — **NEXT**
 15. HBS
 16. VKY
 17. DataVet
