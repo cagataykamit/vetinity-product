@@ -21,8 +21,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Stok (üst domain)** — 12 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında; side-effect davranışları NOT OBSERVED); [kapsam](#stok-modül) ve [tracker](#review-tracker).
 - **Finansal (üst domain)** — 7 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında; save/posting ve bakiye/ledger etkileri NOT VERIFIED); [kapsam](#finansal-modül) ve [tracker](#review-tracker).
 - **Ürün (üst domain)** — 6 menü öğesi **REVIEWED / CLOSED** (2026-10-01; tüm ana menü ekranları incelendi; davranışsal side-effect ve uygulama semantiği çoğu alanda NOT VERIFIED); [kapsam](#ürün-modül) ve [tracker](#review-tracker).
+- **Müşteri (üst domain)** — 6 menü öğesi + Müşteri Kartı derin inceleme **REVIEWED / CLOSED** (2026-10-01; global menü ve kart shell kapsamında; çoğu save/posting ve entegrasyon semantiği NOT VERIFIED); [kapsam](#müşteri-modül) ve [tracker](#review-tracker). **global Hasta** üst menüsü bu turda **CLOSED değil** — [Next Review Queue](#next-review-queue).
 
-**Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** global Hasta üst menü review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -48,6 +49,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
+| **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -84,7 +86,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED) |
 
 ---
 
@@ -2718,6 +2720,186 @@ Satış zamanı tiered price seçimi · Excel import template/validation/duplica
 - Müşteri İade Faturaları
 - Müşteri Grupları
 
+*(Ekran bazlı inceleme ve status → [Müşteri (modül)](#müşteri-modül).)*
+
+---
+
+## Müşteri (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-01).
+
+**CLOSED anlamı:** Üst menüdeki 6 global ekran ve Müşteri Kartı shell’i (profil sekmeleri, müşteri-scoped sol menü, finansal/ekstre/rapor/sale/return/group yüzeyleri) incelendi. **Anlamına gelmez:** ledger/accounting engine, payment settlement, IYS/WhatsApp API entegrasyonu, SMS handset delivery, KVKK hukuki yeterlilik, aging bucket logic, return stock reversal, proforma→invoice conversion, RBAC veya immutable audit doğrulanmıştır.
+
+**Kanıt notu:** Canlı UI gözlemi; backend/domain çıkarımı yoktur. Gerçek müşteri/hasta adı, telefon, kimlik, adres, e-posta, SMS Id, ürün adı, fiyat ve vergi no dokümana taşınmadı. Ödeme tipleri ve Direct Sale davranışları için → [Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül). Randevu shell için → [Global Takvim (modül)](#global-takvim-modül). Patient workspace için → [Hasta Kartı / Patient Workspace](#hasta-kartı--patient-workspace). Devreden Bakiye / ekstre shell (hasta bağlamı) → [Ekstreler / finansal hareketler](#ekstreler--finansal-hareketler).
+
+### Global menü envanteri (6/6)
+
+| # | Ekran | Reviewed clinic/account | Not |
+|---|---|---|---|
+| 1 | Müşteriler | ~4318 kayıt | Directory → Müşteri Kartı |
+| 2 | Müşteri Ödemeleri | ~5487 kayıt | Global payment list |
+| 3 | Müşteri Ekstreleri | ~10941 kayıt | Global statement lines |
+| 4 | Müşteri Satış Faturaları | Müşteri filtresi zorunlu | Print variants |
+| 5 | Müşteri İade Faturaları | Liste **empty** | Yeni form açıldı; save yok |
+| 6 | Müşteri Grupları | 4 configured group | Ürün İndirimleri ile UI linkage |
+
+### Müşteriler — global liste
+
+**OBSERVED:** Serbest metin arama · Ara · Temizle · pagination · yaklaşık **4318** kayıt. Kolonlar: Adı · Kayıt Tarihi · Protokol No · Kart No · Gsm · Email · Şehir · Borç · Ödeme · Bakiye · Durum (ör. **Aktif**). Müşteri adına tıklanınca **Müşteri Kartı** açılıyor. Yalnızca müşteri directory/master list UI kanıtı (CRM pipeline, merge, householding iddiası yok).
+
+### Müşteri Kartı — shell
+
+**OBSERVED — üst özet:** müşteri adı · Borç · Ödeme · Bakiye · **+ Hasta** · **Sms** · **Sil**.
+
+**OBSERVED — ana sekmeler:** Ana · İletişim · Adres · Özel · Notlar.
+
+**OBSERVED — Hastalar paneli:** **Aktif** · **Pasif / Vefat / Sahibi Değişmiş** (tam lifecycle modeli NOT VERIFIED).
+
+**OBSERVED — sol operasyon menüsü (müşteri-scoped workspace):**
+
+- *Finansal:* Ödeme Geçmişi (+) · Doğrudan Satış Geçmişi (+) · Bakiye İndirim Geçmişi (+) · Proformalar (+) · Ekstreler >
+- *Randevu & Muayene:* Randevular (+) · Muayene Geçmişi
+- *Diğer:* Dosyalarım · Whatsapp · KVKK · Ana sayfa
+
+Müşteri Kartı yalnız CRUD profil değil; müşteri bağlamında finansal, randevu, klinik geçmiş, dosya, iletişim ve consent yüzeylerine erişim sağlayan **workspace/shell** (domain architecture kararı değil).
+
+#### Ana sekme
+
+**OBSERVED:** Adı Soyadı · Protokol No · Kart No · Gsm · Kimlik No · Mobil Kullanıcı Adı · Mobil Şifre (masked) · Doğum Tarihi · İletişim Tipi · Açıklama. İletişim Tipi’nde kanal tag’leri (ör. SMS · Email). Mobil şifre yanında dairesel aksiyon ikonu (reset/regenerate **test edilmedi** — action icon observed only). Hastalar paneli Ana altında da görünür.
+
+#### İletişim sekme
+
+**OBSERVED:** Erişilebilir İletişim (kanal tag’leri; GSM · Email örneği) · Email · Tel 1 · Tel 1 Hakkında · Tel 2 · Tel 2 Hakkında · ülke kodu · **IYS** · **IYS’ye Kayt** (buton gözlendi; **çalıştırılmadı**). IYS workflow · consent sync · status query · opt-in/out lifecycle NOT VERIFIED.
+
+#### Adres sekme
+
+**OBSERVED:** Ülke · Şehir · İlçe · Köy - Mahalle · Adres · **Harita Üzerindeki Konumu**. Harita UI · “Seçime Başla” benzeri seçim akışı · attribution **Leaflet / OpenStreetMap** render. Reverse geocoding · coordinate persistence · address validation · map provider architecture · routing NOT VERIFIED.
+
+#### Özel sekme
+
+**OBSERVED:** Durum · Beni Uyar · Müşteri Grubu · Meslek · İlgili Kişi · Sahiplenmek İster · Sahiplenme Bilgisi · Tüzel Mi · Tüzel Adı (Ünvan) · Vergi No · Vergi Dairesi · Bilgi · Pasif Nedeni. Customer metadata/profile capability. “Beni Uyar” davranışı NOT VERIFIED. Tüzel alanlar aynı kartta; ayrı corporate-account architecture iddiası yok.
+
+#### Notlar sekme
+
+**OBSERVED:** Satır bazlı not grid — Sil · Not Tarihi · Oluşturan · Not · **Ekle**. Note permissions · history/versioning · audit immutability NOT VERIFIED.
+
+### Ödeme Geçmişi (müşteri-scoped)
+
+**OBSERVED:** Tarih aralığı · liste · işlem menüsü · footer toplamları. Kolonlar: İşlemler · İşlem Tipi · Oluşturan · İşlem Tarihi · Hasta · İşlem No · Borç · Ödeme (ör. işlem sınıfları: **Doğrudan Satış Fatura Ödemesi** vb.). **İşlemler:** Düzenle · Ödeme Fişi · Sil. Ödeme Fişi → print/report render (ödeme tipi · tutar · toplam · PDF/download/print UI). Settlement/accounting iddiası yok.
+
+### Global Müşteri Ödemeleri
+
+**OBSERVED:** Tarih Aralığı · Arama Metni · Ara · Temizle · yaklaşık **5487** kayıt. Kolonlar: İşlemler · İşlem Tipi · İşlem Tarihi · Müşteri · Hasta Adı · İşlem No · Borç · Ödeme. İşlem tipleri (ör.): **Ziyaret Fatura Ödemesi** · **Genel Ödeme** · **Doğrudan Satış Fatura Ödemesi**. **İşlemler:** Düzenle · Sil. Detay örneği: ziyaret/satış toplamı · ödeme toplamı · İşlem No · Açıklama · Ödeme Detayları (Ödeme Tipi · İşlem Tarihi · Makbuz No · Tutar · kasa · Belge No · Ekle · Kaydet). Ödeme tipleri → [Global Doğrudan Satış (modül)](#global-doğrudan-satış-modül) (Nakit/Kredi Kartı/Çek/Senet/Banka Transferi Ödeme; duplicate prose yok).
+
+### Doğrudan Satış Geçmişi (müşteri-scoped)
+
+**OBSERVED:** Tarih aralığı · örnekte 2 kayıt · expand row (ürün satırları: Ürün · Toplam · Miktar · Birim · Depo; ödeme satırları: Ödeme Tipi · Tutar · Makbuz No · Kasa · Banka · Banka Hesabı · Pos Hesabı). **İşlemler (OBSERVED):** İncele · Düzenle · Ödeme · **Sms Gönder** · Kopyala · Fatura (3 lü) · Fatura · Bilgi Fişi · Hesap Ekstresi · Hesap Ekstresi (Detaylı) · Sil. Authorization · delete dependency · invoice numbering · fiscal finalization NOT VERIFIED.
+
+#### SMS (Doğrudan Satış Geçmişi)
+
+**OBSERVED — live interaction:** **Sms Gönder** sonrası **Durum** modalı — hesap/müşteri etiketi · GSM · **SMS Id** · yeşil check indicator. *SMS action returned a status modal containing a generated SMS ID and a green success indicator; downstream carrier delivery semantics were not verified.* Gerçek SMS Id/GSM dokümanda yok.
+
+#### WhatsApp (Müşteri Kartı)
+
+**OBSERVED:** Whatsapp aksiyonu/ekranı kişiye mesaj için **WhatsApp handoff** (rich in-app inbox/thread manager gözlemlenmedi). [Global Takvim (modül)](#global-takvim-modül) WhatsApp Web handoff ile uyumlu. Official WhatsApp Business API · server-side send · delivery/read sync · conversation history sync NOT VERIFIED.
+
+### Bakiye İndirim Geçmişi (müşteri-scoped)
+
+**OBSERVED:** **Kayıt bulunamadı** (empty). Kolonlar: İşlemler · İşlem Tarihi · Toplam · Açıklama · plus/new. **Yeni Bakiye İndirimi** formu: Müşteri Bakiyesi · İşlem Tarihi · İskonto · Açıklama · Kaydet — **kayıt yapılmadı**. Balance mutation · ledger · discount accounting · undo/reversal NOT VERIFIED (balance adjustment UI exists).
+
+### Proformalar (müşteri-scoped)
+
+**OBSERVED liste:** empty · İşlemler · İşlem Tarihi · Veteriner · Oluşturan · Toplam · plus/new. **Yeni Proforma:** İşlem Tarihi · Veteriner · Açıklama · Barkod/QR · Depo · Ürün · Miktar · Fiyat · İskonto · Toplam · Ekle · Operasyon Paketi... · Genel İndirim · Genel Toplam · Kaydet — **kayıt yapılmadı**. Estimate/proforma authoring shell. Conversion · approval · expiration · deposit · invoice conversion NOT VERIFIED.
+
+### Ekstreler (müşteri-scoped)
+
+**OBSERVED submenu:** Ekstreler · Hesap Ekstresi · Hesap Ekstresi (Detaylı) · **Yaşlandırma**.
+
+**Ekstreler listesi:** tarih aralığı · **Giriş / Çıkış** direction badges · işlem tipi · açıklama · işlem tarihi · fatura no · hasta · toplam · expandable rows (ürün + ödeme satırları). Giriş/Çıkış = UI presentation; accounting debit/credit model iddiası yok.
+
+**Hesap Ekstresi raporu:** Tarih Aralığı · **Devreden Bakiye** · Filtrele · PDF · download · print; render kolonları (hareket tipi · fatura/makbuz no · iskonto · borç · ödeme · bakiye vb.). Devreden Bakiye semantics → [Ekstreler / finansal hareketler](#ekstreler--finansal-hareketler) (NOT VERIFIED).
+
+**Hesap Ekstresi (Detaylı):** Aynı filtre shell; satır altında ürün/service · depo · miktar · birim fiyat/tutar benzeri detay + ödeme kasa/tutar detayı — summary vs detailed statement ayrımı OBSERVED.
+
+**Yaşlandırma:** Müşteri · gsm · borç · ödeme · bakiye + fatura tarihi/tipi/tutar/ödenen/kalan satırları; PDF/download/print. Klasik 0–30 / 31–60 / 61–90 **aging bucket kolonları gözlemlenmedi** — bucket logic · overdue classification · due date engine NOT VERIFIED.
+
+### Global Müşteri Ekstreleri
+
+**OBSERVED:** Tarih aralığı · arama · yaklaşık **10941** kayıt. Kolonlar: İşlemler · İşlem Tipi · Açıklama · İşlem Tarihi · Fatura No · Müşteri · Bakiye · Hasta Adı · Veteriner · Toplam. İşlem Tipi **Giriş / Çıkış** badge’leri. **Düzenle** row action. Customer-scoped Ekstreler ile cross-reference.
+
+### Müşteri Satış Faturaları (global)
+
+**OBSERVED:** Tarih Aralığı · **Müşteri** (zorunlu; boşken validation). Liste: İşlem Tipi · İşlem Tarihi · Fatura No · Toplam · Yazdırıldı · Yazdırılma Tarihi · Hasta · Veteriner (ör. **Doğrudan Satış** · **Ziyaret Faturası**). Üst: **Fatura** · **Fatura (3 lü)**; checkbox seçimi.
+
+### Fatura / print variants
+
+**OBSERVED (bu tur):** Satış Faturası · Üçlü Satış Faturası (üç kopya layout) · Toplu Satış Faturası (tarih · fatura öneki/no · Filtrele · Onayla) · Bilgi Fişi · Ödeme Fişi. Genel: printable render · PDF · download · print. Satış Faturası’nda invoice prefix/no · **Onayla** alanları görüldü. Fiscal issuance · tax authority · e-Fatura · immutable invoice number assignment iddiası yok.
+
+### Müşteri İade Faturaları (global)
+
+**OBSERVED liste (empty):** Tarih aralığı · arama · Ara · Temizle · Yeni Kayıt. Kolonlar: İşlemler · İşlem Tarihi · Fatura No · Müşteri · Genel Toplam · Ödeme · Bakiye.
+
+**OBSERVED — Yeni İade Faturası (save yok):** Müşteri · İşlem Tarihi · Fatura No · **Stok Hareketini Engelle** (Evet/Hayır) · Açıklama · Barkod/QR · Depo · Ürün · Miktar · Fiyat · İskonto · Toplam · Ekle · genel indirim/totals. Return stock reversal · original-sale matching · refund · credit note · e-invoice return NOT VERIFIED.
+
+### Müşteri Grupları (global)
+
+**OBSERVED:** **4** configured customer group; İşlemler · Kod · Adı · Durum; Düzenle · Sil; Yeni Kayıt. **Tanım:** Durum · Kod · Adı · Kaydet · Kaydet / Yeni. [Ürün (modül)](#ürün-modül) Ürün İndirimleri formunda Müşteri Grubu selector linkage (UI). Automatic pricing · discount precedence · inheritance · auto membership NOT VERIFIED.
+
+### Randevular (müşteri-scoped)
+
+**OBSERVED:** Seçili müşteride liste empty. Kolonlar (ör.): İşlemler · Tarih · Hasta · Aşı Paketi · Görev Tipi · Açıklama · Bölüm. **Yeni Randevu:** Görev Tipi · Bölüm · Veteriner · Durum · Tarih · Süre (dk) · Hasta · Aşı Paketi · Bilgi · Açıklama · Kaydet. Durum: **Randevu** · **Gelmedi** · **Tamamlandı**. Randevu workflow → [Global Takvim (modül)](#global-takvim-modül); müşteri kartından erişim ayrıca kayıtlı.
+
+### Muayene Geçmişi (müşteri-scoped)
+
+**OBSERVED:** Tarih aralığı · seçili müşteride **empty**. Kolonlar: İşlem Tarihi · Hasta · Veteriner · Teşhis · Açıklama · Toplam. Müşteri seviyesinde clinical-history aggregation entry point; encounter detail navigation NOT VERIFIED.
+
+### Dosyalarım (müşteri-scoped)
+
+**OBSERVED:** empty · İşlem Tarihi · Bilgi · Dosya · search · Ekle · Kaydet. [Dosyalarım (attachments)](#dosyalarım-attachments) patient pattern ile benzer; customer-scoped attachment UI. Storage/version/MIME/ACL NOT VERIFIED.
+
+### KVKK (müşteri-scoped)
+
+**OBSERVED:** Printable **KVKK consent/report** — clinic-specific consent text (metin **kopyalanmadı**) · Kabul Ediyorum / Kabul Etmiyorum checkbox’ları · Veri Sahibi · Adı Soyadı · Tarih · İmza; PDF/download/print. *Customer-scoped printable KVKK consent template/report observed.* Legal adequacy requires independent validation. Digital capture · revocation · valid consent workflow iddiası yok.
+
+---
+
+### Müşteri — önemli gözlemler
+
+**OBSERVED UI composition:** Tek müşteri context’inde master/profile · linked patients · payments · direct sales · balance adjustments · proformas · statements/reports · appointments · exam history · files · WhatsApp handoff · KVKK erişilebilir.
+
+**INFERRED (dikkatli):** Müşteri alanı, gözlenen UI’da operasyonel ve finansal işler için context-preserving launch point işlevi görüyor (backend “customer workspace” modeli iddiası değil).
+
+---
+
+### Müşteri — VETINITY IMPLICATION
+
+*(Nötr ürün dersi; implementation kararı veya E-Vet kopyalama değil.)*
+
+- Customer workspace, ilgili finansal, iletişim ve klinik workflow’lara context koruyarak geçiş için değerlendirilebilir.
+- Statement/invoice print variants çok sayıda; hangi belgenin resmi/fiscal olduğu kullanıcıya net olmalı (E-Vet’te doğrulanmadı).
+- Aging adı vs içerik uyumu kullanıcı beklentisi riski taşıyabilir.
+- IYS/KVKK/SMS yüzeyleri compliance review gerektirir; UI varlığı yeterlilik kanıtı değildir.
+
+---
+
+### Müşteri — Backlog cross-reference
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| CHECKOUT-001 | NO MATCH | Ziyaret checkout orkestrasyonu ≠ müşteri ödeme listesi |
+| PORTAL-005 | NO MATCH | Dijital onam/imza ≠ printable KVKK şablonu |
+| INT-005 | NO MATCH | e-Fatura/e-SMM ≠ fatura print UI |
+| REPORT-007 | NO MATCH (ek not gerekmez) | Zaten Rapor/ekstre export shell; müşteri kanıtı aynı capability family — competitor evidence bu belgede |
+| APPT-* | NO MATCH | Online booking backlog; klinik içi randevu shell Takvim’de |
+
+**Potential backlog gaps (kayıt açılmadı):** customer master/workspace · customer-scoped financial history · balance discount UI · proforma · customer return invoice · aging/receivables report semantics · customer group segmentation.
+
+---
+
+### Müşteri — TBD / NOT OBSERVED
+
+Ledger/accounting engine · payment settlement/gateway · bank reconciliation · discount precedence/stacking · customer-group automatic pricing · invoice fiscal finalization · e-Fatura mapping · IYS lifecycle · SMS delivery/read/retry · WhatsApp API · map geocoding persistence · mobile login integration · soft/hard delete · RBAC · return stock reversal · proforma conversion · aging buckets · concurrent edit on payments · audit immutability · Giriş/Çıkış = debit/credit · Bakiye = immutable ledger balance.
+
 ---
 
 ## Hasta navigation (üst domain)
@@ -2923,6 +3105,20 @@ Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş 
 
 **TBD / NOT OBSERVED:** [Ürün — TBD](#ürün--tbd--not-observed).
 
+### Müşteri — REVIEWED / CLOSED
+
+Müşteri üst domain (**6/6** global menü) ve **Müşteri Kartı** derin inceleme **REVIEWED / CLOSED** (2026-10-01). **Anlamına gelmez:** IYS/SMS delivery, WhatsApp API, KVKK legal adequacy, aging buckets, return accounting veya ledger semantics doğrulanmıştır.
+
+Müşteriler · Müşteri Ödemeleri · Müşteri Ekstreleri · Müşteri Satış Faturaları · Müşteri İade Faturaları · Müşteri Grupları · Müşteri Kartı (profil + müşteri-scoped menü).
+
+**Empty (reviewed account):** Müşteri İade Faturaları listesi; seçili müşteride Randevular / Muayene Geçmişi / Bakiye İndirim / Proformalar / Dosyalarım empty örnekleri.
+
+**Live:** Doğrudan Satış → Sms Gönder → Durum modal (SMS Id + success indicator; delivery NOT VERIFIED).
+
+**global Hasta** üst menü bu pass’te **CLOSED değil** — sıradaki ana alan.
+
+**TBD:** [Müşteri — TBD](#müşteri--tbd--not-observed).
+
 ### Finansal — REVIEWED / CLOSED
 
 Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
@@ -2956,8 +3152,8 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
 | **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Ürün (modül)](#ürün-modül); 6/6 menü; Hızlı Fiyatlandırma live zam/rollback; davranışsal semantikler çoğunlukla NOT VERIFIED |
-| **Müşteri** (global) | **PARTIAL / NOT SYSTEMATIC** | |
-| **Hasta** (üst domain, global) | **PARTIAL** | Patient Card **CLOSED**; master-data ekranları ayrı |
+| **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Müşteri (modül)](#müşteri-modül); 6/6 menü + Müşteri Kartı; global **Hasta** menüsü ayrı |
+| **Hasta** (üst domain, global) | **NOT REVIEWED** (NEXT) | Patient Card **CLOSED**; üst menü Hasta master/config **henüz systematic review yok** |
 | **Muayene** (üst domain config) | **PARTIAL** | |
 | **Laboratuvar** (üst domain config) | **PARTIAL** | |
 | **Genel / configuration** | NOT REVIEWED | |
@@ -2980,16 +3176,17 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 9. ~~Stok~~ — **CLOSED** ([Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED)
 10. ~~Finansal~~ — **CLOSED** ([Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting ve bakiye/ledger etkileri NOT VERIFIED)
 11. ~~Ürün~~ — **CLOSED** ([Ürün (modül)](#ürün-modül); 6/6 menü; davranışsal TBD'ler CLOSED kapsamını engellemez)
-12. **Müşteri / global Hasta** — **NEXT**
-13. e-Fatura / e-SMM
-14. HBS
-15. VKY
-16. DataVet
-17. İlaç Rehberi
-18. Nekropsi
-19. Mobil Uygulamalar
-20. Katalog / Dokümanlar
-21. Genel / configuration
+12. ~~Müşteri~~ — **CLOSED** ([Müşteri (modül)](#müşteri-modül); 6/6 + Müşteri Kartı)
+13. **Hasta** (üst domain, global) — **NEXT** (Patient Card ayrı **CLOSED**; üst menü master-data henüz systematic değil)
+14. e-Fatura / e-SMM
+15. HBS
+16. VKY
+17. DataVet
+18. İlaç Rehberi
+19. Nekropsi
+20. Mobil Uygulamalar
+21. Katalog / Dokümanlar
+22. Genel / configuration
 
 ---
 
@@ -3030,7 +3227,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam); **Finansal** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only UI kapsamı); **Ürün** üst domain **REVIEWED / CLOSED** (2026-10-01; 6/6 menü). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam); **Finansal** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only UI kapsamı); **Ürün** üst domain **REVIEWED / CLOSED** (2026-10-01; 6/6 menü); **Müşteri** üst domain **REVIEWED / CLOSED** (2026-10-01; 6/6 + Müşteri Kartı). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 

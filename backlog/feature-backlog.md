@@ -2208,7 +2208,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
-| **Notlar** | Trial'da gerçek SMS sınırlandırılır. **E-Vet SMART:** Takvim SMS bakiye; Hatırlatma / Düzenle modal gönder / Sms Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-takvim-modül) |
+| **Notlar** | Trial'da gerçek SMS sınırlandırılır. **E-Vet SMART:** Takvim SMS bakiye; Hatırlatma / Düzenle modal gönder / Sms Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-takvim-modül). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Doğrudan Satış Geçmişi **Sms Gönder** → Durum modal (SMS Id + success indicator); carrier delivery **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
 ### INT-004 — WhatsApp entegrasyonu
 
@@ -2224,7 +2224,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma) |
+| **Notlar** | **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Whatsapp — person-message handoff (in-app inbox **gözlemlenmedi**); API/server-side **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
 ### INT-005 — e-Fatura / e-SMM
 
