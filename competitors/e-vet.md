@@ -20,8 +20,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Rapor (üst domain)** — Rapor Özellikleri, Genel, Randevu, Resmi, Depo, Finansal **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti ve yetki sınırları içinde; ACCESS-BLOCKED alt raporlar explicit); [kapsam](#rapor) ve [tracker](#review-tracker).
 - **Stok (üst domain)** — 12 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only etkileşimler kapsamında; side-effect davranışları NOT OBSERVED); [kapsam](#stok-modül) ve [tracker](#review-tracker).
 - **Finansal (üst domain)** — 7 menü öğesi **REVIEWED / CLOSED** (2026-09-30; erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında; save/posting ve bakiye/ledger etkileri NOT VERIFIED); [kapsam](#finansal-modül) ve [tracker](#review-tracker).
+- **Ürün (üst domain)** — 6 menü öğesi **REVIEWED / CLOSED** (2026-10-01; tüm ana menü ekranları incelendi; davranışsal side-effect ve uygulama semantiği çoğu alanda NOT VERIFIED); [kapsam](#ürün-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** tam Ürün modül review, Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -46,6 +47,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Rapor → Finansal** | **REVIEWED / CLOSED** (2026-09-29) |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) |
+| **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -82,7 +84,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED) |
 
 ---
 
@@ -932,13 +934,13 @@ Aynı ekran **değildir**; ilişkili randevu capability'sinin farklı context y�
 
 ---
 
-### Destekleyici inceleme — Ürün Tanımı (PARTIAL, modül CLOSED değil)
+### Destekleyici inceleme — Ürün Tanımı (öncül destek notu)
 
-**Amaç:** Direct sale miat davranışını anlamak; **Global Ürün modülü review kapatılmadı**.
+**Not:** Doğrudan Satış / miat kanıtı için öncül not; Ürün üst menüsünün tam incelemesi → [Ürün (modül)](#ürün-modül).
 
-**OBSERVED — Ürün Tanımı (seçilmiş alanlar):** İçerik Tipi · Ürün Tipi · Ürün Grubu · Ürün Alt Grubu · Adı · Durum · Birim · Çarpan · Barkod-1 · Barkod-2 · Hasvet Kodu · Reçete Ürünü mü? · Alış/Satış fiyatları · Alış/Satış KDV · KDV dahil bayrakları · **Stok Durum Kontrolü** · **Miat Kontrolü** (Evet/Hayır) · Minimum/Maksimum/Alarm Miktarı · Aşı Paketi Var Mı · Fiyat Aralık Listesi.
+**OBSERVED — Ürün Tanımı (seçilmiş alanlar; özet):** İçerik Tipi · Ürün Tipi · Ürün Grubu · Ürün Alt Grubu · Adı · Durum · Birim · Çarpan · Barkod-1 · Barkod-2 · Hasvet Kodu · Reçete Ürünü mü? · Alış/Satış fiyatları · Alış/Satış KDV · KDV dahil bayrakları · **Stok Durum Kontrolü** · **Miat Kontrolü** (Evet/Hayır) · Minimum/Maksimum/Alarm Miktarı · Aşı Paketi Var Mı · Fiyat Aralık Listesi.
 
-**OBSERVED:** **Miat Kontrolü** ürün bazında — expiry zorunluluğu **conditional** (her ürün için zorunlu değil).
+**OBSERVED:** **Miat Kontrolü** ürün bazında — expiry zorunluluğu **conditional** (her ürün için zorunlu değil). Ayrıntılı ürün master, taxonomy ve fiyatlandırma → [Ürün (modül)](#ürün-modül).
 
 ---
 
@@ -2266,7 +2268,7 @@ Exact export format list (PDF dışı) · cloud/download icon semantics · Excel
 
 **OBSERVED — Düzenle (mevcut kayıt):** Ürün + depo aynı seçim metninde; miktar/faktör · birim; miat izlenen üründe **Miat** alanı görünür (mevcut miatlı ürün düzenlenebilir formda açıldı). Ortalama Maliyet ve Seri No bu bağlamda ayrıca gözlemlenmedi (yalnızca İncele modalında görüldü); düzenleme sonrası save doğrulanmadı.
 
-**Bağlam (öncül gözlemlerle tutarlı):** Ürün tanımında Miat Kontrolü Evet/Hayır; miat izlenen ürünlerde purchase-side/stok ekranlarında Miat alanı ([Ürün Tanımı](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil)). Bu turda lot/batch alanı doğrulanmadı; **Seri No ≠ lot/batch**; FEFO/FIFO enforcement iddiası yok.
+**Bağlam (öncül gözlemlerle tutarlı):** Ürün tanımında Miat Kontrolü Evet/Hayır; miat izlenen ürünlerde purchase-side/stok ekranlarında Miat alanı ([Ürün Tanımı](#destekleyici-inceleme--ürün-tanımı-öncül-destek-notu)). Bu turda lot/batch alanı doğrulanmadı; **Seri No ≠ lot/batch**; FEFO/FIFO enforcement iddiası yok.
 
 ### Stok Çıkış
 
@@ -2559,6 +2561,150 @@ gerçek save/posting · banka/kasa bakiye etkisi · double-entry muhasebe · ext
 - Ürün Grupları
 - Ürün Alt Grupları
 
+*(Ekran bazlı inceleme ve status → [Ürün (modül)](#ürün-modül).)*
+
+---
+
+## Ürün (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-01).
+
+**CLOSED anlamı:** Ürün üst menüsündeki tüm ana ekranlar incelendi. **Anlamına gelmez:** indirim precedence, type-default inheritance, cascade filtering, satış zamanı fiyat/indirim seçimi, Excel import/export doğrulama, barkod standardı uyumu, e-SMM resmi mapping, stok/expiry enforcement, yetki modeli veya diğer davranışsal semantikler live olarak doğrulanmıştır.
+
+**Kanıt notu:** Canlı UI gözlemi; backend entity/table/architecture çıkarımı yoktur. Gerçek ürün adları, fiyatlar, barkodlar ve müşteri adları dokümana taşınmadı.
+
+### Ekran durumu (6/6)
+
+| Alt ekran | Reviewed clinic/account durumu | Gözlem düzeyi |
+|---|---|---|
+| Ürünler | Çok sayıda kayıt (binlerce) | Liste + İncele/Düzenle/QRCode/Sil + import/export + barkod |
+| Hızlı Fiyatlandırma | Filtrelenmiş ürün satırları | Toplu zam UI + **live** `%1` apply → Zam Geçmişi → Geri al |
+| Ürün İndirimleri | Liste **empty in reviewed clinic/account** | Tanım formu; kayıt save edilmedi |
+| Ürün Tipleri | 14 kayıt | Liste + Tip Tanımı |
+| Ürün Grupları | 219 kayıt | Liste + Grup Tanımı |
+| Ürün Alt Grupları | 49 kayıt (liste üst gruplar altında gruplu) | Liste + Alt Grup Tanımı |
+
+### Ürünler
+
+**OBSERVED — Ürün Listesi:** Durum filtresi · Arama Metni · Ara · Temizle · **İçe / Dışa Aktar** · **Barkod** · Yeni Kayıt. Reviewed hesapta çok sayıda (binlerce) ürün kaydı vardı. Kolonlar: İşlemler · Ürün Tipi · Ana Grup · Adı · Birim · Çarpan · Barkod-1 · Barkod-2 · Alış Fiyatı · Satış Fiyatı · Durum. **İşlemler:** İncele · Düzenle · QRCode · Sil.
+
+**OBSERVED — İncele:** Ürün özet bilgileri bölümlenmiş modal. Alanlar (gözlenen set): İçerik Tipi · Ürün Tipi · Adı · Durum · Ürün Grubu · Ürün Alt Grubu · Bilgi · Kod · Birim · Çarpan · Barkod-1 · Barkod-2 · Hasvet Kodu · Reçete Ürünü mü? (Kliniğim Shop) · Alış Fiyatı · Alış KDV Oranı · Alış Fiyatına KDV Dahil · Satış Fiyatı · Satış KDV Oranı · Satış Fiyatına KDV Dahil · Stok Durum Kontrolü · Miat Kontrolü · Aşı Paketi Var Mı · Minimum/Maksimum/Alarm Miktarı · Açıklama · **Fiyat Aralık Listesi** (Min Aralık · Max Aralık · Fiyat · Ekle) — **tiered / quantity-range pricing UI capability**.
+
+**OBSERVED — İçerik Tipi (örnek seçenekler, tam enum iddiası yok):** Aşı · Hizmet · Hospitalizasyon · Malzeme · Muayene · Operasyon · Sperma · Test · İlaç.
+
+**OBSERVED — Ürün Tipi (örnek seçenekler, tam enum iddiası yok):** Aksesuar · Aşı · Hizmet · İlaç · Kozmetik · Laboratuvar · Mama & Ödül · Operasyon Malzemesi · Premiks · Sarf Malzemesi · Solüsyon · Sperma · Temizlik Malzemesi · Vitamin · vb.
+
+**OBSERVED — Ürün Grubu:** Çok sayıda tanımlı grup seçilebiliyor (tek tek listelenmedi).
+
+**OBSERVED — İçe / Dışa Aktar:** İçe Aktar — dosya seçimi · **Excel'den İçe Aktar**. Dışa Aktar filtreleri — Ürün Tipi · Ürün Grubu · Durum (Aktif · Pasif) · **Dışa Aktar (Excel)**. Spreadsheet import/export UI capability.
+
+**OBSERVED — Barkod menüsü:** CODE-128 · EAN-13 · EAN-128 · QRCODE. EAN13 report: Ürün seçimi · Barkod · Filtrele · önizleme · PDF · indirme · yazdırma. QRCode: ürün seçimi · önizleme · PDF / download / print. Barcode/label/report generation UI (GS1 compliance veya barkod standardı validation iddiası yok).
+
+**NOT VERIFIED:** Satış sırasında fiyat aralığı seçimi · aralık inclusive/exclusive sınırları · fiyat aralığı vs indirim precedence · Excel template/validation/duplicate handling/transaction/rollback/error report · ürün silme dependency · Düzenle save lifecycle.
+
+### Hızlı Fiyatlandırma
+
+**OBSERVED — filtreler:** Stoktakiler (Evet/Hayır) · Ürün Tipi · Ürün Grubu · Ürün · Arama Metni.
+
+**OBSERVED — tablo (ürün satırı):** Satış — Fiyat · KDV Oranı · KDV Dahil. Alış — Fiyat · KDV Oranı · KDV Dahil. Ek: Barkod-1 · **Kaydet** (satır bazlı).
+
+**OBSERVED — toplu zam:** Zam Oranı (%) · Hesapla · İşlemler · Uygula. İşlem seçenekleri: `Görünenlere zam uygula (N)` · `Tüm ürünlere zam uygula (N)` · `Zammı geri al...`. UI uyarısı: zam uygulamadan önce **Hesapla** ile yeni satış fiyatlarının önizlenmesi öneriliyor.
+
+**OBSERVED — live test (güvenli):** Görünen 10 ürüne **%1** zam uygulandı · fiyatların değiştiği gözlendi · kayıt **Zam Geçmişi**'nde göründü (tarih · kullanıcı · ürün sayısı · zam oranı) · aynı history kaydında **Geri al** aksiyonu · onay metni: `Uygulanan zammı geri almak istediğinizden emin misiniz? Bu işlem geri alınamaz!` (rollback işleminin tekrar geri alınamayacağı uyarısı; immutable audit/event sourcing iddiası değil) · geri alma çalıştırıldı · örnek fiyatların önceki değerlere döndüğü gözlendi.
+
+**NOT VERIFIED:** Rollback'in ikinci kez undo edilmesi · concurrent edits · authorization · audit log (görünen history ötesi) · alış fiyatı üzerinde bulk semantics · rounding/decimal precision · transaction boundaries · rollback'in sonradan manuel değiştirilmiş fiyatları nasıl ele aldığı.
+
+### Ürün İndirimleri
+
+**OBSERVED — liste (empty in reviewed clinic/account; `Kayıt bulunamadı`):** İşlemler · Adı · Müşteri Grubu · Müşteri · Durum.
+
+**OBSERVED — Yeni Ürün İndirim Tanımı:** Adı · Müşteri Grubu · Müşteri · Durum. Müşteri Grubu dropdown'ında konfigüre gruplar; özel müşteri arama/seçim alanı. Discount line grid: Sil · Ürün Tipi · Ürün Grubu · Ürün · İndirim Oranı (%) · **Ekle** — birden fazla satır eklenebilir; müşteri grubu ve/veya spesifik müşteri alanları mevcut (AND/OR precedence iddiası yok).
+
+**OBSERVED — UI behavior:** Ürün Tipi ve Ürün Grubu seçildiğinde **Ürün** arama dropdown'ı seçimlere göre görünür şekilde daralmadı; farklı tip/grup seçimlerinde uyumsuz görünen ürün kayıtları listelenmeye devam etti. *The product selector did not visibly narrow to the selected Product Type/Product Group in the reviewed UI state; whether those fields are informational, asynchronously applied, validated only on save, or affected by configuration is NOT VERIFIED.*
+
+**NOT VERIFIED:** İndirim kaydı save edilmedi · satış/ziyaret faturasında indirim uygulaması · customer vs customer-group precedence · overlapping rules · stacking · highest/lowest/last-wins · tarih geçerliliği · min quantity · kampanyalar · specificity precedence · discount audit/history · delete/deactivate · save validation.
+
+### Ürün Tipleri
+
+**OBSERVED — liste:** İşlemler · Kod · Adı · Durum; **14** kayıt; İşlemler → Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Ürün Tip Tanımı:** Durum · Adı · Kod · Alış Fiyatına KDV Dahil · Alış KDV Oranı · Satış Fiyatına KDV Dahil · Satış KDV Oranı · **Miat Kontrolü** · **Stok Durum Kontrolü** · **e-SMM Yer Alır** · **e-SMM Adı** · Kaydet · Kaydet / Yeni. Mevcut kayıtlarda tip bazında KDV, miat, stok ve e-SMM alanları farklı Evet/Hayır kombinasyonlarıyla konfigüre edilmiş görünüyor.
+
+**OBSERVED:** Product Type definition exposes configurable defaults/policy-like fields in the UI (KDV, miat, stok, e-SMM). **NOT VERIFIED:** propagation/inheritance/enforcement semantics. `e-SMM Yer Alır` + `e-SMM Adı` e-SMM ile ilişkili tip konfigürasyonu; resmi vergi mapping / entegrasyon semantiği doğrulanmadı.
+
+### Ürün Grupları
+
+**OBSERVED — liste:** İşlemler · Kod · Adı · **İçerik Tipi** · Durum; **219** kayıt; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Ürün Grup Tanımı:** Durum · İçerik Tipi · Kod · Adı · Kaydet · Kaydet / Yeni. Required göstergelerine göre Durum · İçerik Tipi · Adı zorunlu; Kod zorunlu görünmüyor.
+
+**OBSERVED — İçerik Tipi (örnekler):** Aşı · Hizmet · Hospitalizasyon · Malzeme · Muayene · Operasyon · Sperma · Test · İlaç. UI taxonomy ilişkisi: **İçerik Tipi → Ürün Grubu** (backend entity/referential integrity iddiası yok).
+
+### Ürün Alt Grupları
+
+**OBSERVED — liste:** İşlemler · Kod · Adı · Durum; **49** kayıt; liste üst gruplar altında görsel gruplama; bir üst grup altında birden fazla alt grup; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Ürün Alt Grup Tanımı:** Durum · **Üst Grup** · Kod · Adı · Kaydet · Kaydet / Yeni. Required: Durum · Üst Grup · Adı; Kod zorunlu görünmüyor. Yeni kayıtta Üst Grup dropdown mevcut Ürün Gruplarını listeler. Observed UI hierarchy: **İçerik Tipi → Ürün Grubu → Ürün Alt Grubu → Ürün** (backend architecture iddiası değil).
+
+**OBSERVED (captured state):** Mevcut bir alt grup liste ekranında belirli bir üst grup başlığı altında gösterildi; aynı kayıt edit ekranında açıldığında **Üst Grup** alanı `Seçiniz...` (boş) göründü. Whether this reflects loading behavior, stale/inconsistent data, alternate grouping logic, or a UI defect is NOT VERIFIED.
+
+---
+
+### Ürün — Cross-module synthesis
+
+**OBSERVED UI / workflow capabilities:**
+
+- Configurable product catalog (master list + detay alanları)
+- Content type / product type / group / subgroup taxonomy yüzeyleri
+- Stock/expiry policy-like flags (Stok Durum Kontrolü · Miat Kontrolü)
+- Purchase/sales tax ve tax-inclusive configuration (ürün ve tip seviyesinde)
+- Product-level price, barcode ve quantity/range pricing UI
+- Excel import/export UI
+- Barcode/QR label/report generation UI
+- Bulk pricing: preview (Hesapla) · scope (görünenler vs tüm ürünler) · **Zam Geçmişi** · geri al (live rollback gözlendi)
+- Customer/customer-group scoped discount-definition UI (save/apply doğrulanmadı)
+
+**INFERRED (dikkatli):** Product area, gözlenen UI'da klinik hizmet ve fiziksel envanter kalemlerini kapsayan paylaşılan katalog/konfigürasyon yüzeyi gibi davranıyor. Product Type, yeniden kullanılabilir varsayılan/policy-benzeri alanları merkezileştirebilir (inheritance/enforcement doğrulanmadı).
+
+**Observed olarak yazılmaz:** shared backend catalog model · database inheritance · referential integrity · automatic type inheritance · cascade filtering · discount precedence/stacking · sale-time discount application · inventory reservation · FEFO/FIFO · GS1 compliance · accounting integration · e-SMM official mapping · audit immutability · transactional bulk update · Excel validation/rollback · role/permission model.
+
+---
+
+### Ürün — VETINITY IMPLICATION
+
+*(Ürün dersi/adayı; E-Vet kopyalama veya Vetinity implementation kararı değil.)*
+
+- Hizmet, ilaç, malzeme, test vb. billable/catalog items için ortak katalog yaklaşımı değerlendirilebilir.
+- Taxonomy kullanıcıya fayda sağlamalı; cascading/filter semantics açık ve tutarlı olmalı (E-Vet indirim ekranında selector daralması doğrulanmadı).
+- Product type defaults vs product overrides ayrımı net tasarlanmalı.
+- Bulk price updates: preview + explicit scope + history + rollback güçlü operasyonel pattern (E-Vet'te live kanıt var).
+- Pricing history/audit önemli.
+- Discount scope ve precedence kuralları görünür ve deterministik olmalı.
+- Barcode/reporting ürün master'ından ayrıştırılabilir.
+- Stok/expiry bayrakları gerçek inventory enforcement ile bağlanacaksa semantics net olmalı.
+
+---
+
+### Ürün — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog'a E-Vet Ürün evidence'ı eklenmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| UX-005 (ürün kategorileri Tanımlar altında) | NO MATCH | Vetinity IA önerisi; E-Vet üst menü Ürün yapısı kanıtı değil |
+| CHECKOUT-001 | NO MATCH | Ziyaret checkout/tahsilat; ürün katalogu veya toplu fiyat değil |
+| INT-005 (e-Fatura/e-SMM) | NO MATCH | Ürün tipinde e-SMM alanları ≠ yasal e-belge entegrasyonu |
+| RECORD-005 (lot/expiry/route) | NO MATCH | Klinik kayıt izlenebilirliği; ürün master Miat bayrağı aynı semantik değil |
+| REPORT-* | NO MATCH | Barkod rapor ekranı Report Center capability değil |
+
+**Potential backlog gaps (kayıt açılmadı):** bulk pricing + rollback/history · customer/group discount definitions · product taxonomy · barcode label generation · Excel import/export · type-level defaults.
+
+---
+
+### Ürün — TBD / NOT OBSERVED
+
+Satış zamanı tiered price seçimi · Excel import template/validation/duplicate/transaction/rollback · indirim save/apply ve precedence/stacking · product type default propagation · cascade product selector filtering (save-time validation bilinmiyor) · alt grup Üst Grup edit tutarsızlığı kök nedeni · GS1/barcode validation · e-SMM resmi mapping · stok/expiry enforcement at sale/inventory · ürün silme dependency · concurrent bulk pricing · authorization · purchase-side bulk zam semantics · rounding policy · discount date/campaign rules.
+
 ---
 
 ## Müşteri navigation (üst domain)
@@ -2765,6 +2911,18 @@ Alış Faturası (+ AI ile içeri aktar modalı) · İade Faturası · Sipariş 
 
 **TBD / NOT OBSERVED (CLOSED kapsamını engellemez):** [Stok — TBD](#stok--tbd--not-observed) listesi.
 
+### Ürün — REVIEWED / CLOSED
+
+Ürün üst domain menüsü (6 öğe) **tüm ana ekranlar incelenmiş** olarak **REVIEWED / CLOSED** (2026-10-01; tekrar inceleme gerekmez). **Anlamına gelmez:** indirim precedence, type inheritance, cascade filtering, satış zamanı fiyat/indirim uygulaması, Excel doğrulama, e-SMM mapping veya stok/expiry enforcement doğrulanmıştır.
+
+Ürünler · Hızlı Fiyatlandırma · Ürün İndirimleri · Ürün Tipleri · Ürün Grupları · Ürün Alt Grupları
+
+**Empty in reviewed clinic/account:** Ürün İndirimleri listesi.
+
+**Live evidence (Hızlı Fiyatlandırma):** %1 zam → Zam Geçmişi → Geri al (fiyatlar döndü).
+
+**TBD / NOT OBSERVED:** [Ürün — TBD](#ürün--tbd--not-observed).
+
 ### Finansal — REVIEWED / CLOSED
 
 Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
@@ -2797,7 +2955,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
-| **Ürün** | **PARTIAL** | Direct Sale pass: Ürün Tanımı (destek) — [destek](#destekleyici-inceleme--ürün-tanımı-partial-modül-closed-değil); tam modül **NOT REVIEWED** |
+| **Ürün** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Ürün (modül)](#ürün-modül); 6/6 menü; Hızlı Fiyatlandırma live zam/rollback; davranışsal semantikler çoğunlukla NOT VERIFIED |
 | **Müşteri** (global) | **PARTIAL / NOT SYSTEMATIC** | |
 | **Hasta** (üst domain, global) | **PARTIAL** | Patient Card **CLOSED**; master-data ekranları ayrı |
 | **Muayene** (üst domain config) | **PARTIAL** | |
@@ -2821,8 +2979,8 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 8. ~~Rapor~~ — **CLOSED** ([Rapor](#rapor); erişilebilir ekran seti içinde; ACCESS-BLOCKED alt raporlar explicit)
 9. ~~Stok~~ — **CLOSED** ([Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED)
 10. ~~Finansal~~ — **CLOSED** ([Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting ve bakiye/ledger etkileri NOT VERIFIED)
-11. **Ürün** — **NEXT**
-12. Müşteri / global Hasta
+11. ~~Ürün~~ — **CLOSED** ([Ürün (modül)](#ürün-modül); 6/6 menü; davranışsal TBD'ler CLOSED kapsamını engellemez)
+12. **Müşteri / global Hasta** — **NEXT**
 13. e-Fatura / e-SMM
 14. HBS
 15. VKY
@@ -2872,7 +3030,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ## Ürün özeti / hedef kitle / güçlü-zayıf / backlog
 
-**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam); **Finansal** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only UI kapsamı). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
+**TBD** — Navigation IA tamamlandı; operasyon modülleri (Hospitalizasyon, Takvim, Doğrudan Satış, Muayene Odası, Lab, Pacs) **CLOSED**; **Xray** **PARTIAL**; **Rapor** üst domain **REVIEWED / CLOSED** (2026-09-29; erişilebilir ekran seti içinde); **Stok** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only kapsam); **Finansal** üst domain **REVIEWED / CLOSED** (2026-09-30; güvenli/read-only UI kapsamı); **Ürün** üst domain **REVIEWED / CLOSED** (2026-10-01; 6/6 menü). Genel E-Vet özeti ilerledikçe doldurulacaktır ([Next Review Queue](#next-review-queue)).
 
 ---
 
