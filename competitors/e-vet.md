@@ -24,6 +24,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Müşteri (üst domain)** — 6 menü öğesi + Müşteri Kartı derin inceleme **REVIEWED / CLOSED** (2026-10-01; global menü ve kart shell kapsamında; çoğu save/posting ve entegrasyon semantiği NOT VERIFIED); [kapsam](#müşteri-modül) ve [tracker](#review-tracker).
 - **Hasta** (üst domain — reference data) — 8 menü öğesi **REVIEWED / CLOSED** (2026-10-01; global üst menü configuration/owner-transfer yüzeyleri; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#hasta-modül) ve [tracker](#review-tracker).
 - **Muayene** (üst domain) — 13 menü öğesi **REVIEWED / CLOSED** (2026-10-01; reçete/aşı config, klinik vocabulary, paket/template ve treatment-monitoring configuration; [Global Muayene Odası](#global-muayene-odası-modül) ve [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#muayene-modül) ve [tracker](#review-tracker).
+- **Laboratuvar** (üst domain) — 7 menü öğesi **REVIEWED / CLOSED** (2026-10-03; lab comparison, test/PACS/reference/device configuration; [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) operasyon yüzeyleri ayrı); [kapsam](#laboratuvar-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -54,6 +55,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
+| **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -90,7 +92,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED) |
 
 ---
 
@@ -3352,6 +3354,182 @@ e-Reçete successful print/PDF · Onayla persistence · ATS create/submit · aş
 - Cihazlar
 - Laboratuvarlar
 
+*(Ekran bazlı inceleme ve status → [Laboratuvar (modül)](#laboratuvar-modül). Operasyonel worklist/istek → [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial). Patient lab history → [Hasta Kartı](#hasta-kartı--patient-workspace).)*
+
+---
+
+## Laboratuvar (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-03).
+
+**Kapsam notu:** Bu bölüm **üst menü Laboratuvar** (7/7 configuration + comparison yüzeyleri). **Global Lab İstekleri** · **Pacs İstekleri** · **Xray İstekleri (PARTIAL)** sol menü operasyon kuyrukları **ayrı** pass’lerdir. **Test Grupları** tanımı [Global Xray (PARTIAL)](#global-xray-i̇stekleri-partial) pass’inde de kısmen görülmüştü; bu bölüm üst menü Laboratuvar kapsamını tamamlar — Xray **PARTIAL** statüsünü **değiştirmez**.
+
+**CLOSED anlamı:** 7/7 ekran UI incelemesi tamamlandı. **Anlamına gelmez:** device/PACS/DICOM entegrasyonu çalışır, sonuç ingestion otomatik, lab comparison longitudinal veri render edildi, reference range otomatik uygulanır veya create/update/delete mutation doğrulanmıştır.
+
+### Global menü envanteri (7/7)
+
+| # | Ekran | Status | Reviewed clinic/account (özet) |
+|---|---|---|---|
+| 1 | Lab Sonuçları Karşılaştır | **REVIEWED / CLOSED** | Filtreler + export UI; başarılı comparison **not verified** |
+| 2 | Test Grupları | **REVIEWED / CLOSED** | ~12 configured; detay + yeni form açıldı; **Kaydet çalıştırılmadı** |
+| 3 | Test Grup Panelleri | **REVIEWED / CLOSED** | 5 configured panels |
+| 4 | Test Referansları | **REVIEWED / CLOSED** | ~287 reference rows |
+| 5 | Pacs Grupları | **REVIEWED / CLOSED** | ~21 configured; yeni form açıldı; **Kaydet çalıştırılmadı** |
+| 6 | Cihazlar | **REVIEWED / CLOSED** | ~12 devices; yeni form açıldı |
+| 7 | Laboratuvarlar | **REVIEWED / CLOSED** | 1 configured laboratory |
+
+---
+
+### Lab Sonuçları Karşılaştır
+
+**OBSERVED — filtreler:** Tarih Aralığı · Müşteri · Hasta · Test Grubu · **Ara** · **Temizle**.
+
+**OBSERVED — sonuç alanı kolonları:** Test · Birim · Min Değer · Max Değer.
+
+**OBSERVED:** **Dışa Aktar (Excel)** aksiyonu.
+
+**OBSERVED UX FRICTION — Müşteri → Hasta:** Müşteri seçildiğinde müşterinin hayvanı olmayan senaryoda **Hasta** selector UI’da görünmeye devam ediyor; dropdown açıldığında `Kayıt bulunamadı` (yalnız incelenen UI davranışı; backend bug / data integrity / tüm müşterilerde geçerli **iddia edilmez**).
+
+**OBSERVED UX FRICTION — Test grubu keşfedilebilirliği:** Hasta seçilebildiğinde geçmişte hangi testlerin gerçekten çalışıldığı bu ekrandan görülemiyor; **Test Grubu** selector geniş/global configured test grupları sunuyor. Kullanıcı geçmiş uygulama bilgisi olmadan grup seçmek zorunda; seçilen hasta + test grubu kombinasyonlarında `Kayıt bulunamadı` görüldü. **Test Grubu** zorunlu alan validation’ı gözlemlendi.
+
+**NOT VERIFIED:** başarılı longitudinal comparison render · tarih aralığında yan yana karşılaştırma semantiği · trend chart · analyte dönemsel değişim · abnormal flagging · cross-device normalization · reference-range reconciliation · export içeriği.
+
+#### VETINITY IMPLICATION (product direction — implementation kararı değil)
+
+1. Owner seçildiğinde yalnız owner’a bağlı hastalar gösterilmeli.
+2. Owner’ın hastası yoksa patient selector boş dropdown bırakılmamalı; anlamlı empty-state / disabled state.
+3. Hasta seçildikten sonra Test Grubu listesi mümkünse global katalogdan değil, hastanın **tamamlanmış lab sonuç geçmişinden** türetilmeli.
+4. Kullanıcı “hangi testi karşılaştıracağım?” sorusunu tahminle çözmemeli.
+5. Örnek flow: Patient → completed lab history → comparable analyte/test groups → date/range → comparison.
+6. Uygun test yoksa açık empty state.
+7. Global configured test catalog ile patient result history ayrılmalı.
+
+**Product principle (rakip lesson):** *Comparison should begin from patient evidence/history, not from the global configured test catalog.*
+
+---
+
+### Test Grupları
+
+**OBSERVED — liste (reviewed clinic/account, ~12):** İşlemler · Test Tipi · Adı · Durum; grouped presentation (ör. Lab altında); Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Test Grubu Tanımı (mevcut detay):** Tür · Test Tipi · Adı · Serbest Parametreli (Evet/Hayır) · Laboratuvar · Cihaz · Durum · **Test Kalemleri** grid — Kod · Sıra No · Test Adı · Cihaz Kodu · Test Grup Panelleri · Durum; satır **Teknikler - Göster** · Sil; Ekle · Kaydet.
+
+**OBSERVED — Tür:** Lab · Röntgen.
+
+**OBSERVED — Test Tipi dropdown (örnek kategoriler):** Hemogram · Arteriyel K.G. · Biyokimya · Diğer · Hormon · İdrar · Venüs Kan Gazı · Röntgen. Tür=Lab iken listede **Röntgen** değerinin görünmesi gözlemlendi — intentional design vs filtering **NOT VERIFIED**.
+
+**OBSERVED — Test Kalemleri:** Kod selector geniş test/analyte vocabulary; Test Grup Panelleri configured panel dictionary; mevcut gruplarda çok satırlı grid (ör. ~25 ve ~32 item görünümleri — reviewed account). Pagination gözlemlendi. **Teknikler** genişleyebilir alt alan — içerik/semantik **doğrulanmadı**.
+
+**NOT live:** Yeni kayıt ekranı açıldı; **Kaydet çalıştırılmadı**.
+
+**NOT VERIFIED:** create/update/delete mutation · Teknikler işlevi · cihazdan otomatik mapping · device-code reconciliation · result ingestion · billing/stock · strict Tür→Test Tipi filtering · Serbest Parametreli runtime semantics.
+
+---
+
+### Test Grup Panelleri
+
+**OBSERVED — liste (reviewed clinic/account, 5 configured):** İşlemler · Adı · Durum; Yeni Kayıt · Düzenle · Sil controls observed.
+
+**OBSERVED — Tanım:** yalnızca Durum · Adı. Panel adları katalog olarak dump edilmedi.
+
+**OBSERVED (cross-surface):** Test Grubu test item satırındaki **Test Grup Panelleri** selector bu panel kayıtlarını sunuyor — UI-level reusable panel dictionary; item’lar panel ile ilişkilendirilebiliyor.
+
+**NOT VERIFIED:** panel membership’in panel formundan yönetimi · panel order/billing/device semantics · create/update/delete mutation exercised.
+
+---
+
+### Test Referansları
+
+**OBSERVED — liste (reviewed clinic/account, ~287):** İşlemler · Hasta Türü · Cinsiyet · Test Adı · Min Değer · Max Değer · Açıklama · Birim · Durum; category/type heading altında gruplama.
+
+**OBSERVED — form (existing + Yeni Kayıt yüzeyi):** Hasta Türü · Cinsiyet · Birim · Durum · Test Tipi · Test · Min Değer · Max Değer · Metin Değeri · Açıklama. Test Tipi örnekleri: Analiz · Arteriyel K.G. · Biyokimya · Diğer · Hemogram · Hormon · Venüs K.G. Test ve Birim dropdown’ları geniş vocabulary.
+
+**OBSERVED (UI-level):** Species-aware reference ranges; gender alanı mevcut ve observed örnekte boş/optional; numeric min/max; Metin Değeri alanı.
+
+**NOT VERIFIED:** age/breed-specific ranges · automatic reference selection · sex fallback · critical-value alerting · lab-device normalization · CDS · abnormal classification · create/update/delete mutation exercised.
+
+---
+
+### Pacs Grupları
+
+**OBSERVED — liste (reviewed clinic/account, ~21):** İşlemler · Adı · Kod · Durum; modality grouping görünümü; Aktif/Pasif örnekleri.
+
+**OBSERVED — Tanım:** Durum · **Modalite** · Adı · Kod. Modalite dropdown: CR · CT · DX · IO · MR · US · XA · MG.
+
+**NOT live:** Yeni Kayıt formu açıldı; **Kaydet çalıştırılmadı**.
+
+**OBSERVED (UI):** PACS group configuration is modality-coded at UI level.
+
+**NOT VERIFIED:** DICOM routing · Study Instance UID · modality worklist · PACS server connection · DICOM compliance · automatic image ingestion · device/PACS routing rules.
+
+---
+
+### Cihazlar
+
+**OBSERVED — liste (reviewed clinic/account, ~12):** İşlemler · Adı · DLL Adı · Durum.
+
+**OBSERVED — Tanım:** Durum · Adı · DLL Adı · DLL Tipi · İşlem Protokolü · Port No · IP Adresi · Seri No. **İşlem Protokolü** örnekleri: TCP · COM · VETXPERT. Mevcut kayıtta TCP + port gibi bağlantı alanları görüldü. Yeni Kayıt formu açıldı.
+
+**INFERRED:** DLL Adı / DLL Tipi alanları device-specific adapter/driver configuration **olabileceğini** düşündürür (confirmed integration **değil**).
+
+**NOT VERIFIED / not confirmed:** .NET dynamic loading · plugin architecture · local Windows service · real-time TCP listener · COM serial reader · bidirectional integration · automatic result import · retry/reconnect · device health monitoring · save/update/delete mutation exercised · physical device connection.
+
+#### VETINITY IMPLICATION (product direction)
+
+Clinic-facing configuration’da ham adapter/DLL implementation detail’lerinin doğrudan kullanıcıya gösterilmesi tercih edilmemeli. Daha soyut UX: **Device** → Integration Profile → Connection Type → conditional settings (ör. TCP → IP/Port; serial → COM-specific fields). Driver/adapter mapping internal kalabilir (ADR/architecture kararı değil).
+
+---
+
+### Laboratuvarlar
+
+**OBSERVED — liste (reviewed clinic/account, 1 configured):** İşlemler · Adı · Durum; Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — Tanım:** Durum · Adı (başka metadata gözlemlenmedi).
+
+**OBSERVED (cross-surface):** Test Grubu **Laboratuvar** selector bu configured laboratory kaydını kullanıyor — UI-level reusable reference entity for test-group configuration.
+
+**NOT VERIFIED:** location/address · department · staff assignment · hours · device ownership · multi-site · tenant scope · create/update/delete mutation exercised.
+
+---
+
+### Laboratuvar — Cross-surface model (UI relationships)
+
+Özet (backend/schema iddiası **yok**):
+
+```
+Laboratory (configured name)
+    ↓ used by
+Test Group — Tür · Test Tipi · Device · Serbest Parametreli
+    ├─ Test Items (Kod / analyte / device code / optional Panel)
+    └─ links to Test Group Panel dictionary
+
+Test Reference — species · optional gender · test · unit · min/max or text
+
+PACS Group — modality · name · code
+
+Device — connection/config fields (incl. DLL labels at UI)
+```
+
+---
+
+### Laboratuvar — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog değiştirilmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| INT-001 | NO MATCH | Partner/protocol **research**; E-Vet admin device form ≠ integration scope |
+| IMG-005 / IMG-006 | NO MATCH | DICOM/digital X-ray **research**; Pacs Grupları modality-coded config only |
+| Global Lab/PACS modules | NO MATCH | Operasyon worklist; üst menü config pass ayrı |
+
+**Potential gaps (kayıt açılmadı):** patient-centric lab comparison · test group/panel/reference admin · species reference ranges · modality-coded PACS groups · device connection UI · lab comparison UX friction lessons.
+
+---
+
+### Laboratuvar — TBD / NOT OBSERVED
+
+Successful lab comparison output · device integration live · automated result ingestion · PACS/DICOM routing · reference auto-apply · panel auto-expand on requests · billing/stock linkage · shared DB/FK model · test group type-filter semantics enforcement.
+
 ---
 
 ## Genel navigation (üst domain)
@@ -3550,6 +3728,20 @@ Reçete · ATS Listesi · Aşı Paketleri · Aşı Programları · Aşılanmamı
 
 **TBD:** [Muayene — TBD](#muayene--tbd--not-observed).
 
+### Laboratuvar — REVIEWED / CLOSED
+
+Laboratuvar üst domain (**7/7** global menü) **REVIEWED / CLOSED** (2026-10-03). **Anlamına gelmez:** device/PACS/DICOM entegrasyonu, automated ingestion, successful longitudinal lab comparison, reference auto-apply veya mutation/save semantics doğrulanmıştır.
+
+Lab Sonuçları Karşılaştır · Test Grupları · Test Grup Panelleri · Test Referansları · Pacs Grupları · Cihazlar · Laboratuvarlar.
+
+**UX friction (Lab Sonuçları Karşılaştır):** owner without animals → patient selector still shown; test group from global catalog not patient history; empty `Kayıt bulunamadı` combinations.
+
+**NOT live:** Test Grupları / Pacs Grupları yeni kayıt **Kaydet** çalıştırılmadı.
+
+**Operasyon ayrı:** [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) **CLOSED**; [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) **unchanged**.
+
+**TBD:** [Laboratuvar — TBD](#laboratuvar--tbd--not-observed).
+
 ### Finansal — REVIEWED / CLOSED
 
 Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
@@ -3586,7 +3778,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Müşteri** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Müşteri (modül)](#müşteri-modül); 6/6 menü + Müşteri Kartı |
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Hasta (modül)](#hasta-modül); 8/8 menü; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı |
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Muayene (modül)](#muayene-modül); 13/13; [Global Muayene Odası](#global-muayene-odası-modül) ayrı |
-| **Laboratuvar** (üst domain config) | **PARTIAL** | |
+| **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) | Bkz. [Laboratuvar (modül)](#laboratuvar-modül); 7/7; Lab/PACS/Xray operasyon modülleri ayrı |
 | **Genel / configuration** | NOT REVIEWED | |
 | **Hasta Kabul** (global landing) | **PARTIAL** | Landing alanları; tam operasyon **TBD** |
 
