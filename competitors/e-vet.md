@@ -25,6 +25,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Hasta** (üst domain — reference data) — 8 menü öğesi **REVIEWED / CLOSED** (2026-10-01; global üst menü configuration/owner-transfer yüzeyleri; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#hasta-modül) ve [tracker](#review-tracker).
 - **Muayene** (üst domain) — 13 menü öğesi **REVIEWED / CLOSED** (2026-10-01; reçete/aşı config, klinik vocabulary, paket/template ve treatment-monitoring configuration; [Global Muayene Odası](#global-muayene-odası-modül) ve [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#muayene-modül) ve [tracker](#review-tracker).
 - **Laboratuvar** (üst domain) — 7 menü öğesi **REVIEWED / CLOSED** (2026-10-03; lab comparison, test/PACS/reference/device configuration; [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) operasyon yüzeyleri ayrı); [kapsam](#laboratuvar-modül) ve [tracker](#review-tracker).
+- **Genel** (üst domain) — 12 menü öğesi **REVIEWED / CLOSED** (2026-10-03; clinic master data, authorization surfaces, settings, backup UI, manual shell, external Alpemix link); [kapsam](#genel-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -56,6 +57,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
+| **Genel** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -92,7 +94,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -3549,6 +3551,228 @@ Successful lab comparison output · device integration live · automated result 
 - Kullanma Kılavuzu
 - Alpemix
 
+*(Ekran bazlı inceleme → [Genel (modül)](#genel-modül). Üst menü **Rapor → Genel** rapor kategorisi ayrı — bkz. [Rapor → Genel](#rapor--genel-reviewed--closed).)*
+
+---
+
+## Genel (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-03).
+
+**Kapsam notu:** Canlı klinik hesabı **read-only** UI incelemesi; Kaydet/sil/kullanıcı oluşturma/ayar değiştirme/yedek çalıştırma **yapılmadı**. **Anlamına gelmez:** permission backend enforcement, entegrasyonların çalışması, backup başarısı veya kılavuz içeriğinin bağımsız product doğrulaması.
+
+**Kanıt notu:** Gerçek personel/müşteri adı, GSM, e-posta, kullanıcı adı, parola, API key, token, adres, koordinat, vergi no veya diğer secret/PII **dokümana taşınmadı**.
+
+### Global menü envanteri (12/12)
+
+| # | Ekran | Status |
+|---|---|---|
+| 1 | Birimler | **REVIEWED / CLOSED** |
+| 2 | Bölümler | **REVIEWED / CLOSED** |
+| 3 | KDV Oranı | **REVIEWED / CLOSED** |
+| 4 | Rol Şablonları | **REVIEWED / CLOSED** |
+| 5 | Veterinerler & Personeller | **REVIEWED / CLOSED** |
+| 6 | Odalar | **REVIEWED / CLOSED** |
+| 7 | Görev Tipleri | **REVIEWED / CLOSED** |
+| 8 | Meslekler | **REVIEWED / CLOSED** |
+| 9 | Ayarlar | **REVIEWED / CLOSED** |
+| 10 | Yedek Al | **REVIEWED / CLOSED** |
+| 11 | Kullanım Kılavuzu | **REVIEWED / CLOSED** (menü yüzeyi; 86 sayfa içerik ayrı doğrulanmadı) |
+| 12 | Alpemix | **REVIEWED / CLOSED** (external link handoff) |
+
+---
+
+### Birimler
+
+**OBSERVED — Birim Listesi (reviewed clinic/account, ~50):** Kod · Adı · e-Fatura Kodu · Durum; Düzenle · Sil; Yeni Kayıt. Form: Durum · Kod · Adı · e-Fatura Kodu · Kaydet · Kaydet / Yeni. Örnekler laboratuvar ölçüm/unit benzeri kayıtlar içeriyor.
+
+**OBSERVED (UI):** Unit-of-measure master data; e-belge kodu metadata ile ilişkilendirilebilir.
+
+**NOT VERIFIED:** standart/kod sistemi adı · e-Fatura mapping otomatik kullanımı · mutation exercised.
+
+---
+
+### Bölümler
+
+**OBSERVED — Bölüm Listesi (reviewed clinic/account, ~6):** Ortak Alan · Kod · Adı · Durum; Düzenle · Sil; Yeni Kayıt. Form: Durum · Ortak Alan · Kod · Adı.
+
+**OBSERVED (UI):** Reusable organizational/location classification; staff ve room tanımlarında bölüm referansı kullanılıyor.
+
+**NOT VERIFIED:** `Ortak Alan` runtime semantics · department isolation · permission enforcement.
+
+---
+
+### KDV Oranı
+
+**OBSERVED — liste (reviewed clinic/account, ~3 aktif):** 0 · 10 · 20; Düzenle · Sil; Yeni Kayıt. Form: Durum · KDV Oranı.
+
+**OBSERVED (UI):** Centralized configurable tax rate master data.
+
+**NOT VERIFIED:** compliance engine · historical rate/version handling · mutation exercised.
+
+---
+
+### Rol Şablonları
+
+**OBSERVED — Rol Şablon Listesi:** reviewed account’ta `Kayıt bulunamadı`; Yeni Kayıt mevcut. Yeni form: Adı · Durum · Açıklama + permission tabs (aşağıda). Mutation **not exercised**.
+
+#### Tab 1 — Roller
+
+**OBSERVED:** Grouped CRUD matrix — kolonlar Göster · Yeni · Düzenle · Sil · Tümü. Domain grupları (müşteri, finansal, ürün, rapor, randevu, genel vb.). Temsilî izin öğeleri: Müşteriler · Müşteri Bakiyesine İndirim · Müşteri Dosyaları · Müşteri Grupları · Müşteri Ödemeleri · Müşteri İade Faturası · Ürünler · Ürün İndirimleri · Ürün Grupları · Ürün Alt Grupları · Ürün Tipleri · Randevu · Şablonlar · Bölümler · Meslekler · Personeller & Veterinerler · Rol Şablonları · Odalar · Görev Zamanlayıcı · Görev Tipleri · KDV Oranı (tam katalog dump edilmedi).
+
+#### Tab 2 — Parametreli Roller
+
+**OBSERVED:** Boolean/capability-style permissions. Örnek gruplar: Müşteri (GSM · Kimlik No · Tel 1/2 · İYS’ye Kayıt) · Yapay zeka (Yapay zeka · Rapor Modu) · Genel (Yedek Al — Randevular · Müşteri Listesi · Muayene Listesi · Giriş Bilgileri · Dosyalarım).
+
+**OBSERVED (UI):** CRUD dışında field/action/capability-level permissions.
+
+#### Tab 3 — Rapor Rolleri
+
+**OBSERVED:** Rapor bazında **Göster**. Temsilî örnekler: Aktif Stok · SKT Geçen Ürünler · Gelecek Aşılar · MS Altına Düşen Ürünler · SKT Yaklaşan Ürünler · Takipteki Hastalar · Hospitalizasyon Listesi · Hasta Listesi · İstatistik · Anket Sonuçları · Test Sonuç Karşılaştır · Bugün Uygulanacak Tedaviler · Ziyaret Geçmişi.
+
+**OBSERVED (UI):** Reporting visibility ayrı kontrol yüzeyi.
+
+#### Tab 4 — Önceki İşlem Rolleri
+
+**OBSERVED:** UI açıklaması — Yeni/Düzenle yetkisi verilen işlemlerde kullanıcının en fazla belirlenen **gün** kadar geriye dönük işlem yapabilmesi. Kolonlar: Gün Önce · Yeni · Düzenle · Tümü. Temsilî domainler: Müşteri Bakiyesine İndirim · Müşteri Ödemeleri · Müşteri İade Faturası · Lab İstek · Pacs İstek · Sayım · Doğrudan Satış · Hospitalizasyon · Reçete · Sipariş Faturası · Randevu.
+
+**OBSERVED (UI):** Temporal permission / retroactive edit-create window — *user may have permission to perform an action, but only within an allowed historical window* (competitor observation; backend enforcement **NOT VERIFIED**).
+
+#### Tab 5 — Tarih Aralığı Filtresi
+
+**OBSERVED:** Feature/list bazında Gün Önce · Gün Sonra. Örnekler: Müşteri Muayene Geçmişi · Müşteri Ekstreleri · Müşteri Satış Faturaları · Müşteri Ödeme Geçmişi · Müşteri Ödemeleri · Müşteri İade Fatura Listesi.
+
+**NOT VERIFIED:** backend data-window enforcement.
+
+#### Tab 6 — SmartIVet Rolleri
+
+**OBSERVED:** **Göster** visibility permissions. Örnekler: Aktif Hasta Listesi · Aktif Müşteri Listesi · Günlük Kasa · Kasa Hareketleri · Müşteri Ekstresi · Hospitalizasyon · Ziyaretçi Müşteri Sayısı · Günlük Yapılacak İşler · Toplam Bakiye.
+
+**NOT VERIFIED:** SmartIVet product architecture; yalnızca ayrı feature/report visibility surface.
+
+---
+
+### Veterinerler & Personeller
+
+**OBSERVED — Personeller & Veterinerler (~21):** Veteriner / Personel grup ayrımı; kolonlar Bölüm · Adı · Rol Şablonu · GSM · Email · Kullanıcı Adı · Durum (PII **kopyalanmadı**); Düzenle · Sil; Yeni Kayıt.
+
+**OBSERVED — ana tab alanları:** Kullanıcı Tipi (Personel/Veteriner) · Durum · Bölüm · Adı · Diploma No · GSM · Doğum Tarihi · Email · Sicil No · Maaş · Kullanıcı Adı · Parola · Parolayı Onayla · Çift Faktörlü Güvenlik Doğrulama (Evet/Hayır) · Bilgi · İşe Giriş/Çıkış Tarihi · Rol Şablonu · **Uygula** aksiyonu.
+
+**OBSERVED — user-level permission tabs:** Roller · Parametreli Roller · Rapor Rolleri · Önceki İşlem Rolleri · Tarih Aralığı Filtresi · SmartIVet Rolleri · **Diğer** (template ile aynı tab seti + Diğer).
+
+**OBSERVED:** Mevcut bir veteriner kaydında CRUD matrix’in büyük kısmı açık görünüyordu → **template + per-user permissions coexist** (precedence/merge **NOT VERIFIED**).
+
+**OBSERVED — Diğer tab:** SmartIVET Aktif/Pasif · Genel İndirim Oranı (%) · Yetkili Olduğu Depolar · Yetkili Olduğu Kasalar · Yetkili Olduğu Bankalar. UI metni: hiç depo seçilmezse **tüm depolar**; seçim yapılırsa yalnız seçilenler — aynı semantics kasa ve banka için.
+
+**OBSERVED (authorization):** Operational **resource scope** (warehouse · cash register · bank) user-level configurable; capability/CRUD ile birlikte.
+
+**NOT VERIFIED:** 2FA provider · password policy · termination semantics · Rol Şablonu Uygula replace vs merge · row-level security · query filter enforcement.
+
+---
+
+### Odalar
+
+**OBSERVED — Oda Listesi (reviewed clinic/account, ~20):** department/group headings altında; Adı · Durum; Düzenle · **Oda QRCode** · Sil; Yeni Kayıt. Form: Durum · Bölüm · Adı.
+
+**OBSERVED — Oda QRCode:** Report/view · QR görüntü · PDF/download/print controls.
+
+**NOT VERIFIED:** QR scan workflow · hospitalization assignment · occupancy/capacity · mutation exercised.
+
+---
+
+### Görev Tipleri
+
+**OBSERVED — liste (reviewed clinic/account, ~38):** Adı · Renk · Durum; Yeni Kayıt · Düzenle · Sil. Form: Durum · Adı · Şablon · Renk (native color picker). Şablon dropdown çok sayıda template (aşı · bilgilendirme · anestezi öncesi vb. — dump edilmedi).
+
+**NOT VERIFIED:** template execution · task automation · recurrence · mutation exercised.
+
+---
+
+### Meslekler
+
+**OBSERVED — Meslek Listesi (reviewed clinic/account, ~689):** Kod · Adı · Durum; Düzenle · Sil; Yeni Kayıt. Form: Durum · Kod · Adı. Geniş profession lookup catalog (liste dump **yok**).
+
+---
+
+### Ayarlar
+
+**OBSERVED accordion’lar:** Genel · Müşteri/Hasta · Klinik Bilgileri · E-Fatura Bilgileri · SmartVet/Vetogle. Yalnızca **field/category adları**; gerçek değer/secret **yok**.
+
+**Genel (observed fields):** Ana Depo · Ana Kasa · Ana Banka Hesabı · Takvim Görünüm · Aşı Görev Tipi · Tamamlanan Görev Tipi · Kontrol İş Tipi · Ürün Birimi · Doğrudan Satış Müşterisi · Ziyarete Gelmeme Gün Sayısı · Satış Fatura No/Öneki · Reçete Seri/Cilt/Sıra No · Ziyaret SMS Şablonu · Çek/Senet Görev Tipi · Bildirim Süresi (ms) · Hatırlatmaları SMS ile Gönder · Lab Sonuçlarını Bildirim ile Gönder · Randevu Otomatik Aktar · Otomatik Doğum Günü Hatırlatma · Tablo varsayılan satır sayısı.
+
+**Müşteri/Hasta:** protokol no auto/increment · zorunlu/uyarı alanları · varsayılan tür/ırk/cinsiyet · Tekrarlı Kimlik Nr İzin Ver.
+
+**Klinik Bilgileri (categories only):** clinic identity · SmartIVET name · contact · hours · address · coordinates · email server/SSL · HasvetApp API key field · SMS provider fields · PACS code · İYS fields · country/currency · VetXpert username/password fields — **integration success NOT VERIFIED**.
+
+**E-Fatura Bilgileri (fields):** URL · firma/ünvan · vergi no · e-Fatura sağlayıcı · kullanıcı/şifre · adres alanları · WSDL/REST URL · açıklama alanları — reviewed account’ta çoğu boş görünüm; issuance/compliance **NOT VERIFIED**.
+
+**SmartVet/Vetogle toggles (examples):** Randevularını Görebilir · Randevu Alabilir · Aşı Karnesi · Bakiye/Borc/Ödeme/Ekstre · Muayene/Lab/Pacs/X-Ray geçmişi · sahiplendirme/çiftleştirme görünürlükleri · Doktor SMS Gönder · Bildirim SMS Tel · Randevu Zaman Aralığı · Randevu Talep Görev Tipi · Randevu Max Tarih — portal capability toggles; architecture **NOT VERIFIED**.
+
+---
+
+### Yedek Al
+
+**OBSERVED modal:** “Yedek almak istediğiniz başlıkları seçip Yedek Al tıklayınız.” **Excel Dosyası ile:** Müşteri Listesi · Hasta Listesi · Randevular · Muayene Listesi · **Giriş Bilgileri**. **Email ile:** Dosyalarım. UI: tanımlı e-postaya indirme linki **24 saat** içinde. **Yedek Al** button — **çalıştırılmadı**.
+
+**NOT VERIFIED:** backup success · encryption · restore · full DB backup · export format.
+
+**VETINITY IMPLICATION:** `Giriş Bilgileri` credential-class export permission ayrı capability; Vetinity’de çok daha sıkı security boundary (export içeriği görülmedi).
+
+---
+
+### Kullanım Kılavuzu
+
+**OBSERVED:** Embedded PDF viewer · **86** sayfa · ürün kullanım kılavuzu; TOC geniş setup/workflow konuları (tanımlar, hasta, muayene, lab, müşteri vb.).
+
+**CLOSED scope:** Genel menü **surface** only. Manual page contents **not** independently verified product behavior.
+
+---
+
+### Alpemix
+
+**OBSERVED:** Genel > Alpemix → external **alpemix.com** (Windows download / third-party remote support site). E-Vet evidence: **link/handoff to external AlpeMix tooling** only.
+
+**NOT VERIFIED:** auth handoff · embedded integration · session audit in E-Vet · data sharing. Alpemix site feature list (remote desktop, file transfer, vb.) **third-party marketing** — E-Vet native capability değil.
+
+---
+
+### Genel — Authorization model synthesis (OBSERVED UI layers)
+
+1. **CRUD/action** — Göster / Yeni / Düzenle / Sil
+2. **Capability / sensitive-field** — GSM, kimlik, İYS, AI, backup categories
+3. **Report visibility** — Rapor Rolleri
+4. **Temporal action restriction** — Önceki İşlem Rolleri (Gün Önce)
+5. **Visible date-range restriction** — Tarih Aralığı Filtresi
+6. **Resource scope** — depo · kasa · banka
+7. **Role template + per-user configuration coexistence**
+
+#### VETINITY IMPLICATION (research — ADR/architecture kararı değil)
+
+- Basit role presets başlangıç; seçili advanced overrides.
+- Hassas capability’ler ayrı izin.
+- Finans/stok kaynaklarında optional resource scope.
+- Historical edit window security/audit açısından anlamlı olabilir.
+- Rakip UI çok granular/ağır — birebir kopyalama önerilmez.
+- Principles: **Simple defaults, explicit advanced controls.** · **Permission ≈ capability + optional resource scope + optional temporal constraint**
+
+---
+
+### Genel — Backlog cross-reference
+
+**Exact-match bulunamadı; backlog değiştirilmedi.**
+
+| Aday | Karar | Gerekçe |
+|---|---|---|
+| UX-002 | NO MATCH | Vetinity Ayarlar>Tanımlar IA; E-Vet üst Genel admin yüzeyi değil |
+| REPORT (report access) | NO MATCH | Rapor 403 gözlemi; Rol Şablonları admin UI ≠ report feature |
+| APPT-036 | NO MATCH | Provider picker filter; staff/RBAC admin değil |
+
+---
+
+### Genel — TBD / NOT OBSERVED
+
+Permission backend enforcement · template precedence · 2FA implementation · room QR workflow · SMS/e-Fatura/IYS/PACS/VetXpert/HasvetApp integration success · backup/restore · Alpemix session audit · mutation on all config screens · tenant isolation architecture.
+
 ---
 
 ## Review Tracker
@@ -3742,6 +3966,20 @@ Lab Sonuçları Karşılaştır · Test Grupları · Test Grup Panelleri · Test
 
 **TBD:** [Laboratuvar — TBD](#laboratuvar--tbd--not-observed).
 
+### Genel — REVIEWED / CLOSED
+
+Genel üst domain (**12/12** global menü) **REVIEWED / CLOSED** (2026-10-03). **Anlamına gelmez:** permission enforcement, entegrasyon çalışması, backup başarısı, 2FA, veya kılavuz içeriğinin product truth olarak doğrulanması.
+
+Birimler · Bölümler · KDV Oranı · Rol Şablonları · Veterinerler & Personeller · Odalar · Görev Tipleri · Meslekler · Ayarlar · Yedek Al · Kullanım Kılavuzu · Alpemix.
+
+**Authorization highlight:** CRUD + parametreli capability + rapor visibility + temporal edit window + date-range filter + depo/kasa/banka scope + template/user coexistence.
+
+**NOT live:** Yedek Al çalıştırılmadı; config mutation yapılmadı. **Secrets/PII** dokümana taşınmadı.
+
+**Kullanım Kılavuzu:** menü yüzeyi CLOSED; 86 sayfa içerik review **değil**.
+
+**TBD:** [Genel — TBD](#genel--tbd--not-observed).
+
 ### Finansal — REVIEWED / CLOSED
 
 Finansal üst domain menüsü (7 öğe) **erişilebilir ekranlar ve güvenli/read-only UI incelemesi kapsamında** incelendi (2026-09-30; tekrar inceleme gerekmez). **Anlamına gelmez:** gerçek finansal kayıt oluşturma, save/posting, silme/reversal, banka/kasa bakiye etkisi, reconciliation, muhasebe/ledger entegrasyonu ve `Raporlara Dahil Et/Etme` seçiminin gerçek rapor etkisi live olarak doğrulandı.
@@ -3779,7 +4017,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Hasta** (üst domain — reference data) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Hasta (modül)](#hasta-modül); 8/8 menü; [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı |
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Muayene (modül)](#muayene-modül); 13/13; [Global Muayene Odası](#global-muayene-odası-modül) ayrı |
 | **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) | Bkz. [Laboratuvar (modül)](#laboratuvar-modül); 7/7; Lab/PACS/Xray operasyon modülleri ayrı |
-| **Genel / configuration** | NOT REVIEWED | |
+| **Genel** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) | Bkz. [Genel (modül)](#genel-modül); 12/12 üst menü |
 | **Hasta Kabul** (global landing) | **PARTIAL** | Landing alanları; tam operasyon **TBD** |
 
 ---
@@ -3809,7 +4047,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 19. Nekropsi
 20. Mobil Uygulamalar
 21. Katalog / Dokümanlar
-22. Genel / configuration
+22. ~~Genel~~ (üst domain — configuration) — **CLOSED** ([Genel (modül)](#genel-modül); 12/12)
 
 ---
 
