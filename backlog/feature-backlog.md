@@ -656,7 +656,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | v1 Release Blocker → [v1-release-scope](../roadmap/v1-release-scope.md). Navigasyon → [ux/navigation.md](../ux/navigation.md). Raporlama: ayrı HOSP rapor epic değil; yatış verisi [REPORT-001](#report-001--rapor-merkezi) / [REPORT-002](#report-002--rapor-kategorileri) üzerinden erişilebilir olmalı (aktif/geçmiş yatış listesi — detay TBD). **TBD (v1 dışı / future):** medication administration, nursing sheet, treatment schedule gibi inpatient alt workflow'lar. **Competitor evidence (requirement değil):** E-Vet Hospitalizasyon Geçmişi listesi — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi) |
+| **Notlar** | v1 Release Blocker → [v1-release-scope](../roadmap/v1-release-scope.md). Navigasyon → [ux/navigation.md](../ux/navigation.md). Raporlama: ayrı HOSP rapor epic değil; yatış verisi [REPORT-001](#report-001--rapor-merkezi) / [REPORT-002](#report-002--rapor-kategorileri) üzerinden erişilebilir olmalı (aktif/geçmiş yatış listesi — detay TBD). **TBD (v1 dışı / future):** medication administration, nursing sheet, treatment schedule gibi inpatient alt workflow'lar. **Competitor evidence (requirement değil):** E-Vet global Hospitalizasyonlar + hasta Hospitalizasyon Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül) · [geçmiş](../competitors/e-vet.md#hospitalizasyon-geçmişi) (2026-10-04 pass; scope değişmedi) |
 
 ### HOSP-002 — Yatış konum ataması
 
@@ -672,7 +672,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | HOSP-001 |
-| **Notlar** | E-Vet UI örneği (Bölüm/Oda kolonları) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD** |
+| **Notlar** | E-Vet UI örneği (Bölüm/Oda/Veteriner) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD**; kapasite/conflict E-Vet’te **NOT VERIFIED** |
 
 ### HOSP-003 — Hasta yatış geçmişi ve klinik bağlam
 
@@ -687,7 +687,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
 | **Bağımlılıklar** | HOSP-001, TIMELINE-001 |
-| **Notlar** | Filtre/tarih aralığı → [TIMELINE-003](#timeline-003--timeline-filtreleri). **Competitor evidence:** E-Vet hasta kartı Hospitalizasyon Geçmişi — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi). **TBD:** “Tedavisi var mı?” benzeri göstergenin veri kaynağı; inpatient treatment schedule |
+| **Notlar** | Filtre/tarih aralığı → [TIMELINE-003](#timeline-003--timeline-filtreleri). **Competitor evidence:** E-Vet hasta kartı Hospitalizasyon Geçmişi + global süreklilik — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi) · [global modül](../competitors/e-vet.md#global-hospitalizasyon-modül). **TBD:** “Tedavisi var mı?” benzeri göstergenin veri kaynağı; inpatient treatment schedule |
 
 ---
 
