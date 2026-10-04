@@ -26,6 +26,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Muayene** (üst domain) — 13 menü öğesi **REVIEWED / CLOSED** (2026-10-01; reçete/aşı config, klinik vocabulary, paket/template ve treatment-monitoring configuration; [Global Muayene Odası](#global-muayene-odası-modül) ve [Hasta Kartı](#hasta-kartı--patient-workspace) ayrı); [kapsam](#muayene-modül) ve [tracker](#review-tracker).
 - **Laboratuvar** (üst domain) — 7 menü öğesi **REVIEWED / CLOSED** (2026-10-03; lab comparison, test/PACS/reference/device configuration; [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) operasyon yüzeyleri ayrı); [kapsam](#laboratuvar-modül) ve [tracker](#review-tracker).
 - **Genel** (üst domain) — 12 menü öğesi **REVIEWED / CLOSED** (2026-10-03; clinic master data, authorization surfaces, settings, backup UI, manual shell, external Alpemix link); [kapsam](#genel-modül) ve [tracker](#review-tracker).
+- **VKY** (sol menü — yönetim analitiği) — 3 alt ekran **REVIEWED / CLOSED** (2026-10-04); [kapsam](#vky-modül) ve [tracker](#review-tracker). *(Üst menü [Rapor](#rapor) predefined rapor kataloğu ayrı yüzey.)*
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -58,6 +59,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) |
 | **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
 | **Genel** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
+| **VKY** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -94,7 +96,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -125,7 +127,7 @@ Bu belgede **yapılmaz:**
 - Pacs İstekleri *(global modül — [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül) **CLOSED**)*
 - Hospitalizasyon *(global modül — [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) **CLOSED**; sol nav sıradaki modül: **HBS**)*
 - HBS (Hayvan Bilgi Sistemi) *(sol operasyonel nav — **NEXT** modül incelemesi; [Review Tracker](#review-tracker))*
-- VKY
+- VKY *( [VKY (modül)](#vky-modül) **REVIEWED / CLOSED** 2026-10-04; HBS sıradaki **NOT REVIEWED** modül olarak korunur)*
 - e-Fatura / e-SMM
 - DataVet
 - İlaç Rehberi
@@ -150,13 +152,11 @@ Bu belgede **yapılmaz:**
 
 #### VKY
 
-**OBSERVED:**
+**OBSERVED — alt menü (IA):** Güncel Durum Ekranı · Performans Göstergeleri · Parametre Tanımları.
 
-- Güncel Durum Ekranı
-- Performans Göstergeleri
-- Parametre Tanımları
+**Review:** **REVIEWED / CLOSED** (2026-10-04) — ekran detayı → [VKY (modül)](#vky-modül).
 
-**TBD:** “VKY” kısaltmasının açılımı ve menü öğelerinin işlevi (yalnızca gözlemlenen isimler kayıtlıdır).
+**TBD:** “VKY” kısaltmasının tam açılımı (menü etiketinden **uydurulmaz**).
 
 #### e-Fatura / e-SMM
 
@@ -3812,6 +3812,143 @@ Permission backend enforcement · template precedence · 2FA implementation · r
 
 ---
 
+## VKY (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-04; sol menü **VKY** — üç alt ekran product review kapsamı).
+
+**Characterization:** Sol menüde klinik **yönetim analitiği / KPI** yüzeyi (finans, müşteri-hasta, stok, özet istatistikler, Top-N listeler, performans göstergeleri, parametre eşlemeleri). **[Rapor](#rapor)** üst menüsündeki predefined printable rapor kataloğu **değildir** — complementary analytics layer (backend birleşik mi **NOT VERIFIED**).
+
+**OBSERVED — giriş:** Sol operasyonel menü **VKY** → alt öğeler: **Güncel Durum Ekranı** · **Performans Göstergeleri** · **Parametre Tanımları**.
+
+### Global menü envanteri (3/3)
+
+| # | Alt menü | Review status |
+|---|---|---|
+| 1 | Güncel Durum Ekranı | **REVIEWED / CLOSED** (2026-10-04) |
+| 2 | Performans Göstergeleri | **REVIEWED / CLOSED** (2026-10-04) |
+| 3 | Parametre Tanımları | **REVIEWED / CLOSED** (2026-10-04) |
+
+### Güncel Durum Ekranı
+
+**OBSERVED — üst sekmeler:** Finansal Yönetim · Hasta Analizi · Stok Kontrol · Genel İstatistikler · En Çok Özet / En’ler.
+
+**OBSERVED — yaygın zaman seçimi (çoklu grafik/kart):** Bu Yıl · Geçen Yıl · Son 1 Yıl · Tarih Aralığı (tüm widget’lara aynı uygulama **NOT VERIFIED**).
+
+#### Finansal Yönetim
+
+**OBSERVED — rapor/grafik yüzeyleri (metrik türü; canlı tutarlar kopyalanmadı):**
+
+- **Aylık Ciro Değişim Raporu** — aylık ciro · değişim oranı
+- **Tahsilat Değişiklik Raporu** — tahsilat · değişim oranı
+- **Yıllık Gelir Gider Raporu** — gelir · gider · kazanç
+- **Toplam Gelir/Gider** — ödeme kanalı/türü kırılımı (ör. Kasa · Kredi Kartı · Banka Transferi · Çek · Senet); giriş/çıkış toplamları
+- **Personel Satış Raporu** — personel bazlı satış tutarı (isimler **kopyalanmadı**)
+- **Ürün Tipi Satış Raporu** — ürün tipi bazlı dağılım; ekran altında ödeme tipi özetleri
+
+**NOT VERIFIED:** Grafik hesaplama formülleri · muhasebe doğruluğu · aggregation/cache mimarisi · export · drill-down · yetki/scope enforcement.
+
+#### Hasta Analizi
+
+**OBSERVED:**
+
+- **Müşteri Sayısı Değişim Raporu** — yeni müşteri · değişim oranı
+- **İşlem Yapılan Müşteri Sayısı** — adet · değişim oranı
+- **Müşteri durum özeti** — toplam · aktif/pasif kırılım
+- **Hasta durum özeti** — toplam · aktif/pasif/ölü (gözlenen kırılım etiketleri) kırılım
+- Aktif hasta sayısı özet/donut
+- **Hasta Türüne Göre Aktif Hasta** — tür bazlı dağılım
+- **Veteriner Hekim Yönlendirme Sayısı Raporu** — veteriner bazlı yönlendirme/muayene benzeri grafik (backend semantiği **NOT VERIFIED**)
+- **Yapılacak & Tamamlanan Aşı Sayısı** — aşı/paket satırları; **Beklemede** / **Tamamlandı** için Bugün · Bu Hafta · Bu Ay · Bu Yıl
+- **Çiftleştirilecek Hastalar** · **Sahiplendirilecek Hastalar** panelleri (içerik/isimler **kopyalanmadı**)
+
+#### Stok Kontrol
+
+**OBSERVED — dashboard kartları / listeler:**
+
+- **Klinik Stok Özeti ve Analizi** — toplam ürün · A/B/C sınıf dağılımı · depodaki toplam sermaye · hantallaşan stok / atıl sermaye · SKT yaklaşan riskli sermaye · stoklu/stoksuz/toplam satış cirosu (son 90 gün) · acil sipariş bekleyen ürün sayısı
+- **Minimum Stok Altına Düşen Ürünler** — mevcut miktar vs minimum stok
+- **SKT Geçmiş Ürünler** — ürün · depo · kategori/tür · miktar · geçen gün · tarih (gerçek ürün adları **kopyalanmadı**)
+- **Son Kullanma Tarihi Yaklaşan Ürünler (Son 90 Gün)** — ürün · depo · kategori/tür · miktar · SKT · kalan gün · görsel risk göstergesi
+- Yönetim uyarı metni — uzun süredir hareketsiz / atıl stok oranı (algoritma/threshold engine **NOT VERIFIED**)
+
+**NOT VERIFIED:** ABC/atıl stok formülleri · risk eşik konfigürasyonu · otomatik sipariş · FEFO/FIFO · rezervasyon · alert gönderimi.
+
+#### Genel İstatistikler
+
+**OBSERVED — özet kart alanları (sayısal değerler kopyalanmadı):**
+
+- **Bakiye** — Toplam Ödeme · Toplam Borç · Toplam Alacak
+- **Müşteri** — Yeni · Toplam
+- **Müşteri Sadakat Oranı** — tek KPI
+- **Hasta** — Yeni · Toplam
+- **Satış** — sayı · ciro · müşteri · hasta · müşteri ortalama satış · hasta ortalama satış
+- **Aşı** — toplam · tamamlandı · müşteri · hasta · müşteri ortalama aşı · hasta ortalama aşı
+
+**NOT VERIFIED:** Sadakat/ortalama formülleri · tarih filtresinin tüm kartlara uygulanması · historical snapshot semantics.
+
+#### En Çok Özet / En’ler
+
+**OBSERVED — Top-N / ranked list dashboard** (bazı listeler “30” ile etiketlenmiş):
+
+- En Çok Satılan Ürünler
+- En Çok Borcu Olan Müşteriler
+- En Çok Randevusu Olan Müşteriler
+- En Çok Ziyaret Yapan Müşteriler
+- En Çok Harcama Yapan Müşteriler
+
+Gerçek müşteri/ürün adları ve parasal sıra değerleri **kopyalanmadı**.
+
+**NOT VERIFIED:** Ranking tie-break · iptal/iade dahililiği · müşteri merge · doğrudan satış generic müşteri semantiği · satır drill-down.
+
+### Performans Göstergeleri
+
+**OBSERVED — sayfa:** Performans Göstergeleri.
+
+**OBSERVED — üst kontroller:** Tarih Aralığı · **Özel Değerler** dropdown · **Yeniden Hesapla**.
+
+**OBSERVED — recalculation UX:** **Yeniden Hesapla** → “İşleminiz gerçekleştiriliyor...” loading/progress state.
+
+**NOT VERIFIED:** Hesaplamanın başarıyla tamamlanması · yeni değerlerin persistence’ı · server-side/background job · **Özel Değerler** precedence · formüller · otomatik vs manuel alan kaynağı · scenario/historical snapshot.
+
+**OBSERVED — sol/orta girdi alanları (örnek kategori/alan adları; canlı 0.00 vb. kopyalanmadı):**
+
+- **Genel Klinik Bilgileri** — Tam Zamanlı Çalışan Veteriner Hekim Sayısı · Diğer Çalışan Sayısı · Aktif Hasta Sayısı · Çalışma Gün Sayısı · Hasta Başına Ortalama Yıllık Tıbbi Ziyaret
+- **Klinik Gelirleri** — Muayene ve Konsültasyon · Aşı · Kuaför · PetShop ve Tamamlayıcı Servisler · (ek gelir sınıfları ekranın devamında)
+- **Klinik Giderleri** — Laboratuvar/Operasyon/Sarf · Mama/İlaç/Malzeme · Amortisman · Vergiler (SGK, Muhtasar, KDV vb.) · Pazarlama/Reklam · İşletme · Finansal giderler · Toplam Giderler
+
+**OBSERVED — sağ KPI tablosu (kayıt adları):** Hekim Başına Yıllık Ortalama Gelir · Hekim Başına Yıllık Ortalama Gelir (Sağlık Hizmetleri İçin) · Hekim Başına Yıllık Ortalama Maaş Maliyeti · Çalışan Başına Yıllık Gelir Ortalaması · Çalışan Başına Yıllık Maaş Gideri · Hekim Başına Aktif Hasta Sayısı · Günlük Konsültasyon/Vet · Hasta Başına Toplam Yıllık Ortalama Gelir · Tıbbi Hizmetler İçin Hasta Başına Ortalama Yıllık Gelir · Diğer Ürünlerin Hasta Başına Ortalama Yıllık Geliri · Her Hasta İçin Ziyaret Başına Ortalama Gelir · Kapı Açma Maliyeti · Giderleri Karşılamak İçin Günlük Min Olması Gereken Ziyaret Sayısı · Giderleri Karşılamak İçin Günlük Hekim Başına Min Olması Gereken Ziyaret Sayısı
+
+### Parametre Tanımları
+
+**OBSERVED:** VKY hesaplamalarını besleyen geniş **eşleme/konfigürasyon** ekranı (Save/mutation **test edilmedi**; parametre değiştirilmedi).
+
+**OBSERVED — gelir eşleme alan başlıkları (örnek):** Aksesuar · Kozmetik · İlaç · Yem Katkı · Mama · Diagnostik Görüntüleme · Muayene ve Konsültasyon · Aşı · Hospitalizasyon · Laboratuvar Analiz · Kuaför · Operasyon · Diğer Tıbbi İşlem — *… Gelir Ürün Tip(ler)i*
+
+**OBSERVED — gider / işletme parametreleri (örnek):** Danışman VH hizmeti · Amortisman · Klinik donanım/leasing · Finansal harcamalar · Vergiler · Teknisyen/diğer personel/VH maaş toplamları · Mama/ilaç/malzeme gider ürün tipleri · Kuaför gider · Genel yönetim (kira, utilities) · Laboratuvar/operasyon/sarf · Pazarlama/reklam
+
+**OBSERVED — operasyonel parametreler:** Tıbbi Ziyaret Ürün Tip(ler)i · tam zamanlı VH/diğer personel sayısı · yıllık çalışma gün sayısı · kira fırsat maliyeti
+
+**OBSERVED — dropdown kaynakları:** Gelir eşlemelerinde **ürün tipi** listesi (örnek tipler: Aksesuar · Aşı · Hizmet · İlaç · Kozmetik · Laboratuvar · Mama & Ödül · Operasyon Malzemesi — tam enum **iddia edilmez**). Gider eşlemelerinde **gider tipi** seçimi (örnek seçenek türleri: araç bakım/kiralama/otopark/sigorta/vergi/yakıt · BAĞKUR · banka komisyonu — tam liste **dump edilmedi**).
+
+**INFERRED (UI-level):** VKY göstergeleri, mevcut ürün/gider sınıflarını yönetim analitiği kategorilerine bağlayan **configurable mappings** ile destekleniyor görünmektedir. Backend calculation architecture · rule engine · OLAP/warehouse · mapping enforcement **NOT VERIFIED**.
+
+### VKY — Backlog cross-reference
+
+**Backlog exact-match:** **NO MATCH** (VKY = entegre management analytics + KPI calculator + mapping config; [REPORT-001](../backlog/feature-backlog.md#report-001--rapor-merkezi) predefined **Rapor Merkezi** / printable catalog scope’u ile birebir değil; [AI-101](../backlog/feature-backlog.md#ai-101--ai-business-copilot) doğal dil copilot — adjacent, exact değil). Yeni backlog ID **oluşturulmadı**.
+
+### VKY — TBD / NOT VERIFIED (CLOSED kapsamını engellemez)
+
+Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · parametre Save · export/drill-down · permission model · ABC/atıl/SKT risk algoritmaları · Top-N iş kuralları · performans KPI motoru · historical snapshots.
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- E-Vet **VKY**, operasyonel klinik veriyi finans, müşteri/hasta, stok ve yönetim KPI’larında birleştiren kapsamlı bir **management analytics** katmanı sunar; birebir UI/kapsam kopyası önerilmez (“copy workflows, not UI”).
+- **İlk aşama (companion clinic):** operasyonel dashboard · temel gelir/tahsilat özetleri · müşteri/hasta temel göstergeleri · kritik stok / min stok / SKT riskleri · basit satış kırılımları.
+- **İleri aşama (research):** configurable management-accounting mappings · personel/ürün/hizmet performansı · break-even / kapı açma maliyeti · minimum günlük ziyaret · hekim productivity/economic KPI · scenario/benchmarking.
+- Roadmap veya mimari karar **değildir**; [Rapor](#rapor) ve finans/stok operasyon modülleri ile read-model hizalaması ayrı ürün tasarımı gerektirir.
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -3832,6 +3969,14 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 - Patient delete persistence semantics
 - “Beni Uyar” cross-workflow visibility
 - Özel Form-4 inconsistent content root cause
+
+### VKY — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-04). Sol menü **VKY** — **3/3** alt ekran:
+
+Güncel Durum (5 sekme: Finansal Yönetim · Hasta Analizi · Stok Kontrol · Genel İstatistikler · En’ler) · zaman seçiciler · grafik/kart metrik türleri · Top-N listeler · Performans Göstergeleri (Tarih · Özel Değerler · Yeniden Hesapla + loading state) · KPI tablosu alan adları · Parametre Tanımları (ürün/gider tip eşlemeleri; Save **NOT VERIFIED**)
+
+**TBD / NOT VERIFIED** (CLOSED kapsamını **engellemez**): formüller · recalculation success/persistence · mapping backend · export/drill-down · ABC/atıl/SKT algoritmaları · yetki modeli
 
 ### Global Hospitalizasyon — REVIEWED / CLOSED
 
@@ -4039,7 +4184,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Xray İstekleri** (global kuyruk) | **PARTIAL** (2026-09-29) | Bkz. [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); current clinic: no request rows / no selectable Xray Test Grubu; result lifecycle **not validated** |
 | **Pacs İstekleri** (global modül) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül); US image unavailable on reviewed samples — limitation documented |
 | **HBS** | NOT REVIEWED | Sol operasyonel nav **NEXT** (Hospitalizasyon **CLOSED** 2026-10-04) |
-| **VKY** | NOT REVIEWED | |
+| **VKY** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [VKY (modül)](#vky-modül); 3/3 alt menü; [Rapor](#rapor) ayrı |
 | **e-Fatura / e-SMM** | PARTIAL | Nav + patient finans alanları |
 | **DataVet** | NOT REVIEWED | |
 | **İlaç Rehberi** | NOT REVIEWED | |
@@ -4063,7 +4208,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** — **CLOSED** (2026-10-04; [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül)). Bu eksende sıradaki modül: **HBS (Hayvan Bilgi Sistemi) — NEXT**. *(Aşağıdaki numaralı kuyruk farklı öncelik eksenidir; **14. e-Fatura / e-SMM — NEXT** korunur.)*
+**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** — **CLOSED** (2026-10-04). **VKY** — **CLOSED** (2026-10-04; [VKY (modül)](#vky-modül)). Bu eksende sıradaki **henüz incelenmemiş** modül: **HBS (Hayvan Bilgi Sistemi) — NEXT** (değişmedi). *(Aşağıdaki numaralı kuyruk farklı öncelik eksenidir; **14. e-Fatura / e-SMM — NEXT** korunur.)*
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül); 2026-10-04)
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
@@ -4080,7 +4225,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 13. ~~Hasta~~ (üst domain — reference data) — **CLOSED** ([Hasta (modül)](#hasta-modül); 8/8; Patient Card ayrı **CLOSED**)
 14. **e-Fatura / e-SMM** — **NEXT**
 15. HBS
-16. VKY
+16. ~~VKY~~ — **CLOSED** ([VKY (modül)](#vky-modül); 2026-10-04; 3/3)
 17. DataVet
 18. İlaç Rehberi
 19. Nekropsi
@@ -4108,7 +4253,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 **TBD:**
 
 - “Resmi” ekranların hukuki/regulatory zorunluluk olup olmadığı (menü adından türetilmez).
-- HBS, PACS, İlaç Rehberi entegrasyon/kapsam detayları; VKY işlevi; e-Fatura/e-SMM sağlayıcı ve mevzuat davranışı; DataVet ekran içi akışları; SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı.
+- HBS, PACS, İlaç Rehberi entegrasyon/kapsam detayları; e-Fatura/e-SMM sağlayıcı ve mevzuat davranışı; DataVet ekran içi akışları; SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(VKY yönetim analitiği → [VKY (modül)](#vky-modül) **CLOSED** 2026-10-04.)*
 
 **INFERRED (domain coverage — menü envanterinden):**
 
@@ -4121,7 +4266,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 *(Minimum — deep-dive ilerledikçe genişletilecek.)*
 
 - **TBD:** Navigation'da operasyon ile master-data birleşiminin Vetinity IA hedefleriyle nasıl karşılaştırılacağı ([ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md), [ADR-003](../decisions/ADR-003-report-center.md) — bu pass'te karar yok).
-- **TBD:** Türkiye-local entegrasyon adları (HBS, VKY, e-Fatura/e-SMM, DataVet) için ayrı entegrasyon deep-dive.
+- **TBD:** Türkiye-local entegrasyon adları (HBS, e-Fatura/e-SMM, DataVet) için ayrı entegrasyon deep-dive. VKY → [VKY (modül)](#vky-modül) (analytics; entegrasyon adı değil).
 
 ---
 
