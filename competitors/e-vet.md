@@ -27,8 +27,11 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **Laboratuvar** (üst domain) — 7 menü öğesi **REVIEWED / CLOSED** (2026-10-03; lab comparison, test/PACS/reference/device configuration; [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) operasyon yüzeyleri ayrı); [kapsam](#laboratuvar-modül) ve [tracker](#review-tracker).
 - **Genel** (üst domain) — 12 menü öğesi **REVIEWED / CLOSED** (2026-10-03; clinic master data, authorization surfaces, settings, backup UI, manual shell, external Alpemix link); [kapsam](#genel-modül) ve [tracker](#review-tracker).
 - **VKY** (sol menü — yönetim analitiği) — 3 alt ekran **REVIEWED / CLOSED** (2026-10-04); [kapsam](#vky-modül) ve [tracker](#review-tracker). *(Üst menü [Rapor](#rapor) predefined rapor kataloğu ayrı yüzey.)*
+- **HBS (Hayvan Bilgi Sistemi)** — sol menü **E-Reçete & ATS** operasyon yüzeyi **REVIEWED / CLOSED** (2026-10-04; resmi gönderim entegrasyonu **NOT VERIFIED**); [kapsam](#hbs-modül) ve [tracker](#review-tracker).
+- **e-Fatura / e-SMM** — sol menü **PARTIAL** (2026-10-04; UI + pre-send workflow; entegrasyon config eksik); [kapsam](#e-fatura--e-smm-modül) ve [tracker](#review-tracker).
+- **DataVet** — Laboratuvar (Pet/Büyükbaş) + Semptomlar **REVIEWED / CLOSED** (2026-10-04; clinical validity/algorithm **NOT VERIFIED**); [kapsam](#datavet-modül) ve [tracker](#review-tracker).
 
-**Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, DataVet entegrasyon deep-dive, vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
+**Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, e-Fatura/e-SMM external lifecycle (config blocker), vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
 ## Analiz durumu
 
@@ -60,6 +63,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
 | **Genel** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) |
 | **VKY** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
+| **HBS** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
+| **e-Fatura / e-SMM** (sol menü) | **PARTIAL** (2026-10-04) |
+| **DataVet** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -96,7 +102,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -125,11 +131,11 @@ Bu belgede **yapılmaz:**
 - Lab İstekleri *(global modül — [Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül) **CLOSED**)*
 - Xray İstekleri *(global — [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial))*
 - Pacs İstekleri *(global modül — [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül) **CLOSED**)*
-- Hospitalizasyon *(global modül — [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) **CLOSED**; sol nav sıradaki modül: **HBS**)*
-- HBS (Hayvan Bilgi Sistemi) *(sol operasyonel nav — **NEXT** modül incelemesi; [Review Tracker](#review-tracker))*
-- VKY *( [VKY (modül)](#vky-modül) **REVIEWED / CLOSED** 2026-10-04; HBS sıradaki **NOT REVIEWED** modül olarak korunur)*
-- e-Fatura / e-SMM
-- DataVet
+- Hospitalizasyon *(global modül — [Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül) **CLOSED** 2026-10-04)*
+- HBS (Hayvan Bilgi Sistemi) *( [HBS (modül)](#hbs-modül) **REVIEWED / CLOSED** 2026-10-04)*
+- VKY *( [VKY (modül)](#vky-modül) **REVIEWED / CLOSED** 2026-10-04)*
+- e-Fatura / e-SMM *( [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül) **PARTIAL** 2026-10-04)*
+- DataVet *( [DataVet (modül)](#datavet-modül) **REVIEWED / CLOSED** 2026-10-04)*
 - İlaç Rehberi
 - Nekropsi
 - Mobil Uygulamalar
@@ -158,26 +164,23 @@ Bu belgede **yapılmaz:**
 
 **TBD:** “VKY” kısaltmasının tam açılımı (menü etiketinden **uydurulmaz**).
 
+#### HBS (Hayvan Bilgi Sistemi)
+
+**OBSERVED — giriş:** Sol menü **HBS** → sayfa **E-Reçete & ATS** (alt menü envanteri ayrı listelenmedi; bu pass tek operasyon yüzeyi).
+
+**Review:** **REVIEWED / CLOSED** (2026-10-04) — detay → [HBS (modül)](#hbs-modül). Resmi HBS gönderim/API **NOT VERIFIED**.
+
 #### e-Fatura / e-SMM
 
-**OBSERVED:**
+**OBSERVED — alt menü (IA):** Fatura Yönetim Paneli · Giden e-Faturalar · Gelen e-Faturalar.
 
-- Fatura Yönetim Paneli
-- Giden e-Faturalar
-- Gelen e-Faturalar
-
-Entegrasyon sağlayıcısı, teknik mimari veya mevzuat davranışı bu menü isimlerinden **çıkarılmaz**.
+**Review:** **PARTIAL** (2026-10-04) — detay → [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül). Entegrasyon sağlayıcısı, teknik mimari veya mevzuat davranışı menü isimlerinden **çıkarılmaz**.
 
 #### DataVet
 
-**OBSERVED:**
+**OBSERVED — alt menü (IA):** Laboratuvar (Pet · Büyükbaş) · Semptomlar.
 
-- Laboratuvar
-  - Pet
-  - Büyükbaş
-- Semptomlar
-
-Pet / Büyükbaş ayrımı UI navigation'da gözlemlendi; tenant, product edition, ayrı veri modeli veya backend architecture anlamına geldiği **varsayılmaz**.
+**Review:** **REVIEWED / CLOSED** (2026-10-04) — detay → [DataVet (modül)](#datavet-modül). Pet / Büyükbaş ayrımı tenant/edition/backend modeli **iddia edilmez**.
 
 #### Mobil Uygulamalar
 
@@ -1290,7 +1293,7 @@ Backend’de ayrı field/entity **iddia edilmez**. UI’da **iki farklı state c
 
 **NOT OBSERVED / TBD:** Lab device integration · result import · LIS · bidirectional sync · automatic analyzer feed · cloud sync · DataVet dışı entegrasyon fonksiyonları.
 
-*(Sol menü **DataVet** modülü ayrı — bu pass **NOT REVIEWED**.)*
+**Cross-ref:** Sol menü [DataVet (modül)](#datavet-modül) **REVIEWED / CLOSED** (2026-10-04) — bu yüzey analyte-level reference; tam decision-support workspace ayrı.
 
 ---
 
@@ -3183,6 +3186,8 @@ Owner transfer side-effects · reference-data tenant/clinic scope · delete refe
 
 **NOT VERIFIED:** başarılı e-Reçete gönderimi · resmi entegrasyon · elektronik imza · HBS/ATS submission · regulator acceptance · print-state persistence · Onayla approval semantics · billing/stock effects.
 
+**Cross-ref (2026-10-04):** Sol menü [HBS (modül)](#hbs-modül) **E-Reçete & ATS** worklist/export — üst menü **Muayene → Reçete** ayrı yüzey.
+
 ---
 
 ### ATS Listesi
@@ -3192,6 +3197,8 @@ Owner transfer side-effects · reference-data tenant/clinic scope · delete refe
 ATS kısaltmasının teknik açılımı **tahmin edilmedi**. HBS Kimlik No kolonundan otomatik entegrasyon/submission **çıkarılmadı**.
 
 **NOT VERIFIED:** ATS veri gönderimi · resmi servis entegrasyonu · belge oluşturma akışı · retry/error handling · status lifecycle · successful submission.
+
+**Cross-ref (2026-10-04):** [HBS (modül)](#hbs-modül) ATS tab — populated worklist kanıtı (PII kopyalanmadı).
 
 ---
 
@@ -3949,6 +3956,161 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 ---
 
+## HBS (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-04). **Anlamı:** Sol menü **HBS** ekran/workflow product review tamamlandı; resmi HBS/e-Reçete/ATS **entegrasyon semantics doğrulanmadı**.
+
+**OBSERVED — giriş:** Sol operasyonel menü **HBS (Hayvan Bilgi Sistemi)** → sayfa başlığı **E-Reçete & ATS**.
+
+**OBSERVED — üst kontroller:** Tarih Aralığı · Arama Metni · **Dışa Aktar (Excel)**.
+
+**OBSERVED — ana sekmeler:** **e-Reçete** · **ATS**.
+
+### e-Reçete
+
+**OBSERVED — tablo kolonları (PII/değer kopyalanmadı):** Tür · Müşteri · Kimlik No · Çip No · Hasta · Veteriner · Teşhis · HBS Kimlik No · e-Reçete No.
+
+**OBSERVED:** Satırlar tarih altında gruplanıyor; Tür örneği **Muayene**; satır expand/collapse; expand’de ürün satırları — Ürün · Miktar · Doz · Birim · Seri No (içerik **kopyalanmadı**).
+
+**OBSERVED:** e-Reçete No yanında save-benzeri aksiyon ikonu (HBS gönderimi/kayıt **test edilmedi**).
+
+### ATS
+
+**OBSERVED — tablo kolonları:** Tür · Müşteri · Kimlik No · Çip No · Hasta · Veteriner · HBS Kimlik No · Aşı Uygulama Belgesi Seri No.
+
+**OBSERVED:** Tarih bazlı gruplu liste; seri no alanı + save-benzeri aksiyon (gönderim **test edilmedi**).
+
+### Excel export (e-Reçete)
+
+**OBSERVED:** Export dosya indirdi; yapısal kolonlar (reçete tipi, veteriner, tarih, müşteri, kimlik, hasta, doğum tarihi, tür/ırk/cinsiyet/renk, HBS kimlik, chip, seri/cilt/sıra, ürün, birim, miktar, doz vb.) — **değerler dokümana alınmadı**.
+
+**NOT VERIFIED:** HBS API/protokolü · e-Reçete üretim/gönderim aşaması · save ikonu semantics · HBS Kimlik No kaynağı · teşhis zorunluluğu · reçete validasyonları · ATS gönderim · başarı/başarısızlık · retry/idempotency · resmi hata kodları · yetki/audit · ziyaret/muayene backend ilişki modeli.
+
+**Backlog exact-match:** **NO MATCH** (resmi HBS entegrasyon backlog maddesi yok; yeni ID **oluşturulmadı**).
+
+**Cross-ref:** [Muayene (modül)](#muayene-modül) → Reçete / ATS Listesi (üst menü configuration listeleri).
+
+---
+
+## e-Fatura / e-SMM (modül)
+
+**Review status:** **PARTIAL** (2026-10-04).
+
+**PARTIAL gerekçesi:** Sol menü UI envanteri ve Fatura Yönetim Paneli pre-send workflow **gözlemlendi**; reviewed account’ta **e-Fatura kullanıcı bilgileri eksik** uyarısı nedeniyle gerçek external gönderim/alım lifecycle **doğrulanamadı**.
+
+**OBSERVED — alt menü:** Fatura Yönetim Paneli · Giden e-Faturalar · Gelen e-Faturalar.
+
+### Fatura Yönetim Paneli
+
+**OBSERVED — Hazırdaki Faturalar:** liste/pagination · search · checkbox · expand · kolonlar İşlemler · Müşteri · Toplam · Ödenecek Tutar · üst **Kaydet** · satır İşlemler’de **Kaydet**.
+
+**OBSERVED — Taslakdaki Faturalar:** liste/pagination · search · checkbox · İşlemler · Taslak Tarihi · Müşteri · Toplam · Ödeme · üst **Gönder**.
+
+**INFERRED (UI-level lifecycle):** hazır → kaydet/taslak → gönder benzeri aşamalı invoice UI (backend state machine **iddia edilmez**).
+
+### Giden e-Faturalar
+
+**OBSERVED — filtreler:** Tarih Aralığı · Arama Metni · **e-Fatura / e-SMM** selector (seçenekler: e-Fatura · e-Smm).
+
+**OBSERVED — kolonlar:** İşlemler · Fatura Tarihi · Durum · Fatura No · Alıcı · Fatura Tipi · Gönderim Tipi · Fatura Toplamı · Ödenecek Tutar.
+
+**OBSERVED:** Reviewed account’ta liste kaydı **yok**; configuration eksikliği uyarısı (ayarlara gitme yönlendirmesi).
+
+### Gelen e-Faturalar
+
+**OBSERVED — filtreler:** Tarih aralığı · Arama metni.
+
+**OBSERVED — kolonlar:** Giden ile aynı kolon seti (yukarıda).
+
+**OBSERVED:** Kayıt **yok**; aynı configuration eksikliği uyarısı.
+
+**OBSERVED:** e-Fatura/e-SMM yüzeyleri **konfigürasyon bağımlı**; canlı hesapta kullanıcı/entegrasyon bilgileri eksik → gerçek gönderim/alım workflow **doğrulanamadı**.
+
+**NOT VERIFIED:** Provider · GİB entegrasyon yöntemi · authentication · UBL/XML · e-SMM vs e-Fatura lifecycle farkları · draft persistence · gönderim status enum · incoming sync · retry · cancel/void/reject · credit note linkage · audit · authorization · attachment/PDF/XML download · Save/Gönder persistence.
+
+**Backlog cross-reference (exact semantic match, scope değişmedi):** [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) — competitor evidence only.
+
+---
+
+## DataVet (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-04). **Anlamı:** Gözlenen decision-support yüzeyleri competitor research açısından yeterli; **clinical validity · algorithm · AI iddiası doğrulanmadı**. Canlı mutation **yapılmadı**.
+
+**OBSERVED — giriş / IA:** Sol menü **DataVet** → **Laboratuvar** (Pet · Büyükbaş) · **Semptomlar**.
+
+### DataVet Laboratory — Pet
+
+**OBSERVED:** Species/context selector; sol: lab parametreleri/bulgular; sağ: **Olası Hastalıklar**; search · **Karşılaştır**.
+
+**OBSERVED — kategori sekmeleri (örnek):** BOS · Biyokimya · Elektrolit · Hemogram · Hormon · Koagulasyon (tam enum **iddia edilmez**).
+
+**OBSERVED — değerleme UI:** (1) Kategorik Yok/Düşük/Normal/Yüksek · (2) Binary `-` / `+`. Bazı parametrelerde bilgi/video benzeri ikonlar (içerik bu pass’te **doğrulanmadı**).
+
+**OBSERVED:** Parametrede ör. **Düşük** seçildiğinde sağ **Olası Hastalıklar** listesi doldu.
+
+**OBSERVED — Olası Hastalıklar kolonları:** Olası Teşhis · Lab ⅓ (eşleşme fraksiyonu benzeri) · Lab % · İncele. **NOT VERIFIED:** olasılık/risk/AI confidence semantics — yalnızca UI eşleşme oranı/coverage benzeri gösterim.
+
+### DataVet Laboratory — Büyükbaş / Ruminant
+
+**OBSERVED:** Ayrı **DataVet Lab (Ruminant)** yüzeyi; sekmeler arasında A. Kan Gazı · Biyokimya · Bulgular · Diğer · Gaita · Hemogram · Hormon · Kan M. · Sperma · V. Kan Gazı · İdrar vb. (tam set **dump edilmedi**).
+
+**OBSERVED:** Biyokimya parametresi değişince olası hastalık listesi güncellendi.
+
+**INFERRED (UI-level):** Companion + ruminant için ayrı knowledge/screen setleri.
+
+### Hastalık detay modalı (`İncele`)
+
+**OBSERVED — sekmeler:** Parametreler · İçerik.
+
+**Parametreler:** Test Grubu · Test Adı · Değer tablosu; **Uyuşan Parametreler** · **Önerilen Parametreler** grupları; değer kodları H/L/N/+ (clinical calculation semantics **iddia edilmez** — UI-level coded state).
+
+**İçerik:** Accordion disease knowledge — başlık örnekleri: Tanım · Etiyoloji · Epidemiyoloji · Patogenez · Ayırıcı Tanı · Prognoz · Tedavi · Patofizyoloji · Patolojik Bulgular · Korunma · Etkilenen Sistemler · Genetik · Yatkınlık · Anamnez · Semptomlar · Nedenler · Hemogram · Görüntüleme · Diğer Tanı Yöntemleri · İlaç Tedavisi vb. (**metin kopyalanmadı**).
+
+### DataVet Symptoms
+
+**OBSERVED:** **DATAVET SYMPTOM**; species tabs (kedi · köpek · büyükbaş/ruminant); dataset species’a göre değişiyor (yüzlerce kayıt — exact count **kopyalanmadı**).
+
+**OBSERVED — sol panel:** search · pagination · **Seçilenleri Göster** · **Sonuçlar (n)**.
+
+**OBSERVED:**
+
+- Semptomlar checkbox ile seçiliyor.
+- Tek semptom seçiliyken sonuç alınmaya çalışıldığında `Lütfen 2 teşhis seçiniz...` uyarısı görüldü; mesajdaki “teşhis” ifadesi, kullanıcı o anda semptom seçtiği için **UI copy inconsistency** olarak not edilir.
+- İki semptom seçildiğinde `Sonuçlar (2)` üzerinden **Olası Hastalıklar** listesi görüntülendi (Olası Teşhis · Semp ⅓ · Semp % · İncele kolonları).
+
+**NOT VERIFIED:** Sonuç üretmek için gereken exact minimum semptom sayısının genel business rule olup olmadığı · Semp % / fraction değerlerinin hesaplama semantiği.
+
+### Hastalık karşılaştırma (`Karşılaştır`)
+
+**OBSERVED:**
+
+- **Olası Hastalıklar** listesinde aday hastalıklar seçilebiliyor; **Karşılaştır** aksiyonu mevcut.
+- Karşılaştırma modalında iki aday hastalık yan yana gösterildi; gruplar **Eşleşen Parametreler** · **Farklı Parametreler** · **Önemsiz Parametreler**.
+
+**NOT VERIFIED:** Karşılaştırmanın exact selection-cardinality kuralı · ranking/scoring formülü · weighting · probability/confidence semantics (Semp % / Lab % vb.) · AI/ML/probability interpretation · clinical validation.
+
+**INFERRED (UI-level, zayıf):** Rule/reference-data driven clinical decision-support **benzeri** UI — **AI tanı koyuyor** iddiası **yok**.
+
+### DataVet synthesis
+
+**OBSERVED:** Species-specific datasets · lab abnormality/finding selection · symptom selection · candidate disease listing · match fraction/% UI · disease knowledge base · parameter matching · differential compare · pet + ruminant specialization.
+
+**NOT VERIFIED:** Algorithm · AI/ML · data source · medical validation · governance/versioning · explainability · patient record write-back · automatic diagnosis · audit · permissions.
+
+**Backlog exact-match:** **NO MATCH** ([AI-100](../backlog/feature-backlog.md#epic-ai-100--embedded-clinical-intelligence) embedded intelligence epic — **adjacent**, exact değil; scope değiştirilmedi).
+
+**Cross-ref:** [Global Lab İstekleri](#global-lab-i̇stekleri-modül) analyte-level DataVet modal — ayrı yüzey.
+
+---
+
+### HBS / e-Belge / DataVet — VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+1. **HBS:** Türkiye-localization için resmi veteriner sistemleri **integration boundary** gerekebilir; provider/API araştırılmadan mimari karar **yok**.
+2. **e-Fatura/e-SMM:** Invoice generation ≠ official e-document transmission; configuration · draft · send · status · failure/retry lifecycle ayrı ürün tasarımı ([INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) Vetinity scope referansı — burada karar değil).
+3. **DataVet:** [AI-100](../backlog/feature-backlog.md#epic-ai-100--embedded-clinical-intelligence) vizyonuyla **adjacency**; ayrı decision-support ekranı kopyalanmamalı — workflow-embedded intelligence · evidence/explanation · user confirmation · no autonomous diagnosis. Eşleşme % UI’sını gerçek olasılık olarak kopyalama.
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -3969,6 +4131,22 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 - Patient delete persistence semantics
 - “Beni Uyar” cross-workflow visibility
 - Özel Form-4 inconsistent content root cause
+
+### HBS — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-04). Sol menü **HBS** → **E-Reçete & ATS** (e-Reçete + ATS tabs · tarih gruplama · expand ürün satırları · Excel export yapısı · save-benzeri aksiyonlar **NOT VERIFIED** persistence/submission).
+
+**NOT VERIFIED (CLOSED’ı engellemez):** resmi HBS API · gönderim lifecycle · validasyon · audit.
+
+### e-Fatura / e-SMM — PARTIAL
+
+**PARTIAL** (2026-10-04). Fatura Yönetim Paneli (Hazır/Taslak · Kaydet/Gönder) · Giden/Gelen list shells · e-Fatura/e-Smm selector · config eksik uyarısı.
+
+**NOT VERIFIED:** external provider lifecycle · persistence post Save/Gönder · incoming sync.
+
+### DataVet — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-04). Lab Pet + Ruminant · Symptoms · disease modal · Karşılaştır — decision-support UI (algorithm/clinical validity **NOT VERIFIED**).
 
 ### VKY — REVIEWED / CLOSED
 
@@ -4183,10 +4361,10 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Lab İstekleri** (global modül) | **REVIEWED / CLOSED** | Bkz. [Global Lab İstekleri (modül)](#global-lab-i̇stekleri-modül); patient Lab Geçmişi (Hasta Kartı **CLOSED**) |
 | **Xray İstekleri** (global kuyruk) | **PARTIAL** (2026-09-29) | Bkz. [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial); current clinic: no request rows / no selectable Xray Test Grubu; result lifecycle **not validated** |
 | **Pacs İstekleri** (global modül) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Global Pacs İstekleri (modül)](#global-pacs-i̇stekleri-modül); US image unavailable on reviewed samples — limitation documented |
-| **HBS** | NOT REVIEWED | Sol operasyonel nav **NEXT** (Hospitalizasyon **CLOSED** 2026-10-04) |
+| **HBS** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [HBS (modül)](#hbs-modül); resmi entegrasyon **NOT VERIFIED** |
 | **VKY** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [VKY (modül)](#vky-modül); 3/3 alt menü; [Rapor](#rapor) ayrı |
-| **e-Fatura / e-SMM** | PARTIAL | Nav + patient finans alanları |
-| **DataVet** | NOT REVIEWED | |
+| **e-Fatura / e-SMM** | **PARTIAL** (2026-10-04) | Bkz. [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül); config blocker |
+| **DataVet** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [DataVet (modül)](#datavet-modül); Lab Pet/Büyükbaş + Semptomlar |
 | **İlaç Rehberi** | NOT REVIEWED | |
 | **Nekropsi** | NOT REVIEWED | |
 | **Mobil Uygulamalar** | NOT REVIEWED | |
@@ -4208,7 +4386,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** — **CLOSED** (2026-10-04). **VKY** — **CLOSED** (2026-10-04; [VKY (modül)](#vky-modül)). Bu eksende sıradaki **henüz incelenmemiş** modül: **HBS (Hayvan Bilgi Sistemi) — NEXT** (değişmedi). *(Aşağıdaki numaralı kuyruk farklı öncelik eksenidir; **14. e-Fatura / e-SMM — NEXT** korunur.)*
+**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** · **HBS** · **VKY** · **DataVet** — **CLOSED** (2026-10-04). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Bu eksende sıradaki **henüz sistematik incelenmemiş** modül: **İlaç Rehberi — NEXT**. *(Numaralı kuyruk ayrı eksen — aşağıda.)*
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül); 2026-10-04)
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
@@ -4223,11 +4401,11 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 11. ~~Ürün~~ — **CLOSED** ([Ürün (modül)](#ürün-modül); 6/6 menü; davranışsal TBD'ler CLOSED kapsamını engellemez)
 12. ~~Müşteri~~ — **CLOSED** ([Müşteri (modül)](#müşteri-modül); 6/6 + Müşteri Kartı)
 13. ~~Hasta~~ (üst domain — reference data) — **CLOSED** ([Hasta (modül)](#hasta-modül); 8/8; Patient Card ayrı **CLOSED**)
-14. **e-Fatura / e-SMM** — **NEXT**
-15. HBS
+14. ~~e-Fatura / e-SMM~~ — **PARTIAL** ([e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül); 2026-10-04; UI + pre-send workflow; entegrasyon config eksik — external lifecycle **NOT VERIFIED**)
+15. ~~HBS~~ — **CLOSED** ([HBS (modül)](#hbs-modül); 2026-10-04)
 16. ~~VKY~~ — **CLOSED** ([VKY (modül)](#vky-modül); 2026-10-04; 3/3)
-17. DataVet
-18. İlaç Rehberi
+17. ~~DataVet~~ — **CLOSED** ([DataVet (modül)](#datavet-modül); 2026-10-04)
+18. **İlaç Rehberi** — **NEXT**
 19. Nekropsi
 20. Mobil Uygulamalar
 21. Katalog / Dokümanlar
@@ -4253,7 +4431,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 **TBD:**
 
 - “Resmi” ekranların hukuki/regulatory zorunluluk olup olmadığı (menü adından türetilmez).
-- HBS, PACS, İlaç Rehberi entegrasyon/kapsam detayları; e-Fatura/e-SMM sağlayıcı ve mevzuat davranışı; DataVet ekran içi akışları; SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(VKY yönetim analitiği → [VKY (modül)](#vky-modül) **CLOSED** 2026-10-04.)*
+- PACS, İlaç Rehberi entegrasyon/kapsam detayları; e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04); SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(HBS → [HBS (modül)](#hbs-modül) **CLOSED**; DataVet → [DataVet (modül)](#datavet-modül) **CLOSED**; VKY → [VKY (modül)](#vky-modül) **CLOSED**.)*
 
 **INFERRED (domain coverage — menü envanterinden):**
 
@@ -4266,7 +4444,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 *(Minimum — deep-dive ilerledikçe genişletilecek.)*
 
 - **TBD:** Navigation'da operasyon ile master-data birleşiminin Vetinity IA hedefleriyle nasıl karşılaştırılacağı ([ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md), [ADR-003](../decisions/ADR-003-report-center.md) — bu pass'te karar yok).
-- **TBD:** Türkiye-local entegrasyon adları (HBS, e-Fatura/e-SMM, DataVet) için ayrı entegrasyon deep-dive. VKY → [VKY (modül)](#vky-modül) (analytics; entegrasyon adı değil).
+- **TBD:** PACS ve diğer entegrasyon deep-dive’ları. HBS/DataVet/e-Fatura competitor pass → modül bölümleri (**CLOSED** / **PARTIAL** 2026-10-04); resmi entegrasyon semantics hâlâ **NOT VERIFIED** where noted.
 
 ---
 
