@@ -30,6 +30,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **HBS (Hayvan Bilgi Sistemi)** — sol menü **E-Reçete & ATS** operasyon yüzeyi **REVIEWED / CLOSED** (2026-10-04; resmi gönderim entegrasyonu **NOT VERIFIED**); [kapsam](#hbs-modül) ve [tracker](#review-tracker).
 - **e-Fatura / e-SMM** — sol menü **PARTIAL** (2026-10-04; UI + pre-send workflow; entegrasyon config eksik); [kapsam](#e-fatura--e-smm-modül) ve [tracker](#review-tracker).
 - **DataVet** — Laboratuvar (Pet/Büyükbaş) + Semptomlar **REVIEWED / CLOSED** (2026-10-04; clinical validity/algorithm **NOT VERIFIED**); [kapsam](#datavet-modül) ve [tracker](#review-tracker).
+- **İlaç Rehberi** (sol menü) — ürün referans + etkileşim yüzeyi **REVIEWED / CLOSED** (2026-10-05; interaction engine/clinical validity **NOT VERIFIED**); [kapsam](#ilaç-rehberi-modül) ve [tracker](#review-tracker).
+- **Nekropsi** (sol menü) — bulgu taxonomy + olası hastalık CDS yüzeyi **REVIEWED / CLOSED** (2026-10-05; scoring/algorithm/clinical validity **NOT VERIFIED**); [kapsam](#nekropsi-modül) ve [tracker](#review-tracker). *(Pattern: [DataVet (modül)](#datavet-modül) — ayrı pass.)*
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, e-Fatura/e-SMM external lifecycle (config blocker), vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -66,6 +68,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **HBS** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
 | **e-Fatura / e-SMM** (sol menü) | **PARTIAL** (2026-10-04) |
 | **DataVet** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
+| **İlaç Rehberi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
+| **Nekropsi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -102,7 +106,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -136,8 +140,8 @@ Bu belgede **yapılmaz:**
 - VKY *( [VKY (modül)](#vky-modül) **REVIEWED / CLOSED** 2026-10-04)*
 - e-Fatura / e-SMM *( [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül) **PARTIAL** 2026-10-04)*
 - DataVet *( [DataVet (modül)](#datavet-modül) **REVIEWED / CLOSED** 2026-10-04)*
-- İlaç Rehberi
-- Nekropsi
+- İlaç Rehberi *( [İlaç Rehberi (modül)](#ilaç-rehberi-modül) **REVIEWED / CLOSED** 2026-10-05)*
+- Nekropsi *( [Nekropsi (modül)](#nekropsi-modül) **REVIEWED / CLOSED** 2026-10-05)*
 - Mobil Uygulamalar
 - Katalog
 - Dokümanlar
@@ -181,6 +185,18 @@ Bu belgede **yapılmaz:**
 **OBSERVED — alt menü (IA):** Laboratuvar (Pet · Büyükbaş) · Semptomlar.
 
 **Review:** **REVIEWED / CLOSED** (2026-10-04) — detay → [DataVet (modül)](#datavet-modül). Pet / Büyükbaş ayrımı tenant/edition/backend modeli **iddia edilmez**.
+
+#### İlaç Rehberi
+
+**OBSERVED — giriş:** Sol menü **İlaç Rehberi** → **Ürün Özeti** (Ürün · Etken Madde · Lisans Firması) · **Etkileşim**.
+
+**Review:** **REVIEWED / CLOSED** (2026-10-05) — detay → [İlaç Rehberi (modül)](#ilaç-rehberi-modül). Interaction engine/clinical validity **NOT VERIFIED**.
+
+#### Nekropsi
+
+**OBSERVED — giriş:** Sol menü **Nekropsi** → bulgu tree · **Sonuçlar** · **Olası Hastalıklar**.
+
+**Review:** **REVIEWED / CLOSED** (2026-10-05) — detay → [Nekropsi (modül)](#nekropsi-modül). Scoring/algorithm/clinical validity **NOT VERIFIED**.
 
 #### Mobil Uygulamalar
 
@@ -4111,6 +4127,103 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 ---
 
+## İlaç Rehberi (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05). **Anlamı:** Competitor surface/workflow review tamamlandı; drug-interaction algorithm veya clinical validity **doğrulanmadı**.
+
+**OBSERVED — giriş:** Sol operasyonel menü **İlaç Rehberi**.
+
+**OBSERVED — üst alanlar:** **Ürün Özeti** · **Etkileşim**.
+
+### Ürün Özeti — browse sekmeleri
+
+**OBSERVED — üç sekme:** **Ürün** · **Etken Madde** · **Lisans Firması**.
+
+#### Ürün
+
+**OBSERVED:** Search · pagination · katalog ölçeği reviewed account’ta ~1.8k satır (tam global katalog sayısı **iddia edilmez**); satır **İncele** aksiyonu.
+
+**OBSERVED — İncele detail panelleri:** Etken Madde · Prospektüs Bilgileri · Özet Bilgiler · Firma Bilgileri.
+
+**OBSERVED — metadata türleri (içerik kopyalanmadı):** aktif/etken maddeler · uygulama yeri/yolu · farmakolojik grup · hayvan türleri · lisans/üretici/menşei firma alanları · prospektüs tabanlı structured sections (accordion — örnek başlıklar: Bileşimi · Endikasyon · Kullanım Şekli ve Dozu; tam metin **kopyalanmadı**).
+
+#### Etken Madde
+
+**OBSERVED:** Search ile etken madde bulunabiliyor; seçim sonrası ilişkili ürün bilgisi aynı ürün detail yüzeyinde gösterilebiliyor.
+
+**INFERRED (UI-level):** Active-ingredient → related product discovery workflow (backend relation model **NOT VERIFIED**).
+
+#### Lisans Firması
+
+**OBSERVED:** Firma bazlı browse/search; lisans firmaları listesi; firmadan ilgili ürün kataloğuna expand/browse affordance.
+
+**NOT VERIFIED:** Filtering semantics · cardinality · relation source.
+
+### Etkileşim (ilaç etkileşimi)
+
+**OBSERVED — UI yüzeyi:** **Seçilenleri Göster** · **ETKİLEŞİMLERİ GÖSTER** · search · sonuç listesi alanı.
+
+**NOT VERIFIED (bu pass’te interaction sonucu üretilmedi):** seçim cardinality (ürün/etken/mixed) · severity/taxonomy · calculation/source · evidence · clinical validation · governance · patient-specific/dose/species-aware checking · prescription workflow integration · audit · persistence · permissions.
+
+**NOT inferred:** otomatik reçete sırasında uyarı · hasta ilaçlarını kontrol etme — gözlenmedi.
+
+### İlaç Rehberi — Backlog cross-reference
+
+**Backlog exact-match:** **NO MATCH** (standalone drug reference + interaction shell ≠ [EXAM-010](../backlog/feature-backlog.md) exam shortcuts · ≠ prescription transaction · interaction engine backlog maddesi yok; yeni ID **oluşturulmadı**).
+
+**Cross-ref:** [Muayene (modül)](#muayene-modül) → Reçete (operational prescribing); [DataVet (modül)](#datavet-modül) (clinical CDS — ayrı).
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- Medication knowledge: product · active ingredient · manufacturer/license taxonomy ile keşfedilebilir olmalı (competitor catalog UI kopyası **değil**).
+- Drug/reference information ≠ prescribing transaction.
+- Interaction warnings (varsa) source/severity/semantics açık olmalı; competitor interaction UI engine olarak **doğrulanmadı**.
+
+---
+
+## Nekropsi (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05). **Anlamı:** Gözlenen yüzey competitor research açısından yeterli; clinical validity / scoring algorithm **doğrulanmadı**.
+
+**OBSERVED — layout:** Sol **Nekropsi Bulguları** (hiyerarşik tree) · sağ **Olası Hastalıklar** · üst **Sonuçlar**.
+
+### Bulgu taxonomy
+
+**OBSERVED — üst kategoriler (representative):** Abdominal / Karın Boşluğu · Ekstremite · Genel · Genel Fetus Değerlendirilmesi · Kafatası · Thorax / Göğüs Boşluğu (tam alt ağaç **dump edilmedi**).
+
+**OBSERVED:** Multi-level expandable tree; organ/sistem/anatomik bölge/spesifik bulgu seviyeleri; leaf bulgular checkbox ile seçilebilir (bulgu metinleri repo’ya **kopyalanmadı**).
+
+### Canlı sonuç testi (güvenli)
+
+**OBSERVED:** İki nekropsi bulgusu seçildi → **Sonuçlar (2)** → sağ **Olası Hastalıklar** listesi doldu.
+
+**OBSERVED — akış:** anatomik/sistem taxonomy → bulgu seçimi → Sonuçlar → olası hastalıklar.
+
+**OBSERVED — Olası Hastalıklar kolonları:** Olası Teşhis · Bulgu ⅓ (fraction benzeri) · Bulgu % (hastalık adları **kopyalanmadı**).
+
+**NOT VERIFIED:** Bulgu fraction denominator · yüzde formülü · weighting · ranking · missing-finding penalty · prevalence · probabilistic model · AI/ML · clinical validation.
+
+**OBSERVED:** Satır solunda disclosure/expand affordance; ek clinical detail üretimi bu pass’te **güvenilir kanıtlanmadı** (detay semantics **NOT VERIFIED**).
+
+### Nekropsi synthesis
+
+**OBSERVED:** Structured necropsy finding taxonomy · hierarchical navigation · checkbox selection · result generation · candidate disease list · match fraction/% UI.
+
+**INFERRED (UI-level):** Post-mortem bulguları disease knowledge base ile ilişkilendiren clinical decision-support/reference workspace benzeri konumlanma (**AI olarak tanımlanmaz**).
+
+**NOT VERIFIED:** Knowledge graph · rule engine · AI/ML · scoring · clinical validation · literature source · versioning · species rules · case persistence · necropsy report · pathology workflow · diagnosis write-back · audit.
+
+**Backlog exact-match:** **NO MATCH** ([AI-100](../backlog/feature-backlog.md#epic-ai-100--embedded-clinical-intelligence) **adjacent** only; pathology/necropsy epic yok).
+
+**Cross-ref:** [DataVet (modül)](#datavet-modül) — benzer match-% CDS pattern; ayrı domain.
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- Structured clinical findings anatomy/system taxonomy ile yakalanabilir; CDS candidate matches seçili bulgularla açıklanabilir olmalı (opaque scoring kopyası **değil**).
+- Companion-clinic primary scope nedeniyle Nekropsi Vetinity priority’si competitor varlığından **yükseltilmez** (MVP requirement **değil**).
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -4147,6 +4260,14 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 ### DataVet — REVIEWED / CLOSED
 
 **REVIEWED / CLOSED** (2026-10-04). Lab Pet + Ruminant · Symptoms · disease modal · Karşılaştır — decision-support UI (algorithm/clinical validity **NOT VERIFIED**).
+
+### İlaç Rehberi — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-05). Ürün Özeti (Ürün ~1.8k scale · Etken Madde · Lisans Firması) · prospektüs/reference panelleri · **Etkileşim** UI shell (Seçilenleri Göster · ETKİLEŞİMLERİ GÖSTER · search) — interaction sonucu bu pass’te **üretilmedi**; engine semantics **NOT VERIFIED**.
+
+### Nekropsi — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-05). Hiyerarşik nekropsi bulgu taxonomy · checkbox seçim · **Sonuçlar (2)** canlı test → Olası Hastalıklar (Olası Teşhis · Bulgu fraction · Bulgu %) · row expand affordance — scoring/algorithm **NOT VERIFIED**.
 
 ### VKY — REVIEWED / CLOSED
 
@@ -4365,9 +4486,9 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **VKY** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [VKY (modül)](#vky-modül); 3/3 alt menü; [Rapor](#rapor) ayrı |
 | **e-Fatura / e-SMM** | **PARTIAL** (2026-10-04) | Bkz. [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül); config blocker |
 | **DataVet** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [DataVet (modül)](#datavet-modül); Lab Pet/Büyükbaş + Semptomlar |
-| **İlaç Rehberi** | NOT REVIEWED | |
-| **Nekropsi** | NOT REVIEWED | |
-| **Mobil Uygulamalar** | NOT REVIEWED | |
+| **İlaç Rehberi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [İlaç Rehberi (modül)](#ilaç-rehberi-modül); interaction engine **NOT VERIFIED** |
+| **Nekropsi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Nekropsi (modül)](#nekropsi-modül); scoring **NOT VERIFIED** |
+| **Mobil Uygulamalar** | NOT REVIEWED | Sıradaki numaralı kuyruk **NEXT** (2026-10-05) |
 | **Katalog / Dokümanlar** | NOT REVIEWED | |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
@@ -4386,7 +4507,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** · **HBS** · **VKY** · **DataVet** — **CLOSED** (2026-10-04). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Bu eksende sıradaki **henüz sistematik incelenmemiş** modül: **İlaç Rehberi — NEXT**. *(Numaralı kuyruk ayrı eksen — aşağıda.)*
+**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** · **HBS** · **VKY** · **DataVet** · **İlaç Rehberi** · **Nekropsi** — **CLOSED** (İlaç/Nekropsi 2026-10-05). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Bu eksende sıradaki **henüz sistematik incelenmemiş** modül: **Mobil Uygulamalar** (SmartVET / SmartIVET). *(Numaralı kuyruk ayrı eksen — aşağıda.)*
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül); 2026-10-04)
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
@@ -4405,9 +4526,9 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 15. ~~HBS~~ — **CLOSED** ([HBS (modül)](#hbs-modül); 2026-10-04)
 16. ~~VKY~~ — **CLOSED** ([VKY (modül)](#vky-modül); 2026-10-04; 3/3)
 17. ~~DataVet~~ — **CLOSED** ([DataVet (modül)](#datavet-modül); 2026-10-04)
-18. **İlaç Rehberi** — **NEXT**
-19. Nekropsi
-20. Mobil Uygulamalar
+18. ~~İlaç Rehberi~~ — **CLOSED** ([İlaç Rehberi (modül)](#ilaç-rehberi-modül); 2026-10-05)
+19. ~~Nekropsi~~ — **CLOSED** ([Nekropsi (modül)](#nekropsi-modül); 2026-10-05)
+20. **Mobil Uygulamalar** — **NEXT**
 21. Katalog / Dokümanlar
 22. ~~Genel~~ (üst domain — configuration) — **CLOSED** ([Genel (modül)](#genel-modül); 12/12)
 
@@ -4431,7 +4552,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 **TBD:**
 
 - “Resmi” ekranların hukuki/regulatory zorunluluk olup olmadığı (menü adından türetilmez).
-- PACS, İlaç Rehberi entegrasyon/kapsam detayları; e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04); SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(HBS → [HBS (modül)](#hbs-modül) **CLOSED**; DataVet → [DataVet (modül)](#datavet-modül) **CLOSED**; VKY → [VKY (modül)](#vky-modül) **CLOSED**.)*
+- PACS entegrasyon/kapsam detayları; e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04); SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(HBS · VKY · DataVet · İlaç Rehberi · Nekropsi → ilgili modül bölümleri **CLOSED**.)*
 
 **INFERRED (domain coverage — menü envanterinden):**
 
