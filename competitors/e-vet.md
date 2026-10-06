@@ -32,6 +32,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **DataVet** — Laboratuvar (Pet/Büyükbaş) + Semptomlar **REVIEWED / CLOSED** (2026-10-04; clinical validity/algorithm **NOT VERIFIED**); [kapsam](#datavet-modül) ve [tracker](#review-tracker).
 - **İlaç Rehberi** (sol menü) — ürün referans + etkileşim yüzeyi **REVIEWED / CLOSED** (2026-10-05; interaction engine/clinical validity **NOT VERIFIED**); [kapsam](#ilaç-rehberi-modül) ve [tracker](#review-tracker).
 - **Nekropsi** (sol menü) — bulgu taxonomy + olası hastalık CDS yüzeyi **REVIEWED / CLOSED** (2026-10-05; scoring/algorithm/clinical validity **NOT VERIFIED**); [kapsam](#nekropsi-modül) ve [tracker](#review-tracker). *(Pattern: [DataVet (modül)](#datavet-modül) — ayrı pass.)*
+- **Mobil Uygulamalar** (sol menü — SmartIVET · SmartVET) — web marketing/catalog surface **REVIEWED / CLOSED** (2026-10-05; native app workflow **NOT VERIFIED**); [kapsam](#mobil-uygulamalar-modül) ve [tracker](#review-tracker).
+- **Katalog** (sol menü) — E-vet (ve shell’de Hasvet · Safir sekmeleri) marketing/catalog **REVIEWED / CLOSED** (2026-10-05; brochure ≠ live workflow); [kapsam](#katalog-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, e-Fatura/e-SMM external lifecycle (config blocker), vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -70,6 +72,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **DataVet** (sol menü) | **REVIEWED / CLOSED** (2026-10-04) |
 | **İlaç Rehberi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
 | **Nekropsi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
+| **Mobil Uygulamalar** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
+| **Katalog** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -106,7 +110,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-10-05 (Mobil Uygulamalar — CLOSED); 2026-10-05 (Katalog — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -142,8 +146,8 @@ Bu belgede **yapılmaz:**
 - DataVet *( [DataVet (modül)](#datavet-modül) **REVIEWED / CLOSED** 2026-10-04)*
 - İlaç Rehberi *( [İlaç Rehberi (modül)](#ilaç-rehberi-modül) **REVIEWED / CLOSED** 2026-10-05)*
 - Nekropsi *( [Nekropsi (modül)](#nekropsi-modül) **REVIEWED / CLOSED** 2026-10-05)*
-- Mobil Uygulamalar
-- Katalog
+- Mobil Uygulamalar *( [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül) **REVIEWED / CLOSED** 2026-10-05)*
+- Katalog *( [Katalog (modül)](#katalog-modül) **REVIEWED / CLOSED** 2026-10-05)*
 - Dokümanlar
 - Güncelleme Notları
 - WhatsApp Destek Hattı
@@ -200,12 +204,15 @@ Bu belgede **yapılmaz:**
 
 #### Mobil Uygulamalar
 
-**OBSERVED:**
+**OBSERVED — alt yüzey (IA):** SmartVET · SmartIVET (ayrı ürün/persona — karıştırılmaz).
 
-- SmartVET
-- SmartIVET
+**Review:** **REVIEWED / CLOSED** (2026-10-05) — web marketing/catalog evidence; native app **NOT live-tested** → [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül).
 
-**TBD:** Uygulama hedef kullanıcısı ve capability kapsamı (isimlerden tahmin edilmez).
+#### Katalog
+
+**OBSERVED — giriş:** Sol menü **Katalog** → sekmeler **E-vet** · **Hasvet** · **Safir** (bu pass **E-vet** katalog materyali; Hasvet/Safir içeriği **incelenmedi**).
+
+**Review:** **REVIEWED / CLOSED** (2026-10-05) — marketing/catalog positioning → [Katalog (modül)](#katalog-modül). Brochure iddiaları live workflow **sayılmaz**.
 
 ---
 
@@ -4224,6 +4231,156 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 ---
 
+## Mobil Uygulamalar (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05). **Anlamı:** Sol menü altındaki SmartIVET / SmartVET **web marketing ve tanıtım yüzeyleri** incelendi. **Anlamına gelmez:** native iOS/Android kurulumu, canlı oturum veya uygulama içi workflow doğrulaması.
+
+**OBSERVED (navigation):** Sol menü **Mobil Uygulamalar** altında **SmartIVET** ve **SmartVET** ayrı girişler.
+
+> Brochure / marketing copy = **MARKETING CLAIM / CATALOG EVIDENCE**; canlı ürün davranışı değildir. App Store / Google Play rozeti = mağaza varlığı; workflow doğrulaması değildir.
+
+### SmartIVET
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05) — web marketing/surface review; **native app workflow NOT VERIFIED**.
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Veteriner hekim / klinik tarafına yönelik mobil erişim ürünü olarak tanıtılıyor; E-vet Smart ile bağlantılı/senkronizasyon iddiaları metinde yer alıyor (**sync semantics NOT VERIFIED**).
+
+**Capability grupları (özet — tam liste dump edilmedi):**
+
+| Grup | Tanıtılan erişim alanları (yapısal) |
+|---|---|
+| Müşteri / sahip | Profil/iletişim · müşteriye bağlı hastalar · randevular |
+| Klinik kayıtlar | Laboratuvar geçmişi · PACS geçmişi · doğrudan satış geçmişi |
+| Finans | Ödeme geçmişi · ekstre / hesap hareketleri · dosyalar |
+| Yönetim / raporlama (örnek türler) | Yoğun ziyaret · uzun süredir gelmeyen müşteriler · yoğun randevu · çok satan ürünler · minimum stok · SKT yaklaşan/ geçen · planlanan iş · depo stok · giderler · günlük kasa · müşteri ekstreleri · kasa hareketleri/güncel durum · şirket hareket/bakiye · bakiyeli müşteriler |
+
+**OBSERVED (marketing shell):** iOS / Android availability badges.
+
+**NOT VERIFIED:** Native login/auth/session · gerçek senkronizasyon · offline · CRUD yetkileri · web ile permission parity · push · data freshness · background sync · audit · rapor formülleri · pazarlanan her öğenin güncel native app’te bulunması · store sürümü/fonksiyon parity.
+
+**NOT claimed:** Native app kuruldu veya live-test edildi.
+
+### SmartVET
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05) — web/catalog marketing review; **native owner app workflow NOT VERIFIED**.
+
+**INFERRED (positioning only):** Pet-owner / **Dijital Sağlık Karnesi** companion yüzeyi — SmartIVET’ten **ayrı persona** (klinik operasyon mobil erişimi değil).
+
+**MARKETING CLAIM / CATALOG EVIDENCE — capability grupları:**
+
+- Randevular (tümü)
+- Otomatik randevu hatırlatma / bildirimler
+- Laboratuvar sonuçları
+- Tanı görüntüleme / görüntüleme referansları
+- Pet profili · kilo takibi
+- **Kliniğim Shop**
+- **SmartvetTag**
+
+**OBSERVED (marketing shell):** iOS / Android availability gösterimi.
+
+**NOT VERIFIED:** Randevu booking lifecycle · push güvenilirliği · lab/PACS yetkilendirme · image viewer · ödeme/e-ticaret mimarisi · reçete erişimi · owner identity · consent · klinik→sahip veri görünürlük kuralları · SmartvetTag protokolü · NFC/QR güvenlik · native parity.
+
+### Mobil Uygulamalar — synthesis
+
+| Ürün | Konumlanma (evidence) |
+|---|---|
+| **SmartIVET** | Klinik / veteriner operasyonel mobil erişim |
+| **SmartVET** | Pet-owner dijital sağlık karnesi + companion |
+
+**INFERRED:** İki ayrı mobil ürün hattı rakip ekosisteminde bilinçli ayrım — Vetinity mimari kararı **değil**.
+
+**Backlog exact-match:** **NO MATCH** (MOBILE- prefix tablosu var; anlamlı MOBILE-* backlog maddesi yok; yeni ID **oluşturulmadı**).
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- Gelecek mobil strateji **staff workflow** vs **pet-owner workflow** ayrımını değerlendirebilir; bu pass’ten otomatik iki native app veya roadmap scope **çıkarılmaz**.
+- Mobil read access, hatırlatmalar ve owner-facing sonuç paylaşımı bağımsız değerlendirme konuları olabilir.
+
+---
+
+## Katalog (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-05). **Anlamı:** Marketing/catalog yüzeyi yapılandırıldı. **Anlamına gelmez:** katalogdaki her iddia için live workflow doğrulaması.
+
+**OBSERVED — shell:** Sol menü **Katalog** · sekmeler **E-vet** · **Hasvet** · **Safir**. Bu pass’te incelenen kanıt = **E-vet** katalog materyali. Hasvet/Safir sekmeleri için içerik **uydurulmadı** / **NOT REVIEWED**.
+
+> Tüm alt bölümlerde **MARKETING CLAIM / CATALOG EVIDENCE** unless explicitly cross-referenced to prior **live REVIEWED** modül pass.
+
+### E-vet Smart Plus (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Klinik/hastane otomasyonu olarak konumlanıyor.
+
+**Corroborating (live review elsewhere — detay tekrarlanmaz):** müşteri/hasta takibi · ziyaret/ödeme geçmişi · muayene · laboratuvar / röntgen · randevu · hospitalizasyon · ürün/stok · finans/muhasebe · raporlama → ilgili **CLOSED** modül pass’leri.
+
+**MARKETING CLAIM only (bu katalog pass’te live doğrulanmadı):** e-Fatura · İYS/KVKK · vaka paylaşımı · tedavi yönetimi · e-imza · görev zamanlayıcı — *“MARKETING CLAIM; current live workflow not independently verified in this catalog pass.”*
+
+### PACS & Labs (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Laboratuvar cihaz/sistem entegrasyonları · PACS entegrasyonu · Fujifilm Synapse PACS adı · görüntü/sonuç erişimi ve karşılaştırma faydaları.
+
+**NOT VERIFIED (katalogdan):** Production entegrasyon · protokol/DICOM · cihaz matrisi · bidirectional sync · depolama mimarisi · veri sahipliği.
+
+**Cross-ref (live):** [Global Lab İstekleri](#global-lab-i̇stekleri-modül) · [Global Pacs İstekleri](#global-pacs-i̇stekleri-modül) · [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) — katalog yalnızca corroborating marketing.
+
+### SmartVET ecosystem (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Dijital sağlık karnesi · randevular · otomatik bildirim · lab/görüntüleme sonuç erişimi · profil/kilo · Kliniğim Shop · SmartvetTag.
+
+**Cross-ref:** [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül) — SmartVET marketing özeti.
+
+### Kliniğim Shop (katalog)
+
+**MARKETING CLAIM only.** Owner-facing commerce/sipariş capability; SmartVET ekosistemi ile ilişkilendirilir.
+
+**NOT VERIFIED:** Stok rezervasyonu · sipariş lifecycle · ödeme sağlayıcı · fulfillment · gelir modeli · marketplace · katalog senkronizasyonu. Backlog scope **oluşturulmadı**.
+
+### SmartvetTag (katalog)
+
+**MARKETING CLAIM only.** Akıllı etiket / pet tanımlama-erişim (NFC ve/veya QR konseptleri).
+
+**NOT VERIFIED:** Teknik mimari · read/write güvenlik · kimlik sahipliği · acil erişim · gizlilik · persistence/sync. Vetinity için eşdeğer donanım ihtiyacı **çıkarılmaz**.
+
+### E-vet Pro (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Smart Plus modülü olarak değil; **ayrı ürün ailesi / segment** olarak sunuluyor.
+
+Yalnız üst düzey positioning; müşteri/üniversite listeleri veya pazar payı iddiaları **kopyalanmadı**.
+
+### VetBG Calc (katalog)
+
+**MARKETING CLAIM only.** Kan gazı analizi / tedavi destek asistanı.
+
+Özet capability düzeyi: sonuç okuma/giriş · yorumlama desteği · neden/bağlam · algoritma odaklı değerlendirme · tedavi destek rehberliği.
+
+**NOT VERIFIED:** Clinical validation · diagnostic accuracy · AI/ML · medical-device statüsü · formüller · Smart Plus entegrasyonu.
+
+### DataVet (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Tanı/tedavi destek asistanı positioning — [DataVet (modül)](#datavet-modül) live pass ile **uyumlu corroboration** only.
+
+**NOT:** “AI diagnosis”. Wording: **clinical decision-support / diagnosis-treatment support positioning**. Scoring · algorithm · AI/ML · clinical validity → önceki DataVet **NOT VERIFIED** caveats geçerli; burada tekrarlanmaz.
+
+### HasvetApp (katalog)
+
+**MARKETING CLAIM / CATALOG EVIDENCE:** Hasvet ekosistemi uygulaması — E-vet Smart Plus özelliği **değil**.
+
+Özet gruplar: sipariş · teknik servis · akademi/eğitim · muhasebe · duyurular · kampanya/fırsatlar · iletişim/sosyal sorumluluk tipi içerik.
+
+### Katalog — synthesis
+
+**INFERRED (positioning evidence):** E-vet yalnız klinik yazılımı değil; geniş ekosistem — core clinic/hospital · clinician mobile · owner digital health card · lab/PACS · CDS/reference · commerce · connected tag · adjacent Hasvet apps.
+
+**NOT concluded:** “Vetinity hepsini yapmalı.”
+
+**Backlog exact-match:** **NO MATCH** (SmartvetTag · Kliniğim Shop · VetBG Calc · Evet Pro · HasvetApp için yeni ID **yok**).
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- Yalnız hedef pazar ve roadmap ile hizalı workflow’lar değerlendirilir; companion-clinic core öncelik kalır.
+- Adjacent ecosystem ürünleri bağımsız gerekçe olmadan discovery backlog’a **eklenmez**.
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -4268,6 +4425,14 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 ### Nekropsi — REVIEWED / CLOSED
 
 **REVIEWED / CLOSED** (2026-10-05). Hiyerarşik nekropsi bulgu taxonomy · checkbox seçim · **Sonuçlar (2)** canlı test → Olası Hastalıklar (Olası Teşhis · Bulgu fraction · Bulgu %) · row expand affordance — scoring/algorithm **NOT VERIFIED**.
+
+### Mobil Uygulamalar — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-05). SmartIVET (clinic/vet mobile marketing) · SmartVET (owner digital health card marketing) · iOS/Android badges — **native app NOT live-tested**; sync/CRUD/permissions **NOT VERIFIED**.
+
+### Katalog — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-05). Katalog shell (E-vet · Hasvet · Safir tabs); **E-vet** brochure families (Smart Plus · PACS/Labs · SmartVET ecosystem · Shop · Tag · Evet Pro · VetBG Calc · DataVet · HasvetApp) — **marketing evidence only** unless cross-ref to prior live module.
 
 ### VKY — REVIEWED / CLOSED
 
@@ -4488,8 +4653,9 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **DataVet** | **REVIEWED / CLOSED** (2026-10-04) | Bkz. [DataVet (modül)](#datavet-modül); Lab Pet/Büyükbaş + Semptomlar |
 | **İlaç Rehberi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [İlaç Rehberi (modül)](#ilaç-rehberi-modül); interaction engine **NOT VERIFIED** |
 | **Nekropsi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Nekropsi (modül)](#nekropsi-modül); scoring **NOT VERIFIED** |
-| **Mobil Uygulamalar** | NOT REVIEWED | Sıradaki numaralı kuyruk **NEXT** (2026-10-05) |
-| **Katalog / Dokümanlar** | NOT REVIEWED | |
+| **Mobil Uygulamalar** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül); SmartIVET · SmartVET; native **NOT VERIFIED** |
+| **Katalog** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Katalog (modül)](#katalog-modül); E-vet catalog pass; Hasvet/Safir tabs **NOT REVIEWED** |
+| **Dokümanlar** | NOT REVIEWED | Numaralı kuyruk **NEXT** (2026-10-05) |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
@@ -4507,7 +4673,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** · **HBS** · **VKY** · **DataVet** · **İlaç Rehberi** · **Nekropsi** — **CLOSED** (İlaç/Nekropsi 2026-10-05). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Bu eksende sıradaki **henüz sistematik incelenmemiş** modül: **Mobil Uygulamalar** (SmartVET / SmartIVET). *(Numaralı kuyruk ayrı eksen — aşağıda.)*
+**Sol operasyonel navigation (soldan aşağı):** **Hospitalizasyon** · **HBS** · **VKY** · **DataVet** · **İlaç Rehberi** · **Nekropsi** · **Mobil Uygulamalar** · **Katalog** — **CLOSED** (Mobil/Katalog 2026-10-05). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Bu eksende sıradaki **henüz sistematik incelenmemiş** modül: **Dokümanlar**. *(Numaralı kuyruk ayrı eksen — aşağıda.)*
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül); 2026-10-04)
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
@@ -4528,8 +4694,8 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 17. ~~DataVet~~ — **CLOSED** ([DataVet (modül)](#datavet-modül); 2026-10-04)
 18. ~~İlaç Rehberi~~ — **CLOSED** ([İlaç Rehberi (modül)](#ilaç-rehberi-modül); 2026-10-05)
 19. ~~Nekropsi~~ — **CLOSED** ([Nekropsi (modül)](#nekropsi-modül); 2026-10-05)
-20. **Mobil Uygulamalar** — **NEXT**
-21. Katalog / Dokümanlar
+20. ~~Mobil Uygulamalar~~ — **CLOSED** ([Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül); 2026-10-05; SmartIVET · SmartVET)
+21. ~~Katalog~~ — **CLOSED** ([Katalog (modül)](#katalog-modül); 2026-10-05) · **Dokümanlar** — **NEXT**
 22. ~~Genel~~ (üst domain — configuration) — **CLOSED** ([Genel (modül)](#genel-modül); 12/12)
 
 ---
@@ -4552,7 +4718,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 **TBD:**
 
 - “Resmi” ekranların hukuki/regulatory zorunluluk olup olmadığı (menü adından türetilmez).
-- PACS entegrasyon/kapsam detayları; e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04); SmartVET / SmartIVET hedef kullanıcı ve capability kapsamı. *(HBS · VKY · DataVet · İlaç Rehberi · Nekropsi → ilgili modül bölümleri **CLOSED**.)*
+- PACS entegrasyon/kapsam detayları (live modül pass’leri **CLOSED**; katalog corroboration only); e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04). *(Mobil Uygulamalar · Katalog → marketing/catalog **CLOSED** 2026-10-05; native app / brochure live parity **NOT VERIFIED**.)*
 
 **INFERRED (domain coverage — menü envanterinden):**
 
