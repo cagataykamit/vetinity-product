@@ -8,7 +8,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 
 **Tamamlanan pass'ler:**
 
-- Platform shell / navigation ve IA envanteri (**navigation discovery tamamlandı**, 2026-09-23); login sonrası Hasta Kabul landing (alan etiketleri; kısmi — bkz. [Review Tracker](#review-tracker)).
+- Platform shell / navigation ve IA envanteri (**navigation discovery tamamlandı**, 2026-09-23).
+- **Hasta Kabul** (global front-desk workspace) — arama · sonuç hiyerarşisi · müşteri/hasta workspace handoff **REVIEWED / CLOSED** (2026-10-07); [kapsam](#landing--hasta-kabul) ve [tracker](#review-tracker).
 - **Hasta Kartı / Patient Workspace** — planlanan görsel/product review kapsamı **REVIEWED / CLOSED** (2026-09-24 – 2026-09-25); [kapsam](#hasta-kartı--patient-workspace) ve [tracker](#review-tracker).
 - **Global Hospitalizasyon modülü** — sol menü **Hospitalizasyon** / **Hospitalizasyonlar** operasyon yüzeyi **REVIEWED / CLOSED** (2026-10-04; önceki pass 2026-09-25); [kapsam](#global-hospitalizasyon-modül) ve [tracker](#review-tracker).
 - **Global Takvim modülü** — Randevular + Hatırlatma/iletişim batch **REVIEWED / CLOSED** (2026-09-25); [kapsam](#global-takvim-modül) ve [tracker](#review-tracker).
@@ -33,7 +34,8 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **İlaç Rehberi** (sol menü) — ürün referans + etkileşim yüzeyi **REVIEWED / CLOSED** (2026-10-05; interaction engine/clinical validity **NOT VERIFIED**); [kapsam](#ilaç-rehberi-modül) ve [tracker](#review-tracker).
 - **Nekropsi** (sol menü) — bulgu taxonomy + olası hastalık CDS yüzeyi **REVIEWED / CLOSED** (2026-10-05; scoring/algorithm/clinical validity **NOT VERIFIED**); [kapsam](#nekropsi-modül) ve [tracker](#review-tracker). *(Pattern: [DataVet (modül)](#datavet-modül) — ayrı pass.)*
 - **Mobil Uygulamalar** (sol menü — SmartIVET · SmartVET) — web marketing/catalog surface **REVIEWED / CLOSED** (2026-10-05; native app workflow **NOT VERIFIED**); [kapsam](#mobil-uygulamalar-modül) ve [tracker](#review-tracker).
-- **Katalog** (sol menü) — E-vet (ve shell’de Hasvet · Safir sekmeleri) marketing/catalog **REVIEWED / CLOSED** (2026-10-05; brochure ≠ live workflow); [kapsam](#katalog-modül) ve [tracker](#review-tracker).
+- **Katalog** (sol menü) — E-vet · Hasvet · Safir sekmeleri **REVIEWED / CLOSED** (E-vet 2026-10-05 marketing; Hasvet/Safir 2026-10-07 embedded static catalog); [kapsam](#katalog-modül) ve [tracker](#review-tracker).
+- **WhatsApp Destek Hattı** (sol alt menü) — external WhatsApp Web handoff **REVIEWED / CLOSED** (2026-10-07); [kapsam](#whatsapp-destek-hattı-modül) ve [tracker](#review-tracker).
 - **Dokümanlar** (sol menü) — document/reference library hub **REVIEWED / CLOSED** (2026-10-06; PDF/website ≠ live workflow verification); [kapsam](#dokümanlar-modül) ve [tracker](#review-tracker).
 - **Güncelleme Notları** (sol menü) — in-product versioned changelog **REVIEWED / CLOSED** (2026-10-06; release-note ≠ independent live re-test); [kapsam](#güncelleme-notları-modül) ve [tracker](#review-tracker).
 
@@ -75,7 +77,9 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **İlaç Rehberi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
 | **Nekropsi** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
 | **Mobil Uygulamalar** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
-| **Katalog** (sol menü) | **REVIEWED / CLOSED** (2026-10-05) |
+| **Katalog** (sol menü) | **REVIEWED / CLOSED** (2026-10-07; E-vet/Hasvet/Safir) |
+| **Hasta Kabul** (global front-desk) | **REVIEWED / CLOSED** (2026-10-07) |
+| **WhatsApp Destek Hattı** (sol alt menü) | **REVIEWED / CLOSED** (2026-10-07) |
 | **Dokümanlar** (sol menü) | **REVIEWED / CLOSED** (2026-10-06) |
 | **Güncelleme Notları** (sol menü) | **REVIEWED / CLOSED** (2026-10-06) |
 
@@ -114,7 +118,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-10-05 (Mobil Uygulamalar — CLOSED); 2026-10-05 (Katalog — CLOSED); 2026-10-06 (Dokümanlar — CLOSED); 2026-10-06 (Güncelleme Notları — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-10-05 (Mobil Uygulamalar — CLOSED); 2026-10-05 (Katalog E-vet — CLOSED); 2026-10-06 (Dokümanlar — CLOSED); 2026-10-06 (Güncelleme Notları — CLOSED); 2026-10-07 (Hasta Kabul — CLOSED); 2026-10-07 (Katalog Hasvet/Safir — CLOSED); 2026-10-07 (WhatsApp Destek Hattı — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -136,7 +140,7 @@ Bu belgede **yapılmaz:**
 
 ### 2. Sol operasyonel navigation
 
-- Hasta Kabul
+- Hasta Kabul *( [Landing / Hasta Kabul](#landing--hasta-kabul) **REVIEWED / CLOSED** 2026-10-07)*
 - Takvim
 - Doğrudan Satış
 - Muayene Odası *(global modül — [Global Muayene Odası (modül)](#global-muayene-odası-modül) **CLOSED**)*
@@ -151,10 +155,10 @@ Bu belgede **yapılmaz:**
 - İlaç Rehberi *( [İlaç Rehberi (modül)](#ilaç-rehberi-modül) **REVIEWED / CLOSED** 2026-10-05)*
 - Nekropsi *( [Nekropsi (modül)](#nekropsi-modül) **REVIEWED / CLOSED** 2026-10-05)*
 - Mobil Uygulamalar *( [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül) **REVIEWED / CLOSED** 2026-10-05)*
-- Katalog *( [Katalog (modül)](#katalog-modül) **REVIEWED / CLOSED** 2026-10-05)*
+- Katalog *( [Katalog (modül)](#katalog-modül) **REVIEWED / CLOSED** 2026-10-07 — E-vet/Hasvet/Safir)*
 - Dokümanlar *( [Dokümanlar (modül)](#dokümanlar-modül) **REVIEWED / CLOSED** 2026-10-06)*
 - Güncelleme Notları *( [Güncelleme Notları (modül)](#güncelleme-notları-modül) **REVIEWED / CLOSED** 2026-10-06)*
-- WhatsApp Destek Hattı
+- WhatsApp Destek Hattı *( [WhatsApp Destek Hattı (modül)](#whatsapp-destek-hattı-modül) **REVIEWED / CLOSED** 2026-10-07)*
 
 **OBSERVED:** Navigation envanteri (üst domain + sol operasyonel + belgelenen sol alt menüler) tamamlandı. Alt menüsü listelenmeyen sol öğeler için alt yapı **TBD** (gözlemlenmediyse varsayılmaz).
 
@@ -214,9 +218,9 @@ Bu belgede **yapılmaz:**
 
 #### Katalog
 
-**OBSERVED — giriş:** Sol menü **Katalog** → sekmeler **E-vet** · **Hasvet** · **Safir** (bu pass **E-vet** katalog materyali; Hasvet/Safir içeriği **incelenmedi**).
+**OBSERVED — giriş:** Sol menü **Katalog** → sekmeler **E-vet** · **Hasvet** · **Safir**.
 
-**Review:** **REVIEWED / CLOSED** (2026-10-05) — marketing/catalog positioning → [Katalog (modül)](#katalog-modül). Brochure iddiaları live workflow **sayılmaz**.
+**Review:** **REVIEWED / CLOSED** (2026-10-07) — E-vet (2026-10-05 marketing) · Hasvet/Safir (2026-10-07 embedded static catalog) → [Katalog (modül)](#katalog-modül). Commerce/inventory integration **NOT VERIFIED**.
 
 #### Dokümanlar
 
@@ -234,37 +238,32 @@ Bu belgede **yapılmaz:**
 
 ## Landing / Hasta Kabul
 
-**OBSERVED:** Login sonrası çalışma alanı Hasta Kabul ekranı.
+**Review status:** **REVIEWED / CLOSED** (2026-10-07). **Anlamı:** Front-desk **operational workspace** — müşteri/hasta arama · sonuç hiyerarşisi · müşteri veya hasta workspace handoff. **Anlamına gelmez:** arama algoritması, persistence veya yetki modeli doğrulanmıştır.
 
-**OBSERVED — arama ve aksiyonlar:**
+**OBSERVED:** Login sonrası çalışma alanı **Hasta Kabul**; sol **Arama Ekranı** · sağ müşteri kartı/form alanı.
 
-- Müşteri adı/soyadı ile arama
-- Hasta adı ile arama
-- Detaylı Arama
-- Yeni Müşteri
+**OBSERVED — basit arama:** Müşteri Adı/Soyadı · Hasta Adı · **Detaylı Arama** (expand) · **Temizle** · **Ara** · alt **Müşteriler** sonuç alanı · **Yeni Müşteri**.
 
-**OBSERVED — Yeni Müşteri kartı tab yapısı:**
+**OBSERVED — Detaylı Arama alan etiketleri (değer kopyalanmadı):**
 
-- Ana
-- İletişim
-- Adres
-- Özel
-- Notlar
+| Müşteri detayları | Hasta detayları |
+|---|---|
+| Durum · Protokol No · Kart No · Kimlik No · GSM · Ülke · Şehir · İlçe · Köy/Mahalle | Protokol No · Kart No · Çip No · Hasta Türü · Irk · Cinsiyet · Renk |
 
-**OBSERVED — Ana tab üzerinde görülen alan etiketleri (örnekler):**
+**OBSERVED — arama sonucu ve handoff:**
 
-- Adı Soyadı
-- Protokol No
-- Kart No
-- GSM
-- Kimlik No
-- Doğum Tarihi
-- Mobil Kullanıcı Adı
-- Mobil Şifre
-- İletişim Tipi
-- Açıklama
+- Sonuç listesi sol panelde; müşteri satırı **expand** → altında hastalar.
+- Hasta satırları species icon ile.
+- **Hasta** seçimi → [Hasta Kartı / Patient Workspace](#hasta-kartı--patient-workspace) (**CLOSED** — detay tekrarlanmaz).
+- **Müşteri** seçimi → sağda müşteri workspace ([Müşteri (modül)](#müşteri-modül) / Müşteri Kartı — **CLOSED** — detay tekrarlanmaz).
 
-**TBD:** Arama sonuçları, Detaylı Arama kapsamı, kayıt/kaydetme akışı, zorunlu alanlar ve validasyon. Global Hasta Kabul operasyon yüzeyi — **PARTIAL** ([Review Tracker](#review-tracker)).
+**INFERRED (UI-level):** Yalnız “yeni müşteri formu” değil; bul → bağlam seç → workspace geçişi.
+
+**OBSERVED — Yeni Müşteri (önceki pass):** Tab yapısı Ana · İletişim · Adres · Özel · Notlar; Ana’da alan etiketleri (Adı Soyadı, Protokol No, Kart No, GSM, Kimlik No, Doğum Tarihi, Mobil Kullanıcı Adı/Şifre, İletişim Tipi, Açıklama) — **PII değeri yazılmadı**.
+
+**NOT VERIFIED:** Search ranking · fuzzy search · duplicate detection · keyboard-only workflow · saved searches · authorization/scope filtering · pagination/max results · new customer save validation/persistence · search audit/logging · inactive/deceased/owner-changed result rules · large-dataset performance.
+
+**Backlog exact-match:** **NO MATCH** (≠ [UX-006](../backlog/feature-backlog.md) global application search; ≠ [CHECKIN-001](../backlog/feature-backlog.md) check-in orchestration — front-desk scoped search + hierarchy + handoff).
 
 ---
 
@@ -4316,13 +4315,13 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 ## Katalog (modül)
 
-**Review status:** **REVIEWED / CLOSED** (2026-10-05). **Anlamı:** Marketing/catalog yüzeyi yapılandırıldı. **Anlamına gelmez:** katalogdaki her iddia için live workflow doğrulaması.
+**Review status:** **REVIEWED / CLOSED** (2026-10-07). **E-vet** sekmesi (2026-10-05) marketing/catalog; **Hasvet** · **Safir** (2026-10-07) embedded static vendor catalogs. **Anlamına gelmez:** native commerce, stok veya ürün master entegrasyonu.
 
-**OBSERVED — shell:** Sol menü **Katalog** · sekmeler **E-vet** · **Hasvet** · **Safir**. Bu pass’te incelenen kanıt = **E-vet** katalog materyali. Hasvet/Safir sekmeleri için içerik **uydurulmadı** / **NOT REVIEWED**.
+**OBSERVED — shell:** Sol menü **Katalog** · sekmeler **E-vet** · **Hasvet** · **Safir** — üçü **CLOSED** (pass tarihleri yukarıda).
 
-> Tüm alt bölümlerde **MARKETING CLAIM / CATALOG EVIDENCE** unless explicitly cross-referenced to prior **live REVIEWED** modül pass.
+> **E-vet** alt bölümlerinde **MARKETING CLAIM / CATALOG EVIDENCE** unless cross-ref to prior **live REVIEWED** modül pass. **Hasvet/Safir** = **embedded/static catalog viewer** (vendor equipment catalogs).
 
-### E-vet Smart Plus (katalog)
+### E-vet Smart Plus (katalog) — REVIEWED / CLOSED (2026-10-05)
 
 **MARKETING CLAIM / CATALOG EVIDENCE:** Klinik/hastane otomasyonu olarak konumlanıyor.
 
@@ -4382,13 +4381,35 @@ Yalnız üst düzey positioning; müşteri/üniversite listeleri veya pazar pay�
 
 Özet gruplar: sipariş · teknik servis · akademi/eğitim · muhasebe · duyurular · kampanya/fırsatlar · iletişim/sosyal sorumluluk tipi içerik.
 
+### Hasvet sekmesi — REVIEWED / CLOSED (2026-10-07)
+
+**OBSERVED:** E-Vet shell içinde gömülü **uzun dijital/static catalog viewer**; Hasvet ürün kataloğu sayfaları (tam sayfa envanteri **dump edilmedi**).
+
+**Representative product families (yapısal):** görüntüleme/radyoloji · ultrasonografi · endoskopi · laboratuvar cihazları · anestezi & yoğun bakım · klinik ekipmanları · cerrahi/ortopedik çözümler · pet ürünleri · yazılım/dijital eğitim vb.
+
+**OBSERVED interaction model:** Sayfalı katalog; cihaz görselleri · teknik özellik/açıklama blokları; Hasvet ekosistem/marka ve bazı dış servis grupları; HasvetApp tanıtım sayfası (**live E-Vet integration olarak yorumlanmaz**).
+
+**NOT VERIFIED / NOT OBSERVED:** Fiyat · canlı stok · sepet · sipariş · E-Vet ürün kartına handoff · ürün master senkronizasyonu · satın alma entegrasyonu · supplier ordering · live availability · [Ürün (modül)](#ürün-modül) / stok bağlantısı · API.
+
+### Safir sekmesi — REVIEWED / CLOSED (2026-10-07)
+
+**OBSERVED:** Ayrı **Safir** sekmesinde Safir cerrahi ürün kataloğu — static/digital catalog content.
+
+**Representative set families (isim listesi örnek — tam envanter değil):** Yumuşak Doku Seti · Kısırlaştırma Seti · Göz Seti · Diş Seti · Ortopedi Seti · Pin Set · Veteriner Spinal Cerrahi Seti · şarjlı ortopedik matkap/testere · neurosurgery spine drill set · ultrasonik yıkama cihazı vb.
+
+**OBSERVED:** Set görselleri · ürün adları/adetleri · bazı teknik bilgiler; cerrahi alet ve ortopedi/nöroşirürji ekipmanı odaklı yapı.
+
+**NOT VERIFIED:** Aynı commerce/integration maddeleri (Hasvet ile ortak) — embedded catalog access only.
+
 ### Katalog — synthesis
 
-**INFERRED (positioning evidence):** E-vet yalnız klinik yazılımı değil; geniş ekosistem — core clinic/hospital · clinician mobile · owner digital health card · lab/PACS · CDS/reference · commerce · connected tag · adjacent Hasvet apps.
+**INFERRED (positioning evidence):** E-vet yalnız klinik yazılımı değil; geniş ekosistem — core clinic/hospital · clinician mobile · owner digital health card · lab/PACS · CDS/reference · commerce · connected tag · adjacent Hasvet apps · **embedded vendor catalogs (Hasvet/Safir)**.
+
+**INFERRED (interaction):** `embedded/static catalog access` — **not** native commerce/inventory integration.
 
 **NOT concluded:** “Vetinity hepsini yapmalı.”
 
-**Backlog exact-match:** **NO MATCH** (SmartvetTag · Kliniğim Shop · VetBG Calc · Evet Pro · HasvetApp için yeni ID **yok**).
+**Backlog exact-match:** **NO MATCH** (vendor static catalog viewer için yeni ID **yok**; SmartvetTag · Kliniğim Shop · VetBG Calc · Evet Pro · HasvetApp — önceki pass ile aynı).
 
 ### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
 
@@ -4512,6 +4533,31 @@ Yalnız üst düzey positioning; müşteri/üniversite listeleri veya pazar pay�
 
 ---
 
+## WhatsApp Destek Hattı (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-07). **Anlamı:** Sol alt menü destek kanalı yüzeyi incelendi. **Anlamına gelmez:** native helpdesk veya WhatsApp Business API entegrasyonu.
+
+**OBSERVED:**
+
+- Sol alt menü **WhatsApp Destek Hattı** aksiyonu.
+- E-Vet içinde native ticket/helpdesk ekranı **açılmıyor**.
+- **WhatsApp Web** handoff / yönlendirme.
+- Composer’da klinik/şirket kod bağlamını içeren **prefilled destek mesajı** (mesaj metni/PII **kopyalanmadı**); kullanıcı WhatsApp üzerinden gönderir.
+
+**Characterization:** External **WhatsApp Web handoff with prefilled support message**.
+
+**Cross-ref (farklı yüzey):** [Global Takvim (modül)](#global-takvim-modül) Hatırlatma → WhatsApp Web prefilled reminder — müşteri hatırlatma bağlamı; bu modül **vendor support** handoff.
+
+**NOT VERIFIED:** Gönderim · destek SLA · E-Vet conversation history · ticket ID · delivery/read tracking · inbound sync · server-side WhatsApp Business API · case persistence · transcript storage · audit trail.
+
+**Backlog exact-match:** **NO MATCH** (sırf handoff gözlemi için yeni integration ID **yok**; ≠ unified communication inbox backlog maddeleri).
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- External messaging handoff pattern notu olarak kalabilir; native ticket sistemi veya API entegrasyonu bu pass’ten **çıkarılmaz**.
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -4563,7 +4609,15 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 
 ### Katalog — REVIEWED / CLOSED
 
-**REVIEWED / CLOSED** (2026-10-05). Katalog shell (E-vet · Hasvet · Safir tabs); **E-vet** brochure families (Smart Plus · PACS/Labs · SmartVET ecosystem · Shop · Tag · Evet Pro · VetBG Calc · DataVet · HasvetApp) — **marketing evidence only** unless cross-ref to prior live module.
+**REVIEWED / CLOSED** (2026-10-07). **E-vet** (2026-10-05 marketing families) · **Hasvet** · **Safir** (2026-10-07 embedded static vendor catalogs) — commerce/inventory integration **NOT VERIFIED**.
+
+### Hasta Kabul — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-07). Arama Ekranı · Detaylı Arama alanları · Müşteriler sonuç tree (expand → hastalar) · hasta/müşteri workspace handoff · Yeni Müşteri shell — search algorithm/persistence **NOT VERIFIED**.
+
+### WhatsApp Destek Hattı — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-07). WhatsApp Web handoff · prefilled support message (clinic/company code context) — native helpdesk/API **NOT VERIFIED**.
 
 ### Dokümanlar — REVIEWED / CLOSED
 
@@ -4793,10 +4847,11 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **İlaç Rehberi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [İlaç Rehberi (modül)](#ilaç-rehberi-modül); interaction engine **NOT VERIFIED** |
 | **Nekropsi** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Nekropsi (modül)](#nekropsi-modül); scoring **NOT VERIFIED** |
 | **Mobil Uygulamalar** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül); SmartIVET · SmartVET; native **NOT VERIFIED** |
-| **Katalog** | **REVIEWED / CLOSED** (2026-10-05) | Bkz. [Katalog (modül)](#katalog-modül); E-vet catalog pass; Hasvet/Safir tabs **NOT REVIEWED** |
+| **Katalog** | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [Katalog (modül)](#katalog-modül); E-vet + Hasvet + Safir |
 | **Dokümanlar** | **REVIEWED / CLOSED** (2026-10-06) | Bkz. [Dokümanlar (modül)](#dokümanlar-modül); PDF/website ≠ live verification |
 | **Güncelleme Notları** | **REVIEWED / CLOSED** (2026-10-06) | Bkz. [Güncelleme Notları (modül)](#güncelleme-notları-modül); release-note corroboration only |
-| **WhatsApp Destek Hattı** | NOT REVIEWED | Sol alt menü; ayrı modül pass **yok** |
+| **WhatsApp Destek Hattı** | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [WhatsApp Destek Hattı (modül)](#whatsapp-destek-hattı-modül); Web handoff only |
+| **Hasta Kabul** (global front-desk) | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [Landing / Hasta Kabul](#landing--hasta-kabul); search + handoff |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
 | **Finansal** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Finansal (modül)](#finansal-modül); güvenli/read-only UI kapsamı; save/posting, bakiye/ledger ve rapor etkisi NOT VERIFIED; Rapor > Finansal ve patient ekstre ayrı yüzeyler |
@@ -4806,7 +4861,6 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Muayene** (üst domain) | **REVIEWED / CLOSED** (2026-10-01) | Bkz. [Muayene (modül)](#muayene-modül); 13/13; [Global Muayene Odası](#global-muayene-odası-modül) ayrı |
 | **Laboratuvar** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) | Bkz. [Laboratuvar (modül)](#laboratuvar-modül); 7/7; Lab/PACS/Xray operasyon modülleri ayrı |
 | **Genel** (üst domain) | **REVIEWED / CLOSED** (2026-10-03) | Bkz. [Genel (modül)](#genel-modül); 12/12 üst menü |
-| **Hasta Kabul** (global landing) | **PARTIAL** | Landing alanları; tam operasyon **TBD** |
 
 ---
 
@@ -4814,7 +4868,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 
 Ürün inceleme önceliği (architecture kararı **değil**):
 
-**Sol operasyonel navigation (soldan aşağı):** Planlanan sol menü modül pass’leri **Dokümanlar** · **Güncelleme Notları** dahil **CLOSED** (2026-10-06). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). Sol menüde **WhatsApp Destek Hattı** — **NOT REVIEWED** (envanterde; deep-dive pass planlanmadı). *(Numaralı kuyruk — aşağıda; **remaining review audit** bölümü.)*
+**Sol operasyonel navigation:** Planlanan sol menü / alt menü modül pass’leri (**Katalog** üç sekme · **Dokümanlar** · **Güncelleme Notları** · **WhatsApp Destek Hattı** · **Hasta Kabul** landing) **CLOSED** (son pass 2026-10-07). **e-Fatura / e-SMM** — **PARTIAL** (2026-10-04). *(Numaralı kuyruk — aşağıda; [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-07).)*
 
 1. ~~Hospitalizasyon~~ — **CLOSED** ([Global Hospitalizasyon (modül)](#global-hospitalizasyon-modül); 2026-10-04)
 2. ~~Takvim~~ — **CLOSED** ([Global Takvim (modül)](#global-takvim-modül); patient-context randevu [Randevular](#randevular))
@@ -4836,28 +4890,32 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 18. ~~İlaç Rehberi~~ — **CLOSED** ([İlaç Rehberi (modül)](#ilaç-rehberi-modül); 2026-10-05)
 19. ~~Nekropsi~~ — **CLOSED** ([Nekropsi (modül)](#nekropsi-modül); 2026-10-05)
 20. ~~Mobil Uygulamalar~~ — **CLOSED** ([Mobil Uygulamalar (modül)](#mobil-uygulamalar-modül); 2026-10-05; SmartIVET · SmartVET)
-21. ~~Katalog~~ — **CLOSED** ([Katalog (modül)](#katalog-modül); 2026-10-05)
+21. ~~Katalog~~ — **CLOSED** ([Katalog (modül)](#katalog-modül); E-vet 2026-10-05 · Hasvet/Safir 2026-10-07)
 22. ~~Dokümanlar~~ — **CLOSED** ([Dokümanlar (modül)](#dokümanlar-modül); 2026-10-06)
 23. ~~Güncelleme Notları~~ — **CLOSED** ([Güncelleme Notları (modül)](#güncelleme-notları-modül); 2026-10-06)
 24. ~~Genel~~ (üst domain — configuration) — **CLOSED** ([Genel (modül)](#genel-modül); 12/12)
+25. ~~Hasta Kabul~~ (global front-desk) — **CLOSED** ([Landing / Hasta Kabul](#landing--hasta-kabul); 2026-10-07)
+26. ~~WhatsApp Destek Hattı~~ — **CLOSED** ([WhatsApp Destek Hattı (modül)](#whatsapp-destek-hattı-modül); 2026-10-07)
 
-**Remaining review audit required (2026-10-06):** Numaralı öncelik kuyruğu (1–24) planlanan modül pass’leri için **tamamlandı**; **E-Vet genel review IN PROGRESS** kalır. Açık ana yüzeyler → [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-06).
+**Remaining review audit (2026-10-07):** Numaralı kuyruk genişletildi (Hasta Kabul · WhatsApp). **E-Vet genel review IN PROGRESS** — bilinen **PARTIAL** blocker’lar closure sayılmaz. → [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-07).
 
-### Remaining E-Vet review inventory (2026-10-06)
+### Remaining E-Vet review inventory (2026-10-07)
 
-Architecture kararı **değil**; tracker/queue taraması özeti.
+Architecture kararı **değil**; tam dosya/tracker taraması özeti.
 
 | Surface | Current status | Why still open | Practically review more? |
 |---|---|---|---|
-| **Global Xray İstekleri** | **PARTIAL** (2026-09-29) | İncelenen klinikte request rows / test group yok; result lifecycle doğrulanamadı | **Maybe** — farklı klinik/tenant veya yapılandırılmış Xray test grubu gerekir |
-| **e-Fatura / e-SMM** | **PARTIAL** (2026-10-04) | Entegrasyon config eksik; external lifecycle **NOT VERIFIED** | **Maybe** — config tamamlanmış ortam veya sandbox credentials |
-| **Hasta Kabul** (global landing) | **PARTIAL** | Landing alanları gözlendi; tam operasyon/TBD | **Yes** — kayıt/arama/detaylı arama deep-dive |
-| **WhatsApp Destek Hattı** (sol alt menü) | **NOT REVIEWED** | Navigation envanterinde; modül pass yok | **Yes** — support channel / handoff yüzeyi |
-| **Katalog → Hasvet / Safir** sekmeleri | **NOT REVIEWED** (E-vet tab **CLOSED**) | Bu pass yalnız E-vet katalog materyali | **Yes** — ayrı catalog pass istenirse |
-| **Rapor** alt raporlar (ACCESS-BLOCKED) | **CLOSED** kategori; alt öğeler blocked | Yetki/erişim sınırı | **Maybe** — yetkili hesap gerekir |
-| CLOSED modüller içi **TBD / NOT VERIFIED** | Intentional limitation | Live-test yapılmadı veya scope dışı | **Selective** — ihtiyaç halinde targeted follow-up |
+| **Global Xray İstekleri** | **PARTIAL** (2026-09-29) | Tenant/config/data: usable test group ve request rows yok; result lifecycle doğrulanamadı | **Maybe** — farklı klinik veya Xray test grubu yapılandırması |
+| **e-Fatura / e-SMM** | **PARTIAL** (2026-10-04) | Config blocker; external provider lifecycle **NOT VERIFIED** | **Maybe** — entegrasyon tamamlanmış hesap |
+| **Rapor** alt raporlar | **CLOSED** üst domain; alt öğeler **ACCESS-BLOCKED** | Permission/erişim sınırı — içerik verified **değil** | **Maybe** — yetkili rol/hesap |
+| CLOSED modüller içi **TBD / NOT VERIFIED** | Intentional limitation | Scope dışı veya live-test yapılmadı | **Selective** — targeted follow-up |
+| Üst menü major modüller | **REVIEWED / CLOSED** (ilgili pass’ler) | — | Hayır (mevcut metodoloji kapsamında) |
+| Sol menü planlanan modül pass’leri | **CLOSED** (2026-10-07’ye kadar) | — | Hayır |
+| Hasta Kartı / Müşteri Kartı | **CLOSED** | — | Hayır (bağımsız major surface kalmadı) |
 
-**Known PARTIAL (yeni modül sayılmaz):** [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) · [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül).
+**No practically reviewable major E-Vet surface remains in the current tenant/session**, except **known PARTIAL** items (Xray · e-Fatura/e-SMM) and **permission-blocked** Rapor alt yüzeyleri — bunlar queue’yu “bitmiş” saymak için **CLOSED yapılmaz**.
+
+**Known PARTIAL:** [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) · [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül).
 
 ---
 
@@ -4879,7 +4937,7 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 **TBD:**
 
 - “Resmi” ekranların hukuki/regulatory zorunluluk olup olmadığı (menü adından türetilmez).
-- PACS entegrasyon/kapsam detayları (live modül pass’leri **CLOSED**; katalog corroboration only); e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04). *(Dokümanlar · Güncelleme Notları **CLOSED** 2026-10-06 — document/release evidence ≠ live verification; [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-06).)*
+- PACS entegrasyon/kapsam detayları (live modül pass’leri **CLOSED**); e-Fatura/e-SMM external lifecycle (UI **PARTIAL** 2026-10-04). *(Hasta Kabul · Katalog (3 tab) · WhatsApp Destek **CLOSED** 2026-10-07 — [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-07).)*
 
 **INFERRED (domain coverage — menü envanterinden):**
 
