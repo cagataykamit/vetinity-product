@@ -38,6 +38,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 - **WhatsApp Destek Hattı** (sol alt menü) — external WhatsApp Web handoff **REVIEWED / CLOSED** (2026-10-07); [kapsam](#whatsapp-destek-hattı-modül) ve [tracker](#review-tracker).
 - **Dokümanlar** (sol menü) — document/reference library hub **REVIEWED / CLOSED** (2026-10-06; PDF/website ≠ live workflow verification); [kapsam](#dokümanlar-modül) ve [tracker](#review-tracker).
 - **Güncelleme Notları** (sol menü) — in-product versioned changelog **REVIEWED / CLOSED** (2026-10-06; release-note ≠ independent live re-test); [kapsam](#güncelleme-notları-modül) ve [tracker](#review-tracker).
+- **Öğrenme Modu / Asistan** — E-vet Smart+ training environment (`training.evetsmart.com`) contextual training assistant **REVIEWED / CLOSED** (2026-10-07; **TRAINING ENVIRONMENT / UI EVIDENCE** — production klinik workflow **değil**); [kapsam](#öğrenme-modu--asistan-modül) ve [tracker](#review-tracker).
 
 **Devam eden / henüz sistematik incelenmeyen:** Xray result lifecycle (incelenen klinikte doğrulanamadı), PACS US missing-image root cause, e-Fatura/e-SMM external lifecycle (config blocker), vb. — [Review Tracker](#review-tracker), [Next Review Queue](#next-review-queue).
 
@@ -82,6 +83,7 @@ E-Vet SMART (Türkiye pazarı veteriner klinik yönetim yazılımı)
 | **WhatsApp Destek Hattı** (sol alt menü) | **REVIEWED / CLOSED** (2026-10-07) |
 | **Dokümanlar** (sol menü) | **REVIEWED / CLOSED** (2026-10-06) |
 | **Güncelleme Notları** (sol menü) | **REVIEWED / CLOSED** (2026-10-06) |
+| **Öğrenme Modu / Asistan** (training env.) | **REVIEWED / CLOSED** (2026-10-07) |
 
 > **CLOSED:** Planlanan modül görsel/product review kapsamı tamamlandı; kaynak dokümantasyon oluşturuldu. **Anlamına gelmez:** reverse engineering, backend/domain semantics, tam status enum veya tüm E-Vet ürün kapsamının incelenmiş olması.
 
@@ -94,6 +96,8 @@ Kanıt sınıflandırması:
 | Etiket | Anlam |
 |---|---|
 | **OBSERVED** | Canlı UI'da doğrudan görülen |
+| **TRAINING ENVIRONMENT / UI EVIDENCE** | E-vet Smart+ Öğrenme Modu / `training.evetsmart.com` gibi eğitim ortamı UI’si; production klinik workflow **sayılmaz** |
+| **OBSERVED UI COPY** | Ekranda görünen ürün metni; backend garantisi veya production davranışı **değildir** |
 | **VIDEO OBSERVED** | E-Vet eğitim/yönlendirme videosundan; aynı iddia canlı UI ile ayrı doğrulanmadı |
 | **INFERRED** | Menü/etiketlerden makul ama doğrulanmamış çıkarım |
 | **VETINITY IMPLICATION** | Vetinity için değerlendirme adayı (kesin karar değil) |
@@ -118,7 +122,7 @@ Bu belgede **yapılmaz:**
 |---|---|
 | Kaynak türü | Canlı ürün incelemesi (live product review) |
 | Gözlemlenen sürüm | v4.12.0 |
-| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-10-05 (Mobil Uygulamalar — CLOSED); 2026-10-05 (Katalog E-vet — CLOSED); 2026-10-06 (Dokümanlar — CLOSED); 2026-10-06 (Güncelleme Notları — CLOSED); 2026-10-07 (Hasta Kabul — CLOSED); 2026-10-07 (Katalog Hasvet/Safir — CLOSED); 2026-10-07 (WhatsApp Destek Hattı — CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
+| İnceleme tarihi | 2026-09-23 (navigation); 2026-09-24 – 2026-09-25 (Hasta Kartı — CLOSED); 2026-09-25 (Global Hospitalizasyon — CLOSED); 2026-10-04 (Global Hospitalizasyon — reaffirm / CLOSED); 2026-10-04 (VKY — CLOSED); 2026-10-04 (HBS — CLOSED); 2026-10-04 (e-Fatura/e-SMM — PARTIAL); 2026-10-04 (DataVet — CLOSED); 2026-10-05 (İlaç Rehberi — CLOSED); 2026-10-05 (Nekropsi — CLOSED); 2026-10-05 (Mobil Uygulamalar — CLOSED); 2026-10-05 (Katalog E-vet — CLOSED); 2026-10-06 (Dokümanlar — CLOSED); 2026-10-06 (Güncelleme Notları — CLOSED); 2026-10-07 (Hasta Kabul — CLOSED); 2026-10-07 (Katalog Hasvet/Safir — CLOSED); 2026-10-07 (WhatsApp Destek Hattı — CLOSED); 2026-10-07 (Öğrenme Modu / Asistan — training env. CLOSED); 2026-09-25 (Global Takvim — CLOSED); 2026-09-27 (Global Doğrudan Satış — CLOSED); 2026-09-28 (Global Muayene Odası — CLOSED); 2026-09-28 (Global Lab İstekleri — CLOSED); 2026-09-29 (Global Xray İstekleri — PARTIAL); 2026-09-29 (Global Pacs İstekleri — CLOSED); 2026-09-29 (Rapor / Genel pass); 2026-09-29 (Rapor / Randevu, Resmi, Depo, Finansal consolidation — Rapor CLOSED); 2026-09-30 (Stok — CLOSED); 2026-09-30 (Finansal — CLOSED); 2026-10-01 (Ürün — CLOSED); 2026-10-01 (Müşteri — CLOSED); 2026-10-01 (Hasta üst menü — CLOSED); 2026-10-01 (Muayene üst menü — CLOSED); 2026-10-03 (Laboratuvar üst menü — CLOSED); 2026-10-03 (Genel üst menü — CLOSED) |
 
 ---
 
@@ -4558,6 +4562,40 @@ Yalnız üst düzey positioning; müşteri/üniversite listeleri veya pazar pay�
 
 ---
 
+## Öğrenme Modu / Asistan (modül)
+
+**Review status:** **REVIEWED / CLOSED** (2026-10-07). **Kaynak:** E-vet Smart+ **Öğrenme Modu** — `training.evetsmart.com` (2026-10-07 ekran gözlemi).
+
+**Kanıt türü:** **TRAINING ENVIRONMENT / UI EVIDENCE** — production klinik workflow olarak sunulmaz.
+
+**Characterization:** **Öğrenme Modu / Contextual Training Assistant** — product education · onboarding · contextual screen explanation · guided training · example-question driven assistant.
+
+### OBSERVED (incelenen Öğrenme Modu yüzeyi)
+
+1. Smart+ içinde **Öğrenme Modu** adlı ayrı eğitim deneyimi.
+2. Sağda contextual yardımcı panel.
+3. Panelde gözlenen aktif mod seçimi: **Asistan** (bu yüzeyde başka çalışan AI mod/araç seçeneği **gözlemlenmedi** — tüm E-vet için “tek AI” **genellenmez**).
+4. Hazır örnek sorular (örnek semantik: Smart+ AI Rapor Modu kullanımı · Güncel Durum Ekranı yorumlama — tam katalog **dump edilmedi**).
+5. Örnek soru seçildiğinde Asistan, açık modül/yüzey için adım adım açıklama (örnek: [VKY (modül)](#vky-modül) **Güncel Durum Ekranı** açıkken Finansal Yönetim · Hasta Analizi · Stok Kontrol · Genel İstatistikler · En’ler benzeri bölümler — eğitim bağlamında; VKY detayları burada **tekrarlanmaz**).
+6. **OBSERVED UI COPY:** Açıklama metni eğitimin örnek verilerle ilerlediğini ve gerçek verilere dokunulmadığını belirtiyor (**backend izolasyonu / tenant güvenliği garantisi olarak yorumlanmaz**).
+7. **Sesli İletişim** kartı — UI metni özelliğin **ileride** aktif olacağını belirtiyor (voice UI teaser **OBSERVED**; aktif sesli görüşme **NOT OBSERVED**).
+8. Alt bölümde eğitim ilerleme kontrolü: eğitim kontrolü · geri/ileri benzeri kontroller · progress/bölüm göstergesi.
+
+**INFERRED (UI-level):** Serbest genel-purpose chatbot’tan ziyade ürün içi eğitim akışına bağlı guided experience.
+
+**NOT VERIFIED / NOT OBSERVED:** Production Smart+ içinde aynı Asistan davranışı · clinical decision support · patient summarization · autonomous workflow · lab/imaging interpretation · diagnosis/treatment recommendation · business/operations copilot · production patient-data reasoning · tool/action execution · persistent AI memory · RAG/LLM/provider/model · backend architecture · voice capability live · Smart+ AI Rapor Modu canlı doğrulama · Öğrenme Modu girişinin production sol menü envanterinde ayrı pass (**bu pass yalnız training host**).
+
+**Backlog exact-match:** **NO MATCH** — ≠ [AI-100](../backlog/feature-backlog.md#epic-ai-100--embedded-clinical-intelligence) embedded clinical intelligence; ≠ [AI-101](../backlog/feature-backlog.md#ai-101--ai-business-copilot) operasyonel doğal dil business copilot (contextual **training** assistant — adjacent only). Yeni ID **yok**.
+
+**Cross-ref:** [DataVet (modül)](#datavet-modül) · [Nekropsi (modül)](#nekropsi-modül) — ayrı clinical decision-support **reference** yüzeyleri; Öğrenme Modu Asistan bunların yerine geçmez.
+
+### VETINITY IMPLICATION (research — architecture/ADR kararı değil)
+
+- Rakip bu kanıtta AI’ı klinik otomasyon yerine **ürün içi öğrenme/onboarding** bağlamında kullanıyor.
+- Olası ders: karmaşık ekranlarda contextual help / “bu ekranı açıkla” faydalı olabilir; **AI-100 clinical intelligence roadmap’inin yerine geçmez**; ayrı tutulmalıdır.
+
+---
+
 ## Review Tracker
 
 Hasta-scoped bir yüzeyin incelenmesi, ilgili **global modülün** reviewed olduğu anlamına **gelmez**.
@@ -4618,6 +4656,10 @@ Patient Card navigation / IA · Anasayfa > Ana · Anasayfa > Özel · Anasayfa >
 ### WhatsApp Destek Hattı — REVIEWED / CLOSED
 
 **REVIEWED / CLOSED** (2026-10-07). WhatsApp Web handoff · prefilled support message (clinic/company code context) — native helpdesk/API **NOT VERIFIED**.
+
+### Öğrenme Modu / Asistan — REVIEWED / CLOSED
+
+**REVIEWED / CLOSED** (2026-10-07). Training environment (`training.evetsmart.com`) · Öğrenme Modu · sağ panel **Asistan** · örnek sorular · contextual screen explanation · training progress controls · Sesli İletişim teaser — production parity / clinical AI **NOT VERIFIED**.
 
 ### Dokümanlar — REVIEWED / CLOSED
 
@@ -4851,6 +4893,7 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 | **Dokümanlar** | **REVIEWED / CLOSED** (2026-10-06) | Bkz. [Dokümanlar (modül)](#dokümanlar-modül); PDF/website ≠ live verification |
 | **Güncelleme Notları** | **REVIEWED / CLOSED** (2026-10-06) | Bkz. [Güncelleme Notları (modül)](#güncelleme-notları-modül); release-note corroboration only |
 | **WhatsApp Destek Hattı** | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [WhatsApp Destek Hattı (modül)](#whatsapp-destek-hattı-modül); Web handoff only |
+| **Öğrenme Modu / Asistan** | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [Öğrenme Modu / Asistan (modül)](#öğrenme-modu--asistan-modül); training environment only |
 | **Hasta Kabul** (global front-desk) | **REVIEWED / CLOSED** (2026-10-07) | Bkz. [Landing / Hasta Kabul](#landing--hasta-kabul); search + handoff |
 | **Rapor** (üst domain) | **REVIEWED / CLOSED** (2026-09-29) | Bkz. [Rapor](#rapor); erişilebilir ekran seti/yetki sınırları içinde; 5 rapor ACCESS-BLOCKED |
 | **Stok** (üst domain) | **REVIEWED / CLOSED** (2026-09-30) | Bkz. [Stok (modül)](#stok-modül); güvenli/read-only kapsam; side-effect davranışları NOT OBSERVED; Rapor > Depo raporları ayrı ([Rapor → Depo](#rapor--depo-reviewed--closed)) |
@@ -4896,8 +4939,9 @@ Banka Giriş/Çıkış · Kasa Giriş/Çıkış · Bankalar · Banka Hesapları 
 24. ~~Genel~~ (üst domain — configuration) — **CLOSED** ([Genel (modül)](#genel-modül); 12/12)
 25. ~~Hasta Kabul~~ (global front-desk) — **CLOSED** ([Landing / Hasta Kabul](#landing--hasta-kabul); 2026-10-07)
 26. ~~WhatsApp Destek Hattı~~ — **CLOSED** ([WhatsApp Destek Hattı (modül)](#whatsapp-destek-hattı-modül); 2026-10-07)
+27. ~~Öğrenme Modu / Asistan~~ (training environment) — **CLOSED** ([Öğrenme Modu / Asistan (modül)](#öğrenme-modu--asistan-modül); 2026-10-07)
 
-**Remaining review audit (2026-10-07):** Numaralı kuyruk genişletildi (Hasta Kabul · WhatsApp). **E-Vet genel review IN PROGRESS** — bilinen **PARTIAL** blocker’lar closure sayılmaz. → [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-07).
+**Remaining review audit (2026-10-07):** Numaralı kuyruk genişletildi (#25 Hasta Kabul · #26 WhatsApp Destek Hattı · #27 Öğrenme Modu / Asistan — **CLOSED**). **E-Vet genel review IN PROGRESS** — bilinen **PARTIAL** blocker’lar closure sayılmaz. → [Remaining E-Vet review inventory](#remaining-e-vet-review-inventory-2026-10-07).
 
 ### Remaining E-Vet review inventory (2026-10-07)
 
@@ -4912,8 +4956,9 @@ Architecture kararı **değil**; tam dosya/tracker taraması özeti.
 | Üst menü major modüller | **REVIEWED / CLOSED** (ilgili pass’ler) | — | Hayır (mevcut metodoloji kapsamında) |
 | Sol menü planlanan modül pass’leri | **CLOSED** (2026-10-07’ye kadar) | — | Hayır |
 | Hasta Kartı / Müşteri Kartı | **CLOSED** | — | Hayır (bağımsız major surface kalmadı) |
+| **Öğrenme Modu** production parity / availability | **NOT VERIFIED** | Training ortamında gözlemlenen yüzeyin production Smart+ içindeki karşılığı / erişilebilirliği bu pass’te **doğrulanmadı** (training pass **CLOSED** — ayrı) | **Maybe** — production tenant’ta Öğrenme Modu girişi varlığı/parity |
 
-**No practically reviewable major E-Vet surface remains in the current tenant/session**, except **known PARTIAL** items (Xray · e-Fatura/e-SMM) and **permission-blocked** Rapor alt yüzeyleri — bunlar queue’yu “bitmiş” saymak için **CLOSED yapılmaz**.
+**No practically reviewable major E-Vet surface remains in the current tenant/session** (production sol/üst menü planı kapsamında), except **known PARTIAL** items (Xray · e-Fatura/e-SMM), **permission-blocked** Rapor alt yüzeyleri, ve **production Öğrenme Modu parity** (training-only pass ayrı **CLOSED**) — bunlar queue’yu “bitmiş” saymak için **CLOSED yapılmaz**.
 
 **Known PARTIAL:** [Global Xray İstekleri (PARTIAL)](#global-xray-i̇stekleri-partial) · [e-Fatura / e-SMM (modül)](#e-fatura--e-smm-modül).
 
