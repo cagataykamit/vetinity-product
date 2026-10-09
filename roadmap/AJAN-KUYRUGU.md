@@ -6,9 +6,9 @@
 
 ## Aşama 1 — Muayene çalışma alanı, dilim 1 (EXAM-001–005, ADR-005)
 
-**Durum:** Kabul edildi (kullanıcı kararı, 2026-10-10). Kod commit'li, iki depoda `feature/muayene-dilim1` dalında; **merge, push ve deploy yapılmadı** (kullanıcı onayı bekliyor). Kabul, kalan manuel senaryolar tamamlanmadan verildi; aşağıdaki "Kabul sırasında doğrulanmamış" listesi açık risktir.
+**Durum:** Kabul edildi (kullanıcı kararı, 2026-10-10). Üç depoda yerel `main`e fast-forward merge edildi; **push ve deploy yapılmadı** (push izin denetimi tarafından engellendi, kullanıcı elle yapacak). Kabul, kalan manuel senaryolar tamamlanmadan verildi; aşağıdaki "Kabul sırasında doğrulanmamış" listesi açık risktir.
 
-**Son commitler:** Backend `b36eafc`. Frontend `a119e65` → `df2e906` (kayıt toast'ı) → `919ad0e` (kayıttan sonra detaya dönüş) → `ecb60ba` (İptal/Kaydet butonları kart içine). Frontend son durum: `ng build` hatasız, `ng test` 52/52 (ajan raporu).
+**Son commitler:** Backend `b36eafc`. Frontend `a119e65` → `df2e906` (kayıt toast'ı) → `919ad0e` (kayıttan sonra detaya dönüş) → `ecb60ba` → `576d777` (İptal/Kaydet butonları son bölüm kartının içine; `576d777` ajan raporunda yoktu, sonradan eklenmiş). Frontend son durum: `ng build` hatasız, `ng test` 52/52 (ajan raporu).
 
 **Kabul sırasında doğrulanmamış:** Kullanıcı yalnızca yeni muayene oluşturmayı denedi. Elle denenmeyenler: alan koruma (kısmi PUT), vitaller/`clearVitals`, iki sekmede çakışma, boş bulgular, tarih filtresi (İstanbul/UTC sınırı), randevudan açma ve eski kayıt/export. İptal butonunun görsel rengi tarayıcıda teyit edilmedi. HTTP uçtan uca PUT/409 ve Z'siz tarih `Kind` davranışı doğrulanmadı. ESLint çalışmıyor (karar bekliyor).
 
