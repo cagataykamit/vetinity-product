@@ -2,7 +2,31 @@
 
 > **Not:** Bu belge kesin tarih taahhüdü içermez. Aşamalı yayın yaklaşımını, giriş/çıkış kriterlerini ve ölçülecek metrikleri tanımlar. Detaylı özellik listesi için [roadmap](roadmap.md) ve [feature backlog](../backlog/feature-backlog.md) kullanılır.
 
+> **Ana plan (2026-10-09):** Bu release plan, [Uçtan uca yol haritası ve ürün kararları](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md) belgesine (8 Ekim 2026) hizalanır. Sıra veya kapsamda çelişki olursa **o belge geçerlidir**. Aşağıdaki "Yayın aşaması" yapısı silinmedi; "Önceki aşama yapısı (referans)" başlığı altında korunuyor. Karışıklık olmaması için ana plandaki numaralara "Ana plan Aşama N", bu belgedekilere "Yayın aşaması N" denir.
+
 ---
+
+## Ana plana göre aşama eşlemesi
+
+| Yayın aşaması (önceki) | Ana plandaki karşılığı | Değişiklik |
+|---|---|---|
+| 1 — Çıkış öncesi ürün tamamlama | Ana plan Aşama 0–3 (muayene, geliş/Bugün, temel ücret/bakiye); menü ve Rapor Merkezi Aşama 8'e kayar | "Menü sadeleştirme ve Rapor Merkezi uygulandı" çıkış kriteri Aşama 8'e taşındı. Geliş/Bugün ve temel finans yeni giriş kriterleri. |
+| 2 — Kontrollü pilot | Ana plan Aşama 9 | Pilot tamamen bitişten sonra değil: Aşama 1–3 kabul edilince kapsamı açık sınırlı senaryolar pilot kullanıcıyla denenebilir. Aşama 4–8 gerçek geri bildirimle tamamlanır. |
+| 3 — Self-service trial açılışı | Ana plan Aşama 8 | **Sıra değişti.** Trial ve örnek klinik, muayene/geliş/finans temelinden sonra teslim edilir ve pilot çıkış kapılarına dahildir. Dış kullanıcıya açılış kararı ayrıca verilir. |
+| 4 — İlk ücretli müşteriler | Ana plan Aşama 9 (ilk ticari sürüm) | Abonelik ve ödeme akışı ana planda yalnızca "platform" kapısı olarak geçer; ayrıntılı zamanlama **açık soru**. |
+| 5 — Premium klinik özellikleri | Ana plan Aşama 4 (özet, uyarı, timeline, revizyon), Aşama 6 (görüntüleme) ve Aşama 10 (şablon, paket, AI) | **Çelişki çözüldü:** temel timeline/özet/görüntüleme v1.0 kapsamında; ileri sürümleri, şablon/bundle/doz hesaplayıcı ve AI ilk ticari sürümden sonra (Aşama 10). |
+| 6 — Entegrasyon genişlemesi | Ana plan Aşama 11 | Talebe göre. SMS/e-belge pilot için engelse erkene alınır. Cihaz entegrasyonları Aşama 12. |
+| 7 — Mobil ve enterprise genişlemesi | Ana plan Aşama 12 (ve portal için Aşama 11) | İlk sürümde native mobil yok; enterprise ayrı araştırma ve pilot. |
+
+### İlk ticari sürümün çıkış kapıları
+
+Ana plan bölüm 14 on iki kapı tanımlar: hasta/ziyaret, muayene, işlem sürekliliği, finans, geçmiş/takip, klinik kayıt politikası, platform, rapor/iletişim, deneme/kullanım, canlı işletim, müşteri geçişi ve pilot kabulü. Bunlar yapılmış test sonuçları değil, önerilen çıkış koşullarıdır; seçilen pilot profiline göre daraltılıp ürün belgelerine yazılır. Aşağıdaki önceki çıkış kriterleri bu kapılarla birlikte okunur.
+
+---
+
+## Önceki aşama yapısı (referans)
+
+> **Not:** Aşağıdaki yedi yayın aşaması 2026-10-09 öncesi yapıdır. Sıra için yukarıdaki eşlemeye bakın. Giriş/çıkış kriterleri ve metrikler geçerliliğini korur.
 
 ## Aşama 1 — Çıkış öncesi ürün tamamlama
 
@@ -250,6 +274,7 @@ Veteriner mobil uygulaması, hasta sahibi deneyimi ve enterprise özelliklerinin
 
 ## İlgili belgeler
 
+- [Uçtan uca yol haritası ve ürün kararları (ana plan)](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md)
 - [Roadmap](roadmap.md)
 - [Feature backlog](../backlog/feature-backlog.md)
 - [Release notes](../release-notes/README.md)
