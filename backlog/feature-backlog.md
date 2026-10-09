@@ -16,6 +16,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | EXAM- | Muayene deneyimi |
 | HOSP- | Hospitalization (yatış) |
 | CHECKIN- | Check-in orkestrasyonu |
+| SEARCH- | Günlük hasta/sahip arama (resepsiyon) |
 | CHECKOUT- | Ziyaret kapanışı ve tahsilat |
 | RECORD- | Klinik kayıt yaşam döngüsü |
 | PORTAL- | Hasta sahibi portalı |
@@ -767,6 +768,54 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | CHECKIN-001 |
 | **Notlar** | Kapsam durumları: Booked, Checked In, In Room, Visit Complete, Check Out. Bu kayıt yalnızca check-in işlemini değil, randevudan tamamlanmaya kadar tüm ziyaret/encounter yaşam döngüsünü temsil eder. DaySmart sandbox observation (~28:13–35:25): Visit Complete iken ayrı Check Out başlatılabiliyor → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu). Mevcut backlog ID'si CHECKIN-005 olarak korunur. İleride ziyaret/encounter alanı bağımsız bir ürün alanına dönüşürse kategori ve ID yapısı ayrıca değerlendirilebilir. DaySmart sandbox observation (2026-08-02 bölüm 3); SOAP ekranından durum değişimi gözlemlendi — doğrulanmadı. **Canlı sandbox — Census:** operasyon kuyruğu görünümü; satır bazlı status değişimi (gözlemlenen örnek: Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — gözlemlenen seçeneklerin tam durum kümesi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--census-profiller-ve-operasyon-kuyruğu). **Canlı sandbox — Treatment Board:** aktif tedavi operasyon panosu — [daysmart.md](../competitors/daysmart.md#sandbox--treatment-board). **Canlı sandbox — Boarding Dashboard:** Checking In/Out/Checked In kolonları + durum legend — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-dashboard). **Patients Module:** Patient Profile Appointments + Boarding Reservation birleşik liste; domain ayrı — [daysmart.md](../competitors/daysmart.md#appointments-patient-profile). **Clients Module:** Client Appointments/Reservations unified query — [daysmart.md](../competitors/daysmart.md#appointments--reservations). **E-Vet SMART (2026-09-24):** UI'da **Randevular** ile **Ziyaret Geçmişi** ayrı yüzeyler; randevu listesinde örnek durum `Gelmedi` — tam enum/backend modeli **doğrulanmadı** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#randevular) |
+
+### CHECKIN-006 — Hafif geliş ve bekleme akışı (Visit, randevulu/randevusuz)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-006 |
+| **Başlık** | Hafif geliş ve bekleme akışı (Visit, randevulu/randevusuz) |
+| **Kategori** | Check-in |
+| **Problem** | Ayrı geliş zamanı, randevusuz geliş ve bekleme akışı yok. Randevusuz muayene kaydı tek başına bu ihtiyacı karşılamıyor; planlı randevu ile gerçek geliş ayrı izlenmiyor |
+| **Önerilen çözüm** | Ayrı Visit kaydı: hasta, klinik, geliş zamanı, sorumlu hekim, opsiyonel randevu ilişkisi. Randevusuz geliş sahte randevu olarak takvime yazılmaz. Bakım durumu sade: Bekliyor / Devam ediyor / Tamamlandı; ödeme durumu ve açık iş göstergesi bakım durumundan ayrı tutulur. Tekrar tıklama ikinci ziyaret üretmez. Yanlış geliş işareti ve durum düzeltmesi yetki ve gerekçeyle izlenir. Muayene oluşturmanın randevuyu otomatik tamamlama davranışı Visit politikasına uyarlanır |
+| **Kullanıcı değeri** | Resepsiyon ve hekim aynı güncel sırayı görür; muayeneye geçişte hasta tekrar seçilmez |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Tasarlanacak (ADR taslağı: [ADR-009](../decisions/ADR-009-visit-model-and-arrival-flow.md), onay bekliyor) |
+| **Bağımlılıklar** | EXAM-001 (dilim 1 kabul edildi), ADR-009 |
+| **Notlar** | Ana plan Aşama 2. CHECKIN-001/005 ile ilişkili; ağır check-in formu (şablon/bundle/fatura/form/kafes kartı seçimi) ilk gelişte **yok** → CHECKIN-002–004 kapsam dışı. Online randevu teknik ön koşul değildir ([APPT](#appt--online-booking-ve-randevu-talepleri)). Departman/oda yönetimi, kapsamlı triage, portal, belge/imza sonraki kapsam. Rapor etkisi ADR-009'da incelenir |
+
+### CHECKIN-007 — Bugün yüzeyi (günlük operasyon görünümü)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-007 |
+| **Başlık** | Bugün yüzeyi (günlük operasyon görünümü) |
+| **Kategori** | Check-in |
+| **Problem** | Resepsiyon ve hekim günlük sırayı (randevular, bekleyenler, bakımı devam edenler, açık işler) tek yerde göremiyor |
+| **Önerilen çözüm** | Bugün: randevular, bekleyenler, bakım devam edenler, ilgili açık işler; aktif yatış ayrıca görünür. Bakım, ödeme ve açık iş göstergeleri ayrı. Günlük aksiyon yüzeyidir, geçmişe dönük raporla karıştırılmaz. Mevcut dashboard korunur |
+| **Kullanıcı değeri** | Günlük iş akışı tek ekranda; "sıra kimde" sorusu cevaplanır |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Tasarlanacak |
+| **Bağımlılıklar** | CHECKIN-006, ADR-009 |
+| **Notlar** | Ana plan Aşama 2. Rakip ilham: DaySmart Census, E-Vet Muayene Odası (operasyon iş listesi) — kopyalanmaz. Ödeme göstergesi temel finans (Aşama 3) gelene kadar yalnızca mevcut ödeme verisini yanlış sonuç üretmeden gösterir; veri yoksa göstergeyi uydurmaz |
+
+### SEARCH-001 — Günlük hasta/sahip arama
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | SEARCH-001 |
+| **Başlık** | Günlük hasta/sahip arama |
+| **Kategori** | Arama |
+| **Problem** | Resepsiyon sahibi ve hastasını hızlı bulamıyor; Türkçe harf, ad/soyad sırası, boşluk/noktalama ve telefon biçimi farkları aramayı kaçırıyor; exact backlog kaydı yoktu |
+| **Önerilen çözüm** | Sahip adı, hasta adı, telefon ve mevcut mikroçip ile toleranslı dar arama; sonuçta sahip altında hastalar anlaşılır gösterilir. Yeni sahip/hasta oluşturma akışı korunur; sahip oluşmuş, hasta kaydı başarısız olmuşsa aynı sahip üzerinden devam edilir. Arama normalizasyonu tenant/clinic erişim filtresini değiştirmez |
+| **Kullanıcı değeri** | Hastayı bulma süresi kısalır; yinelenen kayıt azalır |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Tasarlanacak |
+| **Bağımlılıklar** | — (CHECKIN-006 ile birlikte teslim edilir) |
+| **Notlar** | Ana plan Aşama 2. Kabul senaryoları somutlaştırılacak: Türkçe karakter (ı/İ, ş, ğ), ad/soyad sırası, boşluk/noktalama, telefon biçimleri, mikroçip. Bütün entity'lerde gelişmiş/AI arama kapsam dışı (Aşama 8/10) |
 
 ---
 
