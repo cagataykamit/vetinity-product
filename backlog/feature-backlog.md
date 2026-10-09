@@ -781,7 +781,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Resepsiyon ve hekim aynı güncel sırayı görür; muayeneye geçişte hasta tekrar seçilmez |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Tasarlanacak (ADR taslağı: [ADR-009](../decisions/ADR-009-visit-model-and-arrival-flow.md), onay bekliyor) |
+| **Durum** | Planlandı ([ADR-009](../decisions/ADR-009-visit-model-and-arrival-flow.md) kabul edildi, 2026-10-10) |
 | **Bağımlılıklar** | EXAM-001 (dilim 1 kabul edildi), ADR-009 |
 | **Notlar** | Ana plan Aşama 2. CHECKIN-001/005 ile ilişkili; ağır check-in formu (şablon/bundle/fatura/form/kafes kartı seçimi) ilk gelişte **yok** → CHECKIN-002–004 kapsam dışı. Online randevu teknik ön koşul değildir ([APPT](#appt--online-booking-ve-randevu-talepleri)). Departman/oda yönetimi, kapsamlı triage, portal, belge/imza sonraki kapsam. Rapor etkisi ADR-009'da incelenir |
 
@@ -797,7 +797,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Günlük iş akışı tek ekranda; "sıra kimde" sorusu cevaplanır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Tasarlanacak |
+| **Durum** | Planlandı |
 | **Bağımlılıklar** | CHECKIN-006, ADR-009 |
 | **Notlar** | Ana plan Aşama 2. Rakip ilham: DaySmart Census, E-Vet Muayene Odası (operasyon iş listesi) — kopyalanmaz. Ödeme göstergesi temel finans (Aşama 3) gelene kadar yalnızca mevcut ödeme verisini yanlış sonuç üretmeden gösterir; veri yoksa göstergeyi uydurmaz |
 
@@ -813,7 +813,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hastayı bulma süresi kısalır; yinelenen kayıt azalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Tasarlanacak |
+| **Durum** | Planlandı |
 | **Bağımlılıklar** | — (CHECKIN-006 ile birlikte teslim edilir) |
 | **Notlar** | Ana plan Aşama 2. Kabul senaryoları somutlaştırılacak: Türkçe karakter (ı/İ, ş, ğ), ad/soyad sırası, boşluk/noktalama, telefon biçimleri, mikroçip. Bütün entity'lerde gelişmiş/AI arama kapsam dışı (Aşama 8/10) |
 

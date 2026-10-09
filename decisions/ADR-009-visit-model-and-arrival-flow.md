@@ -2,7 +2,7 @@
 
 ## Durum
 
-Önerildi — **kullanıcı onayı bekliyor.** Onaylanmadan geliştirme başlamaz ([WORKFLOW](../WORKFLOW.md)). Aşağıdaki "Karar bekleyen noktalar" bölümü onaylanacak seçimleri içerir.
+Kabul edildi (2026-10-10, kullanıcı onayı). K1–K4 önerilen seçeneklerle onaylandı: K1 = ayrı `Visit` varlığı, K2 = muayene→randevu otomatik tamamlama aynen korunur, K3 = yeni `Visits.Correct` izni + zorunlu gerekçe + audit, K4 = randevu başına tek muayene kuralı bu işe girmez (önce veri kontrolü, ayrı iş). Geliştirme [WORKFLOW](../WORKFLOW.md) uyarınca başlayabilir; backend sözleşmesi önce yazılır.
 
 ## Bağlam
 
@@ -29,7 +29,7 @@ Gereksinim: randevulu ve randevusuz geliş ayrı izlenir; randevusuz geliş saht
 7. **Yanlış geliş/durum düzeltmesi** ayrı bir izinle yapılır, gerekçe zorunludur ve audit'e yazılır (`IAuditableRequest`).
 8. **Arama (SEARCH-001)** ayrı iş olarak teslim edilir; Visit modelinden bağımsızdır (aşağıya bakın).
 
-### Karar bekleyen noktalar (onayınız gerekir)
+### Onaylanan kararlar (2026-10-10: tümü "Öneri" sütunundaki seçenek)
 
 | # | Konu | Seçenekler | Öneri |
 |---|---|---|---|
