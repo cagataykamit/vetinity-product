@@ -37,6 +37,8 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 | 11 | P2 / ihtiyaca göre P1 | Online randevu, gelişmiş finans/kapanış, SMS/e-belge/POS/iletişim/portal | Talep doğrulanmış genişleme |
 | 12 | Future | Cihaz/LIS/PACS, ileri yatış, mobil, hastane/enterprise ve yeni segmentler | İlk klinik sürümünden sonra |
 
+**Aşama 1 durumu (2026-10-10):** Dilim 1 kullanıcı tarafından kabul edildi; iki depoda `feature/muayene-dilim1` dalında, main'e merge ve deploy bekliyor, yani üretimde kullanılabilir değil ("Tamamlandı" değil). Doğrulanmayanlar ve kalan manuel senaryolar: [AJAN-KUYRUGU](AJAN-KUYRUGU.md).
+
 İlk iş: **Muayene kayıt bütünlüğü ve bağlamlı çalışma alanı, dilim 1** (EXAM-001–005, ADR-005). Kapsam dışı: tam Visit, timeline, alerji veri modeli, gerçek finalize/addendum, ücret/bakiye, ürün stok tüketimi, AI, cihaz entegrasyonu ve genel menü yeniden tasarımı (bölüm 23).
 
 ## Öncelik eşlemesi (önceki yapı → ana plan)
@@ -94,7 +96,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Muayeneyi Vetinity'nin en kritik çalışma alanı haline getirmek |
 | **Kullanıcı değeri** | Veteriner hekim muayene sırasında tüm klinik bağlamı tek ekranda yönetir |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (dilim 1 kabul edildi, merge bekliyor) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | — |
 | **Kapsam notu** | SOAP mantığı, Türkçe terminoloji; şablon/bundle/doz hesaplayıcı P1'e taşınır |

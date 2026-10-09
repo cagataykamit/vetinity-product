@@ -408,9 +408,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Tek ekranda klinik akış |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor |
 | **Bağımlılıklar** | EXAM-002–005 |
-| **Notlar** | → [ADR-005](../decisions/ADR-005-modern-examination-experience.md). DaySmart (2026-08-02 bölüm 2): üst bağlam bandı, SOAP bölümleri, sistematik muayene, lock — sandbox doğrulanmadı |
+| **Notlar** | **Dilim 1 kabul edildi (2026-10-10, kullanıcı kararı); kod `feature/muayene-dilim1` dalında, main'e merge/deploy bekliyor — "Tamamlandı" değil.** Gerçek Draft/Finalized ve revizyon Aşama 4'te. Kalan doğrulamalar: [AJAN-KUYRUGU](../roadmap/AJAN-KUYRUGU.md). → [ADR-005](../decisions/ADR-005-modern-examination-experience.md). DaySmart (2026-08-02 bölüm 2): üst bağlam bandı, SOAP bölümleri, sistematik muayene, lock — sandbox doğrulanmadı |
 
 ### EXAM-002 — Şikâyet ve anamnez bölümü
 
@@ -424,9 +424,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Doğal veteriner dili |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | |
+| **Notlar** | Dilim 1 EXAM-001 ile kabul edildi (2026-10-10); merge/deploy bekliyor |
 
 ### EXAM-003 — Klinik bulgular ve vital değerler
 
@@ -440,9 +440,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Standart kayıt; raporlama kolaylığı |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | DaySmart sandbox — Treatment Board vital özet; **Patients Module** Overview snapshot (Weight, Temp, HR, RR) + Vitals History (Reference: SOAP) → [daysmart.md](../competitors/daysmart.md#patient-profile--header--overview) |
+| **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. Vitaller opsiyonel, kısmi güncellemede null=dokunma, `clearVitals` ile toptan temizleme. DaySmart sandbox — Treatment Board vital özet; **Patients Module** Overview snapshot (Weight, Temp, HR, RR) + Vitals History (Reference: SOAP) → [daysmart.md](../competitors/daysmart.md#patient-profile--header--overview) |
 
 ### EXAM-004 — Değerlendirme / tanı alanı
 
@@ -456,9 +456,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik karar kaydı |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | **Canlı sandbox — Patients Module:** Open Diagnoses (Overview); Custom Diagnoses clinic catalog ≠ patient diagnosis — hybrid catalog + free text adayı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
+| **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. **Canlı sandbox — Patients Module:** Open Diagnoses (Overview); Custom Diagnoses clinic catalog ≠ patient diagnosis — hybrid catalog + free text adayı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
 
 ### EXAM-005 — Tedavi planı
 
@@ -472,9 +472,9 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Muayeneden tedaviye kesintisiz geçiş |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor |
 | **Bağımlılıklar** | EXAM-001 |
-| **Notlar** | |
+| **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. Plan alanı eklendi; tedavi/reçete/stok bağlantısı Aşama 5'te |
 
 ### EXAM-006 — Muayene şablonları
 

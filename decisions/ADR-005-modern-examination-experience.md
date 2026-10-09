@@ -65,6 +65,7 @@ Aşağıdaki maddeler stratejik hedef veya backlog olarak sınıflandırılır; 
 - SOAP bölümleri ayrı ayrı backlog'da ([EXAM-002](../backlog/feature-backlog.md)–[EXAM-005](../backlog/feature-backlog.md))
 - P1 hedefleri: şablonlar, bundle'lar, doz hesaplayıcı ([EXAM-006](../backlog/feature-backlog.md)–[EXAM-008](../backlog/feature-backlog.md))
 - AI muayene notu yapılandırma muayene akışına bağlanacak ([AI-001](../backlog/feature-backlog.md))
+- **Uygulama notu (2026-10-10):** Dilim 1 (tam sayfa çalışma alanı, dört bölüm, opsiyonel vitaller, kısmi güncelleme, sürüm korumalı kayıt, çakışmada metin koruma) kullanıcı tarafından kabul edildi. Kod iki depoda `feature/muayene-dilim1` dalında; main'e merge ve deploy yapılmadı. Gerçek Draft/Finalized, revizyon, şablon/bundle/doz hesaplayıcı bu dilimde yok.
 
 ## İlgili belgeler
 
