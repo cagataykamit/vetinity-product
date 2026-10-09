@@ -39,6 +39,10 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 
 ## Aşama 2 — Hasta bulma, geliş, bekleme ve Bugün (P0)
 
-**Durum:** Karar bekliyor. Önce backlog kayıtları ve Visit modeli ADR'si gerekli (WORKFLOW); kod başlamaz.
+**Durum:** Geliştirmeye hazır, başlanmadı. Backlog: CHECKIN-006, CHECKIN-007, SEARCH-001 (Planlandı). [ADR-009](../decisions/ADR-009-visit-model-and-arrival-flow.md) kabul edildi (2026-10-10): ayrı `Visit` varlığı; muayene→randevu otomatik tamamlama aynen korunur; `Visits.Correct` izni + zorunlu gerekçe + audit; randevu başına tek muayene kuralı bu işe girmez.
+
+**Sıra:** (1) Backend: Visit modeli ve sözleşme dokümanı önce; geliş, durum geçişi (idempotent, DB düzeyinde benzersiz kural), düzeltme, Bugün sorgusu, `Examination.VisitId`, Query DB read modeli. (2) Frontend: Bugün yüzeyi, randevusuz geliş, muayeneye geçiş (backend sözleşmesi hazır olunca). (3) SEARCH-001 (bağımsız; mikroçip, Türkçe harf, telefon; ayrı worktree'de paralel yürütülebilir). Her iş: feature branch, ayrı commit, gerçek test sonucu; push/merge/migration/deploy kullanıcı onayıyla.
+
+**Ayrı bug (Aşama 2'yi bekletmez, backlog'a işlenmedi):** `PUT /appointments/{id}` `Reschedule` izniyle gövdedeki `Status` ile `Completed/Cancelled` yapabiliyor görünüyor (koddan çıkarım, HTTP ile denenmedi).
 
 Kabul (ana plan bölüm 7): Randevulu ve randevusuz iki hasta kabul edilir; resepsiyon ve hekim aynı güncel kuyruğu görür; muayeneye geçişte hasta tekrar seçilmez; ödeme eksikliği bakım durumunu yanlış göstermez. Ayrıca: tekrar tıklama iki ziyaret üretmez; randevusuz geliş sahte randevu olarak takvime yazılmaz; arama tenant/clinic filtresini değiştirmez.
