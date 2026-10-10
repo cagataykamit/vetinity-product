@@ -43,6 +43,21 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 
 **Sıra:** (1) Backend: Visit modeli ve sözleşme dokümanı önce; geliş, durum geçişi (idempotent, DB düzeyinde benzersiz kural), düzeltme, Bugün sorgusu, `Examination.VisitId`, Query DB read modeli. (2) Frontend: Bugün yüzeyi, randevusuz geliş, muayeneye geçiş (backend sözleşmesi hazır olunca). (3) SEARCH-001 (bağımsız; mikroçip, Türkçe harf, telefon; ayrı worktree'de paralel yürütülebilir). Her iş: feature branch, ayrı commit, gerçek test sonucu; push/merge/migration/deploy kullanıcı onayıyla.
 
+**Durum güncellemesi (2026-10-10):** Backend Visit dalı `feature/visit-model` tamamlandı (domain 47/47, Application Visit+muayene 141/141, Visit entegrasyon LocalDB 23/23; merge/push yok; sözleşme `docs/VISITS_API_CONTRACT.md`). SEARCH-001 dalı `claude/hopeful-chebyshev-906416` (`047db36`, `0d67bb2`): birim testleri geçti, gerçek SQL Server doğrulaması sürüyor. ESLint dalı `chore/eslint-config` (`ee1e0b7`): lint çalışıyor (39 hata, 5.987 uyarı), merge yok. Hepsi push/merge bekliyor.
+
+### Bilinen eksikler ve takip işleri (unutulmasın)
+- **Hekim seçimi/adı (kullanıcı kararı, işleniyor):** Geliş kaydını resepsiyon açacağı için sorumlu hekim seçilebilmeli ve yanıtlarda hekim adı görünmeli. Backend ajanı mevcut hekim listesi kaynağını araştırıyor; randevulu gelişte randevudaki hekim varsayılan.
+- **Açık iş göstergesi yok:** Lab/tedavi/reçetede açık-kapalı durumu tutulmuyor. Karar: ilk sürümde göstergesiz çıkılır; ürün tanımı sonra.
+- **Randevu outbox olayı:** Muayene randevuyu `Completed` yapınca randevu olayı çıkmıyor. Query DB açıldığında randevu `Scheduled` görünür. Karar: ayrı iş.
+- **Query DB read modeli (Visit, arama, mikroçip):** Bayraklar her ortamda kapalı; Bugün ve arama komut DB'den okuyor. Bayrak açılmadan önce read model/projeksiyon/backfill ayrı iş.
+- **Yeni `Visits.*` izinleri:** Seeder ile gelir; mevcut özel roller elle almalı (deploy notu).
+- **Bugün sorgusu sınırları:** 500 satır sınırı ve gün/saat dilimi sınırları yalnızca birim testle kapsandı.
+- **Tam entegrasyon paketinde 18 başarısız test** (Dashboard/Payments/Query parity): Visit'ten bağımsızlığı temiz commit'le karşılaştırılarak doğrulanmadı. Application'daki 2 ödeme outbox testi (`PaymentCommandHandlerOutboxEmissionTests`) Visit öncesi `b36eafc`'de de başarısız (doğrulandı).
+- **Arama:** Klinik filtresi yok (Client/Pet'te `ClinicId` yok; ürün kararı bekliyor); randevu/muayene/aşı/ödeme aramaları eski kuralla; Collate davranışı gerçek SQL Server'da doğrulanmadı (sürüyor).
+- **ESLint:** 5.605 boş-satır ihlali ve 223 `member-ordering` uyarıya alındı (toplu temizlik ayrı iş); `p` öneki kuralı uyarıda (ürün kararı); `npm audit` uyarısına bakılmadı; lock güncellemesinden sonra `ng build`/`ng test` yeniden çalıştırılmadı; kalan 39 hata küçük temizlik işi.
+- **Aşama 1'den devam eden:** Doğrulanmayan manuel senaryolar, `angular.json` test `styles` geçici çözümü, tek vitali silme formda engelli, `PUT /appointments/{id}` Status bypass bulgusu (HTTP ile doğrulanmadı, backlog'a işlenmedi).
+- **Kullanıcı eylemleri:** Sızan Gmail uygulama parolasını iptal edip yenile; `AddVisits` yalnızca yerel DB'ye (onaylandı), paylaşılan/üretim DB'ye ayrı onayla.
+
 **Ayrı bug (Aşama 2'yi bekletmez, backlog'a işlenmedi):** `PUT /appointments/{id}` `Reschedule` izniyle gövdedeki `Status` ile `Completed/Cancelled` yapabiliyor görünüyor (koddan çıkarım, HTTP ile denenmedi).
 
 Kabul (ana plan bölüm 7): Randevulu ve randevusuz iki hasta kabul edilir; resepsiyon ve hekim aynı güncel kuyruğu görür; muayeneye geçişte hasta tekrar seçilmez; ödeme eksikliği bakım durumunu yanlış göstermez. Ayrıca: tekrar tıklama iki ziyaret üretmez; randevusuz geliş sahte randevu olarak takvime yazılmaz; arama tenant/clinic filtresini değiştirmez.
