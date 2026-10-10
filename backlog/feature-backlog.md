@@ -998,7 +998,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Başlık** | Müşteri kredisi ve mahsup |
 | **Kategori** | Finans |
 | **Problem** | İlk sürümde borçtan fazla tahsilat reddedilir (para üstü); müşteri peşin bakiye/kredi bırakamaz, sonraki ücrete mahsup edilemez |
-| **Önerilen çözüm** | Fazla tutarın müşteri kredisi olarak tutulması, sonraki ücretlere mahsup, kredi iade/iptal kuralları, kasa etkisi netleştirilir. DaySmart kredi/mahsup gözlemi ([daysmart.md](../competitors/daysmart.md)) |
+| **Önerilen çözüm** | Avans, depozito ve önceden ödeme dahil müşteri kredisi **ayrı bir Kredi kaydı** (müşteri, sebep, tutar, kalan bakiye) olarak tutulur; sonraki ücretlere kısmen mahsup edilir; kredi iade/iptal kuralları, kasa etkisi netleştirilir. Ödeme her zaman ücrete bağlı kalır (ADR-012 madde 6). DaySmart Credit kaydı gözlemi ([daysmart.md](../competitors/daysmart.md#billing-credits), sandbox gözlemi, doğrulanmadı) |
 | **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |

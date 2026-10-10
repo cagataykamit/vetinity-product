@@ -11,6 +11,9 @@
 3. **Para birimi:** İlk sürümde yalnızca **TRY**. Çoklu para birimi ertelenmiş iş ([FIN-006](../backlog/feature-backlog.md)).
 4. **Fazla ödeme:** Borçtan fazla tahsilat **reddedilir** (ödeme borç kadar kaydedilir, fazlası para üstü). Müşteri kredisi/mahsup ertelenmiş iş ([FIN-005](../backlog/feature-backlog.md)).
 5. **Eski ödemeler:** "Bağlanmamış" kalır (hayali borç türetilmez); bakiyede ayrı satır olarak gösterilir ([FIN-007](../backlog/feature-backlog.md)).
+6. **Tahsis zorunlu (Dilim 2, kullanıcı kararı):** Her **yeni** ödeme en az bir ücrete tahsis edilir ve tahsis toplamı ödeme tutarına eşittir; tahsissiz serbest ödeme yoktur. Avans/depozito/önceden ödeme, rakip deseni gibi (DaySmart: ödeme faturaya bağlı, depozito ayrı **Kredi** kaydı) ileride [FIN-005](../backlog/feature-backlog.md) kapsamında ayrı bir kredi kaydı olarak gelir.
+7. **Çift ödeme koruması:** Ödeme isteklerinde `requestId` zorunludur.
+8. **Ödeme düzeltmesi:** Tutar/müşteri/klinik/para birimi değişikliği yalnızca `Payments.Correct` (yönetici düzeyi), gerekçe + audit; tahsisli ödemede bu alanlar kilitlidir. Yeni ödemeler yalnızca TRY.
 
 **Ertelenenler (yok sayılmaz, backlog'da):** FIN-005 müşteri kredisi ve mahsup, FIN-006 çoklu para birimi, FIN-007 eski ödemelerin ücretlere bağlanması ve açılış bakiyesi, FIN-008 hizmet kataloğu, FIN-009 düzeltme yetkisinin kontrollü gevşetilmesi.
 
