@@ -47,6 +47,7 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 
 ### Bilinen eksikler ve takip işleri (unutulmasın)
 - **Hekim seçimi/adı (kullanıcı kararı, işleniyor):** Geliş kaydını resepsiyon açacağı için sorumlu hekim seçilebilmeli ve yanıtlarda hekim adı görünmeli. Backend ajanı mevcut hekim listesi kaynağını araştırıyor; randevulu gelişte randevudaki hekim varsayılan.
+- **Hızlı müşteri+hasta ekleme (kullanıcı kararı, 2026-10-10, frontend ajanında sırada):** Randevusuz geliş diyaloğunda satır içi mini form; telefon zorunlu; frontend iki çağrıyı sırayla yapar (müşteri → hasta → Visit); çift kayıt uyarısı (aynı telefon), yarım kayıtta yeniden deneme, `Clients.Create`+`Pets.Create` yetkisi. **Sonraya:** müşteri+hasta+Visit'i tek işlemde yapan backend ucu (yarım kayıt riskini kökten çözer).
 - **Açık iş göstergesi yok:** Lab/tedavi/reçetede açık-kapalı durumu tutulmuyor. Karar: ilk sürümde göstergesiz çıkılır; ürün tanımı sonra.
 - **Randevu outbox olayı:** Muayene randevuyu `Completed` yapınca randevu olayı çıkmıyor. Query DB açıldığında randevu `Scheduled` görünür. Karar: ayrı iş.
 - **Query DB read modeli (Visit, arama, mikroçip):** Bayraklar her ortamda kapalı; Bugün ve arama komut DB'den okuyor. Bayrak açılmadan önce read model/projeksiyon/backfill ayrı iş.
