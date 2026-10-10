@@ -817,6 +817,96 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | — (CHECKIN-006 ile birlikte teslim edilir) |
 | **Notlar** | Ana plan Aşama 2. Kabul senaryoları somutlaştırılacak: Türkçe karakter (ı/İ, ş, ğ), ad/soyad sırası, boşluk/noktalama, telefon biçimleri, mikroçip. Bütün entity'lerde gelişmiş/AI arama kapsam dışı (Aşama 8/10) |
 
+### CHECKIN-009 — Yanlış geliş işaretini geri alma
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-009 |
+| **Başlık** | Yanlış geliş işaretini geri alma |
+| **Kategori** | Check-in |
+| **Problem** | Yanlışlıkla "Yanlış geliş" işaretlenen kayıt arayüzden geri getirilemiyor; yanlış işaretlenenleri görmenin yolu yok |
+| **Önerilen çözüm** | `Visits.Correct` yetkisiyle gerekçeli geri alma (audit'li); Bugün'de "Yanlış işaretlenenler" görünümü; geri alma aynı hayvan/randevu için başka aktif Visit varsa 409 verir |
+| **Kullanıcı değeri** | Resepsiyon düzeltmeyi korkmadan kullanır; kayıt temiz kalır |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı (kullanıcı onayı 2026-10-10) |
+| **Bağımlılıklar** | CHECKIN-006/007 |
+
+### CHECKIN-010 — Randevulu hasta gelmedi (no-show) işareti
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-010 |
+| **Başlık** | Randevulu hasta gelmedi (no-show) işareti |
+| **Kategori** | Check-in |
+| **Problem** | `NoShow` randevu durumundan kaldırılmış; gelmeyen hastayı işaretlemenin ve raporlamanın yolu yok |
+| **Önerilen çözüm** | Önce tasarım: Appointment modeli ve mevcut raporlar bozulmadan "gelmedi" bilgisini nerede tutmak doğru (Visit tarafı mı, ayrı işaret mi). Ürün/ADR kararı gerekirse önce karar |
+| **Kullanıcı değeri** | Gelmeyen hasta takibi ve raporlanabilir bilgi |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı (önce tasarım önerisi) |
+| **Bağımlılıklar** | CHECKIN-006/007, ADR-009 |
+
+### CHECKIN-011 — Uzun bekleme uyarısı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-011 |
+| **Başlık** | Uzun bekleme uyarısı |
+| **Kategori** | Check-in |
+| **Problem** | Uzun bekleyen hasta sırada fark edilmiyor |
+| **Önerilen çözüm** | Bugün'de bekleme süresi eşiği aşınca satır süresi renk değiştirir (örn. 30 dk uyarı, 60 dk kritik; eşik sabit, ayar sonraya) |
+| **Kullanıcı değeri** | Resepsiyon bekleyeni geç bırakmaz |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı (kullanıcı onayı 2026-10-10) |
+| **Bağımlılıklar** | CHECKIN-007 |
+
+### CHECKIN-012 — Acil işareti
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-012 |
+| **Başlık** | Acil işareti (basit öncelik bayrağı) |
+| **Kategori** | Check-in |
+| **Problem** | Acil hasta sırada ayrışmıyor; kapsamlı triage ADR-009'da sonraya bırakıldı |
+| **Önerilen çözüm** | Visit'e `Acil` bayrağı; gelişte veya sonradan işaretlenir; Bugün'de sıranın başında ve belirgin rozetle görünür; yalnızca bayrak, triage skoru yok |
+| **Kullanıcı değeri** | Acil hasta kaçmaz |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük-Orta |
+| **Durum** | Planlandı (CHECKIN-009–011'den sonra) |
+| **Bağımlılıklar** | CHECKIN-006/007 |
+
+### CHECKIN-013 — Bugün satırında hasta uyarı rozetleri
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-013 |
+| **Başlık** | Bugün satırında hasta uyarı rozetleri (alerji, agresif, kronik) |
+| **Kategori** | Check-in / Hasta bağlamı |
+| **Problem** | Hekim muayeneye girmeden hastanın kritik uyarılarını görmüyor |
+| **Önerilen çözüm** | Mevcut hasta uyarı/alerji verisi varsa Bugün satırında rozet; veri yoksa uydurulmaz. Önce veri kaynağı doğrulanır |
+| **Kullanıcı değeri** | Klinik güvenlik |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı (önce veri kaynağı doğrulaması; [ADR-005](../decisions/ADR-005-modern-examination-experience.md) hasta bağlamı) |
+| **Bağımlılıklar** | CHECKIN-007 |
+
+### CHECKIN-014 — Hekim için "Benim hastalarım" filtresi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-014 |
+| **Başlık** | Hekim için "Benim hastalarım" filtresi |
+| **Kategori** | Check-in |
+| **Problem** | Hekim Bugün'de yalnızca kendine atanmış satırları kolay göremiyor |
+| **Önerilen çözüm** | Bugün sorgusuna sorumlu hekim filtresi; hekim rolü için varsayılan "Benim hastalarım", tümünü göster seçeneği |
+| **Kullanıcı değeri** | Hekim kendi sırasına odaklanır |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı (CHECKIN-009–011'den sonra) |
+| **Bağımlılıklar** | CHECKIN-007, hekim seçimi |
+
 ### CHECKIN-008 — Randevusuz gelişte hızlı müşteri ve hasta kaydı
 
 | Alan | Değer |
