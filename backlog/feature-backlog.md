@@ -1185,6 +1185,22 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3); generic record architecture adayı → [IDEA-026](../research/ideas.md#idea-026--unified-dynamic-record-model), [PATTERN-020](../research/patterns.md#pattern-020--unified-record-with-dynamic-type-forms). **Canlı sandbox — Patients Module:** Records/Pharmacy/Labs/Images/Vaccines/Vitals History filtreleri aynı timeline read-model → [daysmart.md](../competitors/daysmart.md#records) |
 
+### RECORD-007 — Muayene yeniden açma ve revizyon geçmişi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | RECORD-007 |
+| **Başlık** | Muayene yeniden açma ve revizyon geçmişi |
+| **Kategori** | Record |
+| **Problem** | İlk sürümde kesinleşen muayene kilitlenir ve yalnız ek notla (addendum) düzeltilir; yanlışlıkla kesinleştirilen kayıt açılamaz |
+| **Önerilen çözüm** | Yetkili kişi gerekçeyle muayeneyi yeniden açar; her kesinleştirmede anlık görüntü (revizyon) saklanır; eski sürümler görüntülenir ve karşılaştırılır; yeni izin ve audit |
+| **Kullanıcı değeri** | Hatalı kesinleştirmenin düzeltilebilmesi; denetlenebilirlik |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin: ek 2 backend dilimi, migration var; ölçülmedi) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-11: önce kilit + ek not) |
+| **Bağımlılıklar** | Aşama 4 dilim D (kesinleştirme) ve E (addendum); [RECORD-002](#record-002--record-audit-history) |
+| **Notlar** | Aşama 4 keşfi D1 seçenek (b). Gerçek kullanımda "yanlışlıkla kilitledim" ihtiyacı görülürse öne alınır. Rakip: DaySmart kilit ikonu ve Lock Letter gözlemlendi, kilit açma yetkisi doğrulanmadı — [EXAM-015](#exam-015--medical-note-lock) |
+
 ---
 
 ## PORTAL — Hasta sahibi portalı

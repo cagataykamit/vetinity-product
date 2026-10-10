@@ -49,6 +49,12 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 
 **Dilim sırası:** (0) kırık finans testlerini onar (`PaymentCommandHandlerOutboxEmissionTests` sabit tarih; `PaymentFinanceRolloutAcceptance` ve `DashboardFinanceQueryParity` kullanıcı bağlamı eksik) → (1) `Charge` → (2) `PaymentAllocation`, eşzamanlılık, idempotency → (3) `GET /clients/{id}/balance` → (4) Bugün satırında ücret/ödenen/kalan ve frontend akışı → (5) düzeltme, iptal, audit.
 
+## Aşama 4 — Hasta özeti, timeline, muayene kesinleştirme
+
+**Durum:** Backend keşfi tamamlandı (backend `docs/ASAMA4_DISCOVERY.md`, dal `feature/asama4-kesif`, commit `4f886e4`, push yok). Kararlar (kullanıcı, 2026-10-11): D1 muayene kesinleştirince kilit, düzeltme yalnız ek not (addendum); yeniden açma ve revizyon geçmişi ertelendi ([RECORD-007](../backlog/feature-backlog.md)). D2 kilo geçmişi muayene vitallerinden türetilir. D3 tek özet ucu, bölüm bazlı durum. D4/D5 (timeline kapsamı, eski muayeneler Taslak kalır) kullanıcıyla konuşulacak.
+
+**Dilimler:** Okuma grubu (migration yok): A özet ucu, B timeline, C derin bağlantı verisi, F izin süzmesi. Yazma grubu (migration var): D `Status` + `Finalize`, E addendum. İki grup ayrı dallarda paralel yürüyebilir. Ödeme türü Aşama 3 oturunca timeline'a eklenir.
+
 ## Bugün iyileştirmeleri
 
 **Bugün iyileştirmeleri merge (2026-10-10, yerel, push yok):** CHECKIN-009 geri alma, 010 Gelmedi (ADR-010, B yolu), 011 uzun bekleme uyarısı, 012 acil, 013 hayvan uyarıları (ADR-011), 014 benim hastalarım, hekim varsayılan atama, hızlı kayıt keşfedilebilirliği, eylem menüsü. Backend `main` `8e4b0f8`, frontend `main` `6f1904d`. Doğrulama (birleşik main): backend build 0 hata/0 uyarı, Application filtreli 450/450, Domain 89/89; frontend `ng build` (development) hatasız, `ng test` 209/209. Entegrasyon testleri birleşik main'de yeniden çalıştırılmadı (ajan dalında geçti); tam pakette Payments/Dashboard finans parity testleri ve 2 ödeme outbox testi bilinen başarısızlıklar. Tarayıcıda kullanıcı: Bugün, acil, geri al, benim hastalarım (hekim) denendi; Gelmedi, hasta uyarıları, hızlı kayıt ve yeni eylem menüsü tam denenmedi. Sıradaki büyük iş: Aşama 3 (temel ücret/tahsilat/bakiye).
