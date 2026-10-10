@@ -840,7 +840,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Başlık** | Randevulu hasta gelmedi (no-show) işareti |
 | **Kategori** | Check-in |
 | **Problem** | `NoShow` randevu durumundan kaldırılmış; gelmeyen hastayı işaretlemenin ve raporlamanın yolu yok |
-| **Önerilen çözüm** | Önce tasarım: Appointment modeli ve mevcut raporlar bozulmadan "gelmedi" bilgisini nerede tutmak doğru (Visit tarafı mı, ayrı işaret mi). Ürün/ADR kararı gerekirse önce karar |
+| **Önerilen çözüm** | Karar: randevuya `NoShow` sonuç durumu eklenir, tüm tüketiciler (rapor, dashboard, takvim, hatırlatma, Query DB) birlikte güncellenir ([ADR-010](../decisions/ADR-010-appointment-no-show-status.md)); elle işaretleme, otomasyon yok |
 | **Kullanıcı değeri** | Gelmeyen hasta takibi ve raporlanabilir bilgi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
