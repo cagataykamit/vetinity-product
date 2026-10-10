@@ -51,7 +51,7 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 
 ## Aşama 4 — Hasta özeti, timeline, muayene kesinleştirme
 
-**Durum:** Backend keşfi tamamlandı (backend `docs/ASAMA4_DISCOVERY.md`, dal `feature/asama4-kesif`, commit `4f886e4`, push yok). Kararlar (kullanıcı, 2026-10-11): D1 muayene kesinleştirince kilit, düzeltme yalnız ek not (addendum); yeniden açma ve revizyon geçmişi ertelendi ([RECORD-007](../backlog/feature-backlog.md)). D2 kilo geçmişi muayene vitallerinden türetilir. D3 tek özet ucu, bölüm bazlı durum. D4/D5 (timeline kapsamı, eski muayeneler Taslak kalır) kullanıcıyla konuşulacak.
+**Durum:** Backend keşfi tamamlandı (backend `docs/ASAMA4_DISCOVERY.md`, dal `feature/asama4-kesif`, commit `4f886e4`, push yok). Kararlar (kullanıcı, 2026-10-11): D1 muayene kesinleştirince kilit, düzeltme yalnız ek not (addendum); yeniden açma ve revizyon geçmişi ertelendi ([RECORD-007](../backlog/feature-backlog.md)). D2 kilo geçmişi muayene vitallerinden türetilir. D3 tek özet ucu, bölüm bazlı durum. D4 timeline ilk kapsamı: muayene, tedavi, reçete, lab, uygulanan aşı, yatış, geliş (ödeme Aşama 3 sonrası; iptal/yanlış işaretli varsayılan gizli, filtreyle açılır). D5 eski muayeneler Taslak kalır, otomatik kilitlenmez.
 
 **Dilimler:** Okuma grubu (migration yok): A özet ucu, B timeline, C derin bağlantı verisi, F izin süzmesi. Yazma grubu (migration var): D `Status` + `Finalize`, E addendum. İki grup ayrı dallarda paralel yürüyebilir. Ödeme türü Aşama 3 oturunca timeline'a eklenir.
 
