@@ -17,6 +17,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | HOSP- | Hospitalization (yatış) |
 | CHECKIN- | Check-in orkestrasyonu |
 | SEARCH- | Günlük hasta/sahip arama (resepsiyon) |
+| FIN- | Temel ücret, tahsilat ve bakiye (Aşama 3) |
 | CHECKOUT- | Ziyaret kapanışı ve tahsilat |
 | RECORD- | Klinik kayıt yaşam döngüsü |
 | PORTAL- | Hasta sahibi portalı |
@@ -922,6 +923,72 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Planlandı (kullanıcı kararı 2026-10-10: telefon zorunlu; en doğru çözüm: backend'de tek işlemli kayıt ucu) |
 | **Bağımlılıklar** | CHECKIN-006, SEARCH-001 |
 | **Notlar** | Yarım kayıt (müşteri var, hasta yok) oluşmamalı. Yeni uç Clients.Create ve Pets.Create yetkilerini ister; yetkisi olmayana bağlantı görünmez. Query DB projeksiyon/outbox davranışı mevcut müşteri ve hasta oluşturma ile aynı olmalı. **Karar (2026-10-10):** yinelenen kural mevcut hâliyle kalır (aynı ad + aynı telefon → 409; yalnızca telefon aynıysa serbest, aile bireyleri paylaşabilir); telefon aramada mevcut müşteriyi gösterir. Telefon görünümü mevcut `+90 5XX …` biçimi |
+
+---
+
+## FIN — Temel ücret, tahsilat ve bakiye
+
+> Ana plan Aşama 3 ([bölüm 8](../roadmap/Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md)); karar taslağı [ADR-012](../decisions/ADR-012-basic-charges-payments-balance.md). Gelişmiş kredi/mahsup, kasa mutabakatı, belge paketi, kapsamlı muhasebe ve resmi e-belge kapsam dışıdır ([CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu), [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme)).
+
+### FIN-001 — Ücret (borç) kaydı ve manuel ücret satırı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-001 |
+| **Başlık** | Ücret kaydı ve manuel ücret satırı |
+| **Kategori** | Finans |
+| **Problem** | Payment tahsil edilen tutarı kaydediyor; muayene/ziyaret sonrası ücret (borç) oluşturan kaynak yok, bu yüzden "ne kadar borçlu" bilinemiyor |
+| **Önerilen çözüm** | Hasta/ziyaret veya klinik işlemle bağlı ücret: açıklama, miktar, tutar, para birimi; ilk dilimde manuel satır. Hizmet kataloğu ön koşul değil |
+| **Kullanıcı değeri** | Muayeneden ücrete bağlamı kaybetmeden geçiş |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta-Yüksek |
+| **Durum** | Tasarlanacak (ADR-012 taslak, kod keşfi bekliyor) |
+| **Bağımlılıklar** | CHECKIN-006, ADR-012 |
+
+### FIN-002 — Tahsilat–ücret ilişkilendirme ve bakiye
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-002 |
+| **Başlık** | Tahsilat–ücret ilişkilendirme ve bakiye |
+| **Kategori** | Finans |
+| **Problem** | Toplam tahsilat müşterinin kalan borcunu vermiyor; hangi ödemenin hangi ücreti kapattığı belli değil |
+| **Önerilen çözüm** | Açık ilişki (hangi tahsilat hangi ücreti karşılar, aynı para iki borcu kapatamaz); sahip bazında klinik kapsamlı bakiye: ücret, ödeme, açık kalan; kısmi ödeme ve sonraki tahsilatta kapanış; çift istek/iki kullanıcı aynı ödemeyi iki kez saymaz |
+| **Kullanıcı değeri** | "Kalan borç" sorusu tek yerde cevaplanır |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Tasarlanacak |
+| **Bağımlılıklar** | FIN-001, ADR-012 |
+
+### FIN-003 — Ücret ve tahsilat düzeltme
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-003 |
+| **Başlık** | Ücret/tahsilat düzeltme, iptal ve iade kuralları |
+| **Kategori** | Finans |
+| **Problem** | Yanlış girilen ücret veya ödeme düzeltilemez; geçmiş işlemin izi korunmalı |
+| **Önerilen çözüm** | Tutar değiştirme, iptal ve iade; yetki + zorunlu gerekçe + audit; geçmiş işlem silinmez (iptal/ters kayıt) |
+| **Kullanıcı değeri** | Denetlenebilir kasa; güvenli düzeltme |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta-Yüksek |
+| **Durum** | Tasarlanacak |
+| **Bağımlılıklar** | FIN-001, FIN-002 |
+
+### FIN-004 — Bugün ve muayeneden ücret/ödeme akışı (arayüz)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-004 |
+| **Başlık** | Bugün ve muayeneden ücret ekleme ve ödeme alma |
+| **Kategori** | Finans |
+| **Problem** | Bugün satırındaki "Ödeme kaydı yok" rozeti bilgi veriyor ama ödemeye geçilemiyor |
+| **Önerilen çözüm** | Muayene sonu ve Bugün satırında "Ücret ekle / Ödeme al" kısayolu; satırda ücret, ödenen, kalan görünümü; bakım durumu (Tamamlandı) borcu kapatmaz |
+| **Kullanıcı değeri** | Hasta çıkarken tek akışta tahsilat |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı (backend FIN-001/002 sonrası) |
+| **Bağımlılıklar** | FIN-001, FIN-002, CHECKIN-007 |
 
 ---
 
