@@ -990,6 +990,81 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Planlandı (backend FIN-001/002 sonrası) |
 | **Bağımlılıklar** | FIN-001, FIN-002, CHECKIN-007 |
 
+### FIN-005 — Müşteri kredisi ve mahsup (fazla ödeme)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-005 |
+| **Başlık** | Müşteri kredisi ve mahsup |
+| **Kategori** | Finans |
+| **Problem** | İlk sürümde borçtan fazla tahsilat reddedilir (para üstü); müşteri peşin bakiye/kredi bırakamaz, sonraki ücrete mahsup edilemez |
+| **Önerilen çözüm** | Fazla tutarın müşteri kredisi olarak tutulması, sonraki ücretlere mahsup, kredi iade/iptal kuralları, kasa etkisi netleştirilir. DaySmart kredi/mahsup gözlemi ([daysmart.md](../competitors/daysmart.md)) |
+| **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Ertelendi (ADR-012 kararı: ilk sürümde kapsam dışı; unutulmayacak) |
+| **Bağımlılıklar** | FIN-001, FIN-002, FIN-003 |
+
+### FIN-006 — Çoklu para birimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-006 |
+| **Başlık** | Çoklu para birimi |
+| **Kategori** | Finans |
+| **Problem** | İlk sürüm yalnızca TRY |
+| **Önerilen çözüm** | Her ücret/ödeme kendi para biriminde; farklı para birimleri tek toplamda karıştırılmaz; kur dönüşümü otomatik varsayılmaz |
+| **Kullanıcı değeri** | Döviz kullanan klinikler |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta-Yüksek |
+| **Durum** | Ertelendi (ADR-012) |
+| **Bağımlılıklar** | FIN-001, FIN-002 |
+
+### FIN-007 — Eski ödemelerin bağlanması ve açılış bakiyesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-007 |
+| **Başlık** | Eski ödemelerin ücretlere bağlanması ve açılış bakiyesi |
+| **Kategori** | Finans |
+| **Problem** | Ücret öncesi girilmiş ödemeler "bağlanmamış" kalır; müşteri açılış borcu/alacağı girilemez |
+| **Önerilen çözüm** | Bağlanmamış ödemelerin sonradan ücretlere bağlanması; yetkili ve gerekçeli açılış bakiyesi kaydı; hayali borç türetilmez |
+| **Kullanıcı değeri** | Mevcut müşteri verisiyle geçiş |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Ertelendi (ADR-012; canlıya geçişten önce yeniden değerlendirilir) |
+| **Bağımlılıklar** | FIN-002 |
+
+### FIN-008 — Hizmet kataloğu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-008 |
+| **Başlık** | Hizmet kataloğu ve fiyat listesi |
+| **Kategori** | Finans |
+| **Problem** | İlk dilimde ücret manuel satırdır; her seferinde açıklama ve tutar elle girilir |
+| **Önerilen çözüm** | Klinik hizmet/ürün kataloğu ve varsayılan fiyatlar; ücret satırı katalogdan seçilir, tutar düzenlenebilir; stok `Product.UnitPrice` ile ilişki ayrıca değerlendirilir |
+| **Kullanıcı değeri** | Hızlı ve tutarlı ücretlendirme |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta-Yüksek |
+| **Durum** | Planlandı (ADR-012: manuel ücretin ön koşulu değil) |
+| **Bağımlılıklar** | FIN-001 |
+
+### FIN-009 — Düzeltme yetkisinin kontrollü gevşetilmesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | FIN-009 |
+| **Başlık** | Düzeltme yetkisinin kontrollü gevşetilmesi |
+| **Kategori** | Finans |
+| **Problem** | İlk sürümde yalnızca yönetici düzeyi düzeltir; küçük klinikte resepsiyon aynı gün kendi hatasını düzeltmek isteyebilir |
+| **Önerilen çözüm** | Örn. kullanıcının kendi girdiği ve aynı gün içindeki kaydı gerekçeyle düzeltmesi; sınırlar ve audit netleştirilir |
+| **Kullanıcı değeri** | Operasyon hızı, kasa güvenliğinden ödün vermeden |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük-Orta |
+| **Durum** | Ertelendi (ADR-012) |
+| **Bağımlılıklar** | FIN-003 |
+
 ---
 
 ## CHECKOUT — Ziyaret kapanışı ve tahsilat

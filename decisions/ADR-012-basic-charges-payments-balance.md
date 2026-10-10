@@ -2,7 +2,17 @@
 
 ## Durum
 
-**Taslak (2026-10-10), kullanıcı onayı bekliyor.** Ana plan Aşama 3 ([bölüm 8](../roadmap/Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md)) kararlarına dayanır; kod keşfi tamamlanmadan kesinleşmez. Ürün canlıda değil, gerçek müşteri verisi yok (geriye dönük veri taşıma kısıtı yoktur).
+**Kabul edildi (2026-10-10, kullanıcı onayı).** Ana plan Aşama 3 ([bölüm 8](../roadmap/Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md)) kararlarına ve backend kod keşfine (`docs/FIN_DISCOVERY.md`, backend deposu) dayanır. Ürün canlıda değil, gerçek müşteri verisi yok (geriye dönük veri taşıma kısıtı yoktur).
+
+**Onaylanan karar noktaları (kullanıcı, "önerilerle" + "karmaşık diye yok saymayalım, ileriye atalım"):**
+
+1. **Ücret bağı:** `Charge` her zaman bir **müşteriye** (`ClientId` zorunlu) bağlıdır; `VisitId` ve `ExaminationId` **opsiyoneldir**. Muayenesiz/gelişsiz ücret (ör. mama satışı) girilebilir.
+2. **Düzeltme yetkisi:** Yalnızca **yönetici düzeyi** (Admin, Owner, ClinicAdmin) ücret/ödeme düzeltir ve iptal eder. Resepsiyon ücret ve ödeme **ekler**; hekim ücret ekleyemez. Gerekçe ve audit zorunlu. Gevşetme sonraya ([FIN-009](../backlog/feature-backlog.md)).
+3. **Para birimi:** İlk sürümde yalnızca **TRY**. Çoklu para birimi ertelenmiş iş ([FIN-006](../backlog/feature-backlog.md)).
+4. **Fazla ödeme:** Borçtan fazla tahsilat **reddedilir** (ödeme borç kadar kaydedilir, fazlası para üstü). Müşteri kredisi/mahsup ertelenmiş iş ([FIN-005](../backlog/feature-backlog.md)).
+5. **Eski ödemeler:** "Bağlanmamış" kalır (hayali borç türetilmez); bakiyede ayrı satır olarak gösterilir ([FIN-007](../backlog/feature-backlog.md)).
+
+**Ertelenenler (yok sayılmaz, backlog'da):** FIN-005 müşteri kredisi ve mahsup, FIN-006 çoklu para birimi, FIN-007 eski ödemelerin ücretlere bağlanması ve açılış bakiyesi, FIN-008 hizmet kataloğu, FIN-009 düzeltme yetkisinin kontrollü gevşetilmesi.
 
 ## Bağlam
 
