@@ -56,7 +56,7 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 - **Arama:** Klinik filtresi yok (Client/Pet'te `ClinicId` yok; ürün kararı bekliyor); randevu/muayene/aşı/ödeme aramaları eski kuralla; Collate davranışı gerçek SQL Server'da doğrulanmadı (sürüyor).
 - **ESLint:** 5.605 boş-satır ihlali ve 223 `member-ordering` uyarıya alındı (toplu temizlik ayrı iş); `p` öneki kuralı uyarıda (ürün kararı); `npm audit` uyarısına bakılmadı; lock güncellemesinden sonra `ng build`/`ng test` yeniden çalıştırılmadı; kalan 39 hata küçük temizlik işi.
 - **Aşama 1'den devam eden:** Doğrulanmayan manuel senaryolar, `angular.json` test `styles` geçici çözümü, tek vitali silme formda engelli, `PUT /appointments/{id}` Status bypass bulgusu (HTTP ile doğrulanmadı, backlog'a işlenmedi).
-- **Kullanıcı eylemleri:** Sızan Gmail uygulama parolasını iptal edip yenile; `AddVisits` yalnızca yerel DB'ye (onaylandı), paylaşılan/üretim DB'ye ayrı onayla.
+- **Kullanıcı eylemleri:** Sızan Gmail uygulama parolası için kullanıcı kararı: önemli değil, iptal edilmeyecek (kabul edilen risk, 2026-10-10). `AddVisits` yalnızca yerel DB'ye (onaylandı), paylaşılan/üretim DB'ye ayrı onayla.
 
 **Ayrı bug (Aşama 2'yi bekletmez, backlog'a işlenmedi):** `PUT /appointments/{id}` `Reschedule` izniyle gövdedeki `Status` ile `Completed/Cancelled` yapabiliyor görünüyor (koddan çıkarım, HTTP ile denenmedi).
 
