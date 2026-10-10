@@ -817,6 +817,22 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | — (CHECKIN-006 ile birlikte teslim edilir) |
 | **Notlar** | Ana plan Aşama 2. Kabul senaryoları somutlaştırılacak: Türkçe karakter (ı/İ, ş, ğ), ad/soyad sırası, boşluk/noktalama, telefon biçimleri, mikroçip. Bütün entity'lerde gelişmiş/AI arama kapsam dışı (Aşama 8/10) |
 
+### CHECKIN-008 — Randevusuz gelişte hızlı müşteri ve hasta kaydı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | CHECKIN-008 |
+| **Başlık** | Randevusuz gelişte hızlı müşteri ve hasta kaydı |
+| **Kategori** | Check-in |
+| **Problem** | Randevusuz gelen yeni hasta kayıtlı değilse resepsiyon geliş diyaloğunda ilerleyemiyor; müşteri ve hasta için ayrı ekranlara gitmek gerekiyor |
+| **Önerilen çözüm** | Geliş diyaloğunda arama sonuç vermezse satır içi mini form: sahip adı soyadı, telefon (zorunlu), hayvan adı, tür, opsiyonel mikroçip. Müşteri + hasta backend'de tek işlemle (transaction) oluşturulur; ardından idempotent geliş kaydı açılır. Aynı telefonla müşteri varsa uyarı ve mevcut müşteriyi seçme. Kayıtlı sahibe yeni hayvan: mevcut hasta oluşturma ucu |
+| **Kullanıcı değeri** | Yeni hasta kabulü tek akışta; resepsiyon ekran değiştirmez; yinelenen kayıt azalır |
+| **Öncelik** | P0 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı (kullanıcı kararı 2026-10-10: telefon zorunlu; en doğru çözüm: backend'de tek işlemli kayıt ucu) |
+| **Bağımlılıklar** | CHECKIN-006, SEARCH-001 |
+| **Notlar** | Yarım kayıt (müşteri var, hasta yok) oluşmamalı. Yeni uç Clients.Create ve Pets.Create yetkilerini ister; yetkisi olmayana bağlantı görünmez. Query DB projeksiyon/outbox davranışı mevcut müşteri ve hasta oluşturma ile aynı olmalı |
+
 ---
 
 ## CHECKOUT — Ziyaret kapanışı ve tahsilat
