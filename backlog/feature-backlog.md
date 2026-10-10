@@ -831,7 +831,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı (kullanıcı kararı 2026-10-10: telefon zorunlu; en doğru çözüm: backend'de tek işlemli kayıt ucu) |
 | **Bağımlılıklar** | CHECKIN-006, SEARCH-001 |
-| **Notlar** | Yarım kayıt (müşteri var, hasta yok) oluşmamalı. Yeni uç Clients.Create ve Pets.Create yetkilerini ister; yetkisi olmayana bağlantı görünmez. Query DB projeksiyon/outbox davranışı mevcut müşteri ve hasta oluşturma ile aynı olmalı |
+| **Notlar** | Yarım kayıt (müşteri var, hasta yok) oluşmamalı. Yeni uç Clients.Create ve Pets.Create yetkilerini ister; yetkisi olmayana bağlantı görünmez. Query DB projeksiyon/outbox davranışı mevcut müşteri ve hasta oluşturma ile aynı olmalı. **Karar (2026-10-10):** yinelenen kural mevcut hâliyle kalır (aynı ad + aynı telefon → 409; yalnızca telefon aynıysa serbest, aile bireyleri paylaşabilir); telefon aramada mevcut müşteriyi gösterir. Telefon görünümü mevcut `+90 5XX …` biçimi |
 
 ---
 
