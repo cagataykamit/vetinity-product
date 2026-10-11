@@ -84,3 +84,7 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 **Ayrı bug (Aşama 2'yi bekletmez, backlog'a işlenmedi):** `PUT /appointments/{id}` `Reschedule` izniyle gövdedeki `Status` ile `Completed/Cancelled` yapabiliyor görünüyor (koddan çıkarım, HTTP ile denenmedi).
 
 Kabul (ana plan bölüm 7): Randevulu ve randevusuz iki hasta kabul edilir; resepsiyon ve hekim aynı güncel kuyruğu görür; muayeneye geçişte hasta tekrar seçilmez; ödeme eksikliği bakım durumunu yanlış göstermez. Ayrıca: tekrar tıklama iki ziyaret üretmez; randevusuz geliş sahte randevu olarak takvime yazılmaz; arama tenant/clinic filtresini değiştirmez.
+
+## Menü ve genel yapı (karar notu, 2026-10-12)
+
+Kullanıcı, menü ve genel bilgi mimarisinin hâlâ modül listesi (CRUD) görünümünde olduğunu, rakip analizindeki iş akışı odaklı yapıya geçilmesi gerekip gerekmediğini sordu. Seçenekler değerlendirildi (menü dilimini öne çekmek / tüm arayüzü yeniden tasarlamak / plana göre Aşama 8). **Karar: plan korunur, menü ve yapı düzenlemesi Aşama 8'de** (ana plan bölüm 13: ana menü günlük işe odaklı, Tür/Irk/ürün kategorisi Ayarlar > Tanımlar altında, tek Raporlar girişi, eski URL'ler korunur). Aşama 1–7 sırasında yeni sayfalar menüye eklenirken menü büyümesi bilinçli sınırlı tutulur; öne çekme ihtiyacı pilotta menü karmaşasından şikâyet gelirse yeniden değerlendirilir.
