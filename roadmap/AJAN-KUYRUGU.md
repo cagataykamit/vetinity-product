@@ -97,3 +97,5 @@ Kullanıcı, menü ve genel bilgi mimarisinin hâlâ modül listesi (CRUD) gör�
 **Devam eden:** Backend Aşama 5 Dilim 1 stok güvenliği (migration içerir).
 **Sırada:** Dilim 2 (Uygulama kaydı) ve Dilim 3 (reçete satırları) paralel; Dilim 6 frontend. Dilim 5 arayüzünün gerçek iptal ile elle denenmesi (TEST kayıtlarla). Visit satırında başlığın da muayeneye bağlanması (ürün tercihi). Pet read model: bayrak açılırken backfill kararı (önerilen: şimdilik dokunma).
 **Dev ortamı uyarısı:** `dotnet ef migrations list` bu makinede geçmişi yanlış okur (hepsi Pending); `sqlcmd` ile `__EFMigrationsHistory` doğrulanır, `database update <migration> --connection` kullanılır.
+
+**Test çalıştırma kuralı (ajanlar için, 2026-10-12):** Geliştirirken yalnız ilgili filtre (Domain, Application, ilgili entegrasyon sınıfı); TAM entegrasyon paketi yalnız birleştirmeden önce bir kez. Eşzamanlı LocalDB yükü "CREATE DATABASE failed" üretebilir: tekrar dene, değişiklikten bağımsız olduğunu açıkça yaz. Bilinen kırık: Dashboard/Payments parity, `OperationalListsEndpointPaginationTests`.
