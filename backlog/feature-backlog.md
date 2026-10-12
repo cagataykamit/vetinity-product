@@ -29,6 +29,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | INT- | Entegrasyonlar |
 | MOBILE- | Mobil |
 | ENT- | Enterprise |
+| SEC- | Güvenlik ve sertleştirme |
 
 ---
 
@@ -393,6 +394,38 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | UX-001 |
 | **Notlar** | **DaySmart (observed):** kategori ör. Schedule/Patients/Clients/Contacts/Inventory/Billing; Patient All/Name/Chip/Tag; Recently Viewed cross-entity; `LastName, FirstName` tam sorgu fail / partial success — → [daysmart.md](../competitors/daysmart.md#sandbox--global-search). **Vetinity (implication):** toleranslı kişi araması — ad-soyad sırası, soyad-ad, `Soyad, Ad`, partial, fazla/eksik boşluk, TR karakter, case-insensitive. → [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) |
+
+### UX-007 — Rol bazlı ayrı menüler
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | UX-007 |
+| **Başlık** | Rol bazlı ayrı menüler (Resepsiyon / Hekim / Yönetici) |
+| **Kategori** | UX |
+| **Problem** | Aşama 8 menüsü izne göre süzülür ama her rol aynı grup yapısını görür; pilotta rol bazlı sadeleştirme ihtiyacı çıkabilir |
+| **Önerilen çözüm** | Rol başına özel menü düzeni (grup sırası, varsayılan sayfa, kısayollar); izin altyapısı değişmeden üstüne ince bir katman |
+| **Kullanıcı değeri** | Her kullanıcı yalnız kendi günlük işini görür; öğrenme maliyeti düşer |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-13: önce izne göre süzülen 6 gruplu menü) |
+| **Bağımlılıklar** | Aşama 8 Dilim 1 (menü ve gezinti kaydı) |
+| **Notlar** | Pilot klinikte gerçek kullanıcı geri bildirimi gelmeden yapılmaz; keşif `docs/ASAMA8_DISCOVERY.md` D-M1 seçenek c |
+
+### UX-008 — Kişiye özel bildirimler ve onay akışı (kalıcı bildirim modeli)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | UX-008 |
+| **Başlık** | Kişiye özel bildirimler ve onay akışı |
+| **Kategori** | UX |
+| **Problem** | Açık işler ilk sürümde kaynak kayıtlardan hesaplanan liste olacak; kişiye özel olaylar (örn. kesinleşmiş muayeneye sonradan eklenen uygulama, atanan görev) bu modelle iletilemez |
+| **Önerilen çözüm** | Kalıcı bildirim modeli (kime, olay, okundu/çözüldü); ilk kullanım: sonradan eklenen kayıtlar için muayene hekimine bildirim ve opsiyonel onay ([ADR-013](../decisions/ADR-013-finalized-examination-late-entries-and-administration-void.md)); topbar zil |
+| **Kullanıcı değeri** | Hekim kendi hastasındaki sonradan değişiklikten haberdar olur; denetim izi iş akışına dönüşür |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin: backend model + migration + frontend; ölçülmedi) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-13: açık işler önce hesaplanan liste) |
+| **Bağımlılıklar** | Aşama 8 açık işler (hesaplanan liste); ADR-013 uygulaması |
+| **Notlar** | Hesaplanan listeyle çelişmemesi için yalnız olay tabanlı/kişiye atanan işler bu modele girer; keşif `docs/ASAMA8_DISCOVERY.md` D-N1, D-N2 |
 
 ---
 
@@ -1201,6 +1234,22 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | Aşama 4 dilim D (kesinleştirme) ve E (addendum); [RECORD-002](#record-002--record-audit-history) |
 | **Notlar** | Aşama 4 keşfi D1 seçenek (b). Gerçek kullanımda "yanlışlıkla kilitledim" ihtiyacı görülürse öne alınır. Rakip: DaySmart kilit ikonu ve Lock Letter gözlemlendi, kilit açma yetkisi doğrulanmadı — [EXAM-015](#exam-015--medical-note-lock) |
 
+
+### RECORD-008 — Reçete iptali ve kesinleşmiş muayenede düzeltme yolu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | RECORD-008 |
+| **Başlık** | Reçete iptali ve kesinleşmiş muayenede düzeltme yolu |
+| **Kategori** | Record |
+| **Problem** | Reçetede iptal/durum kavramı yok; Aşama 5 D3 "gerekçeli iptal ve yeni kayıt" kararı reçete için uygulanmadı. Reçete satırlarının kimliği her değişiklikte yeniden üretiliyor |
+| **Önerilen çözüm** | Reçeteye iptal durumu (gerekçe, denetim izi, silme yok), kararlı satır kimlikleri, kesinleşmiş muayenede sonradan ekleme için ADR-013 ilkelerinin reçeteye uyarlanması |
+| **Kullanıcı değeri** | Hatalı reçete düzeltilebilir ve izlenebilir |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | Aşama 5 Dilim 3 (reçete satırları); [ADR-013](../decisions/ADR-013-finalized-examination-late-entries-and-administration-void.md) |
+| **Notlar** | Aşama 5 Dilim 3 raporu açık soruları; migration gerekir |
 ---
 
 ## PORTAL — Hasta sahibi portalı
@@ -2572,6 +2621,40 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Notlar** | Trial'da gerçek POS sınırlandırılır |
 
 ---
+
+## SEC — Güvenlik ve sertleştirme
+
+### SEC-001 — Hesap kilitleme ve giriş denemesi koruması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | SEC-001 |
+| **Başlık** | Hesap kilitleme ve giriş denemesi koruması |
+| **Kategori** | SEC |
+| **Problem** | Güvenlik incelemesi (O3): hesap kilitleme yok, giriş sınırı yalnız IP başına; olmayan kullanıcıda parola doğrulaması çalışmadığı için zamanlama farkı var |
+| **Önerilen çözüm** | Başarısız deneme sayacı ve geçici kilit (migration), sabit zamanlı doğrulama, kilit olayı denetim kaydı |
+| **Kullanıcı değeri** | Parola tahmin saldırısına karşı koruma (canlıya çıkış koşulu) |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | Aşama 9 canlıya çıkış kontrol listesi |
+| **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O3; migration gerektirir |
+
+### SEC-002 — İzinlerin JWT'de taşınması ve yetki geri alma gecikmesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | SEC-002 |
+| **Başlık** | Yetki geri alma gecikmesi (izinler JWT'de, ömrü 60 dk) |
+| **Kategori** | SEC |
+| **Problem** | Güvenlik incelemesi (O6): yetkisi alınan kullanıcı JWT ömrü boyunca eski yetkisini kullanır |
+| **Önerilen çözüm** | Kısa ömürlü erişim jetonu + yenileme, ya da izin sürümü/oturum iptal kontrolü; seçenekler ürün kararı |
+| **Kullanıcı değeri** | Yetki kaldırma anında etkili olur |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Araştırılacak |
+| **Bağımlılıklar** | Aşama 9 |
+| **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O6; tasarım kararı gerekir |
 
 ## İlgili belgeler
 
