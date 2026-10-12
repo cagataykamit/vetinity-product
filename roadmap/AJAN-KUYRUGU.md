@@ -81,10 +81,19 @@ Push yok, merge yok. `subscription-access.utils.ts` frontend'de commit dışı, 
 - **Aşama 1'den devam eden:** Doğrulanmayan manuel senaryolar, `angular.json` test `styles` geçici çözümü, tek vitali silme formda engelli, `PUT /appointments/{id}` Status bypass bulgusu (HTTP ile doğrulanmadı, backlog'a işlenmedi).
 - **Kullanıcı eylemleri:** Sızan Gmail uygulama parolası için kullanıcı kararı: önemli değil, iptal edilmeyecek (kabul edilen risk, 2026-10-10). `AddVisits` yalnızca yerel DB'ye (onaylandı), paylaşılan/üretim DB'ye ayrı onayla.
 
-**Ayrı bug (Aşama 2'yi bekletmez, backlog'a işlenmedi):** `PUT /appointments/{id}` `Reschedule` izniyle gövdedeki `Status` ile `Completed/Cancelled` yapabiliyor görünüyor (koddan çıkarım, HTTP ile denenmedi).
+**Ayrı bug (çözüldü, 2026-10-12):** `PUT /appointments/{id}` ile durum değişimi şüphesi gerçek değil; `56a0368` ile kapalı (`EnsureCanApplyStatus`, 400 `InvalidStatusTransition`), entegrasyon testi 14/14. Frontend düzenleme sayfası durum değişimini ayrı uçlarla yapıyor; PUT gövdesinin her durumda mevcut durumu taşıdığı elle denenmedi.
 
 Kabul (ana plan bölüm 7): Randevulu ve randevusuz iki hasta kabul edilir; resepsiyon ve hekim aynı güncel kuyruğu görür; muayeneye geçişte hasta tekrar seçilmez; ödeme eksikliği bakım durumunu yanlış göstermez. Ayrıca: tekrar tıklama iki ziyaret üretmez; randevusuz geliş sahte randevu olarak takvime yazılmaz; arama tenant/clinic filtresini değiştirmez.
 
 ## Menü ve genel yapı (karar notu, 2026-10-12)
 
 Kullanıcı, menü ve genel bilgi mimarisinin hâlâ modül listesi (CRUD) görünümünde olduğunu, rakip analizindeki iş akışı odaklı yapıya geçilmesi gerekip gerekmediğini sordu. Seçenekler değerlendirildi (menü dilimini öne çekmek / tüm arayüzü yeniden tasarlamak / plana göre Aşama 8). **Karar: plan korunur, menü ve yapı düzenlemesi Aşama 8'de** (ana plan bölüm 13: ana menü günlük işe odaklı, Tür/Irk/ürün kategorisi Ayarlar > Tanımlar altında, tek Raporlar girişi, eski URL'ler korunur). Aşama 1–7 sırasında yeni sayfalar menüye eklenirken menü büyümesi bilinçli sınırlı tutulur; öne çekme ihtiyacı pilotta menü karmaşasından şikâyet gelirse yeniden değerlendirilir.
+
+## Durum güncellemesi (2026-10-12, akşam)
+
+**Push edildi (kullanıcı):** üç depo `main` (Dilim 4 dahil). Sonrası yerel, push yok.
+**Yerel main'e birleşenler:** Backend: Aşama 5 keşif + Dilim 0 (kesinleşmiş muayeneye bağlı tedavi/reçete/aşı kilidi), timeline Visit→`relatedExaminationId`, Aşama 3 Dilim 5 (ücret düzeltme/iptal, ödeme iptali; migration `AddFinanceVoidAndReversal` yerel dev DB'ye uygulandı), Query DB pet sağlık kontrolü düzeltmesi. Frontend: timeline tarih aralığı süzgeci, "Bağlı muayene" bağlantısı, ücret/ödeme düzeltme-iptal arayüzü (`ng test` 538/538, tarayıcıda denenmedi).
+**Kararlar:** Aşama 5 D1–D9 önerildiği gibi kabul (backend `docs/ASAMA5_DISCOVERY.md`). Kullanıcı genel yetki verdi: rutin yerel git/DB/API işleri sorulmadan yapılır; ürün kararı, paylaşılan/üretim DB, deploy, push'ta sorulur. Paralel ajan sınırı kullanıcı tarafından gevşetildi (gerekirse 100 dolarlık plana geçilecek).
+**Devam eden:** Backend Aşama 5 Dilim 1 stok güvenliği (migration içerir).
+**Sırada:** Dilim 2 (Uygulama kaydı) ve Dilim 3 (reçete satırları) paralel; Dilim 6 frontend. Dilim 5 arayüzünün gerçek iptal ile elle denenmesi (TEST kayıtlarla). Visit satırında başlığın da muayeneye bağlanması (ürün tercihi). Pet read model: bayrak açılırken backfill kararı (önerilen: şimdilik dokunma).
+**Dev ortamı uyarısı:** `dotnet ef migrations list` bu makinede geçmişi yanlış okur (hepsi Pending); `sqlcmd` ile `__EFMigrationsHistory` doğrulanır, `database update <migration> --connection` kullanılır.
