@@ -95,3 +95,17 @@ Durum: **Var** = çalışıyor, **Yolda** = ajan/dilim sürüyor, **Planlı** = 
 ## Sonraki adım (önerilen)
 
 Pilot klinikle (K4) bu matrisi birlikte gözden geçirmek; "bunu kullanıyoruz / kullanmıyoruz" işaretletmek. Yanıtlara göre backlog öncelikleri güncellenir.
+
+## Rapor ve defter envanteri (E-vet SMART, OCR'dan, 41 benzersiz başlık)
+
+Yöntem notu: Raporlar adreste `report?code=...` biçiminde tek sayfadan açılıyor; yalnız kullanıcının gezdiği raporlar görünür, gerçek sayı daha yüksek olabilir. Başlıklar OCR'dan; yazım hataları olabilir.
+
+| Grup | Rakipteki raporlar (örnekler) | Bizde |
+|---|---|---|
+| **Kayıt defterleri (yasal olabilir, DOĞRULANMADI)** | Aşı Kayıt Defteri, Reçete Kayıt Defteri, Muayene Kayıt Defteri, İlaç Kayıt Defteri, Narkotik Kayıt Defteri, Psikotropik Ürünler Stok ve Sarf Defteri | **Yok**; verinin çoğu var (aşı, reçete, muayene, uygulama+stok), ürün sınıfı (narkotik/psikotropik) ve resmi format yok |
+| **Klinik belge çıktıları** | Epikriz Raporu, Sağlık Karnesi, Hasta QR Kod Raporu, İstatistik Raporu | **Yok** (yazdırma/çıktı Aşama 7 Dilim 3'te yalnız yatış talimatı için) |
+| **Finans / gelir** | Günlük İşlem Dökümü, Yıllık Gelir Gider, Aylık Ciro Değişimi, Gider Raporu ve Gider Türü Dağılımı, Tahsilat Değişiklik Raporu, Personel Satış, Müşteri Satış Dökümü, Tipi Satış, Kasa tarih aralığı, Tahsilat makbuzu | **Ödeme raporu var**; diğerleri yok. Gider kavramı yok (kasa/banka/gider planda yok) |
+| **Stok / ürün** | Klinik Stok Özeti ve Analizi, ABC Analizi, Ürün alış/satış/özet, Ürün satış (aylık) | **Planlı** (stok raporu, borç raporu onaylandı); ABC analizi yok |
+| **Hasta / müşteri analitiği** | Hasta Analizi, Müşteri Sayısı Değişimi, Veteriner Hekim Yönlendirme Sayısı | **Yok** |
+| **Lab** | Laboratuvar Test Sayısı Raporu, Kan Gazı Analizi | **Yok** |
+| **Hatırlatma** | Gelecek Aşılar Raporu, Doğum günü, Görev listesi raporu | Aşı raporu **var**; gecikmiş/gelecek ayrımı kontrol edilecek |
