@@ -12,16 +12,16 @@
 
 ## 1. Mevcut durum özeti (neden çoğu madde "yapılacak")
 
-Backend keşfine göre (2026-10-13, kodu/belgeyi okuyarak; hiçbir ortama bağlanılmadı):
+Backend keşfi (2026-10-13) ve sonraki backend belgeleri (`docs/CI_CD.md`, `docs/SECURITY_CONFIGURATION.md`; `docs/MONITORING_ALERTING_CONTRACT.md` ayrı dalda, henüz `main`'de değil) okunarak güncellendi (2026-10-14). Belge/kod okuması; hiçbir ortama bağlanılmadı, iş akışları çalıştırılmadı:
 
 | Konu | Durum |
 |---|---|
 | Üretim/staging ortamı | Kurulu olduğuna dair kanıt yok; yalnız tasarım/runbook belgeleri var (Windows IIS hedefli; ADR-014 K1 bunu yedek plan sayar) |
-| CI/CD, sürüm etiketi | Yok (API sürümü kodda sabit `1.0.0`, git etiketi yok) |
+| CI/CD, sürüm etiketi | CI iş akışı tanımlı (`.github/workflows/ci.yml`: derleme + test + artifact + idempotent migration betikleri; `v*` etiketiyle SemVer). **GitHub'da henüz çalışmadı** (`CI_CD.md`: ilk koşuda ayar gerekebilir). **Dağıtım (CD) ve hosting yok.** Telemetri sürümü kodda sabit `1.0.0` (derleme sürümünü okumaz) |
 | Yedekleme / geri yükleme | Repoda tanımlı değil, hiç denenmedi |
-| Hata izleme / uyarı aracı | Yok. Var olanlar: Serilog dosya günlüğü, `/health/live`, `/health/ready`, OpenTelemetry çıktısı (toplayıcı yok) |
+| Hata izleme / uyarı aracı | Hesap/araç yok. Kod tarafı (izleme dalında, `main`'de değil): korelasyon kimliği, `IErrorReporter` soyutlaması (varsayılan yalnız günlüğe yazar), outbox eşikleri, `ops.*` metrikleri. Üretim günlüğü stdout'a JSON (platform toplar); `/health/live`, `/health/ready`; OTLP yalnız `OTEL_EXPORTER_OTLP_ENDPOINT` verilirse. Toplayıcı, uptime izleyici ve uyarı kanalı kurulu değil |
 | Olay yönetimi / destek | Yok (bu belge ilk taslak) |
-| Sabit parolalı varsayılan yönetici | Kodda var; Dilim 1 ile kaldırılacak (K7). Kaldırılana dek üretimde `seed` çalıştırılmaz |
+| Sabit parolalı varsayılan yönetici | Development dışında artık oluşturulmaz; ilk yönetici `DbMigrator create-platform-admin` ile (`SECURITY_CONFIGURATION.md`). Üretim açılış doğrulaması eksik/yer tutucu gizli ayarlarda API'yi başlatmaz. Üretimde `seed` yalnız etiketli birleşik sürümden |
 
 Bu nedenle aşağıdaki prosedürler **go-live öncesi hazırlık hedefidir**. Gerçek ortam kurulunca her maddenin yanındaki `<...>` alanları doldurulur ve prosedür provası yapılır (bölüm 11).
 
@@ -116,20 +116,23 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 
 ### 5.1 Bugünkü gerçek durum
 
-- Her birleşmede otomatik derleme/yayın yok; sürüm numarası ve etiketi yok **[YAPILACAK – Dilim 2]**.
+- CI tanımlı (`ci.yml`; tetik: `main`'e push, `v*` etiketi, PR, elle) ama GitHub'da henüz koşmadı; ilk koşuyu izlemek, `main` dal koruması ve Actions'ı açmak kullanıcı işi. **Otomatik dağıtım yok**: CI yalnız derler, test eder, artifact üretir.
+- Sürüm = git etiketi (`vMAJOR.MINOR.PATCH` veya `-rc.1`), yalnız testleri geçmiş `main` commit'ine; iş akışı bunu zorlamaz. Etiketsiz koşu `0.0.0-ci.<koşu no>` alır. Etiket push'u kullanıcı işi. Uygulama içi telemetri sürümü hâlâ sabit `1.0.0` (bilinen boşluk).
+- Artifact'lar: `api-<sürüm>`, `dbmigrator-<sürüm>`, `migrations-<sürüm>`, test sonuçları (etiket koşuları 90 gün, diğerleri 30 gün saklanır).
+- Bilinen tuzak: `Api.csproj` yayından `appsettings.Production.json`'u her zaman dışlar; üretim yapılandırması platform ortam değişkenlerinden gelmeli (`AllowedOrigins`, `AllowedHosts`, `Jwt:Key`, bağlantı dizeleri, `Smtp:*`; eksikse API açılmaz). Kural Dilim 3'te netleşecek **[YAPILACAK]**.
 - API açılışta migration/seed **çalıştırmaz**; veritabanı değişikliği yalnız `DbMigrator` komutlarıyla yapılır (`migrate`, `migrate-query`, `seed`).
 - EF migration'ında **geri alma (down) yoktur**; veritabanını geri almanın yolu **yedekten dönüş** (backend runbook'u: "yedekten dönüş").
-- İdempotent migration SQL betiği üretimi henüz yok **[YAPILACAK – Dilim 2]**.
-- Tam entegrasyon test paketi yeşil değil (bilinen kırık testler) → sürüm kesmeden önce "temiz referans" gerekir.
+- İdempotent migration betikleri CI'da üretilir (`migrations-<sürüm>`: `AppDbContext.sql` komut DB, `QueryDbContext.sql` sorgu DB); **hiçbir DB'ye otomatik uygulanmaz**. Betik izin/seed verisi eklemez.
+- Tam entegrasyon test paketi yeşil değil (bilinen kırık testler); CI'da `integration-tests` işi Windows + LocalDB'de koşar (yerelde ~21 dk). Sürüm kesmeden önce kırıkların bilinenlerle aynı olduğu not edilir.
 
 ### 5.2 Sürüm öncesi (her canlı yayından önce)
 
 - [ ] Yayın içeriği listelendi (hangi commit/etiket, hangi migration var, izin/seed değişikliği var mı).
-- [ ] Etiketli, birleşik sürüm. **Seed yalnız etiketli birleşik sürümden çalıştırılır**; farklı dallardan seed izinleri birbirinden siler.
+- [ ] Etiketli, birleşik sürüm; bu commit için CI koşusu görüldü ve `migrations-<sürüm>` artifact'ı indirildi. **Seed yalnız etiketli birleşik sürümden çalıştırılır**; farklı dallardan seed izinleri birbirinden siler.
 - [ ] Testler: Domain + Application + ilgili entegrasyon sınıfları geçti; tam paket sonucu ve bilinen kırıklar açıkça not edildi.
 - [ ] Staging'de aynı sürümle migration + temel kabul denendi **[YAPILACAK – staging kurulunca]**.
 - [ ] **Yedek alındı ve alındığı doğrulandı** (bölüm 5.3 adım 1).
-- [ ] Migration varsa **kullanıcı onayı alındı** (migration başına; paylaşılan/üretim DB'ye onaysız uygulanmaz).
+- [ ] Migration varsa betik **gözden geçirildi** (sütun/tablo silme, tür daralması, veri kaybı riski) ve **kullanıcı onayı alındı** (migration başına; paylaşılan/üretim DB'ye onaysız uygulanmaz).
 - [ ] Bakım penceresi planlandı ve klinik bilgilendirildi (bölüm 6).
 - [ ] Geri alma planı yazılı: önceki yayın paketi saklı, yedek noktasının saati kayıtlı.
 - [ ] Yeni izinler (`*.Read` vb.) varsa: özel roller elle güncellenecek mi, notlandı.
@@ -139,8 +142,8 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 1. **Yedek:** veritabanı yedek noktası kaydedilir (saat + doğrulama). Yönetilen platformda anlık görüntü/nokta-zaman yedeği de not edilir.
 2. Bakım penceresi başlar; gerekirse klinik kullanıcılar çıkış yapar.
 3. Yeni API paketi dağıtılır; gizli bilgiler platformun gizli deposundan gelir (dosyaya yazılmaz).
-4. `DbMigrator migrate` (komut DB), ardından `migrate-query` (sorgu DB'si; pilotta okuma bayrakları kapalı olsa da bağlantı ve şema zorunludur) **[YAPILACAK – üretim runbook'unda doğrulanacak]**.
-5. Yalnız gerekiyorsa `seed` (etiketli sürümden). Sonrasında kullanıcılar **çıkış-giriş** yapar (izinler yenilensin).
+4. Migration: ya `DbMigrator migrate` (komut DB) + `migrate-query` (sorgu DB'si; pilotta okuma bayrakları kapalı olsa da bağlantı ve şema zorunludur) ya da CI'dan inen idempotent betikler (`AppDbContext.sql`, `QueryDbContext.sql`; `sqlcmd`/SSMS/platform aracı). Hangisinin kullanılacağı ve komut sırası **[YAPILACAK – Dilim 3 üretim runbook'unda doğrulanacak]**.
+5. Yalnız gerekiyorsa `seed` (etiketli sürümden; yeni izin eklenmişse gerekir). `seed` oturumları iptal etmez: sonrasında kullanıcılar **çıkış-giriş** yapar (izinler yenilensin). Üretimde `seed` varsayılan yönetici oluşturmaz; ilk yönetici yalnız kurulumda `create-platform-admin` ile.
 6. Doğrulama: `/health/ready` yeşil; giriş; Bugün açılır; bir test hastasıyla geliş → muayene taslağı (test kaydı politikası klinikle konuşulur); rapor sayfası açılır.
 7. Pencere kapanır, klinik bilgilendirilir.
 
@@ -177,11 +180,18 @@ Geri alma sonrası olay kaydı ve (S1/S2 için) olay sonrası inceleme zorunludu
 
 - `/health/live` (süreç ayakta mı), `/health/ready` (komut DB, sorgu DB, outbox, projeksiyonlar; sorunda 503).
 - Outbox sağlığı: ölü mektup (dead-letter) varsa Unhealthy; bekleyen > 500 ise Degraded.
-- Serilog dosya günlüğü; yavaş SQL günlüğü (eşik 200 ms).
+- Üretim şablonunda günlük stdout'a yapılandırılmış JSON (platform toplar; dosya sink'i varsayılan kapalı); yavaş SQL günlüğü (eşik 200 ms).
 - Hata yanıtlarında `traceId`/`correlationId`.
 - OpenTelemetry iz/metrik çıktısı (toplayıcı yapılandırılırsa).
 
-### 7.2 Beklenen ama kurulmamış olanlar **[YAPILACAK – Dilim 5]**
+### 7.1b İzleme kod katmanı (backend `MONITORING_ALERTING_CONTRACT.md`; ayrı dalda, `main`'e birleşmedi)
+
+- `X-Correlation-ID` başlığı ve ProblemDetails `correlationId`: destek taleplerinde bu kimlik istenir (bölüm 4).
+- Beklenmeyen (5xx) hatalar `IErrorReporter` ile raporlanır; varsayılan uygulama yalnız günlüğe yazar ve `ops.errors.unhandled.total` sayar. Dış hata izleme hizmeti **bağlı değil** (hesap/DSN gerekir).
+- Outbox eşikleri `/health/ready` içinde: dead-letter > 0 Unhealthy; en eski bekleyen ≥ 120 sn Degraded, ≥ 600 sn Unhealthy; bekleyen > 500 Degraded. Metrikler: `ops.outbox.pending`, `ops.outbox.dead_letter`, `ops.outbox.oldest_pending_age` (son `/health/ready` sonucundan beslenir; uptime izleyici bu ucu en az dakikada bir çağırmalı).
+- Sözleşmenin önerdiği uyarılar (kanal kurulunca): hazır değil 503 ≥ 2 dk; canlı değil ≥ 1 dk; dead-letter > 0; outbox gecikmesi ≥ 600 sn; 5 dk'da 5'ten fazla beklenmeyen hata; projeksiyon Unhealthy. Eşikler pilot verisiyle ayarlanmadı; gerçek metrik adları toplayıcıda doğrulanmalı.
+
+### 7.2 Beklenen ama kurulmamış olanlar **[YAPILACAK – Dilim 5: hesap ve kanal kullanıcı işi]**
 
 | Beklenti | Neden |
 |---|---|
@@ -211,7 +221,7 @@ Sistemde işlenen kişisel veriler (koddan çıkarılan envanter; tam liste değ
 
 1. **Şüphe/algı:** Yetkisiz erişim, yanlış kişiye veri gösterimi (ör. başka klinik verisi), kayıp cihaz/hesap, sızan gizli bilgi, yanlış gönderilen e-posta, yedek/depolamanın açığa çıkması.
 2. **Hemen:** olay S1 olarak açılır; olay yöneticisi ve ürün sahibi haberdar edilir. **Kanıt korunur** (günlükler silinmez, ekran görüntüsü alınır; yeniden başlatma/temizlik kararı önce sorulur).
-3. **Durdur:** erişim kapatılır (ilgili hesabın parolası/oturumu iptal, sızan anahtar döndürme, ilgili özelliğin kapatılması). *Not: bugünkü sistemde hesap kilitleme yok ve izin değişikliği açık oturumları hemen kesmez (SEC-001/SEC-002 ertelendi); bu yüzden hesap devre dışı bırakma + parola sıfırlama + gizli anahtar döndürme birlikte düşünülür.*
+3. **Durdur:** erişim kapatılır (ilgili hesabın parolası/oturumu iptal, sızan anahtar döndürme, ilgili özelliğin kapatılması). *Not: hesap kilitleme yok (SEC-001 ertelendi). Üretimde `RevokeSessionsOnPermissionChange=true` (kullanıcı kararı 2026-10-13) yalnız yönetim API'sindeki dört izin komutunda etkilenen kullanıcıların refresh token'larını iptal eder; verilmiş access token süresi bitene dek (`Jwt:ExpMinutes` 60 dk) geçerli kalır; `seed` ve rol atama oturum iptal etmez. Bu yüzden hesap devre dışı bırakma + parola sıfırlama + gizli anahtar döndürme birlikte düşünülür.*
 4. **Olgular (danışmana gidecek bilgi):** ne zaman başladı/fark edildi, hangi veri türleri, kaç kişi/kayıt tahmini, hangi klinik(ler), veri kime açıldı/sızdı, hâlâ sürüyor mu, ne yapıldı. Tahmini sayılar "tahmin" diye işaretlenir; bilinmeyen "bilinmiyor" yazılır.
 5. **Danışmana bildir (aynı gün):** `<danışman iletişimi>` **[YAPILACAK]**. Kararı o verir: bu bir ihlal mi? Kuruma (KVKK Kurulu) ve/veya ilgili kişilere bildirim gerekir mi? Hangi sürede? Bildirimi **kimin** (veri sorumlusu klinik mi, Vetinity veri işleyen olarak mı) yapacağı sözleşmeye bağlıdır (veri işleyen sözleşmesi K3 kapsamında hazırlanır).
 6. **Veri sorumlusu kliniğe haber:** veri işleyen rolünde olunuyorsa sözleşmedeki süre içinde kliniğe yazılı bilgi verilir. Süre sözleşmeyle yazılır: `<süre>` **[YAPILACAK]**. *Mevzuattaki sürelerin (kamuoyunda anılan 72 saat dâhil) doğru uygulanışı danışmanla teyit edilmelidir; bu belge bu süreyi doğrulamaz.*
@@ -292,5 +302,7 @@ ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek
 - Yönetilen bulut (Azure) hizmetlerinin yedek/geri yükleme özellikleri, saklama süreleri ve komutları bu belgede **anlatılmadı** (hesap yok; platforma özgü adımlar kurulumda eklenecek).
 - `DbMigrator` komut sırası ve Query DB'nin pilotta (bayraklar kapalı) şema güncelleme gereksinimi üretim runbook'unda doğrulanacak.
 - Kişisel veri ihlaline ilişkin yasal süreler ve sorumluluk dağılımı doğrulanmadı (hukuki konu).
-- Hesap kilitleme ve izin değişince oturum iptali yok (SEC-001/002 ertelendi); bu yüzden bölüm 8 adım 3 ihtiyatlı yazıldı.
+- Hesap kilitleme yok; izin değişikliğinde oturum iptali yalnız dört yönetim komutuyla ve access token süresi kadar gecikmeyle (backend `SECURITY_CONFIGURATION.md`'den alındı, kod çalıştırılmadı). Bölüm 8 adım 3 ihtiyatlı yazıldı.
+- Backend `CI_CD.md`, `SECURITY_CONFIGURATION.md` ve izleme sözleşmesi okundu; CI iş akışları GitHub'da çalışmadığı için CI davranışı doğrulanmadı. İzleme sözleşmesi `main`'de değil, değişebilir.
+- Destek erişimi (davet/üyelikten çıkarma) backend belgesinde de "uç yolları ve arayüz adımları doğrulanmadı" diye geçiyor.
 - Önem derecesi süreleri, mesai saatleri ve nöbet düzeni öneridir; hiçbiri kararlaştırılmadı.
