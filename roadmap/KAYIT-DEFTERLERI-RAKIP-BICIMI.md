@@ -1,18 +1,20 @@
 # Kayıt defterleri: rakip (E-vet SMART) biçimi ve bizdeki karşılığı (2026-10-13)
 
+**Kullanıcı doğruladı (2026-10-13): ekran görüntüleri TAM SAYFA, tablolarda gizli sağ sütun yoktur; aşağıdaki sütun listeleri eksiksizdir.**
+
 Kaynak: kullanıcının E-vet SMART ekran görüntüleri (Rapor menüsü; adresler `report?code=...RECORDBOOKREPORT`). **Yasal dayanak ve resmî biçim DOĞRULANMADI.** Ekranlardaki "i" simgesinin metni görülmedi. Tüm defterlerde: tek süzgeç **tarih aralığı + Filtrele**; sağ üstte **PDF seçici, indir, Yazdır**; kırmızı başlık bandı; sıra no; sayfalı (muayene 297, reçete 480 sayfa); sağ altta üretici logosu.
 
 ## 1. Defterler ve sütunları
 
 **Muayene Kayıt Defteri ("Hayvan Muayene Kayıt Defteri"):** Sıra No | Muayene Tarihi | Hasta Sahibinin Adı Soyadı | Telefonu | Adresi | Hasta (Ad, Tür, Irk, Cinsiyet, Yaş, Kart No, Çip No, Protokol No, e-Reçete Kimlik) | Hastanın Şikayeti | Teşhis Edilen Hastalık | Tedavi Şekli, Reçete Bilgileri, Satışa Eklenen İlaçlar | Veteriner Hekimin Adı Soyadı.
 
-**Reçete Kayıt Defteri:** gruplu başlıklar: REÇETENİN (Tarihi, Sınıfı [örnekte "B"], Cilt/Sıra No) | VETERİNER HEKİMİN (Adı Soyadı, Adresi) | HAYVAN SAHİBİNİN (Adı Soyadı, Adresi) | HAYVANIN (Türü, Kulak/İşletme No, Sayısı) | İlacın Adı, Farmakolojik Şekli, Ambalajı, Adedi.
+**Reçete Kayıt Defteri:** gruplu başlıklar: REÇETENİN (Tarihi, Sınıfı [örnekte "B"], Cilt/Sıra No) | VETERİNER HEKİMİN (Adı Soyadı, Adresi) | HAYVAN SAHİBİNİN (Adı Soyadı, Adresi) | HAYVANIN (Türü, Kulak/İşletme No, Sayısı) | tek sütun: "İlacın Adı, Farmakolojik Şekli, Ambalajı, Adedi" (hücrede birleşik metin, örn. "Dectomax"; reçete satırı başına bir satır değil, ilaçlar tek hücrede).
 
 **Aşı Kayıt Defteri (aşı STOK/giriş defteri, hayvan kaydı DEĞİL):** Sıra No | Ticari Adı | Seri No | Son Kullanma Tarihi | Toplam Miktar (Doz) | Satın Alınan Firma | Nakil Şekli (Soğuk Zincir) | Nakilde Kullanılan İzleme Cihazı (Soğuk Zincir İndikatörü) | Depo Çıkış Tarihi | Teslim Tarihi | Fatura Tarihi | Fatura No.
 
 **İlaç Kayıt Defteri (ilaç GİRİŞ defteri):** Sıra No | Ürün | Farmakolojik Şekli | Takdim Şekli | Adet | Birim | Firma Adı | Geldiği Tarih | Fatura Tarihi | Fatura No | Seri No.
 
-**Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri:** Sıra No | Ürün Adı, Ticari Adı ve Farmakolojik Şekli | Ticari Takdim Şekli | Miktar | Seri No | SATIN/İADE/DEVİR ALINAN ÜRÜNÜN (Alındığı Yer, Tarih, Belge No) | SATILAN/İADE VEYA DEVREDİLEN ÜRÜNÜN (Çıkış Yapılan Yer, Tarih, Reçete/Belge No) | (ekran görüntüsünde son sütun "Reçete / Belge No"; kaydırma çubuğu tablonun orada bittiğini gösteriyor, ayrı "kalan/bakiye" sütunu GÖRÜNMÜYOR; bakiye ayrıca hesaplanabilir).
+**Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri:** Sıra No | Ürün Adı, Ticari Adı ve Farmakolojik Şekli | Ticari Takdim Şekli | Miktar | Seri No | SATIN/İADE/DEVİR ALINAN ÜRÜNÜN (Alındığı Yer, Tarih, Belge No) | SATILAN/İADE VEYA DEVREDİLEN ÜRÜNÜN (Çıkış Yapılan Yer, Tarih, Reçete/Belge No) (tablo burada biter; ayrı "kalan/bakiye" sütunu YOK, bakiye ayrıca hesaplanabilir).
 
 **Aşı Bilgi Raporu (`VACCINEINFOREPORT`), hayvan bazlı aşı çıktısı:** süzgeçler Tarih aralığı, Ürün, Veteriner. Sütunlar: # | Tarih | Hasta Sahibi | T.C. | Hasta | Tür | Çip No | Ürün | **Seri No | S.K.T** | Birim | Miktar | Fiyat | Toplam. (Doğrudan satıştan da satırlar geliyor.)
 
