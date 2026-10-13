@@ -2620,6 +2620,22 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | TRIAL-004 |
 | **Notlar** | Trial'da gerçek POS sınırlandırılır |
 
+### INT-007 — Otomatik fatura / e-belge oluşturma
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | INT-007 |
+| **Başlık** | Otomatik fatura / e-belge oluşturma (ücret ve tahsilattan) |
+| **Kategori** | INT |
+| **Problem** | Veteriner klinikleri e-Fatura / e-SMM'ye ek olarak ücret ve ödemeden **otomatik fatura oluşturan** bir yapı bekliyor (kullanıcı bilgisi, 2026-10-13). Bugün ücret/ödeme yalnız iç kayıt; resmi belge yok. Rakip (E-vet SMART) ana ekranında e-Fatura/e-SMM, müşteri kartında zorunlu Kimlik No ve doğum tarihi gösteriyor |
+| **Önerilen çözüm** | Önce keşif: belge türleri (e-Fatura, e-Arşiv, e-SMM), entegratör seçenekleri, veri modeli eşleşmesi (KDV oranı/hizmet kataloğu [FIN-008](#), müşteri TC/vergi no ve fatura adresi, numaralandırma, iptal/iade [ADR-012](../decisions/ADR-012-basic-charges-payments-balance.md) ile uyum), otomatik kesme kuralı (ücret girilince / ödeme alınınca / ziyaret kapanınca / elle "fatura kes"). Sonra sözleşme ve dilimler |
+| **Kullanıcı değeri** | Klinik, ayrı bir programda faturayı yeniden yazmaz; Vetinity eski sistemin yerini alabilir (canlıya geçiş koşulu) |
+| **Öncelik** | P1 (pilotun gölge döneminde gerekmez; eski sistemi bırakma aşamasında gerekli) |
+| **Tahmini zorluk** | Yüksek (tahmin: keşif + backend + entegratör + frontend; ölçülmedi) |
+| **Durum** | Karar bekliyor (kullanıcı 2026-10-13: detaylar sonra netleştirilecek) |
+| **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
+| **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı) |
+
 ---
 
 ## SEC — Güvenlik ve sertleştirme
