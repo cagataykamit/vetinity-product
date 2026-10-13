@@ -2,6 +2,8 @@
 
 **Kullanıcı doğruladı (2026-10-13): ekran görüntüleri TAM SAYFA, tablolarda gizli sağ sütun yoktur; aşağıdaki sütun listeleri eksiksizdir.**
 
+**Karar (kullanıcı, 2026-10-14): muayene defterinde "Tedavi Şekli, Reçete Bilgileri, Satışa Eklenen İlaçlar" TEK SÜTUN (rakipteki gibi).**
+
 Kaynak: kullanıcının E-vet SMART ekran görüntüleri (Rapor menüsü; adresler `report?code=...RECORDBOOKREPORT`). **Yasal dayanak ve resmî biçim DOĞRULANMADI.** Ekranlardaki "i" simgesinin metni görülmedi. Tüm defterlerde: tek süzgeç **tarih aralığı + Filtrele**; sağ üstte **PDF seçici, indir, Yazdır**; kırmızı başlık bandı; sıra no; sayfalı (muayene 297, reçete 480 sayfa); sağ altta üretici logosu.
 
 ## 1. Defterler ve sütunları
