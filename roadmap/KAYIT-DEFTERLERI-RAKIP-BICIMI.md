@@ -8,7 +8,7 @@ Kaynak: kullanıcının E-vet SMART ekran görüntüleri (Rapor menüsü; adresl
 
 ## 1. Defterler ve sütunları
 
-**Muayene Kayıt Defteri ("Hayvan Muayene Kayıt Defteri"):** Sıra No | Muayene Tarihi | Hasta Sahibinin Adı Soyadı | Telefonu | Adresi | Hasta (Ad, Tür, Irk, Cinsiyet, Yaş, Kart No, Çip No, Protokol No, e-Reçete Kimlik) | Hastanın Şikayeti | Teşhis Edilen Hastalık | Tedavi Şekli, Reçete Bilgileri, Satışa Eklenen İlaçlar | Veteriner Hekimin Adı Soyadı.
+**Muayene Kayıt Defteri ("Hayvan Muayene Kayıt Defteri"):** (Ekran görüntüsü düzeltmesi 2026-10-14: rakip ekranında "Hasta" bilgileri GRUP DEĞİL, tek hücrede virgüllü metin, örn. "Oscar, Köpek, Maltese, Erkek, 8, , , 1071,"; boş alanlar ",,," kalıyor; ekran yine de yatay kaydırıyor.) Sıra No | Muayene Tarihi | Hasta Sahibinin Adı Soyadı | Telefonu | Adresi | Hasta (Ad, Tür, Irk, Cinsiyet, Yaş, Kart No, Çip No, Protokol No, e-Reçete Kimlik) | Hastanın Şikayeti | Teşhis Edilen Hastalık | Tedavi Şekli, Reçete Bilgileri, Satışa Eklenen İlaçlar | Veteriner Hekimin Adı Soyadı.
 
 **Reçete Kayıt Defteri:** gruplu başlıklar: REÇETENİN (Tarihi, Sınıfı [örnekte "B"], Cilt/Sıra No) | VETERİNER HEKİMİN (Adı Soyadı, Adresi) | HAYVAN SAHİBİNİN (Adı Soyadı, Adresi) | HAYVANIN (Türü, Kulak/İşletme No, Sayısı) | tek sütun: "İlacın Adı, Farmakolojik Şekli, Ambalajı, Adedi" (hücrede birleşik metin, örn. "Dectomax"; reçete satırı başına bir satır değil, ilaçlar tek hücrede).
 
