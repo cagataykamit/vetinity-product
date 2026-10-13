@@ -12,7 +12,7 @@ Kaynak: kullanıcının E-vet SMART ekran görüntüleri (Rapor menüsü; adresl
 
 **İlaç Kayıt Defteri (ilaç GİRİŞ defteri):** Sıra No | Ürün | Farmakolojik Şekli | Takdim Şekli | Adet | Birim | Firma Adı | Geldiği Tarih | Fatura Tarihi | Fatura No | Seri No.
 
-**Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri:** Sıra No | Ürün Adı, Ticari Adı ve Farmakolojik Şekli | Ticari Takdim Şekli | Miktar | Seri No | SATIN/İADE/DEVİR ALINAN ÜRÜNÜN (Alındığı Yer, Tarih, Belge No) | SATILAN/İADE VEYA DEVREDİLEN ÜRÜNÜN (Çıkış Yapılan Yer, Tarih, Reçete/Belge No) | (sağ taraf ekranda kesik olabilir: kalan/bakiye sütunu bekleniyor, DOĞRULANMADI).
+**Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri:** Sıra No | Ürün Adı, Ticari Adı ve Farmakolojik Şekli | Ticari Takdim Şekli | Miktar | Seri No | SATIN/İADE/DEVİR ALINAN ÜRÜNÜN (Alındığı Yer, Tarih, Belge No) | SATILAN/İADE VEYA DEVREDİLEN ÜRÜNÜN (Çıkış Yapılan Yer, Tarih, Reçete/Belge No) | (ekran görüntüsünde son sütun "Reçete / Belge No"; kaydırma çubuğu tablonun orada bittiğini gösteriyor, ayrı "kalan/bakiye" sütunu GÖRÜNMÜYOR; bakiye ayrıca hesaplanabilir).
 
 **Aşı Bilgi Raporu (`VACCINEINFOREPORT`), hayvan bazlı aşı çıktısı:** süzgeçler Tarih aralığı, Ürün, Veteriner. Sütunlar: # | Tarih | Hasta Sahibi | T.C. | Hasta | Tür | Çip No | Ürün | **Seri No | S.K.T** | Birim | Miktar | Fiyat | Toplam. (Doğrudan satıştan da satırlar geliyor.)
 
