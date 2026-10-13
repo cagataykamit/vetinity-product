@@ -427,6 +427,22 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | Aşama 8 açık işler (hesaplanan liste); ADR-013 uygulaması |
 | **Notlar** | Hesaplanan listeyle çelişmemesi için yalnız olay tabanlı/kişiye atanan işler bu modele girer; keşif `docs/ASAMA8_DISCOVERY.md` D-N1, D-N2 |
 
+### UX-009 — Menü kenar çubuğu görünümü (seçenek A denemesi sonrası)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | UX-009 |
+| **Başlık** | Menü kenar çubuğu görünümü ve simge şeridi cilası |
+| **Kategori** | UX |
+| **Problem** | Seçenek A denemesi (dal `feature/menu-secenek-a`, commit 7909f39, main'de değil) açık/kapalı geçişte simge konumunu sabitledi ama kullanıcı görünümü beğenmedi. Ekran görüntüsünden gözlenenler: kapalı şeritte Bugün rozeti üstten kırpılıyor ve ilk satır üst çubuğa yapışık; kapalıda grup adları kayboluyor (yalnız çizgi); 22px kalın çizgili simgeler 14px yazıya göre ağır; şerit 80px ile geniş; açıkta Bugün/Özet ile KLİNİK arasında ayırıcı yok (kapalıda var); Ayarlar alt kenara sıkışık; kapalıda tooltip doğrulanmadı |
+| **Önerilen çözüm** | Menü satırları ve grup yapısı netleşince tek seferde ele alınır: rozet kırpılması ve üst boşluk, simge boyutu/ağırlığı, açık ve kapalı ayırıcı tutarlılığı, şerit genişliği, kapalıda grup ayrımı (renk veya kısa etiket: tasarım tercihi, kullanıcıya sorulur), tooltip doğrulaması, küçük ekranda alt kenar |
+| **Kullanıcı değeri** | Menü hem açık hem kapalıyken kaymadan, okunur ve dengeli görünür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük-orta (tahmin; ölçülmedi) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-13: menü satırları netleşmeden bu işe girilmez) |
+| **Bağımlılıklar** | Menü satırları ve grup yapısının netleşmesi (kullanıcı kararı bekleniyor) |
+| **Notlar** | Mevcut main menüsü (be0adf9) olduğu gibi kalır. Seçenek A dalı silinmedi, referans olarak durur. Araştırma: Material 3 navigation rail, Carbon UI shell, Ant Design Layout |
+
 ---
 
 ## EXAM — Muayene deneyimi
