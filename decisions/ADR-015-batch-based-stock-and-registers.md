@@ -16,6 +16,11 @@ Rakip yazılımdaki aşı, ilaç, narkotik/psikotropik defterleri ve Aşı Bilgi
 4. **Defterler partiden ve kayıtlardan türetilir** (ayrı veri girişi yok): Aşı Kayıt Defteri, İlaç Kayıt Defteri, Narkotik ve Psikotropik Ürünler Stok ve Sarf Defteri, Aşı Bilgi raporu, Muayene ve Reçete defterleri. Çıktı: ekran, CSV/XLSX, yazdırma/PDF. Sütun tanımları tek yerde ve yapılandırılabilir.
 5. **Resmî/yasal biçim doğrulanmadı:** sözleşme ve arayüzde "resmî biçime uygunluk doğrulanmadı" notu; biçim doğrulanınca yalnız sütun tanımı ve üstbilgi/imza alanı güncellenir.
 
+## Kararlar (2026-10-14, QA tur 3 sonrası, kullanıcı: önerilere göre)
+
+6. **Süresi geçmiş parti:** Stok girişinde SKT geçmişse uyarı ve açık onay istenir (engellenmez). Stok ekranlarında **"Kullanılabilir"** ve **"Süresi geçmiş"** miktarı ayrı gösterilir; düşük stok uyarısı ve uygulanabilir bakiye yalnız kullanılabilir miktara bakar.
+7. **Telefon biçimi:** Ekranda ve yazdırmada okunur biçim (`+90 532 111 00 01`, tüm ekranlarda aynı); CSV/Excel çıktılarında ham rakam. Resmî biçim doğrulanınca çıktı biçimi değişebilir.
+
 ## Sonuçlar
 
 - Backend: parti varlığı, stok giriş (alış) kaydı genişlemesi, uygulama–parti bağı, ürün alanları (migration), defter ve rapor uçları; sözleşme önce.
