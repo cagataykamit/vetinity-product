@@ -37,3 +37,7 @@ Her işin ayrıntılı talimatı koordinatör oturumunda; sözleşme/ADR çıkt�
 - **Q6 Frontend D4 (Ücretlendir paneli): TAMAM**, main'de (68aaa05), `ng test` 1050/1050.
 - **Q8 Frontend D6 (gün sonu ekranı): TAMAM**, main'de, `ng test` 1064/1064 (birleşik).
 - **Q7 mal kabul (backend)** ve **Q9 Hastalar girişi/açılış/randevudan geliş (frontend):** devam ediyor.
+- **Q9 Frontend (Hastalar girişi arama-öncelikli, randevudan geliş, açılış): TAMAM**, main'de (166c7f8), `ng test` 1080/1080. K5 (yönetici açılışı Bugün) zaten yapılmıştı.
+- **Q7 Mal kabul: TAMAM**, backend main'de (174ebf3, `POST /goods-receipts`, atomik; entegrasyon paketi 1322/0 hata), frontend main'de (`feat/mal-kabul-ekrani`), `ng test` 1090/1090. Migration/izin yok.
+- **Q10 QA tur 4:** tarayıcı ve kullanıcı oturumu gerektirir, **kullanıcı bekliyor**. Sabah için önerilen gözle kontrol listesi: Bugün çipleri ve açık işler şeridi; muayene çalışma alanı (+Ekle yan panel, aşı satırları yenileme sonrası); Ücret bekleyenler sekmesi (çevir, ücretsiz say, Ödeme al); Satışlar (hızlı satış, iptal, fiş); Mal kabul (çok satır, düşük stoktan Giriş); Gün sonu kartı; Hastalar arama; randevudan Muayene Oluştur.
+- **Gece özeti:** kuyruğun tamamı bitti (Q1-Q9, Q11). Açık notlar: tüm yeni ekranlar yalnız birim/bileşen testleriyle doğrulandı, tarayıcıda görülmedi; bundle bütçe uyarısı (1.08/1.00 MB) kaynağı ölçülmedi; outbox testi kararsız; ESLint worktree'lerde çalışmadı.
