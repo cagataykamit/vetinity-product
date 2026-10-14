@@ -114,7 +114,7 @@ Her senaryoda: **Kim**, **hangi bilgi**, **hangi sırayla**. Sıra, belge dayana
 
 ### 3.1 Sayım yöntemi
 
-- Başlangıç: oturum açık, kullanıcı panel açılış ekranında. Açılış ekranı koddan: `Visits.Read` izni olana **Bugün**, yoksa Özet (`FE:core/routing/panel-home.redirect.ts`; `FE:` = `C:FrontEndeteriner-frontendsrcpp`). Yön rolleri `Visits.Read`'e sahip (ClinicAdmin doğrulandı) olduğundan onlar da Bugün'e düşer, ASAMA8 D-M2 "Yönetici → Özet" ile çelişir (B-11).
+- Başlangıç: oturum açık, kullanıcı panel açılış ekranında. Açılış ekranı koddan: `Visits.Read` izni olana **Bugün**, yoksa Özet (`FE:core/routing/panel-home.redirect.ts`; `FE:` tanımı bölüm 4 başında). Yön rolleri `Visits.Read`'e sahip (ClinicAdmin doğrulandı) olduğundan onlar da Bugün'e düşer, ASAMA8 D-M2 "Yönetici → Özet" ile çelişir (B-11).
 - **T = tıklama** (menü, bağlantı, düğme, seçim, diyalog onayı). Alana yazmak sayılmaz; "Kaydet" sayılır.
 - **G = ekran geçişi** (rota değişimi; diyalog açmak geçiş sayılmaz).
 - Sayım, ilgili bileşenin şablonunda düğme/bağlantıyı ve `router.navigate`/`routerLink` hedefini okuyarak yapıldı. Düğme etiketi doğrulanamayan yerler işaretli. **Kullanıcıyla ölçülmedi; alt sınır sayılmalı** (arama, kaydırma, hata, yeniden deneme yok).
@@ -184,7 +184,7 @@ Tüm değerler alt sınır ve koddan çıkarım. "Rsp"/"Hkm" kimin yaptığını
 
 ## 4. Bulgular
 
-Şiddet: **Kritik** = veri/gelir kaybı veya yanlış kayıt riski; **Yüksek** = günlük işi belirgin yavaşlatır veya yanlış yönlendirir; **Orta** = tutarsızlık/bağlam kaybı; **Düşük** = kozmetik/keşfedilebilirlik. Kanıt yolları kısa biçimde: `FE:` = `C:\FrontEnd\veteriner-frontend\src\app\features\`, `BE:` = `C:\Users\DELL\source\repos\Veteriner\`.
+Şiddet: **Kritik** = veri/gelir kaybı veya yanlış kayıt riski; **Yüksek** = günlük işi belirgin yavaşlatır veya yanlış yönlendirir; **Orta** = tutarsızlık/bağlam kaybı; **Düşük** = kozmetik/keşfedilebilirlik. Kanıt yolları kısa biçimde: `FE:` = `C:\FrontEnd\veteriner-frontend\src\app\features\` (yalnız `core/`, `layout/`, `shared/` ile başlayan yollar `...\src\app\` altındadır), `BE:` = `C:\Users\DELL\source\repos\Veteriner\`.
 
 ### 4.1 Kritik
 
