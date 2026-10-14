@@ -59,3 +59,7 @@ Outbox testi kararsızlığı çözüldü (backend main `be24108`: test paylaş�
 - **Q13 B2 okuma/eşleme: TAMAM** (601b9d6). **Q14 B3 doğrulama/kuru çalıştırma: TAMAM** (79c7716; 25.000 satır ~1,3 sn, N+1 yok). Tam entegrasyon 1402/0 hata.
 - **Q17 F1 frontend sihirbaz: TAMAM**, frontend main'de (`feat/import-sihirbaz`), `ng test` 1112/1112. Onay adımı B4 uçları gelene kadar 'henüz etkin değil' gösterir (sahte başarı yok).
 - **Q15 B4 uygulama (Opus):** devam ediyor. Sonra B5 (geri alma), T (deneme), ve yeni küçük iş Q19: müşteri mükerrer ad karşılaştırmasını Türkçe duyarlı yap ('AYŞE YILMAZ' = 'Ayşe Yılmaz'; bugün ToLowerInvariant, mükerrer kaçıyor).
+
+## Durdurma (kullanıcı, 2026-10-14 öğleden sonra)
+
+**"Şimdi bunlar bitince yeni görev açma."** 15 dakikalık otomatik tur kapatıldı; yeni görev AÇILMAZ. Yalnızca çalışmakta olan işler (içe aktarma deneme/performans ölçümü) bitince doğrulanır ve birleştirilir. Bekleyen küçük notlar: muayene sayfasında boş bölümlerin gereksiz uzunluğu; kullanıcının QA turundan gelecek bulgular.
