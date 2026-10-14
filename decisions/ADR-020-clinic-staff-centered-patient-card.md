@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Kabul edildi (2026-10-14, kullanıcı: "evet bu düzen hoşuma gitti", taslak ekranlar sohbette gösterildi).** Hedef kitle: **klinik çalışanı** (hekim, resepsiyon, yardımcı personel birlikte). Uygulama kullanıcı onayıyla, dilim dilim başlar; bu ADR yalnız yönü kaydeder. İlgili: [ADR-017](ADR-017-workflow-centered-navigation.md), [ADR-018](ADR-018-charge-suggestion-and-service-catalog.md), [ADR-004](ADR-004-navigation-and-menu-philosophy.md), [ux/HEDEF-IS-AKISLARI-2026-10.md](../ux/HEDEF-IS-AKISLARI-2026-10.md).
+**Kabul edildi (2026-10-14, kullanıcı: "evet bu düzen hoşuma gitti", taslak ekranlar sohbette gösterildi). S1-S5 uygulandı ve yerel main'de (2026-10-14); ayrıntı ve bilinen eksikler: roadmap/GECE-KUYRUGU-2026-10-14.md.** Hedef kitle: **klinik çalışanı** (hekim, resepsiyon, yardımcı personel birlikte). Uygulama kullanıcı onayıyla, dilim dilim başlar; bu ADR yalnız yönü kaydeder. İlgili: [ADR-017](ADR-017-workflow-centered-navigation.md), [ADR-018](ADR-018-charge-suggestion-and-service-catalog.md), [ADR-004](ADR-004-navigation-and-menu-philosophy.md), [ux/HEDEF-IS-AKISLARI-2026-10.md](../ux/HEDEF-IS-AKISLARI-2026-10.md).
 
 ## Bağlam
 
