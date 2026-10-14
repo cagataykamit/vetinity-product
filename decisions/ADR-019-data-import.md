@@ -26,3 +26,7 @@
 - Dilimler (backend `ASAMA9_IMPORT_DESIGN.md` bölüm 11): B1 temel + migration, B2 okuma/eşleme, B3 doğrulama/kuru çalıştırma, B4 uygulama (arka plan), B5 geri alma/temizlik, F1 frontend sihirbaz, T deneme/performans.
 - Yeni izinler (`Imports.*`) ve migration yerel dev veritabanına doğrulanarak uygulanır; paylaşılan/üretim için ayrı onay.
 - Riskler: pilot dosya biçimi tahminden farklı olabilir (R3), toplu hatırlatma e-postası (R1, K3 ile kapalı), outbox birikimi → sağlık 503 (R4, geri basınç).
+
+## Ek karar (2026-10-14, kullanıcı: "baştan arka plana alalım")
+
+- **K13 Doğrulama çalışma biçimi:** doğrulama (kuru çalıştırma) de K11 gibi **arka plan işi** olur: kullanıcı "Doğrula"ya basınca iş kuyruğa alınır, ekranda ilerleme izlenir, sekme kapansa da sürer; senkron istek zaman aşımı riski kalkar. Gerekçe: T ölçümünde 5.000 müşteri / 8.000 hayvan / 20.000 aşı için doğrulama ~38 sn; pilot dosya boyutu bilinmiyor. Uygulama T performans düzeltmesi (karesel ikinci parti doğrulaması) birleştikten sonra backend + frontend dilimi olarak yapılır; uç sözleşmesi geriye dönük kırılmayacak şekilde (durum/ilerleme B4 ilerleme ucu deseniyle) tasarlanır.
