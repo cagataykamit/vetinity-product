@@ -33,3 +33,7 @@ Her işin ayrıntılı talimatı koordinatör oturumunda; sözleşme/ADR çıkt�
 - **Q3 Backend D4 (ücret önerisi + hizmet kataloğu): TAMAM**, backend main'de (7a39e79). Opus: model "hesaplanan öneri"den kalıcı `ChargeSuggestion` kaydına çevrildi (gerekçe ADR-018: geçmiş kayıt seli, eşzamanlılık, ileride yeni kaynaklar); bedelsiz ürün kalem doğurmaz. Migration `20261014043646_AddChargeSuggestions` yerel dev DB'ye uygulandı; API yeniden başlatıldı (health/ready 200). Yeni izin yok (seed gerekmez). D2 ile 5 dosyada çakışma Opus ajanıyla çözüldü, testler yeşil.
 - **Q6 Frontend D4 (Ücretlendir paneli):** başlatıldı (`feat/ucretlendir-paneli`). **Q5 Backend D6 (gün sonu):** devam ediyor (`feat/gun-sonu-raporlari`).
 - Bilinen: tam entegrasyon paketinde `OutboxPending_Http...` testi arada kırılıyor, tek başına geçiyor (kararsız test, kök neden araştırılmadı).
+- **Q5 Backend D6 (gün sonu raporları): TAMAM**, backend main'de (5315eef): daily-transactions, cash-summary, end-of-day/open-items; testler yeşil; migration/izin yok.
+- **Q6 Frontend D4 (Ücretlendir paneli): TAMAM**, main'de (68aaa05), `ng test` 1050/1050.
+- **Q8 Frontend D6 (gün sonu ekranı): TAMAM**, main'de, `ng test` 1064/1064 (birleşik).
+- **Q7 mal kabul (backend)** ve **Q9 Hastalar girişi/açılış/randevudan geliş (frontend):** devam ediyor.
