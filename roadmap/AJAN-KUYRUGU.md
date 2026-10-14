@@ -124,3 +124,5 @@ Bu özet, yukarıdaki eski "Aşama 2/3/4 geliştirmeye hazır" notlarının YER�
 **Açık kararlar:** veri içe aktarma 12 madde; doğrudan satış (stoktan düşen) kapsamı; indeks önerilerinin uygulanması (migration, onay); Aşı Bilgi raporunda hekim kuralı sorumlu hekime alındı (karar verildi).
 
 **Ertelendi (kullanıcı, 2026-10-14):** Linux VPS kurulum rehberi, deploy ve yedekleme betikleri (Aşama 9 Dilim 3-4 uyarlaması) şimdilik yapılmıyor, "sonraki iş". Ajan oturumu kapatıldı, çıktı üretilmedi. Başlarken ihtiyaç: SQL Server durumu, VPS RAM/CPU/disk, alan adı, yedek hedefi. Not: yedek olmadan gerçek müşteri verisi girilmemeli.
+
+**Ertelendi (kullanıcı, 2026-10-14):** Örnek Veteriner Kliniği ve onboarding/trial akışı (Aşama 8 kalanı, [ADR-002](../decisions/ADR-002-example-clinic-strategy.md)) pilot sonrasına. Gerekçe: pilot klinik gerçek veriyle başlayacak. Kodda örnek klinik/onboarding izi bulunmadı (yalnız arama, tam doğrulama değil).
