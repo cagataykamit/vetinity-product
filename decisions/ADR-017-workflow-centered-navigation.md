@@ -15,6 +15,17 @@
 | K9 | Satış ekranı yeri | [ADR-016](ADR-016-direct-sale.md) arayüzü **Para** altında + **Bugün'den kısayol**. |
 | K10 | Kesinleştirme kontrolü | Kesinleştirmeden önce "eklenmemiş/ücretlenmemiş kalem var" **uyarısı** (engel değil). Ücretlenmemiş kısmı K2'ye bağlıdır; metin uyarısı Dilim A4'te gelir. |
 
+## Kalan kararlar (2026-10-14, kullanıcı: "rakip bu işi 12 senedir yapıyor, ona bakıp yapalım, bana sorma")
+
+Klinik pratiği soruları için varsayılan kaynak **rakibin 12 yıllık pratiği** ([RAKIP-ANALIZI-2026-10.md](../roadmap/RAKIP-ANALIZI-2026-10.md): iş kapsamı ve veri akışı; görünüm kopyalanmaz). Veteriner soruları ([KLINIK-SORULARI-2026-10.md](../ux/KLINIK-SORULARI-2026-10.md)) pilotta doğrulama içindir, geliştirmeyi bekletmez. Önerilen cevaplarla kabul:
+
+| # | Konu | Karar | Rakip dayanağı |
+|---|---|---|---|
+| K1 | Aşı | **Tek giriş**: aşı formunda ürün/parti seçilince hem aşı kaydı hem stoktan düşen uygulama yazılır; ürün seçilmezse yalnız aşı kaydı. ADR-005/D6 bu kapsam için değişir. | Rakipte Aşı Bilgi raporu ürün, seri no, SKT, miktar, fiyat taşır (aşı ürün bazlı) |
+| K2 | Ücret önerisi | Hekimin yaptığı işlem/ürün **"ücret bekliyor"** olarak resepsiyona düşer; resepsiyon onaylayıp ücrete çevirir (hekim ücret ekleyemez, [ADR-012](ADR-012-fees-payments-balance.md) karar 2 korunur). | Rakipte muayenede "satışa eklenen ilaçlar" muayene içinde işlenir |
+| K6 | Bugün'e açık işler | Bekleyen lab, borçlu çıkan ve tamamlanmamış geliş Bugün'de hesaplanan liste olarak ([Aşama 8 D-N1](../roadmap/AJAN-KUYRUGU.md) ile aynı). | — |
+| K8 | Gün sonu | Rapor Merkezi'ne **"Günlük işlem dökümü"** (ücret, ödeme türüne göre tahsilat, satış, iptal/düzeltme) ve tarih aralığı **tahsilat/kasa özeti**; kasa/banka/gider (ön muhasebe) **kapsam dışı** kalır. | Rakipte "Günlük İşlem Dökümü", "Kasa tarih aralığı", "Tahsilat değişiklik raporu" var |
+
 ## Hedef menü (K3 + K4)
 
 Bugün · Hastalar (Müşteri + Hayvan sekmeli) · Randevular (liste/takvim anahtarı) · Para (Ücret + Ödeme + Satış, sekmeli) · Stok (Ürün + Stok durumu + Stok hareketleri, sekmeli) · Kayıtlar (sekmeli) · Raporlar · Ayarlar (+ Özet yalnız yönetici). Hiçbir rota silinmez, yalnız menü girişi değişir (ADR-004 madde 5); birleşik sayfalar mevcut sayfa bileşenlerini yeniden kullanır.
