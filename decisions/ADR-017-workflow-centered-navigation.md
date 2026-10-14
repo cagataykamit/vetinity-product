@@ -26,6 +26,16 @@ Klinik pratiği soruları için varsayılan kaynak **rakibin 12 yıllık pratiğ
 | K6 | Bugün'e açık işler | Bekleyen lab, borçlu çıkan ve tamamlanmamış geliş Bugün'de hesaplanan liste olarak ([Aşama 8 D-N1](../roadmap/AJAN-KUYRUGU.md) ile aynı). | — |
 | K8 | Gün sonu | Rapor Merkezi'ne **"Günlük işlem dökümü"** (ücret, ödeme türüne göre tahsilat, satış, iptal/düzeltme) ve tarih aralığı **tahsilat/kasa özeti**; kasa/banka/gider (ön muhasebe) **kapsam dışı** kalır. | Rakipte "Günlük İşlem Dökümü", "Kasa tarih aralığı", "Tahsilat değişiklik raporu" var |
 
+## Rakip iş akışı çalışması sonrası ayarlar (2026-10-14)
+
+Kaynak: [ux/RAKIP-IS-AKISI-CALISMASI-2026-10.md](../ux/RAKIP-IS-AKISI-CALISMASI-2026-10.md) ve [ux/HEDEF-IS-AKISLARI-2026-10.md](../ux/HEDEF-IS-AKISLARI-2026-10.md) (rakip pratiği varsayılan kaynak; kullanıcıya sorulmaz). Kabul:
+
+- **K4 ince ayar:** "Kayıtlar" sekmeleri **denetim/arama** amaçlıdır; **"Yeni" düğmesi yalnız bağlamdan** (ziyaret çalışma alanı, hasta eylem çubuğu) çalışır. Bağlamsız kayıt (müşteri+hayvan baştan) çift giriş üretir. Menü yapısı aynı kalır.
+- **K3 ince ayar (P5):** "Hastalar" girişi **arama-öncelikli**, tablo ikinci düzey. Yeni menü öğesi eklenmez: Mal kabul = Stok sekmesi, Aranacaklar = Randevular sekmesi, Gün sonu = Raporlar kartı.
+- **K2 kapsamı:** ücret önerisi için **hizmet kataloğu** gerekir; **FIN-008 yeniden açılır** (yalnız "Hizmet" ürün türü + fiyat; KDV/birim sonra). Model **ADR-018** (ücret önerisi) ile yazılır; pilot için asgari sürüm: uygulama ve aşı kalemleri, fiyatlı ürünlerle.
+- **Uygulama sırası (HEDEF §4):** D2 Bugün açık işler (K6) → D1 aşı tek giriş ekranı (yapıldı) → D3 ziyaret çalışma alanı (İşlemler bölümü, yan panel) → D4 ücret önerisi + katalog (ADR-018, migration) → D5 mal kabul → D6 gün sonu (K8, D2 sorgusunu paylaşır).
+- ADR-016 K9 (hekim satış yapmaz) **değişmez**; ücret önerisi aynı işi denetimli yapar, pilotta izlenir.
+
 ## Hedef menü (K3 + K4)
 
 Bugün · Hastalar (Müşteri + Hayvan sekmeli) · Randevular (liste/takvim anahtarı) · Para (Ücret + Ödeme + Satış, sekmeli) · Stok (Ürün + Stok durumu + Stok hareketleri, sekmeli) · Kayıtlar (sekmeli) · Raporlar · Ayarlar (+ Özet yalnız yönetici). Hiçbir rota silinmez, yalnız menü girişi değişir (ADR-004 madde 5); birleşik sayfalar mevcut sayfa bileşenlerini yeniden kullanır.
