@@ -104,3 +104,21 @@ Kullanıcı, menü ve genel bilgi mimarisinin hâlâ modül listesi (CRUD) gör�
 **Güvenlik incelemesi (2026-10):** Kritik/Yüksek yok; Orta 6, Düşük 7 (`docs/SECURITY_REVIEW_2026-10.md`). O1 muayene related-summary izin süzmesi, O2 Swagger, O4 HSTS/başlıklar/AllowedOrigins, O5 izli appsettings.Development gizleri düzeltilecek; O3 hesap kilitleme (migration) sonra.
 
 **Aşama 9 kararları (kullanıcı onayı 2026-10-13):** [ADR-014](../decisions/ADR-014-pilot-and-production-operations.md) K1–K9 (yönetilen bulut, dakikalar düzeyinde yedek + aylık dönüş provası, pilottan önce KVKK uzmanı, küçük kâğıt/Excel klinik + 2 hafta gölge, alan adlı e-posta hizmeti ve sızan parolanın iptali, Query DB pilotta kapalı, varsayılan yönetici kaldırılır, içe aktarma = müşteri+hasta+aşı geçmişi, pilot kapsamı Aşama 1–3). Hazırlık dilimleri `docs/ASAMA9_READINESS.md` bölüm 5. **Kullanıcı eylemleri:** bulut hesabı, KVKK uzmanı, pilot klinik, alan adı + e-posta hizmeti, sızan Gmail parolası iptali, ödeme sandbox anahtarlarını yenileme.
+
+## Durum özeti (2026-10-14, koordinatör)
+
+Bu özet, yukarıdaki eski "Aşama 2/3/4 geliştirmeye hazır" notlarının YERİNE geçer; onlar tarihseldir. Hepsi yerel `main`'de, **push yok** (son push 2026-10-12 akşamı).
+
+| Aşama | Durum | Not |
+|---|---|---|
+| 1-4 | Bitti | Muayene alanı, Bugün/geliş (Visit), ücret/ödeme/bakiye, hasta özeti, timeline, kesinleştirme |
+| 5 | Bitti | Klinik stok güvenliği, uygulama kaydı, reçete satırları, parti (lot) bazlı stok (ADR-015) |
+| 6-7 | Bitti | Lab sonuç durumu, yatış modeli |
+| 8 | Büyük kısmı bitti | Menü (seçenek A, [UX-009](../backlog/feature-backlog.md) ile yeniden düzeltilecek), Rapor Merkezi, global arama, borç raporu. Örnek klinik/onboarding durumu bu özette doğrulanmadı |
+| Kayıt defterleri (ADR-015) | Backend bitti; frontend muayene+reçete bitti | Aşı/ilaç/narkotik/aşı bilgi ekranları dalı hazır (`feature/defterler-asi-ilac-narkotik`, frontend), kullanıcı görmedi, main'e alınmadı. Hekim sütunu yalnız sorumlu hekim (karar 2026-10-14) |
+| 9 | Sürüyor | Güvenlik düzeltmeleri, CI/CD, izleme (Dilim 5), işletim kılavuzu (Dilim 11), performans ölçümü (Dilim 9: pilot hacminde acil darboğaz yok; indeks önerileri onay bekler) bitti. QA tur 3 çalışıyor. Bekleyen: ortam kurulumu, yedek/geri yükleme, e-posta doğrulama, veri içe aktarma (12 ürün kararı bekler), KVKK teknik, pilot provası |
+| 10-12 | Başlanmadı | Bilinçli ertelendi |
+
+**Kullanıcı tarafında bekleyen (ajan yapamaz, ADR-014):** bulut hesabı, KVKK uzmanı, pilot klinik, alan adı ve e-posta hizmeti, iyzico anahtar yenileme, sızan Gmail parolası iptali, rol bazlı elle testler.
+
+**Açık kararlar:** veri içe aktarma 12 madde; doğrudan satış (stoktan düşen) kapsamı; indeks önerilerinin uygulanması (migration, onay); Aşı Bilgi raporunda hekim kuralı sorumlu hekime alındı (karar verildi).
