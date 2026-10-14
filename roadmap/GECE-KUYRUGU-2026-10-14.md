@@ -41,3 +41,17 @@ Her işin ayrıntılı talimatı koordinatör oturumunda; sözleşme/ADR çıkt�
 - **Q7 Mal kabul: TAMAM**, backend main'de (174ebf3, `POST /goods-receipts`, atomik; entegrasyon paketi 1322/0 hata), frontend main'de (`feat/mal-kabul-ekrani`), `ng test` 1090/1090. Migration/izin yok.
 - **Q10 QA tur 4:** tarayıcı ve kullanıcı oturumu gerektirir, **kullanıcı bekliyor**. Sabah için önerilen gözle kontrol listesi: Bugün çipleri ve açık işler şeridi; muayene çalışma alanı (+Ekle yan panel, aşı satırları yenileme sonrası); Ücret bekleyenler sekmesi (çevir, ücretsiz say, Ödeme al); Satışlar (hızlı satış, iptal, fiş); Mal kabul (çok satır, düşük stoktan Giriş); Gün sonu kartı; Hastalar arama; randevudan Muayene Oluştur.
 - **Gece özeti:** kuyruğun tamamı bitti (Q1-Q9, Q11). Açık notlar: tüm yeni ekranlar yalnız birim/bileşen testleriyle doğrulandı, tarayıcıda görülmedi; bundle bütçe uyarısı (1.08/1.00 MB) kaynağı ölçülmedi; outbox testi kararsız; ESLint worktree'lerde çalışmadı.
+
+## Gece 2. kuyruk: veri içe aktarma (ADR-019, kullanıcı: "rakip pratiği/önerilere göre karar ver")
+
+Outbox testi kararsızlığı çözüldü (backend main `be24108`: test paylaşılan DB'de 100'ü aşan bekleyen mesajlar yüzünden mesajı listede bulamıyordu; yalnız test düzeltildi, ürün kodu temiz).
+
+| # | Dalga | İş | Tür | Bağımlılık | Durum |
+|---|---|---|---|---|---|
+| Q12 | 1 | İçe aktarma B1: temel (ImportBatch varlıkları, durum makinesi, Imports.* izinleri, migration, iskelet uçlar) | BE+MIG (Opus) | — | Bekliyor |
+| Q13 | 2 | B2: okuma ve eşleme (XLSX/CSV, kanonik başlık, şablon üretimi, mapping) | BE | Q12 | Bekliyor |
+| Q14 | 3 | B3: doğrulama / kuru çalıştırma (satır kuralları, mükerrer, reminderImpact, hata raporu) | BE | Q13 | Bekliyor |
+| Q15 | 4 | B4: uygulama (arka plan işi, sahip bazlı işlem, hatırlatma dışlama, idempotency) | BE (Opus) | Q14 | Bekliyor |
+| Q16 | 5 | B5: geri alma ve temizlik | BE (Opus) | Q15 | Bekliyor |
+| Q17 | 3+ | F1: frontend sihirbaz (şablon indir → yükle → eşle → doğrula → onay → ilerleme → rapor → geri alma) | FE | Q14 sözleşmesi | Bekliyor |
+| Q18 | 6 | T: sentetik pilot verisi, uçtan uca ve performans (yalnız yerel/izole test DB) | TEST | Q16, Q17 | Bekliyor |
