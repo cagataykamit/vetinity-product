@@ -55,3 +55,7 @@ Outbox testi kararsızlığı çözüldü (backend main `be24108`: test paylaş�
 | Q16 | 5 | B5: geri alma ve temizlik | BE (Opus) | Q15 | Bekliyor |
 | Q17 | 3+ | F1: frontend sihirbaz (şablon indir → yükle → eşle → doğrula → onay → ilerleme → rapor → geri alma) | FE | Q14 sözleşmesi | Bekliyor |
 | Q18 | 6 | T: sentetik pilot verisi, uçtan uca ve performans (yalnız yerel/izole test DB) | TEST | Q16, Q17 | Bekliyor |
+- **Q12 B1 temel: TAMAM**, backend main'de (67d1563); migration `AddDataImportBatches` yerel dev DB'ye uygulandı; seed çalıştırıldı (Imports.Read/Manage/Commit, 3 role); API yeniden başlatıldı.
+- **Q13 B2 okuma/eşleme: TAMAM** (601b9d6). **Q14 B3 doğrulama/kuru çalıştırma: TAMAM** (79c7716; 25.000 satır ~1,3 sn, N+1 yok). Tam entegrasyon 1402/0 hata.
+- **Q17 F1 frontend sihirbaz: TAMAM**, frontend main'de (`feat/import-sihirbaz`), `ng test` 1112/1112. Onay adımı B4 uçları gelene kadar 'henüz etkin değil' gösterir (sahte başarı yok).
+- **Q15 B4 uygulama (Opus):** devam ediyor. Sonra B5 (geri alma), T (deneme), ve yeni küçük iş Q19: müşteri mükerrer ad karşılaştırmasını Türkçe duyarlı yap ('AYŞE YILMAZ' = 'Ayşe Yılmaz'; bugün ToLowerInvariant, mükerrer kaçıyor).
