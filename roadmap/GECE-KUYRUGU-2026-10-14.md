@@ -22,3 +22,9 @@
 | Q10 | 4 | QA tur 4 (yeni akışlar), bulgu raporu | TEST | Q1-Q9 | Bekliyor |
 
 Her işin ayrıntılı talimatı koordinatör oturumunda; sözleşme/ADR çıktıları ilgili depoda.
+
+## Gece günlüğü
+
+- **Q2 Frontend D3 (ziyaret çalışma alanı): TAMAM**, yerel main'e alındı (e0b1f4a). `ng test` 977/977; ekran görüntüsü alınamadı (giriş bilgisi yok, parola girilmedi). Bilinen eksik: aşı satırları yalnız oturumda eklenenler için görünür; backend `related-summary.vaccinations` ve aşı listesi `examinationId` süzgeci gerekir.
+- **Q11 Backend muayene aşı özeti (D3 devamı):** başlatıldı (`feat/muayene-asi-ozeti`), sonra frontend tarafı (aşı satırlarının kalıcı görünmesi) kuyruğa eklenecek.
+- D3 kararları (rakip pratiği, sorulmadı): "Yeni Muayene" bağlamsız düğmesi de kalktı (Bugün, randevu, hasta eylem çubuğunda duruyor); uygulama kendi bölümünde (iptal akışı); ücretlenmemiş işlem kontrolü ADR-018'e bağlı.
