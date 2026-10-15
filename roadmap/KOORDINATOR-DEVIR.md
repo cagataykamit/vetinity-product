@@ -1,4 +1,4 @@
-# Koordinatör devir notu (2026-10-12)
+# Koordinatör devir notu (2026-10-12) — ESKİ, güncel olan: roadmap/DEVIR-2026-10-15.md
 
 Yeni koordinatör oturumu bu dosyayı, `CLAUDE.md`, `roadmap/AJAN-KUYRUGU.md` ve `decisions/` altındaki ADR'leri okuyarak başlar. Bu not **durum özetidir**; ayrıntı kaynak dosyalardadır.
 
