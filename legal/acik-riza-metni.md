@@ -35,3 +35,4 @@ Veri Sahibi: {{clientName}}      Tarih: {{date}}      İmza:
 - "Rıza vermesem de hizmet alırım" cümlesi eklendi (özgür irade).
 - Hatırlatma kampanya/ticari iletiden ayrıldı; İYS gereği doğarsa ayrıca ele alınır (HUKUKI-ONAY-LISTESI A4).
 - Aktarım, saklama, güncellik maddeleri rıza değil aydınlatma konusu olduğundan çıkarıldı.
+- Kutular ve imza satırı kodda varsayılan metne konmadı: yazdırma görünümü bunları sabit düzenle basar (backend sözleşmesi K15); metne girerse iki kez basılırdı.
