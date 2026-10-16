@@ -2855,7 +2855,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Site ürünle aynı dili konuşur; yanıltıcı iddia kalmaz |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.5; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) D1. Küçük iş (WORKFLOW), ADR gerekmez |
 
@@ -2871,7 +2871,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Telefonla gelen ziyaretçi paketlere ve kayda ulaşır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.3–3.4. Devir notundaki "tema düğmesine aria-label" küçük işi buraya bağlanır |
 
@@ -2887,7 +2887,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Arama motorunda görünürlük; paylaşımda doğru kart |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
 | **Bağımlılıklar** | ADR-033 (prerender/ayrı derleme kısmı) |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.1–3.2; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6. Yazı tipi yerelleştirme ayrı iş (wt-font) |
 
@@ -2903,7 +2903,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ziyaretçi 30 saniyede "benim için mi" diyebilir; güven kurulur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
 | **Bağımlılıklar** | WEB-005, AK-1/AK-3/AK-4/AK-5 kararları |
 | **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 3; iddia tablosu [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 4. "Mevzuata uygun"/"KVKK uyumlu" ifadeleri kullanılmaz |
 
