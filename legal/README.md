@@ -19,6 +19,8 @@ Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinlerin **ürün 
 | [kullanim-sartlari.md](kullanim-sartlari.md) | Vetinity ↔ klinik | Herkese açık sayfa, sürümlü kabul (TRIAL-009) | Taslak, onay bekliyor |
 | [veri-isleme-sozlesmesi.md](veri-isleme-sozlesmesi.md) | Klinik ↔ Vetinity | Kayıtta kabul edilir, PDF olarak indirilebilir | Taslak, onay bekliyor |
 | [saklama-ve-imha-politikasi.md](saklama-ve-imha-politikasi.md) | Klinik iç belgesi / Vetinity | Klinik için şablon, Vetinity için iç politika | Taslak, onay bekliyor |
+| [portal-kullanim-sartlari.md](portal-kullanim-sartlari.md) | Vetinity ↔ hasta sahibi (portal kullanıcısı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında ve güncellemede sürümlü kabul (ADR-031 K4, ADR-029) | Taslak, onay bekliyor (AK-5) |
+| [portal-gizlilik-politikasi.md](portal-gizlilik-politikasi.md) | Vetinity → hasta sahibi (portal hesabı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında sürümlü kabul, portal içi bağlantı (ADR-031 K4, ADR-029) | Taslak, onay bekliyor (AK-5) |
 
 ## Sürümleme
 

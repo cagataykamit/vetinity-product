@@ -132,4 +132,5 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 - Backend (ileride, ayrı iş): `OwnerAccount`, davet, bağ, portal kimlik şeması, portal API, kabul kayıtlarının hasta sahibine genişletilmesi, bildirim hizmeti; migration kullanıcı onayıyla.
 - Frontend (ileride): ayrı mobil-öncelikli Angular portal uygulaması; klinik panelinde davet/erişim yönetimi.
 - Kod, migration, VPS/altyapı bu belgeyle başlamaz; kabul sonrası iş sırası WORKFLOW'a göre önce backend sözleşmesi.
+- Hukuki metinler (P0): K4'teki hasta sahibi varyantları taslak olarak yazıldı — [portal kullanım şartları](../legal/portal-kullanim-sartlari.md) ve [portal gizlilik politikası](../legal/portal-gizlilik-politikasi.md) v0.1 (2026-10-16); AK-5 soruları HUKUKI-ONAY-LISTESI C5/C6'da.
 - Riskler: hukuki görüş gecikmesi (AK-5), SMS maliyeti, hesap–müşteri yanlış eşleşme (davetle önlenir), iki yüzeyin bakım yükü, mağaza inceleme süreleri.
