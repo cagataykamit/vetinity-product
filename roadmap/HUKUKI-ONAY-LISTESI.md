@@ -42,6 +42,14 @@ Kayıt defteri sayfaları (Rapor Merkezi) **rakip yazılımın raporlarındaki s
 | C3 | Ödeme ve iade | iyzico entegrasyonu (kimlik bilgileri döndürülecek). | Mesafeli satış, iade/iptal kuralları. | Soru |
 | C4 | Hesap/parola güvenliği | Hesap kilitleme ve izin süresi ertelendi (SEC-001/002). | Asgari güvenlik beklentisi. | Soru |
 
+## Geliştirme varsayımı (kullanıcı kararı, 2026-10-16)
+
+Hukuki görüş gelene kadar **geliştirme beklemez**: yukarıdaki taslak metinler ve "Mevcut hâl" sütunları **çalışma varsayımı** olarak kabul edilip iş sürer (ADR-024). Bu, hukuki onay verilmiş anlamına gelmez:
+- Durum sütunları "Onay bekliyor/Soru" olarak kalır; "Onaylandı" yalnız hukukçu yanıtıyla yazılır.
+- Kullanıcıya görünen **taslak uyarıları** (hukuki sayfalardaki bant, form metni uyarı satırı, `LEGAL_DRAFT_NOTICE`) pilot öncesi hukukçu onayına kadar KALIR; onaysız metni onaylı gibi göstermeyiz.
+- Hukuki bir kural varsayımla koda girerse tek yerde yaşar (örn. sürüm sabiti, saklama süresi sabiti) ve burada ilgili satıra not düşülür; hukukçu farklı derse tek yerden değişir.
+- **Pilot canlı müşteri verisiyle başlamadan önce** A1–A5 ve B1–B4 hukukçuyla kapatılır (aşağıdaki öneri geçerli).
+
 ## Nasıl kullanılır
 
 1. Bu dosya hukukçuya verilir. Her satırdaki **Soru** ve **Onay bekliyor** hücreleri cevaplanır.
