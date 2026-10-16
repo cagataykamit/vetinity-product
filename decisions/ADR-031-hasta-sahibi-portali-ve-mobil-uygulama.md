@@ -31,7 +31,8 @@ Hasta sahibi iki sınıf kullanıcı üretir: (a) hesap açan (portal/uygulama);
 | Klinikle mesaj | ✘ | ✔ v1/v2 | MSG-001/002; moderasyon ve acil uyarı metni gerekir (AK-7) |
 | Bildirimler | ✔ e-posta | push, SMS | K7 |
 | Belge/onam görüntüleme ve imza | ✘ | v2+ | PORTAL-005; hukuki geçerlilik araştırması |
-| Muayene notu, lab, görüntü, reçete | ✘ | AK-8 | Klinik veri; varsayılan kapalı |
+| Reçete ve tedavi özeti | ✘ | ✔ v1 | AK-8 kararı (b); sade dil, klinik bazlı açma anahtarı, hukuki görüş (AK-5) sonrası |
+| Muayene notu, lab, görüntü | ✘ | ✘ | AK-8 kararıyla kapsam dışı; yeniden açılırsa ayrı karar |
 
 ### K3 — Kimlik doğrulama ve müşteri hesabıyla bağ
 
@@ -101,8 +102,8 @@ Kanal seçimi kullanıcı tercihine bağlıdır; her bildirim türü için "kimi
 | Aşama | İçerik | Giriş koşulu |
 |---|---|---|
 | **P0 — Hazırlık** | Hukuki: aydınlatma/portal metin varyantı ve AK-5 görüşü; ADR kabulü; API sözleşmesi taslağı | Bu ADR'nin kabulü |
-| **v0 — En küçük değerli dilim** (pilot sonrası) | Davetle hesap + e-posta/SMS kodu; hayvanlarım; randevularım (salt okunur); aşı geçmişi ve yaklaşan aşı; bakiye (salt okunur); klinik bilgisi; e-posta bildirimi; sürümlü kabul; erişimi kapatma; PWA | Pilot kliniğin canlıya çıkması (ADR-014) ve go-live koşulları |
-| **v1** | Randevu talebi (klinik onaylı); push bildirimi; fatura/ekstre PDF; aşı karnesi PDF; hesap/veri talebi; Capacitor ile mağaza uygulaması | v0 kullanım verisi |
+| **v0 — En küçük değerli dilim** (pilot sonrası) | Davetle hesap + e-posta kodu veya e-posta + parola (SMS yok, AK-6); hayvanlarım; randevularım (salt okunur); aşı geçmişi ve yaklaşan aşı; bakiye (salt okunur); klinik bilgisi; e-posta bildirimi; sürümlü kabul; erişimi kapatma; PWA | Pilot kliniğin canlıya çıkması (ADR-014) ve go-live koşulları |
+| **v1** | Randevu talebi (klinik onaylı); reçete ve tedavi özeti; push bildirimi; fatura/ekstre PDF; aşı karnesi PDF; hesap/veri talebi; Capacitor ile mağaza uygulaması | v0 kullanım verisi |
 | **v2** | Klinikle mesajlaşma; belge/onam imzası; online ödeme; çok klinik görünümü | Hukuki geçerlilik + ödeme kararı |
 | **Ayrı hat (hasta sahibi portalından bağımsız)** | Klinik panelinin telefonda tam kullanımı (mobil responsive, PWA); ekran bazlı denetim ve düzeltme | Kullanıcı kararı AK-1; zamanı AK-11'e bağlı değil, pilotla paralel |
 
@@ -117,10 +118,10 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 | AK-3 | Hesap kapsamı | (a) kişi başına tek hesap, birden çok klinik; (b) klinik başına ayrı hesap | **KARAR (kullanıcı, 2026-10-16): proje zaten çoklu klinik tasarımlı → (a) kişi başına tek hesap, klinik başına bağ.** Kapandı. v0'da tek klinik gösterimi ayrı bir ürün kararı değil, yalnız ilk dilim sınırı |
 | AK-4 | Dağıtım | **KARAR (kullanıcı, 2026-10-16): hasta sahibi uygulaması mağazada olacak** (PWA + Capacitor ile Google Play/App Store); mağaza hesabı şirket adına | Kapandı. v0 PWA, mağaza v1'de. Geliştirici hesaplarını açmak kullanıcı işi |
 | AK-5 | Hukuki çerçeve | Portal hesabında Vetinity rolü (sorumlu/işleyen), İYS/ETK, silme–saklama süresi, vekâlet | Hukuk danışmanı görüşü; ADR-024 kapsamına eklenir |
-| AK-6 | SMS sağlayıcısı ve maliyet modeli | (a) klinik kendi hesabı; (b) Vetinity havuzu, pakete dahil/ek ücret; push ayrı | Kullanıcı karar verir; v0 e-posta ile başlayabilir |
+| AK-6 | SMS sağlayıcısı ve maliyet modeli | (a) klinik kendi hesabı; (b) Vetinity havuzu, pakete dahil/ek ücret; push ayrı | **KARAR (kullanıcı, 2026-10-16): v0'da SMS yok, yalnız e-posta.** Kapandı (v0 için). SMS sağlayıcısı ve maliyet modeli SMS eklenmeden önce yeniden açılır. Sonuç: v0 kodu e-postayla gelir; telefon doğrulaması ve SMS hatırlatma sonraya kalır |
 | AK-7 | Mesajlaşma politikası | Acil durum uyarısı, yanıt süresi beklentisi, saklama | v2'ye ertelenir; karar o zaman |
-| AK-8 | Sağlık verisi görünürlüğü | (a) yalnız aşı/randevu/bakiye; (b) + reçete/tedavi özeti; (c) + lab/görüntü/not | (a) v0; sonrası klinik bazlı açma anahtarı |
-| AK-9 | Ödeme | Bakiye gösterimi mi, online ödeme mi, hangi sağlayıcı | Gösterim v0; online ödeme ayrı ADR |
+| AK-8 | Sağlık verisi görünürlüğü | (a) yalnız aşı/randevu/bakiye; (b) + reçete/tedavi özeti; (c) + lab/görüntü/not | **KARAR (kullanıcı, 2026-10-16): (b) aşı/randevu/bakiye + reçete ve tedavi özeti; lab, görüntü, muayene notu görünmez.** Kapandı. Sıralama notu (ajan, onay bekler): v0'da aşı/randevu/bakiye, reçete ve tedavi özeti v1'de |
+| AK-9 | Ödeme | Bakiye gösterimi mi, online ödeme mi, hangi sağlayıcı | **KARAR (kullanıcı, 2026-10-16): yalnız bakiye gösterimi.** Kapandı; online ödeme ayrı ADR ile |
 | AK-10 | Marka | Klinik markalı mı (kendi adı/logosu), Vetinity markalı mı | Klinik adı + logo, Vetinity alt bilgi |
 | AK-11 | v0 zamanlaması | Pilot ve go-live'dan sonra mı, paralel mi? | Pilot sonrası (altyapı/VPS işleri kullanıcı yönlendirmesiyle) |
 | AK-12 | Başlık/ad | Portal ve uygulama adı, alan adı | Kullanıcı |
