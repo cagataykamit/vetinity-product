@@ -1278,13 +1278,13 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Başlık** | Hasta sahibi portalı |
 | **Kategori** | Portal |
 | **Problem** | Hasta sahibi klinik bilgilerine self-servis erişemiyor |
-| **Önerilen çözüm** | Ayrı web portalı; ana ekranda ziyaretler, hatırlatmalar, faturalar, hayvan kartları |
+| **Önerilen çözüm** | Ayrı mobil-öncelikli web portalı (PWA); v0: davetle hesap, hayvanlarım, randevularım, aşı geçmişi/yaklaşan aşı, bakiye, klinik bilgisi |
 | **Kullanıcı değeri** | Self-servis; resepsiyon yükü azalır |
-| **Öncelik** | P2 |
+| **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | **v1.0 dışı aday** → [IDEA-017](../research/ideas.md#idea-017--owner-portal-as-operational-extension), [PATTERN-013](../research/patterns.md#pattern-013--portal-to-clinic-continuity) |
+| **Notlar** | **Kullanıcı kararı (2026-10-16): zorunlu; P2→P1, pilot sonrası.** Kapsam, kimlik, KVKK, teknoloji ve açık kararlar → [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md). v1.0 dışı; rakip gözlemi → [IDEA-017](../research/ideas.md#idea-017--owner-portal-as-operational-extension), [PATTERN-013](../research/patterns.md#pattern-013--portal-to-clinic-continuity) |
 
 ### PORTAL-002 — Portal hayvan profili
 
@@ -1349,6 +1349,86 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | PORTAL-003 |
 | **Notlar** | v1.0 dışı aday; Türkiye hukuki geçerlilik araştırılmalı → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-014](../research/patterns.md#pattern-014--document-to-signature-continuity). DaySmart sandbox observation (bölüm 3): Draw/Type Signature; Lock Letter after sign → [PATTERN-023](../research/patterns.md#pattern-023--post-signature-document-immutability). **Templates Module:** Forms — Designer/Preview/Logic; conditional form logic; multi-page — → [daysmart.md](../competitors/daysmart.md#templates-forms). **Clients Module** form template örnekleri — → [daysmart.md](../competitors/daysmart.md#documents). **E-Vet SMART:** Anestezi İzin Formu — auto-fill owner/patient; imza + PDF/print; metin nihai şablon değil — → [e-vet.md](../competitors/e-vet.md#hasta-formları) |
+
+### PORTAL-006 — Portal kimliği, davet ve müşteri bağı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-006 |
+| **Başlık** | Portal kimliği, davet ve müşteri bağı |
+| **Kategori** | Portal |
+| **Problem** | Hasta sahibinin sistemde kimliği yok; otomatik telefon eşleşmesi yanlış kişiye veri sızdırabilir |
+| **Önerilen çözüm** | Ayrı hasta sahibi hesabı; klinik müşteri kartından süreli tek kullanımlık davet; SMS/e-posta kodu ile doğrulama; hesap↔Client bağı (kişi başına tek hesap, klinik başına bağ — AK-3); kod deneme sınırı, oturum/jeton yönetimi |
+| **Kullanıcı değeri** | Güvenli ve doğru eşleşen self-servis giriş |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-001, SEC-001 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3; giriş yöntemi AK-2. Backend önce, migration kullanıcı onayıyla |
+
+### PORTAL-007 — Portal KVKK: sürümlü kabul, bildirim tercihi, veri talebi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-007 |
+| **Başlık** | Portal KVKK: sürümlü kabul, bildirim tercihi, veri talebi |
+| **Kategori** | Portal |
+| **Problem** | ADR-029 kabulü yalnız klinik kullanıcıları içindir; hasta sahibi aydınlatma/kabul/silme talebi yolu yok |
+| **Önerilen çözüm** | ADR-029 mekanizmasını hasta sahibi hesabına genişlet; ilk girişte aydınlatma + hasta sahibi varyantı kabulü; ayrı ve geri alınabilir bildirim tercihi; portalda erişim/düzeltme/silme talebi → klinik KVKK talep süreci; Ret/RemindersOptedOut uyumu |
+| **Kullanıcı değeri** | Yasal uyum; güven |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-006, TRIAL-009 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4; Vetinity'nin rolü ve İYS/ETK için hukuki görüş şart (AK-5); [HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md)'ne eklenir |
+
+### PORTAL-008 — Portal API ayrımı ve kiracı izolasyonu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-008 |
+| **Başlık** | Portal API ayrımı ve kiracı izolasyonu |
+| **Kategori** | Portal |
+| **Problem** | Portal uçları personel yüzeyiyle karışırsa yetki ve veri sızıntısı riski |
+| **Önerilen çözüm** | Ayrı yol öneki, kimlik şeması/token hedef kitlesi, portal DTO'ları, 'yalnız kendi Client kayıtlarım' sahiplik kontrolü tek yardımcıda, çapraz kiracı ve çapraz token testleri, okuma denetim kaydı, hız sınırı |
+| **Kullanıcı değeri** | Güvenli, sürdürülebilir portal yüzeyi |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-006 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K6; backend sözleşmesi tek doğruluk kaynağı, önce backend |
+
+### PORTAL-009 — Klinik panelinde portal yönetimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-009 |
+| **Başlık** | Klinik panelinde portal yönetimi |
+| **Kategori** | Portal |
+| **Problem** | Klinik hangi müşterinin portala davetli/bağlı olduğunu göremez, erişimi kapatamaz |
+| **Önerilen çözüm** | Müşteri kartında portal durumu (davetli/bağlı/kapalı), davet gönder/iptal/yenile, erişimi kapat, klinik düzeyinde portalı aç/kapat (çıkış planı), portal talepleri için gelen kutusu girişi |
+| **Kullanıcı değeri** | Klinik kontrolü; çıkış güvencesi |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-006 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3/K8; yeni portal yönetim izni (izin kataloğu) |
+
+### PORTAL-010 — Portal bildirimleri (e-posta, SMS, push)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-010 |
+| **Başlık** | Portal bildirimleri (e-posta, SMS, push) |
+| **Kategori** | Portal |
+| **Problem** | Hatırlatma ve doğrulama için kanal seçimi ve tercih yönetimi tanımsız |
+| **Önerilen çözüm** | Bildirim türü × kanal kuralı tek yerde (backend); v0 e-posta, SMS kodu/kritik hatırlatma, v1 push; minimum veri içerikli metin; teslim durumu ve tercih |
+| **Kullanıcı değeri** | Hasta sahibi doğru kanaldan zamanında haberdar olur |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; SMS sağlayıcısı/maliyet AK-6 |
 
 ---
 
@@ -2651,6 +2731,74 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Karar bekliyor (kullanıcı 2026-10-13: detaylar sonra netleştirilecek) |
 | **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
 | **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı) |
+
+---
+
+## MOBILE — Mobil
+
+### MOBILE-001 — Hasta sahibi mobil deneyimi (PWA)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | MOBILE-001 |
+| **Başlık** | Hasta sahibi mobil deneyimi (PWA) |
+| **Kategori** | Mobil |
+| **Problem** | Hasta sahibi telefonundan kolay erişim bekler |
+| **Önerilen çözüm** | Portalın mobil-öncelikli, ana ekrana eklenebilir PWA olarak yayını; çevrimdışı yalnız son görüntülenen veri önbelleği |
+| **Kullanıcı değeri** | Telefonla kolay erişim, mağaza gerekmeden |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-001 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5 (öneri: önce PWA); AK-4 |
+
+### MOBILE-002 — Hasta sahibi mobil uygulaması (Capacitor, mağaza)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | MOBILE-002 |
+| **Başlık** | Hasta sahibi mobil uygulaması (Capacitor, mağaza) |
+| **Kategori** | Mobil |
+| **Problem** | PWA'da iOS push ve mağaza varlığı sınırlı |
+| **Önerilen çözüm** | Aynı Angular kod tabanını Capacitor ile iOS/Android paketle; yerel push, biyometrik kilit; mağaza hesabı şirket adına |
+| **Kullanıcı değeri** | Mağazada bulunma, güvenilir push |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | MOBILE-001, MOBILE-003 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4 |
+
+### MOBILE-003 — Push bildirim altyapısı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | MOBILE-003 |
+| **Başlık** | Push bildirim altyapısı |
+| **Kategori** | Mobil |
+| **Problem** | Randevu/aşı hatırlatması için anında kanal yok |
+| **Önerilen çözüm** | Cihaz jetonu kaydı/iptali, bildirim izni ve KVKK tercihi, sağlayıcı arayüzü arkasında gönderim |
+| **Kullanıcı değeri** | Zamanında hatırlatma |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | PORTAL-010 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; MOBILE-002 ile birlikte |
+
+### MOBILE-004 — Veteriner/çalışan mobil deneyimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | MOBILE-004 |
+| **Başlık** | Veteriner/çalışan mobil deneyimi |
+| **Kategori** | Mobil |
+| **Problem** | Hekimin telefondan klinik kayda erişimi |
+| **Önerilen çözüm** | Şimdilik responsive web; ayrı uygulama ihtiyacı doğrulanırsa aynı kabuk |
+| **Kullanıcı değeri** | Esneklik |
+| **Öncelik** | P3 |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Araştırılacak |
+| **Bağımlılıklar** | — |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) AK-1 (açık karar); roadmap Aşama 12'de kalır |
 
 ---
 
