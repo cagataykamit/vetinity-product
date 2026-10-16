@@ -12,6 +12,7 @@ Bu klasör, Vetinity'nin uzun vadeli **ürün araştırma merkezidir**. Rakip g�
 |---|---|
 | [ideas.md](ideas.md) | Tekil ürün fikirleri — rakip araştırmalarından çıkan, henüz backlog'a alınmamış aday fikirler |
 | [patterns.md](patterns.md) | Tekrar eden ürün tasarım kalıpları — birden fazla rakipte görülebilen, Vetinity tarafından kullanılabilir veya kullanılmayabilir yapılar |
+| [tanitim-sitesi-analizi-2026-10.md](tanitim-sitesi-analizi-2026-10.md) | Tanıtım sitesi (www) analizi: bulgular, doğrulanmış iddia tablosu, rakip vaatleri; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md), ADR-034 taslak |
 
 ---
 
