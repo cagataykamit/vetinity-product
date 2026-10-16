@@ -112,10 +112,10 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 
 | # | Soru | Seçenekler | Öneri |
 |---|---|---|---|
-| AK-1 | "Mobil uygulama" kimin için? | **KARAR (kullanıcı, 2026-10-16): hasta sahibi + çalışan; çalışan mobilden aynı siteye girer.** | Kapandı. Kalan alt soru AK-1b: çalışan için ayrıca mağaza uygulaması (Capacitor) gerekir mi, yoksa mobil tarayıcı + ana ekrana eklenen PWA yeter mi? Öneri: PWA yeter, mağaza ihtiyacı pilotta görülürse |
+| AK-1 | "Mobil uygulama" kimin için? | **KARAR (kullanıcı, 2026-10-16): hasta sahibi + çalışan; çalışan mobilden aynı siteye girer.** | Kapandı. **AK-1b KARAR (kullanıcı, 2026-10-16, öneri kabul): çalışan için mobil tarayıcı + ana ekrana eklenen PWA yeter, ayrı mağaza uygulaması yok;** pilotta ihtiyaç görülürse yeniden açılır |
 | AK-2 | Hasta sahibi girişi | (a) SMS/e-posta tek kullanımlık kod; (b) e-posta + parola; (c) ikisi | (a), e-posta yedeğiyle |
 | AK-3 | Hesap kapsamı | (a) kişi başına tek hesap, birden çok klinik; (b) klinik başına ayrı hesap | (a) veri modeli, v0'da tek klinik gösterimi |
-| AK-4 | Dağıtım | (a) yalnız PWA; (b) PWA + mağaza uygulaması (Capacitor); mağaza hesabı şirket adına | (b), v1'de; v0 PWA. Marka/şirket hesabı kullanıcı işi |
+| AK-4 | Dağıtım | **KARAR (kullanıcı, 2026-10-16): hasta sahibi uygulaması mağazada olacak** (PWA + Capacitor ile Google Play/App Store); mağaza hesabı şirket adına | Kapandı. v0 PWA, mağaza v1'de. Geliştirici hesaplarını açmak kullanıcı işi |
 | AK-5 | Hukuki çerçeve | Portal hesabında Vetinity rolü (sorumlu/işleyen), İYS/ETK, silme–saklama süresi, vekâlet | Hukuk danışmanı görüşü; ADR-024 kapsamına eklenir |
 | AK-6 | SMS sağlayıcısı ve maliyet modeli | (a) klinik kendi hesabı; (b) Vetinity havuzu, pakete dahil/ek ücret; push ayrı | Kullanıcı karar verir; v0 e-posta ile başlayabilir |
 | AK-7 | Mesajlaşma politikası | Acil durum uyarısı, yanıt süresi beklentisi, saklama | v2'ye ertelenir; karar o zaman |
