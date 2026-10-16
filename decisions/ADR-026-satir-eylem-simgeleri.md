@@ -1,0 +1,22 @@
+# ADR-026 — Liste satır eylemleri simge düğmesi olur, belirgin (dolu) simgeler
+
+## Durum
+
+**Kabul edildi (2026-10-16, kullanıcı kararı).** Menü simgeleriyle ([ADR-023](ADR-023-menu-grouping-and-placement-rule.md), Font Awesome) aynı simge ailesini kullanır. Rakip görünümü kopyalanmaz.
+
+## Bağlam
+
+Liste satırlarında "Detay" yazı bağlantısı var, düzenle/iptal simgeleri çok ince (outline) çizgili. Kullanıcı ikisinden de memnun değil: yazı yerine simge, simgeler daha belirgin.
+
+## Karar
+
+1. **Satır eylemleri simge düğmesidir:** "Detay" yazısı kalkar; Detay, Düzenle, Sil/İptal simge olarak gösterilir. Birincil metinli eylemler ("Ödeme al" vb.) olduğu gibi kalır.
+2. **Simge ailesi Font Awesome Solid** (menüyle aynı; ince/outline simge yok): Detay `fa-eye`, Düzenle `fa-pen-to-square`, Sil `fa-trash-can`, İptal/geçersiz kıl `fa-ban`. Yalnız satırda gerçekten bulunan eylemler gösterilir.
+3. **Erişilebilirlik zorunlu:** metin kalktığı için her düğmede `aria-label` ve fare/odakta ipucu (tooltip) bulunur; tıklanabilir alan en az 32×32 px (dokunmatikte 40).
+4. **Renk:** Detay ve Düzenle nötr/ikincil vurgu, Sil/İptal tehlike rengi; üzerine gelince zemin tonu değişir. Renk tek başına anlam taşımaz (ipucu ve etiket var).
+5. **Tek ortak bileşen:** satır eylemi düğmesi tek yerde yaşar (ortak bileşen + tek stil); sayfalar kendi ikon düğmesini yazmaz. Mevcut listeler bu bileşene taşınır.
+
+## Sonuçlar
+
+- Frontend: ortak satır eylemi bileşeni ve tüm liste sayfalarının geçişi; spec'ler (aria-label, ipucu, eylem varlığı).
+- Mevcut metin bağlantısı olarak "Detay"a güvenen testler güncellenir.
