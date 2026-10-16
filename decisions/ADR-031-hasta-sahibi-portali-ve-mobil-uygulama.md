@@ -124,7 +124,7 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 | AK-9 | Ödeme | Bakiye gösterimi mi, online ödeme mi, hangi sağlayıcı | **KARAR (kullanıcı, 2026-10-16): yalnız bakiye gösterimi.** Kapandı; online ödeme ayrı ADR ile |
 | AK-10 | Marka | Klinik markalı mı (kendi adı/logosu), Vetinity markalı mı | **KARAR (kullanıcı, 2026-10-16, öneri kabul): klinik adı + logo, alt bilgide Vetinity.** Kapandı |
 | AK-11 | v0 zamanlaması | Pilot ve go-live'dan sonra mı, paralel mi? | **KARAR (kullanıcı, 2026-10-16, öneri kabul): şimdi, ürün işleriyle paralel.** Backend önce (portal API), sonra Angular PWA; altyapı/VPS işleri hariç (kullanıcı söyleyecek). Kapandı |
-| AK-12 | Başlık/ad | Portal ve uygulama adı, alan adı | **KARAR (kullanıcı, 2026-10-16, öneri kabul): geçici "Vetinity"; ad ve alan adı mağaza öncesi netleşir.** Kapandı |
+| AK-12 | Başlık/ad | Portal ve uygulama adı, alan adı | **KARAR (kullanıcı, 2026-10-16, öneri kabul): geçici "Vetinity"; ad mağaza öncesi netleşir. Alan adı `vetinity.com`, portal adresi `portal.vetinity.com` (staging `portal-staging.vetinity.com`): bkz. [ADR-033](ADR-033-alan-adi-ve-adres-duzeni.md).** Kapandı |
 
 ## Sonuçlar
 
