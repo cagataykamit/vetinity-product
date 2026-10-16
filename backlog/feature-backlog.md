@@ -175,7 +175,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Uyumluluk; şeffaf onboarding ve hesap erişimi |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Uygulandı (2026-10-16, ADR-029; metinler taslak, hukuki onay bekliyor) |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Trial/onboarding girişinde de uygulanır; yalnızca trial'a özgü değildir. DaySmart sandbox gözlemi (giriş akışı) — tenant/kullanıcı kapsamı ve audit **doğrulanmadı** → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance) |
 
