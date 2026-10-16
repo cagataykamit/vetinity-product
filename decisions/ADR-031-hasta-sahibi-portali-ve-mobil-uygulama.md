@@ -14,7 +14,7 @@
 
 ### K1 — Kim kullanır
 
-**Hasta sahibi** (ana kullanıcı). Klinik çalışanı portala/hasta sahibi uygulamasına girmez; çalışanın tek işi klinik panelinde davet göndermek, erişimi yönetmek, gelen talepleri işlemektir. Veteriner/çalışan mobil kullanımı ayrı bir konudur (AK-1); varsayılan öneri: çalışan için şimdilik responsive web, ayrı uygulama yok.
+**Hasta sahibi** (ana kullanıcı) ve **klinik çalışanı** (kullanıcı kararı, 2026-10-16: "çalışan da mobil uygulamayı kullanabilmeli; aynı internet sitesine mobilden girebildiği gibi"). İki ayrı yüzey kalır: hasta sahibi portalı (ayrı uygulama) ve klinik paneli. Çalışan, **mevcut klinik paneline telefonundan aynı adresten girer**; panel telefon genişliğinde tam kullanılabilir olmalıdır (şu anki "masaüstü/tablet öncelikli" kapsamı genişler) ve ana ekrana eklenebilir (PWA) olur. Çalışanın hasta sahibi portalına girişi yoktur; portalda yalnız davet gönderme, erişim yönetimi ve gelen talepleri işleme klinik panelinde yapılır. Çalışan için **ayrı mağaza uygulaması** kararı verilmedi (AK-1b).
 
 Hasta sahibi iki sınıf kullanıcı üretir: (a) hesap açan (portal/uygulama); (b) hesap açmayan (klinik e-posta/SMS ile ulaşmaya devam eder). (b) için hiçbir işlev kaybolmaz.
 
@@ -104,7 +104,7 @@ Kanal seçimi kullanıcı tercihine bağlıdır; her bildirim türü için "kimi
 | **v0 — En küçük değerli dilim** (pilot sonrası) | Davetle hesap + e-posta/SMS kodu; hayvanlarım; randevularım (salt okunur); aşı geçmişi ve yaklaşan aşı; bakiye (salt okunur); klinik bilgisi; e-posta bildirimi; sürümlü kabul; erişimi kapatma; PWA | Pilot kliniğin canlıya çıkması (ADR-014) ve go-live koşulları |
 | **v1** | Randevu talebi (klinik onaylı); push bildirimi; fatura/ekstre PDF; aşı karnesi PDF; hesap/veri talebi; Capacitor ile mağaza uygulaması | v0 kullanım verisi |
 | **v2** | Klinikle mesajlaşma; belge/onam imzası; online ödeme; çok klinik görünümü | Hukuki geçerlilik + ödeme kararı |
-| **Ayrı hat** | Veteriner/çalışan mobil deneyimi | AK-1 |
+| **Ayrı hat (hasta sahibi portalından bağımsız)** | Klinik panelinin telefonda tam kullanımı (mobil responsive, PWA); ekran bazlı denetim ve düzeltme | Kullanıcı kararı AK-1; zamanı AK-11'e bağlı değil, pilotla paralel |
 
 Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı ölçütü (öneri): davetlerin kabul oranı, aylık etkin kullanıcı, telefonla sorulan "randevum ne zaman / aşım ne zaman" çağrılarında düşüş (klinik beyanı).
 
@@ -112,7 +112,7 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 
 | # | Soru | Seçenekler | Öneri |
 |---|---|---|---|
-| AK-1 | "Mobil uygulama" kimin için? | (a) yalnız hasta sahibi; (b) hasta sahibi + veteriner/çalışan | (a); çalışan için responsive web kalır, ihtiyaç görülürse sonra |
+| AK-1 | "Mobil uygulama" kimin için? | **KARAR (kullanıcı, 2026-10-16): hasta sahibi + çalışan; çalışan mobilden aynı siteye girer.** | Kapandı. Kalan alt soru AK-1b: çalışan için ayrıca mağaza uygulaması (Capacitor) gerekir mi, yoksa mobil tarayıcı + ana ekrana eklenen PWA yeter mi? Öneri: PWA yeter, mağaza ihtiyacı pilotta görülürse |
 | AK-2 | Hasta sahibi girişi | (a) SMS/e-posta tek kullanımlık kod; (b) e-posta + parola; (c) ikisi | (a), e-posta yedeğiyle |
 | AK-3 | Hesap kapsamı | (a) kişi başına tek hesap, birden çok klinik; (b) klinik başına ayrı hesap | (a) veri modeli, v0'da tek klinik gösterimi |
 | AK-4 | Dağıtım | (a) yalnız PWA; (b) PWA + mağaza uygulaması (Capacitor); mağaza hesabı şirket adına | (b), v1'de; v0 PWA. Marka/şirket hesabı kullanıcı işi |

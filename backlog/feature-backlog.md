@@ -2789,16 +2789,16 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | Alan | Değer |
 |---|---|
 | **Kimlik** | MOBILE-004 |
-| **Başlık** | Veteriner/çalışan mobil deneyimi |
+| **Başlık** | Klinik panelinin çalışan için mobil kullanımı |
 | **Kategori** | Mobil |
-| **Problem** | Hekimin telefondan klinik kayda erişimi |
-| **Önerilen çözüm** | Şimdilik responsive web; ayrı uygulama ihtiyacı doğrulanırsa aynı kabuk |
+| **Problem** | Çalışan (hekim, resepsiyon) telefondan aynı klinik paneline girip işini yapamıyor veya zor yapıyor |
+| **Önerilen çözüm** | Mevcut paneli telefon genişliğinde tam kullanılabilir yap (responsive denetim: Bugün, randevu, hasta/müşteri, muayene, ödeme); ana ekrana eklenebilir PWA; ayrı mağaza uygulaması AK-1b ile karara bağlanır |
 | **Kullanıcı değeri** | Esneklik |
-| **Öncelik** | P3 |
-| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Araştırılacak |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) AK-1 (açık karar); roadmap Aşama 12'de kalır |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) Kullanıcı kararı (2026-10-16): çalışan mobilden aynı siteye girebilmeli; mağaza uygulaması AK-1b |
 
 ---
 

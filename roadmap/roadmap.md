@@ -68,7 +68,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 | Online randevu | P3 | Aşama 11 (P2) | **P3 → P2.** Check-in'in teknik ön koşulu değildir. |
 | Hasta sahibi uygulaması (portal) | P3 | **Pilot sonrası, zorunlu (P1)** | **Kullanıcı kararı 2026-10-16: zorunlu.** Kapsam ve aşamalar: [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md); açık kararlar bekliyor. |
 | Aşı ve kontrol hatırlatmaları | P3 | Aşama 7 | Mevcut e-posta hatırlatması korunur ve gerçek gönderim senaryosuyla doğrulanır. |
-| Veteriner mobil uygulaması | P3 | Aşama 12 (Future) | İlk sürümde responsive web; native yok. Hasta sahibi mobil uygulaması ayrı ve zorunlu ([ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md)); çalışan mobili açık karar AK-1. |
+| Veteriner mobil uygulaması | P3 | Aşama 12 (Future) | İlk sürümde responsive web; native yok. Kullanıcı kararı 2026-10-16: çalışan da mobilden aynı panele girebilmeli (MOBILE-004, P1); hasta sahibi mobili ayrı ve zorunlu ([ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md)). |
 | Çok şubeli yönetim, SSO, gelişmiş audit, workflow engine, API marketplace, kurumsal raporlama | P4 | Aşama 12 (Future) | Mevcut tenant/clinic temeli korunur. |
 | Diğer P2–P3 maddeleri (gelişmiş AI arama, AI rapor özetleme, kontrollü klinik karar desteği, push bildirimleri, reçete/tedavi görüntüleme, güvenli mesajlaşma) | P2 / P3 | Ana planda ayrıca yeniden sıralanmadı | Mevcut öncelikleri geçerli kalır; Aşama 10–12 ile uyumlu olduğu doğrulanacak. |
 
