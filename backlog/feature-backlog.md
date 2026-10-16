@@ -2841,7 +2841,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 
 ## WEB — Tanıtım sitesi (www)
 
-> Kaynak: [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) ve [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md). Açık kararlar AK-1…AK-9 öneri belgesinde; kararsız maddeler Planlandı kalır.
+> Kaynak: [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md), [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md), [ux/tanitim-sitesi-tasarim.md](../ux/tanitim-sitesi-tasarim.md). Kararlar: [ADR-034](../decisions/ADR-034-tanitim-sitesi-konumlandirma.md) kabul edildi (2026-10-16); AK-6 iletişim bilgileri bekliyor; hastane sonraki hedef, ayrı paket.
 
 ### WEB-001 — Tanıtım sitesi metin ve dil düzeltmeleri (ADR-022, boş iddialar)
 

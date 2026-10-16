@@ -139,11 +139,11 @@ Ana sayfa ─ "Ücretsiz dene" ─► /auth/signup (plan seçimi gizli, varsayı
 
 D1 ve D2 "doğrudan kodlanabilecek küçük işler" sınıfındadır (WORKFLOW); D3–D6 bu belgeye ve açık kararlara bağlıdır.
 
-## 9. Açık kararlar (kullanıcı)
+## 9. Açık kararlar (kullanıcı) — **karar verildi 2026-10-16: önerilen seçenekler kabul edildi (ADR-034); AK-6 bekliyor; hastane sonraki hedef, ayrı paket**
 
 | # | Karar | Seçenekler | Öneri |
 |---|---|---|---|
-| AK-1 | Ana hedef kitle | A küçük klinik · B çok klinikli işletme · C hastane | **A** ana, B ikincil satır, C yok |
+| AK-1 | Ana hedef kitle | A küçük klinik · B çok klinikli işletme · C hastane | **A** ana, B ikincil satır, C yok — C sonraki hedef, ayrı paket (kullanıcı) |
 | AK-2 | Fiyat gösterimi | (a) "Fiyat yakında" kalsın · (b) fiyat yazılsın (paket başına aylık TL, KDV notu) · (c) fiyat yok, "teklif al / iletişime geçin" · (d) tek paket + "büyüyünce konuşalım" | **(b)** pilot fiyatı belli olunca; o güne kadar **(c)** ("Pilot dönemi fiyatı için yazın"). "Fiyat yakında" kaldırılsın. Ayrıca kullanıcı/klinik sınırlarının tek doğrusu (site 1/5/∞ mi, backend 3/10/50 mi) |
 | AK-3 | Ana mesaj | (a) "Günün akışı tek ekranda" · (b) "Defterler ve KVKK kendiliğinden" · (c) "Kayıtlarınız güvende" · (d) mevcut "modern yönetim platformu" | **(a)** kahraman, (b) ikinci bölüm; (d) bırakılır |
 | AK-4 | Ton | (a) sade/klinik dili, "siz" · (b) kurumsal/teknik · (c) samimi/"sen" | **(a)** |
