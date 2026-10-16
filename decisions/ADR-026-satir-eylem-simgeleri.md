@@ -16,6 +16,8 @@ Liste satırlarında "Detay" yazı bağlantısı var, düzenle/iptal simgeleri �
 4. **Renk:** Detay ve Düzenle nötr/ikincil vurgu, Sil/İptal tehlike rengi; üzerine gelince zemin tonu değişir. Renk tek başına anlam taşımaz (ipucu ve etiket var).
 5. **Tek ortak bileşen:** satır eylemi düğmesi tek yerde yaşar (ortak bileşen + tek stil); sayfalar kendi ikon düğmesini yazmaz. Mevcut listeler bu bileşene taşınır.
 
+6. **Düzenle her listede bulunur (2026-10-16, kullanıcı: "2 iş yaptırma"):** düzenleme sayfası/rotası olan her kaydın liste satırında, kullanıcının düzenleme yetkisi varsa **Düzenle** simgesi de bulunur; kullanıcı önce Detay'a girip sonra Düzenle'ye basmak zorunda kalmaz. Satırda Detay + Düzenle yan yana durur; kesinleşmiş/kilitli ya da salt okunur kayıtta mevcut koşula göre gizlenir veya pasif gösterilir (kural sayfanın mevcut düzenleme koşuluyla aynı).
+
 ## Sonuçlar
 
 - Frontend: ortak satır eylemi bileşeni ve tüm liste sayfalarının geçişi; spec'ler (aria-label, ipucu, eylem varlığı).
