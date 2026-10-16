@@ -30,6 +30,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | MOBILE- | Mobil |
 | ENT- | Enterprise |
 | SEC- | Güvenlik ve sertleştirme |
+| WEB- | Tanıtım sitesi (www) |
 
 ---
 
@@ -2835,6 +2836,140 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | Aşama 9 |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O6; tasarım kararı gerekir |
+
+---
+
+## WEB — Tanıtım sitesi (www)
+
+> Kaynak: [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) ve [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md). Açık kararlar AK-1…AK-9 öneri belgesinde; kararsız maddeler Planlandı kalır.
+
+### WEB-001 — Tanıtım sitesi metin ve dil düzeltmeleri (ADR-022, boş iddialar)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-001 |
+| **Başlık** | Tanıtım sitesi metin ve dil düzeltmeleri (ADR-022, boş iddialar) |
+| **Kategori** | WEB |
+| **Problem** | Sitede "pet", "Dashboard", "Admin/sekreter" gibi ADR-022'ye aykırı terimler; "öncelikli kullanım kapasitesi" gibi tanımsız iddialar; sahte "panel önizleme" kartı; ölü `pages/landing/*` kodu |
+| **Önerilen çözüm** | ADR-022 diline geçiş, tanımsız iddiaların silinmesi, sahte önizleme kaldırma, `pages/landing/*` ve `public/demo` temizliği, `<title>`/`description` metnine "veteriner" |
+| **Kullanıcı değeri** | Site ürünle aynı dili konuşur; yanıltıcı iddia kalmaz |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.5; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) D1. Küçük iş (WORKFLOW), ADR gerekmez |
+
+### WEB-002 — Tanıtım sitesi mobil menü ve erişilebilirlik
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-002 |
+| **Başlık** | Tanıtım sitesi mobil menü ve erişilebilirlik |
+| **Kategori** | WEB |
+| **Problem** | 375 px'te üst menü tamamen gizli (hamburger yok): Paketler, SSS, Giriş, Ücretsiz başla ulaşılamaz; tema düğmelerinin erişilebilir adı boş; 7 dokunma hedefi 44 px altında; "içeriğe atla" yok |
+| **Önerilen çözüm** | Hamburger menü (odak tuzağı, Escape ile kapanma), tema düğmesine gerçek `aria-label`, dokunma hedefi ≥44 px, atla bağlantısı |
+| **Kullanıcı değeri** | Telefonla gelen ziyaretçi paketlere ve kayda ulaşır |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.3–3.4. Devir notundaki "tema düğmesine aria-label" küçük işi buraya bağlanır |
+
+### WEB-003 — Tanıtım sitesi teknik SEO (robots, sitemap, canonical, OG, JSON-LD, prerender)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-003 |
+| **Başlık** | Tanıtım sitesi teknik SEO (robots, sitemap, canonical, OG, JSON-LD, prerender) |
+| **Kategori** | WEB |
+| **Problem** | `robots.txt`/`sitemap.xml` yok (index.html dönüyor); canonical origin'den türetiliyor (staging kendini asıl sayıyor, noindex yok); `og:image`/twitter kartı yok; sunucu HTML'inde `<h1>` yok (tamamen istemci tarafı), ~782 KB JS |
+| **Önerilen çözüm** | Sabit `https://www.vetinity.com` canonical, staging `noindex`, robots ve sitemap, OG görseli, JSON-LD (Organization, SoftwareApplication, FAQPage), tanıtım sayfaları için prerender/SSG değerlendirmesi (ADR-033 ayrımıyla birlikte) |
+| **Kullanıcı değeri** | Arama motorunda görünürlük; paylaşımda doğru kart |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-033 (prerender/ayrı derleme kısmı) |
+| **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.1–3.2; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6. Yazı tipi yerelleştirme ayrı iş (wt-font) |
+
+### WEB-004 — Ana sayfanın problem odaklı yeniden yazımı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-004 |
+| **Başlık** | Ana sayfanın problem odaklı yeniden yazımı |
+| **Kategori** | WEB |
+| **Problem** | Ana sayfa modül listesi ve jenerik sıfatlarla ürünün içini anlatıyor; kliniğin problemini, Türkiye'ye özgü güçlü yanları (defterler, KVKK, Bugün, geçiş) ve "ne yapmıyoruz"u anlatmıyor; gerçek ekran yok |
+| **Önerilen çözüm** | Öneri belgesindeki 10 bölümlük omurga: kahraman (gerçek Bugün ekranı), kime göre, bir günün akışı, Türkiye'ye özgü (defter+KVKK), kayıt güvenliği, geçiş, yol haritası (dürüst), SSS 6–8, çağrı; yalnız doğrulanmış iddialar |
+| **Kullanıcı değeri** | Ziyaretçi 30 saniyede "benim için mi" diyebilir; güven kurulur |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | WEB-005, AK-1/AK-3/AK-4/AK-5 kararları |
+| **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 3; iddia tablosu [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 4. "Mevzuata uygun"/"KVKK uyumlu" ifadeleri kullanılmaz |
+
+### WEB-005 — Tanıtım için gerçek ekran görüntüleri (anonim test verisi)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-005 |
+| **Başlık** | Tanıtım için gerçek ekran görüntüleri (anonim test verisi) |
+| **Kategori** | WEB |
+| **Problem** | Sitede gerçek ürün görseli yok; sahte önizleme kartı var |
+| **Önerilen çözüm** | Analiz belgesi bölüm 7 listesi: Bugün, muayene alanı, hasta kartı/zaman çizelgesi, Aşı Kayıt Defteri + yazdırma, KVKK formu, ödeme/bakiye ve gün sonu, veri aktarma sihirbazı, mal kabul; açık + koyu tema, 2×, WebP, `alt` metni; sentetik ad/telefon |
+| **Kullanıcı değeri** | Somut kanıt; sahte görsel yok |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | Panelde sentetik veri (TEST kayıtları) |
+| **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 7. Portal görseli yayınlanana kadar yok |
+
+### WEB-006 — Yeni tanıtım sayfaları: Özellikler, Defterler ve KVKK, Geçiş, İletişim/Demo, Hakkımızda/Destek
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-006 |
+| **Başlık** | Yeni tanıtım sayfaları: Özellikler, Defterler ve KVKK, Geçiş, İletişim/Demo, Hakkımızda/Destek |
+| **Kategori** | WEB |
+| **Problem** | İletişim, demo talebi, hakkımızda, destek, güvenlik/KVKK ve geçiş sayfaları yok; ziyaretçinin soru soracağı yer yok |
+| **Önerilen çözüm** | Beş sayfa (adresler öneri belgesinde); iletişim/demo ilk sürümde form yerine e-posta/telefon olabilir (backend ucu yok); SSS ayrı sayfa |
+| **Kullanıcı değeri** | Sorusu olan klinik ulaşabilir; Türkiye'ye özgü değer ayrı sayfada anlatılır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | AK-5, AK-6 (iletişim bilgileri, tüzel kişi) |
+| **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 2 ve 5. Blog şimdilik yok |
+
+### WEB-007 — Paketler sayfası: fiyat kararı ve backend plan kataloğu ile tek kaynak
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-007 |
+| **Başlık** | Paketler sayfası: fiyat kararı ve backend plan kataloğu ile tek kaynak |
+| **Kategori** | WEB |
+| **Problem** | Üç kartta "Fiyat yakında"; site kullanıcı sınırları (1/5/∞) backend `SubscriptionPlanCatalog` (3/10/50) ile çelişiyor; klinik sınırı backend'de yok; deneme sonrası ne olacağı tanımsız |
+| **Önerilen çözüm** | AK-2 kararına göre fiyat ya da "teklif al"; sınırların tek doğrusu backend'den (katalog ucu ya da aynı sabit); /pricing → /paketler yönlendirme; deneme sonu kuralı (TRIAL-007) netleşmeden SSS'de yazılmaz |
+| **Kullanıcı değeri** | Fiyat belirsizliği güven kaybına yol açmaz; site ürünle çelişmez |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | AK-2, TRIAL-004, TRIAL-007 |
+| **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.6 |
+
+### WEB-008 — Tanıtım sitesinin ayrı derlemesi ve çerezsiz ziyaret sayacı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | WEB-008 |
+| **Başlık** | Tanıtım sitesinin ayrı derlemesi ve çerezsiz ziyaret sayacı |
+| **Kategori** | WEB |
+| **Problem** | Tanıtım, panel ve portal aynı Angular derlemesinde; tanıtım ziyaretçisi panel JS'ini indiriyor; analitik yok, eklenirse KVKK/çerez sorusu |
+| **Önerilen çözüm** | ADR-033 ile birlikte tanıtımın ayrı statik/prerender derlemesi; analitik: önce yok (sunucu günlüğü), sonra kendi barındırılan çerezsiz sayaç; dış kaynak (GA/Pixel) kullanılmaz; dönüşüm backend'den (TRIAL-008) |
+| **Kullanıcı değeri** | Hızlı, hafif, KVKK açısından temiz tanıtım sitesi |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-033 uygulaması (kullanıcı), AK-7, AK-8 |
+| **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6.3 ve 7 |
 
 ## İlgili belgeler
 
