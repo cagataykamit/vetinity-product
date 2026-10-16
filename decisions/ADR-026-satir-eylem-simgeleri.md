@@ -18,6 +18,8 @@ Liste satırlarında "Detay" yazı bağlantısı var, düzenle/iptal simgeleri �
 
 6. **Düzenle her listede bulunur (2026-10-16, kullanıcı: "2 iş yaptırma"):** düzenleme sayfası/rotası olan her kaydın liste satırında, kullanıcının düzenleme yetkisi varsa **Düzenle** simgesi de bulunur; kullanıcı önce Detay'a girip sonra Düzenle'ye basmak zorunda kalmaz. Satırda Detay + Düzenle yan yana durur; kesinleşmiş/kilitli ya da salt okunur kayıtta mevcut koşula göre gizlenir veya pasif gösterilir (kural sayfanın mevcut düzenleme koşuluyla aynı).
 
+7. **Sil/İptal listede de bulunur (2026-10-16, kullanıcı: "sil gerekiyorsa onu da yapalım"):** bir kaydın silme/iptal (geçersiz kıl) akışı **zaten varsa** (detay/düzenleme sayfasında ya da API'de) ve kullanıcının yetkisi varsa liste satırında da **Sil** (`fa-trash-can`) ya da **İptal** (`fa-ban`) simgesi bulunur. Simge, detaydaki eylemle **aynı onay penceresini, aynı yetkiyi ve aynı koşulu** kullanır (kural çoğaltılmaz). **Yeni silme yeteneği eklenmez:** silme akışı olmayan varlıkta (örn. müşteri/hasta, KVKK nedeniyle ayrı süreç; kesinleşmiş muayene; yasal kayıtlar) simge konmaz. Geri alınamaz silme onay penceresinde sonucu açıkça yazar; mali/klinik kayıtlarda mevcut davranış "sil" değil "iptal/geçersiz kıl" ise o kalır.
+
 ## Sonuçlar
 
 - Frontend: ortak satır eylemi bileşeni ve tüm liste sayfalarının geçişi; spec'ler (aria-label, ipucu, eylem varlığı).
