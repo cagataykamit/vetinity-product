@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Kabul edildi (2026-10-17, kullanıcı: "pilot bölümümüz yok, tek paket olmasın, canlıya çıkıyormuş gibi hazırlanıyoruz; uygun bir şey belirle").** Kademe yapısını kullanıcı seçti (klinik sayısı + kullanıcı); **fiyat ve limit değerlerini kullanıcı koordinatöre bıraktı**, aşağıdaki değerler koordinatör önerisidir ve **ticari varsayımdır**: Türkiye'deki rakip fiyatları için güvenilir kaynak bulunamadı (rakipler fiyat yayımlamıyor), değerler pazar verisine dayanmaz. Kullanıcı istediği an değiştirir; fiyat/limit değerleri tek veri dosyasında yaşar (`pricing-plan.utils.ts`). Bu ADR [ADR-034](ADR-034-tanitim-sitesi-konumlandirma.md)'ün "pilot dönemi, tek paket" kısmını yerine geçer; deneme (14 gün ücretsiz, kart yok) ve demo kararı aynen kalır.
+**Kabul edildi (2026-10-17, kullanıcı: "pilot bölümümüz yok, tek paket olmasın, canlıya çıkıyormuş gibi hazırlanıyoruz; uygun bir şey belirle").** Kademe yapısını kullanıcı seçti (klinik sayısı + kullanıcı); **fiyat ve limit değerlerini kullanıcı koordinatöre bıraktı**, aşağıdaki değerler koordinatör önerisidir ve **ticari varsayımdır**. Tek gözlenen pazar verisi (kullanıcı, 2026-10-17, Kolayvet fiyat sayfası): Standart ₺999, Profesyonel ₺1.990, Plus ₺4.990 aylık (yıllıkta yaklaşık yarısı), Premium teklifle; onlarda SMS, e-fatura ve WhatsApp dahil, bizde yok; bu yüzden fiyatlar o seviyenin altına ve yakınına konuldu, yapı ve içerik kopyalanmadı. Kullanıcı istediği an değiştirir; fiyat/limit değerleri tek veri dosyasında yaşar (`pricing-plan.utils.ts`). Bu ADR [ADR-034](ADR-034-tanitim-sitesi-konumlandirma.md)'ün "pilot dönemi, tek paket" kısmını yerine geçer; deneme (14 gün ücretsiz, kart yok) ve demo kararı aynen kalır.
 
 ## Karar
 
@@ -10,8 +10,8 @@
 
 | | Temel | Profesyonel | Kurumsal |
 |---|---|---|---|
-| Fiyat (aylık, KDV hariç) | ₺1.490 | ₺2.990 | İletişime geçin |
-| Yıllık ödeme | ₺14.900 / yıl | ₺29.900 / yıl | — |
+| Fiyat (aylık, KDV hariç) | ₺999 | ₺1.990 | İletişime geçin |
+| Yıllık ödeme | ₺9.990 / yıl | ₺19.900 / yıl | — |
 | Klinik | 1 | 1 | Çok klinik |
 | Kullanıcı | 3 | 10 | Sınırsız |
 | Çekirdek klinik akış: Bugün/geliş, randevu, muayene, hasta kartı ve zaman çizelgesi, aşı, tedavi/reçete, lab durumu, yatış | ✔ | ✔ | ✔ |
