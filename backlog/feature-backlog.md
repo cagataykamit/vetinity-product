@@ -2699,7 +2699,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
-| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes). **E-Vet SMART (2026-09-27):** Doğrudan Satış e-Fatura\|SMM Notu alanları; **VIDEO OBSERVED** gelgeç müşteride e-Fatura düzenlenememe anlatımı — live kural **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#ana-satış-ekranı). **E-Vet SMART (2026-10-04):** sol menü e-Fatura/e-SMM UI + Fatura Yönetim Paneli pre-send workflow; reviewed account config eksik → external lifecycle **NOT VERIFIED** — → [e-vet.md](../competitors/e-vet.md#e-fatura--e-smm-modül) (competitor evidence; scope değişmedi) |
+| **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes). **E-Vet SMART (2026-09-27):** Doğrudan Satış e-Fatura\|SMM Notu alanları; **VIDEO OBSERVED** gelgeç müşteride e-Fatura düzenlenememe anlatımı — live kural **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#ana-satış-ekranı). **E-Vet SMART (2026-10-04):** sol menü e-Fatura/e-SMM UI + Fatura Yönetim Paneli pre-send workflow; reviewed account config eksik → external lifecycle **NOT VERIFIED** — → [e-vet.md](../competitors/e-vet.md#e-fatura--e-smm-modül) (competitor evidence; scope değişmedi). **Keşif (2026-10-19):** kullanıcı beyanı "zorunlu"; serbest hekim hizmeti e-SMM, şirket klinik ve ayrı ticari satış fatura (e-Arşiv / e-Fatura), yol özel entegratör API'si — [keşif](../research/hbs-ve-e-belge-kesfi-2026-10.md), karar taslağı [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) (Dilim 3–5). Öncelik önerisi P1, ilk ücretli canlı müşteriden önce (ADR-036 AK-7, karar bekliyor) |
 
 ### INT-006 — POS ve online ödeme
 
@@ -2731,7 +2731,23 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Yüksek (tahmin: keşif + backend + entegratör + frontend; ölçülmedi) |
 | **Durum** | Karar bekliyor (kullanıcı 2026-10-13: detaylar sonra netleştirilecek) |
 | **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
-| **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı) |
+| **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı). **2026-10-19:** açık sorular (1)–(4) [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) AK-1…AK-4'e taşındı (öneri: elle "Belge kes" + kapanışta öneri v1, tam otomatik v2) |
+
+### INT-008 — HBS e-Reçete ve ATS aşı kaydı yardımcısı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | INT-008 |
+| **Başlık** | HBS e-Reçete ve ATS aşı kaydı yardımcısı |
+| **Kategori** | Entegrasyon |
+| **Problem** | Hekim reçeteyi (e-Reçete) ve aşıyı (ATS) Bakanlığın Hayvan Bilgi Sistemi'ne (HBS, e-Devlet girişi) ayrıca girmek zorunda; veri Vetinity'de yapılandırılmış ve hazır değilse iki kez yazar ve unutur. Kullanıcı beyanı (2026-10-19): HBS zorunlu. Klinik yazılımları için herkese açık resmî web servis bulunamadı (doğrulanmadı) |
+| **Önerilen çözüm** | v1 manuel yardımcı: aşı/reçete kaydı kapanınca HBS'e girilecek veri tek ekranda alan alan, kopyalanabilir ve dışa aktarılabilir; HBS'ten dönen numaralar (e-Reçete No, aşı uygulama belgesi seri no, HBS hayvan kimlik no) geri kaydedilir; "HBS'e girilmedi" iş listesi. v2 otomatik gönderim yalnız resmî web servis izni çıkarsa. Portal otomasyonu/ekran kazıma yok |
+| **Kullanıcı değeri** | Yasal kaydın unutulmaması, çift yazımın azalması; eski sistemi bırakma koşulu |
+| **Öncelik** | P1 önerisi (pilot canlı veriden önce; ADR-036 AK-7, karar bekliyor) |
+| **Tahmini zorluk** | Orta (tahmin; reçete kalemlerinin yapılandırılması dahil, ölçülmedi) |
+| **Durum** | Karar bekliyor |
+| **Bağımlılıklar** | [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) Dilim 1–2, ADR-015 (parti/SKT), Aşama 5 reçete yapısı, müşteri TCKN alanı |
+| **Notlar** | Keşif: [research/hbs-ve-e-belge-kesfi-2026-10.md](../research/hbs-ve-e-belge-kesfi-2026-10.md). Rakip E-vet: HBS menüsü = e-Reçete + ATS listeleri, Excel dışa aktarma; gönderim semantiği doğrulanmadı — → [e-vet.md](../competitors/e-vet.md#hbs-modül). Sahip değişikliği/ölüm/kayıp bildirimi sahibin yükümlülüğü görünüyor (doğrulanmadı); kapsam dışı, en fazla bilgi notu. Kullanıcı adımları: pilot hekimle HBS ekran gözlemi, Bakanlığa web servis sorusu |
 
 ---
 
