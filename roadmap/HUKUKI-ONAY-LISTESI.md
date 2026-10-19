@@ -29,7 +29,7 @@ Kayıt defteri sayfaları (Rapor Merkezi) **rakip yazılımın raporlarındaki s
 | B2 | Reçete kayıt defteri | Gruplu başlıklar: Reçetenin / Veteriner hekimin / Hayvan sahibinin / Hayvanın (tür, kulak/işletme no, sayısı). Reçete sınıfı, cilt/sıra no, hekim adresi, kulak no, hayvan sayısı ambalaj alanları sistemde YOK. | Resmî biçim ve eksik alanlar zorunlu mu? E-reçete (ÜTS/ilaç takip sistemi) entegrasyonu gerekli mi? | `register-definitions.ts` | Soru |
 | B3 | Aşı kayıt defteri | Aşı STOK/giriş defteri (ticari ad, seri no, SKT, miktar, firma, soğuk zincir, depo çıkış, fatura). Soğuk zincir ve fatura alanları sistemde yok. | Zorunlu alanlar? | `register-definitions.ts` | Soru |
 | B4 | İlaç ve narkotik/psikotropik defter | Narkotik ve psikotropik ilaç hareket defteri var; satış kısıtı (aşı/narkotik doğrudan satılamaz, ADR-016). | Resmî defter biçimi, sayım ve denetim yükümlülüğü? | `register-definitions.ts`, ADR-016 | Soru |
-| B5 | Aşı bilgi raporu / HBS | Hayvan bazlı aşı çıktısı (seri no, SKT). Hayvan Bilgi Sistemi (HBS) entegrasyonu yok. | HBS bildirimi zorunlu mu, hangi hayvanlar için? | yok | Soru |
+| B5 | Aşı bilgi raporu / HBS | Hayvan bazlı aşı çıktısı (seri no, SKT). Hayvan Bilgi Sistemi (HBS) entegrasyonu yok. | HBS bildirimi zorunlu mu, hangi hayvanlar için? **Kullanıcı beyanı (2026-10-19): bizde de zorunlu; keşif ve ADR yürütülüyor, kapsam hukuki doğrulamada.** | yok | Soru (zorunluluk kullanıcı beyanı) |
 | B6 | Kesinleşmiş muayene kaydı | Kesinleştirilen muayene kilitlenir, düzeltme yalnız ek not (ADR-013). | Tıbbi kayıt değiştirilemezliği ve saklama? | ADR-013 | Soru |
 | B7 | Hekim yetkisi ve imza | Defterlerde imza/kaşe alanı yok; "imza resmî biçim doğrulanınca netleşir". | Defterlerde imza/kaşe ve sayfa numarası zorunluluğu? | `register-definitions.ts` | Soru |
 
@@ -38,7 +38,7 @@ Kayıt defteri sayfaları (Rapor Merkezi) **rakip yazılımın raporlarındaki s
 | # | Konu | Mevcut hâl | Soru | Durum |
 |---|---|---|---|---|
 | C1 | Kullanım şartları ve gizlilik politikası | Taslak metinler `legal/` altında; herkese açık /privacy ve /terms sayfaları (taslak bandıyla). Sürümlü kabul (TRIAL-009) yok. | Hizmet sözleşmesi, kullanım şartları, gizlilik politikası. | Onay bekliyor (taslak yazıldı) |
-| C2 | E-fatura / e-belge | Planlı, henüz yok. Bilgi amaçlı fiş var (satışta, "mali değeri yoktur" notu). | Fiş/fatura yükümlülüğü, e-arşiv/e-SMM kapsamı. | Soru |
+| C2 | E-fatura / e-belge | Planlı, henüz yok. Bilgi amaçlı fiş var (satışta, "mali değeri yoktur" notu). | Fiş/fatura yükümlülüğü, e-arşiv/e-SMM kapsamı. **Kullanıcı beyanı (2026-10-19): e-fatura/e-SMM bizde de zorunlu; keşif ve ADR yürütülüyor.** | Soru (zorunluluk kullanıcı beyanı) |
 | C3 | Ödeme ve iade | iyzico entegrasyonu (kimlik bilgileri döndürülecek). | Mesafeli satış, iade/iptal kuralları. | Soru |
 | C4 | Hesap/parola güvenliği | Hesap kilitleme ve izin süresi ertelendi (SEC-001/002). | Asgari güvenlik beklentisi. | Soru |
 | C5 | Portal kullanım şartları (hasta sahibi) | Taslak `legal/portal-kullanim-sartlari.md` v0.1 (ADR-031 K4): bilgilendirme amaçlı, tıbbi tavsiye değil, acilde klinik aranır; kod/parola güvenliği; klinik veri sorumlusu, Vetinity veri işleyen; erişimin kapatılması; sorumluluk sınırı; sürümlü yeniden kabul. | AK-5: sözleşmenin tarafı (yalnız Vetinity mi, klinik de mi); portal hesabı için Vetinity rolü; tüketici mevzuatı karşısında sorumluluk sınırı; yaş sınırı ve vekâlet/ortak sahiplik; hatırlatmalar İYS/ETK kapsamında mı. | Onay bekliyor (taslak yazıldı) |
