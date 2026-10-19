@@ -4990,6 +4990,40 @@ Aşağıdakiler **preliminary observation**dır; Vetinity ürün kararı veya sc
 
 ---
 
+## Güncelleme Notları gözlemi (2026-10-19, kullanıcı ekran görüntüleri)
+
+**Kaynak:** E-vet SMART "Güncelleme Notları" sayfası (v4.15.0, 16 Ekim 2026'ya kadar), kullanıcının paylaştığı 14 ekran görüntüsü. Yalnız görüntülerde görünenler yazılmıştır; her birinin altındaki işleyiş **NOT VERIFIED** (canlı denenmedi). Görünüm/akış kopyalanmaz; problem odaklı değerlendirilir.
+
+**OBSERVED (sürüm notları):**
+
+| Sürüm / tarih | Not başlığı | Çözdüğü problem (çıkarım) |
+|---|---|---|
+| v4.15.0 · 16.10.2026 | **Rapor AI — hızlı yanıt seçenekleri** ("Smart+ AI" paneli; doğal dil soru, belirsiz üründe seçenek listesi, tablo önizleme, Excel indirme) | Hazır rapor kataloğunda olmayan özel soruları (örn. "son 6 ayda şu üründen kaç adet satıldı") raporcu beklemeden yanıtlamak |
+| v4.13.0 · 29.09.2026 | **Takip parametreleri silme** | Tedavi kaleminde kullanılmayan takip parametresini (örn. ateş) kaldırabilmek |
+| v4.13.0 | **Takip parametrelerinde başlangıç günü** | Tedavi takibinde hangi günden itibaren ölçüm istendiğini planlamak |
+| v4.13.0 | **Dosyalarım tarih/saat saniye bilgisi** (Dosyalar sekmesi; ör. röntgen dosyası) | Aynı gün eklenen dosyaların sırasını ayırt etmek |
+| v4.12.0 · 23.09.2026 | **Veri satır sayısı seçimi** (Ayarlar > Genel, tablo varsayılan satır sayısı 5/10/15/20/25/50) | Liste uzunluğunu kullanıcı tercihine bırakmak |
+| v4.12.0 | **Hasta kartında geçmiş (sahip değişikliği ve ziyaret geçmişi)** (kart üstünde "Geçmiş Göster" düğmesi; "sahibi değişmiş" uyarısı; eski sahibin kayıtları ayrı gösterilir) | Hasta sahibi değiştiğinde önceki sahibe ait ziyaret/ödeme geçmişini kaybetmeden izlemek |
+| v4.12.0 | **Personel listesinde rol şablonu bilgisi** | Hangi personel hangi rol şablonunda, listede görmek |
+| v4.12.0 | **Hızlı aramada menü bilgisi** (arama sonucunda ekranın hangi menü altında olduğu) | Çok menülü üründe aranan ekranı bulmak |
+| v4.12.0 | **Hızlı fiyatlandırmada fiyat aralığı güncelleme** (fiyat aralığı listeleri, zam oranı) | Çok sayıda ürün/hizmet fiyatını toplu ve aralıklı güncellemek |
+
+**Menü envanteri (aynı ekran görüntülerinden):** Hasta Kabul, Takvim, Doğrudan Satış, Muayene Odası, Lab/Xray/Pacs istekleri, Hospitalizasyon, HBS (Hayvan Bilgi Sistemi), VKY, e-Fatura / e-SMM, DataVet, İlaç Rehberi, Nekropsi, Mobil Uygulamalar, Katalog, Dökümanlar, Güncelleme Notları, WhatsApp Destek Hattı. Üst menü: Rapor, Stok, Finansal, Ürün, Müşteri, Hasta, Muayene, Laboratuvar, Genel. **VKY**'nin ne olduğu görüntülerden anlaşılmıyor (**NOT VERIFIED**; kısaltmanın açılımı tahmin edilmez).
+
+**VETINITY IMPLICATION (Benchmark Decision Flow, WORKFLOW.md):**
+
+- **Zaten karşılanan veya karşılanmaya yakın:** sahip değişikliği için müşteri-hasta bağı ve ödeme/ücret geçmişi (hasta kartı + müşteri kartı; sahip değişim geçmişi ayrıca ele alınır → mevcut hasta/sahip modeli ADR gerektirir, kayıt açılmadı); hospitalizasyon; mobil portal (ADR-031); arama (global arama menü yolunu göstermiyor, küçük UX notu).
+- **Yeni problem adayları (kullanıcıya ürün sorusu olarak; ayrı backlog kaydı onay sonrası):**
+  1. **Tedavi takip parametreleri** (ateş, vb.) ve başlangıç günü: tedavi/yatış takibi derinliği (HOSP / TREAT alanı); pilot geri bildirimiyle değerlendirilecek.
+  2. **Toplu fiyat güncelleme** (ürün/hizmet kataloğu): FIN-008 hizmet kataloğuyla birlikte ele alınacak (ertelenmiş).
+  3. **Rapor için doğal dil sorusu** (AI rapor asistanı): ADR-008 (gömülü AI) ve Aşama 10 kapsamı; pilot sonrası. Doğrulanmamış iddia riski ve veri sızıntısı (kiracı izolasyonu) ADR konusu.
+  4. **Tablo satır sayısı tercihi**: küçük kullanıcı ayarı (UX); sayfalama varsayılanı tutarlı; ayar ihtiyacı pilotta sorulur.
+  5. **Personel listesinde rol bilgisi:** mevcut Üyeler listesinde rol sütunu var mı kontrol edilecek (küçük).
+- **Dikkat (mevzuat):** E-vet'in menüsünde **HBS** ve **e-Fatura / e-SMM** modülleri ayrı duruyor; bizde ikisi de yok. Bunların resmî zorunluluğu ve kapsamı HUKUKI-ONAY-LISTESI B5 ve C2'de **açık soru**; rakipte var olması zorunluluk kanıtı değildir ama pilot klinikler bunu **bekleyebilir**. Pilot kliniğe sorulacak (Aşama 11 önceliğini değiştirebilir).
+- Kopyalama yok: bu notlar rakip ekranlarını taklit etmek için değil, çözülen problemleri izlemek içindir.
+
+---
+
 ## VETINITY IMPLICATION
 
 *(Minimum — deep-dive ilerledikçe genişletilecek.)*
