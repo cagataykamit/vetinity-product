@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Taslak, kullanıcı kararı bekliyor (2026-10-19).** Tetikleyen: kullanıcı beyanı (2026-10-19) — HBS entegrasyonu ve e-Fatura/e-SMM Vetinity için de zorunlu. Keşif: [research/hbs-ve-e-belge-kesfi-2026-10.md](../research/hbs-ve-e-belge-kesfi-2026-10.md). Hukuki/vergi görüşü beklenmez; çalışma varsayımıyla ilerlenir ([HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md) B5, C2). Mevzuat iddialarının çoğu keşifte **DOĞRULANMADI** olarak işaretli; bu ADR onları gerçek kabul etmez, kuralı tek yerde ve değiştirilebilir tutar. Backlog: [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm), [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma), [INT-008](../backlog/feature-backlog.md#int-008--hbs-e-reçete-ve-ats-aşı-kaydı-yardımcısı).
+**Kabul edildi (2026-10-21, kullanıcı: "tamam, öyle yapalım": açık kararlarda koordinatör önerileri AK-1…AK-8 aynen geçerli; AK-2 entegratör seçimi teklif ve sandbox sonrası).** Önceki durum: taslak (2026-10-19). Tetikleyen: kullanıcı beyanı (2026-10-19) — HBS entegrasyonu ve e-Fatura/e-SMM Vetinity için de zorunlu. Keşif: [research/hbs-ve-e-belge-kesfi-2026-10.md](../research/hbs-ve-e-belge-kesfi-2026-10.md). Hukuki/vergi görüşü beklenmez; çalışma varsayımıyla ilerlenir ([HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md) B5, C2). Mevzuat iddialarının çoğu keşifte **DOĞRULANMADI** olarak işaretli; bu ADR onları gerçek kabul etmez, kuralı tek yerde ve değiştirilebilir tutar. Backlog: [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm), [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma), [INT-008](../backlog/feature-backlog.md#int-008--hbs-e-reçete-ve-ats-aşı-kaydı-yardımcısı).
 
 ## Bağlam
 
