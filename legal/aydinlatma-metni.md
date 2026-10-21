@@ -1,6 +1,6 @@
 # Müşteri Aydınlatma Metni (klinik şablonu)
 
-Sürüm: 0.1 (taslak) · Taslak tarihi: 2026-10-15 · Durum: hukuki onay bekliyor
+Sürüm: 0.2 (taslak) · Taslak tarihi: 2026-10-21 (0.1: 2026-10-15; 0.2: fatura/e-belge amacı ve kimlik/vergi numarası, ADR-036) · Durum: hukuki onay bekliyor
 Yer tutucular: `{{clinicName}}`, `{{clientName}}`, `{{date}}`. Köşeli parantezli alanları klinik doldurur.
 
 ---
@@ -13,14 +13,14 @@ Yer tutucular: `{{clinicName}}`, `{{clientName}}`, `{{date}}`. Köşeli parantez
 Veri sorumlusu {{clinicName}}'dır (Adres: [klinik adresi]; Telefon: [klinik telefonu]; E-posta: [klinik e-postası]; Vergi/ticaret sicil bilgisi: [varsa]).
 
 **2. İşlenen kişisel veriler**
-- Kimlik: ad, soyad, [T.C. kimlik numarası: yalnız gerekli olduğunda].
+- Kimlik: ad, soyad; yalnız fatura/e-belge için gerektiğinde T.C. kimlik numarası, kurumsal alıcıda vergi kimlik numarası, vergi dairesi ve unvan.
 - İletişim: telefon, e-posta, adres.
 - Müşteri işlem: hayvanınıza ilişkin hasta kaydı, randevu, muayene, tedavi, aşı ve uygulama kayıtları (bu kayıtlar sizinle ilişkilendirilir), reçete ve belge bilgileri.
 - Finans: ücret, ödeme, bakiye, makbuz ve fatura bilgileri.
 - İşlem güvenliği: sistem kullanım ve erişim kayıtları (yalnız kliniğin çalışanları için).
 
 **3. Kişisel verilerin işlenme amaçları**
-Veteriner hizmetinin sunulması ve takibi; randevu ve geliş süreçlerinin yürütülmesi; aşı, tedavi ve kontrol takibi; ücretlendirme, tahsilat ve faturalandırma; mevzuattan doğan kayıt, defter ve raporlama yükümlülüklerinin yerine getirilmesi; sizinle hizmete ilişkin iletişim kurulması; hak taleplerinin ve uyuşmazlıkların yönetilmesi; bilgi güvenliğinin sağlanması.
+Veteriner hizmetinin sunulması ve takibi; randevu ve geliş süreçlerinin yürütülmesi; aşı, tedavi ve kontrol takibi; ücretlendirme, tahsilat ve faturalandırma; fatura/e-belge (e-Arşiv fatura, e-Fatura, e-Serbest Meslek Makbuzu) düzenlenmesi ve resmî bildirim yükümlülüklerinin yerine getirilmesi (kimlik/vergi numarası yalnız gerektiğinde); mevzuattan doğan kayıt, defter ve raporlama yükümlülüklerinin yerine getirilmesi; sizinle hizmete ilişkin iletişim kurulması; hak taleplerinin ve uyuşmazlıkların yönetilmesi; bilgi güvenliğinin sağlanması.
 
 **4. Hukuki sebepler**
 Kanun'un 5/2 maddesindeki şu sebeplere dayanılır: (c) hizmet sözleşmesinin kurulması ve ifası için gerekli olması; (ç) veri sorumlusunun hukuki yükümlülüğünü yerine getirmesi için zorunlu olması; (e) bir hakkın tesisi, kullanılması veya korunması için zorunlu olması; (f) ilgili kişinin temel hak ve özgürlüklerine zarar vermemek kaydıyla veri sorumlusunun meşru menfaatleri için zorunlu olması. Aşı ve randevu hatırlatmalarını telefon, SMS veya e-posta ile iletmemiz ayrıca açık rızanıza bağlıdır; rıza vermemeniz hizmeti almanıza engel olmaz.
@@ -29,7 +29,7 @@ Kanun'un 5/2 maddesindeki şu sebeplere dayanılır: (c) hizmet sözleşmesinin 
 Verileriniz sizden sözlü, yazılı veya elektronik ortamda (kayıt formu, telefon, e-posta, yüz yüze görüşme) ve hizmetin yürütülmesi sırasında oluşan kayıtlardan elde edilir.
 
 **6. Kişisel verilerin aktarılması**
-Verileriniz, hizmetin gereği ve mevzuatın izin verdiği ölçüde şu alıcı gruplarına aktarılabilir: mevzuatın zorunlu kıldığı hallerde yetkili kamu kurum ve kuruluşları (örneğin Tarım ve Orman Bakanlığı ve bağlı birimleri, vergi ve adli makamlar); kliniğin yetkili çalışanları; hizmet aldığımız yazılım, barındırma, ödeme ve bildirim (SMS/e-posta) sağlayıcıları (veri işleyen olarak, yalnız bizim talimatımızla); laboratuvarlar ve sevk edilen sağlık kuruluşları; hukuk, mali müşavirlik ve denetim danışmanlarımız. [Yurt dışına aktarım: yok / varsa Kanun'un 9. maddesine uygun mekanizma — klinik doldurur.]
+Verileriniz, hizmetin gereği ve mevzuatın izin verdiği ölçüde şu alıcı gruplarına aktarılabilir: mevzuatın zorunlu kıldığı hallerde yetkili kamu kurum ve kuruluşları (örneğin Tarım ve Orman Bakanlığı ve bağlı birimleri, vergi ve adli makamlar); kliniğin yetkili çalışanları; hizmet aldığımız yazılım, barındırma, ödeme, e-belge (özel entegratör) ve bildirim (SMS/e-posta) sağlayıcıları (veri işleyen olarak, yalnız bizim talimatımızla); laboratuvarlar ve sevk edilen sağlık kuruluşları; hukuk, mali müşavirlik ve denetim danışmanlarımız. [Yurt dışına aktarım: yok / varsa Kanun'un 9. maddesine uygun mekanizma — klinik doldurur.]
 
 **7. Saklama süresi**
 Verileriniz, işleme amacının gerektirdiği ve ilgili mevzuatta öngörülen süre boyunca saklanır; süre sonunda silinir, yok edilir veya anonim hale getirilir ([saklama süreleri: klinik saklama ve imha politikasına bakınız]).
