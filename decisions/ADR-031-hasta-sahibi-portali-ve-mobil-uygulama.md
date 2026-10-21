@@ -29,7 +29,7 @@ Hasta sahibi iki sınıf kullanıcı üretir: (a) hesap açan (portal/uygulama);
 | Bakiye ve ödeme geçmişi | ✔ yalnız tutar/durum | fatura/ekstre, online ödeme | Tutar görüntüleme; ödeme alma ayrı karar (AK-9) |
 | Klinik bilgisi (adres, telefon, çalışma saati) | ✔ | harita/yol tarifi | |
 | Klinikle mesaj | ✘ | ✔ v1/v2 | MSG-001/002; moderasyon ve acil uyarı metni gerekir (AK-7) |
-| Bildirimler | ✔ e-posta | push, SMS | K7 |
+| Bildirimler | ✔ e-posta | push, WhatsApp (SMS yok, AK-6) | K7 |
 | Belge/onam görüntüleme ve imza | ✘ | v2+ | PORTAL-005; hukuki geçerlilik araştırması |
 | Reçete ve tedavi özeti | ✘ | ✔ v1 | AK-8 kararı (b); sade dil, klinik bazlı açma anahtarı, hukuki görüş (AK-5) sonrası |
 | Muayene notu, lab, görüntü | ✘ | ✘ | AK-8 kararıyla kapsam dışı; yeniden açılırsa ayrı karar |
@@ -39,7 +39,7 @@ Hasta sahibi iki sınıf kullanıcı üretir: (a) hesap açan (portal/uygulama);
 Öneri:
 - **Ayrı principal türü:** portal hesabı (`OwnerAccount`) personelden ayrıdır; personel kullanıcısı portala, hasta sahibi hesabı klinik paneline giremez (ayrı kimlik doğrulama şeması ve token hedef kitlesi; bkz. K6).
 - **Klinik davetiyle bağ:** otomatik "telefon eşleşmesi" YOK (aile üyeleri/paylaşılan numara başka sahibin verisini sızdırabilir). Klinik, müşteri kartından "Portala davet et" der; davet tek kullanımlık, süreli (varsayılan 7 gün; DaySmart'ın bağlantı süresi ayarına benzer) bir bağlantı/kod üretir ve müşteri kartındaki telefon/e-postaya yollar. Sahip bağlantıyı açar, **telefona (veya e-postaya) gelen tek kullanımlık kodu** girer, hesabı oluşturur ve `Client` kaydına bağlanır.
-- **Giriş:** parolasız (SMS veya e-posta tek kullanımlık kod) veya e-posta+parola — AK-2. Öneri: parolasız tek kullanımlık kod (mobilde sürtünme düşük, parola sızıntı yüzeyi yok); SMS maliyeti ve teslim sorunu için e-posta yedeği.
+- **Giriş:** e-posta tek kullanımlık kod veya e-posta+parola (AK-2: ikisi birden; AK-6: SMS yok). Kod e-postayla gelir; telefon doğrulaması sonraya kalır.
 - **Bir hesap, birden çok klinik/müşteri kaydı:** hasta sahibi birden fazla Vetinity kliniğine gidebilir. Öneri: kişi bazlı tek hesap + klinik başına ayrı bağ (`OwnerAccount` ↔ `Client`, kiracı başına) — AK-3 (v0'da tek klinik gösterilse bile veri modeli buna hazır).
 - **Bağ kopması:** klinik erişimi tek tıkla kapatabilir; müşteri kartı birleştirilir/silinirse bağ yeniden doğrulanır; telefon/e-posta değişince eski kodla giriş kapanır.
 - Hesap güvenliği: kod deneme sınırı, kilitleme (SEC-001 ile aynı desen), kısa ömürlü erişim + yenileme jetonu, "tüm cihazlardan çıkış".
@@ -83,9 +83,9 @@ Kısıtlar: tek kod tabanı, mevcut Angular (vetinity-web) ve .NET backend ile u
 | Kanal | Rol | Notlar |
 |---|---|---|
 | E-posta | v0 varsayılan | Mevcut altyapı (ADR-014 K5); doğrulama kodu ve hatırlatma |
-| SMS | doğrulama kodu ve kritik hatırlatma | Sağlayıcı seçimi, maliyet/klinik başına kota, teslim durumu, İYS/ETK ayrımı (INT-003, APPT-023); AK-6 |
+| SMS | kapsam dışı | Ücret nedeniyle bu aşamada yok (AK-6); eklenirse sağlayıcı, maliyet, İYS/ETK ayrımı (INT-003, APPT-023) yeniden karara bağlanır |
 | Push | v1 (PWA web push veya Capacitor yerel push) | Cihaz jetonu depolama, onay izni, KVKK tercihi; AK-6 |
-| WhatsApp | kapsam dışı | Ayrı karar (roadmap Aşama 11) |
+| WhatsApp | v0/v1: personel gönderimli bağlantı (ücretsiz) | Klinik panelinden ilgili hasta sahibinin WhatsApp sohbetini hazır metinle açan bağlantı (wa.me); mesajı personel gönderir, otomatik gönderim ve teslim durumu YOK. Resmî WhatsApp Business API (otomatik gönderim, ücretli) sonra, ayrı karar. Davet bağlantısı ve aşı/randevu hatırlatması bu yolla da iletilebilir. Kod gönderimi için kullanılmaz (otomatik gönderim gerektirir) |
 
 Kanal seçimi kullanıcı tercihine bağlıdır; her bildirim türü için "kimin için, hangi kanal, hangi sırayla" kuralı tek yerde (backend) yaşar. Bildirim metni minimum veri taşır (hayvan adı ve tarih; teşhis/tedavi yok).
 
@@ -118,8 +118,8 @@ Her aşama kendi backlog kaydı ve kabul ölçütleriyle gelir; v0 başarı öl�
 | AK-3 | Hesap kapsamı | (a) kişi başına tek hesap, birden çok klinik; (b) klinik başına ayrı hesap | **KARAR (kullanıcı, 2026-10-16): proje zaten çoklu klinik tasarımlı → (a) kişi başına tek hesap, klinik başına bağ.** Kapandı. v0'da tek klinik gösterimi ayrı bir ürün kararı değil, yalnız ilk dilim sınırı |
 | AK-4 | Dağıtım | **KARAR (kullanıcı, 2026-10-16): hasta sahibi uygulaması mağazada olacak** (PWA + Capacitor ile Google Play/App Store); mağaza hesabı şirket adına | Kapandı. v0 PWA, mağaza v1'de. Geliştirici hesaplarını açmak kullanıcı işi |
 | AK-5 | Hukuki çerçeve | Portal hesabında Vetinity rolü (sorumlu/işleyen), İYS/ETK, silme–saklama süresi, vekâlet | Hukuk danışmanı görüşü; ADR-024 kapsamına eklenir |
-| AK-6 | SMS sağlayıcısı ve maliyet modeli | (a) klinik kendi hesabı; (b) Vetinity havuzu, pakete dahil/ek ücret; push ayrı | **KARAR (kullanıcı, 2026-10-16): v0'da SMS yok, yalnız e-posta.** Kapandı (v0 için). SMS sağlayıcısı ve maliyet modeli SMS eklenmeden önce yeniden açılır. Sonuç: v0 kodu e-postayla gelir; telefon doğrulaması ve SMS hatırlatma sonraya kalır |
-| AK-7 | Mesajlaşma politikası | Acil durum uyarısı, yanıt süresi beklentisi, saklama | v2'ye ertelenir; karar o zaman |
+| AK-6 | SMS sağlayıcısı ve maliyet modeli | (a) klinik kendi hesabı; (b) Vetinity havuzu, pakete dahil/ek ücret; push ayrı | **KARAR (kullanıcı, 2026-10-16): v0'da SMS yok, yalnız e-posta. KARAR (kullanıcı, 2026-10-21): SMS yerine WhatsApp eklensin, şimdilik para verilmeyecek.** Kapandı. Ajan yorumu (düzeltilebilir): ücretsiz seçenek = personelin gönderdiği WhatsApp bağlantısı (K7); resmî Business API ücretli olduğu için sonraya. SMS eklenirse maliyet kararı yeniden açılır. Sonuç: kod e-postayla gelir, telefon doğrulaması sonraya kalır |
+| AK-7 | Mesajlaşma politikası | Acil durum uyarısı, yanıt süresi beklentisi, saklama | **KARAR (kullanıcı, 2026-10-21, öneri kabul): v2'ye ertelenir; politika o zaman yazılır.** Kapandı |
 | AK-8 | Sağlık verisi görünürlüğü | (a) yalnız aşı/randevu/bakiye; (b) + reçete/tedavi özeti; (c) + lab/görüntü/not | **KARAR (kullanıcı, 2026-10-16): (b) aşı/randevu/bakiye + reçete ve tedavi özeti; lab, görüntü, muayene notu görünmez.** Kapandı. Sıralama notu (ajan, onay bekler): v0'da aşı/randevu/bakiye, reçete ve tedavi özeti v1'de |
 | AK-9 | Ödeme | Bakiye gösterimi mi, online ödeme mi, hangi sağlayıcı | **KARAR (kullanıcı, 2026-10-16): yalnız bakiye gösterimi.** Kapandı; online ödeme ayrı ADR ile |
 | AK-10 | Marka | Klinik markalı mı (kendi adı/logosu), Vetinity markalı mı | **KARAR (kullanıcı, 2026-10-16, öneri kabul): klinik adı + logo, alt bilgide Vetinity.** Kapandı |

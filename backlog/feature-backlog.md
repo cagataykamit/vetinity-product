@@ -1415,21 +1415,21 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | PORTAL-006 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3/K8; yeni portal yönetim izni (izin kataloğu) |
 
-### PORTAL-010 — Portal bildirimleri (e-posta, SMS, push)
+### PORTAL-010 — Portal bildirimleri (e-posta, WhatsApp bağlantısı, push)
 
 | Alan | Değer |
 |---|---|
 | **Kimlik** | PORTAL-010 |
-| **Başlık** | Portal bildirimleri (e-posta, SMS, push) |
+| **Başlık** | Portal bildirimleri (e-posta, WhatsApp bağlantısı, push) |
 | **Kategori** | Portal |
 | **Problem** | Hatırlatma ve doğrulama için kanal seçimi ve tercih yönetimi tanımsız |
-| **Önerilen çözüm** | Bildirim türü × kanal kuralı tek yerde (backend); v0 e-posta, SMS kodu/kritik hatırlatma, v1 push; minimum veri içerikli metin; teslim durumu ve tercih |
+| **Önerilen çözüm** | Bildirim türü × kanal kuralı tek yerde (backend); v0 e-posta; personel gönderimli WhatsApp bağlantısı (ücretsiz, otomatik gönderim yok); v1 push; SMS bu aşamada yok; minimum veri içerikli metin; teslim durumu ve tercih |
 | **Kullanıcı değeri** | Hasta sahibi doğru kanaldan zamanında haberdar olur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; SMS sağlayıcısı/maliyet AK-6 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
 
 ---
 
