@@ -1613,7 +1613,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik görüntü yönetimi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [ADR-007](../decisions/ADR-007-imaging-module.md). **Canlı sandbox — Patients Module:** Patient History > Images; clinic-wide Images worklist (View Online NON_INTEGRATED) — patient vs clinic scope → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics). **E-Vet SMART (2026-09-29):** Ayrı global **Pacs İstekleri** populated worklist + patient **Pacs Geçmişi** / **Yeni Pacs İstek**; **Xray İstekleri** ayrı yüzey ([PARTIAL](../competitors/e-vet.md#global-xray-i̇stekleri-partial)). Imaging operasyon ≠ generic **Dosyalarım** — → [e-vet.md](../competitors/e-vet.md#global-pacs-i̇stekleri-modül) |
 
@@ -1629,7 +1629,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Düzenli röntgen arşivi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1645,7 +1645,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Tam görüntüleme kapsamı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1661,7 +1661,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Görsel klinik kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, yalnız klinik fotoğraf; video v1 kapsamı dışında — ADR-007 uygulama notu) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1709,7 +1709,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik bağlam |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
 | **Bağımlılıklar** | IMG-001, EXAM-001 |
 | **Notlar** | |
 
@@ -1725,7 +1725,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Birleşik hasta geçmişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
 | **Bağımlılıklar** | IMG-001, TIMELINE-001 |
 | **Notlar** | **Canlı sandbox — Patients Module:** Images History filter; diagnostic record ≠ generic attachment — → [daysmart.md](../competitors/daysmart.md#pharmacy--labs--images--vaccines--vitals--communications) |
 
