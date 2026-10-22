@@ -59,6 +59,21 @@ Dijital röntgen ve laboratuvar cihazı entegrasyonları temel dosya yönetimiyl
 - Muayene ve timeline bağlantıları ([IMG-007](../backlog/feature-backlog.md), [IMG-008](../backlog/feature-backlog.md))
 - DICOM ve cihaz entegrasyonu araştırması ([IMG-005](../backlog/feature-backlog.md), [IMG-006](../backlog/feature-backlog.md))
 
+## Uygulama notu (2026-10-22)
+
+Kullanıcı kararı (2026-10-22): görüntüleme ve dosya katmanı yapılır; altyapı/VPS/yedek işi kullanıcı söyleyene kadar yapılmaz. Teknik sözleşme: backend `docs/IMAGING_API_CONTRACT.md` (tek doğruluk kaynağı). Durum: dal `feat/goruntuleme-dosya-katmani` (backend + frontend), main'e alınmadı, migration (`AddImagingRecordsAndStoredFiles`) hiçbir veritabanına uygulanmadı.
+
+**Kapsam (v1):**
+- Görüntüleme kaydı: hasta, isteğe bağlı muayene, tarih, tür (Röntgen, Ultrason, BT, MR, Endoskopi, Klinik fotoğraf, Diğer), açıklama, klinik not, dosyalar. Silme yok; gerekçeli iptal, iptalde dosyaların erişimi kapanır.
+- Kesinleşmiş muayene (ADR-013 uyumu): kesinleşmiş muayeneye görüntüleme bağlamak yeni (ek) kayıt sayılır ve serbesttir ("kesinleştirmeden sonra eklendi" rozeti); muayene kesinleştiğinde var olan kayıt düzenlenemez ve dosya almaz.
+- Lab sonucuna dosya (PDF/fotoğraf) eklenir; lab istem-sonuç akışı değişmez, lab iptalinde dosyaların erişimi kapanır.
+- Hasta zaman çizelgesinde "Görüntüleme" olayı (yalnız başlık, küçük resim yok); hasta kartında son görüntülemeler; muayene çalışma alanında ve hasta eylem çubuğunda "Görüntüleme" ekleme kısayolu; menüde Kayıtlar > Görüntüleme (ADR-023).
+- İzinler: `Imaging.Read/Create/Update/Cancel`; yönetim ve Veteriner tam, Sekreter yalnız okur. Lab dosyası mevcut `LabResults.Read/Update` ile.
+
+**Sınırlar:** Yalnız JPEG, PNG, WebP ve PDF (tür içerikten tespit edilir); dosya başına varsayılan 15 MB (yapılandırılabilir), kayıt başına 20 dosya. DICOM, video, büyük dosya, küçük resim üretimi, virüs taraması (yalnız arayüz yeri), fiziksel silme/saklama süresi ve cihaz entegrasyonu kapsam dışı ([IMG-004](../backlog/feature-backlog.md) videosu, [IMG-005](../backlog/feature-backlog.md), [IMG-006](../backlog/feature-backlog.md) açık).
+
+**Depolama soyutlaması:** Dosyalar veritabanında değil, `IFileStorage` arkasında yerel diskte (kök dizin `FileStorage:RootPath` yapılandırmadır; kiracı/klinik/yıl-ay alt dizinleri, tahmin edilemez anahtar, orijinal ad yalnız meta tabloda). Buluta geçiş yeni bir depolama uygulaması ister, ürün akışı değişmez. Dosyalar statik adresle sunulmaz: yetkili akış ucu ve görüntüler için 5 dakikalık imzalı adres. Depolama konumu ve yedek ayarı yapılandırmadır; **dosyalar veritabanı yedeğine girmez**, disk yedeği dağıtım işiyle (ADR-014) kullanıcı tarafından planlanmalıdır.
+
 ## İlgili belgeler
 
 - [ADR-006 — Hasta timeline](ADR-006-patient-timeline.md)
