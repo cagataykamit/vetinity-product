@@ -13,6 +13,7 @@
 | | Temel | Profesyonel | Kurumsal |
 |---|---|---|---|
 | Fiyat (aylık, KDV hariç) | ₺999 | ₺1.990 | İletişime geçin |
+| Yıllık ödeme (10 ay fiyatı, "2 ay hediye"; 2026-10-22 kullanıcı kararı "B", ADR-037) | ₺9.990 / yıl | ₺19.900 / yıl | — |
 | Klinik | 1 | 1 | Çok klinik |
 | Kullanıcı | 3 | 10 | Sınırsız |
 | Çekirdek klinik akış: Bugün/geliş, randevu, muayene, hasta kartı ve zaman çizelgesi, aşı, tedavi/reçete, lab durumu, yatış | ✔ | ✔ | ✔ |
