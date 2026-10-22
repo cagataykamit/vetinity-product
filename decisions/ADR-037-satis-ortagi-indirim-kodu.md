@@ -19,4 +19,4 @@
 
 - Backend: ortak/kod/kullanım tabloları (migration), platform yöneticisi uçları, anonim kod doğrulama, abonelik/ödeme akışına indirim ve komisyon hesabı (mevcut faturalandırma sağlayıcı soyutlamasıyla), rapor uçları.
 - Frontend: kayıt/abonelik akışında kod alanı ve `/r/:kod` yönlendirmesi, platform yöneticisine "Satış ortakları" yönetim ekranı ve raporu.
-- Açık: faturalandırma altyapısının (iyzico) indirimli tutarı çekebilmesi ve tahsilat olayını bildirmesi koddan doğrulanacak; yıllık ödeme seçeneğinin ürün tarafında ne zaman açılacağı (sitede şu an yalnız aylık) ayrı karar.
+- Açık: faturalandırma altyapısının (iyzico) indirimli tutarı çekebilmesi ve tahsilat olayını bildirmesi koddan doğrulanacak; yıllık ödeme seçeneği OLACAK (kullanıcı, 2026-10-22): taban fiyat 12 × aylık (kendi indirimi yok), tek tahsilat; kod varsa indirim bu tek tahsilata uygulanır ve komisyon tek seferliktir. Sitede yıllık seçenek, faturalandırma altyapısı yıllık dönemi destekleyince eklenir (keşif bulgusuna bağlı).
