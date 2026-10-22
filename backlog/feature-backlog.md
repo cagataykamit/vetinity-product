@@ -2987,6 +2987,40 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Bağımlılıklar** | ADR-033 uygulaması (kullanıcı), AK-7, AK-8 |
 | **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6.3 ve 7 |
 
+## Satış ortağı ve faturalandırma
+
+### PARTNER-001 — Satış ortağı ve indirim kodu v1
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PARTNER-001 |
+| **Başlık** | Satış ortağı ve indirim kodu v1 |
+| **Kategori** | PARTNER |
+| **Problem** | Satış ortakları müşteri getiriyor ama kod, indirim, komisyon ve ortak başına satış izlenemiyor |
+| **Önerilen çözüm** | [ADR-037](../decisions/ADR-037-satis-ortagi-indirim-kodu.md): ortak/kod/kullanım kayıtları; kayıtta ve ilk ödemeden önce abonelikte "Ortak kodu"; `/r/KOD` bağlantısı (yalnız URL + oturum belleği); checkout'ta ilk 12 ay indirim; doğrulanmış tahsilatta net üzerinden komisyon, iadede geri alma; platform yöneticisine "Satış ortakları" ekranı (özet, kodlar, kullanım satırları, ödendi işareti, CSV) |
+| **Kullanıcı değeri** | Ortak kanalıyla satış ölçülebilir; komisyon hesabı elle tablo tutmadan çıkar |
+| **Öncelik** | P1 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Geliştiriliyor (dal `feat/satis-ortagi-indirim-kodu`, backend + frontend; main'e alınmadı, migration uygulanmadı) |
+| **Bağımlılıklar** | ADR-035, ADR-037; yıllık seçenek için BILL-001 |
+| **Notlar** | Uygulama notu ve keşif bulguları ADR-037 sonunda. Sağlayıcıdan iade olayı yok (elle işaretleme). Ortağın kendi satışını görmesi sonraki sürüm |
+
+### BILL-001 — Yıllık ödeme dönemi (faturalandırma)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | BILL-001 |
+| **Başlık** | Yıllık ödeme dönemi (faturalandırma) |
+| **Kategori** | BILL |
+| **Problem** | Ürün kararı yıllık ödeme (10 ay fiyatı, tek tahsilat) ama faturalandırma yalnız aylık dönem üretiyor |
+| **Önerilen çözüm** | Abonelikte dönem (aylık/yıllık), yıllık dönem sonu, checkout'ta dönem seçimi; fiyat `SubscriptionPricing` (plan → yıllık → kod) üzerinden; satış ortağı komisyonu yıllıkta tek seferlik (kural hazır) |
+| **Kullanıcı değeri** | Yıllık ödeyen klinik indirim alır, nakit akışı öne çekilir |
+| **Öncelik** | P1 (sitede yıllık seçenek bu işe bağlı) |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
+| **Notlar** | Keşif (2026-10-22): dönem `ActivatedAtUtc + 1 ay` sabit, plan fiyatı yapılandırmada tek tutar. Ayrıca görülen riskler: panel finalize ödemeyi doğrulamıyor; süresi dolmuş denemede yükseltme farkı 1 kuruşa iniyor |
+
 ## İlgili belgeler
 
 - [Roadmap](../roadmap/roadmap.md)
