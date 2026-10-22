@@ -3019,7 +3019,39 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
-| **Notlar** | Keşif (2026-10-22): dönem `ActivatedAtUtc + 1 ay` sabit, plan fiyatı yapılandırmada tek tutar. Ayrıca görülen riskler: panel finalize ödemeyi doğrulamıyor; süresi dolmuş denemede yükseltme farkı 1 kuruşa iniyor |
+| **Notlar** | Keşif (2026-10-22): dönem `ActivatedAtUtc + 1 ay` sabit, plan fiyatı yapılandırmada tek tutar. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
+
+### BILL-002 — Panel "finalize" ucu ödemeyi doğrulamadan aboneliği etkinleştiriyor
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | BILL-002 |
+| **Başlık** | Panel "finalize" ucu ödemeyi doğrulamadan aboneliği etkinleştiriyor |
+| **Kategori** | BILL |
+| **Problem** | `POST /tenants/{id}/subscription-checkout/{sessionId}/finalize` (`Subscriptions.Manage`) oturumu sağlayıcıdan doğrulamadan ücretli plana geçiriyor; arayüz yalnız Manual sağlayıcıda gösteriyor ama uç iyzico oturumunda da çağrılabiliyor → ödemesiz etkinleştirme |
+| **Önerilen çözüm** | Finalize'ı yalnız Manual sağlayıcıya (geliştirme/test) sınırla ya da iyzico'da sonucu sağlayıcıdan sorgula (retrieve); üretimde etkinleştirme yalnız imzası doğrulanan webhook'tan |
+| **Kullanıcı değeri** | Ödenmemiş abonelik açılmaz; gelir kaybı ve kötüye kullanım önlenir |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Keşif (2026-10-22, PARTNER-001). Satış ortağı komisyonu zaten yalnız webhook tahsilatında yazılıyor |
+
+### BILL-003 — Süresi dolmuş denemede üst plana geçiş 1 kuruş çekiyor
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | BILL-003 |
+| **Başlık** | Süresi dolmuş denemede üst plana geçiş 1 kuruş çekiyor |
+| **Kategori** | BILL |
+| **Problem** | Deneme bitmiş (salt okunur) kiracı üst plan seçince yükseltme farkı deneme penceresine göre oranlanıyor; kalan süre 0 olduğundan tutar 0'a, `Math.Max(1, …)` ile 1 kuruşa iniyor; kiracı ilk ayı neredeyse ücretsiz alıyor |
+| **Önerilen çözüm** | Süresi dolmuş denemede (ve dolmuş ücretli dönemde) yükseltmeyi yenileme gibi hedef planın tam dönem fiyatıyla ücretlendir; oranlama yalnız etkin ücretli dönemde |
+| **Kullanıcı değeri** | Denemeden ücretliye geçişte doğru tutar tahsil edilir |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Keşif (2026-10-22, PARTNER-001): `StartSubscriptionCheckoutCommandHandler` + `SubscriptionProrationCalculator` |
 
 ## İlgili belgeler
 
