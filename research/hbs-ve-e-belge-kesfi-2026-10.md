@@ -186,3 +186,12 @@ Yöntem: web araması ve resmî/ikincil sayfaların okunması (2026-10-19). Resm
 - Faturaport (Mayıs 2026): https://faturaport.com/blog/e-fatura/2026-mayis-e-fatura-kontor-fiyatlari
 - WiseCP Paraşüt eklentisi dokümanı (OAuth, sandbox): https://docs.wisecp.com/en/parasut-e-invoice-addon
 - Kolayvet: https://www.kolayvet.com
+
+---
+
+## 9. Güncelleme (2026-10-24): otomatik e-reçete araştırması
+
+- Resmî web servis/API kanıtı yine **bulunamadı** (D9 açık); e-Reçete HAYBİS modülü, `hbsapp.tarim.gov.tr` "Dijital Hizmetler Platformu" altında.
+- Kolayvet "Tarbil entegrasyonu" bir **Chrome eklentisi**: klinik yazılımındaki işlem HBS ekranında hazır doldurulmuş görev olur (müşteri adı, telefon, TC, çip, doğum tarihi); e-Devlet girişi kullanıcıda. Onaysız gönderim olup olmadığı belirsiz; sayfa pazarlama dilidir ([kaynak](https://www.kolayvet.com/ozellikler/ozellikler/tarbil-entegrasyonu)). Yani piyasada tam otomatik resmî entegrasyon değil, **form doldurma yardımcısı** görülüyor.
+- e-Reçete kılavuzu (Talimat ve Uygulama Kılavuzu, 12.12.2018; [TEİS özeti](https://www.teis.org.tr/post/veteri%CC%87ner-heki%CC%87m-e-re%C3%A7ete-tali%CC%87mati-ve-uygulama-kilavuzu-hakkinda-bi%CC%87lgi%CC%87lendi%CC%87rme), tam metin PDF arşivde): kedi, köpek ve atlar kapsamda; kayıtlı olmayan hayvan için önce "Tanımsız Hayvan" kaydı açılır (sahip TCKN/VKN, tür, doğum tarihi, cinsiyet, ırk, eşgal; çip no zorunlu değil) ve sistem hayvan numarası üretir. **D3 büyük ölçüde kapandı** (kılavuzun tamamı okunmadı; hangi ilaç grupları ve imza yöntemi DOĞRULANMADI).
+- Görüşme paketi: [operations/hbs-e-belge-gorusme-paketi.md](../operations/hbs-e-belge-gorusme-paketi.md).
