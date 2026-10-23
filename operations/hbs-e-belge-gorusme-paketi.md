@@ -54,7 +54,7 @@ Hekim kendi e-Devlet'iyle HBS'e girer; hasta bilgisi görünmeyecek şekilde ekr
 
 Gönderilecek metin (kısa):
 
-> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyoruz. Kliniklerimizin kendi mükellef hesaplarıyla e-SMM, e-Arşiv ve e-Fatura keserken sizin API'nizi kullanmasını planlıyoruz. Şunları öğrenmek istiyoruz:
+> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyorum (şu an gerçek kişi olarak; şirket kuruluşu planlanıyor). Müşteri kliniklerimin kendi mükellef hesaplarıyla e-SMM, e-Arşiv ve e-Fatura keserken sizin API'nizi kullanmasını planlıyoruz. Şunları öğrenmek istiyoruz:
 > 1. e-SMM, e-Arşiv ve e-Fatura için API dokümanı; belge oluşturma, iptal, durum sorgulama, PDF alma, e-Fatura mükellefi sorgusu.
 > 2. Test (sandbox) hesabı ve kimlik bilgisi verme süreci.
 > 3. Kimlik doğrulama modeli: her klinik kendi hesabıyla mı, bizim adımıza tek anlaşma mı (çözüm ortaklığı/bayilik koşulları)?
@@ -62,19 +62,23 @@ Gönderilecek metin (kısa):
 > 5. Aynı belgeyi iki kez göndermeyi önleyen idempotency desteği, webhook/durum bildirimi, hız sınırları.
 > 6. Belge saklama süresi ve veri çıkışı.
 
+Not: Entegratörlerin bayilik/çözüm ortaklığı koşulları çoğunlukla vergi mükellefi (şahıs işletmesi veya şirket) ister. Teklifte "sandbox ve kliniklerin kendi hesabıyla API kullanımı" için gerçek kişi başvurusunun yeterli olup olmadığını ayrıca sorun; çözüm ortaklığı (E3) şirketleşmeye bağlı kalabilir. Bu ticari/vergisel karar mali müşavir görüşmesinde de açılmalı (bölüm 2'ye ek soru: şahıs işletmesi mi, şirket mi, ne zaman).
+
 Karşılaştırma tablosu: API kalitesi, sandbox hızı, fiyat, bayilik koşulu, destek. Test hesabı kimlik bilgileri yalnız user-secrets'a girer.
 
 ## 4. Bakanlık yazısı taslağı (HBS / ilgili genel müdürlük veya il müdürlüğü)
 
 > Konu: Veteriner klinik yazılımlarının HBS e-Reçete ve ATS ile entegrasyonu hakkında bilgi talebi
 >
-> Veteriner hekimler için klinik yönetim yazılımı geliştirmekteyiz. Serbest veteriner hekimlerin kullanıcı oldukları HBS e-Reçete ve Aşı Takip Sistemi (ATS) kayıtlarının, hekimin kendi yetkisi ve onayıyla klinik yazılımından iletilebilmesi için:
+> Veteriner hekimler için klinik yönetim yazılımı geliştirmekteyim (şahsım adına; henüz şirketleşme yapılmamıştır). Serbest veteriner hekimlerin kullanıcı oldukları HBS e-Reçete ve Aşı Takip Sistemi (ATS) kayıtlarının, hekimin kendi yetkisi ve onayıyla klinik yazılımından iletilebilmesi için:
 > 1. Üçüncü taraf yazılımlar için resmî bir web servis/API veya entegrasyon dokümanı bulunmakta mıdır?
 > 2. Varsa yazılım firması olarak hangi başvuru, izin ve güvenlik koşulları aranmaktadır?
 > 3. Yoksa planlanan bir entegrasyon çalışması var mıdır; yazılımların tarayıcı üzerinden hekim adına form doldurması Bakanlığın kullanım şartlarına uygun mudur?
 > 4. Kedi, köpek ve at için e-Reçete'de yazılım tarafının sağlaması gereken veri alanları nelerdir?
 >
-> Bilgi ve yönlendirmenizi rica ederiz. (Firma adı, yetkili, iletişim — **kullanıcı doldurur**.)
+> Bilgi ve yönlendirmenizi rica ederim. (Ad soyad, iletişim e-postası ve telefon — **kullanıcı doldurur**. Firma adı yok; gerçek kişi olarak gönderilir. TCKN, adres gibi bilgiler yazının kendisinde istenmedikçe yazılmaz.)
+
+Şahıs adıyla gönderimin sonucu: Bakanlık yetkilendirmeyi veya dokümanı firmaya (tüzel kişi/vergi mükellefi) vereceğini söylerse bu, yanıtta yazar; şirketleşme ya da şahıs işletmesi kurma kararı o zaman netleşir. Yazıdaki "yazılımların tarayıcı üzerinden form doldurması uygun mu" sorusu yazıda kalsın, yanıt B seçeneğini belirler.
 
 Gönderim kanalı ve imza kullanıcıdadır; yanıtı keşif belgesine D9 olarak işleyin.
 
