@@ -64,7 +64,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Boş klinikle başlayan kullanıcı ürün değerini geç görür |
 | **Önerilen çözüm** | Onboarding'de "Boş klinik" veya "Örnek Veteriner Kliniği" seçeneği; örnek klinik önerilen |
 | **Kullanıcı değeri** | İlk 5–10 dakikada anlamlı keşif |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-003 |
@@ -80,7 +80,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Demo verisi gerçekçi olmadan ürün değeri anlaşılmaz |
 | **Önerilen çözüm** | Müşteri, hayvan, randevu, muayene, aşı, tedavi, lab, ödeme, ürün, stok, rapor, takvim içeren sentetik veri seti |
 | **Kullanıcı değeri** | Gerçek bir işletme gibi hissettiren deneyim |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
@@ -96,7 +96,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Trial'da gerçek dış sistem işlemleri maliyet ve risk oluşturur |
 | **Önerilen çözüm** | SMS, e-Fatura, POS, API anahtarı, toplu dışa aktarma ve yüksek maliyetli entegrasyon çağrılarını sınırla |
 | **Kullanıcı değeri** | Günlük kullanımın büyük bölümü deneyimlenir; risk kontrol altında |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-001 |
@@ -112,7 +112,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Büyük klinikler ve kurumsal müşteriler kişiselleştirilmiş demo isteyebilir |
 | **Önerilen çözüm** | Self-service trial ana kanal; büyük/kurumsal müşteriler için isteğe bağlı canlı demo |
 | **Kullanıcı değeri** | Kurumsal satış sürecinde esneklik |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
@@ -128,7 +128,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Sınırsız trial kötüye kullanıma açık |
 | **Önerilen çözüm** | Makul kullanım limitleri (kayıt sayısı, depolama vb.) tanımla |
 | **Kullanıcı değeri** | Adil kullanım; platform sürdürülebilirliği |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-001 |
@@ -160,7 +160,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Trial başarısı ölçülemeden optimize edilemez |
 | **Önerilen çözüm** | Trial başlatma, örnek klinik seçimi, ilk 10 dk aksiyon, aktivasyon, dönüşüm metrikleri |
 | **Kullanıcı değeri** | Ürün ekibi veri odaklı karar alır |
-| **Öncelik** | P0 |
+| **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-001, TRIAL-002 |
