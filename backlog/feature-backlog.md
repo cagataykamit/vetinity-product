@@ -4,7 +4,9 @@
 
 ## Durum değerleri
 
-Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı · Ertelendi
+Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Kısmen geliştirildi (main'de, kapsamın bir kısmı eksik; eksik parantezde) · Geliştirildi (main'de; doğrulanmayan kısım parantezde) · Tamamlandı · Ertelendi
+
+Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum satırı aynı commit dalgasında güncellenir. Son toplu senkron: 2026-10-24 kod incelemesi (bkz. roadmap/KOD-INCELEME-2026-10-24.md).
 
 ## Kategori kimlikleri
 
@@ -48,7 +50,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Anında erişim; satış sürtünmesi olmadan değerlendirme |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | TRIAL-004, TRIAL-007 |
 | **Notlar** | Canlı demo büyük/kurumsal müşteriler için opsiyonel kalır → [ADR-001](../decisions/ADR-001-self-service-trial-strategy.md). Sürümlü kullanım şartları/hukuki metin kabulü (genel ürün yeteneği) → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance), [TRIAL-009](#trial-009--sürümlü-kullanım-şartları-ve-hukuki-metin-kabulü)
 
@@ -144,7 +146,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Kesintisiz devam |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; gerçek sağlayıcıyla uçtan uca doğrulanmadı) |
 | **Bağımlılıklar** | TRIAL-001, abonelik modülü |
 | **Notlar** | Dönüşüm metrikleri tanımlanacak |
 
@@ -196,7 +198,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Merkezi rapor keşfi; sidebar sade kalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [ADR-003](../decisions/ADR-003-report-center.md). **Clients Module:** Client Dashboard analytics P3. **Contacts Module:** Contact Dashboard analytics P3 — → [daysmart.md](../competitors/daysmart.md#contact-dashboard--contact-list). **Reports Module:** Reports Dashboard KPIs (Active Patients/Clients/Appointments); 9 category predefined catalog — → [daysmart.md](../competitors/daysmart.md#reports-dashboard) |
 
@@ -212,7 +214,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hızlı rapor bulma |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | REPORT-001 |
 | **Notlar** | Ödeme, randevu, muayene, aşı raporları kategoriler altında. **Reports Module:** DaySmart 9 category catalog (Schedule, Patients, Clients, Communications, Contacts, Inventory, Billing, Staff, Wellness Plan) — predefined reports not generic builder — → [daysmart.md](../competitors/daysmart.md#reports-dashboard). **E-Vet SMART (2026-09-29):** Üst menü **Rapor** altında kategorize predefined report catalog — Genel, Randevu, Resmi, Depo, Finansal (+ Rapor Özellikleri layout/print config); custom report builder gözlemlenmedi — → [e-vet.md](../competitors/e-vet.md#rapor) |
 
@@ -260,7 +262,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Öğrenme eğrisi düşer |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | REPORT-001 |
 | **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** As Of, range period, location, provider/staff, date range — report-specific subset — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART (2026-09-29):** Rapor ekranlarında sol report-specific filtre paneli + sağ print-oriented report preview shell; filtre seti rapora göre değişiyor — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
@@ -276,7 +278,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Güvenli ve sade arayüz |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; uç başına yetki ayrıntısı doğrulanmadı) |
 | **Bağımlılıklar** | REPORT-001 |
 | **Notlar** | Gelecekte değerlendirilecek. **E-Vet SMART (2026-09-29):** **Laboratuvar Test Sayısı Raporu** menüde görünür; reviewed account navigasyon sonrası **403** — page/report-level access enforcement observed; exact role/permission model ve permission administration UI **not verified**. Depo altındaki dört rapor için kullanıcı erişim engelini doğruladı; ayrı 403 ekranı gözlemlenmedi — → [e-vet.md](../competitors/e-vet.md#rapor--open--access-limited-items) |
 
@@ -292,7 +294,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ofis dışı rapor paylaşımı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): CSV/Excel var; gerçek PDF üretimi ve deneme sürümünde dışa aktarma kısıtı yok |
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
 | **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler). **E-Vet SMART (2026-09-29):** Rapor ekranlarında shared shell — print-oriented preview + **Pdf** dropdown + download-like action + **Yazdır...**; Excel/CSV support not observed — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
@@ -312,7 +314,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Daha az bilişsel yük |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | UX-002 |
 | **Notlar** | → [ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md). **Platform Module:** Global Quick Create top bar — → [daysmart.md](../competitors/daysmart.md#platform-quick-create) |
 
@@ -328,7 +330,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ana menü sade kalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | UX-003, UX-004, UX-005 |
 | **Notlar** | Kabul edilmiş hedef; henüz uygulanmadı. **DaySmart (observed):** Settings ≠ tek key/value tablosu; searchable List of Configurations (Option/Value/Description). **Vetinity (implication):** Tanımlar merkezi domain ownership ile büyümeli; policy registry searchable + discoverable olmalı — alfabetik dev tablo UX hedefi değil. → [daysmart.md](../competitors/daysmart.md#config-list), [daysmart.md](../competitors/daysmart.md#sandbox--settings--configuration) |
 
@@ -344,7 +346,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Sidebar sadeleşir |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | UX-002 |
 | **Notlar** | Derin linkler korunmalı |
 
@@ -360,7 +362,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Sidebar sadeleşir |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | UX-002 |
 | **Notlar** | Derin linkler korunmalı. DaySmart sandbox: breed aramada tür/grup etiketi birlikte; Vetinity species + breed ayrı model korunmalı |
 
@@ -376,7 +378,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Sidebar sadeleşir |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | UX-002 |
 | **Notlar** | Derin linkler korunmalı |
 
@@ -392,7 +394,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Navigation maliyeti düşer; sık kullanılan kayıtlara hızlı dönüş |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): global arama (Ctrl/Cmd+K) var; "son görüntülenenler" yok |
 | **Bağımlılıklar** | UX-001 |
 | **Notlar** | **DaySmart (observed):** kategori ör. Schedule/Patients/Clients/Contacts/Inventory/Billing; Patient All/Name/Chip/Tag; Recently Viewed cross-entity; `LastName, FirstName` tam sorgu fail / partial success — → [daysmart.md](../competitors/daysmart.md#sandbox--global-search). **Vetinity (implication):** toleranslı kişi araması — ad-soyad sırası, soyad-ad, `Soyad, Ad`, partial, fazla/eksik boşluk, TR karakter, case-insensitive. → [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) |
 
@@ -460,7 +462,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Tek ekranda klinik akış |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştiriliyor |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-002–005 |
 | **Notlar** | **Dilim 1 kabul edildi (2026-10-10, kullanıcı kararı); kod `feature/muayene-dilim1` dalında, main'e merge/deploy bekliyor — "Tamamlandı" değil.** Gerçek Draft/Finalized ve revizyon Aşama 4'te. Kalan doğrulamalar: [AJAN-KUYRUGU](../roadmap/AJAN-KUYRUGU.md). → [ADR-005](../decisions/ADR-005-modern-examination-experience.md). DaySmart (2026-08-02 bölüm 2): üst bağlam bandı, SOAP bölümleri, sistematik muayene, lock — sandbox doğrulanmadı |
 
@@ -476,7 +478,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Doğal veteriner dili |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | Dilim 1 EXAM-001 ile kabul edildi (2026-10-10); merge/deploy bekliyor |
 
@@ -492,7 +494,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Standart kayıt; raporlama kolaylığı |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. Vitaller opsiyonel, kısmi güncellemede null=dokunma, `clearVitals` ile toptan temizleme. DaySmart sandbox — Treatment Board vital özet; **Patients Module** Overview snapshot (Weight, Temp, HR, RR) + Vitals History (Reference: SOAP) → [daysmart.md](../competitors/daysmart.md#patient-profile--header--overview) |
 
@@ -508,7 +510,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik karar kaydı |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. **Canlı sandbox — Patients Module:** Open Diagnoses (Overview); Custom Diagnoses clinic catalog ≠ patient diagnosis — hybrid catalog + free text adayı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
 
@@ -524,7 +526,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Muayeneden tedaviye kesintisiz geçiş |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | Dilim 1 kabul edildi (2026-10-10); merge/deploy bekliyor. Plan alanı eklendi; tedavi/reçete/stok bağlantısı Aşama 5'te |
 
@@ -540,7 +542,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hız; tutarlılık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | Stratejik hedef. **Settings/Templates Module:** Medical Note Templates — structured builder (Section→Group→Field); SOAP + Holistic + Client Communication; field types (numeric+unit, controlled score, multi-select); system-bound components (Diagnoses) — → [daysmart.md](../competitors/daysmart.md#templates-medical-notes). Template definition ≠ completed note — → [daysmart.md](../competitors/daysmart.md#templates-vs-runtime) |
 
@@ -588,7 +590,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | DaySmart uyarı panelinden ilham. **Patients Module:** Attention panel; Notes Priority. **Clients Module:** Client Notes (Profile Only, Pop-up) — clinical SOAP **değil** — → [daysmart.md](../competitors/daysmart.md#client-notes) |
 
@@ -604,7 +606,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Bağlam korunur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): bağlı kayıt listeleri ve görüntüleme ekle var; lab/reçete hızlı oluşturma bağlantısı doğrulanmadı |
 | **Bağımlılıklar** | EXAM-001, IMG-001 |
 | **Notlar** | |
 
@@ -684,7 +686,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Kayıt bütünlüğü |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): kesinleştirme kilidi ve ek not var; kilit açma yok (ADR-013 bilinçli) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | DaySmart lock aksiyonu gözlemlendi — sandbox doğrulanmadı. **Patients Module:** Medical Notes History lock icon — finalized anlamı **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#medical-notes). **DaySmart (observed):** Lock Medical Notes clinic policy — → [daysmart.md](../competitors/daysmart.md#config-lock-medical-notes). **Vetinity (implication):** Draft → Finalized/Locked → audit-safe correction/addendum; DaySmart irreversible auto-lock otomatik requirement değil — → [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions) |
 
@@ -706,7 +708,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | v1 yatış modülü; resepsiyon/hekim operasyon görünürlüğü |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | — |
 | **Notlar** | v1 Release Blocker → [v1-release-scope](../roadmap/v1-release-scope.md). Navigasyon → [ux/navigation.md](../ux/navigation.md). Raporlama: ayrı HOSP rapor epic değil; yatış verisi [REPORT-001](#report-001--rapor-merkezi) / [REPORT-002](#report-002--rapor-kategorileri) üzerinden erişilebilir olmalı (aktif/geçmiş yatış listesi — detay TBD). **TBD (v1 dışı / future):** medication administration, nursing sheet, treatment schedule gibi inpatient alt workflow'lar. **Competitor evidence (requirement değil):** E-Vet global Hospitalizasyonlar + hasta Hospitalizasyon Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül) · [geçmiş](../competitors/e-vet.md#hospitalizasyon-geçmişi) (2026-10-04 pass; scope değişmedi) |
 
@@ -722,7 +724,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Yatış operasyonu; ekip koordinasyonu |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): serbest metin konum var; klinik tanımlı konum/oda hiyerarşisi yok |
 | **Bağımlılıklar** | HOSP-001 |
 | **Notlar** | E-Vet UI örneği (Bölüm/Oda/Veteriner) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD**; kapasite/conflict E-Vet’te **NOT VERIFIED** |
 
@@ -733,6 +735,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kimlik** | HOSP-003 |
 | **Başlık** | Hasta yatış geçmişi ve klinik bağlam |
 | **Kategori** | Hospitalization |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Problem** | Hasta kaydından aktif/geçmiş yatışlar ve yatış süresince klinik kayıtlara erişim dağınık |
 | **Önerilen çözüm** | Patient-scoped read surface: aktif yatış + geçmiş yatış listesi ([TIMELINE-001](#timeline-001--hasta-timeline) read-model ile hizalanabilir; duplicate storage önerilmez). Yatış bağlamından ilgili muayene/tedavi/klinik kayıtlara geçiş — [EXAM-001](#exam-001--modern-muayene-çalışma-alanı), [RECORD-001](#record-001--recordfinans-bağlantısı-görünürlüğü) capability'lerini duplicate etmeden bağlam sağlar |
 | **Kullanıcı değeri** | Hasta merkezli yatış geçmişi; yatış–klinik süreklilik |
@@ -816,7 +819,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Operasyonel görünürlük; ekip koordinasyonu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): ADR-009 sade model (Waiting/InProgress/Completed) uygulandı; Booked/In Room/Check Out geçişleri yok, CHECKIN-006 ile örtüşüyor |
 | **Bağımlılıklar** | CHECKIN-001 |
 | **Notlar** | Kapsam durumları: Booked, Checked In, In Room, Visit Complete, Check Out. Bu kayıt yalnızca check-in işlemini değil, randevudan tamamlanmaya kadar tüm ziyaret/encounter yaşam döngüsünü temsil eder. DaySmart sandbox observation (~28:13–35:25): Visit Complete iken ayrı Check Out başlatılabiliyor → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu). Mevcut backlog ID'si CHECKIN-005 olarak korunur. İleride ziyaret/encounter alanı bağımsız bir ürün alanına dönüşürse kategori ve ID yapısı ayrıca değerlendirilebilir. DaySmart sandbox observation (2026-08-02 bölüm 3); SOAP ekranından durum değişimi gözlemlendi — doğrulanmadı. **Canlı sandbox — Census:** operasyon kuyruğu görünümü; satır bazlı status değişimi (gözlemlenen örnek: Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — gözlemlenen seçeneklerin tam durum kümesi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--census-profiller-ve-operasyon-kuyruğu). **Canlı sandbox — Treatment Board:** aktif tedavi operasyon panosu — [daysmart.md](../competitors/daysmart.md#sandbox--treatment-board). **Canlı sandbox — Boarding Dashboard:** Checking In/Out/Checked In kolonları + durum legend — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-dashboard). **Patients Module:** Patient Profile Appointments + Boarding Reservation birleşik liste; domain ayrı — [daysmart.md](../competitors/daysmart.md#appointments-patient-profile). **Clients Module:** Client Appointments/Reservations unified query — [daysmart.md](../competitors/daysmart.md#appointments--reservations). **E-Vet SMART (2026-09-24):** UI'da **Randevular** ile **Ziyaret Geçmişi** ayrı yüzeyler; randevu listesinde örnek durum `Gelmedi` — tam enum/backend modeli **doğrulanmadı** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#randevular) |
 
@@ -832,7 +835,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Resepsiyon ve hekim aynı güncel sırayı görür; muayeneye geçişte hasta tekrar seçilmez |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı ([ADR-009](../decisions/ADR-009-visit-model-and-arrival-flow.md) kabul edildi, 2026-10-10) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | EXAM-001 (dilim 1 kabul edildi), ADR-009 |
 | **Notlar** | Ana plan Aşama 2. CHECKIN-001/005 ile ilişkili; ağır check-in formu (şablon/bundle/fatura/form/kafes kartı seçimi) ilk gelişte **yok** → CHECKIN-002–004 kapsam dışı. Online randevu teknik ön koşul değildir ([APPT](#appt--online-booking-ve-randevu-talepleri)). Departman/oda yönetimi, kapsamlı triage, portal, belge/imza sonraki kapsam. Rapor etkisi ADR-009'da incelenir |
 
@@ -848,7 +851,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Günlük iş akışı tek ekranda; "sıra kimde" sorusu cevaplanır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006, ADR-009 |
 | **Notlar** | Ana plan Aşama 2. Rakip ilham: DaySmart Census, E-Vet Muayene Odası (operasyon iş listesi) — kopyalanmaz. Ödeme göstergesi temel finans (Aşama 3) gelene kadar yalnızca mevcut ödeme verisini yanlış sonuç üretmeden gösterir; veri yoksa göstergeyi uydurmaz |
 
@@ -864,7 +867,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hastayı bulma süresi kısalır; yinelenen kayıt azalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | — (CHECKIN-006 ile birlikte teslim edilir) |
 | **Notlar** | Ana plan Aşama 2. Kabul senaryoları somutlaştırılacak: Türkçe karakter (ı/İ, ş, ğ), ad/soyad sırası, boşluk/noktalama, telefon biçimleri, mikroçip. Bütün entity'lerde gelişmiş/AI arama kapsam dışı (Aşama 8/10) |
 
@@ -880,7 +883,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Resepsiyon düzeltmeyi korkmadan kullanır; kayıt temiz kalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı (kullanıcı onayı 2026-10-10) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006/007 |
 
 ### CHECKIN-010 — Randevulu hasta gelmedi (no-show) işareti
@@ -895,7 +898,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Gelmeyen hasta takibi ve raporlanabilir bilgi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı (önce tasarım önerisi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006/007, ADR-009 |
 
 ### CHECKIN-011 — Uzun bekleme uyarısı
@@ -910,7 +913,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Resepsiyon bekleyeni geç bırakmaz |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı (kullanıcı onayı 2026-10-10) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; tasarım gereği yalnız frontend) |
 | **Bağımlılıklar** | CHECKIN-007 |
 
 ### CHECKIN-012 — Acil işareti
@@ -925,7 +928,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Acil hasta kaçmaz |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük-Orta |
-| **Durum** | Planlandı (CHECKIN-009–011'den sonra) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006/007 |
 
 ### CHECKIN-013 — Bugün satırında hasta uyarı rozetleri
@@ -940,7 +943,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı (önce veri kaynağı doğrulaması; [ADR-005](../decisions/ADR-005-modern-examination-experience.md) hasta bağlamı) |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): hasta uyarı verisi Bugün yanıtında; satırda rozet render'ı doğrulanmadı |
 | **Bağımlılıklar** | CHECKIN-007 |
 
 ### CHECKIN-014 — Hekim için "Benim hastalarım" filtresi
@@ -955,7 +958,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hekim kendi sırasına odaklanır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı (CHECKIN-009–011'den sonra) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-007, hekim seçimi |
 
 ### CHECKIN-008 — Randevusuz gelişte hızlı müşteri ve hasta kaydı
@@ -970,7 +973,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Yeni hasta kabulü tek akışta; resepsiyon ekran değiştirmez; yinelenen kayıt azalır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı (kullanıcı kararı 2026-10-10: telefon zorunlu; en doğru çözüm: backend'de tek işlemli kayıt ucu) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006, SEARCH-001 |
 | **Notlar** | Yarım kayıt (müşteri var, hasta yok) oluşmamalı. Yeni uç Clients.Create ve Pets.Create yetkilerini ister; yetkisi olmayana bağlantı görünmez. Query DB projeksiyon/outbox davranışı mevcut müşteri ve hasta oluşturma ile aynı olmalı. **Karar (2026-10-10):** yinelenen kural mevcut hâliyle kalır (aynı ad + aynı telefon → 409; yalnızca telefon aynıysa serbest, aile bireyleri paylaşabilir); telefon aramada mevcut müşteriyi gösterir. Telefon görünümü mevcut `+90 5XX …` biçimi |
 
@@ -992,7 +995,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Muayeneden ücrete bağlamı kaybetmeden geçiş |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta-Yüksek |
-| **Durum** | Tasarlanacak (ADR-012 taslak, kod keşfi bekliyor) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | CHECKIN-006, ADR-012 |
 
 ### FIN-002 — Tahsilat–ücret ilişkilendirme ve bakiye
@@ -1007,7 +1010,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | "Kalan borç" sorusu tek yerde cevaplanır |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Tasarlanacak |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | FIN-001, ADR-012 |
 
 ### FIN-003 — Ücret ve tahsilat düzeltme
@@ -1022,7 +1025,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Denetlenebilir kasa; güvenli düzeltme |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta-Yüksek |
-| **Durum** | Tasarlanacak |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | FIN-001, FIN-002 |
 
 ### FIN-004 — Bugün ve muayeneden ücret/ödeme akışı (arayüz)
@@ -1037,7 +1040,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hasta çıkarken tek akışta tahsilat |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı (backend FIN-001/002 sonrası) |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): ödeme al ve ücret/ödenen/kalan var; Bugün/muayeneden "ücret ekle" kısayolu yok |
 | **Bağımlılıklar** | FIN-001, FIN-002, CHECKIN-007 |
 
 ### FIN-005 — Müşteri kredisi ve mahsup (fazla ödeme)
@@ -1097,7 +1100,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hızlı ve tutarlı ücretlendirme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta-Yüksek |
-| **Durum** | Planlandı (ADR-012: manuel ücretin ön koşulu değil) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | FIN-001 |
 
 ### FIN-009 — Düzeltme yetkisinin kontrollü gevşetilmesi
@@ -1151,7 +1154,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Eksik ücret kontrolü; denetlenebilirlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): "ücret bekliyor" kalemi ve açık işler var; satır bazında fiyat/fatura görünümü yok |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [IDEA-007](../research/ideas.md#idea-007--clinical-to-financial-traceability), [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Patients Module:** History Invoice + Reference. **Clients Module:** customer-scoped invoice list — → [daysmart.md](../competitors/daysmart.md#client-billing). **Inventory Module:** Item Transactions — → [daysmart.md](../competitors/daysmart.md#inventory-transactions). **Billing Module:** Invoice workspace (Items/Payments/Credits/Returns/Late Fees tabs); line-level Patient/Provider; finansal özet (Subtotal…Balance) — → [daysmart.md](../competitors/daysmart.md#billing-invoices). **E-Vet SMART (2026-09-24):** Ziyaret Geçmişi (Fatura No, Toplam, Ödeme); Yeni Ziyaret > Satış fatura satırları — backend entity ayrımı **iddia edilmez** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#yeni-ziyaret) |
 
@@ -1167,7 +1170,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Denetlenebilirlik; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): denetim yazımı var; okuma ucu ve "değişiklikleri gör" ekranı yok |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart view changes gözlemlendi — sandbox doğrulanmadı → [IDEA-025](../research/ideas.md#idea-025--auditable-clinical-record-lifecycle), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions). **Inventory Module:** stock adjustment audit — → [daysmart.md](../competitors/daysmart.md#inventory-adjustments). **Reports Module:** Staff > Deleted Transactions report — deleted financial/transaction visibility — → [daysmart.md](../competitors/daysmart.md#reports-deleted-transactions) |
 
@@ -1183,7 +1186,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Bağlamlı dokümantasyon |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız görüntüleme ve lab kayıtlarında dosya eki; diğer kayıt türlerinde yok |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | **E-Vet SMART:** Hasta kartı **Dosyalarım** — generic dosya satırları (tarih, bilgi, dosya seç, liste arama); lab/PACS/clinical document ile aynı capability sayılmamalı — → [e-vet.md](../competitors/e-vet.md#dosyalarım-attachments) |
 
@@ -1215,7 +1218,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik güvenlik; denetim |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): lot/parti ve son kullanma var; uygulama yolu, bölge, üretici yok |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart record satırı gözlemi. **Patients Module:** Pharmacy/Vaccines lot/route. **Inventory Module:** Purchases/Transactions/Alerts — → [daysmart.md](../competitors/daysmart.md#inventory-purchases). **Reports Module:** Controlled Substances Log — TR regulatory TBD — → [daysmart.md](../competitors/daysmart.md#reports-controlled-substances-log). **DaySmart (observed):** Inventory Shelf Management = Soonest Expiring vs purchase-date FIFO — → [daysmart.md](../competitors/daysmart.md#config-inventory-shelf). **Vetinity (implication):** expiring inventory için FEFO/FIFO policy değerlendirilebilir |
 
@@ -1283,7 +1286,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Self-servis; resepsiyon yükü azalır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; v0 kapsamı) |
 | **Bağımlılıklar** | — |
 | **Notlar** | **Kullanıcı kararı (2026-10-16): zorunlu; P2→P1, pilot sonrası.** Kapsam, kimlik, KVKK, teknoloji ve açık kararlar → [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md). v1.0 dışı; rakip gözlemi → [IDEA-017](../research/ideas.md#idea-017--owner-portal-as-operational-extension), [PATTERN-013](../research/patterns.md#pattern-013--portal-to-clinic-continuity) |
 
@@ -1299,7 +1302,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Merkezi hayvan bilgisi |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): temel profil ve aşılar var; fotoğraf, belgeler, notlar, ziyaretler yok |
 | **Bağımlılıklar** | PORTAL-001 |
 | **Notlar** | v1.0 dışı aday. Portal demografisi klinik hayvan kaydından türetilir. **Canlı sandbox — Patients Module:** Upload Photo modal; chip/birthdate Edit Profile — → [daysmart.md](../competitors/daysmart.md#edit-patient-profile) |
 
@@ -1315,7 +1318,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Proaktif hasta sahibi bilgilendirmesi |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yaklaşan aşı ve randevular var; ziyaret ve belge listesi yok |
 | **Bağımlılıklar** | PORTAL-001 |
 | **Notlar** | v1.0 dışı aday. **Reminders:** Klinik Reminders Detail ≠ portal reminder yüzeyi — → [daysmart.md](../competitors/daysmart.md#sandbox--reminders-reminders-detail). **DaySmart (observed):** Link Expiration policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). **Vetinity (implication):** scoped access + expiration + revocation |
 
@@ -1331,7 +1334,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Şeffaf faturalama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): bakiye ve ödemeler var; fatura/durum etiketi modeli yok (ADR-012) |
 | **Bağımlılıklar** | PORTAL-001 |
 | **Notlar** | v1.0 dışı aday; online ödeme ayrı kapsam. **Clients Module:** Account Statement Email/Print; customer balance header — → [daysmart.md](../competitors/daysmart.md#client-billing) |
 
@@ -1363,7 +1366,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Güvenli ve doğru eşleşen self-servis giriş |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | PORTAL-001, SEC-001 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3; giriş yöntemi AK-2. Backend önce, migration kullanıcı onayıyla |
 
@@ -1379,7 +1382,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Yasal uyum; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): sürümlü kabul ve aydınlatma var; bildirim tercihi ve veri talebi akışı doğrulanmadı |
 | **Bağımlılıklar** | PORTAL-006, TRIAL-009 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4; Vetinity'nin rolü ve İYS/ETK için hukuki görüş şart (AK-5); [HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md)'ne eklenir |
 
@@ -1395,7 +1398,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Güvenli, sürdürülebilir portal yüzeyi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; çapraz kiracı test kapsamı doğrulanmadı) |
 | **Bağımlılıklar** | PORTAL-006 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K6; backend sözleşmesi tek doğruluk kaynağı, önce backend |
 
@@ -1411,7 +1414,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik kontrolü; çıkış güvencesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): müşteri kartında durum/davet/iptal/kapat var; klinik düzeyi aç-kapat ve gelen kutusu yok |
 | **Bağımlılıklar** | PORTAL-006 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3/K8; yeni portal yönetim izni (izin kataloğu) |
 
@@ -1427,7 +1430,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hasta sahibi doğru kanaldan zamanında haberdar olur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız davet e-postası; tür×kanal kuralı, WhatsApp, push yok |
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
 
@@ -1547,7 +1550,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Tek bakışta hasta hikâyesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | TIMELINE-002 |
 | **Notlar** | → [ADR-006](../decisions/ADR-006-patient-timeline.md). **Canlı sandbox — Patients Module:** Patient Dashboard klinik kayıt merkezi; Overview due list + snapshot vitals; History filtreleri (Records…Communications, More); patient-scoped read-models → [daysmart.md](../competitors/daysmart.md#sandbox--patients-module). **E-Vet SMART (2026-09-24):** hasta bağlamında sol nav (randevu/ziyaret, muayene/aşı, lab/xray/pacs, hospitalizasyon, ekstre, dosya, form); E-Vet IA kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#hasta-kartı--patient-workspace) |
 
@@ -1563,7 +1566,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Veri tutarlılığı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Ayrı kopya yok. **Patients/Clients/Contacts/Inventory Modules** — scoped read-models. **Reports Module:** operational → entity read-model → clinic-wide report → dashboard KPI; report-only duplicate source yok — → [daysmart.md](../competitors/daysmart.md#reports-architecture), [ADR-006](../decisions/ADR-006-patient-timeline.md) |
 
@@ -1579,7 +1582,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Hızlı geçmiş taraması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): backend tür/tarih/iptal süzgeçleri tam; frontend tarih aralığı süzgeci doğrulanmadı |
 | **Bağımlılıklar** | TIMELINE-001 |
 | **Notlar** | DaySmart sandbox — History filtreleri… **Clients Module:** Declined Items client billing + patient History More — shared source — → [daysmart.md](../competitors/daysmart.md#client-billing). **E-Vet SMART:** Ziyaret Geçmişi tarih aralığı filtresi — → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi) |
 
@@ -1613,7 +1616,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik görüntü yönetimi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; migration uygulanması ve tarayıcı denemesi doğrulanmadı) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [ADR-007](../decisions/ADR-007-imaging-module.md). **Canlı sandbox — Patients Module:** Patient History > Images; clinic-wide Images worklist (View Online NON_INTEGRATED) — patient vs clinic scope → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics). **E-Vet SMART (2026-09-29):** Ayrı global **Pacs İstekleri** populated worklist + patient **Pacs Geçmişi** / **Yeni Pacs İstek**; **Xray İstekleri** ayrı yüzey ([PARTIAL](../competitors/e-vet.md#global-xray-i̇stekleri-partial)). Imaging operasyon ≠ generic **Dosyalarım** — → [e-vet.md](../competitors/e-vet.md#global-pacs-i̇stekleri-modül) |
 
@@ -1629,7 +1632,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Düzenli röntgen arşivi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1645,7 +1648,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Tam görüntüleme kapsamı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1661,7 +1664,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Görsel klinik kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor (2026-10-22, yalnız klinik fotoğraf; video v1 kapsamı dışında — ADR-007 uygulama notu) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; video kapsam dışı, ADR-007) |
 | **Bağımlılıklar** | IMG-001 |
 | **Notlar** | |
 
@@ -1709,7 +1712,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Klinik bağlam |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | IMG-001, EXAM-001 |
 | **Notlar** | |
 
@@ -1725,7 +1728,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Birleşik hasta geçmişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştiriliyor (2026-10-22, v1 kodlandı: backend + frontend dalı `feat/goruntuleme-dosya-katmani`; main'e alınmadı, migration uygulanmadı, tarayıcıda denenmedi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | IMG-001, TIMELINE-001 |
 | **Notlar** | **Canlı sandbox — Patients Module:** Images History filter; diagnostic record ≠ generic attachment — → [daysmart.md](../competitors/daysmart.md#pharmacy--labs--images--vaccines--vitals--communications) |
 
@@ -2263,7 +2266,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | No-show azaltma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): klinik düzeyi ayar ve müşteri kanal tercihi var; sahip tarafı devre dışı bırakma yok |
 | **Bağımlılıklar** | APPT-013 |
 | **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. Default reminder/confirmation clinic policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). Pre-visit workflow — → [CHECKIN-002](#checkin-002--check-in-sırasında-medical-note-şablonu), [PORTAL-005](#portal-005--dijital-onam-ve-imza). Reminder ≠ Task |
 
@@ -2615,7 +2618,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Doğru atama; tutarlı seçim listeleri; rol netliği |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): geliş diyaloğunda hekim süzgeci var; tüm sağlayıcı seçimlerinde ortak politika doğrulanmadı |
 | **Bağımlılıklar** | APPT-007 |
 | **Notlar** | APPT kapsamında kayıtlı; randevu, hasta, muayene ve diğer klinik kayıtlarındaki provider seçimlerine uygulanır. DaySmart sandbox: veteriner olmayan hesap listede göründü — sandbox konfigürasyonu veya provider ataması doğrulanmadı; kesin yetkilendirme hatası iddiası yok |
 
@@ -2745,7 +2748,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Yasal kaydın unutulmaması, çift yazımın azalması; eski sistemi bırakma koşulu |
 | **Öncelik** | P1 (pilot canlı veriden önce; ADR-036 AK-7 kabul edildi 2026-10-21) |
 | **Tahmini zorluk** | Orta (tahmin; reçete kalemlerinin yapılandırılması dahil, ölçülmedi) |
-| **Durum** | Doğrulama bekliyor (v1 geliştirildi, 2026-10-22; main'e birleşmedi, push yok, migration uygulanmadı). Backend ve frontend dalı `feat/hbs-yardimcisi-d2`; sözleşme backend `docs/HBS_ASSISTANT_API_CONTRACT.md`. Yapılan: reçete kaleminde doz/birim/parti; e-Reçete No ve ATS belge seri no geri kaydı (Girilmedi/Girildi/Gerekmiyor + gerekçe, işaretleyen ve zaman, denetim kaydı), kesinleşmiş kayıtta da (ayrı uç); "HBS verisi" diyaloğu (alan alan kopyala, sahip TCKN/VKN tam değeri yalnız müşteri düzenleme izniyle); Reçeteler/Aşılar listesinde HBS durumu süzgeci ve sütunu; Bugün açık işlerde "HBS'e girilmedi" (son 30 gün); Rapor Merkezi'nde HBS takibi listeleri (CSV/Excel). Doğrulanmadı: tarayıcıda elle deneme, HBS ekran alanlarının pilot hekimle eşleşmesi |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; tarayıcı denemesi ve pilot hekim eşleşmesi doğrulanmadı) |
 | **Bağımlılıklar** | [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) Dilim 1–2, ADR-015 (parti/SKT), Aşama 5 reçete yapısı, müşteri TCKN alanı |
 | **Notlar** | Keşif: [research/hbs-ve-e-belge-kesfi-2026-10.md](../research/hbs-ve-e-belge-kesfi-2026-10.md). Rakip E-vet: HBS menüsü = e-Reçete + ATS listeleri, Excel dışa aktarma; gönderim semantiği doğrulanmadı — → [e-vet.md](../competitors/e-vet.md#hbs-modül). Sahip değişikliği/ölüm/kayıp bildirimi sahibin yükümlülüğü görünüyor (doğrulanmadı); kapsam dışı, en fazla bilgi notu. Kullanıcı adımları: pilot hekimle HBS ekran gözlemi, Bakanlığa web servis sorusu |
 
@@ -2765,7 +2768,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Telefonla kolay erişim, mağaza gerekmeden |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | PORTAL-001 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5 (öneri: önce PWA); AK-4 |
 
@@ -2871,7 +2874,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Site ürünle aynı dili konuşur; yanıltıcı iddia kalmaz |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.5; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) D1. Küçük iş (WORKFLOW), ADR gerekmez |
 
@@ -2903,7 +2906,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Arama motorunda görünürlük; paylaşımda doğru kart |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): robots/sitemap/canonical/OG var; Organization ve FAQ JSON-LD, staging noindex, prerender yok |
 | **Bağımlılıklar** | ADR-033 (prerender/ayrı derleme kısmı) |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.1–3.2; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6. Yazı tipi yerelleştirme ayrı iş (wt-font) |
 
@@ -2919,7 +2922,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ziyaretçi 30 saniyede "benim için mi" diyebilir; güven kurulur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
 | **Bağımlılıklar** | WEB-005, AK-1/AK-3/AK-4/AK-5 kararları |
 | **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 3; iddia tablosu [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 4. "Mevzuata uygun"/"KVKK uyumlu" ifadeleri kullanılmaz |
 
@@ -2951,7 +2954,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Sorusu olan klinik ulaşabilir; Türkiye'ye özgü değer ayrı sayfada anlatılır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; içerik kalitesi doğrulanmadı) |
 | **Bağımlılıklar** | AK-5, AK-6 (iletişim bilgileri, tüzel kişi) |
 | **Notlar** | Öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 2 ve 5. Blog şimdilik yok |
 
@@ -3001,7 +3004,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ortak kanalıyla satış ölçülebilir; komisyon hesabı elle tablo tutmadan çıkar |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştiriliyor (dal `feat/satis-ortagi-indirim-kodu`, backend + frontend; main'e alınmadı, migration uygulanmadı) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; satış ortakları tarayıcı denemesi doğrulanmadı) |
 | **Bağımlılıklar** | ADR-035, ADR-037; yıllık seçenek için BILL-001 |
 | **Notlar** | Uygulama notu ve keşif bulguları ADR-037 sonunda. Sağlayıcıdan iade olayı yok (elle işaretleme). Ortağın kendi satışını görmesi sonraki sürüm |
 
@@ -3017,7 +3020,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Yıllık ödeyen klinik indirim alır, nakit akışı öne çekilir |
 | **Öncelik** | P1 (sitede yıllık seçenek bu işe bağlı) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız satış ortağı yıllık komisyon kuralı hazır; abonelik dönemi ve checkout seçimi yok |
 | **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
 | **Notlar** | Keşif (2026-10-22): dönem `ActivatedAtUtc + 1 ay` sabit, plan fiyatı yapılandırmada tek tutar. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
 
@@ -3033,7 +3036,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ödenmemiş abonelik açılmaz; gelir kaybı ve kötüye kullanım önlenir |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi/Dalda (2026-10-24, backend dal `feat/bill-002-003`; main'e alınmadı, push yok). Finalize yalnız Manual sağlayıcı oturumunda çalışır; iyzico/Stripe oturumunda 409 `Billing.ManualFinalizeNotAllowed`, etkinleştirme yalnız imzası doğrulanan webhook ile. Doğrulanmadı: gerçek iyzico ile uçtan uca |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; gerçek iyzico ile uçtan uca doğrulanmadı) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Keşif (2026-10-22, PARTNER-001). Satış ortağı komisyonu zaten yalnız webhook tahsilatında yazılıyor |
 
@@ -3049,7 +3052,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Denemeden ücretliye geçişte doğru tutar tahsil edilir |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi/Dalda (2026-10-24, backend dal `feat/bill-002-003`; main'e alınmadı, push yok). Süresi dolmuş deneme/ücretli dönemde yükseltme hedef planın tam fiyatıyla (kod indirimi ADR-037 sırasıyla) çekilir; oranlama yalnız etkin ücretli dönemde. Doğrulanmadı: gerçek iyzico ile uçtan uca |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi; gerçek iyzico ile uçtan uca doğrulanmadı) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Keşif (2026-10-22, PARTNER-001): `StartSubscriptionCheckoutCommandHandler` + `SubscriptionProrationCalculator` |
 
