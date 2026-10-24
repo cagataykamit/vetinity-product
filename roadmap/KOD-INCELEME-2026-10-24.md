@@ -21,6 +21,8 @@ En kritik ikisi (koordinatör doğruladı):
 
 Aynı desen: `Tenants/Commands/Create`, `Public/Commands/SignupAndAcceptInvite`, `Reminders/Commands/UpdateSettings`, `Examinations/Commands/Create` (muayene kaydedildikten sonra randevu tamamlanması ikinci commit).
 
+**Durum (2026-10-24, backend dalı `fix/b1-transaction-markers`, push yok):** Tarama yeniden yapıldı; 21 adayın 11'i işaretsizdi, bunların 4'ü ekle-ya-da-güncelle dallı tek yazım (işaret gereksiz), 2'si dış IO içeriyor ve bilinçli olarak dışarıda bırakıldı (`StartSubscriptionCheckout`: sağlayıcıya HTTP çağrısı ortasında, kendi telafi mantığı var; `UploadStoredFile`: dosya akışı sırasında kayıt önce yazılır, bakım işi yarım yüklemeyi temizler). Kalan 5 komut işaretlendi: OwnerSignup, SignupAndAcceptInvite, CreateTenant, CreateExamination, UpdateClinicWorkingHours. Davet kabulünde geri alma entegrasyon testiyle kanıtlandı (işaret olmadan kullanıcı kaydı kalıyor). Çalışma saatleri handler'ının hata yolu HTTP'den tetiklenemez (validator domain kuralını birebir yansıtır). Backend: build 0/0, Domain 692, Application 3532, Integration 1579 geçti (2 atlandı).
+
 **Öneri:** Kısa vadede 10 handler'a `ITransactionalRollbackOnFailureRequest`. Kalıcı çözüm: `EfRepository`'de `SaveChanges`'i kapat (Ardalis `RepositoryBase` yazım metodlarının `saveChanges: false` overload'ı / override), tek `_uow.SaveChangesAsync` (127 handler'da zaten çağrılıyor) gerçek tek commit olsun. Bu değişiklik entegrasyon testleriyle korunmalı.
 
 ### B2. Çapraz kesen kurallar tek yerde yaşamıyor (SOLID/"kural tek yerde" ihlali)
