@@ -1040,7 +1040,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta çıkarken tek akışta tahsilat |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): ödeme al ve ücret/ödenen/kalan var; Bugün/muayeneden "ücret ekle" kısayolu yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24): Bugün satırı menüsünde ve muayene detayında "Ücret ekle" (müşteri/hasta/geliş/muayene ön ayarlı), ödeme al mevcut; tarayıcıda elle denenmedi |
 | **Bağımlılıklar** | FIN-001, FIN-002, CHECKIN-007 |
 
 ### FIN-005 — Müşteri kredisi ve mahsup (fazla ödeme)
