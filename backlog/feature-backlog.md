@@ -3033,7 +3033,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Ödenmemiş abonelik açılmaz; gelir kaybı ve kötüye kullanım önlenir |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi/Dalda (2026-10-24, backend dal `feat/bill-002-003`; main'e alınmadı, push yok). Finalize yalnız Manual sağlayıcı oturumunda çalışır; iyzico/Stripe oturumunda 409 `Billing.ManualFinalizeNotAllowed`, etkinleştirme yalnız imzası doğrulanan webhook ile. Doğrulanmadı: gerçek iyzico ile uçtan uca |
 | **Bağımlılıklar** | — |
 | **Notlar** | Keşif (2026-10-22, PARTNER-001). Satış ortağı komisyonu zaten yalnız webhook tahsilatında yazılıyor |
 
@@ -3049,7 +3049,7 @@ Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Tamamlandı
 | **Kullanıcı değeri** | Denemeden ücretliye geçişte doğru tutar tahsil edilir |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi/Dalda (2026-10-24, backend dal `feat/bill-002-003`; main'e alınmadı, push yok). Süresi dolmuş deneme/ücretli dönemde yükseltme hedef planın tam fiyatıyla (kod indirimi ADR-037 sırasıyla) çekilir; oranlama yalnız etkin ücretli dönemde. Doğrulanmadı: gerçek iyzico ile uçtan uca |
 | **Bağımlılıklar** | — |
 | **Notlar** | Keşif (2026-10-22, PARTNER-001): `StartSubscriptionCheckoutCommandHandler` + `SubscriptionProrationCalculator` |
 

@@ -43,3 +43,5 @@ Ayrıntı ve uç sözleşmesi: backend `docs/SALES_PARTNER_DISCOUNT_API_CONTRACT
 6. Menü: Yönetim grubunda yalnız platform yöneticisine görünen "Satış ortakları" öğesi (görev tanımına göre; ADR-023 madde 4 "yeni sayfa kendi satırını almaz" ile gerilim: klinik kullanıcısı bu satırı hiç görmez).
 
 **Mevcut akışta görülen, bu işte düzeltilmeyen riskler:** (a) panel finalize ucu ödemeyi sağlayıcıdan doğrulamadan aboneliği etkinleştiriyor; (b) süresi dolmuş denemede üst plana geçişte fark deneme penceresine göre oranlanıyor ve çekilen tutar 1 kuruşa iniyor.
+
+**Düzeltme (2026-10-24, backend dal `feat/bill-002-003`, backlog BILL-002/003; main'e alınmadı):** (a) panel finalize yalnız `Manual` sağlayıcı oturumunu etkinleştirir; iyzico/Stripe oturumunda 409 `Billing.ManualFinalizeNotAllowed` döner, etkinleştirme yalnız imzası doğrulanan webhook ile olur (sağlayıcıya sorgu eklenmedi). (b) Süresi dolmuş deneme/ücretli dönemde yükseltme hedef planın tam fiyatıyla çekilir, kod indirimi bu tutara uygulanır; oranlama yalnız etkin ücretli dönem içindeki yükseltmede kalır.
