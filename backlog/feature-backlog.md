@@ -66,7 +66,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İlk 5–10 dakikada anlamlı keşif |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): kayıtta "Nasıl başlayalım?" seçimi (örnek klinik önerilen/varsayılan, boş klinik), başarı ekranında yüklenen içerik kartı, abonelik sayfasında sonradan yükleme kartı; backend owner-signup startWithExampleClinic + POST /tenants/{id}/example-clinic; tarayıcıda uçtan uca denenmedi |
 | **Bağımlılıklar** | TRIAL-003 |
 | **Notlar** | → [ADR-002](../decisions/ADR-002-example-clinic-strategy.md) |
 
@@ -82,7 +82,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Gerçek bir işletme gibi hissettiren deneyim |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): sentetik örnek klinik seti (12 müşteri, 20 hayvan, ~40 randevu, ~25 muayene, aşı/tedavi/lab, ücret-ödeme, 10 ürün + stok), sabit tohum, ÖRNEK işaretli; temizleme/geri alma ucu yok (ADR-002 riski, ayrı iş) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Gerçek müşteri verisi kullanılmaz |
 
