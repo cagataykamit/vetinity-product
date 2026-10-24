@@ -98,7 +98,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Günlük kullanımın büyük bölümü deneyimlenir; risk kontrol altında |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece, karar: Standart): denemede e-posta hatırlatma günde 20, dışa aktarma 1.000 satır, içe aktarma tablo başına 500 satır; 422 Trial.* kodları + kullanıcı mesajı + "Aboneliğe geç"; ücretli kiracıda kısıt yok |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Kısıtlamalar kullanıcıya açık şekilde gösterilmeli |
 
