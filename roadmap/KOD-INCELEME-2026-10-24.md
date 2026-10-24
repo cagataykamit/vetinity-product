@@ -108,7 +108,7 @@ Aynı desen: `Tenants/Commands/Create`, `Public/Commands/SignupAndAcceptInvite`,
 | Sıra | İş | Depo | Boyut | Risk azaltımı |
 |---|---|---|---|---|
 | 1 | B1: 10 handler'a transaction işareti; sonra `EfRepository` SaveChanges kapatma + tek commit | backend | Küçük → Orta | Veri bütünlüğü (kayıt, çalışma saatleri) |
-| 2 | O1 audit try/catch; O9 Production connection anahtarı; F5 menuitem sızıntısı; F7 Sakai ölü kod silme | ikisi | Küçük (1 PR her biri) | Hızlı kazanım |
+| 2 | O1 audit try/catch; O9 Production connection anahtarı; F5 menuitem sızıntısı; F7 Sakai ölü kod silme — **Yapıldı (2026-10-24)**: backend `fix/quick-wins-audit-config` (audit yazımı try/catch + 3 birim testi; Production şablonu `DefaultConnection`), frontend `fix/quick-wins-menuitem-sakai` (`takeUntilDestroyed` + 2 spec; ~15 bin satır Sakai kalıntısı silindi). Backend Application 3535 + Auditing entegrasyon 25 geçti; frontend lint 0/0, panel 1800 + portal 119 test, build temiz. Dallar main'e alınmadı, push yok. | ikisi | Küçük (1 PR her biri) | Hızlı kazanım |
 | 3 | P1 backlog senkronu; P2 sözleşme kopyalarını tek kaynağa bağla | ürün+frontend | Küçük | Planlama doğruluğu |
 | 4 | O10 billing webhook entegrasyon testleri; P3 CI'a lint + audit + Dependabot | ikisi | Küçük | Para akışı güvencesi |
 | 5 | F3 pipe'lar + OnPush varsayılanı; F1/F2 `ListPageState` + `routeEntityLoader` (önce 5+5 sayfa) | frontend | Orta | Tekrar ve CD maliyeti |
