@@ -724,7 +724,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yatış operasyonu; ekip koordinasyonu |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): serbest metin konum var; klinik tanımlı konum/oda hiyerarşisi yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): iki seviyeli Bölüm → Oda tanımları (Ayarlar > Tanımlar > Yatış konumları, klinik bazlı, pasife alma), yatış formunda oda seçimi, liste/detayda "Bölüm / Oda"; kapasite/çakışma yok (karar). Tarayıcıda elle denenmedi; migration yalnız test DB'de |
 | **Bağımlılıklar** | HOSP-001 |
 | **Notlar** | E-Vet UI örneği (Bölüm/Oda/Veteriner) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD**; kapasite/conflict E-Vet’te **NOT VERIFIED** |
 
