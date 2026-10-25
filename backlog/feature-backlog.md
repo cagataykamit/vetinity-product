@@ -162,7 +162,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Ürün ekibi veri odaklı karar alır |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-25): `GET /admin/trial-metrics` (platform yöneticisi) kohort özeti — deneme başlatan, örnek klinik seçme oranı, aktivasyon, ilk 10 dk aktivasyon, ilk değer anına medyan süre, ücretli dönüşüm, ilk aksiyon dağılımı, örnek/boş klinik karşılaştırması; 9 komutta `IActivationSignalRequest` + `ActivationSignalBehavior` → `TenantActivations` (ilk aksiyon bir kez), örnek klinik yüklemesi işaretlenir; panelde "Deneme ölçümleri" sayfası (Satış ortaklarının yanında, 7/30/90 gün). Ziyaretçi→deneme oranı ve günlük zaman serisi yok (sözleşme §7). Tarayıcıda denenmedi (platform yöneticisi girişi kullanıcıda); migration yalnız test DB'de |
 | **Bağımlılıklar** | TRIAL-001, TRIAL-002 |
 | **Notlar** | → [Release plan](../roadmap/release-plan.md) metrikleri |
 
