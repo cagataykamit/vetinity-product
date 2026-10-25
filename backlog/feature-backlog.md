@@ -66,7 +66,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İlk 5–10 dakikada anlamlı keşif |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): kayıtta "Nasıl başlayalım?" seçimi (örnek klinik önerilen/varsayılan, boş klinik), başarı ekranında yüklenen içerik kartı, abonelik sayfasında sonradan yükleme kartı; backend owner-signup startWithExampleClinic + POST /tenants/{id}/example-clinic; tarayıcıda uçtan uca denenmedi |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): kayıtta "Nasıl başlayalım?" seçimi (örnek klinik önerilen/varsayılan, boş klinik), başarı ekranında yüklenen içerik kartı, abonelik sayfasında sonradan yükleme kartı; backend owner-signup startWithExampleClinic + POST /tenants/{id}/example-clinic. Tarayıcıda uçtan uca denendi (2026-10-25, kayıt → örnek klinikle panel): ilk denemede Pazar günü Bugün boş ve hastalarda cins/renk eksik çıktı, üretici düzeltildi (backend `6651f1b0`: yükleme günü her zaman randevulu, cins adı + renk) ve yeniden doğrulandı |
 | **Bağımlılıklar** | TRIAL-003 |
 | **Notlar** | → [ADR-002](../decisions/ADR-002-example-clinic-strategy.md) |
 
@@ -724,7 +724,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yatış operasyonu; ekip koordinasyonu |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): iki seviyeli Bölüm → Oda tanımları (Ayarlar > Tanımlar > Yatış konumları, klinik bazlı, pasife alma), yatış formunda oda seçimi, liste/detayda "Bölüm / Oda"; kapasite/çakışma yok (karar). Tarayıcıda elle denenmedi; migration yalnız test DB'de |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 gece): iki seviyeli Bölüm → Oda tanımları (Ayarlar > Tanımlar > Yatış konumları, klinik bazlı, pasife alma), yatış formunda oda seçimi, liste/detayda "Bölüm / Oda"; kapasite/çakışma yok (karar). Tarayıcıda denendi (2026-10-25): bölüm ve oda tanımı oluşturma, yatış formunda Bölüm → Oda; formda bulunan geliştirme-modu hatası (yatış tarihi alt sınırının her turda yeniden hesaplanması, NG0100) düzeltildi (frontend `72ce00e9`). Migration yerel dev DB'ye uygulandı; paylaşılan/üretim DB ayrı onay |
 | **Bağımlılıklar** | HOSP-001 |
 | **Notlar** | E-Vet UI örneği (Bölüm/Oda/Veteriner) Vetinity alan/requirement kopyası değildir — → [e-vet.md](../competitors/e-vet.md#global-hospitalizasyon-modül). Odalar/kaynak tanımları Ayarlar/Tanımlar ile ilişkilendirilebilir — kesin IA **TBD**; kapasite/conflict E-Vet’te **NOT VERIFIED** |
 
