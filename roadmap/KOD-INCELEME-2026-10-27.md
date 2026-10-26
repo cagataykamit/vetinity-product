@@ -120,7 +120,7 @@ Düşük: `standalone: true` 274 gereksiz tekrar; `prefer-on-push` kuralı kapal
 | 7 | F3 Eager→OnPush: 79 adaydan başla | frontend | O |
 | 8 | B1 kalıcı; O2/O3; F1/F2 iskelet; B2/B4 kademeli | ikisi | O-B (24 Ekim planı geçerli) |
 
-*Durum (2026-10-27):* 1-3 main'de. 4-6 yapıldı, dallarda bekliyor (main'e alınmadı); ayrıntı [devir notu](DEVIR-2026-10-24.md) madde 8.
+*Durum (2026-10-27):* 1, 2 ve 3'teki B-Y2 main'de; 3'teki B-Y3 (billingPeriod kuralı validator'a) ve B-Y4 (`TransactionBehavior` namespace) **yapılmadı**. 4-6 yapıldı ve main'e alındı; ayrıntı [devir notu](DEVIR-2026-10-24.md) madde 8.
 
 ## 9. Doğrulanmayanlar
 Build/test/lint koşmadı. Ardalis `AddAsync` SaveChanges davranışı paket kaynağından değil yorumlardan; B-Y1 log davranışı kod okumasından; Eager→OnPush adaylarının davranışsal uygunluğu; bütçe uyarısı; vite açığının güncelliği; çok satırlı aria-label durumu; public type sayımı regex tabanlı yaklaşık; Visits no-show geri alma entegrasyon testi Visits klasöründe bulunamadı.
