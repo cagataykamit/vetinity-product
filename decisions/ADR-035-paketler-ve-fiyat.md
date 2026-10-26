@@ -4,11 +4,12 @@
 
 **Kabul edildi (2026-10-17, kullanıcı: "pilot bölümümüz yok, tek paket olmasın, canlıya çıkıyormuş gibi hazırlanıyoruz; uygun bir şey belirle").** Kademe yapısını kullanıcı seçti (klinik sayısı + kullanıcı); **fiyat ve limit değerlerini kullanıcı koordinatöre bıraktı**, aşağıdaki değerler koordinatör önerisidir ve **ticari varsayımdır**. Tek gözlenen pazar verisi (kullanıcı, 2026-10-17, Kolayvet fiyat sayfası): Standart ₺999, Profesyonel ₺1.990, Plus ₺4.990 aylık (yıllıkta yaklaşık yarısı), Premium teklifle; onlarda SMS, e-fatura ve WhatsApp dahil, bizde yok; bu yüzden fiyatlar o seviyenin altına ve yakınına konuldu, yapı ve içerik kopyalanmadı. Kullanıcı istediği an değiştirir; fiyat/limit değerleri tek veri dosyasında yaşar (`pricing-plan.utils.ts`). Bu ADR [ADR-034](ADR-034-tanitim-sitesi-konumlandirma.md)'ün "pilot dönemi, tek paket" kısmını yerine geçer; deneme (14 gün ücretsiz, kart yok) ve demo kararı aynen kalır.
 
-- 2026-10-22: yıllık ödeme ve indirim kaldırıldı (kullanıcı); satış ortağı indirim kodu ayrı ADR.
+- 2026-10-22: yıllık ödeme ve indirim kaldırıldı (kullanıcı); satış ortağı indirim kodu ayrı ADR. Aynı gün yıllık ödeme 10 ay fiyatıyla geri alındı (kullanıcı kararı "B", ADR-037).
+- 2026-10-26: yıllık ödeme uygulandı (BILL-001; kullanıcı kararları: aylıktan yıllığa hemen geçiş, mevcut ayın kalan günleri düşülür; yıllıktan aylığa dönem sonunda; otomatik yenileme yok; sitede Aylık/Yıllık anahtarı).
 
 ## Karar
 
-Üç kademe, aylık fiyatlar KDV hariç; faturalandırma aylık:
+Üç kademe, aylık fiyatlar KDV hariç; faturalandırma aylık ya da yıllık (yıllık = 10 ay fiyatı, BILL-001):
 
 | | Temel | Profesyonel | Kurumsal |
 |---|---|---|---|
@@ -29,6 +30,6 @@
 
 ## Sonuçlar
 
-- Frontend: `pricing-plan.utils.ts` bu tablodan beslenir; paketler sayfası 3 kademe, özellik karşılaştırma tablosu, yalnız aylık fiyat, SSS (fiyat, KDV, deneme, kademe geçişi); ana sayfa ve SEO/JSON-LD aynı verilerden.
+- Frontend: `pricing-plan.utils.ts` bu tablodan beslenir; paketler sayfası 3 kademe, özellik karşılaştırma tablosu, Aylık/Yıllık anahtarı (varsayılan aylık; ana sayfa yalnız aylık), SSS (fiyat, KDV, deneme, kademe geçişi); ana sayfa ve SEO/JSON-LD aynı verilerden.
 - Fiyat ve limitler değişince tek dosya güncellenir; sitedeki sayılar kopyalanmaz.
 - Faturalandırma/abonelik altyapısı (iyzico) bu kararın kapsamı dışındadır; kademe limitlerinin (kullanıcı/klinik sayısı) ürün içinde zorlanması ayrı iştir (backlog).
