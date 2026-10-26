@@ -10,6 +10,8 @@ Gerçek hata riski taşıyan **yeni** bulgu 3 tane: portal üretim derlemesinin 
 
 ## 2. Yeni bulgular — gerçek hata riski
 
+> **Durum (2026-10-27 gece):** üçü de düzeltildi, dallarda (main'e alınmadı): frontend `fix/portal-api-base-url` `8490d62f`; backend `fix/denetim-2026-10-27` `edba0fd3` (B-Y1) ve `3cdccd59` (B-Y2). Ayrıntı ve test sonuçları devir notunda.
+
 ### F-Y1. Portal üretim derlemesi localhost API adresiyle çıkıyor (K, dağıtım hatası)
 `projects/portal/src/environments/environment.ts:11` `portalApiBaseUrl: 'https://localhost:7173/api/portal/v1'`. CI'daki "Set production API URL" adımı (`ci.yml:82-93`) `scripts/set-api-base-url.mjs` ile yalnız panelin `src/environments/environment.ts` dosyasını yazar; portal için eşdeğer yok. `ng build portal --configuration production` (`ci.yml:98`) portalı localhost adresiyle üretir; `capacitor.config.ts` `allowNavigation` da buradan türediği için mobil kabukta API host'u localhost olur. Staging dosyaları ve `portalBaseUrl` ADR-033 ile uyumlu; yalnız üretim API adresi eksik.
 **Aksiyon:** betiğe `PORTAL_API_BASE_URL` (ya da `API_BASE_URL`'den `/api/portal/v1` türetme) ekle, CI'da portal derlemesinden önce koştur, etiket derlemesinde tanımsızlığı hata yap. Canlıya geçiş notlarına "CI'da `API_BASE_URL`" maddesinin yanına portal eşini ekle.
