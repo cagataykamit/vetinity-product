@@ -60,6 +60,7 @@ Demo ortamının yaşayan bir ürün hissi vermesi UX ilkesidir ([UX ilkeleri](.
 - Onboarding akışına seçim ekranı eklenmeli ([TRIAL-002](../backlog/feature-backlog.md))
 - Sentetik seed veri seti oluşturulmalı ([TRIAL-003](../backlog/feature-backlog.md))
 - Örnek klinik seçme oranı metrik olarak izlenmeli ([TRIAL-008](../backlog/feature-backlog.md))
+- Örnek veriyi temizleme (risk maddesi, 2026-10-26 kararı): abonelik sayfasındaki örnek klinik kartından kalıcı silme; örnek müşteri/hastalar ve onlara bağlı her şey silinir, kullanılmış örnek ürün pasife alınır, kullanıcının kendi kayıtları etkilenmez; Sahip/Yönetici, deneme ve ücretli abonelikte ([TRIAL-003](../backlog/feature-backlog.md); backend `docs/EXAMPLE_CLINIC_API_CONTRACT.md` §10)
 
 ## İlgili belgeler
 
