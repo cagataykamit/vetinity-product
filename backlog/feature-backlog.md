@@ -114,9 +114,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kurumsal satış sürecinde esneklik |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (feature dalları `feat/trial-005-demo-request`, 2026-10-26; main'e alınınca "main + origin"): İletişim sayfasında herkese açık canlı demo talep formu (20 dk görüntülü görüşme, çok hekimli/şubeli vurgu, ana çağrı deneme) → anonim `POST /public/demo-requests` (doğrulama, tuzak alan, IP başına 10 dakikada 3), `DemoRequests` tablosu, `DemoRequests:NotifyEmail` doluysa outbox e-postası. Bildirim adresi AK-6 ile kullanıcıdan bekleniyor; boşken talepler yalnız DB'de birikir. Panelde liste yok (karar: ilk sürümde yalnız e-posta). Tarayıcıda dev ortamında form → kayıt denendi; e-posta gerçek SMTP ile denenmedi |
 | **Bağımlılıklar** | — |
-| **Notlar** | Ana edinme kanalı değil |
+| **Notlar** | Ana edinme kanalı değil. Kararlar (kullanıcı, 2026-10-26): kapsam form + uç + e-posta; 20 dk görüntülü görüşme vaadi; herkese açık, çok şube vurgulu. Sözleşme backend `docs/TRIAL_DEMO_REQUEST_API_CONTRACT.md` (§7 kapsam dışı: panel listesi, takvim entegrasyonu, onay e-postası, saklama süresi) |
 
 ### TRIAL-006 — Trial kullanım kotası
 
