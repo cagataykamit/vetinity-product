@@ -95,9 +95,9 @@ Düşük: `standalone: true` 274 gereksiz tekrar; `prefer-on-push` kuralı kapal
 1. `foundation-rules.md:12` "Application yalnızca Domain" ↔ EF Core paketi (B3). Karar açık.
 2. `foundation-rules.md` §3 tek public type ↔ 281 dosya.
 3. `foundation-rules.md:13` "Domain dış paket bağımlı olmaz" ↔ `Mediator.Abstractions` (B-Y2 kaldırılırsa kapanır).
-4. Backend kök `README.md` çekirdek-yalnız anlatım ↔ 80+ controller (P5).
+4. Backend kök `README.md` çekirdek-yalnız anlatım ↔ 80+ controller (P5). *(Düzeltme 2026-10-27: gerçek sayı 61 controller, ~390 uç; README güncellendi, `35ba7e75`.)*
 5. `release-notes/` yalnız şablon README; WORKFLOW "geliştirme bitince release notu" diyor, hiç sürüm notu yok (ürün henüz yayınlanmadığı için kabul edilebilir; ilk sürümle başlar).
-6. Ürün deposunda `.claude/` izlenmiyor ve `.gitignore`'da yok (`launch.json`, worktrees). `.gitignore`'a eklenmeli (K).
+6. Ürün deposunda `.claude/` izlenmiyor ve `.gitignore`'da yok (`launch.json`, worktrees). `.gitignore`'a eklenmeli (K). *(Yapıldı 2026-10-27, `37d4e68`.)*
 
 ## 7. Karar bekleyenler (kullanıcı)
 1. B3: EF paketini Application'dan düşür (O) mü, `foundation-rules §1`'i gerçeğe çek (K) mı. Öneri: önce belge.
@@ -119,6 +119,8 @@ Düşük: `standalone: true` 274 gereksiz tekrar; `prefer-on-push` kuralı kapal
 | 6 | P5 README; ürün deposu `.gitignore` `.claude/` | ikisi | K |
 | 7 | F3 Eager→OnPush: 79 adaydan başla | frontend | O |
 | 8 | B1 kalıcı; O2/O3; F1/F2 iskelet; B2/B4 kademeli | ikisi | O-B (24 Ekim planı geçerli) |
+
+*Durum (2026-10-27):* 1-3 main'de. 4-6 yapıldı, dallarda bekliyor (main'e alınmadı); ayrıntı [devir notu](DEVIR-2026-10-24.md) madde 8.
 
 ## 9. Doğrulanmayanlar
 Build/test/lint koşmadı. Ardalis `AddAsync` SaveChanges davranışı paket kaynağından değil yorumlardan; B-Y1 log davranışı kod okumasından; Eager→OnPush adaylarının davranışsal uygunluğu; bütçe uyarısı; vite açığının güncelliği; çok satırlı aria-label durumu; public type sayımı regex tabanlı yaklaşık; Visits no-show geri alma entegrasyon testi Visits klasöründe bulunamadı.
