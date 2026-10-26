@@ -3020,9 +3020,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yıllık ödeyen klinik indirim alır, nakit akışı öne çekilir |
 | **Öncelik** | P1 (sitede yıllık seçenek bu işe bağlı) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız satış ortağı yıllık komisyon kuralı hazır; abonelik dönemi ve checkout seçimi yok |
+| **Durum** | Geliştirildi (dal `feat/bill-001-yearly`, backend + frontend, 2026-10-26; main'e alınmadı, migration `AddBillingPeriod` yalnız yerel geliştirme veritabanına uygulandı) |
 | **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
-| **Notlar** | Keşif (2026-10-22): dönem `ActivatedAtUtc + 1 ay` sabit, plan fiyatı yapılandırmada tek tutar. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
+| **Notlar** | Kullanıcı kararları (2026-10-26): aylıktan yıllığa hemen geçilir, mevcut ayın kalan günleri düşülür; yıllıktan aylığa dönem sonunda; dönem sonu aylıkla aynı (otomatik yenileme yok, salt okunur + yeniden ödeme); sağlayıcı iyzico + Manual (Stripe yıllıkta reddedilir); sitede Aylık/Yıllık anahtarı. Sözleşme: backend `docs/SUBSCRIPTION_YEARLY_BILLING_API_CONTRACT.md`. Tarayıcıda: paketler anahtarı ve abonelik sayfasında "Yıllığa geç" denendi; iyzico sandbox ödeme formu yerel ağdan açılamadı (DNS), yıllık ödeme ucu entegrasyon testiyle (Manual) doğrulandı. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
 
 ### BILL-002 — Panel "finalize" ucu ödemeyi doğrulamadan aboneliği etkinleştiriyor
 
