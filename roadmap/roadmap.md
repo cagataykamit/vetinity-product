@@ -12,6 +12,7 @@
 | Araştırılacak | Keşif ve değerlendirme gerekiyor |
 | Tasarlanacak | Ürün/UX tasarımı bekleniyor |
 | Geliştiriliyor | Aktif geliştirme sürecinde |
+| Geliştirildi | Kod main'de (origin ile eşit); üretime deploy edilmedi. Backlog'daki aynı adlı durumla eşdeğer |
 | Tamamlandı | Üretim ortamında kullanılabilir |
 | Ertelendi | Bilinçli olarak ertelendi |
 
@@ -37,13 +38,13 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 | 11 | P2 / ihtiyaca göre P1 | Online randevu, gelişmiş finans/kapanış, SMS/e-belge/POS/iletişim/portal | Talep doğrulanmış genişleme |
 | 12 | Future | Cihaz/LIS/PACS, ileri yatış, mobil, hastane/enterprise ve yeni segmentler | İlk klinik sürümünden sonra |
 
-**Aşama 1 durumu (2026-10-10):** Dilim 1 kullanıcı tarafından kabul edildi; iki depoda `feature/muayene-dilim1` dalında, main'e merge ve deploy bekliyor, yani üretimde kullanılabilir değil ("Tamamlandı" değil). Doğrulanmayanlar ve kalan manuel senaryolar: [AJAN-KUYRUGU](AJAN-KUYRUGU.md).
+**Aşama 1 durumu (2026-10-26):** Dilim 1 (EXAM-001–005) main'de ve origin'de, backlog'da "Geliştirildi"; üretime deploy yok, yani "Tamamlandı" değil. Önceki durum (2026-10-10: `feature/muayene-dilim1` dalında, merge bekliyor) geçersiz. Güncel ayrıntı: [backlog](../backlog/feature-backlog.md), [devir notu](DEVIR-2026-10-24.md).
 
 İlk iş: **Muayene kayıt bütünlüğü ve bağlamlı çalışma alanı, dilim 1** (EXAM-001–005, ADR-005). Kapsam dışı: tam Visit, timeline, alerji veri modeli, gerçek finalize/addendum, ücret/bakiye, ürün stok tüketimi, AI, cihaz entegrasyonu ve genel menü yeniden tasarımı (bölüm 23).
 
 ## Öncelik eşlemesi (önceki yapı → ana plan)
 
-Önceliği değişen maddeler gerekçesiyle birlikte yazılmıştır. Durum alanları değişmedi; hiçbiri uygulanmış sayılmaz.
+Önceliği değişen maddeler gerekçesiyle birlikte yazılmıştır. Uygulama durumu aşağıdaki P0 bölümünde ve backlog'dadır (2026-10-26 eşitlendi).
 
 | Madde | Önceki | Ana plandaki yeri | Not |
 |---|---|---|---|
@@ -56,8 +57,8 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 | Örnek Veteriner Kliniği | P0 | Aşama 8 (P1) | **P0 → P1.** Aynı gerekçe. [ADR-002](../decisions/ADR-002-example-clinic-strategy.md) |
 | Menü sadeleştirme | P0 | Aşama 8 (P1) | **P0 → P1.** Mevcut route'lar ve bookmark'lar korunur. [ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md) |
 | Rapor Merkezi | P0 | Aşama 8 (P1) | **P0 → P1.** Borç raporu ücret modelinden sonra anlamlıdır. [ADR-003](../decisions/ADR-003-report-center.md) |
-| Trial kısıtlama politikası | P0 | **Açık soru** | Ana planda ayrıca zamanlanmadı. Aşama 8 trial kapsamıyla birlikte ele alınması önerilir; karar bekliyor. |
-| Trial'dan ücretli plana dönüşüm akışı | P0 | **Açık soru** | Ana planda yalnızca "abonelik" platform kapısı olarak geçiyor (Aşama 9). Zamanlama kararı bekliyor. |
+| Trial kısıtlama politikası | P0 | Aşama 8 (P1) | **Karar (2026-10-24): Standart** — [TRIAL-004](../backlog/feature-backlog.md) geliştirildi; kullanım kotası (TRIAL-006) karar bekliyor. |
+| Trial'dan ücretli plana dönüşüm akışı | P0 | Aşama 8–9 | [TRIAL-007](../backlog/feature-backlog.md), BILL-002/003 geliştirildi; gerçek sağlayıcıyla uçtan uca doğrulanmadı. |
 | Muayene şablonları, hazır tedavi paketleri | P1 | Aşama 10 (P2) | **P1 → P2.** Büyük yapılandırma motoru ilk günlük akışa gereksiz kapsam ekler. |
 | Doz hesaplayıcı | P1 | Aşama 10 (P2) | **P1 → P2.** Klinik olarak doğrulanmış ayrı kapsam gerektirir. |
 | İlk düşük riskli AI yardımcıları | P1 | Aşama 10 (P2) | **P1 → P2.** İlk ticari klinik akıştan sonra, onaylı taslak olarak. [ADR-008](../decisions/ADR-008-embedded-ai-assistant.md) |
@@ -78,7 +79,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 1. **Backlog:** Geliş/Bugün, dar hasta/sahip arama, temel ücret/bakiye, lab istemi ve yapılandırılmış reçete satırı için exact kayıtlar açılmalı. Komşu feature ID'siyle tamamlanmış sayılmaz.
 2. **ADR:** Visit modeli ve temel finans (ücret/tahsilat/bakiye) için ADR gerekir. [WORKFLOW](../WORKFLOW.md) bu iki işte geliştirmeden önce karar ister.
 3. **v1 kapsamı:** [v1-release-scope.md](v1-release-scope.md) içindeki geniş etiketler (Patient Timeline, Imaging, Notification Center vb.) ana plandaki dar kapsamla netleştirilmeli.
-4. **Trial:** Kısıtlama politikası ve ücretli plana dönüşüm akışının zamanlaması karara bağlanmalı.
+4. **Trial:** ~~Kısıtlama politikası ve ücretli plana dönüşüm akışının zamanlaması karara bağlanmalı.~~ Karara bağlandı ve geliştirildi (TRIAL-004, TRIAL-007; 2026-10-26). Açık: TRIAL-006 kota.
 5. **Kod doğrulaması:** Muayene dilim 1 başlamadan, ana plandaki kod bulgularının (randevu bağlantısının kaybolması, tarih filtresi uyuşmazlığı, eski formun yeni sürümü ezmesi) güncel kodda hâlâ geçerli olduğu doğrulanmalı.
 
 ---
@@ -97,7 +98,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Muayeneyi Vetinity'nin en kritik çalışma alanı haline getirmek |
 | **Kullanıcı değeri** | Veteriner hekim muayene sırasında tüm klinik bağlamı tek ekranda yönetir |
-| **Durum** | Geliştiriliyor (dilim 1 kabul edildi, merge bekliyor) |
+| **Durum** | Geliştirildi (EXAM-001–005 main'de, 2026-10-26 eşitlendi; üretimde değil) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | — |
 | **Kapsam notu** | SOAP mantığı, Türkçe terminoloji; şablon/bundle/doz hesaplayıcı P1'e taşınır |
@@ -110,10 +111,10 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Kullanıcıların satış görüşmesi olmadan ürünü denemesini sağlamak |
 | **Kullanıcı değeri** | Anında erişim; satış sürtünmesi olmadan değer değerlendirmesi |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (TRIAL-001; canlı demo talebi TRIAL-005 2026-10-26; üretimde değil) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | Trial kısıtlama politikası, dönüşüm akışı |
-| **Kapsam notu** | Canlı demo büyük/kurumsal müşteriler için opsiyonel kalır |
+| **Kapsam notu** | Canlı demo opsiyonel kalır: İletişim sayfasında herkese açık talep formu (20 dk görüntülü görüşme, çok hekimli/şubeli vurgu); ana çağrı deneme |
 
 → [ADR-001](../decisions/ADR-001-self-service-trial-strategy.md)
 
@@ -123,7 +124,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | İlk 5–10 dakikada ürün değerini göstermek |
 | **Kullanıcı değeri** | Boş ekran yerine gerçekçi sentetik veriyle hızlı keşif |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (TRIAL-002/003; örnek veriyi temizleme ucu yok, ayrı iş) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | Sentetik seed verileri |
 | **Kapsam notu** | Önerilen onboarding seçeneği; gerçek müşteri verisi kullanılmaz |
@@ -136,10 +137,10 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Sidebar şişmesini önlemek; tanım ekranlarını Ayarlar altında toplamak |
 | **Kullanıcı değeri** | Daha az bilişsel yük; sık kullanılan işlere hızlı erişim |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (UX-001–005) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | — |
-| **Kapsam notu** | Türler, ırklar, ürün kategorileri → Ayarlar > Tanımlar (hedef, henüz uygulanmadı) |
+| **Kapsam notu** | Türler, ırklar, ürün kategorileri → Ayarlar > Tanımlar |
 
 → [ADR-004](../decisions/ADR-004-navigation-and-menu-philosophy.md)
 
@@ -149,7 +150,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Sidebar'da tek "Raporlar" menüsü; iç navigasyonla rapor erişimi |
 | **Kullanıcı değeri** | Rapor keşfi ve erişimi tek merkezden |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (REPORT-001/002/005; favori ve kayıtlı filtre REPORT-003/004 Planlandı) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | — |
 | **Kapsam notu** | Favoriler, kaydedilmiş filtreler, dışa aktarma backlog'da |
@@ -162,7 +163,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Trial'da günlük kullanımın büyük bölümünü deneyimletirken riskli işlemleri sınırlamak |
 | **Kullanıcı değeri** | Gerçekçi deneyim; maliyetli/riskli entegrasyonlardan koruma |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (TRIAL-004, karar Standart; TRIAL-006 kota karar bekliyor) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | Self-service trial |
 | **Kapsam notu** | SMS, e-Fatura, POS, API anahtarı, toplu dışa aktarma sınırlandırılır |
@@ -173,7 +174,7 @@ Kaynak: [Uçtan uca yol haritası](Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Karar
 |---|---|
 | **Amaç** | Trial bitiminde veya öncesinde sorunsuz plan yükseltme |
 | **Kullanıcı değeri** | Kesintisiz geçiş; veri kaybı olmadan devam |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (TRIAL-007, BILL-002/003, ölçüm TRIAL-008; gerçek sağlayıcıyla doğrulanmadı) |
 | **Öncelik** | P0 |
 | **Bağımlılıklar** | Self-service trial, abonelik modülü |
 | **Kapsam notu** | Dönüşüm metrikleri tanımlanacak |
