@@ -56,7 +56,7 @@ Gerçek hata riski taşıyan **yeni** bulgu 3 tane: portal üretim derlemesinin 
 ### Backend
 | Kod | Ölçüm (2026-10-27) | Durum |
 |---|---|---|
-| B1 kalıcı (EfRepository SaveChanges) | `EfRepository.cs` 13 satır, override yok; `ITransactionalRequest` 10, `ITransactionalRollbackOnFailureRequest` 21; işaretsiz 2+ yazım 6 (4 tek yazım dallı, 2 bilinçli dış IO). Yeni handler'larda (Visits, DemoRequests, BILL-001) işaretsiz çok yazım yok | Kısa vade tamam; kalıcı çözüm yapılmadı (O) |
+| B1 kalıcı (EfRepository SaveChanges) | `EfRepository.cs` 13 satır, override yok; `ITransactionalRequest` 10, `ITransactionalRollbackOnFailureRequest` 21; işaretsiz 2+ yazım 6 (4 tek yazım dallı, 2 bilinçli dış IO). Yeni handler'larda (Visits, DemoRequests, BILL-001) işaretsiz çok yazım yok | Kalıcı çözüm uygulandı: repository'ler kaydetmez, kayıt ağı ([ADR-039](../decisions/ADR-039-birim-is-tek-commit.md) kabul edildi); backend main'de |
 | B2 kiracı/klinik kuralı | `TenantId is not { }` 185; `ClinicContextMismatch` 22 kod / 62 kullanım; `HasQueryFilter` 3; `TryGetResolvedTenant` 259 (248'den ↑) | Yapılmadı, büyüyor (B) |
 | B3 EF sızıntısı | `Application.csproj` EF Core 10.0.14; 120 dosya; `foundation-rules.md:12` çelişkili | Karar bekliyor (belge mi paket mi) |
 | B4 saat kaynağı | Domain `UtcNow` 86/29; Application 91 satır / 77 dosya TimeProvider'sız; RS0030 suggestion | Değişmedi (O) |
