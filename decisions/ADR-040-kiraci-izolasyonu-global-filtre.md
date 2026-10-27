@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Taslak (2026-10-27).** Denetim B2 için hazırlandı. Kullanıcı onayı bekleniyor.
+**Kabul edildi (2026-10-27, kullanıcı: "Önerileri uygula").** Seçenek C. Denetim B2 için hazırlandı.
 
 ## Bağlam
 
