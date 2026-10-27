@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Taslak (2026-10-27).** Kullanıcı Seçenek A'yı onayladı: "Seçenek A ile başla. ADR-039 taslağını da yaz." Uygulama backend `refactor/b1-unit-of-work` dalında; main'e alınmadı.
+**Kabul edildi (2026-10-27, kullanıcı: "ADR-039'u Kabul edildi olarak işaretle").** Seçenek A onayı: "Seçenek A ile başla. ADR-039 taslağını da yaz." Uygulama backend `refactor/b1-unit-of-work` dalından main'e alındı.
 
 ## Bağlam
 
