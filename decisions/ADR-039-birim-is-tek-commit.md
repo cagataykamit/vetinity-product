@@ -43,5 +43,8 @@
   - Build 0/0; Domain 720/720, Application 3656/3656.
   - Tam entegrasyon, yeni testler eklenmeden önce: 1644 geçti, 0 düştü, 2 atlandı.
   - Tam entegrasyon, son hâl: 1648 geçti, 1 düştü, 2 atlandı. Düşen `Concurrent_Same_RequestId_Out_On_Existing_Batch...`. Main'de de var olan çift düşüm yarışı; düzeltmesi `fix/stok-partisi-esz-idempotency` dalında. Tek başına 5 koşunun 4'ünde geçti.
-- O dal `CreateStockMovement` / `ReverseStockMovement`'ı "önce hareketi tek başına yaz" desenine çeviriyor. Bu ADR ile birleştirilirken hareketin `AddAsync`'inden hemen sonra `SaveChangesAsync` çağrılmalıdır; aksi hâlde hareket artık tek başına yazılmaz.
+- Stok düzeltmesi main'e alındı (36e877f6) ve B1 dalına birleştirildi (0e832856).
+  - Düzeltme `CreateStockMovement` / `ReverseStockMovement`'ı "önce hareketi tek başına yaz" desenine çeviriyor.
+  - Çakışmada hareketin `AddAsync`'inden hemen sonraki `SaveChangesAsync` korundu: ilk kayıt yalnız hareket INSERT'üdür, stok/parti değişikliği son kayıtta gider.
+  - Birleşik dal (0e832856): build 0/0; Domain 720/720, Application 3660/3660; tam entegrasyon 1654 geçti, 0 düştü, 2 atlandı. Stok yarışı regresyon testleri dahil.
 - Doğrulanmayan: entegrasyon testi olmayan handler'larda gizli örtük kayıt bağımlılığı. Kayıt ağı bunu ilk başarılı çağrıda yakalar.
