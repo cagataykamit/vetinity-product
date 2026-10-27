@@ -108,6 +108,16 @@ Düşük: `standalone: true` 274 gereksiz tekrar; `prefer-on-push` kuralı kapal
 6. Outbox denetim kaydı ve eski `/api/v1/outbox` uçları (devam listesinden taşındı).
 7. Barkod/SKU araması `tr-TR` mi dilden bağımsız mı (öneri: dilden bağımsız; randevu/aşı kodlarında I→ı hatası yaşandı).
 
+**Kararlar (kullanıcı, 2026-10-27: "en mantıklısı neyse onu yapalım"; yaygın sektör pratiğine göre verildi):**
+1. **B3:** belge gerçeğe çekildi. Application EF Core'u yalnız sorgu ifadeleri ve EF kayıt istisnaları için kullanır; `DbContext`/`DbSet`/migration/transaction yönetimi yasak (bugün Application'da `DbContext`/`DbSet` 0). Backend `6c9fd087`.
+2. **Lint:** `error`. Yön `core/shared ← features ← layout/pages`. layout ve pages en üst katman olduğu için features'ı kullanabilir (denetimdeki "layout/pages'i kapsa" önerisi ters yönde yorumlanmıştı); yasak olan alt katmanın üstü içe aktarmasıdır. Ters yöndeki 3 ihlal düzeltildi, tek istisna tema durumu taşıyan `LayoutService`. Frontend `f4221d4a`, `50bcfca1`. Feature↔feature döngüleri (31 çift, B5) bu kuralın dışında, ayrı iş.
+3. **`p-button`:** şimdi planlanır; ayrı oturum önerildi.
+4. **Public type:** gevşetildi: bir ana tip ve ona bağlı küçük yardımcı tipler aynı dosyada olabilir. Backend `6c9fd087`.
+5. **Dependabot:** iki eski PR kapatılacak; `gh` bu makinede yok, kullanıcı GitHub arayüzünden kapatır.
+6. **Outbox:** mesaj işleme adımları denetim kaydına yazılmaz (log, metrik, dead-letter yeterli); yöneticinin elle yaptığı yeniden deneme ve silme `AuditLogs`'a yazılır. Eski `/api/v1/outbox` uçları kaldırıldı (panel/portal kullanmıyordu). Backend `58f68d18`.
+7. **Barkod/SKU:** dilden bağımsız. Backend araması varsayılan harmanlamayla zaten "I" = "i"; hata frontend'in `tr-TR` tam eşleşmesindeydi. Frontend `2c2b8c00`.
+8. **Virüs tarayıcı:** ClamAV ile arka planda tarama ve karantina, canlıya geçişte (sunucu işleri kullanıcı söyleyince). O zamana kadar dosya türü ve boyut kontrolü.
+
 ## 8. Önerilen iş sırası (karar gerektirmeyenler)
 | Sıra | İş | Depo | Boyut |
 |---|---|---|---|
