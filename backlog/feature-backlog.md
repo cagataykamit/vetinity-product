@@ -3104,6 +3104,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | BILL-002 (elle tamamlama yalnız Manual; korunuyor) |
 | **Notlar** | Etkinleştirme kaynakları: `Webhook`, `ProviderVerified` (backend sağlayıcıya sordu), `Manual` (yalnız açık Manual oturum). Sandbox gözlemi: açılmamış/vazgeçilmiş form 5122, kart reddi ve 3D iptali FAILURE (sayfa yeniden denenebilir), başarılı ödeme SUCCESS ve sayfa "Geçersiz token". iyzico webhook'u yeniden deniyor. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 18 |
 
+### BILL-005 — Çift ödeme: aynı denemede ikinci ödeme otomatik iade
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | BILL-005 |
+| **Başlık** | Çift ödeme: aynı denemede ikinci ödeme otomatik iade |
+| **Kategori** | BILL |
+| **Problem** | Paket ya da dönem değiştirilince eski oturum yalnız bizde iptal ediliyor; iyzico'daki eski ödeme sayfası ödenebilir kalıyor (sandbox'ta görüldü). Kullanıcı iki sekmede de öderse iki kez para çekiliyor |
+| **Önerilen çözüm** | Kullanıcı kararı (2026-10-28): ilk işlenen ödeme paketi açar, aynı denemede sonra gelen ödeme paketi değiştirmez ve otomatik iptal/iade edilir; otomatik iade başarısızsa platform yöneticisi panelinde "Elle iade gerekli" çıkar. Kural: ödeme gelen oturum açıldıktan sonra kiracının başka oturumu tamamlanmışsa çift ödemedir. Paket değişirken bilgi satırı gösterilir |
+| **Kullanıcı değeri** | Müşterinin kartından iki kez para çekilmiş halde kalmaz; iade unutulmaz |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Geliştirildi (dallarda, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
+| **Bağımlılıklar** | BILL-004 |
+| **Notlar** | iyzico'da önce iptal (`Cancel`, aynı gün), olmazsa tutar bazlı iade; 3 denemeden sonra elle. Stripe otomatik iadesi yok (elle). Bilinen sınır: aynı anda işlenen iki ödeme (milisaniye yarışı) ikisi de paket açabilir. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 19 |
+
 ## İlgili belgeler
 
 - [Roadmap](../roadmap/roadmap.md)
