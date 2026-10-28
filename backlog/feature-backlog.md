@@ -298,6 +298,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
 | **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler). **E-Vet SMART (2026-09-29):** Rapor ekranlarında shared shell — print-oriented preview + **Pdf** dropdown + download-like action + **Yazdır...**; Excel/CSV support not observed — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
+### REPORT-008 — İşletme performansı panosu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | REPORT-008 |
+| **Başlık** | İşletme performansı panosu |
+| **Kategori** | Rapor |
+| **Problem** | Yönetici "bu dönem nasıl gidiyoruz" sorusunu tek yerde yanıtlayamıyor: Özet yalnız bugüne bakar, raporlar tek konuya; ciro, tahsilat ve iş hacmi yan yana görülemiyor, önceki dönemle karşılaştırılamıyor |
+| **Önerilen çözüm** | Rapor Merkezi'nde "Yönetim > İşletme performansı": tarih aralığı + klinik filtresi, önceki dönem karşılaştırması; ciro (net ücret), net tahsilat, ödeme türü, açık alacak, muayene, aşı, randevu dağılımı göstergeleri; her sayı aynı filtreyle ilgili rapora iner. Dilim 1 tek salt okuma özet ucu (mevcut okuyucular), dilim 2 yeni sorgular (günlük ciro, hizmet/ürün, ortalama sepet, geliş, yeni müşteri), dilim 3 hekim bazlı |
+| **Kullanıcı değeri** | Dönem performansı tek ekranda; sayılar raporlarla birebir eşleşir |
+| **Öncelik** | P1 (öneri; zamanı kullanıcı kararı) |
+| **Tahmini zorluk** | Dilim 1 Orta, dilim 2 Orta, dilim 3 Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Tasarlanacak (kapsam taslağı yazıldı, kullanıcı kararı bekleniyor) |
+| **Bağımlılıklar** | REPORT-001, REPORT-005, REPORT-006 |
+| **Notlar** | Kapsam, metrik listesi (mevcut uçlarla karşılananlar işaretli), filtre, yetki, UX ve açık sorular → [İşletme performansı panosu kapsam taslağı](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Dilim 1–2 için ADR gerekmez (ADR-003 kapsamı, salt okuma, veri modeli/izin değişmez); dilim 3'te hekim ataması veri modelini değiştirirse ADR. Dilim 1'de yeni izin yok (bölüm bazlı mevcut okuma izinleri). Rakip: **E-Vet VKY** yönetim analitiği (aylık ciro/tahsilat değişimi, personel ve ürün tipi satışı, müşteri değişimi, aşı yapılan/bekleyen) — düzen kopyalanmaz → [e-vet.md](../competitors/e-vet.md#vky-modül); **DaySmart** Reports/Billing Dashboard göstergeleri → [daysmart.md](../competitors/daysmart.md#reports-dashboard). AI-101 aynı özet ucunu kullanır |
+
 ---
 
 ## UX — Kullanıcı deneyimi
