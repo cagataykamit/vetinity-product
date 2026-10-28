@@ -298,6 +298,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
 | **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler). **E-Vet SMART (2026-09-29):** Rapor ekranlarında shared shell — print-oriented preview + **Pdf** dropdown + download-like action + **Yazdır...**; Excel/CSV support not observed — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
+### REPORT-008 — İşletme performansı panosu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | REPORT-008 |
+| **Başlık** | İşletme performansı panosu |
+| **Kategori** | Rapor |
+| **Problem** | Yönetici "bu dönem nasıl gidiyoruz" sorusunu tek yerde yanıtlayamıyor: Özet yalnız bugüne bakar, raporlar tek konuya; ciro, tahsilat ve iş hacmi yan yana görülemiyor, önceki dönemle karşılaştırılamıyor |
+| **Önerilen çözüm** | Rapor Merkezi'nde "Yönetim > İşletme performansı": tarih aralığı + klinik filtresi, önceki dönem karşılaştırması; ciro (net ücret), net tahsilat, ödeme türü, açık alacak, muayene, aşı, randevu dağılımı göstergeleri; her sayı aynı filtreyle ilgili rapora iner. Dilim 1 tek salt okuma özet ucu (mevcut okuyucular), dilim 2 yeni sorgular (günlük ciro, hizmet/ürün, ortalama sepet, geliş, yeni müşteri), dilim 3 hekim bazlı |
+| **Kullanıcı değeri** | Dönem performansı tek ekranda; sayılar raporlarla birebir eşleşir |
+| **Öncelik** | P1 (öneri; zamanı kullanıcı kararı) |
+| **Tahmini zorluk** | Dilim 1 Orta, dilim 2 Orta, dilim 3 Yüksek (tahmin; ölçülmedi) |
+| **Durum** | Tasarlanacak (kapsam taslağı yazıldı, kullanıcı kararı bekleniyor) |
+| **Bağımlılıklar** | REPORT-001, REPORT-005, REPORT-006 |
+| **Notlar** | Kapsam, metrik listesi (mevcut uçlarla karşılananlar işaretli), filtre, yetki, UX ve açık sorular → [İşletme performansı panosu kapsam taslağı](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Dilim 1–2 için ADR gerekmez (ADR-003 kapsamı, salt okuma, veri modeli/izin değişmez); dilim 3'te hekim ataması veri modelini değiştirirse ADR. Dilim 1'de yeni izin yok (bölüm bazlı mevcut okuma izinleri). Rakip: **E-Vet VKY** yönetim analitiği (aylık ciro/tahsilat değişimi, personel ve ürün tipi satışı, müşteri değişimi, aşı yapılan/bekleyen) — düzen kopyalanmaz → [e-vet.md](../competitors/e-vet.md#vky-modül); **DaySmart** Reports/Billing Dashboard göstergeleri → [daysmart.md](../competitors/daysmart.md#reports-dashboard). AI-101 aynı özet ucunu kullanır |
+
 ---
 
 ## UX — Kullanıcı deneyimi
@@ -1433,6 +1449,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız davet e-postası; tür×kanal kuralı, WhatsApp, push yok |
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
+
+### PORTAL-011 — Portal hesabını silme (self-servis)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-011 |
+| **Başlık** | Portal hesabını silme (self-servis) |
+| **Kategori** | Portal |
+| **Problem** | Hukuki metin taslakları "hesabınızı istediğiniz zaman silebilirsiniz" diyor ama silme yolu yok; mağaza uygulaması (AK-4) için uygulama içi silme gerekiyor; klinik kayıtlarının akıbeti tanımsız |
+| **Önerilen çözüm** | Portalda "Hesabı sil": e-posta koduyla yeniden doğrulama; hesap anında anonimleşir (e-posta, parola, ad silinir), oturum ve kodlar silinir, tüm klinik bağları "hesap silindi" gerekçesiyle kapanır; klinik kayıtları, kabul kayıtları ve denetim kaydı kalır; klinik panelinde durum görünür, klinik yeniden davet edebilir |
+| **Kullanıcı değeri** | Hasta sahibi verisi üzerinde denetim; mağaza koşulu; kliniğin KVKK izi bozulmaz |
+| **Öncelik** | P1 (mağaza yayınından önce zorunlu; öneri) |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Tasarlanacak (ADR-041 taslak, kullanıcı kabulü bekleniyor) |
+| **Bağımlılıklar** | PORTAL-006, PORTAL-009 |
+| **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (öneri seçenek C: anonimleştirme + bağ kapatma; bekleme süresi yok). Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
 
 ---
 
@@ -2785,8 +2817,8 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
 | **Durum** | Planlandı |
-| **Bağımlılıklar** | MOBILE-001, MOBILE-003 |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4 |
+| **Bağımlılıklar** | MOBILE-001, MOBILE-003, PORTAL-011 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4. Mağazalar uygulama içi hesap silme istiyor → PORTAL-011 ([ADR-041](../decisions/ADR-041-portal-hesap-silme.md)) |
 
 ### MOBILE-003 — Push bildirim altyapısı
 
