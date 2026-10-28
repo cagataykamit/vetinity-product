@@ -1462,7 +1462,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi verisi üzerinde denetim; mağaza koşulu; kliniğin KVKK izi bozulmaz |
 | **Öncelik** | P1 (mağaza yayınından önce zorunlu; öneri) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Uygulandı (2026-10-28; ADR-041 kabul, backend + portal + panel). Canlı DB migration'ı bekliyor |
+| **Durum** | Uygulandı (2026-10-28; ADR-041 kabul, backend + portal + panel; yerelde tarayıcıda uçtan uca denendi). Canlı DB migration'ı bekliyor |
 | **Bağımlılıklar** | PORTAL-006, PORTAL-009 |
 | **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (seçenek C kabul: anonimleştirme + bağ kapatma; bekleme süresi yok). Uçlar: backend `docs/PORTAL_API_CONTRACT.md` §5.10. Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
 
