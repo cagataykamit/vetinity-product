@@ -291,7 +291,7 @@ ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek
 Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygulandı. Canlıya geçiş kullanıcı söyleyince, bölüm 5.2–5.3 sırasıyla yapılır.
 
 **Veritabanı**
-- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005). İkisi de yalnız yerel DB'de uygulandı.
+- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041). Üçü de yalnız yerel DB'de uygulandı.
 - [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
