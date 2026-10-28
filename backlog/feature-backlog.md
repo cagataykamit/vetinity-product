@@ -3088,6 +3088,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | — |
 | **Notlar** | Keşif (2026-10-22, PARTNER-001): `StartSubscriptionCheckoutCommandHandler` + `SubscriptionProrationCalculator` |
 
+### BILL-004 — Ödeme alınıyor ama abonelik açılmıyor; iptal sonrası "Geçersiz token"
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | BILL-004 |
+| **Başlık** | Ödeme alınıyor ama abonelik açılmıyor; iptal sonrası "Geçersiz token" |
+| **Kategori** | BILL |
+| **Problem** | Abonelik yalnız webhook ile açılıyordu: webhook ulaşmazsa (sunucu o an erişilemez) para alınıp paket açılmıyordu. Açık oturum 30 dk yeniden kullanıldığı için ödemesi tamamlanmış iyzico sayfası tekrar açılıp "Geçersiz token" veriyordu. Başka paket seçilince ödenmiş oturum da iptal ediliyor, sonradan gelen webhook onu etkinleştiremiyordu |
+| **Önerilen çözüm** | Ödeme sonucunu sağlayıcıdan sorgula (iyzico CheckoutForm retrieve; BILL-002'de önerilen yol): dönüşte (callback), ödeme başlatmanın başında ve periyodik uzlaştırmada. Doğrulanmış ödeme oturum kapanmış olsa da etkinleştirir; ödenmiş oturum iptal edilmez; ödenebilir sayfa yeniden kullanılır, tükenmiş sayfa yenilenir |
+| **Kullanıcı değeri** | Ödeyen kurumun paketi her durumda açılır; ölü ödeme sayfası gösterilmez |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Geliştirildi (dallarda, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
+| **Bağımlılıklar** | BILL-002 (elle tamamlama yalnız Manual; korunuyor) |
+| **Notlar** | Etkinleştirme kaynakları: `Webhook`, `ProviderVerified` (backend sağlayıcıya sordu), `Manual` (yalnız açık Manual oturum). Sandbox gözlemi: açılmamış/vazgeçilmiş form 5122, kart reddi ve 3D iptali FAILURE (sayfa yeniden denenebilir), başarılı ödeme SUCCESS ve sayfa "Geçersiz token". iyzico webhook'u yeniden deniyor. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 18 |
+
 ## İlgili belgeler
 
 - [Roadmap](../roadmap/roadmap.md)
