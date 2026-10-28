@@ -1434,6 +1434,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
 
+### PORTAL-011 — Portal hesabını silme (self-servis)
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | PORTAL-011 |
+| **Başlık** | Portal hesabını silme (self-servis) |
+| **Kategori** | Portal |
+| **Problem** | Hukuki metin taslakları "hesabınızı istediğiniz zaman silebilirsiniz" diyor ama silme yolu yok; mağaza uygulaması (AK-4) için uygulama içi silme gerekiyor; klinik kayıtlarının akıbeti tanımsız |
+| **Önerilen çözüm** | Portalda "Hesabı sil": e-posta koduyla yeniden doğrulama; hesap anında anonimleşir (e-posta, parola, ad silinir), oturum ve kodlar silinir, tüm klinik bağları "hesap silindi" gerekçesiyle kapanır; klinik kayıtları, kabul kayıtları ve denetim kaydı kalır; klinik panelinde durum görünür, klinik yeniden davet edebilir |
+| **Kullanıcı değeri** | Hasta sahibi verisi üzerinde denetim; mağaza koşulu; kliniğin KVKK izi bozulmaz |
+| **Öncelik** | P1 (mağaza yayınından önce zorunlu; öneri) |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Tasarlanacak (ADR-041 taslak, kullanıcı kabulü bekleniyor) |
+| **Bağımlılıklar** | PORTAL-006, PORTAL-009 |
+| **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (öneri seçenek C: anonimleştirme + bağ kapatma; bekleme süresi yok). Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
+
 ---
 
 ## MSG — Klinik iletişim / inbox
@@ -2785,8 +2801,8 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
 | **Durum** | Planlandı |
-| **Bağımlılıklar** | MOBILE-001, MOBILE-003 |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4 |
+| **Bağımlılıklar** | MOBILE-001, MOBILE-003, PORTAL-011 |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4. Mağazalar uygulama içi hesap silme istiyor → PORTAL-011 ([ADR-041](../decisions/ADR-041-portal-hesap-silme.md)) |
 
 ### MOBILE-003 — Push bildirim altyapısı
 
