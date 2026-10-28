@@ -310,7 +310,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dönem performansı tek ekranda; sayılar raporlarla birebir eşleşir |
 | **Öncelik** | P1 (öneri; zamanı kullanıcı kararı) |
 | **Tahmini zorluk** | Dilim 1 Orta, dilim 2 Orta, dilim 3 Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Tasarlanacak (kapsam taslağı yazıldı, kullanıcı kararı bekleniyor) |
+| **Durum** | Dilim 1 uygulandı (2026-10-28; backend `PERFORMANCE_SUMMARY_API_CONTRACT.md` + panel Rapor Merkezi > Yönetim). Dilim 2–3 pilot geri bildirimine göre |
 | **Bağımlılıklar** | REPORT-001, REPORT-005, REPORT-006 |
 | **Notlar** | Kapsam, metrik listesi (mevcut uçlarla karşılananlar işaretli), filtre, yetki, UX ve açık sorular → [İşletme performansı panosu kapsam taslağı](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Dilim 1–2 için ADR gerekmez (ADR-003 kapsamı, salt okuma, veri modeli/izin değişmez); dilim 3'te hekim ataması veri modelini değiştirirse ADR. Dilim 1'de yeni izin yok (bölüm bazlı mevcut okuma izinleri). Rakip: **E-Vet VKY** yönetim analitiği (aylık ciro/tahsilat değişimi, personel ve ürün tipi satışı, müşteri değişimi, aşı yapılan/bekleyen) — düzen kopyalanmaz → [e-vet.md](../competitors/e-vet.md#vky-modül); **DaySmart** Reports/Billing Dashboard göstergeleri → [daysmart.md](../competitors/daysmart.md#reports-dashboard). AI-101 aynı özet ucunu kullanır |
 
@@ -1462,9 +1462,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi verisi üzerinde denetim; mağaza koşulu; kliniğin KVKK izi bozulmaz |
 | **Öncelik** | P1 (mağaza yayınından önce zorunlu; öneri) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Tasarlanacak (ADR-041 taslak, kullanıcı kabulü bekleniyor) |
+| **Durum** | Uygulandı (2026-10-28; ADR-041 kabul, backend + portal + panel; yerelde tarayıcıda uçtan uca denendi). Canlı DB migration'ı bekliyor |
 | **Bağımlılıklar** | PORTAL-006, PORTAL-009 |
-| **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (öneri seçenek C: anonimleştirme + bağ kapatma; bekleme süresi yok). Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
+| **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (seçenek C kabul: anonimleştirme + bağ kapatma; bekleme süresi yok). Uçlar: backend `docs/PORTAL_API_CONTRACT.md` §5.10. Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
 
 ---
 

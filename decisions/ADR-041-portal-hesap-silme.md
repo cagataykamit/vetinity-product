@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Taslak (kullanıcı kabulü bekleniyor).** Öneri: seçenek C. İlgili: [ADR-031](ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4/K8 ve AK-4/AK-5, [ADR-029](ADR-029-surumlu-hukuki-kabul.md), [ADR-039](ADR-039-birim-is-tek-commit.md), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md); backlog [PORTAL-011](../backlog/feature-backlog.md#portal-011--portal-hesabını-silme-self-servis).
+**Kabul edildi (2026-10-28): seçenek C.** Kullanıcı açık kararları öneriyle kapattı ("ilk 3'ünü yap"). Uygulandı: backend `feat/portal-hesap-silme` (migration `AddOwnerAccountDeletion` yalnız yerel geliştirme DB'sinde), frontend aynı adlı dal. Öneriden tek sapma: silme gövdesindeki alan `code` değil, `oneTimeCode`. Diğer kod uçlarıyla aynı ad ve denetim kaydında aynı maskeleme için seçildi. İlgili: [ADR-031](ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4/K8 ve AK-4/AK-5, [ADR-029](ADR-029-surumlu-hukuki-kabul.md), [ADR-039](ADR-039-birim-is-tek-commit.md), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md); backlog [PORTAL-011](../backlog/feature-backlog.md#portal-011--portal-hesabını-silme-self-servis).
 
 ## Bağlam
 
@@ -44,7 +44,7 @@
   - Artı: vaat edilen her şey anında silinir. Kliniğin izi ve kabul kayıtları tutarlı kalır. Arka plan işi yok. E-posta serbest kalır; kişi yeniden davetle yeni hesap açabilir.
   - Eksi: geri alma yok (yeniden davet telafi eder). Ele geçirilmiş oturum riski yeniden doğrulamayla azaltılır.
 
-## Karar (öneri: C)
+## Karar (C)
 
 1. **Kim, nereden:** yalnız hesap sahibi, portalda "Hesabım > Hesabı sil". Mağaza uygulaması aynı ekranı kullanır. Personel bir hasta sahibinin hesabını silemez; personelin aracı mevcut "erişimi kapat" (bağ kapatma) olarak kalır.
 2. **Yeniden doğrulama:** silme, hesabın e-postasına gönderilen yeni tek kullanımlık kodla onaylanır (yeni kod amacı `AccountDeletion`; mevcut süre, deneme ve bekleme kuralları aynen). Parolalı hesapta da kod istenir: tek kural, kodla giren hesapta da çalışır.

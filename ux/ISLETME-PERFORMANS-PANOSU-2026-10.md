@@ -1,6 +1,6 @@
 # İşletme performansı panosu: kapsam taslağı (2026-10-28)
 
-**Durum:** Taslak öneri. Kod yazılmadı. Backlog: [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu). Kullanıcı kararı bekleyen noktalar bölüm 8'de.
+**Durum:** Dilim 1 uygulandı (2026-10-28). Kullanıcı açık kararları öneriyle kapattı: S1 (hekim bazlı ciro yalnız Owner/Admin/ClinicAdmin, yeni `Reports.Performance` izni, dilim 3), S2 (dilim 1 şimdi yapıldı; dilim 2–3 pilot geri bildirimine göre). Sapmalar: karttan açılan rapor tarih filtresini taşımaz; klinik filtresi yok, panelin aktif kliniği kullanılır. Backlog: [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu).
 **Kaynak:**
 - [ADR-003](../decisions/ADR-003-report-center.md) (Rapor Merkezi), [ADR-030](../decisions/ADR-030-acilis-sayfasi-ve-bugun-hizli-eylemleri.md) (Özet = yönetici açılışı), [UX ilkeleri](ux-principles.md).
 - Rakip gözlemleri: E-Vet [VKY](../competitors/e-vet.md#vky-modül), DaySmart [Reports Dashboard](../competitors/daysmart.md#reports-dashboard) ve [Billing Dashboard](../competitors/daysmart.md#billing-dashboard).

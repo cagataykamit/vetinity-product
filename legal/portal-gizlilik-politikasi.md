@@ -33,7 +33,7 @@ Verileriniz satılmaz ve reklam amacıyla paylaşılmaz.
 Birden fazla Vetinity kliniğinden hizmet alıyorsanız tek portal hesabınız her kliniğe ayrı ayrı ve yalnız o kliniğin davetiyle bağlanır. Her klinik kendi kayıtlarının **ayrı veri sorumlusudur**; bir klinik diğer kliniğin kayıtlarını, sizin diğer kliniklerle bağınızı veya o kliniklerdeki hayvan bilgilerinizi göremez. Bir kliniğin erişiminizi kapatması diğer bağları etkilemez.
 
 **6. Saklama**
-- Hesap verileri, oturumlar, cihaz jetonları ve bildirim tercihleri: hesap açık olduğu sürece; hesap silinince silinir.
+- Hesap verileri, oturumlar, cihaz jetonları ve bildirim tercihleri: hesap açık olduğu sürece; hesap silinince silinir. E-posta adresiniz de silinir; aynı adresle yeniden davet alabilirsiniz.
 - Giriş ve erişim kayıtları: [süre — hukuk belirler], sonra silinir veya anonimleştirilir.
 - Kabul kayıtları: hesap silinse de ispat amacıyla [süre — hukuk belirler] saklanır.
 - Klinik kayıtları: kliniğin saklama ve imha politikasına ve mevzuattaki sürelere bağlıdır; portal hesabının silinmesi bu kayıtları silmez ([saklama ve imha politikası](saklama-ve-imha-politikasi.md)).
