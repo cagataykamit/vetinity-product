@@ -50,6 +50,13 @@ Hekim kendi e-Devlet'iyle HBS'e girer; hasta bilgisi görünmeyecek şekilde ekr
 8. POS tahsilatından sonra e-SMM sırası.
 9. Entegratör kullanılırsa mükellefin yükümlülükleri (mali mühür, İVD kodu).
 
+Vetinity'nin kendi kuruluşu (yazılım işletmesi olarak):
+
+10. İşletme türü: şahıs işletmesi mi, şirket (Ltd.) mi; ne zaman kurulmalı (ilk ücretli müşteri, entegratör çözüm ortaklığı şartı)?
+11. Bağ-Kur/SGK: şu an SGK'lı değilim; işletme kurulunca Bağ-Kur (4/b) zorunluluğu, aylık prim tutarı ve başlangıç tarihi; istisna veya teşvik (genç girişimci vb.) var mı?
+12. İş yeri adresi olarak ev adresi: vergi kaydı ve fatura adresi için yeterli mi, sanal ofis gerekir mi?
+13. Sorumluluk sigortası: yazılım hatası veya veri kaybına karşı mesleki sorumluluk (ve siber) sigortası gerekli mi, tipik kapsam ve maliyet?
+
 ## 3. Entegratör teklif isteği (en az iki firma)
 
 Gönderilecek metin (kısa):
