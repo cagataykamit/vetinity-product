@@ -116,14 +116,14 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 
 ### 5.1 Bugünkü gerçek durum
 
-- CI tanımlı (`ci.yml`; tetik: `main`'e push, `v*` etiketi, PR, elle) ama GitHub'da henüz koşmadı; ilk koşuyu izlemek, `main` dal koruması ve Actions'ı açmak kullanıcı işi. **Otomatik dağıtım yok**: CI yalnız derler, test eder, artifact üretir.
+- CI tanımlı (`ci.yml`; tetik: `main`'e push, `v*` etiketi, PR, elle) ve GitHub'da her `main` push'unda koşuyor (backend: derleme + birim, LocalDB entegrasyon; frontend ayrı iş akışı). `main` dal koruması kullanıcı işi. **Otomatik dağıtım yok**: CI yalnız derler, test eder, artifact üretir.
 - Sürüm = git etiketi (`vMAJOR.MINOR.PATCH` veya `-rc.1`), yalnız testleri geçmiş `main` commit'ine; iş akışı bunu zorlamaz. Etiketsiz koşu `0.0.0-ci.<koşu no>` alır. Etiket push'u kullanıcı işi. Uygulama içi telemetri sürümü hâlâ sabit `1.0.0` (bilinen boşluk).
 - Artifact'lar: `api-<sürüm>`, `dbmigrator-<sürüm>`, `migrations-<sürüm>`, test sonuçları (etiket koşuları 90 gün, diğerleri 30 gün saklanır).
 - Bilinen tuzak: `Api.csproj` yayından `appsettings.Production.json`'u her zaman dışlar; üretim yapılandırması platform ortam değişkenlerinden gelmeli (`AllowedOrigins`, `AllowedHosts`, `Jwt:Key`, bağlantı dizeleri, `Smtp:*`; eksikse API açılmaz). Kural Dilim 3'te netleşecek **[YAPILACAK]**.
 - API açılışta migration/seed **çalıştırmaz**; veritabanı değişikliği yalnız `DbMigrator` komutlarıyla yapılır (`migrate`, `migrate-query`, `seed`).
 - EF migration'ında **geri alma (down) yoktur**; veritabanını geri almanın yolu **yedekten dönüş** (backend runbook'u: "yedekten dönüş").
 - İdempotent migration betikleri CI'da üretilir (`migrations-<sürüm>`: `AppDbContext.sql` komut DB, `QueryDbContext.sql` sorgu DB); **hiçbir DB'ye otomatik uygulanmaz**. Betik izin/seed verisi eklemez.
-- Tam entegrasyon test paketi yeşil değil (bilinen kırık testler); CI'da `integration-tests` işi Windows + LocalDB'de koşar (yerelde ~21 dk). Sürüm kesmeden önce kırıkların bilinenlerle aynı olduğu not edilir.
+- Tam entegrasyon test paketi yeşil (2026-10-28, `d091bc1b`: 1684 geçti, 2 bilinçli atlanan performans ölçümü, 0 başarısız; yerelde ~9 dk). CI'da `integration-tests` işi Windows + LocalDB'de koşar. Sürüm kesmeden önce kırmızı koşu varsa nedeni not edilir.
 
 ### 5.2 Sürüm öncesi (her canlı yayından önce)
 
@@ -285,6 +285,32 @@ ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek
 - [ ] Bakım penceresi klinikle anlaşıldı.
 - [ ] KVKK danışmanı atandı, ihlal akışı (bölüm 8) onunla gözden geçirildi.
 - [ ] Bu kılavuzdaki **[YAPILACAK]** ve `<...>` alanları kalmadı veya bilinçli ertelendi.
+
+### 11.1 İlk canlı kurulumda bekleyen teknik adımlar (2026-10-28)
+
+Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygulandı. Canlıya geçiş kullanıcı söyleyince, bölüm 5.2–5.3 sırasıyla yapılır.
+
+**Veritabanı**
+- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005). İkisi de yalnız yerel DB'de uygulandı.
+- [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
+
+**Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
+- [ ] `AllowedHosts` gerçek api alan adını içerir (ADR-033: `api.vetinity.com`); yoksa iyzico dönüşü ve webhook 400 alır.
+- [ ] `Billing:DefaultCheckoutProvider` = `Iyzico` (Manual yalnız geliştirme; Stripe yıllıkta reddedilir).
+- [ ] Ad değişikliği: `PerformanceDiagnostics:MediatRSlowMs` → `PerformanceDiagnostics:MediatorSlowMs` (eski ad okunmaz).
+- [ ] Yeni ayar `Outbox:ClaimLeaseSeconds` (varsayılan 300; çok örnekli çalışmada outbox claim süresi).
+- [ ] iyzico canlı anahtarları yenilenmiş hâliyle gizli depoda (sandbox anahtarı kullanılmaz).
+
+**Sunucu ve altyapı**
+- [ ] .NET 10 Hosting Bundle (IIS) ya da eşdeğer çalışma zamanı.
+- [ ] Alan adı düzeni (ADR-033): `www`, `panel`, `portal`, `api`; frontend CI'da `API_BASE_URL` canlı api adresi.
+- [ ] ClamAV: yüklenen dosyalar arka planda taranır, şüpheli dosya karantinaya alınır (karar verildi, kurulum burada).
+- [ ] Dosya deposu (`FileStorage:RootPath`) için disk yedeği; DB yedeğiyle aynı saklama düzeni (bölüm 9).
+
+**İlk açılış doğrulaması**
+- [ ] İlk platform yöneticisi `DbMigrator create-platform-admin` ile açılır; bir kez giriş yapılır ve yönetici sayfaları (satış ortakları, deneme metrikleri, çift ödemeler) açılır.
+- [ ] Gerçek kartla küçük tutarlı bir iyzico ödemesi uçtan uca denenir (ödeme → dönüş → abonelik etkin); webhook'un da geldiği günlükten görülür.
+- [ ] Arka plan işleri canlıya yakın ortamda bir tur gözlenir: içe aktarma, hatırlatma gönderimi, outbox claim (O3), ödeme uzlaştırma.
 
 ## 12. Kullanıcı kararı gerektirenler
 
