@@ -130,7 +130,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Adil kullanım; platform sürdürülebilirliği |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Planlandı (kullanıcı kararı 2026-10-30: erteleme kaldırıldı, P1 tamamlama turuna alındı) |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Limitler günlük klinik deneyimini engellememeli |
 
@@ -410,7 +410,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Navigation maliyeti düşer; sık kullanılan kayıtlara hızlı dönüş |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): global arama (Ctrl/Cmd+K) var; "son görüntülenenler" yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): Ctrl/Cmd+K paletinde son görüntülenen 10 müşteri/hasta/muayene (kullanıcı+kiracı başına, tarayıcıda) |
 | **Bağımlılıklar** | UX-001 |
 | **Notlar** | **DaySmart (observed):** kategori ör. Schedule/Patients/Clients/Contacts/Inventory/Billing; Patient All/Name/Chip/Tag; Recently Viewed cross-entity; `LastName, FirstName` tam sorgu fail / partial success — → [daysmart.md](../competitors/daysmart.md#sandbox--global-search). **Vetinity (implication):** toleranslı kişi araması — ad-soyad sırası, soyad-ad, `Soyad, Ad`, partial, fazla/eksik boşluk, TR karakter, case-insensitive. → [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) |
 
@@ -442,7 +442,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hekim kendi hastasındaki sonradan değişiklikten haberdar olur; denetim izi iş akışına dönüşür |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin: backend model + migration + frontend; ölçülmedi) |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-13: açık işler önce hesaplanan liste) |
+| **Durum** | Planlandı (kullanıcı kararı 2026-10-30: erteleme kaldırıldı, P1 tamamlama turuna alındı) |
 | **Bağımlılıklar** | Aşama 8 açık işler (hesaplanan liste); ADR-013 uygulaması |
 | **Notlar** | Hesaplanan listeyle çelişmemesi için yalnız olay tabanlı/kişiye atanan işler bu modele girer; keşif `docs/ASAMA8_DISCOVERY.md` D-N1, D-N2 |
 
@@ -622,7 +622,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Bağlam korunur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): bağlı kayıt listeleri ve görüntüleme ekle var; lab/reçete hızlı oluşturma bağlantısı doğrulanmadı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): muayeneden lab istemi ve reçete bağlamı dolu açılır; testle doğrulandı |
 | **Bağımlılıklar** | EXAM-001, IMG-001 |
 | **Notlar** | |
 
@@ -1071,7 +1071,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (ADR-012 kararı: ilk sürümde kapsam dışı; unutulmayacak) |
+| **Durum** | Planlandı (kullanıcı kararı 2026-10-30: erteleme kaldırıldı, P1 tamamlama turuna alındı) |
 | **Bağımlılıklar** | FIN-001, FIN-002, FIN-003 |
 
 ### FIN-006 — Çoklu para birimi
@@ -1614,9 +1614,11 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı geçmiş taraması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): backend tür/tarih/iptal süzgeçleri tam; frontend tarih aralığı süzgeci doğrulanmadı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): tarih aralığı filtresi uçtan uca testli, "Filtreleri temizle" |
 | **Bağımlılıklar** | TIMELINE-001 |
 | **Notlar** | DaySmart sandbox — History filtreleri… **Clients Module:** Declined Items client billing + patient History More — shared source — → [daysmart.md](../competitors/daysmart.md#client-billing). **E-Vet SMART:** Ziyaret Geçmişi tarih aralığı filtresi — → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi) |
+
+### TIMELINE-004 — Timeline derin bağlantıları
 
 | Alan | Değer |
 |---|---|
@@ -1628,7 +1630,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Keşiften detaya akış |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): olaydan randevu ve bağlı tedaviye bağlantı; muayenesiz uygulama kaydının detay sayfası yok |
 | **Bağımlılıklar** | TIMELINE-001 |
 | **Notlar** | Derin linkler genel prensip. **Canlı sandbox — Patients Module:** History Reference → medical note; Invoice kolonu; Communications dynamic content → [daysmart.md](../competitors/daysmart.md#patient-profile--history) |
 
@@ -1780,7 +1782,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlı kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | EXAM-001, AI-009 |
 | **Notlar** | → [AI roadmap Aşama 1](../ai/ai-roadmap.md) |
 
@@ -1796,7 +1798,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | TIMELINE-001, AI-009 |
 | **Notlar** | Taslak; kullanıcı onayı gerekir |
 
@@ -1812,7 +1814,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1828,7 +1830,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1844,7 +1846,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eller serbest not alma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [AI roadmap Aşama 2](../ai/ai-roadmap.md). DaySmart STT penceresi gözlemlendi (~20 dk süre); teknik sağlayıcı doğrulanmadı. **v1.0 dışı aday**; premium/ileri faz → [IDEA-022](../research/ideas.md#idea-022--voice-assisted-clinical-documentation). Snippet sisteminden ayrı. Bağlamsal özet yan paneli (Summarize/SOAP summary) STT değildir → [AI-102](#ai-102--patient-summary), [AI-103](#ai-103--examination-assistant), [IDEA-008](../research/ideas.md#idea-008--embedded-ai-instead-of-separate-ai-module) |
 
@@ -1860,7 +1862,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı kayıt bulma |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | — |
 | **Notlar** | |
 
@@ -1876,7 +1878,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
@@ -1892,7 +1894,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel kontrol |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-007 |
 | **Notlar** | |
 
@@ -1908,7 +1910,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1924,7 +1926,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; sorun giderme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Hassas klinik veriler normal loglara yazılmaz |
 
@@ -1939,7 +1941,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kategori** | AI (Epic) |
 | **Açıklama** | Vetinity'de yapay zekâ ayrı bir modül veya sohbet ekranı olarak değil, kullanıcıların çalıştığı ekranların doğal bir parçası olarak konumlandırılır. AI, veri özetleme, doğal dil sorgulama, karar desteği ve iş akışı hızlandırma amacıyla kullanılır. Klinik kararın sorumluluğu her zaman veteriner hekime aittir. |
 | **Öncelik** | P1 |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Alt maddeler** | AI-101, AI-102, AI-103, AI-104, AI-105, AI-106, AI-107, AI-108 |
 | **Notlar** | Bu Epic, E-vet Smart Plus'ın SmartAI yaklaşımı incelendikten sonra oluşturulmuştur. Ancak Vetinity'nin hedefi AI'ı ayrı bir ekran yerine ürünün tamamına gömülü şekilde sunmaktır. SmartAI'daki doğal dil sorgulama ve hasta özeti yaklaşımları ürün vizyonu için referans alınmış, ancak kapsam muayene, timeline ve klinik iş akışlarını kapsayacak şekilde genişletilmiştir. → [ADR-008](../decisions/ADR-008-embedded-ai-assistant.md), [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1955,7 +1957,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dashboard ve raporlar arasında gezinmeden anlık işletme görünürlüğü |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Gömülü yardımcı; ayrı sohbet ekranı değil. **Inventory Module:** DaySmart Inventory Alerts (low balance, expiring); item Actions low-balance threshold — operasyonel alert UI ayrı değerlendirme → [daysmart.md](../competitors/daysmart.md#inventory-alerts) |
 
@@ -1971,7 +1973,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı klinik hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | AI-002 ile ilişkili; Epic kapsamında genişletilmiş hasta özeti. DaySmart sandbox observation (~28:13–35:25): hasta profilinde bağlamlı AI yan paneli; aktif hasta otomatik bağlam; Summarize aksiyonu; hasta geçmişi/SOAP/ilaçlar kapsamı; AI hata uyarısı. **v1.0 dışı aday**; insan doğrulaması → [AI-009](#ai-009--ai-çıktı-onay-akışı). Halüsinasyon/klinik güvenlik riski; kaynak kapsamı doğrulanmadı |
 
@@ -1987,7 +1989,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı ve okunabilir muayene kayıtları; zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009, EXAM-001 |
 | **Notlar** | AI-001 ile ilişkili; muayene ekranına gömülü. DaySmart sandbox observation (~28:13–35:25): SOAP summary hazır aksiyonu; klinik kaynaklarla sınırlı özet adayı. Çıktı doğrulanmadan kayda geçmemeli → [AI-009](#ai-009--ai-çıktı-onay-akışı). **v1.0 dışı aday** |
 
@@ -2003,7 +2005,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta hikâyesindeki dönüm noktalarının hızlı fark edilmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | Tanı koymaz; önemli olay vurgusu |
 
@@ -2019,7 +2021,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Lab yorumlamasında hız; kritik değerlere odaklanma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Kesin tanı veya tedavi önerisi vermez; taslak özet |
 
@@ -2035,7 +2037,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Görüntüleme geçmişinin hızlı taranması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009, IMG-001 |
 | **Notlar** | Tanı koymaz; yalnızca kayıt özeti |
 
@@ -2051,7 +2053,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı; tutarlı hasta sahibi bilgilendirmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | AI-004 ile ilişkili; taslak statüsü |
 
@@ -2067,7 +2069,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi iletişiminde hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
 | **Bağımlılıklar** | AI-100, AI-009, INT-003, INT-004 |
 | **Notlar** | Gönderim kullanıcı onayı ile; trial'da gerçek gönderim kısıtlanabilir |
 
@@ -2298,7 +2300,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | No-show azaltma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): klinik düzeyi ayar ve müşteri kanal tercihi var; sahip tarafı devre dışı bırakma yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): sahip portaldan hatırlatmaları kapatıp açar (KVKK Ret varken açamaz) |
 | **Bağımlılıklar** | APPT-013 |
 | **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. Default reminder/confirmation clinic policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). Pre-visit workflow — → [CHECKIN-002](#checkin-002--check-in-sırasında-medical-note-şablonu), [PORTAL-005](#portal-005--dijital-onam-ve-imza). Reminder ≠ Task |
 
@@ -2938,7 +2940,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Arama motorunda görünürlük; paylaşımda doğru kart |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): robots/sitemap/canonical/OG var; Organization ve FAQ JSON-LD, staging noindex, prerender yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): Organization ve FAQPage JSON-LD, staging robots Disallow; prerender ADR-033 kapsamında ayrı |
 | **Bağımlılıklar** | ADR-033 (prerender/ayrı derleme kısmı) |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.1–3.2; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6. Yazı tipi yerelleştirme ayrı iş (wt-font) |
 
