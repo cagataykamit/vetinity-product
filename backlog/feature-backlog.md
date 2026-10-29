@@ -410,7 +410,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Navigation maliyeti düşer; sık kullanılan kayıtlara hızlı dönüş |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): global arama (Ctrl/Cmd+K) var; "son görüntülenenler" yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): Ctrl/Cmd+K paletinde son görüntülenen 10 müşteri/hasta/muayene (kullanıcı+kiracı başına, tarayıcıda) |
 | **Bağımlılıklar** | UX-001 |
 | **Notlar** | **DaySmart (observed):** kategori ör. Schedule/Patients/Clients/Contacts/Inventory/Billing; Patient All/Name/Chip/Tag; Recently Viewed cross-entity; `LastName, FirstName` tam sorgu fail / partial success — → [daysmart.md](../competitors/daysmart.md#sandbox--global-search). **Vetinity (implication):** toleranslı kişi araması — ad-soyad sırası, soyad-ad, `Soyad, Ad`, partial, fazla/eksik boşluk, TR karakter, case-insensitive. → [PATTERN-025](../research/patterns.md#pattern-025--global-search-and-recent-navigation) |
 
@@ -622,7 +622,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Bağlam korunur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): bağlı kayıt listeleri ve görüntüleme ekle var; lab/reçete hızlı oluşturma bağlantısı doğrulanmadı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): muayeneden lab istemi ve reçete bağlamı dolu açılır; testle doğrulandı |
 | **Bağımlılıklar** | EXAM-001, IMG-001 |
 | **Notlar** | |
 
@@ -1614,7 +1614,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı geçmiş taraması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): backend tür/tarih/iptal süzgeçleri tam; frontend tarih aralığı süzgeci doğrulanmadı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): tarih aralığı filtresi uçtan uca testli, "Filtreleri temizle" |
 | **Bağımlılıklar** | TIMELINE-001 |
 | **Notlar** | DaySmart sandbox — History filtreleri… **Clients Module:** Declined Items client billing + patient History More — shared source — → [daysmart.md](../competitors/daysmart.md#client-billing). **E-Vet SMART:** Ziyaret Geçmişi tarih aralığı filtresi — → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi) |
 
@@ -1630,7 +1630,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Keşiften detaya akış |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): olaydan randevu ve bağlı tedaviye bağlantı; muayenesiz uygulama kaydının detay sayfası yok |
 | **Bağımlılıklar** | TIMELINE-001 |
 | **Notlar** | Derin linkler genel prensip. **Canlı sandbox — Patients Module:** History Reference → medical note; Invoice kolonu; Communications dynamic content → [daysmart.md](../competitors/daysmart.md#patient-profile--history) |
 
@@ -2300,7 +2300,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | No-show azaltma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): klinik düzeyi ayar ve müşteri kanal tercihi var; sahip tarafı devre dışı bırakma yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): sahip portaldan hatırlatmaları kapatıp açar (KVKK Ret varken açamaz) |
 | **Bağımlılıklar** | APPT-013 |
 | **Notlar** | Klinik içi randevu oluşturmada da geçerli olabilir. Default reminder/confirmation clinic policy — → [daysmart.md](../competitors/daysmart.md#config-observed-rows). Pre-visit workflow — → [CHECKIN-002](#checkin-002--check-in-sırasında-medical-note-şablonu), [PORTAL-005](#portal-005--dijital-onam-ve-imza). Reminder ≠ Task |
 
@@ -2940,7 +2940,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Arama motorunda görünürlük; paylaşımda doğru kart |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): robots/sitemap/canonical/OG var; Organization ve FAQ JSON-LD, staging noindex, prerender yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): Organization ve FAQPage JSON-LD, staging robots Disallow; prerender ADR-033 kapsamında ayrı |
 | **Bağımlılıklar** | ADR-033 (prerender/ayrı derleme kısmı) |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.1–3.2; öneri [ux/tanitim-sitesi-onerisi.md](../ux/tanitim-sitesi-onerisi.md) bölüm 6. Yazı tipi yerelleştirme ayrı iş (wt-font) |
 

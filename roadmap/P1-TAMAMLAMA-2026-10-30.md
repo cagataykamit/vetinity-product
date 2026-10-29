@@ -27,7 +27,7 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 
 | Dalga | Maddeler | Durum |
 |---|---|---|
-| 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Geliştirildi (dallarda, main'e alınmadı) |
+| 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Geliştirildi (main + origin) |
 | 1b | REPORT-003 favoriler, REPORT-004 kayıtlı filtreler, REPORT-007 PDF + deneme kısıtı | Geliştiriliyor (ajan, worktree `-rapor`) |
 | 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Bekliyor |
 | 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Bekliyor |
@@ -41,7 +41,7 @@ Kapsam dışı (bu turda bilinçli kapanış): EXAM-015 kilit açma (ADR-013 ger
 
 Her madde bitince buraya dal, commit ve test sonucu yazılır.
 
-### Dalga 1a (2026-10-30, alt ajan) — main'e alınmadı
+### Dalga 1a (2026-10-30, alt ajan) — main + origin
 - TIMELINE-003: FE `feat/timeline-tarih-araligi` `45e3bbab` (filtre zaten çalışıyordu; uçtan uca test + "Filtreleri temizle").
 - TIMELINE-004: BE+FE `feat/timeline-derin-baglanti` BE `9ef1a247` (`relatedTreatmentId`), FE `a87b9ba3`.
 - UX-006: FE `feat/son-goruntulenenler` `47a40899` (kiracı+kullanıcı anahtarlı localStorage, en çok 10).
