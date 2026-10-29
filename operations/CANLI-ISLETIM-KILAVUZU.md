@@ -221,7 +221,7 @@ Sistemde işlenen kişisel veriler (koddan çıkarılan envanter; tam liste değ
 
 1. **Şüphe/algı:** Yetkisiz erişim, yanlış kişiye veri gösterimi (ör. başka klinik verisi), kayıp cihaz/hesap, sızan gizli bilgi, yanlış gönderilen e-posta, yedek/depolamanın açığa çıkması.
 2. **Hemen:** olay S1 olarak açılır; olay yöneticisi ve ürün sahibi haberdar edilir. **Kanıt korunur** (günlükler silinmez, ekran görüntüsü alınır; yeniden başlatma/temizlik kararı önce sorulur).
-3. **Durdur:** erişim kapatılır (ilgili hesabın parolası/oturumu iptal, sızan anahtar döndürme, ilgili özelliğin kapatılması). *Not: hesap kilitleme yok (SEC-001 ertelendi). Üretimde `RevokeSessionsOnPermissionChange=true` (kullanıcı kararı 2026-10-13) yalnız yönetim API'sindeki dört izin komutunda etkilenen kullanıcıların refresh token'larını iptal eder; verilmiş access token süresi bitene dek (`Jwt:ExpMinutes` 60 dk) geçerli kalır; `seed` ve rol atama oturum iptal etmez. Bu yüzden hesap devre dışı bırakma + parola sıfırlama + gizli anahtar döndürme birlikte düşünülür.*
+3. **Durdur:** erişim kapatılır (ilgili hesabın parolası/oturumu iptal, sızan anahtar döndürme, ilgili özelliğin kapatılması). *Not: panel ve portal girişinde 5 hatalı denemede hesap 15 dk kilitlenir (SEC-001); kilit kendiliğinden açılır, parola sıfırlama da kaldırır. Üretimde `RevokeSessionsOnPermissionChange=true` (kullanıcı kararı 2026-10-13) yalnız yönetim API'sindeki dört izin komutunda etkilenen kullanıcıların refresh token'larını iptal eder; verilmiş access token süresi bitene dek (`Jwt:ExpMinutes` 60 dk) geçerli kalır; `seed` ve rol atama oturum iptal etmez. Bu yüzden hesap devre dışı bırakma + parola sıfırlama + gizli anahtar döndürme birlikte düşünülür.*
 4. **Olgular (danışmana gidecek bilgi):** ne zaman başladı/fark edildi, hangi veri türleri, kaç kişi/kayıt tahmini, hangi klinik(ler), veri kime açıldı/sızdı, hâlâ sürüyor mu, ne yapıldı. Tahmini sayılar "tahmin" diye işaretlenir; bilinmeyen "bilinmiyor" yazılır.
 5. **Danışmana bildir (aynı gün):** `<danışman iletişimi>` **[YAPILACAK]**. Kararı o verir: bu bir ihlal mi? Kuruma (KVKK Kurulu) ve/veya ilgili kişilere bildirim gerekir mi? Hangi sürede? Bildirimi **kimin** (veri sorumlusu klinik mi, Vetinity veri işleyen olarak mı) yapacağı sözleşmeye bağlıdır (veri işleyen sözleşmesi K3 kapsamında hazırlanır).
 6. **Veri sorumlusu kliniğe haber:** veri işleyen rolünde olunuyorsa sözleşmedeki süre içinde kliniğe yazılı bilgi verilir. Süre sözleşmeyle yazılır: `<süre>` **[YAPILACAK]**. *Mevzuattaki sürelerin (kamuoyunda anılan 72 saat dâhil) doğru uygulanışı danışmanla teyit edilmelidir; bu belge bu süreyi doğrulamaz.*
@@ -291,7 +291,7 @@ ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek
 Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygulandı. Canlıya geçiş kullanıcı söyleyince, bölüm 5.2–5.3 sırasıyla yapılır.
 
 **Veritabanı**
-- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041). Üçü de yalnız yerel DB'de uygulandı.
+- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041), `AddUserLoginLockout` (panel hesap kilidi, SEC-001). Dördü de yalnız yerel DB'de uygulandı.
 - [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
@@ -307,6 +307,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 - [ ] Alan adı düzeni (ADR-033): `www`, `panel`, `portal`, `api`; frontend CI'da `API_BASE_URL` canlı api adresi.
 - [ ] ClamAV: yüklenen dosyalar arka planda taranır, şüpheli dosya karantinaya alınır (karar verildi, kurulum burada).
 - [ ] Dosya deposu (`FileStorage:RootPath`) için disk yedeği; DB yedeğiyle aynı saklama düzeni (bölüm 9).
+- [ ] İstemci IP'si: API IIS içinde (in-process) çalışırsa doğru okunur. Önüne ayrı bir ters vekil (nginx, Cloudflare vb.) konursa `ForwardedHeaders` yalnız loopback'e güvendiği için o vekilin adresi koda (`KnownProxies`/`KnownNetworks`) eklenmeli; yoksa giriş hız sınırı (IP başına 5/dk) tüm kullanıcılara ortak işler ve günlüklerde vekil IP'si görünür.
 
 **İlk açılış doğrulaması**
 - [ ] İlk platform yöneticisi `DbMigrator create-platform-admin` ile açılır; bir kez giriş yapılır ve yönetici sayfaları (satış ortakları, deneme metrikleri, çift ödemeler) açılır.

@@ -22,4 +22,4 @@
 
 - Üretime çıkış koşulu (go-live): Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek + geri yükleme provası), 5 (izleme), 6 (e-posta), 7 (içe aktarma), KVKK danışmanlığı tamamlanmış ve Dilim 10 provası geçmiş olmalı.
 - Kullanıcı eylemleri (ajan yapamaz): ~~bulut hesabı/abonelik~~ (K1 değişti: kendi sunucu; sunucu bilgilerini sağlamak), KVKK uzmanı, pilot klinik, alan adı ve e-posta gönderim hizmeti, sızan parolanın iptali, ödeme sandbox anahtarlarının yenilenmesi.
-- Ertelenen: Query DB okuma modelleri, tüm geçmiş veri içe aktarma, hesap kilitleme ([SEC-001](../backlog/feature-backlog.md)), JWT yetki geri alma ([SEC-002](../backlog/feature-backlog.md)).
+- Ertelenen: Query DB okuma modelleri, tüm geçmiş veri içe aktarma, JWT yetki geri alma ([SEC-002](../backlog/feature-backlog.md)). Hesap kilitleme ([SEC-001](../backlog/feature-backlog.md)) burada ertelenmişti; 2026-10-29'da kullanıcı onayıyla canlıdan önce yapıldı.

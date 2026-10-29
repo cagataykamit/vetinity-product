@@ -2868,7 +2868,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Parola tahmin saldırısına karşı koruma (canlıya çıkış koşulu) |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-29). Migration `AddUserLoginLockout` yalnız yerel DB'de; canlıda kılavuz 11.1 |
 | **Bağımlılıklar** | Aşama 9 canlıya çıkış kontrol listesi |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O3; migration gerektirir |
 
