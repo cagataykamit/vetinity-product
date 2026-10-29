@@ -27,8 +27,8 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 
 | Dalga | Maddeler | Durum |
 |---|---|---|
-| 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Bekliyor |
-| 1b | REPORT-003 favoriler, REPORT-004 kayıtlı filtreler, REPORT-007 PDF + deneme kısıtı | Bekliyor |
+| 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Geliştirildi (dallarda, main'e alınmadı) |
+| 1b | REPORT-003 favoriler, REPORT-004 kayıtlı filtreler, REPORT-007 PDF + deneme kısıtı | Geliştiriliyor (ajan, worktree `-rapor`) |
 | 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Bekliyor |
 | 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Bekliyor |
 | 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Bekliyor |
@@ -40,3 +40,13 @@ Kapsam dışı (bu turda bilinçli kapanış): EXAM-015 kilit açma (ADR-013 ger
 ## İlerleme
 
 Her madde bitince buraya dal, commit ve test sonucu yazılır.
+
+### Dalga 1a (2026-10-30, alt ajan) — main'e alınmadı
+- TIMELINE-003: FE `feat/timeline-tarih-araligi` `45e3bbab` (filtre zaten çalışıyordu; uçtan uca test + "Filtreleri temizle").
+- TIMELINE-004: BE+FE `feat/timeline-derin-baglanti` BE `9ef1a247` (`relatedTreatmentId`), FE `a87b9ba3`.
+- UX-006: FE `feat/son-goruntulenenler` `47a40899` (kiracı+kullanıcı anahtarlı localStorage, en çok 10).
+- WEB-003: FE `feat/tanitim-seo-jsonld` `04c76642` (Organization + FAQPage JSON-LD; staging robots `Disallow: /`).
+- APPT-014: BE+FE `feat/portal-hatirlatma-tercihi` BE `e1cd46a3`, FE `99517aff` (portal "Hatırlatmalar" anahtarı; KVKK Ret varken açılamaz).
+- EXAM-010: FE `feat/muayene-hizli-lab-recete` `01eb24c7` (özellik vardı; test eklendi).
+- Testler (ajan raporu): FE birleşik geçici dalda lint/tsc temiz, panel 2116/2116, portal 128/128; BE tam entegrasyon (APPT-014 dalında) 1693 geçti / 2 atlandı. Elle tarayıcı denemesi yok.
+- Açık soru: sahip hatırlatmayı kapatırsa mevcut davet kuralı (ADR-031 K4) o müşteriye yeni portal davetini engelliyor.
