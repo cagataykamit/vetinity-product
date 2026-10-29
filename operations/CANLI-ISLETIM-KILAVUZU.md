@@ -296,6 +296,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
 - [ ] `AllowedHosts` gerçek api alan adını içerir (ADR-033: `api.vetinity.com`); yoksa iyzico dönüşü ve webhook 400 alır.
+- [ ] `PetProjection__WriteEvents=false` ve `PaymentProjection__WriteEvents=false`. Kullanılmayan hasta ve ödeme projeksiyonlarının olayları outbox'a yazılmaz; yoksa varsayılan `true` ile tablo hiç boşalmadan büyür. Projeksiyon bir gün açılacaksa sıra: `WriteEvents=true` → backfill → `Enabled=true` (backend `docs/cqrs/cqrs-17a…`, `cqrs-12c-7…`).
 - [ ] `Billing:DefaultCheckoutProvider` = `Iyzico` (Manual yalnız geliştirme; Stripe yıllıkta reddedilir).
 - [ ] Ad değişikliği: `PerformanceDiagnostics:MediatRSlowMs` → `PerformanceDiagnostics:MediatorSlowMs` (eski ad okunmaz).
 - [ ] Yeni ayar `Outbox:ClaimLeaseSeconds` (varsayılan 300; çok örnekli çalışmada outbox claim süresi).
