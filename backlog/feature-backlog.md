@@ -114,7 +114,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kurumsal satış sürecinde esneklik |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (feature dalları `feat/trial-005-demo-request`, 2026-10-26; main'e alınınca "main + origin"): İletişim sayfasında herkese açık canlı demo talep formu (20 dk görüntülü görüşme, çok hekimli/şubeli vurgu, ana çağrı deneme) → anonim `POST /public/demo-requests` (doğrulama, tuzak alan, IP başına 10 dakikada 3), `DemoRequests` tablosu, `DemoRequests:NotifyEmail` doluysa outbox e-postası. Bildirim adresi AK-6 ile kullanıcıdan bekleniyor; boşken talepler yalnız DB'de birikir. Panelde liste yok (karar: ilk sürümde yalnız e-posta). Tarayıcıda dev ortamında form → kayıt denendi; e-posta gerçek SMTP ile denenmedi |
+| **Durum** | Geliştirildi (main + origin, 2026-10-26; durum 2026-10-29 git ile senkronlandı): İletişim sayfasında herkese açık canlı demo talep formu (20 dk görüntülü görüşme, çok hekimli/şubeli vurgu, ana çağrı deneme) → anonim `POST /public/demo-requests` (doğrulama, tuzak alan, IP başına 10 dakikada 3), `DemoRequests` tablosu, `DemoRequests:NotifyEmail` doluysa outbox e-postası. Bildirim adresi AK-6 ile kullanıcıdan bekleniyor; boşken talepler yalnız DB'de birikir. Panelde liste yok (karar: ilk sürümde yalnız e-posta). Tarayıcıda dev ortamında form → kayıt denendi; e-posta gerçek SMTP ile denenmedi |
 | **Bağımlılıklar** | — |
 | **Notlar** | Ana edinme kanalı değil. Kararlar (kullanıcı, 2026-10-26): kapsam form + uç + e-posta; 20 dk görüntülü görüşme vaadi; herkese açık, çok şube vurgulu. Sözleşme backend `docs/TRIAL_DEMO_REQUEST_API_CONTRACT.md` (§7 kapsam dışı: panel listesi, takvim entegrasyonu, onay e-postası, saklama süresi) |
 
@@ -2922,7 +2922,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Telefonla gelen ziyaretçi paketlere ve kayda ulaşır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Geliştiriliyor (yerel frontend main'de, 2026-10-16; push yok, canlıda değil) |
+| **Durum** | Geliştirildi (main + origin; durum 2026-10-29 git ile senkronlandı; canlıda değil) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Analiz [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.3–3.4. Devir notundaki "tema düğmesine aria-label" küçük işi buraya bağlanır |
 
@@ -3052,7 +3052,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yıllık ödeyen klinik indirim alır, nakit akışı öne çekilir |
 | **Öncelik** | P1 (sitede yıllık seçenek bu işe bağlı) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (dal `feat/bill-001-yearly`, backend + frontend, 2026-10-26; main'e alınmadı, migration `AddBillingPeriod` yalnız yerel geliştirme veritabanına uygulandı) |
+| **Durum** | Geliştirildi (main + origin, backend + frontend, 2026-10-26; durum 2026-10-29 git ile senkronlandı). Migration `AddBillingPeriod` yalnız yerel DB'de; canlı listesinde (CANLI-ISLETIM-KILAVUZU §11.1) |
 | **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
 | **Notlar** | Kullanıcı kararları (2026-10-26): aylıktan yıllığa hemen geçilir, mevcut ayın kalan günleri düşülür; yıllıktan aylığa dönem sonunda; dönem sonu aylıkla aynı (otomatik yenileme yok, salt okunur + yeniden ödeme); sağlayıcı iyzico + Manual (Stripe yıllıkta reddedilir); sitede Aylık/Yıllık anahtarı. Sözleşme: backend `docs/SUBSCRIPTION_YEARLY_BILLING_API_CONTRACT.md`. Tarayıcıda: paketler anahtarı ve abonelik sayfasında "Yıllığa geç" denendi; iyzico sandbox ödeme formu yerel ağdan açılamadı (DNS), yıllık ödeme ucu entegrasyon testiyle (Manual) doğrulandı. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
 
@@ -3100,7 +3100,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Ödeyen kurumun paketi her durumda açılır; ölü ödeme sayfası gösterilmez |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (dallarda, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
 | **Bağımlılıklar** | BILL-002 (elle tamamlama yalnız Manual; korunuyor) |
 | **Notlar** | Etkinleştirme kaynakları: `Webhook`, `ProviderVerified` (backend sağlayıcıya sordu), `Manual` (yalnız açık Manual oturum). Sandbox gözlemi: açılmamış/vazgeçilmiş form 5122, kart reddi ve 3D iptali FAILURE (sayfa yeniden denenebilir), başarılı ödeme SUCCESS ve sayfa "Geçersiz token". iyzico webhook'u yeniden deniyor. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 18 |
 
@@ -3116,7 +3116,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Müşterinin kartından iki kez para çekilmiş halde kalmaz; iade unutulmaz |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (dallarda, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
 | **Bağımlılıklar** | BILL-004 |
 | **Notlar** | iyzico'da önce iptal (`Cancel`, aynı gün), olmazsa tutar bazlı iade; 3 denemeden sonra elle. Stripe otomatik iadesi yok (elle). Bilinen sınır: aynı anda işlenen iki ödeme (milisaniye yarışı) ikisi de paket açabilir. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 19 |
 
