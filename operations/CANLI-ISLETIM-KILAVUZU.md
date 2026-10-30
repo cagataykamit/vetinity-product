@@ -291,7 +291,7 @@ ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek
 Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygulandı. Canlıya geçiş kullanıcı söyleyince, bölüm 5.2–5.3 sırasıyla yapılır.
 
 **Veritabanı**
-- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041), `AddUserLoginLockout` (panel hesap kilidi, SEC-001). Dördü de yalnız yerel DB'de uygulandı.
+- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041), `AddUserLoginLockout` (panel hesap kilidi, SEC-001), `AddReportFavorites` ve `AddReportSavedFilters` (rapor favorileri ve kayıtlı filtreler, REPORT-003/004). Hepsi yalnız yerel DB'de uygulandı.
 - [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
@@ -307,6 +307,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 - [ ] Alan adı düzeni (ADR-033): `www`, `panel`, `portal`, `api`; frontend CI'da `API_BASE_URL` canlı api adresi.
 - [ ] ClamAV: yüklenen dosyalar arka planda taranır, şüpheli dosya karantinaya alınır (karar verildi, kurulum burada).
 - [ ] Dosya deposu (`FileStorage:RootPath`) için disk yedeği; DB yedeğiyle aynı saklama düzeni (bölüm 9).
+- [ ] PDF raporları için sunucuda Arial (Windows) ya da DejaVu Sans / Liberation Sans (Linux: `fonts-dejavu-core`) bulunmalı; yoksa PDF indirme 500 verir, CSV/Excel etkilenmez (REPORT-007).
 - [ ] İstemci IP'si: API IIS içinde (in-process) çalışırsa doğru okunur. Önüne ayrı bir ters vekil (nginx, Cloudflare vb.) konursa `ForwardedHeaders` yalnız loopback'e güvendiği için o vekilin adresi koda (`KnownProxies`/`KnownNetworks`) eklenmeli; yoksa giriş hız sınırı (IP başına 5/dk) tüm kullanıcılara ortak işler ve günlüklerde vekil IP'si görünür.
 
 **İlk açılış doğrulaması**
