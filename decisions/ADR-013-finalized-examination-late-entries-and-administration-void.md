@@ -22,3 +22,11 @@ Sektör ve düzenleyici ilkeler (tıbbi kayıtta geç giriş/ek, finansal kayıt
 - Backend: Uygulama kaydında sonradan ekleme alanları (işaret, gerekçe), iptal sonucu alanı (iade / zarar), pasif ürün istisnası, denetim izi, sözleşme güncellemesi ve migration; yeni izin gerekmez.
 - Frontend: Kesinleşmiş muayenede "Uygulama ekle (sonradan)" gerekçe diyaloğu ve rozet; iptal diyaloğunda "Stoğa iade et / Zarar yaz" seçimi; düzenleme dışı mesajlar.
 - Ertelenen: hekim bildirimi/onayı, zarar raporu (Aşama 8 raporları).
+
+## Ek (2026-10-30): reçete iptali ve kesinleşmiş muayeneye reçete (RECORD-008)
+
+Bu ADR'deki "reçete kilidi aynen kalır" çizgisi, aynı ilkelerle (orijinal korunur, silme yok, gerekçe ve denetim izi) şöyle genişletildi:
+
+- **Reçete iptali:** reçete silinmez, gerekçeyle iptal edilir; iptal edilen reçete değiştirilemez. Yetki `Prescriptions.Update` (lab iptaliyle aynı, yeni izin yok). İptal edilen reçete zaman çizelgesinde varsayılan gizli, HBS takibine girmez; kayıt defterlerinde çıkarılmaz, "İptal" durumuyla görünür ve filtreyle gizlenebilir.
+- **Kesinleşmiş muayeneye reçete:** uygulama kaydındaki gibi zorunlu gerekçeyle "Kesinleştirmeden sonra eklendi" olarak yazılır; mevcut reçete değişmez.
+- Uygulama: backend `feat/recete-iptali` (migration `AddPrescriptionCancellationAndLateEntry`), P1 Dalga 2.
