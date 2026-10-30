@@ -230,7 +230,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | 2–3 etkileşimde sık raporlara ulaşım |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): Rapor Merkezi'nde yıldızla favori, kullanıcı başına en çok 50; migration `AddReportFavorites` |
 | **Bağımlılıklar** | REPORT-001 |
 | **Notlar** | Gelecekte değerlendirilecek |
 
@@ -246,7 +246,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tekrarlayan raporlama iş yükü azalır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): rapor başına adla kayıtlı filtre (en çok 20); tarih aralığı kaydedilmez; migration `AddReportSavedFilters` |
 | **Bağımlılıklar** | REPORT-001 |
 | **Notlar** | Gelecekte değerlendirilecek |
 
@@ -294,7 +294,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Ofis dışı rapor paylaşımı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): CSV/Excel var; gerçek PDF üretimi ve deneme sürümünde dışa aktarma kısıtı yok |
+| **Durum** | Geliştirildi (main + origin, 2026-10-30): CSV/XLSX'i olan her rapora PDF (A4 yatay, PDFsharp 6.2.4 MIT, sürüm sabit); denemede 1.000 satır sınırı PDF'e de, ücretlide PDF 5.000 satır |
 | **Bağımlılıklar** | REPORT-001, TRIAL-004 |
 | **Notlar** | Gelecekte değerlendirilecek. **Reports Module:** Export observed across reports; exact format per report **doğrulanmadı** — → [daysmart.md](../competitors/daysmart.md#reports-shared-behavior). **E-Vet SMART:** Hesap ekstresi / müşteri-hasta hareketleri PDF+yazdır — → [e-vet.md](../competitors/e-vet.md#ekstreler--finansal-hareketler). **E-Vet SMART (2026-09-29):** Rapor ekranlarında shared shell — print-oriented preview + **Pdf** dropdown + download-like action + **Yazdır...**; Excel/CSV support not observed — → [e-vet.md](../competitors/e-vet.md#shared-report-presentation-shell) |
 
