@@ -29,9 +29,9 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 |---|---|---|
 | 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Geliştirildi (main + origin) |
 | 1b | REPORT-003 favoriler, REPORT-004 kayıtlı filtreler, REPORT-007 PDF + deneme kısıtı | Geliştirildi (main + origin) |
-| 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Geliştiriliyor (oturum p1-dalga-2) |
-| 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştiriliyor (oturum p1-dalga-2) |
-| 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştiriliyor (oturum p1-dalga-3) |
+| 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Geliştirildi (main yerel, gönderilmedi) |
+| 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştirildi (main yerel, gönderilmedi) |
+| 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştirildi (main yerel, gönderilmedi) |
 | 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | Bekliyor |
 | 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | Bekliyor |
 
@@ -56,3 +56,10 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - REPORT-004 kayıtlı filtreler: BE `bae9e769`, FE `96ff20f3`; migration `AddReportSavedFilters`; tarih aralığı kaydedilmez.
 - REPORT-007 PDF: BE `6719c32b`, FE `bab02739`; PDFsharp-MigraDoc 6.2.4 (MIT; 6.5+ AGPL, sürüm sabit, dependabot engelli). Denemede 1.000 satır (TRIAL-004), ücretlide PDF 5.000 satır.
 - Birleştirme: iki migration yerel DB'ye uygulandı. Birleşik main'de BE domain 771, application 3731, rapor/defter/portal/timeline entegrasyon 184 geçti; FE lint/tsc temiz, panel 286 ve portal 23 dosya geçti. PDF görünümü gözle denenmedi.
+
+### Dalga 2 ve 3 (2026-10-30, oturumlar p1-dalga-2 / p1-dalga-3) — main yerel, gönderilmedi
+- Dalga 2: RECORD-002, RECORD-005, RECORD-008 (+ defterde "İptal"), RECORD-001, EXAM-008, APPT-017/018/019, EXAM-007 paket fiyatı (kullanıcı kararı). Dalga 3: ADR-042 online randevu talebi + bildirim merkezi (APPT-001…016, UX-008), izin `AppointmentRequests.Manage`.
+- Birleştirme (koordinatör): BE `entegrasyon/dalga-2-3` → main `57b5cb35`, sonra DbMigrator düzeltmesi `700a1675`; FE main `a46ae366`. Çakışmalar: reçete denetleyicisi, uygulama DTO/eşleyici/fikstürleri, sözleşme bölümleri (RECORD-005 §11, RECORD-001 §12, EXAM-007 §13). Birleşimde eklenen: pakete dahil uygulamada satır ücret durumu `IncludedInPackage`; kayıt geçmişinde uygulama yolu Türkçe etiketi.
+- Beş migration yerel DB'ye uygulandı; `DbMigrator seed` çalıştı (yerelde açılışta DI hatası vardı, düzeltildi: DbMigrator `AddApplication`).
+- Testler: BE domain 810, application 3739, tam entegrasyon 1726 geçti / 2 atlandı; FE lint/tsc temiz, panel ve portal production build hatasız, panel 2201 (3 atlandı), portal 153 geçti. Tarayıcıda elle uçtan uca denenmedi.
+- Açık: portal gizlilik taslağına randevu talebi maddesi (HUKUKI C6); portal talep durumu sayı dönüyor (metne çevirme önerisi).
