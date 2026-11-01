@@ -1071,7 +1071,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı (kullanıcı kararı 2026-10-30: erteleme kaldırıldı, P1 tamamlama turuna alındı) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`, main'e alınmadı): fazla ödeme ve avans kredi olur (`Payment.Settle`), FIFO mahsup ücretin tahsis sayacını kullanır, gerekçeli geri alma ve tam iade (gün sonu dökümünde "Kredi iadesi"), kredisi kullanılmış ödeme iptal edilemez. Sözleşme backend `docs/CLIENT_CREDIT_API_CONTRACT.md`; migration `AddClientCredits` (yalnız yerel DB). Açık soru: açık ücreti olan müşteriye ücrete bağlanmadan avans (ekran şu an yalnız açık ücret yokken sunuyor) |
 | **Bağımlılıklar** | FIN-001, FIN-002, FIN-003 |
 
 ### FIN-006 — Çoklu para birimi
@@ -1250,7 +1250,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı klinik kayıt modeli; ortak lifecycle |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (P1 Dalga 4b, 2026-11-01): öneri B — kayıtlar ayrı ve tipli kalır, ortak çekirdek (tek tür sözlüğü, kilit politikası, iptal/geç kayıt değer nesneleri) + frontend tür kayıt defteri ve ortak form kabuğu. [Araştırma](../research/record-006-birlesik-kayit-modeli-2026-11.md), [ADR-043 taslak](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md); AK-1…9 kullanıcı kararı bekler. Kod yok |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3); generic record architecture adayı → [IDEA-026](../research/ideas.md#idea-026--unified-dynamic-record-model), [PATTERN-020](../research/patterns.md#pattern-020--unified-record-with-dynamic-type-forms). **Canlı sandbox — Patients Module:** Records/Pharmacy/Labs/Images/Vaccines/Vitals History filtreleri aynı timeline read-model → [daysmart.md](../competitors/daysmart.md#records) |
 
@@ -1398,7 +1398,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yasal uyum; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): sürümlü kabul ve aydınlatma var; bildirim tercihi ve veri talebi akışı doğrulanmadı |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): sürümlü kabul ve aydınlatma vardı; eklenen: bildirim tercihleri (push tercihi, hatırlatma, ticari ileti onayı — gönderim kapalı, İYS/ETK hukuki görüş bekler) ve "Verilerimle ilgili talep" (KVKK başvurusu, 30 gün, klinik gelen kutusuna düşer, yanıt e-postası). Hukuki noktalar çalışma varsayımı (HUKUKI-ONAY-LISTESI "Koda giren varsayımlar — Dalga 4b"). Migration `AddPortalPreferencesDataRequestsAndSettings` (yalnız yerel DB) |
 | **Bağımlılıklar** | PORTAL-006, TRIAL-009 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4; Vetinity'nin rolü ve İYS/ETK için hukuki görüş şart (AK-5); [HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md)'ne eklenir |
 
@@ -1430,7 +1430,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik kontrolü; çıkış güvencesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): müşteri kartında durum/davet/iptal/kapat var; klinik düzeyi aç-kapat ve gelen kutusu yok |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): klinik düzeyinde portal aç/kapat (Ayarlar > Hasta sahibi portalı; kayıt yoksa açık, kapatınca hesap/bağ silinmez, bağ uçları ve yeni davet kapanır) ve portal gelen kutusu (KVKK veri talepleri, menü rozeti, bildirim merkezi türü). Davet kuralı: yalnız KVKK Ret engeller (ADR-031 K4 eki, 2026-11-01) |
 | **Bağımlılıklar** | PORTAL-006 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3/K8; yeni portal yönetim izni (izin kataloğu) |
 
@@ -1446,7 +1446,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi doğru kanaldan zamanında haberdar olur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): yalnız davet e-postası; tür×kanal kuralı, WhatsApp, push yok |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): tür × kanal kuralı tek yerde (`OwnerNotificationChannelPolicy`) ve dağıtıcı (e-posta outbox), push yalnız soyutlama (`NotConfiguredPushNotificationSender`; FCM/APNs dış bağımlılık), WhatsApp personel `wa.me` bağlantısı (müşteri kartında davet bilgisi; hatırlatma düğmesi müşteri kartı yeniden tasarımına bırakıldı). Mevcut e-posta gönderimleri dağıtıcıya taşınmadı (teknik borç) |
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
 
