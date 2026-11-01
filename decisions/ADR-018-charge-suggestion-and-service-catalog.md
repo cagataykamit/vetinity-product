@@ -29,3 +29,11 @@ Hekim işlemi (uygulama, aşı) kaydeder, ücreti resepsiyon yazar ([ADR-012](AD
 - Frontend: Ücretlendir yan paneli, Bugün rozeti, kesinleştirme kontrolünde "n ücret bekliyor", hizmet ürün formu, seçicilerden hizmetin çıkarılması.
 - Ertelenen: tedavi/yatış/lab kalemleri ve hekimin hizmet seçmesi (yeni kaynak türleri aynı tabloya eklenir), paket/bundle, KDV, ücretsiz saymanın geri alınması, toplu dönüştürme, geçmiş uygulamalar için backfill.
 - Riskler: ücret iptalinde kalemin geri gelmemesi ve bedelsiz ürünün kalem doğurmaması ürün tercihidir, pilotta gözlenir. Ücreti kesilmiş uygulamanın iptali ücreti kendiliğinden düzeltmez; yönetici düzeltmesi unutulabilir (gün sonu raporunda görünür kılınmalı, D6).
+
+## Ek (2026-10-30): tedavi paketi fiyatı (EXAM-007, kullanıcı kararı)
+
+Kural 1'e istisna: muayene şablonu / tedavi paketine (ADR-020 S4) isteğe bağlı **tek paket fiyatı** verilebilir.
+
+- Paket fiyatı doluysa paket uygulanınca **tek** "ücret bekliyor" kalemi (paket adı, paket fiyatı) doğar. Paketteki kalemler **"pakete dahil"** işaretiyle uygulanır: stoktan düşer, kayıtta görünür, ayrıca kalem doğurmaz.
+- Paket fiyatı boşsa bugünkü kural geçerlidir: fiyatlı her uygulama kendi kalemini doğurur.
+- Kural domain'de tek yerde. Uygulama: P1 Dalga 2, backend/frontend `feat/tedavi-paketi-fiyati`.
