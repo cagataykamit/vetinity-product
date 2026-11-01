@@ -1250,7 +1250,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı klinik kayıt modeli; ortak lifecycle |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (P1 Dalga 4b, 2026-11-01): öneri B — kayıtlar ayrı ve tipli kalır, ortak çekirdek (tek tür sözlüğü, kilit politikası, iptal/geç kayıt değer nesneleri) + frontend tür kayıt defteri ve ortak form kabuğu. [Araştırma](../research/record-006-birlesik-kayit-modeli-2026-11.md), [ADR-043 taslak](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md); AK-1…9 kullanıcı kararı bekler. Kod yok |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3); generic record architecture adayı → [IDEA-026](../research/ideas.md#idea-026--unified-dynamic-record-model), [PATTERN-020](../research/patterns.md#pattern-020--unified-record-with-dynamic-type-forms). **Canlı sandbox — Patients Module:** Records/Pharmacy/Labs/Images/Vaccines/Vitals History filtreleri aynı timeline read-model → [daysmart.md](../competitors/daysmart.md#records) |
 
