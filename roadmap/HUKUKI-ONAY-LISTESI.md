@@ -52,6 +52,15 @@ Hukuki görüş gelene kadar **geliştirme beklemez**: yukarıdaki taslak metinl
 - Hukuki bir kural varsayımla koda girerse tek yerde yaşar (örn. sürüm sabiti, saklama süresi sabiti) ve burada ilgili satıra not düşülür; hukukçu farklı derse tek yerden değişir.
 - **Pilot canlı müşteri verisiyle başlamadan önce** A1–A5 ve B1–B4 hukukçuyla kapatılır (aşağıdaki öneri geçerli).
 
+### Koda giren varsayımlar — P1 Dalga 4b (2026-11-01; PORTAL-007/010, FIN-005)
+
+Durum sütunları değişmedi; aşağıdakiler çalışma varsayımıdır ve her biri tek yerde yaşar (backend `feat/dalga-4b`):
+- **A4 / C5 / C6 — İYS/ETK:** hatırlatma (aşı/randevu) ve işlemsel ileti (kod, davet, talep yanıtı) ticari ileti sayılmadı. Ticari ileti onayı portalda bağ başına kaydedilir (`OwnerAccountClientLinks.MarketingConsentAtUtc`), **gönderim kapalıdır** (`OwnerNotificationChannelPolicy.MarketingSendingEnabled = false`); ticari ileti gönderen özellik yok. Açmak hukuk görüşü + İYS kaydı + ürün kararı ister.
+- **A5 / C6 — KVKK başvurusu:** portaldan "Verilerimle ilgili talep" (erişim, düzeltme, silme, itiraz, diğer) kliniğin gelen kutusuna düşer; yanıt süresi 30 gün (`OwnerDataRequest.ResponseDueDays`, KVKK m.13 varsayımı). Sistem silme/anonimleştirme yapmaz; klinik `operations/kvkk-talep-sureci.md` ile elle yürütür. Talep metni ve yanıt notu denetim kaydında maskelenir. Bir bağda en çok 3 açık talep (kötüye kullanım sınırı; hukukçu "başvuru hakkı sınırlanamaz" derse kaldırılır).
+- **C6 — metin eksikleri (hukukçu onayında sürüm 0.2'ye eklenmeli; şimdi metin değiştirilmedi, sürüm 0.1 kaldı):** (a) portal randevu talebi verileri (hayvan, neden, istenen saat, not; veri sorumlusu klinik — ADR-042); (b) KVKK veri talebi verileri (tür, açıklama, kliniğin yanıtı) ve bölüm 10'daki "(v1)" ibaresinin kaldırılması; (c) bildirim tercihi kapsamı: push izni (sağlayıcı yok, cihaz jetonu tutulmuyor), ticari ileti onayı kaydı.
+- **C6 — WhatsApp:** personel `wa.me` bağlantısıyla kendi WhatsApp'ından gönderir; sistem göndermez, içerik asgari (hayvan adı, tarih, klinik adı). Personelin kişisel cihaz/hesap kullanımı ve WhatsApp'ın yurt dışı aktarımı (m.9) hukukçuya sorulmalı.
+- **FIN-005:** müşteri kredisi iadesi kasa çıkışı olarak gün sonu dökümüne girer; iade belgesi/fiş ve e-belge etkisi C2 (e-fatura) kapsamında ayrıca değerlendirilir.
+
 ## Nasıl kullanılır
 
 1. Bu dosya hukukçuya verilir. Her satırdaki **Soru** ve **Onay bekliyor** hücreleri cevaplanır.
