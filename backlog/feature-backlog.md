@@ -2850,9 +2850,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esneklik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (yerel main, 2026-11-02); gerçek cihaz doğrulaması bekliyor |
 | **Bağımlılıklar** | — |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) Kullanıcı kararı (2026-10-16): çalışan mobilden aynı siteye girebilmeli; mağaza uygulaması AK-1b |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) Kullanıcı kararı (2026-10-16): çalışan mobilden aynı siteye girebilmeli; mağaza uygulaması AK-1b. Uygulama (2026-11-02): telefon eşiği ≤575 px (Tailwind `max-sm:`); dokunma hedefi 44 px (`--touch-target`, [ADR-026](../decisions/ADR-026-satir-eylem-simgeleri.md) eki); ayrı kart görünümü olmayan tablolar telefonda kart satırı (`table-stack-phone`); küçük bağlantılar `max-sm:touch-hit`. PWA: `manifest.webmanifest` (başlangıç /panel), service worker yalnız production/staging derlemesinde ve /panel, /auth yollarında kayıtlanır; API yanıtı önbelleğe alınmaz, çevrimdışı veri yok. Koordinatör kararları (2026-11-02): onay penceresi telefonda tam ekran olmaz, ortada kısa pencere kalır; telefonda klinik adı üst çubukta gösterilmez (menüde); manifest ortak `index.html`'de kalır, tanıtım sitesiyle ayrım ADR-033 adres düzeniyle çözülür. |
 
 ---
 

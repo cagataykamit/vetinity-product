@@ -24,3 +24,7 @@ Liste satırlarında "Detay" yazı bağlantısı var, düzenle/iptal simgeleri �
 
 - Frontend: ortak satır eylemi bileşeni ve tüm liste sayfalarının geçişi; spec'ler (aria-label, ipucu, eylem varlığı).
 - Mevcut metin bağlantısı olarak "Detay"a güvenen testler güncellenir.
+
+## Ek (2026-11-02): telefonda dokunma hedefi 44 px (MOBILE-004)
+
+Karar 3'teki dokunmatik ölçü 40 px'ten **44 px**'e çıkar. Ölçü tek yerde yaşar: `--touch-target: 44px` (`variables/_common.scss`). Satır eylemi düğmesi dokunmatik cihazda (`pointer: coarse`) veya telefon genişliğinde (≤575 px) bu ölçüyü kullanır; masaüstünde 32×32 px değişmez. Telefonda PrimeNG düğme, giriş ve liste öğeleri de en az bu yüksekliktedir (`_mobile.scss`); görünümü küçük kalan bağlantı ve haplar `max-sm:touch-hit` ile görünmez bir dokunma alanı alır (düzen değişmez).
