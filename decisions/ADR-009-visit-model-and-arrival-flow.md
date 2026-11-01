@@ -81,6 +81,28 @@ Gereksinim: randevulu ve randevusuz geliş ayrı izlenir; randevusuz geliş saht
 - Doğrulama: ana plan Aşama 2 kabulü: randevulu ve randevusuz iki hasta kabul edilir; iki kullanıcı aynı kuyruğu görür; muayeneye geçişte hasta tekrar seçilmez; ödeme eksikliği bakım durumunu yanlış göstermez; tekrar tıklama ikinci Visit üretmez.
 - Backlog: [CHECKIN-006](../backlog/feature-backlog.md), [CHECKIN-007](../backlog/feature-backlog.md), [SEARCH-001](../backlog/feature-backlog.md).
 
+## Ek (2026-11-01): geliş yaşam döngüsü ve hazırlık (CHECKIN-001…005, P1 Dalga 4a)
+
+Sade model **değişmez**; yeni bakım durumu eklenmez. Karar rakip pratiğinden türetildi (DaySmart check-in sihirbazı ve ziyaret zinciri; [daysmart.md](../competitors/daysmart.md#check-in-orkestrasyonu)), ADR-009'un "ağır check-in formu reddedildi" gerekçesi korunur.
+
+**Durum eşlemesi (CHECKIN-005):**
+
+| Rakip (DaySmart) | Vetinity | Not |
+|---|---|---|
+| Booked | Bugün'de planlı randevu satırı (Visit yok) | Randevu planı, ADR-009 madde 1 |
+| Checked In | `Bekliyor` | "Geldi" (randevulu) veya randevusuz geliş; geri alma CHECKIN-009 |
+| In Room | `Devam ediyor` (muayenede) | Muayene açılınca otomatik; ayrı muayene odası verisi tutulmaz (oda modeli yok, sorumlu hekim yeter) |
+| Visit Complete | `Tamamlandı` | |
+| Check Out | — | Tahsilat ve belge orkestrasyonu [CHECKOUT-001](../backlog/feature-backlog.md) ayrı iş; ödeme bakım durumunu değiştirmez (madde 2) |
+
+**Geliş hazırlığı (CHECKIN-001/002/003/004):** rakipteki çok alanlı form yerine iki **isteğe bağlı** alan:
+
+1. **Geliş nedeni / şikâyet** (en çok 500 karakter; randevulu gelişte randevu nedeni varsayılan). Bugün satırında görünür; hekim yeni muayene açınca geliş nedeni alanına **öneri** olarak gelir (sunucuda kopyalanmaz).
+2. **Hazırlanan şablon / paket** (EXAM-006/007 şablonu; ayrı "medical note şablonu" ve "bundle" seçicileri yok, çünkü Vetinity'de ikisi tek varlıktır). Gelişte **uygulanmaz**: stok, uygulama kaydı ve "ücret bekliyor" kalemi hekim muayenede mevcut "Şablon uygula" ile onaylayınca doğar. Böylece klinik karar hekimde kalır, geri alma (yanlış geliş) stok/ücret yan etkisi üretmez (IDEA-020 riski).
+3. **Fatura/teklif (CHECKIN-004):** Vetinity'de fatura veya teklif belgesi yoktur (ADR-012: ücret satırı + bakiye; e-belge INT-007 ayrı). Karşılığı: fiyatlı paket seçilince "tahmini ücret" önizlemesi (kayıt değildir) ve geliş sonrası Visit'e bağlı ücret açma kısayolu. Ayrı teklif (estimate) varlığı **eklenmedi**; ihtiyaç pilotta görülürse ayrı karar.
+
+Hazırlık yalnız açık gelişte değiştirilir (tamamlanmışta 409). Uygulama: backend `feat/dalga-4a` (`Visits.ArrivalReason`, `Visits.PreparedExaminationTemplateId`, `PUT /visits/{id}/preparation`, migration `AddVisitPreparation`), sözleşme backend `docs/VISITS_API_CONTRACT.md` §4.5 ve §12 S5.
+
 ## İlgili belgeler
 
 - [Ana plan, Aşama 2](../roadmap/Vetinity_Uctan_Uca_Yol_Haritasi_ve_Urun_Kararlari.md)

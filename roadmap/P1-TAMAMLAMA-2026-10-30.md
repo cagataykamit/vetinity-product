@@ -32,7 +32,7 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 | 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Geliştirildi (main yerel, gönderilmedi) |
 | 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştirildi (main yerel, gönderilmedi) |
 | 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştirildi (main yerel, gönderilmedi) |
-| 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | Bekliyor |
+| 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | 4a (CHECKIN-001…005, EXAM-011/012, TRIAL-006): geliştirildi, dal `feat/dalga-4a` (main'e alınmadı). 4b: ayrı oturum |
 | 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | Bekliyor |
 
 Kapsam dışı (bu turda bilinçli kapanış): EXAM-015 kilit açma (ADR-013 gereği yok), REPORT-008 dilim 2–3 (pilot geri bildirimine bağlı).
@@ -63,3 +63,13 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - Beş migration yerel DB'ye uygulandı; `DbMigrator seed` çalıştı (yerelde açılışta DI hatası vardı, düzeltildi: DbMigrator `AddApplication`).
 - Testler: BE domain 810, application 3739, tam entegrasyon 1726 geçti / 2 atlandı; FE lint/tsc temiz, panel ve portal production build hatasız, panel 2201 (3 atlandı), portal 153 geçti. Tarayıcıda elle uçtan uca denenmedi.
 - Açık: portal gizlilik taslağına randevu talebi maddesi (HUKUKI C6); portal talep durumu sayı dönüyor (metne çevirme önerisi).
+
+### Dalga 4a (2026-11-01, oturum dalga-4a) — dal `feat/dalga-4a`, main'e alınmadı, gönderilmedi
+- Worktree'ler: BE `C:\Vetinity\wt\dalga-4a-be`, FE `C:\Vetinity\wt\dalga-4a-fe` (ikisi de `feat/dalga-4a`, main'den). Ürün belgeleri `docs/dalga-4a` (docs/dalga-2 üstüne).
+- EXAM-011/012 metin parçaları: BE `9c850b69` (migration `AddClinicalSnippets`, izinler `ClinicalSnippets.*`, sözleşme `docs/CLINICAL_SNIPPET_API_CONTRACT.md`); FE `ede5d175`, `c2b2510c`, `4afa9a61`, `944036ff` (Ayarlar → Tanımlar → Metin parçaları; muayenede `#` tetikleyici). Muayene şablonuyla ayrım sözleşme §1'de.
+- TRIAL-006 deneme kotası: BE `dc7e3ddd` (müşteri 1.000, hasta 2.000, depolama 500 MB; `Trial.*QuotaExceeded` 422; `TRIAL_LIMITS_API_CONTRACT.md` K7 §3.4); FE `e9c80cb4`.
+- CHECKIN-001…005 geliş hazırlığı: BE `db7f8680` (Visit `ArrivalReason` + `PreparedExaminationTemplateId`, `PUT /visits/{id}/preparation`, Bugün satırında randevu/geliş nedeni ve şablon adı, migration `AddVisitPreparation`); FE `4d0aa541`, `f55c35a0`, `b81841b4`, `c1e6d79c`. ADR-009 eki (2026-11-01): yeni durum yok, şablon gelişte uygulanmaz, teklif belgesi yok (tahmini ücret önizlemesi).
+- Testler: BE build 0 hata/0 uyarı, domain 822, application 3760, entegrasyon (Visits, Catalog, Clients, Pets, Files, Imports, Tenants) 303 geçti; tam entegrasyon paketi çalıştırılmadı. FE lint ve tsc (app+spec) temiz, panel 2274 geçti / 3 atlandı (306 dosya), portal 153 geçti, panel ve portal production build hatasız.
+- Migration'lar yerel DB'ye uygulandı (`AddClinicalSnippets`, `AddVisitPreparation`). `DbMigrator seed` **çalıştırılmadı** (farklı daldan seed başka dalın izinlerini silebilir); birleştirmeden sonra tek daldan çalıştırılmalı.
+- Doğrulanmayan: tarayıcıda elle deneme yok; gerçek backend'le FE uçtan uca yok; `#` listesinin imleç konumu ve koyu tema gözle bakılmadı.
+- Açık: metin parçaları ayarlarında "Pasifleri göster" varsayılan kapalı; teklif (estimate) belgesi pilot geri bildirimine bırakıldı; şablon seçici 200 aktif şablonla sınırlı.

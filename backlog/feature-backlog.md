@@ -130,7 +130,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Adil kullanım; platform sürdürülebilirliği |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı (kullanıcı kararı 2026-10-30: erteleme kaldırıldı, P1 tamamlama turuna alındı) |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): deneme kiracısında toplam müşteri 1.000, hasta 2.000, dosya depolama 500 MB; aşımda 422 `Trial.ClientQuotaExceeded` / `PetQuotaExceeded` / `StorageQuotaExceeded` + "Aboneliğe geç". Kullanıcı sayısı plan koltuğuyla (Basic 3) zaten sınırlı, şube sınırsız. Değerler ajan önerisi (TRIAL-004 ile tutarlı; rakip belgelerinde kota verisi yok). BE `dc7e3ddd`, FE `e9c80cb4`; sözleşme backend `docs/TRIAL_LIMITS_API_CONTRACT.md` K7 §3.4 |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Limitler günlük klinik deneyimini engellememeli |
 
@@ -638,7 +638,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı yapılandırılmış veri girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): muayenede `anamnesis/findings/assessment/plan/notes` alanlarında `#kısayol` ile metin parçası imlece eklenir (istemci tarafı, AI değil, muayene şeması değişmez). BE `9c850b69`, FE `c2b2510c`, `944036ff`; sözleşme backend `docs/CLINICAL_SNIPPET_API_CONTRACT.md` (muayene şablonuyla ayrım tablosu §1). Tarayıcıda denenmedi |
 | **Bağımlılıklar** | EXAM-002 |
 | **Notlar** | **AI değildir**. **Templates Module:** Snippets template catalog + hashtag/shortcut — Settings > Templates > Snippets — → [daysmart.md](../competitors/daysmart.md#templates-letters-snippets-attachments) |
 
@@ -654,7 +654,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı anamnez ve bulgu girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): Ayarlar → Tanımlar → Metin parçaları (kiracı düzeyi, kısayol tekil, en çok 200, pasifleştirme; izinler `ClinicalSnippets.*`). Migration `AddClinicalSnippets`. BE `9c850b69`, FE `4afa9a61` |
 | **Bağımlılıklar** | EXAM-011 |
 | **Notlar** | Yönetim ekranı sandbox'ta doğrulanmadı |
 
@@ -776,7 +776,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tek giriş noktası; operasyonel hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): Bugün'den "Geldi"/randevusuz geliş diyaloğunda isteğe bağlı geliş nedeni (randevu nedeni varsayılan) + şablon/paket; satırda neden ve hazırlık etiketi; "Hazırlığı düzenle". Ağır sihirbaz yok (ADR-009 eki 2026-11-01). BE `db7f8680`, FE `4d0aa541`, `f55c35a0` |
 | **Bağımlılıklar** | EXAM-001, APPT-001 |
 | **Notlar** | Undo check-in / check-out yan etkileri değerlendirilmeli → [IDEA-020](../research/ideas.md#idea-020--check-in-orchestration), [PATTERN-016](../research/patterns.md#pattern-016--check-in-as-workflow-orchestrator). DaySmart sandbox observation (bölüm 3): ziyaret durumu Booked → Checked In → In Room → Visit Complete → Check Out; tam akış için [CHECKIN-005](#checkin-005--ziyaret-yaşam-döngüsü-ve-durum-geçişleri). **Canlı sandbox — Boarding:** reservation → Check In sihirbazı (billing, form, bundle, item rule, cage card, weight, medical note) — tamamlama **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#check-in-wizard) |
 
@@ -792,7 +792,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayeneye hazır başlangıç |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01): gelişte hazırlanan şablon muayenede "Gelişte hazırlanan: … — Uygula" şeridiyle önerilir, uygulama hekimde; geliş nedeni yeni muayenenin geliş nedenine önerilir. BE `db7f8680`, FE `b81841b4` |
 | **Bağımlılıklar** | CHECKIN-001, EXAM-006 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Canlı sandbox — Boarding Check In:** Boarding Form template (Intake, Cage Card/Instructions, Behavior Observation vb.); Medical Note — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-form-template). **Settings Module:** Appointment Type preset → default medical note / check-in forms — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
 
@@ -803,7 +803,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Erken paket planlama |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01): paket (EXAM-007) gelişte şablonla aynı seçiciden seçilir (Vetinity'de tek varlık); gelişte uygulanmaz, stok/ücret kalemi muayenede onayla doğar. BE `db7f8680`, FE `f55c35a0` |
 | **Bağımlılıklar** | CHECKIN-001, EXAM-007 |
 | **Notlar** | **Canlı sandbox — Boarding Check In:** Boarding Bundle + diğer medical bundle'lar — yansıma **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#bundle-check-in-bağlamı). **Templates Module:** Bundle Items/Activities/Actions; appointment type preset bundle binding — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
@@ -819,7 +819,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik-finans sürekliliği |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Geliştirildi, kapsam daraltıldı (P1 Dalga 4a, 2026-11-01): fatura/teklif belgesi yok (ADR-012); fiyatlı pakette "tahmini ücret" önizlemesi (kayıt değil) ve "Kaydettikten sonra ücret ekle" ile Visit'e bağlı ücret. Ayrı teklif (estimate) varlığı eklenmedi; pilotta ihtiyaç görülürse ayrı karar (ADR-009 eki). FE `f55c35a0` |
 | **Bağımlılıklar** | CHECKIN-001 |
 | **Notlar** | → [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Boarding Check In** New Invoice — [daysmart.md](../competitors/daysmart.md#check-in-wizard). **Clients Module:** Client-scoped Estimates — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** Estimate list/detail — → [daysmart.md](../competitors/daysmart.md#billing-estimates). **DaySmart (observed):** Check In Billing default = Create invoice — → [daysmart.md](../competitors/daysmart.md#config-observed-rows) |
 
@@ -835,7 +835,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel görünürlük; ekip koordinasyonu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): ADR-009 sade model (Waiting/InProgress/Completed) uygulandı; Booked/In Room/Check Out geçişleri yok, CHECKIN-006 ile örtüşüyor |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01): rakip zinciri mevcut modele eşlendi (Booked = planlı satır, Checked In = Bekliyor, In Room = Muayenede, Visit Complete = Tamamlandı); yeni durum yok, oda verisi yok; Check Out = CHECKOUT-001 ayrı. ADR-009 eki 2026-11-01, backend `docs/VISITS_API_CONTRACT.md` §12 S5 |
 | **Bağımlılıklar** | CHECKIN-001 |
 | **Notlar** | Kapsam durumları: Booked, Checked In, In Room, Visit Complete, Check Out. Bu kayıt yalnızca check-in işlemini değil, randevudan tamamlanmaya kadar tüm ziyaret/encounter yaşam döngüsünü temsil eder. DaySmart sandbox observation (~28:13–35:25): Visit Complete iken ayrı Check Out başlatılabiliyor → [CHECKOUT-001](#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu). Mevcut backlog ID'si CHECKIN-005 olarak korunur. İleride ziyaret/encounter alanı bağımsız bir ürün alanına dönüşürse kategori ve ID yapısı ayrıca değerlendirilebilir. DaySmart sandbox observation (2026-08-02 bölüm 3); SOAP ekranından durum değişimi gözlemlendi — doğrulanmadı. **Canlı sandbox — Census:** operasyon kuyruğu görünümü; satır bazlı status değişimi (gözlemlenen örnek: Not confirmed, Confirmed, Cancelled, Checked in); opsiyonel Notes — gözlemlenen seçeneklerin tam durum kümesi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--census-profiller-ve-operasyon-kuyruğu). **Canlı sandbox — Treatment Board:** aktif tedavi operasyon panosu — [daysmart.md](../competitors/daysmart.md#sandbox--treatment-board). **Canlı sandbox — Boarding Dashboard:** Checking In/Out/Checked In kolonları + durum legend — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#boarding-dashboard). **Patients Module:** Patient Profile Appointments + Boarding Reservation birleşik liste; domain ayrı — [daysmart.md](../competitors/daysmart.md#appointments-patient-profile). **Clients Module:** Client Appointments/Reservations unified query — [daysmart.md](../competitors/daysmart.md#appointments--reservations). **E-Vet SMART (2026-09-24):** UI'da **Randevular** ile **Ziyaret Geçmişi** ayrı yüzeyler; randevu listesinde örnek durum `Gelmedi` — tam enum/backend modeli **doğrulanmadı** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#randevular) |
 
