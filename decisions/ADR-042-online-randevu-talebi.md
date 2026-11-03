@@ -66,7 +66,9 @@ Sorun: online randevu açık ama klinikte online görünen neden yoksa ya da sah
 4. **Acil uyarısı:** talep formunun başında "Acil durumda online talep beklemeyin, kliniği arayın" ve kliniğin telefonu (tıklanınca arar). Online talep klinik onayını bekler; acil vaka için uygun kanal değildir.
 5. **Panelde uyarı, engel değil:** klinik adı "acil" içeren bir nedeni online'da görünür yaparsa randevu nedenleri ekranı "Acil vakalar online talep yerine telefonla alınmalı" uyarısı gösterir.
 
-Bu ekle online randevu açıkken çıkmaz sayfa oluşmaz; ayrıca "hazırlık listesi" gerekmez.
+6. **Kurulum tek sayfada** (kullanıcı: "Klinik online randevuyu açtığında bunu da ayarlaması gerektiğini bilmeli"): Ayarlar > Online randevu sayfası sırayla (1) müşterinin seçeceği randevu nedenlerini (Tanımlar'daki parçanın aynısı; sonda sistemin "Diğer" satırı), (2) kurulum kontrolünü ve müşterinin göreceği ilk adımın önizlemesini, (3) talebi açma/kapatmayı, bağlantıyı ve e-postaları gösterir. Kontrol maddeleri: online görünen neden (yoksa uyarı, "Diğer" yine görünür), çalışma saatleri (açık gün yoksa müşteri saat göremez), klinik telefonu (yoksa acil uyarısında numara yok). Eksikler açarken söylenir; **engel değildir**.
+
+Bu ekle online randevu açıkken çıkmaz sayfa oluşmaz.
 
 ## Sonuçlar
 
