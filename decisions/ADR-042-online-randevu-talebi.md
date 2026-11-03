@@ -56,6 +56,18 @@ Kapsam: APPT-001…016 (P1). APPT-020 ve sonrası (HTML butonu, iframe, widget, 
 
 - Bekleyen talepler takvimde istenen saatte farklı görünümle (kesik çerçeve, "Talep") gösterilir; filtre ile gizlenebilir. Tıklanınca kuyruktaki talep açılır.
 
+## Ek (2026-11-03): "Diğer / emin değilim" seçeneği, not ve acil uyarısı (kullanıcı onayı: "Evet, yap")
+
+Sorun: online randevu açık ama klinikte online görünen neden yoksa ya da sahibin derdine uyan neden yoksa sahip ilk adımda takılıyordu ("kliniği arayın"). Not alanı neden seçildikten sonraki adımdaydı; neden seçemeyen sahip derdini yazamıyordu. Rakip pratiği: listenin sonunda her zaman "Diğer", serbest açıklama ve formun başında acil durum telefonu.
+
+1. **"Diğer / emin değilim" her klinikte vardır** (K2'ye ek). Sistem sağlar, klinik tanımlamaz ve kapatamaz; online neden listesinin sonunda durur, klinik hiç neden tanımlamamış olsa da görünür. Süresi 30 dk, klinikteki tüm hekimler uygundur (K3 müsaitliği bu süre ve hekimlerle hesaplanır). Talep nedensiz kaydedilir (`ReasonId` boş, ad "Diğer / emin değilim"); onayda randevu nedensiz oluşur; klinik saati ve hekimi K4'teki "yeniden planla" ile değiştirebilir.
+2. **"Diğer" seçilince not zorunludur** (en az 3 karakter): klinik sahibin ne için geldiğini bilmeden talebi değerlendiremez. Diğer nedenlerde not isteğe bağlı kalır. Kural backend'dedir; sayfa yanıtı her nedenin notu zorunlu kılıp kılmadığını taşır.
+3. **Not alanı neden seçiminin hemen altındadır** (portal ve bağlantı formu): sahip hangi nedeni seçerse seçsin derdini ilk adımda yazabilir.
+4. **Acil uyarısı:** talep formunun başında "Acil durumda online talep beklemeyin, kliniği arayın" ve kliniğin telefonu (tıklanınca arar). Online talep klinik onayını bekler; acil vaka için uygun kanal değildir.
+5. **Panelde uyarı, engel değil:** klinik adı "acil" içeren bir nedeni online'da görünür yaparsa randevu nedenleri ekranı "Acil vakalar online talep yerine telefonla alınmalı" uyarısı gösterir.
+
+Bu ekle online randevu açıkken çıkmaz sayfa oluşmaz; ayrıca "hazırlık listesi" gerekmez.
+
 ## Sonuçlar
 
 - Backend: `AppointmentReason`, `AppointmentRequest` (+ durum geçmişi), klinik online randevu ayarları, kimliksiz bağlantı uçları, portal uçları, müsaitlik sorgusu, e-posta şablonları, bildirim modeli. Migration'lar yalnız yerel DB'ye; canlı listesi kılavuz §11.1.
