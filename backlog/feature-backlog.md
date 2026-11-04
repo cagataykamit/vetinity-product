@@ -590,7 +590,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Güvenlik; hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): muayenede doz hesaplayıcı (kg × doz/kg, konsantrasyondan hacim); kayda yazmaz |
+| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): muayenede doz hesaplayıcı (kg × doz/kg, konsantrasyondan hacim); kendisi kaydetmez. 2026-11-04 (kullanıcı: "Evet, ekle"): "Plana ekle" hesabı "Doz hesabı: …" satırı olarak muayene planının sonuna yazar, kayıt hekim kaydedince olur; "Hesabı kopyala" yedek |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | AI bağımsız doz kararı vermez; klinik karar hekimde kalır. DaySmart (2026-08-02 bölüm 2): kg, mg/kg, konsantrasyon, toplam doz/hacim — sandbox doğrulanmadı. P3 / araştırılacak aday olarak da değerlendirilebilir → [IDEA-024](../research/ideas.md#idea-024--embedded-dosage-support) |
 
