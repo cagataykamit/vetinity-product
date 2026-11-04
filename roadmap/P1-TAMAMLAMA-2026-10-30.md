@@ -29,11 +29,11 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 |---|---|---|
 | 1a | TIMELINE-003 tarih aralığı, TIMELINE-004 derin bağlantı, UX-006 son görüntülenenler, WEB-003 JSON-LD + staging noindex, APPT-014 sahip tarafı hatırlatma kapatma, EXAM-010 hızlı lab/reçete bağlantısı | Geliştirildi (main + origin) |
 | 1b | REPORT-003 favoriler, REPORT-004 kayıtlı filtreler, REPORT-007 PDF + deneme kısıtı | Geliştirildi (main + origin) |
-| 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Geliştirildi (main yerel, gönderilmedi) |
-| 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştirildi (main yerel, gönderilmedi) |
-| 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştirildi (main yerel, gönderilmedi) |
-| 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | Geliştirildi (4a + 4b; main yerel, gönderilmedi; RECORD-006 yalnız araştırma + taslak ADR-043) |
-| 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | MOBILE-004 geliştirildi (main yerel, gönderilmedi; gerçek cihaz doğrulaması bekliyor); diğerleri bekliyor |
+| 2a | RECORD-002 değişiklik geçmişi, RECORD-001 satır fiyat/fatura görünümü, RECORD-005 uygulama yolu/bölge/üretici, RECORD-008 reçete iptali | Geliştirildi (main + origin) |
+| 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştirildi (main + origin) |
+| 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştirildi (main + origin) |
+| 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | Geliştirildi (4a + 4b; main + origin; RECORD-006 yalnız araştırma + taslak ADR-043) |
+| 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | MOBILE-004 geliştirildi (main + origin; gerçek cihaz doğrulaması bekliyor); diğerleri bekliyor |
 
 Kapsam dışı (bu turda bilinçli kapanış): EXAM-015 kilit açma (ADR-013 gereği yok), REPORT-008 dilim 2–3 (pilot geri bildirimine bağlı).
 
@@ -57,14 +57,14 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - REPORT-007 PDF: BE `6719c32b`, FE `bab02739`; PDFsharp-MigraDoc 6.2.4 (MIT; 6.5+ AGPL, sürüm sabit, dependabot engelli). Denemede 1.000 satır (TRIAL-004), ücretlide PDF 5.000 satır.
 - Birleştirme: iki migration yerel DB'ye uygulandı. Birleşik main'de BE domain 771, application 3731, rapor/defter/portal/timeline entegrasyon 184 geçti; FE lint/tsc temiz, panel 286 ve portal 23 dosya geçti. PDF görünümü gözle denenmedi.
 
-### Dalga 2 ve 3 (2026-10-30, oturumlar p1-dalga-2 / p1-dalga-3) — main yerel, gönderilmedi
+### Dalga 2 ve 3 (2026-10-30, oturumlar p1-dalga-2 / p1-dalga-3) — main + origin
 - Dalga 2: RECORD-002, RECORD-005, RECORD-008 (+ defterde "İptal"), RECORD-001, EXAM-008, APPT-017/018/019, EXAM-007 paket fiyatı (kullanıcı kararı). Dalga 3: ADR-042 online randevu talebi + bildirim merkezi (APPT-001…016, UX-008), izin `AppointmentRequests.Manage`.
 - Birleştirme (koordinatör): BE `entegrasyon/dalga-2-3` → main `57b5cb35`, sonra DbMigrator düzeltmesi `700a1675`; FE main `a46ae366`. Çakışmalar: reçete denetleyicisi, uygulama DTO/eşleyici/fikstürleri, sözleşme bölümleri (RECORD-005 §11, RECORD-001 §12, EXAM-007 §13). Birleşimde eklenen: pakete dahil uygulamada satır ücret durumu `IncludedInPackage`; kayıt geçmişinde uygulama yolu Türkçe etiketi.
 - Beş migration yerel DB'ye uygulandı; `DbMigrator seed` çalıştı (yerelde açılışta DI hatası vardı, düzeltildi: DbMigrator `AddApplication`).
 - Testler: BE domain 810, application 3739, tam entegrasyon 1726 geçti / 2 atlandı; FE lint/tsc temiz, panel ve portal production build hatasız, panel 2201 (3 atlandı), portal 153 geçti. Tarayıcıda elle uçtan uca denenmedi.
 - Açık: portal gizlilik taslağına randevu talebi maddesi (HUKUKI C6); portal talep durumu sayı dönüyor (metne çevirme önerisi).
 
-### Dalga 4a (2026-11-01, oturum dalga-4a) — dal `feat/dalga-4a`; main yerel (aşağıda "Dalga 4 birleştirme"), gönderilmedi
+### Dalga 4a (2026-11-01, oturum dalga-4a) — dal `feat/dalga-4a`; main + origin (aşağıda "Dalga 4 birleştirme")
 - Worktree'ler: BE `C:\Vetinity\wt\dalga-4a-be`, FE `C:\Vetinity\wt\dalga-4a-fe` (ikisi de `feat/dalga-4a`, main'den). Ürün belgeleri `docs/dalga-4a` (docs/dalga-2 üstüne).
 - EXAM-011/012 metin parçaları: BE `9c850b69` (migration `AddClinicalSnippets`, izinler `ClinicalSnippets.*`, sözleşme `docs/CLINICAL_SNIPPET_API_CONTRACT.md`); FE `ede5d175`, `c2b2510c`, `4afa9a61`, `944036ff` (Ayarlar → Tanımlar → Metin parçaları; muayenede `#` tetikleyici). Muayene şablonuyla ayrım sözleşme §1'de.
 - TRIAL-006 deneme kotası: BE `dc7e3ddd` (müşteri 1.000, hasta 2.000, depolama 500 MB; `Trial.*QuotaExceeded` 422; `TRIAL_LIMITS_API_CONTRACT.md` K7 §3.4); FE `e9c80cb4`.
@@ -74,7 +74,7 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - Doğrulanmayan: tarayıcıda elle deneme yok; gerçek backend'le FE uçtan uca yok; `#` listesinin imleç konumu ve koyu tema gözle bakılmadı.
 - Açık: metin parçaları ayarlarında "Pasifleri göster" varsayılan kapalı; teklif (estimate) belgesi pilot geri bildirimine bırakıldı; şablon seçici 200 aktif şablonla sınırlı.
 
-### Dalga 4b (2026-11-01, oturum p1-dalga-4b) — dal `feat/dalga-4b`; main yerel (aşağıda "Dalga 4 birleştirme"), gönderilmedi
+### Dalga 4b (2026-11-01, oturum p1-dalga-4b) — dal `feat/dalga-4b`; main + origin (aşağıda "Dalga 4 birleştirme")
 - Worktree'ler: BE `C:\Vetinity\wt\dalga-4b-be`, FE `C:\Vetinity\wt\dalga-4b-fe`, docs `C:\Vetinity\wt\dalga-4b-docs` (`docs/dalga-4b`). Hepsi main'den (BE `700a1675`, FE `9e6ed293`).
 - FIN-005 müşteri kredisi/mahsup: sözleşme `CLIENT_CREDIT_API_CONTRACT.md`. BE `542abd5d`, `c28c8363`, `fda161d3`, `bd6cf709`, `487191e7`, `b4cb6ec7` (test temizliği). FE `f2fe7222` (uçlar), `b8106085`, `fdadec5c`, `b22a797d`, `73b5d5b2`, `16cab28f`. Fazla ödeme/avans → kredi, FIFO mahsup tahsis sayacından, gerekçeli geri alma, tam iade gün sonunda "Kredi iadesi" (net tahsilattan düşer), kredisi kullanılmış ödeme iptal edilemez.
 - PORTAL-007/009/010: sözleşme `PORTAL_API_CONTRACT.md` §10–13. BE `b87c0965`, `501cc944`, `8f07efe5`, `ec752a96`, `5a698349`, `2bd18736` (ADR-031 K4 eki: davet yalnız KVKK Ret ile engellenir; tek başına geri alınabilir). FE `3f4073de`, `ebca798e`, `5a589324` (portal), `71b55b58`, `f5de0a99`, `de7fee81` (panel). Push yalnız soyutlama (FCM/APNs yok), WhatsApp personel `wa.me` bağlantısı, ticari ileti onayı kaydı (gönderim kapalı). Portal randevu talebi `status` metne çevrildi (açık soru kapandı).
@@ -83,7 +83,7 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - Testler: BE domain 843, application 3740 geçti; tam entegrasyon 1728 geçti / 9 başarısız / 2 atlandı — 9'u kredi FK'sinin test temizliğini bozmasından, `b4cb6ec7` ile düzeltildi; düzeltme sonrası ilgili 172 test (ScopeIdor, Parity, Projections.Payments, OwnerPortal, ClientCredit) geçti, tam paket yeniden koşulmadı. FE lint 0, tsc panel+portal temiz, panel 2258 geçti / 3 atlandı (tek dosya `appointment-request-detail-dialog` VITEST_BROWSER_CONNECTION_CLOSED; main'de de düşüyor, düzeltmesi `feat/musteri-detay-tasarim`), portal 168/168, production build panel + portal hatasız. Tarayıcıda ve gerçek backend'e karşı elle uçtan uca denenmedi.
 - Açık: (1) açık ücreti olan müşteriye ücrete bağlamadan avans (ekran yalnız açık ücret yokken sunuyor); (2) hatırlatma için WhatsApp düğmesi müşteri kartı yeniden tasarımına bırakıldı; (3) mevcut e-posta gönderimleri bildirim dağıtıcısına taşınmadı (teknik borç); (4) portal gizlilik taslağına eklenecekler HUKUKI C6 notunda (sürüm 0.1 kaldı); (5) panel muayene çalışma alanındaki kopya kilit kuralı reçeteyi de kilitliyor (RECORD-006 bulgusu, ADR-013 ekiyle çelişiyor; Dalga 4a'nın alanı, düzeltilmedi).
 
-### Dalga 4 birleştirme (2026-11-02, oturum entegrasyon) — main yerel, gönderilmedi
+### Dalga 4 birleştirme (2026-11-02, oturum entegrasyon) — main + origin
 - Yöntem: her depoda `entegrasyon/dalga-4` (main'den), `--no-ff` birleştirmeler, testler geçince main fast-forward. Feature dalları ve worktree'ler duruyor. Derleme/test ayrı worktree'lerde (`C:\Vetinity\wt\entegrasyon-be`, `...\entegrasyon-fe`): ana BE checkout'ta açık kalan `dotnet run` API'si `bin` klasörünü kilitliyordu.
 - BE main `700a1675` → `a98cc7b3`: `fix/sablon-uygulama-ozet` (`cc0f63c7`), `feat/dalga-4a` (`952b51a8`), `feat/dalga-4b` (`a98cc7b3`). Metin çakışması yok; ortak dosyalar (`AppDbContext`, Application `DependencyInjection`, `AppDbContextModelSnapshot`) otomatik birleşti. Snapshot doğrulandı: `has-pending-model-changes` değişiklik yok; zincir sırası `…182503_AddClinicalSnippets`, `…183435_AddClientCredits`, `…183442_AddVisitPreparation`, `…184559_AddPortalPreferencesDataRequestsAndSettings`.
 - FE main `9e6ed293` → `037f810e` → `0b5e354e`: `feat/musteri-detay-tasarim` (`fix/detay-sayfa-duzeni` içinde; `775ef45f`), `fix/sablon-uygulama-ozet` (`77ecaa36`), `feat/dalga-4a` (`5d61d521`), `feat/dalga-4b` (`26742726`), test düzeltmesi `037f810e`; ikinci adımda `feat/mobile-004` (`54bd0360`, metin çakışması yok) ve Dalga 4 ekranlarına telefon kuralları `0b5e354e` (metin parçaları, portal veri talepleri gelen kutusu ve klinik portal ayarı tabloları `table-stack-phone`; satır içi metin düğmeleri ve kredi panelindeki "Kaynak ödeme" `max-sm:touch-hit`; geliş hazırlığı, ödeme ekranı kredi parçaları ve Bugün hazırlık etiketi ortak kurallarla kapsanıyor, ek iş çıkmadı).
@@ -97,3 +97,8 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - Yerel DB (`VetinityCommandDb`): dört Dalga 4 migration'ı zaten uygulu; birleşik zincire karşı bekleyen migration yok (`migrations list --connection`; tasarım zamanı fabrikası LocalDB `VetinityCommandDb_EfDesign`'a baktığı için bağlantısız liste "Pending" gösterir, yanıltıcı). `DbMigrator seed` birleşik koddan çalıştı: 12 yeni rol-izin bağı (`ClinicalSnippets.*`), geri alınan 0. Kullanıcı yeni izinler için çıkış-giriş yapmalı.
 - Testler (birleşik kod): BE build 0 hata / 0 uyarı; domain 864, application 3761, tam entegrasyon 1741 geçti / 0 başarısız / 2 atlandı (10 dk 52 sn). FE lint 0, tsc panel app+spec ve portal app+spec temiz, panel vitest 318 dosya / 2358 test geçti, portal 30 dosya / 168 test geçti, panel + portal production build hatasız ve uyarısız. MOBILE-004 sonrası (`0b5e354e`): lint 0, tsc dört yapılandırma temiz, panel 319 dosya / 2363 test, portal 30 / 168 geçti; production build hatasız, `ngsw.json` üretildi (varlık grupları app 286 + assets 41 dosya, `dataGroups` boş) ve `manifest.webmanifest` çıktıda.
 - Doğrulanmayan: telefonda/gerçek cihazda ve PWA kurulumu denenmedi; tarayıcıda elle bakılmadı (özellikle müşteri detayında kredi satırı, ödeme detayında kredi göstergesi, muayene detayında hazırlanan şablon şeridi); gerçek backend'le FE uçtan uca yok. Çalışan dev sunucuları (API, `ng serve`) eski kodla açık; yeniden başlatılmadı.
+
+### Origin'e gönderim (2026-11-04)
+- Üç deponun main'i origin'e gönderildi: ürün belgeleri, backend, frontend (FE main'in son hâli `e4c240b7`). Dalga 2, 3, 4a, 4b ve MOBILE-004 artık main + origin.
+- Üst çubuk taslak C FE main'e alındı (`e4c240b7`): zil paneli (Okunmamış/Tümü sekmeli, Bugün/Dün/Daha önce gruplu), klinik seçici ve kullanıcı menüsü panelleri, yeni talep uyarısı zilin altında balon; aynı anda tek panel açık (APPT-015 / UX-008 ile ilgili).
+- Push yalnız CI'yi tetikler, deploy yapılmadı. GitHub CI sonucu bu makinede görülmedi (`gh` yok); doğrulanmadı.
