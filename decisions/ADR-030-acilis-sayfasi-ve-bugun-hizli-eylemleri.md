@@ -17,3 +17,11 @@ Menü yeniden düzenlenince (ADR-017 C1, ADR-023) açılış sayfası "menüdeki
 ## Sonuçlar
 
 - Frontend: açılış yönlendirmesi, Bugün başlık eylemleri, testler. Backend değişikliği yok.
+
+## Ek — 2026-11-04: açılış herkes için Bugün
+
+Kullanıcı kararı: "bizim ilk ekranımız bugün olacaksa ilk açılan sayfayı da logoya tıklayınca gitmesi gereken yeri de bugün sayfası yap".
+
+- Karar 1 değişir: **Bugün yetkisi olan herkes (yönetici dahil) Bugün ile açılır.** Bugün yetkisi olmayan yönetici düzeyi Özet ile; ikisi de yoksa ilk erişilebilir öğe, o da yoksa Ayarlar.
+- Logo `/panel` adresine gider, aynı kuralı izler; kural yine tek yerde (`panel-home.redirect`).
+- Gerekçe: 2026-10-16 şikâyetinin nedeni Bugün'den randevu/muayene açılamamasıydı; Karar 2 ile bu eylemler Bugün'de var, Özet'ten başlamanın gerekçesi kalmadı. Özet menüden erişilebilir kalır.
