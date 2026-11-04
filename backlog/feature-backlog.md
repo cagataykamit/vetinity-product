@@ -130,7 +130,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Adil kullanım; platform sürdürülebilirliği |
 | **Öncelik** | P1 (roadmap 2026-10-09, ADR-001/002: P0 → P1; etiket 2026-10-24 düzeltildi) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): deneme kiracısında toplam müşteri 1.000, hasta 2.000, dosya depolama 500 MB; aşımda 422 `Trial.ClientQuotaExceeded` / `PetQuotaExceeded` / `StorageQuotaExceeded` + "Aboneliğe geç". Kullanıcı sayısı plan koltuğuyla (Basic 3) zaten sınırlı, şube sınırsız. Değerler ajan önerisi (TRIAL-004 ile tutarlı; rakip belgelerinde kota verisi yok). BE `dc7e3ddd`, FE `e9c80cb4`; sözleşme backend `docs/TRIAL_LIMITS_API_CONTRACT.md` K7 §3.4 |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): deneme kiracısında toplam müşteri 1.000, hasta 2.000, dosya depolama 500 MB; aşımda 422 `Trial.ClientQuotaExceeded` / `PetQuotaExceeded` / `StorageQuotaExceeded` + "Aboneliğe geç". Kullanıcı sayısı plan koltuğuyla (Basic 3) zaten sınırlı, şube sınırsız. Değerler ajan önerisi (TRIAL-004 ile tutarlı; rakip belgelerinde kota verisi yok). BE `dc7e3ddd`, FE `e9c80cb4`; sözleşme backend `docs/TRIAL_LIMITS_API_CONTRACT.md` K7 §3.4 |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Limitler günlük klinik deneyimini engellememeli |
 
@@ -442,7 +442,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hekim kendi hastasındaki sonradan değişiklikten haberdar olur; denetim izi iş akışına dönüşür |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin: backend model + migration + frontend; ölçülmedi) |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | Aşama 8 açık işler (hesaplanan liste); ADR-013 uygulaması |
 | **Notlar** | Hesaplanan listeyle çelişmemesi için yalnız olay tabanlı/kişiye atanan işler bu modele girer; keşif `docs/ASAMA8_DISCOVERY.md` D-N1, D-N2 |
 
@@ -574,7 +574,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı uygulama |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): şablona isteğe bağlı paket fiyatı, tek paket kalemi + pakete dahil uygulama (kullanıcı kararı, ADR-018 eki); migration `AddExaminationPackagePrice` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): şablona isteğe bağlı paket fiyatı, tek paket kalemi + pakete dahil uygulama (kullanıcı kararı, ADR-018 eki); migration `AddExaminationPackagePrice` |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | DaySmart (2026-08-02 bölüm 2): check-in ve medical note'tan seçim. **Templates Module:** Bundle Items/Activities/Actions üç katman; quantity/price ranges; clinical activity ≠ billable item; Bundle Action ≠ Form Logic — → [daysmart.md](../competitors/daysmart.md#templates-bundles). **Inventory/Boarding/Treatment Board** cross-ref korunur — → [daysmart.md](../competitors/daysmart.md#inventory-bundles), [daysmart.md](../competitors/daysmart.md#new-bundle-sihirbaz) |
 
@@ -590,7 +590,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Güvenlik; hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): muayenede doz hesaplayıcı (kg × doz/kg, konsantrasyondan hacim); kendisi kaydetmez. 2026-11-04 (kullanıcı: "Evet, ekle"): "Plana ekle" hesabı "Doz hesabı: …" satırı olarak muayene planının sonuna yazar, kayıt hekim kaydedince olur; "Hesabı kopyala" yedek |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): muayenede doz hesaplayıcı (kg × doz/kg, konsantrasyondan hacim); kendisi kaydetmez. 2026-11-04 (kullanıcı: "Evet, ekle"): "Plana ekle" hesabı "Doz hesabı: …" satırı olarak muayene planının sonuna yazar, kayıt hekim kaydedince olur; "Hesabı kopyala" yedek |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | AI bağımsız doz kararı vermez; klinik karar hekimde kalır. DaySmart (2026-08-02 bölüm 2): kg, mg/kg, konsantrasyon, toplam doz/hacim — sandbox doğrulanmadı. P3 / araştırılacak aday olarak da değerlendirilebilir → [IDEA-024](../research/ideas.md#idea-024--embedded-dosage-support) |
 
@@ -638,7 +638,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı yapılandırılmış veri girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): muayenede `anamnesis/findings/assessment/plan/notes` alanlarında `#kısayol` ile metin parçası imlece eklenir (istemci tarafı, AI değil, muayene şeması değişmez). BE `9c850b69`, FE `c2b2510c`, `944036ff`; sözleşme backend `docs/CLINICAL_SNIPPET_API_CONTRACT.md` (muayene şablonuyla ayrım tablosu §1). Tarayıcıda denenmedi |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): muayenede `anamnesis/findings/assessment/plan/notes` alanlarında `#kısayol` ile metin parçası imlece eklenir (istemci tarafı, AI değil, muayene şeması değişmez). BE `9c850b69`, FE `c2b2510c`, `944036ff`; sözleşme backend `docs/CLINICAL_SNIPPET_API_CONTRACT.md` (muayene şablonuyla ayrım tablosu §1). Tarayıcıda denenmedi |
 | **Bağımlılıklar** | EXAM-002 |
 | **Notlar** | **AI değildir**. **Templates Module:** Snippets template catalog + hashtag/shortcut — Settings > Templates > Snippets — → [daysmart.md](../competitors/daysmart.md#templates-letters-snippets-attachments) |
 
@@ -654,7 +654,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı anamnez ve bulgu girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): Ayarlar → Tanımlar → Metin parçaları (kiracı düzeyi, kısayol tekil, en çok 200, pasifleştirme; izinler `ClinicalSnippets.*`). Migration `AddClinicalSnippets`. BE `9c850b69`, FE `4afa9a61` |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): Ayarlar → Tanımlar → Metin parçaları (kiracı düzeyi, kısayol tekil, en çok 200, pasifleştirme; izinler `ClinicalSnippets.*`). Migration `AddClinicalSnippets`. BE `9c850b69`, FE `4afa9a61` |
 | **Bağımlılıklar** | EXAM-011 |
 | **Notlar** | Yönetim ekranı sandbox'ta doğrulanmadı |
 
@@ -776,7 +776,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tek giriş noktası; operasyonel hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; `feat/dalga-4a`, main'e alınmadı): Bugün'den "Geldi"/randevusuz geliş diyaloğunda isteğe bağlı geliş nedeni (randevu nedeni varsayılan) + şablon/paket; satırda neden ve hazırlık etiketi; "Hazırlığı düzenle". Ağır sihirbaz yok (ADR-009 eki 2026-11-01). BE `db7f8680`, FE `4d0aa541`, `f55c35a0` |
+| **Durum** | Geliştirildi (P1 Dalga 4a, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): Bugün'den "Geldi"/randevusuz geliş diyaloğunda isteğe bağlı geliş nedeni (randevu nedeni varsayılan) + şablon/paket; satırda neden ve hazırlık etiketi; "Hazırlığı düzenle". Ağır sihirbaz yok (ADR-009 eki 2026-11-01). BE `db7f8680`, FE `4d0aa541`, `f55c35a0` |
 | **Bağımlılıklar** | EXAM-001, APPT-001 |
 | **Notlar** | Undo check-in / check-out yan etkileri değerlendirilmeli → [IDEA-020](../research/ideas.md#idea-020--check-in-orchestration), [PATTERN-016](../research/patterns.md#pattern-016--check-in-as-workflow-orchestrator). DaySmart sandbox observation (bölüm 3): ziyaret durumu Booked → Checked In → In Room → Visit Complete → Check Out; tam akış için [CHECKIN-005](#checkin-005--ziyaret-yaşam-döngüsü-ve-durum-geçişleri). **Canlı sandbox — Boarding:** reservation → Check In sihirbazı (billing, form, bundle, item rule, cage card, weight, medical note) — tamamlama **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#check-in-wizard) |
 
@@ -1071,7 +1071,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`, main'e alınmadı): fazla ödeme ve avans kredi olur (`Payment.Settle`), FIFO mahsup ücretin tahsis sayacını kullanır, gerekçeli geri alma ve tam iade (gün sonu dökümünde "Kredi iadesi"), kredisi kullanılmış ödeme iptal edilemez. Sözleşme backend `docs/CLIENT_CREDIT_API_CONTRACT.md`; migration `AddClientCredits` (yalnız yerel DB). Açık soru: açık ücreti olan müşteriye ücrete bağlanmadan avans (ekran şu an yalnız açık ücret yokken sunuyor) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): fazla ödeme ve avans kredi olur (`Payment.Settle`), FIFO mahsup ücretin tahsis sayacını kullanır, gerekçeli geri alma ve tam iade (gün sonu dökümünde "Kredi iadesi"), kredisi kullanılmış ödeme iptal edilemez. Sözleşme backend `docs/CLIENT_CREDIT_API_CONTRACT.md`; migration `AddClientCredits` (yalnız yerel DB). Açık soru: açık ücreti olan müşteriye ücrete bağlanmadan avans (ekran şu an yalnız açık ücret yokken sunuyor) |
 | **Bağımlılıklar** | FIN-001, FIN-002, FIN-003 |
 
 ### FIN-006 — Çoklu para birimi
@@ -1170,7 +1170,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eksik ücret kontrolü; denetlenebilirlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): uygulama satırında ücret durumu (Charges.Read ile), pakete dahil durumu |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): uygulama satırında ücret durumu (Charges.Read ile), pakete dahil durumu |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [IDEA-007](../research/ideas.md#idea-007--clinical-to-financial-traceability), [PATTERN-005](../research/patterns.md#pattern-005--clinical-to-financial-traceability). **Patients Module:** History Invoice + Reference. **Clients Module:** customer-scoped invoice list — → [daysmart.md](../competitors/daysmart.md#client-billing). **Inventory Module:** Item Transactions — → [daysmart.md](../competitors/daysmart.md#inventory-transactions). **Billing Module:** Invoice workspace (Items/Payments/Credits/Returns/Late Fees tabs); line-level Patient/Provider; finansal özet (Subtotal…Balance) — → [daysmart.md](../competitors/daysmart.md#billing-invoices). **E-Vet SMART (2026-09-24):** Ziyaret Geçmişi (Fatura No, Toplam, Ödeme); Yeni Ziyaret > Satış fatura satırları — backend entity ayrımı **iddia edilmez** → [e-vet.md](../competitors/e-vet.md#ziyaret-geçmişi), [e-vet.md](../competitors/e-vet.md#yeni-ziyaret) |
 
@@ -1186,7 +1186,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Denetlenebilirlik; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): 7 kayıt türünde alan bazlı değişiklik geçmişi, "Değişiklikleri gör"; migration `AddRecordChanges` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): 7 kayıt türünde alan bazlı değişiklik geçmişi, "Değişiklikleri gör"; migration `AddRecordChanges` |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart view changes gözlemlendi — sandbox doğrulanmadı → [IDEA-025](../research/ideas.md#idea-025--auditable-clinical-record-lifecycle), [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions). **Inventory Module:** stock adjustment audit — → [daysmart.md](../competitors/daysmart.md#inventory-adjustments). **Reports Module:** Staff > Deleted Transactions report — deleted financial/transaction visibility — → [daysmart.md](../competitors/daysmart.md#reports-deleted-transactions) |
 
@@ -1234,7 +1234,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik; denetim |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): uygulama yolu (liste) ve bölge, ürün kartında üretici; migration `AddAdministrationRouteSiteAndManufacturer` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): uygulama yolu (liste) ve bölge, ürün kartında üretici; migration `AddAdministrationRouteSiteAndManufacturer` |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart record satırı gözlemi. **Patients Module:** Pharmacy/Vaccines lot/route. **Inventory Module:** Purchases/Transactions/Alerts — → [daysmart.md](../competitors/daysmart.md#inventory-purchases). **Reports Module:** Controlled Substances Log — TR regulatory TBD — → [daysmart.md](../competitors/daysmart.md#reports-controlled-substances-log). **DaySmart (observed):** Inventory Shelf Management = Soonest Expiring vs purchase-date FIFO — → [daysmart.md](../competitors/daysmart.md#config-inventory-shelf). **Vetinity (implication):** expiring inventory için FEFO/FIFO policy değerlendirilebilir |
 
@@ -1283,7 +1283,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hatalı reçete düzeltilebilir ve izlenebilir |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): gerekçeli reçete iptali, kesinleşmiş muayeneye gerekçeli reçete; defterde "İptal" durumu; migration `AddPrescriptionCancellationAndLateEntry`; ADR-013 eki |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): gerekçeli reçete iptali, kesinleşmiş muayeneye gerekçeli reçete; defterde "İptal" durumu; migration `AddPrescriptionCancellationAndLateEntry`; ADR-013 eki |
 | **Bağımlılıklar** | Aşama 5 Dilim 3 (reçete satırları); [ADR-013](../decisions/ADR-013-finalized-examination-late-entries-and-administration-void.md) |
 | **Notlar** | Aşama 5 Dilim 3 raporu açık soruları; migration gerekir |
 ---
@@ -1398,7 +1398,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yasal uyum; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): sürümlü kabul ve aydınlatma vardı; eklenen: bildirim tercihleri (push tercihi, hatırlatma, ticari ileti onayı — gönderim kapalı, İYS/ETK hukuki görüş bekler) ve "Verilerimle ilgili talep" (KVKK başvurusu, 30 gün, klinik gelen kutusuna düşer, yanıt e-postası). Hukuki noktalar çalışma varsayımı (HUKUKI-ONAY-LISTESI "Koda giren varsayımlar — Dalga 4b"). Migration `AddPortalPreferencesDataRequestsAndSettings` (yalnız yerel DB) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): sürümlü kabul ve aydınlatma vardı; eklenen: bildirim tercihleri (push tercihi, hatırlatma, ticari ileti onayı — gönderim kapalı, İYS/ETK hukuki görüş bekler) ve "Verilerimle ilgili talep" (KVKK başvurusu, 30 gün, klinik gelen kutusuna düşer, yanıt e-postası). Hukuki noktalar çalışma varsayımı (HUKUKI-ONAY-LISTESI "Koda giren varsayımlar — Dalga 4b"). Migration `AddPortalPreferencesDataRequestsAndSettings` (yalnız yerel DB) |
 | **Bağımlılıklar** | PORTAL-006, TRIAL-009 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4; Vetinity'nin rolü ve İYS/ETK için hukuki görüş şart (AK-5); [HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md)'ne eklenir |
 
@@ -1430,7 +1430,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik kontrolü; çıkış güvencesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): klinik düzeyinde portal aç/kapat (Ayarlar > Hasta sahibi portalı; kayıt yoksa açık, kapatınca hesap/bağ silinmez, bağ uçları ve yeni davet kapanır) ve portal gelen kutusu (KVKK veri talepleri, menü rozeti, bildirim merkezi türü). Davet kuralı: yalnız KVKK Ret engeller (ADR-031 K4 eki, 2026-11-01) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): klinik düzeyinde portal aç/kapat (Ayarlar > Hasta sahibi portalı; kayıt yoksa açık, kapatınca hesap/bağ silinmez, bağ uçları ve yeni davet kapanır) ve portal gelen kutusu (KVKK veri talepleri, menü rozeti, bildirim merkezi türü). Davet kuralı: yalnız KVKK Ret engeller (ADR-031 K4 eki, 2026-11-01) |
 | **Bağımlılıklar** | PORTAL-006 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K3/K8; yeni portal yönetim izni (izin kataloğu) |
 
@@ -1446,7 +1446,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi doğru kanaldan zamanında haberdar olur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01, dal `feat/dalga-4b`): tür × kanal kuralı tek yerde (`OwnerNotificationChannelPolicy`) ve dağıtıcı (e-posta outbox), push yalnız soyutlama (`NotConfiguredPushNotificationSender`; FCM/APNs dış bağımlılık), WhatsApp personel `wa.me` bağlantısı (müşteri kartında davet bilgisi; hatırlatma düğmesi müşteri kartı yeniden tasarımına bırakıldı). Mevcut e-posta gönderimleri dağıtıcıya taşınmadı (teknik borç) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): tür × kanal kuralı tek yerde (`OwnerNotificationChannelPolicy`) ve dağıtıcı (e-posta outbox), push yalnız soyutlama (`NotConfiguredPushNotificationSender`; FCM/APNs dış bağımlılık), WhatsApp personel `wa.me` bağlantısı (müşteri kartında davet bilgisi; hatırlatma düğmesi müşteri kartı yeniden tasarımına bırakıldı). Mevcut e-posta gönderimleri dağıtıcıya taşınmadı (teknik borç) |
 | **Bağımlılıklar** | PORTAL-006, APPT-013, APPT-023, INT-003 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; Kullanıcı kararı 2026-10-21: SMS yerine WhatsApp (AK-6); Business API ve SMS sonraya, maliyet kararı ile |
 
@@ -2092,7 +2092,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | 7/24 talep; klinik telefon yükü azalır |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-002, APPT-009 |
 | **Notlar** | → [IDEA-010](../research/ideas.md#idea-010--clinic-branded-online-booking) |
 
@@ -2108,7 +2108,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Web sitesi, sosyal medya ve QR ile paylaşım |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | — |
 | **Notlar** | Widget/iframe öncesi minimum entegrasyon |
 
@@ -2124,7 +2124,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Doğru hasta bağlamı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-001 |
 | **Notlar** | Kimlik modeli araştırılacak |
 
@@ -2140,7 +2140,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kesintisiz talep |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-003 |
 | **Notlar** | → [IDEA-009](../research/ideas.md#idea-009--context-preserving-inline-entity-creation) |
 
@@ -2156,7 +2156,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Doğru süre, kaynak ve iş akışı eşleşmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | — |
 | **Notlar** | Equine vb. segmentler target-markets ile uyumlu değerlendirilmeli. **Settings Module:** Appointment Types = workflow preset (medical note, bundle, forms, reminders, eligibility) — metadata-only değil — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types) |
 
@@ -2172,7 +2172,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Doğru müsaitlik hesabı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-005 |
 | **Notlar** | DaySmart sandbox: randevu türü varsayılan süre taşıyor (ör. 15 dk wellness). **Settings Module:** Appointment Types — Name, Duration, Color, Book Online, Pre-visit Confirmation, Default, Rules; workflow preset (medical note, bundle, forms, reminders, eligibility species/weight/age) — → [daysmart.md](../competitors/daysmart.md#settings-appointment-types). **E-Vet SMART:** Yeni Randevu **Süre (dk)**; 30 dk slot ızgarası — kapasite kuralları **TBD** → [e-vet.md](../competitors/e-vet.md#randevular). Global Takvim Düzenle / **+ Yeni Randevu** **Süre (dk)** — slot ızgarası **gözlemlenmedi** → [e-vet.md](../competitors/e-vet.md#mevcut-randevu--düzenle-modal) |
 
@@ -2188,7 +2188,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Daha az red; doğru yönlendirme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-005, APPT-025 |
 | **Notlar** | → [IDEA-014](../research/ideas.md#idea-014--configurable-scheduling-resources) |
 
@@ -2204,7 +2204,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı self-service; daha az red |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-006, APPT-007 |
 | **Notlar** | → [IDEA-012](../research/ideas.md#idea-012--availability-only-booking), [PATTERN-009](../research/patterns.md#pattern-009--availability-driven-self-service) |
 
@@ -2220,7 +2220,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik kontrolü korunur |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-001, APPT-008 |
 | **Notlar** | Doğrudan onaylı randevu zorunlu değil → [PATTERN-008](../research/patterns.md#pattern-008--request-to-confirmation-workflow) |
 
@@ -2236,7 +2236,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Resepsiyon/ekip için net iş listesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-009 |
 | **Notlar** | → [IDEA-011](../research/ideas.md#idea-011--appointment-request-review-queue) |
 
@@ -2252,7 +2252,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Standart operasyonel akış |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-010 |
 | **Notlar** | Yetki modeli değerlendirilmeli |
 
@@ -2268,7 +2268,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız ve tutarlılık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-011, APPT-013 |
 | **Notlar** | → [IDEA-013](../research/ideas.md#idea-013--template-based-appointment-communications), [PATTERN-011](../research/patterns.md#pattern-011--template-first-communication). **Settings Module:** Email Defaults — event/workflow template binding (Appointment Accept/Confirmation/Decline/Reminder, Invoice, Labs, Medical Note vb.) — → [daysmart.md](../competitors/daysmart.md#settings-email-defaults) |
 
@@ -2284,7 +2284,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Şeffaf iletişim |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-012 |
 | **Notlar** | Trial'da gerçek gönderim kısıtlanabilir. **Canlı sandbox — Boarding:** reservation event → otomatik transactional e-posta; unsubscribe footer — SMS/Mail altyapı ilişkisi **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#notification-flow). **Canlı sandbox — Reminders:** Resend selected toplu yeniden gönderim; Last Sent sütunu; Export print/download — → [daysmart.md](../competitors/daysmart.md#actions) |
 
@@ -2316,7 +2316,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel olayların kaçmaması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-009 |
 | **Notlar** | → [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center). **DaySmart (observed):** bell drawer ~30 gün — → [daysmart.md](../competitors/daysmart.md#platform-notification-center). Notification ≠ Task; notification→task workflow ayrı — → [IDEA-015](../research/ideas.md#idea-015--real-time-operational-notification-center) |
 
@@ -2332,7 +2332,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yoğun kliniklerde okunabilir takvim |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): ADR-042 online randevu talebi ve bildirim merkezi; migration `AddOnlineAppointmentRequestsAndNotifications`, izin `AppointmentRequests.Manage` |
 | **Bağımlılıklar** | APPT-009, APPT-010 |
 | **Notlar** | Kuyruk ile birlikte değerlendirilmeli |
 
@@ -2348,7 +2348,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kesintisiz klinik randevu girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
 | **Bağımlılıklar** | — |
 | **Notlar** | Normal müşteri CRUD korunur → [PATTERN-007](../research/patterns.md#pattern-007--context-preserving-creation). **Clients Module:** Client List (A–Z, Pets, Status); Client Dashboard analytics P3 — → [daysmart.md](../competitors/daysmart.md#client-dashboard--client-list). **Boarding reservation:** Add Client — [daysmart.md](../competitors/daysmart.md#new-reservation) |
 
@@ -2364,7 +2364,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kesintisiz klinik randevu girişi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
 | **Bağımlılıklar** | APPT-017 |
 | **Notlar** | Progressive disclosure ile minimal alan seti değerlendirilmeli. DaySmart sandbox: iç içe modal — drawer/stepper tercih edilmeli. **Patients Module:** Patient List status (Active/Inactive/Deceased+date); Edit Profile demographics; Sex display birleşik (liste) vs ayrı (header) — domain model kopyalanmamalı. Yaş/birthdate SOT **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#sandbox--patients-module) |
 
@@ -2380,7 +2380,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Duplicate giriş önlenir |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main yerel, origin'e gönderilmedi, 2026-10-30): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-10-30, origin'e 2026-11-04): satır içi müşteri/hasta oluşturma vardı; arama metni hızlı forma taşınır |
 | **Bağımlılıklar** | APPT-017, APPT-018 |
 | **Notlar** | → [Product Principles — Minimize Duplicate Data Entry](../vision/product-principles.md) |
 
@@ -2850,7 +2850,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esneklik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (yerel main, 2026-11-02); gerçek cihaz doğrulaması bekliyor |
+| **Durum** | Geliştirildi (main + origin; main'e 2026-11-02, origin'e 2026-11-04); gerçek cihaz doğrulaması bekliyor |
 | **Bağımlılıklar** | — |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) Kullanıcı kararı (2026-10-16): çalışan mobilden aynı siteye girebilmeli; mağaza uygulaması AK-1b. Uygulama (2026-11-02): telefon eşiği ≤575 px (Tailwind `max-sm:`); dokunma hedefi 44 px (`--touch-target`, [ADR-026](../decisions/ADR-026-satir-eylem-simgeleri.md) eki); ayrı kart görünümü olmayan tablolar telefonda kart satırı (`table-stack-phone`); küçük bağlantılar `max-sm:touch-hit`. PWA: `manifest.webmanifest` (başlangıç /panel), service worker yalnız production/staging derlemesinde ve /panel, /auth yollarında kayıtlanır; API yanıtı önbelleğe alınmaz, çevrimdışı veri yok. Koordinatör kararları (2026-11-02): onay penceresi telefonda tam ekran olmaz, ortada kısa pencere kalır; telefonda klinik adı üst çubukta gösterilmez (menüde); manifest ortak `index.html`'de kalır, tanıtım sitesiyle ayrım ADR-033 adres düzeniyle çözülür. |
 
