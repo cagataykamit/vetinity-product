@@ -33,5 +33,5 @@
 ## Açık kalan
 
 - AK-6: iletişim bilgileri, tüzel kişi adı, destek saatleri (kullanıcı).
-- Pilot fiyatı belirlenince karar 4 (b) seçeneğine geçilir; sınırların tek doğrusu backend kataloğu (WEB-007).
+- Pilot fiyatı belirlenince karar 4 (b) seçeneğine geçilir; sınırların tek doğrusu backend kataloğu (WEB-007). **2026-11-05:** (b) uygulandı (WEB-007, geçici fiyat; ADR-035 notu); katalog alınamazsa sitede tutar yerine "Fiyat için bize yazın" çıkar.
 - Hastane paketi: kapsam ve zaman ayrı ADR (sonraki iş; backlog ENT- altında aday).

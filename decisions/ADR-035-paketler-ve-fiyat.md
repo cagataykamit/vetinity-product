@@ -6,6 +6,7 @@
 
 - 2026-10-22: yıllık ödeme ve indirim kaldırıldı (kullanıcı); satış ortağı indirim kodu ayrı ADR. Aynı gün yıllık ödeme 10 ay fiyatıyla geri alındı (kullanıcı kararı "B", ADR-037).
 - 2026-10-26: yıllık ödeme uygulandı (BILL-001; kullanıcı kararları: aylıktan yıllığa hemen geçiş, mevcut ayın kalan günleri düşülür; yıllıktan aylığa dönem sonunda; otomatik yenileme yok; sitede Aylık/Yıllık anahtarı).
+- 2026-11-05: fiyat ve sınır güncellendi (WEB-007; fiyat kullanıcı/koordinatör kararı, **geçici**): Temel ₺1.490, Profesyonel ₺2.490, Kurumsal ₺3.990 / ay, KDV hariç; Kurumsal artık "İletişime geçin" değil. Yıllık tutar backend kuralından (10 ay). Kullanıcı sınırının doğrusu backend kataloğu (`SubscriptionPlanCatalog`: 3 / 10 / 50); aşağıdaki tablodaki "Sınırsız" ve klinik sayıları geçersiz — backend'de klinik sınırı olmadığından sitede klinik sayısı yazılmaz. Fiyat ve sınırların tek yeri artık backend (`Billing:PlanPricesMinor`, `SubscriptionPlanCatalog`; anonim `GET /api/v1/public/subscription-plans`); `pricing-plan.utils.ts` yalnız paket metnini ve özellik tablosunu tutar, sayı tutmaz. Checkout aynı kuraldan çektiği için sitedeki fiyat ile çekilen tutar ayrışmaz.
 
 ## Karar
 

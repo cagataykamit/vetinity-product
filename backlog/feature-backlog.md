@@ -3004,7 +3004,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Fiyat belirsizliği güven kaybına yol açmaz; site ürünle çelişmez |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-05; dal `feat/web-007-paketler` BE+FE, main'e alınmadı): geçici fiyat Temel ₺1.490 / Profesyonel ₺2.490 / Kurumsal ₺3.990 aylık, KDV hariç (`appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından; kullanıcı sınırı backend kataloğundan (3/10/50), klinik sınırı yazılmaz. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
 | **Bağımlılıklar** | AK-2, TRIAL-004, TRIAL-007 |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.6 |
 

@@ -18,7 +18,7 @@ Klinik pratiği soruları rakip pratiğinden türetilip ajan tarafından karara 
 | MOBILE-003 push, PORTAL-010 push kanalı | Firebase (FCM) / APNs anahtarları |
 | PORTAL-010 WhatsApp | Business API maliyet kararı (AK-6: önce bağlantı, API sonra) |
 | INT-007 otomatik e-belge | Entegratör seçimi ve muhasebeci yanıtları |
-| WEB-007 paketler sayfası | Fiyat kararı |
+| WEB-007 paketler sayfası | Fiyat kararı (2026-11-05 geçici fiyat verildi; geliştirildi) |
 | PORTAL-007 İYS/ETK | Hukuki görüş (çalışma varsayımıyla ilerlenir) |
 
 ## Dalgalar
@@ -33,7 +33,7 @@ Her madde kendi feature branch'inde; önce backend sözleşmesi, sonra frontend.
 | 2b | EXAM-008 doz hesaplayıcı, EXAM-007 tedavi paketleri, APPT-017/018/019 satır içi müşteri/hasta oluşturma | Geliştirildi (main + origin) |
 | 3 | APPT-005…008 randevu nedeni/süre/hekim/müsaitlik; APPT-002/001/003/004/009 bağlantı + portal talebi; APPT-010/011/016 kuyruk; APPT-012/013 şablon + e-posta; APPT-015 bildirim merkezi + UX-008 | Geliştirildi (main + origin) |
 | 4 | CHECKIN-001…005, EXAM-011/012 şablon parçaları, RECORD-006 (araştırma), PORTAL-007/009/010, FIN-005, TRIAL-006 | Geliştirildi (4a + 4b; main + origin; RECORD-006 yalnız araştırma + taslak ADR-043) |
-| 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | MOBILE-004 geliştirildi (main + origin; gerçek cihaz doğrulaması bekliyor); MOBILE-003 kod tarafı geliştirildi (main + origin; FCM anahtarı bekliyor); diğerleri bekliyor |
+| 5 | MOBILE-002/003/004, INT-007, WEB-005, WEB-007 (dış bağımlılıklara göre) | MOBILE-004 geliştirildi (main + origin; gerçek cihaz doğrulaması bekliyor); MOBILE-003 kod tarafı geliştirildi (main + origin; FCM anahtarı bekliyor); WEB-007 geliştirildi (dal `feat/web-007-paketler`, main'e alınmadı); diğerleri bekliyor |
 
 Kapsam dışı (bu turda bilinçli kapanış): EXAM-015 kilit açma (ADR-013 gereği yok), REPORT-008 dilim 2–3 (pilot geri bildirimine bağlı).
 
@@ -113,3 +113,12 @@ Her madde bitince buraya dal, commit ve test sonucu yazılır.
 - Doğrulanmayan: gerçek Firebase'e gönderim (anahtar yok; sağlayıcı sahte HTTP ile test edildi), gerçek cihazda jeton alma ve bildirim görünümü, tarayıcıda elle deneme, gerçek backend'le FE uçtan uca.
 - Açık: (1) push'a giden tür şimdilik yalnız `DataRequestAnswered`; hatırlatma ve randevu talebi yanıtları dispatcher'a taşınmadan (PORTAL-010 teknik borcu) push almaz, oysa portal ipucu (anahtar varken) "randevu talebi yanıtları ve hatırlatmalar" diyor; FCM açılmadan önce taşıma ya da metin düzeltmesi gerekir. (2) Tek oturum çıkışında `revoke` ve açılışta yeniden kayıt istemcide yok (tarayıcıda jeton yok); MOBILE-002'de bağlanır.
 - Birleştirme ve gönderim (2026-11-05): portal ipucu yalnız push'a giden türü söylüyor (`edd07464`; açık (1)'in metin yarısı kapandı, taşıma PORTAL-010 teknik borcunda). Tam FE paketi FE main ile birleşik ağaçta: panel 2437/2437, portal 190/190, tsc ve lint temiz. Main: BE `af68d2a2`, FE `8005063f`, ürün belgeleri `d0a9763`; üçü origin'de.
+
+### Dalga 5 — WEB-007 paketler sayfası (2026-11-05) — dal `feat/web-007-paketler`; main'e alınmadı, push yok
+- Worktree'ler: BE `C:\Vetinity\wt\web007-be`, FE `C:\Vetinity\wt\web007-fe` (ikisi de `feat/web-007-paketler`), docs `C:\Vetinity\wt\web007-docs` (`docs/web-007-paketler`). BE main `af68d2a2`, FE main `8005063f` üstünde.
+- Fiyat kararı (kullanıcı/koordinatör, geçici): Temel ₺1.490, Profesyonel ₺2.490, Kurumsal ₺3.990 / ay, KDV hariç; yıllık = 10 ay (`SubscriptionPricing.YearlyBilledMonths`).
+- BE: `543ae6a6` fiyat okuma tek kurala (`SubscriptionPlanPrices`; checkout ve iyzico geri dönüşü), `fca5e13d` anonim `GET /api/v1/public/subscription-plans` + `subscription-summary` plan seçeneklerinde `monthlyPriceMinor`/`yearlyPriceMinor`, `df184fcb` `appsettings.json` `Billing:PlanPricesMinor` 149000/249000/399000, `60f2fe6c` sözleşme `SUBSCRIPTION_PLAN_CATALOG_API_CONTRACT.md`. Migration yok, yeni izin yok. `appsettings.Production.json` değişmedi: iyzico `PlanPricesTry` 0 kaldığı için canlıda ücretli checkout açılmaz.
+- FE: `6e9f5e19` sözleşme kopyası, `321350d6` site kartları/karşılaştırma/JSON-LD fiyat, yıllık tutar ve kullanıcı sınırını katalogdan alır (yüklenirken yer tutucu, alınamazsa "Fiyat için bize yazın"); `pricing-plan.utils.ts` sayı tutmaz (999/1.990, "İletişime geçin", Sınırsız, klinik sınırı kaldırıldı); SSS/SEO sayısız; panel abonelik kartı fiyat ve kullanıcı sınırını özetten alır, klinik kutusu kalktı. `/pricing` → `/paketler` yönlendirmesi zaten vardı (test mevcut).
+- Testler: BE build 0 hata / 0 uyarı; domain 872, application 3787, tam entegrasyon 1766 geçti / 0 başarısız / 2 atlandı (29 dk 17 sn). FE tsc app + spec temiz, lint 0, panel vitest 331 dosya / 2448 test geçti.
+- Doğrulanmayan: tarayıcıda gözle bakılmadı (dev sunucusu açılmadı); gerçek backend'le FE uçtan uca yok; portal tsc/test çalıştırılmadı (portal dosyasına dokunulmadı).
+- Açık: (1) Paket adları backend'de Basic/Pro/Premium, sitede Temel/Profesyonel/Kurumsal (FE metni). (2) Özellik tablosunda "Çok klinik yönetimi" yalnız Kurumsal'da ve Temel açıklaması "Tek klinik" diyor; backend'de klinik sınırı yok (ADR-035 ürün kararı olarak bırakıldı). (3) Panelde "12 ay için 10 ay / 2 ay hediye" metni hâlâ sabit yazılı. (4) Canlıda süresi dolmuş abonelikte ödeme denemesi artık `Billing.PlanPriceNotConfigured` yerine `Billing.IyzicoConfigurationIncomplete` (503) döner. (5) Ücretli ödemeyi açmak için `PlanPricesTry` doldurulmalı; çekilen tutar yine `PlanPricesMinor`'dan gelir.
