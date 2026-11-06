@@ -2,7 +2,7 @@
 
 ## Durum
 
-Kabul edildi
+Kabul edildi. Kota, maliyet ve paket modeli (madde 11, 12): [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md).
 
 ## Bağlam
 

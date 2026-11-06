@@ -33,6 +33,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | ENT- | Enterprise |
 | SEC- | Güvenlik ve sertleştirme |
 | WEB- | Tanıtım sitesi (www) |
+| TIER- | Paket farkları ve üst paket işleri |
 
 ---
 
@@ -1782,7 +1783,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlı kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | EXAM-001, AI-009 |
 | **Notlar** | → [AI roadmap Aşama 1](../ai/ai-roadmap.md) |
 
@@ -1798,7 +1799,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | TIMELINE-001, AI-009 |
 | **Notlar** | Taslak; kullanıcı onayı gerekir |
 
@@ -1814,7 +1815,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1830,7 +1831,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1846,7 +1847,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eller serbest not alma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [AI roadmap Aşama 2](../ai/ai-roadmap.md). DaySmart STT penceresi gözlemlendi (~20 dk süre); teknik sağlayıcı doğrulanmadı. **v1.0 dışı aday**; premium/ileri faz → [IDEA-022](../research/ideas.md#idea-022--voice-assisted-clinical-documentation). Snippet sisteminden ayrı. Bağlamsal özet yan paneli (Summarize/SOAP summary) STT değildir → [AI-102](#ai-102--patient-summary), [AI-103](#ai-103--examination-assistant), [IDEA-008](../research/ideas.md#idea-008--embedded-ai-instead-of-separate-ai-module) |
 
@@ -1862,7 +1863,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı kayıt bulma |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | |
 
@@ -1878,7 +1879,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
@@ -1894,7 +1895,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel kontrol |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-007 |
 | **Notlar** | |
 
@@ -1910,7 +1911,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1926,7 +1927,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; sorun giderme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Hassas klinik veriler normal loglara yazılmaz |
 
@@ -1941,7 +1942,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kategori** | AI (Epic) |
 | **Açıklama** | Vetinity'de yapay zekâ ayrı bir modül veya sohbet ekranı olarak değil, kullanıcıların çalıştığı ekranların doğal bir parçası olarak konumlandırılır. AI, veri özetleme, doğal dil sorgulama, karar desteği ve iş akışı hızlandırma amacıyla kullanılır. Klinik kararın sorumluluğu her zaman veteriner hekime aittir. |
 | **Öncelik** | P1 |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Alt maddeler** | AI-101, AI-102, AI-103, AI-104, AI-105, AI-106, AI-107, AI-108 |
 | **Notlar** | Bu Epic, E-vet Smart Plus'ın SmartAI yaklaşımı incelendikten sonra oluşturulmuştur. Ancak Vetinity'nin hedefi AI'ı ayrı bir ekran yerine ürünün tamamına gömülü şekilde sunmaktır. SmartAI'daki doğal dil sorgulama ve hasta özeti yaklaşımları ürün vizyonu için referans alınmış, ancak kapsam muayene, timeline ve klinik iş akışlarını kapsayacak şekilde genişletilmiştir. → [ADR-008](../decisions/ADR-008-embedded-ai-assistant.md), [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1957,7 +1958,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dashboard ve raporlar arasında gezinmeden anlık işletme görünürlüğü |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Gömülü yardımcı; ayrı sohbet ekranı değil. **Inventory Module:** DaySmart Inventory Alerts (low balance, expiring); item Actions low-balance threshold — operasyonel alert UI ayrı değerlendirme → [daysmart.md](../competitors/daysmart.md#inventory-alerts) |
 
@@ -1973,7 +1974,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı klinik hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | AI-002 ile ilişkili; Epic kapsamında genişletilmiş hasta özeti. DaySmart sandbox observation (~28:13–35:25): hasta profilinde bağlamlı AI yan paneli; aktif hasta otomatik bağlam; Summarize aksiyonu; hasta geçmişi/SOAP/ilaçlar kapsamı; AI hata uyarısı. **v1.0 dışı aday**; insan doğrulaması → [AI-009](#ai-009--ai-çıktı-onay-akışı). Halüsinasyon/klinik güvenlik riski; kaynak kapsamı doğrulanmadı |
 
@@ -1989,7 +1990,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı ve okunabilir muayene kayıtları; zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, EXAM-001 |
 | **Notlar** | AI-001 ile ilişkili; muayene ekranına gömülü. DaySmart sandbox observation (~28:13–35:25): SOAP summary hazır aksiyonu; klinik kaynaklarla sınırlı özet adayı. Çıktı doğrulanmadan kayda geçmemeli → [AI-009](#ai-009--ai-çıktı-onay-akışı). **v1.0 dışı aday** |
 
@@ -2005,7 +2006,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta hikâyesindeki dönüm noktalarının hızlı fark edilmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | Tanı koymaz; önemli olay vurgusu |
 
@@ -2021,7 +2022,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Lab yorumlamasında hız; kritik değerlere odaklanma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Kesin tanı veya tedavi önerisi vermez; taslak özet |
 
@@ -2037,7 +2038,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Görüntüleme geçmişinin hızlı taranması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, IMG-001 |
 | **Notlar** | Tanı koymaz; yalnızca kayıt özeti |
 
@@ -2053,7 +2054,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı; tutarlı hasta sahibi bilgilendirmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | AI-004 ile ilişkili; taslak statüsü |
 
@@ -2069,7 +2070,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi iletişiminde hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, INT-003, INT-004 |
 | **Notlar** | Gönderim kullanıcı onayı ile; trial'da gerçek gönderim kısıtlanabilir |
 
@@ -2620,9 +2621,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dijital varlık + randevu tek yerde |
 | **Öncelik** | P3 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (TIER-002 kapsamına alındı, 2026-11-06) |
 | **Bağımlılıklar** | APPT-001 |
-| **Notlar** | — |
+| **Notlar** | Yerine geçen madde: TIER-002 |
 
 ### APPT-035 — AI destekli uygun saat önerisi
 
@@ -2674,7 +2675,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | — |
-| **Notlar** | **Canlı sandbox — Patients Module:** Patients > Labs clinic worklist (Lab Vendor, integration status); patient History > Labs ayrı scope — **P3** MVP dışı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
+| **Notlar** | Paket (2026-11-06, ADR-035): cihaz ve IDEXX entegrasyonu Kurumsal; üretici tarafı gerekir. **Canlı sandbox — Patients Module:** Patients > Labs clinic worklist (Lab Vendor, integration status); patient History > Labs ayrı scope — **P3** MVP dışı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
 
 | Alan | Değer |
 |---|---|
@@ -2720,7 +2721,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Whatsapp — person-message handoff (in-app inbox **gözlemlenmedi**); API/server-side **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
+| **Notlar** | Paket (2026-11-06, ADR-035): Profesyonel ve Kurumsal; sağlayıcı anlaşması gerekir. **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Whatsapp — person-message handoff (in-app inbox **gözlemlenmedi**); API/server-side **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
 ### INT-005 — e-Fatura / e-SMM
 
@@ -3004,7 +3005,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Fiyat belirsizliği güven kaybına yol açmaz; site ürünle çelişmez |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-05, 2026-11-06 fiyat ve sınır güncellemesi; dal `feat/web-007-paketler` BE+FE, main'e alınmadı): fiyat Temel ₺890 / Profesyonel ₺1.790 / Kurumsal ₺3.790 aylık, KDV hariç (kullanıcı onayı; `appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından (₺8.900 / ₺17.900 / ₺37.900); kullanıcı sınırı backend kataloğundan (3/5/15), klinik sınırı yazılmaz. Karşılaştırma tablosu 35 satır, koyu başlıklı görünüm, yok işareti kırmızı çarpı (2026-11-06, kullanıcı seçimi; 34 satır endpoint + ekran olarak kodda doğrulandı, 35. satır "Size özel geliştirmeler" hizmet taahhüdü, TIER-010); davet ekranında sınır mesajı üst paketi söyler. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
 | **Bağımlılıklar** | AK-2, TRIAL-004, TRIAL-007 |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.6 |
 
@@ -3121,6 +3122,382 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Durum** | Geliştirildi (main + origin, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
 | **Bağımlılıklar** | BILL-004 |
 | **Notlar** | iyzico'da önce iptal (`Cancel`, aynı gün), olmazsa tutar bazlı iade; 3 denemeden sonra elle. Stripe otomatik iadesi yok (elle). Bilinen sınır: aynı anda işlenen iki ödeme (milisaniye yarışı) ikisi de paket açabilir. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 19 |
+
+## Paket farkları ve üst paket işleri
+
+> Kullanıcı kararı (2026-11-06): üst paketlerin değeri, Temel'deki özellikleri kısarak değil üst paketlere ekstra ve kaliteli yeni işler koyarak yaratılır. Paket dağılımı [ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md) notunda. Liste Kolayvet'in fiyat sayfasındaki "Yalnızca Bizde" 12 özelliğinden ve kullanıcının klinik sayfası fikrinden çıktı; görünüm kopyalanmaz. Bir iş çalışır hale gelmeden sitede yazılmaz (ADR-034 karar 6). TIER-001'den TIER-012'ye yapım sırası numara sırasıdır; dış bağımlı işler anlaşma çıktıkça. AI eklentisi (TIER-013, TIER-014) pilottan sonra. Zorluklar tahmindir, ölçülmedi.
+
+### TIER-001 — Paket özelliklerinin uygulamada zorlanması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-001 |
+| **Başlık** | Paket özelliklerinin uygulamada zorlanması |
+| **Kategori** | TIER |
+| **Problem** | Uygulamada yalnız kullanıcı sınırı zorlanıyor; sitede pakete bağlı yazan portal, portaldan randevu ve çok klinik Temel'de de kullanılabiliyor. Sonraki üst paket işlerinin de bağlanacağı bir kural yok |
+| **Önerilen çözüm** | Paket → özellik kuralı tek yerde (backend); kural dışı istek reddedilir; panelde kilitli özellik için "üst pakete geç" ekranı. İlk bağlananlar portal, portaldan randevu ve çok klinik. Yasal kayıt defterleri ve KVKK araçları kilitlenmez. Paket düşürmede mevcut veri ve kullanım kararı ayrıca verilir |
+| **Kullanıcı değeri** | Sitede yazan paket farkı üründe gerçekten geçerli olur; üst paketin satın alma nedeni oluşur |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | WEB-007, ADR-035 |
+| **Notlar** | Paket düşürme bugün üye sayısına bakmıyor, sınırı aşan üyeler kalıyor (WEB-007 testleriyle sabit) |
+
+### TIER-002 — Kliniğe özel web sayfası ve oluşturma sihirbazı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-002 |
+| **Başlık** | Kliniğe özel web sayfası ve oluşturma sihirbazı |
+| **Kategori** | TIER |
+| **Problem** | Web sitesi olmayan klinik, müşterisine gönderecek tek bir adres bulamıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Ayarlar > "Web sayfam" sekmesinde klinik başına 5 adımlı sihirbaz (bilgiler, görünüm, hizmetler ve tanıtım, saatler ve randevu, önizle ve yayınla); ortak şablon; bağlantı, QR ve WhatsApp paylaşımı; `vetinity.com/k/...` adresi. İlk sürümde fiyat, kampanya, yorum, ekip fotoğrafı, kendi alan adı ve hasta verisi yok |
+| **Kullanıcı değeri** | Klinik birkaç dakikada paylaşılabilir bir sayfaya kavuşur; ara, yol tarifi ve randevu tek yerde |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Tasarlanacak (geçici taslak dal `taslak/klinik-web-sayfasi` `eaabcdd1`; A/B/C görünüm seçimi bekliyor; main'e alınmaz) |
+| **Bağımlılıklar** | TIER-001, ADR-033 (müşterinin görebilmesi için `www` geçişi; kullanıcı söyleyince), ADR-042 |
+| **Notlar** | APPT-034'ün yerine geçer. Koda geçmeden yeni ADR gerekir: sihirbaz değişikliği klinik kaydına mı yazılır, randevu anahtarı `ClinicOnlineBookingSettings` ile ilişkisi, adresi kim seçer ve değişince eski bağlantı, yayın akışı, WhatsApp önizlemesi için sunucudan meta etiket. Herkese açık bağlantıda randevu kodunun görünmesi tahmin edilemezlik varsayımını zayıflatır (ADR-042 notu). Veteriner reklam kuralları kontrol edilmedi. Kapsama alınanlar (2026-11-06, SaaS taraması): yayın öncesi zorunlu liste; taslak ve yayın ayrı, "önceki yayına dön", "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
+
+### TIER-003 — Otomatik hatırlatıcılar
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-003 |
+| **Başlık** | Otomatik hatırlatıcılar |
+| **Kategori** | TIER |
+| **Problem** | Bugün e-posta ile aşı ve randevu hatırlatması var; klinik diğer takipleri elle yapıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Klinik başına ayarlanabilir kurallar (ör. kontrol muayenesi, borç); kanal önce e-posta, SMS ve WhatsApp entegrasyonlar gelince. Bugünkü e-posta hatırlatması Temel'de kalır. Kural listesi tasarımda netleşir |
+| **Kullanıcı değeri** | Müşteri geri dönüşü elle takip gerektirmez |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001; kanal için INT-003, INT-004 |
+| **Notlar** | Ticari ileti sayılan gönderimlerde izin kaydı TIER-012 ile birlikte değerlendirilir. Örnek kural (2026-11-06): "son ziyaretten N gün sonra dönmedi", klinik başına açılıp kapanır |
+
+### TIER-004 — Gelişmiş raporlar
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-004 |
+| **Başlık** | Gelişmiş raporlar |
+| **Kategori** | TIER |
+| **Problem** | Rapor merkezi temel rakamları veriyor; dönem karşılaştırması ve daha derin kırılımlar yok |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Bugünkü raporlar Temel'de kalır; ek olarak dönem karşılaştırması ve hekim, hizmet gibi kırılımlar. Kapsam tasarımda netleşir |
+| **Kullanıcı değeri** | Klinik sahibi işin nereye gittiğini görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, REPORT-008 |
+| **Notlar** | — |
+
+### TIER-005 — Otomatik aşı sihirbazı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-005 |
+| **Başlık** | Otomatik aşı sihirbazı |
+| **Kategori** | TIER |
+| **Problem** | Aşı takibi var ama aşı takvimi hekim tarafından tek tek planlanıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Tür ve yaşa göre klinikçe tanımlı takvimden önerilen aşı planı; hekim onaylar. Bugünkü aşı takibi Temel'de kalır. Klinik içerik tasarımda netleşir |
+| **Kullanıcı değeri** | Aşı planı hızlanır, atlanan doz azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001 |
+| **Notlar** | Rakibin bu özellikle tam olarak ne yaptığı doğrulanmadı |
+
+### TIER-006 — Mobil barkod
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-006 |
+| **Başlık** | Mobil barkod |
+| **Kategori** | TIER |
+| **Problem** | Stok ve satışta ürün elle aranıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Telefon kamerasıyla barkod okutarak stok ve satışta ürün bulma |
+| **Kullanıcı değeri** | Mal kabul ve satış hızlanır, yanlış ürün seçimi azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, MOBILE-004 |
+| **Notlar** | Ürün kartında barkod alanı ve tarayıcı kamera desteği tasarımda kontrol edilir |
+
+### TIER-007 — Patron ekranı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-007 |
+| **Başlık** | Patron ekranı |
+| **Kategori** | TIER |
+| **Problem** | Birden fazla şubesi olan işletme sahibi şubeleri tek tek açarak izliyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Tüm şubelerin ciro, tahsilat, borç ve iş yükünü tek özette gösteren ekran |
+| **Kullanıcı değeri** | Sahip işletmeyi tek bakışta görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, REPORT-008 |
+| **Notlar** | — |
+
+### TIER-008 — Çoklu kasa ve nakit yönetimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-008 |
+| **Başlık** | Çoklu kasa ve nakit yönetimi |
+| **Kategori** | TIER |
+| **Problem** | Tahsilat ve gün sonu tek kasa gibi izleniyor; şube ve kasa bazında nakit takibi yok |
+| **Önerilen çözüm** | Paket: Kurumsal. Birden fazla kasa, kasalar arası aktarım, kasa bazında gün sonu; ilk dilim günlük kasa kontrol ekranı (2026-11-06, SaaS taraması) |
+| **Kullanıcı değeri** | Nakit farkı kasa bazında görülür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, FIN-002 |
+| **Notlar** | — |
+
+### TIER-009 — API erişimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-009 |
+| **Başlık** | API erişimi |
+| **Kategori** | TIER |
+| **Problem** | Kurumsal müşteri kendi sistemleriyle veri alışverişi yapamıyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Kiracıya özel anahtarla, belgeli ve sınırlı dış API |
+| **Kullanıcı değeri** | Klinik kendi araçlarını Vetinity'ye bağlar |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001 |
+| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır |
+
+### TIER-010 — Size özel geliştirmeler
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-010 |
+| **Başlık** | Size özel geliştirmeler |
+| **Kategori** | TIER |
+| **Problem** | Kurumsal müşteri iş akışına göre küçük düzenlemeler istiyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Vetinity içinde kalan ekran, rapor ve çıktı düzenlemeleri; uç istekler ve ürün dışı işler değil. Sitede bu sözle yazılı (dal `feat/web-007-paketler`) |
+| **Kullanıcı değeri** | Kurumsal müşteri ürünü kendi işine göre kullanır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Kısmen geliştirildi (site metni dalda, main'e alınmadı; talep alma ve sınırlama süreci yok) |
+| **Bağımlılıklar** | — |
+| **Notlar** | Kullanıcı kararı (2026-11-06): uç istekler değil, proje içinde kalan düzenlemeler |
+
+### TIER-011 — Hekim mobil uygulaması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-011 |
+| **Başlık** | Hekim mobil uygulaması |
+| **Kategori** | TIER |
+| **Problem** | Çalışan panele telefondan girebiliyor ama mağazadan kurulan ayrı bir uygulaması yok |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Mağaza uygulaması; panelin telefondan kullanımı (MOBILE-004) bütün paketlerde kalır |
+| **Kullanıcı değeri** | Hekim hızlı erişim ve bildirim alır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, MOBILE-004, AK-1b; mağaza hesapları |
+| **Notlar** | Dış bağımlı |
+
+### TIER-012 — İYS ve Tarbil araştırması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-012 |
+| **Başlık** | İYS ve Tarbil araştırması |
+| **Kategori** | TIER |
+| **Problem** | Bu iki resmî sistemin Vetinity için kapsamı ve zorunluluğu incelenmedi |
+| **Önerilen çözüm** | Paket: kilitlenmemesi önerilir (yasal işler kilitlenmez ilkesine yakın). Önce neyi kapsadıkları ve erişim koşulları araştırılır, sonra entegrasyon kararı |
+| **Kullanıcı değeri** | Toplu ileti ve resmî kayıt işleri programdan yönetilebilir |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Bilinmiyor |
+| **Durum** | Araştırılacak |
+| **Bağımlılıklar** | TIER-003 (İYS); hukuki değerlendirme |
+| **Notlar** | Paket kararı araştırmadan sonra kesinleşir |
+
+### TIER-013 — AI eklentisi: kredi, kota ve fon
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-013 |
+| **Başlık** | AI eklentisi: kredi, kota ve fon |
+| **Kategori** | TIER |
+| **Problem** | AI maliyeti kullanım başına oluşuyor; pakete sınırsız gömülürse maliyet sınırsız kalır; Temel müşterisinin AI alma yolu yok |
+| **Önerilen çözüm** | [ADR-044](../decisions/ADR-044-ai-eklentisi-kredi-ve-fon.md): her pakete eklenen aylık kredi; Hızlı AI 1, Üst düzey AI 20 kredi; satın alırken ya da sonradan fon; Profesyonel 500, Kurumsal 2.000 hediye kredi; kullanım ekranı, %80 ve bitiş uyarısı; bitince yalnız AI durur; maliyet sınırları; dolar bazlı hesap, TL satış |
+| **Kullanıcı değeri** | Her klinik AI'yi ihtiyacı kadar alır, Vetinity için maliyet öngörülebilir kalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı (tarife örnek, gerçek kullanımla kesinleşir) |
+| **Bağımlılıklar** | TIER-001, AI-007, AI-008, ücretli ödemenin canlıya açılması, tek seferlik ödeme |
+| **Notlar** | Pilottan sonra (kullanıcı kararı 2026-10-30). Hukuk doğrulanmadı: dövizle fiyatlama, yurt dışı veri aktarımı, fon iadesi. Çalışmadan sitede yazılmaz. Kapsama alınanlar (2026-11-06, SaaS taraması): kalan kredi ve fon, özellik bazlı tüketim ekranı (hasta adı yok); harcama sırası tek cümle; teknik hatada kredi düşmez, liste açık ("beğenmedim" kapsam dışı); "kota bitince yalnız AI durur" her yerde aynı, Fon ekle bağlantısı; aylık eklenti ve ek fon yan yana, "otomatik para çekilmez". Açık karar: fon ömrü ve iade kuralı |
+
+### TIER-014 — AI altyapısı ve ilk özellik denemesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-014 |
+| **Başlık** | AI altyapısı ve ilk özellik denemesi |
+| **Kategori** | TIER |
+| **Problem** | Kredi modelinin gerçek maliyeti ve Haiku'nun klinik metinlerdeki kalitesi ölçülmedi |
+| **Önerilen çözüm** | Backend'de sağlayıcıdan bağımsız AI katmanı, gerçek token ve maliyet kaydı; ilk özellik hasta geçmişi özeti (AI-002; son ziyaretler, aşılar, alerjiler, süren tedaviler, son lab, her bilgiden kayda bağlantı), yalnız taslak; az sayıda klinikle deneme, sonuca göre model seçimi ve tarife |
+| **Kullanıcı değeri** | Fiyat ve kalite varsayımla değil gerçek veriyle belirlenir |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-008, ADR-044, AI-002, AI-008 |
+| **Notlar** | İlk özellik kullanıcı kararı (2026-11-06). Sesli not (AI-005 + AI-001) sonraya kalır. Kırmızı bayrak taraması alınmaz (ADR-008 sınırı). Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
+
+## SaaS taramasından gelen işler
+
+> Kullanıcı kararı (2026-11-06): [araştırmadaki](../research/saas-ornekleri-2026-11.md) 29 fikrin hepsi alındı. Bazıları mevcut maddelere bağlandı, eşleme belgenin sonunda. Sıra henüz belirlenmedi. Zorluklar tahmindir. Çalışmayan özellik sitede yazılmaz (ADR-034 karar 6).
+
+### TIER-015 — Veteriner bul
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-015 |
+| **Başlık** | Veteriner bul |
+| **Kategori** | TIER |
+| **Problem** | Hayvan sahibi yakınındaki kliniği Vetinity üzerinden bulamıyor; klinik sayfasının yeni müşteri getiren bir kanalı yok |
+| **Önerilen çözüm** | `vetinity.com/veteriner/{il}/{ilçe}` ve hizmet alt sayfaları; arama ve filtre; "Şu an açık"; katılım kliniğin seçimi, varsayılan kapalı; açık sıralama ölçütü ve "Nasıl sıralıyoruz" notu, sıra ödemeyle değişmez; sonuç yoksa yakın ilçe önerisi; boş ve az klinikli sayfalar dizine alınmaz |
+| **Kullanıcı değeri** | Klinik yeni müşteri kazanır, hayvan sahibi yakın kliniği kolay bulur |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-002, ADR-033 (`www` geçişi; kullanıcı söyleyince), TIER-017 |
+| **Notlar** | Fikir CodeBody "Uzman bul". Hangi paketlerde olacağı ve yeni müşteri ücreti kararı açık. Reklam kuralları kontrol edilmedi: "en iyi" gibi söz yok, metin hukuk gözüyle yazılır. İlk sürümde herkese açık yorum ve puan yok. Yeni ADR gerekir |
+
+### TIER-016 — Randevu talebinde kaynak bilgisi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-016 |
+| **Başlık** | Randevu talebinde kaynak bilgisi |
+| **Kategori** | TIER |
+| **Problem** | Klinik, talebin nereden geldiğini ve vitrinin ne getirdiğini göremiyor |
+| **Önerilen çözüm** | Talepte kaynak alanı (Veteriner bul, kendi sayfa, portal, telefon) ve kliniğe basit özet |
+| **Kullanıcı değeri** | Klinik vitrinin getirisini rakamla görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-042, TIER-015 |
+| **Notlar** | Müşteri eşleme yapılırsa KVKK aydınlatması gözden geçirilir |
+
+### TIER-017 — Herkese açık en yakın müsait saat
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-017 |
+| **Başlık** | Herkese açık en yakın müsait saat |
+| **Kategori** | TIER |
+| **Problem** | Klinik sayfasında yalnız Randevu düğmesi var; müşteri uygun saati görmeden talep bırakıyor |
+| **Önerilen çözüm** | Kliniğin online randevuya açtığı boş saatler klinik sayfasında ve Veteriner bul kartında görünür; saat seçilip talep bırakılır, klinik onaylayınca kesinleşir |
+| **Kullanıcı değeri** | Talep doğru saate gelir, ileri geri arama azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-042, APPT-008, TIER-002 |
+| **Notlar** | "Kesin randevu" değil "talep" dili. Takvimle tutarlılık ve aynı anda seçim tasarımda ele alınır |
+
+### TIER-018 — Bekleme listesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-018 |
+| **Başlık** | Bekleme listesi |
+| **Kategori** | TIER |
+| **Problem** | İptal olan saat boş kalıyor, erken gelmek isteyen müşteriye elle aranıyor |
+| **Önerilen çözüm** | Üst paket adayı. Müşteri listeye yazılır; saat boşalınca sıradakine otomatik teklif gider, kabul edilirse randevu oluşur |
+| **Kullanıcı değeri** | Boş saat dolar, kliniğin geliri korunur |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, TIER-019 |
+| **Notlar** | Fikir Jane App. Mesaj işlem iletisi olarak ayrılır (TIER-012); hasta sahibinin tercihine uyar |
+
+### TIER-019 — Hatırlatmada onayla / iptal et
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-019 |
+| **Başlık** | Hatırlatmada onayla / iptal et |
+| **Kategori** | TIER |
+| **Problem** | Müşteri gelemeyeceğini bildirmek için aramak zorunda; klinik son anda boş saatle kalıyor |
+| **Önerilen çözüm** | Randevu hatırlatmasında güvenli, tek kullanımlık "onayla" ve "iptal et" bağlantısı; sonuç Bugün ekranına ve randevuya düşer |
+| **Kullanıcı değeri** | Gelmeme azalır, boşalan saat erken görülür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | APPT-013, APPT-014 |
+| **Notlar** | Bağlantı giriş istemez; yetki ve süre sınırı tasarımda ele alınır |
+
+### TIER-020 — Hatırlatmada takvime ekle
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-020 |
+| **Başlık** | Hatırlatmada takvime ekle |
+| **Kategori** | TIER |
+| **Problem** | Müşteri randevuyu kendi takviminde görmediği için unutabiliyor |
+| **Önerilen çözüm** | Onay ve hatırlatma iletisine Google Takvim bağlantısı ve .ics dosyası |
+| **Kullanıcı değeri** | Randevu unutulma ihtimali azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | APPT-013 |
+| **Notlar** | APPT-032'nin ilk dilimi; takvim aboneliği orada kalır |
+
+### TIER-021 — Rakip programdan veri aktarımı ve kurulum görüşmesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-021 |
+| **Başlık** | Rakip programdan veri aktarımı ve kurulum görüşmesi |
+| **Kategori** | TIER |
+| **Problem** | Eski programdaki veri, geçişin en büyük engeli olabilir |
+| **Önerilen çözüm** | Mevcut içe aktarma üzerine yaygın rakip dosyalarına hazır eşleme, kapsamı açık geçiş desteği ve kurulum görüşmesi |
+| **Kullanıcı değeri** | Klinik verisini kaybetmeden daha kolay geçer |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Hangi programlar ve ücretli mi ücretsiz mi açık. Kişi süresi ve KVKK sorumluluğu netleşmeli |
+
+### TIER-022 — İlk hafta rehberleri
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-022 |
+| **Başlık** | İlk hafta rehberleri |
+| **Kategori** | TIER |
+| **Problem** | Yeni kullanıcı işini hangi sırayla öğreneceğini bilmiyor |
+| **Önerilen çözüm** | Ön büro ve hekim için kısa, role göre "ilk hafta" adımları; yardım araması sonra |
+| **Kullanıcı değeri** | Klinik programa daha hızlı alışır, destek yükü azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | İçerik bakımı gerekir; AI ile arama TIER-014'ten sonra değerlendirilir |
+
+### TIER-023 — Paketler sayfası okunurluğu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-023 |
+| **Başlık** | Paketler sayfası okunurluğu |
+| **Kategori** | TIER |
+| **Problem** | 35 satırlık tablo uzun, kartlarda fark tek bakışta okunmuyor |
+| **Önerilen çözüm** | Tabloda "Sadece farkları göster"; kartlarda "önceki paketin tümü, artı şunlar"; kartta kimin için olduğu; AI çalışınca AI satırında "Eklenti gerekir" etiketi |
+| **Kullanıcı değeri** | Klinik doğru paketi daha hızlı seçer |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | WEB-007 |
+| **Notlar** | Metin `PRICING_FEATURE_ROWS` verisinden üretilir, kopyalanmaz |
 
 ## İlgili belgeler
 
