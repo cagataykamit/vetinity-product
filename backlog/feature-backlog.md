@@ -1783,7 +1783,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlı kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | EXAM-001, AI-009 |
 | **Notlar** | → [AI roadmap Aşama 1](../ai/ai-roadmap.md) |
 
@@ -1799,7 +1799,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | TIMELINE-001, AI-009 |
 | **Notlar** | Taslak; kullanıcı onayı gerekir |
 
@@ -1815,7 +1815,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1831,7 +1831,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1847,7 +1847,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eller serbest not alma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [AI roadmap Aşama 2](../ai/ai-roadmap.md). DaySmart STT penceresi gözlemlendi (~20 dk süre); teknik sağlayıcı doğrulanmadı. **v1.0 dışı aday**; premium/ileri faz → [IDEA-022](../research/ideas.md#idea-022--voice-assisted-clinical-documentation). Snippet sisteminden ayrı. Bağlamsal özet yan paneli (Summarize/SOAP summary) STT değildir → [AI-102](#ai-102--patient-summary), [AI-103](#ai-103--examination-assistant), [IDEA-008](../research/ideas.md#idea-008--embedded-ai-instead-of-separate-ai-module) |
 
@@ -1863,7 +1863,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı kayıt bulma |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | |
 
@@ -1879,7 +1879,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
@@ -1895,7 +1895,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel kontrol |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-007 |
 | **Notlar** | |
 
@@ -1911,7 +1911,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1927,7 +1927,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; sorun giderme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Hassas klinik veriler normal loglara yazılmaz |
 
@@ -1942,7 +1942,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kategori** | AI (Epic) |
 | **Açıklama** | Vetinity'de yapay zekâ ayrı bir modül veya sohbet ekranı olarak değil, kullanıcıların çalıştığı ekranların doğal bir parçası olarak konumlandırılır. AI, veri özetleme, doğal dil sorgulama, karar desteği ve iş akışı hızlandırma amacıyla kullanılır. Klinik kararın sorumluluğu her zaman veteriner hekime aittir. |
 | **Öncelik** | P1 |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Alt maddeler** | AI-101, AI-102, AI-103, AI-104, AI-105, AI-106, AI-107, AI-108 |
 | **Notlar** | Bu Epic, E-vet Smart Plus'ın SmartAI yaklaşımı incelendikten sonra oluşturulmuştur. Ancak Vetinity'nin hedefi AI'ı ayrı bir ekran yerine ürünün tamamına gömülü şekilde sunmaktır. SmartAI'daki doğal dil sorgulama ve hasta özeti yaklaşımları ürün vizyonu için referans alınmış, ancak kapsam muayene, timeline ve klinik iş akışlarını kapsayacak şekilde genişletilmiştir. → [ADR-008](../decisions/ADR-008-embedded-ai-assistant.md), [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1958,7 +1958,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dashboard ve raporlar arasında gezinmeden anlık işletme görünürlüğü |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Gömülü yardımcı; ayrı sohbet ekranı değil. **Inventory Module:** DaySmart Inventory Alerts (low balance, expiring); item Actions low-balance threshold — operasyonel alert UI ayrı değerlendirme → [daysmart.md](../competitors/daysmart.md#inventory-alerts) |
 
@@ -1974,7 +1974,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı klinik hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | AI-002 ile ilişkili; Epic kapsamında genişletilmiş hasta özeti. DaySmart sandbox observation (~28:13–35:25): hasta profilinde bağlamlı AI yan paneli; aktif hasta otomatik bağlam; Summarize aksiyonu; hasta geçmişi/SOAP/ilaçlar kapsamı; AI hata uyarısı. **v1.0 dışı aday**; insan doğrulaması → [AI-009](#ai-009--ai-çıktı-onay-akışı). Halüsinasyon/klinik güvenlik riski; kaynak kapsamı doğrulanmadı |
 
@@ -1990,7 +1990,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı ve okunabilir muayene kayıtları; zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, EXAM-001 |
 | **Notlar** | AI-001 ile ilişkili; muayene ekranına gömülü. DaySmart sandbox observation (~28:13–35:25): SOAP summary hazır aksiyonu; klinik kaynaklarla sınırlı özet adayı. Çıktı doğrulanmadan kayda geçmemeli → [AI-009](#ai-009--ai-çıktı-onay-akışı). **v1.0 dışı aday** |
 
@@ -2006,7 +2006,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta hikâyesindeki dönüm noktalarının hızlı fark edilmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, TIMELINE-001 |
 | **Notlar** | Tanı koymaz; önemli olay vurgusu |
 
@@ -2022,7 +2022,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Lab yorumlamasında hız; kritik değerlere odaklanma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | Kesin tanı veya tedavi önerisi vermez; taslak özet |
 
@@ -2038,7 +2038,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Görüntüleme geçmişinin hızlı taranması |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, IMG-001 |
 | **Notlar** | Tanı koymaz; yalnızca kayıt özeti |
 
@@ -2054,7 +2054,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı; tutarlı hasta sahibi bilgilendirmesi |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009 |
 | **Notlar** | AI-004 ile ilişkili; taslak statüsü |
 
@@ -2070,7 +2070,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi iletişiminde hız |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
 | **Bağımlılıklar** | AI-100, AI-009, INT-003, INT-004 |
 | **Notlar** | Gönderim kullanıcı onayı ile; trial'da gerçek gönderim kısıtlanabilir |
 
@@ -3125,7 +3125,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 
 ## Paket farkları ve üst paket işleri
 
-> Kullanıcı kararı (2026-11-06): üst paketlerin değeri, Temel'deki özellikleri kısarak değil üst paketlere ekstra ve kaliteli yeni işler koyarak yaratılır. Paket dağılımı [ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md) notunda. Liste Kolayvet'in fiyat sayfasındaki "Yalnızca Bizde" 12 özelliğinden ve kullanıcının klinik sayfası fikrinden çıktı; görünüm kopyalanmaz. Bir iş çalışır hale gelmeden sitede yazılmaz (ADR-034 karar 6). Yapım sırası bu bölümdeki numara sırasıdır; dış bağımlı işler anlaşma çıktıkça. Zorluklar tahmindir, ölçülmedi.
+> Kullanıcı kararı (2026-11-06): üst paketlerin değeri, Temel'deki özellikleri kısarak değil üst paketlere ekstra ve kaliteli yeni işler koyarak yaratılır. Paket dağılımı [ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md) notunda. Liste Kolayvet'in fiyat sayfasındaki "Yalnızca Bizde" 12 özelliğinden ve kullanıcının klinik sayfası fikrinden çıktı; görünüm kopyalanmaz. Bir iş çalışır hale gelmeden sitede yazılmaz (ADR-034 karar 6). TIER-001'den TIER-012'ye yapım sırası numara sırasıdır; dış bağımlı işler anlaşma çıktıkça. AI eklentisi (TIER-013, TIER-014) pilottan sonra. Zorluklar tahmindir, ölçülmedi.
 
 ### TIER-001 — Paket özelliklerinin uygulamada zorlanması
 
@@ -3318,6 +3318,38 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | TIER-003 (İYS); hukuki değerlendirme |
 | **Notlar** | Paket kararı araştırmadan sonra kesinleşir |
+
+### TIER-013 — AI eklentisi: kredi, kota ve fon
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-013 |
+| **Başlık** | AI eklentisi: kredi, kota ve fon |
+| **Kategori** | TIER |
+| **Problem** | AI maliyeti kullanım başına oluşuyor; pakete sınırsız gömülürse maliyet sınırsız kalır; Temel müşterisinin AI alma yolu yok |
+| **Önerilen çözüm** | [ADR-044](../decisions/ADR-044-ai-eklentisi-kredi-ve-fon.md): her pakete eklenen aylık kredi; Hızlı AI 1, Üst düzey AI 20 kredi; satın alırken ya da sonradan fon; Profesyonel 500, Kurumsal 2.000 hediye kredi; kullanım ekranı, %80 ve bitiş uyarısı; bitince yalnız AI durur; maliyet sınırları; dolar bazlı hesap, TL satış |
+| **Kullanıcı değeri** | Her klinik AI'yi ihtiyacı kadar alır, Vetinity için maliyet öngörülebilir kalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı (tarife örnek, gerçek kullanımla kesinleşir) |
+| **Bağımlılıklar** | TIER-001, AI-007, AI-008, ücretli ödemenin canlıya açılması, tek seferlik ödeme |
+| **Notlar** | Pilottan sonra (kullanıcı kararı 2026-10-30). Hukuk doğrulanmadı: dövizle fiyatlama, yurt dışı veri aktarımı, fon iadesi. Çalışmadan sitede yazılmaz |
+
+### TIER-014 — AI altyapısı ve ilk özellik denemesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-014 |
+| **Başlık** | AI altyapısı ve ilk özellik denemesi |
+| **Kategori** | TIER |
+| **Problem** | Kredi modelinin gerçek maliyeti ve Haiku'nun klinik metinlerdeki kalitesi ölçülmedi |
+| **Önerilen çözüm** | Backend'de sağlayıcıdan bağımsız AI katmanı, gerçek token ve maliyet kaydı; ilk özellik muayene notu düzenleme (AI-001), yalnız taslak; az sayıda klinikle deneme, sonuca göre model seçimi ve tarife |
+| **Kullanıcı değeri** | Fiyat ve kalite varsayımla değil gerçek veriyle belirlenir |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-008, ADR-044, AI-001, AI-008 |
+| **Notlar** | Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
 
 ## İlgili belgeler
 
