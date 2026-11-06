@@ -37,4 +37,4 @@ AI maliyeti kullanım başına oluşur; pakete sınırsız gömülürse maliyet 
 
 ## Uygulama
 
-Backlog TIER-013 ve TIER-014; bağımlılıklar TIER-001 ve ücretli ödemenin canlıya açılması. AI-001 ilk özellik adayıdır.
+Backlog TIER-013 ve TIER-014; bağımlılıklar TIER-001 ve ücretli ödemenin canlıya açılması. İlk özellik hasta geçmişi özetidir (AI-002; kullanıcı kararı 2026-11-06): her bilgiden kayda bağlantı, yalnız taslak. Sesli not (AI-005 + AI-001) sonraya kalır; ses yazıya çevirme maliyeti bu hesapta yoktur ve ayrı hizmet gerektirebilir (doğrulanmadı).

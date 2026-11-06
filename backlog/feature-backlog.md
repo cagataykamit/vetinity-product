@@ -3343,13 +3343,13 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Başlık** | AI altyapısı ve ilk özellik denemesi |
 | **Kategori** | TIER |
 | **Problem** | Kredi modelinin gerçek maliyeti ve Haiku'nun klinik metinlerdeki kalitesi ölçülmedi |
-| **Önerilen çözüm** | Backend'de sağlayıcıdan bağımsız AI katmanı, gerçek token ve maliyet kaydı; ilk özellik muayene notu düzenleme (AI-001), yalnız taslak; az sayıda klinikle deneme, sonuca göre model seçimi ve tarife |
+| **Önerilen çözüm** | Backend'de sağlayıcıdan bağımsız AI katmanı, gerçek token ve maliyet kaydı; ilk özellik hasta geçmişi özeti (AI-002; son ziyaretler, aşılar, alerjiler, süren tedaviler, son lab, her bilgiden kayda bağlantı), yalnız taslak; az sayıda klinikle deneme, sonuca göre model seçimi ve tarife |
 | **Kullanıcı değeri** | Fiyat ve kalite varsayımla değil gerçek veriyle belirlenir |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
-| **Bağımlılıklar** | ADR-008, ADR-044, AI-001, AI-008 |
-| **Notlar** | Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
+| **Bağımlılıklar** | ADR-008, ADR-044, AI-002, AI-008 |
+| **Notlar** | İlk özellik kullanıcı kararı (2026-11-06). Sesli not (AI-005 + AI-001) sonraya kalır. Kırmızı bayrak taraması alınmaz (ADR-008 sınırı). Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
 
 ## İlgili belgeler
 
