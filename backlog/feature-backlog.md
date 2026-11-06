@@ -3157,7 +3157,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Orta |
 | **Durum** | Tasarlanacak (geçici taslak dal `taslak/klinik-web-sayfasi` `eaabcdd1`; A/B/C görünüm seçimi bekliyor; main'e alınmaz) |
 | **Bağımlılıklar** | TIER-001, ADR-033 (müşterinin görebilmesi için `www` geçişi; kullanıcı söyleyince), ADR-042 |
-| **Notlar** | APPT-034'ün yerine geçer. Koda geçmeden yeni ADR gerekir: sihirbaz değişikliği klinik kaydına mı yazılır, randevu anahtarı `ClinicOnlineBookingSettings` ile ilişkisi, adresi kim seçer ve değişince eski bağlantı, yayın akışı, WhatsApp önizlemesi için sunucudan meta etiket. Herkese açık bağlantıda randevu kodunun görünmesi tahmin edilemezlik varsayımını zayıflatır (ADR-042 notu). Veteriner reklam kuralları kontrol edilmedi |
+| **Notlar** | APPT-034'ün yerine geçer. Koda geçmeden yeni ADR gerekir: sihirbaz değişikliği klinik kaydına mı yazılır, randevu anahtarı `ClinicOnlineBookingSettings` ile ilişkisi, adresi kim seçer ve değişince eski bağlantı, yayın akışı, WhatsApp önizlemesi için sunucudan meta etiket. Herkese açık bağlantıda randevu kodunun görünmesi tahmin edilemezlik varsayımını zayıflatır (ADR-042 notu). Veteriner reklam kuralları kontrol edilmedi. Kapsama alınanlar (2026-11-06, SaaS taraması): yayın öncesi zorunlu liste; taslak ve yayın ayrı, "önceki yayına dön", "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
 ### TIER-003 — Otomatik hatırlatıcılar
 
@@ -3173,7 +3173,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Orta |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TIER-001; kanal için INT-003, INT-004 |
-| **Notlar** | Ticari ileti sayılan gönderimlerde izin kaydı TIER-012 ile birlikte değerlendirilir |
+| **Notlar** | Ticari ileti sayılan gönderimlerde izin kaydı TIER-012 ile birlikte değerlendirilir. Örnek kural (2026-11-06): "son ziyaretten N gün sonra dönmedi", klinik başına açılıp kapanır |
 
 ### TIER-004 — Gelişmiş raporlar
 
@@ -3247,7 +3247,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Başlık** | Çoklu kasa ve nakit yönetimi |
 | **Kategori** | TIER |
 | **Problem** | Tahsilat ve gün sonu tek kasa gibi izleniyor; şube ve kasa bazında nakit takibi yok |
-| **Önerilen çözüm** | Paket: Kurumsal. Birden fazla kasa, kasalar arası aktarım, kasa bazında gün sonu |
+| **Önerilen çözüm** | Paket: Kurumsal. Birden fazla kasa, kasalar arası aktarım, kasa bazında gün sonu; ilk dilim günlük kasa kontrol ekranı (2026-11-06, SaaS taraması) |
 | **Kullanıcı değeri** | Nakit farkı kasa bazında görülür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
@@ -3333,7 +3333,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı (tarife örnek, gerçek kullanımla kesinleşir) |
 | **Bağımlılıklar** | TIER-001, AI-007, AI-008, ücretli ödemenin canlıya açılması, tek seferlik ödeme |
-| **Notlar** | Pilottan sonra (kullanıcı kararı 2026-10-30). Hukuk doğrulanmadı: dövizle fiyatlama, yurt dışı veri aktarımı, fon iadesi. Çalışmadan sitede yazılmaz |
+| **Notlar** | Pilottan sonra (kullanıcı kararı 2026-10-30). Hukuk doğrulanmadı: dövizle fiyatlama, yurt dışı veri aktarımı, fon iadesi. Çalışmadan sitede yazılmaz. Kapsama alınanlar (2026-11-06, SaaS taraması): kalan kredi ve fon, özellik bazlı tüketim ekranı (hasta adı yok); harcama sırası tek cümle; teknik hatada kredi düşmez, liste açık ("beğenmedim" kapsam dışı); "kota bitince yalnız AI durur" her yerde aynı, Fon ekle bağlantısı; aylık eklenti ve ek fon yan yana, "otomatik para çekilmez". Açık karar: fon ömrü ve iade kuralı |
 
 ### TIER-014 — AI altyapısı ve ilk özellik denemesi
 

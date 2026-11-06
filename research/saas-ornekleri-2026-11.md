@@ -76,6 +76,22 @@ Amaç: veteriner dışı ürünlerden fikir toplamak. Görünüm kopyalanmaz. Bi
 - Fiyat önerisi anketi (Stripe): kullanım ölçülmeden yanıltır, sonraya.
 - Düşük sayaçlar, abartılı sosyal kanıt ve "KVKK uyumlu" sözü (ADR-034).
 
-## Önerilen ilk seçim
+## Kullanıcı kararı ve backlog eşlemesi (2026-11-06)
 
-**Küçük ve hemen değerli:** 28, 27, 8, 15, 13. **Klinik sayfası kalıcı koda geçerken:** 14, 16, 4, 20. **AI gelince:** 21, 22, 24, 25. **Üst paket:** 6, 9. **Vitrin:** 1, 2, 3.
+Kullanıcı 29 fikrin hepsini aldı. Yapım sırası ve "Ayrı ticari karar gerektirenler" açık. "Alınmayanlar" değişmedi.
+
+| Fikir | Backlog |
+|---|---|
+| 1, 3, 5 | TIER-015 |
+| 2 | TIER-016 |
+| 4 | TIER-017 |
+| 6 | TIER-018 |
+| 7 | TIER-019 |
+| 8 | TIER-020 (APPT-032'nin ilk dilimi) |
+| 9 | TIER-003 |
+| 10 | TIER-021 |
+| 11 | TIER-008 |
+| 12 | TIER-022 |
+| 13-20 | TIER-002 |
+| 21-26 | TIER-013 (25 için karar açık) |
+| 27-29 | TIER-023 |
