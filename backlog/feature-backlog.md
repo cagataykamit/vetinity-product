@@ -3351,6 +3351,154 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | ADR-008, ADR-044, AI-002, AI-008 |
 | **Notlar** | İlk özellik kullanıcı kararı (2026-11-06). Sesli not (AI-005 + AI-001) sonraya kalır. Kırmızı bayrak taraması alınmaz (ADR-008 sınırı). Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
 
+## SaaS taramasından gelen işler
+
+> Kullanıcı kararı (2026-11-06): [araştırmadaki](../research/saas-ornekleri-2026-11.md) 29 fikrin hepsi alındı. Bazıları mevcut maddelere bağlandı, eşleme belgenin sonunda. Sıra henüz belirlenmedi. Zorluklar tahmindir. Çalışmayan özellik sitede yazılmaz (ADR-034 karar 6).
+
+### TIER-015 — Veteriner bul
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-015 |
+| **Başlık** | Veteriner bul |
+| **Kategori** | TIER |
+| **Problem** | Hayvan sahibi yakınındaki kliniği Vetinity üzerinden bulamıyor; klinik sayfasının yeni müşteri getiren bir kanalı yok |
+| **Önerilen çözüm** | `vetinity.com/veteriner/{il}/{ilçe}` ve hizmet alt sayfaları; arama ve filtre; "Şu an açık"; katılım kliniğin seçimi, varsayılan kapalı; açık sıralama ölçütü ve "Nasıl sıralıyoruz" notu, sıra ödemeyle değişmez; sonuç yoksa yakın ilçe önerisi; boş ve az klinikli sayfalar dizine alınmaz |
+| **Kullanıcı değeri** | Klinik yeni müşteri kazanır, hayvan sahibi yakın kliniği kolay bulur |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-002, ADR-033 (`www` geçişi; kullanıcı söyleyince), TIER-017 |
+| **Notlar** | Fikir CodeBody "Uzman bul". Hangi paketlerde olacağı ve yeni müşteri ücreti kararı açık. Reklam kuralları kontrol edilmedi: "en iyi" gibi söz yok, metin hukuk gözüyle yazılır. İlk sürümde herkese açık yorum ve puan yok. Yeni ADR gerekir |
+
+### TIER-016 — Randevu talebinde kaynak bilgisi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-016 |
+| **Başlık** | Randevu talebinde kaynak bilgisi |
+| **Kategori** | TIER |
+| **Problem** | Klinik, talebin nereden geldiğini ve vitrinin ne getirdiğini göremiyor |
+| **Önerilen çözüm** | Talepte kaynak alanı (Veteriner bul, kendi sayfa, portal, telefon) ve kliniğe basit özet |
+| **Kullanıcı değeri** | Klinik vitrinin getirisini rakamla görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-042, TIER-015 |
+| **Notlar** | Müşteri eşleme yapılırsa KVKK aydınlatması gözden geçirilir |
+
+### TIER-017 — Herkese açık en yakın müsait saat
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-017 |
+| **Başlık** | Herkese açık en yakın müsait saat |
+| **Kategori** | TIER |
+| **Problem** | Klinik sayfasında yalnız Randevu düğmesi var; müşteri uygun saati görmeden talep bırakıyor |
+| **Önerilen çözüm** | Kliniğin online randevuya açtığı boş saatler klinik sayfasında ve Veteriner bul kartında görünür; saat seçilip talep bırakılır, klinik onaylayınca kesinleşir |
+| **Kullanıcı değeri** | Talep doğru saate gelir, ileri geri arama azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | ADR-042, APPT-008, TIER-002 |
+| **Notlar** | "Kesin randevu" değil "talep" dili. Takvimle tutarlılık ve aynı anda seçim tasarımda ele alınır |
+
+### TIER-018 — Bekleme listesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-018 |
+| **Başlık** | Bekleme listesi |
+| **Kategori** | TIER |
+| **Problem** | İptal olan saat boş kalıyor, erken gelmek isteyen müşteriye elle aranıyor |
+| **Önerilen çözüm** | Üst paket adayı. Müşteri listeye yazılır; saat boşalınca sıradakine otomatik teklif gider, kabul edilirse randevu oluşur |
+| **Kullanıcı değeri** | Boş saat dolar, kliniğin geliri korunur |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, TIER-019 |
+| **Notlar** | Fikir Jane App. Mesaj işlem iletisi olarak ayrılır (TIER-012); hasta sahibinin tercihine uyar |
+
+### TIER-019 — Hatırlatmada onayla / iptal et
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-019 |
+| **Başlık** | Hatırlatmada onayla / iptal et |
+| **Kategori** | TIER |
+| **Problem** | Müşteri gelemeyeceğini bildirmek için aramak zorunda; klinik son anda boş saatle kalıyor |
+| **Önerilen çözüm** | Randevu hatırlatmasında güvenli, tek kullanımlık "onayla" ve "iptal et" bağlantısı; sonuç Bugün ekranına ve randevuya düşer |
+| **Kullanıcı değeri** | Gelmeme azalır, boşalan saat erken görülür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | APPT-013, APPT-014 |
+| **Notlar** | Bağlantı giriş istemez; yetki ve süre sınırı tasarımda ele alınır |
+
+### TIER-020 — Hatırlatmada takvime ekle
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-020 |
+| **Başlık** | Hatırlatmada takvime ekle |
+| **Kategori** | TIER |
+| **Problem** | Müşteri randevuyu kendi takviminde görmediği için unutabiliyor |
+| **Önerilen çözüm** | Onay ve hatırlatma iletisine Google Takvim bağlantısı ve .ics dosyası |
+| **Kullanıcı değeri** | Randevu unutulma ihtimali azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | APPT-013 |
+| **Notlar** | APPT-032'nin ilk dilimi; takvim aboneliği orada kalır |
+
+### TIER-021 — Rakip programdan veri aktarımı ve kurulum görüşmesi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-021 |
+| **Başlık** | Rakip programdan veri aktarımı ve kurulum görüşmesi |
+| **Kategori** | TIER |
+| **Problem** | Eski programdaki veri, geçişin en büyük engeli olabilir |
+| **Önerilen çözüm** | Mevcut içe aktarma üzerine yaygın rakip dosyalarına hazır eşleme, kapsamı açık geçiş desteği ve kurulum görüşmesi |
+| **Kullanıcı değeri** | Klinik verisini kaybetmeden daha kolay geçer |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | Hangi programlar ve ücretli mi ücretsiz mi açık. Kişi süresi ve KVKK sorumluluğu netleşmeli |
+
+### TIER-022 — İlk hafta rehberleri
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-022 |
+| **Başlık** | İlk hafta rehberleri |
+| **Kategori** | TIER |
+| **Problem** | Yeni kullanıcı işini hangi sırayla öğreneceğini bilmiyor |
+| **Önerilen çözüm** | Ön büro ve hekim için kısa, role göre "ilk hafta" adımları; yardım araması sonra |
+| **Kullanıcı değeri** | Klinik programa daha hızlı alışır, destek yükü azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | — |
+| **Notlar** | İçerik bakımı gerekir; AI ile arama TIER-014'ten sonra değerlendirilir |
+
+### TIER-023 — Paketler sayfası okunurluğu
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-023 |
+| **Başlık** | Paketler sayfası okunurluğu |
+| **Kategori** | TIER |
+| **Problem** | 35 satırlık tablo uzun, kartlarda fark tek bakışta okunmuyor |
+| **Önerilen çözüm** | Tabloda "Sadece farkları göster"; kartlarda "önceki paketin tümü, artı şunlar"; kartta kimin için olduğu; AI çalışınca AI satırında "Eklenti gerekir" etiketi |
+| **Kullanıcı değeri** | Klinik doğru paketi daha hızlı seçer |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | WEB-007 |
+| **Notlar** | Metin `PRICING_FEATURE_ROWS` verisinden üretilir, kopyalanmaz |
+
 ## İlgili belgeler
 
 - [Roadmap](../roadmap/roadmap.md)
