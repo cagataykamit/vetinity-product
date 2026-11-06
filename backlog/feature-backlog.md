@@ -33,6 +33,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | ENT- | Enterprise |
 | SEC- | Güvenlik ve sertleştirme |
 | WEB- | Tanıtım sitesi (www) |
+| TIER- | Paket farkları ve üst paket işleri |
 
 ---
 
@@ -2620,9 +2621,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dijital varlık + randevu tek yerde |
 | **Öncelik** | P3 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (TIER-002 kapsamına alındı, 2026-11-06) |
 | **Bağımlılıklar** | APPT-001 |
-| **Notlar** | — |
+| **Notlar** | Yerine geçen madde: TIER-002 |
 
 ### APPT-035 — AI destekli uygun saat önerisi
 
@@ -2674,7 +2675,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | — |
-| **Notlar** | **Canlı sandbox — Patients Module:** Patients > Labs clinic worklist (Lab Vendor, integration status); patient History > Labs ayrı scope — **P3** MVP dışı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
+| **Notlar** | Paket (2026-11-06, ADR-035): cihaz ve IDEXX entegrasyonu Kurumsal; üretici tarafı gerekir. **Canlı sandbox — Patients Module:** Patients > Labs clinic worklist (Lab Vendor, integration status); patient History > Labs ayrı scope — **P3** MVP dışı → [daysmart.md](../competitors/daysmart.md#clinic-wide-labs--images--rx-requests--custom-diagnoses--analytics) |
 
 | Alan | Değer |
 |---|---|
@@ -2720,7 +2721,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | — |
-| **Notlar** | **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Whatsapp — person-message handoff (in-app inbox **gözlemlenmedi**); API/server-side **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
+| **Notlar** | Paket (2026-11-06, ADR-035): Profesyonel ve Kurumsal; sağlayıcı anlaşması gerekir. **E-Vet SMART (2026-09-27):** Takvim > Hatırlatma — WhatsApp Web handoff, prefilled reminder metni; Business API / server-side send **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#whatsapp-web-handoff-hatırlatma). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Whatsapp — person-message handoff (in-app inbox **gözlemlenmedi**); API/server-side **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
 ### INT-005 — e-Fatura / e-SMM
 
@@ -3004,7 +3005,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Fiyat belirsizliği güven kaybına yol açmaz; site ürünle çelişmez |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-05, 2026-11-06 fiyat ve sınır güncellemesi; dal `feat/web-007-paketler` BE+FE, main'e alınmadı): fiyat Temel ₺890 / Profesyonel ₺1.790 / Kurumsal ₺3.790 aylık, KDV hariç (kullanıcı onayı; `appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından (₺8.900 / ₺17.900 / ₺37.900); kullanıcı sınırı backend kataloğundan (3/5/15), klinik sınırı yazılmaz. Karşılaştırma tablosu 34 satıra açıldı (her satır endpoint + ekran olarak kodda doğrulandı); davet ekranında sınır mesajı üst paketi söyler. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
+| **Durum** | Geliştirildi (2026-11-05, 2026-11-06 fiyat ve sınır güncellemesi; dal `feat/web-007-paketler` BE+FE, main'e alınmadı): fiyat Temel ₺890 / Profesyonel ₺1.790 / Kurumsal ₺3.790 aylık, KDV hariç (kullanıcı onayı; `appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından (₺8.900 / ₺17.900 / ₺37.900); kullanıcı sınırı backend kataloğundan (3/5/15), klinik sınırı yazılmaz. Karşılaştırma tablosu 35 satır, koyu başlıklı görünüm, yok işareti kırmızı çarpı (2026-11-06, kullanıcı seçimi; 34 satır endpoint + ekran olarak kodda doğrulandı, 35. satır "Size özel geliştirmeler" hizmet taahhüdü, TIER-010); davet ekranında sınır mesajı üst paketi söyler. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
 | **Bağımlılıklar** | AK-2, TRIAL-004, TRIAL-007 |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.6 |
 
@@ -3121,6 +3122,202 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Durum** | Geliştirildi (main + origin, 2026-10-28); iyzico sandbox'ta uçtan uca doğrulandı |
 | **Bağımlılıklar** | BILL-004 |
 | **Notlar** | iyzico'da önce iptal (`Cancel`, aynı gün), olmazsa tutar bazlı iade; 3 denemeden sonra elle. Stripe otomatik iadesi yok (elle). Bilinen sınır: aynı anda işlenen iki ödeme (milisaniye yarışı) ikisi de paket açabilir. Ayrıntı: [DEVIR-2026-10-24](../roadmap/DEVIR-2026-10-24.md) madde 19 |
+
+## Paket farkları ve üst paket işleri
+
+> Kullanıcı kararı (2026-11-06): üst paketlerin değeri, Temel'deki özellikleri kısarak değil üst paketlere ekstra ve kaliteli yeni işler koyarak yaratılır. Paket dağılımı [ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md) notunda. Liste Kolayvet'in fiyat sayfasındaki "Yalnızca Bizde" 12 özelliğinden ve kullanıcının klinik sayfası fikrinden çıktı; görünüm kopyalanmaz. Bir iş çalışır hale gelmeden sitede yazılmaz (ADR-034 karar 6). Yapım sırası bu bölümdeki numara sırasıdır; dış bağımlı işler anlaşma çıktıkça. Zorluklar tahmindir, ölçülmedi.
+
+### TIER-001 — Paket özelliklerinin uygulamada zorlanması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-001 |
+| **Başlık** | Paket özelliklerinin uygulamada zorlanması |
+| **Kategori** | TIER |
+| **Problem** | Uygulamada yalnız kullanıcı sınırı zorlanıyor; sitede pakete bağlı yazan portal, portaldan randevu ve çok klinik Temel'de de kullanılabiliyor. Sonraki üst paket işlerinin de bağlanacağı bir kural yok |
+| **Önerilen çözüm** | Paket → özellik kuralı tek yerde (backend); kural dışı istek reddedilir; panelde kilitli özellik için "üst pakete geç" ekranı. İlk bağlananlar portal, portaldan randevu ve çok klinik. Yasal kayıt defterleri ve KVKK araçları kilitlenmez. Paket düşürmede mevcut veri ve kullanım kararı ayrıca verilir |
+| **Kullanıcı değeri** | Sitede yazan paket farkı üründe gerçekten geçerli olur; üst paketin satın alma nedeni oluşur |
+| **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | WEB-007, ADR-035 |
+| **Notlar** | Paket düşürme bugün üye sayısına bakmıyor, sınırı aşan üyeler kalıyor (WEB-007 testleriyle sabit) |
+
+### TIER-002 — Kliniğe özel web sayfası ve oluşturma sihirbazı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-002 |
+| **Başlık** | Kliniğe özel web sayfası ve oluşturma sihirbazı |
+| **Kategori** | TIER |
+| **Problem** | Web sitesi olmayan klinik, müşterisine gönderecek tek bir adres bulamıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Ayarlar > "Web sayfam" sekmesinde klinik başına 5 adımlı sihirbaz (bilgiler, görünüm, hizmetler ve tanıtım, saatler ve randevu, önizle ve yayınla); ortak şablon; bağlantı, QR ve WhatsApp paylaşımı; `vetinity.com/k/...` adresi. İlk sürümde fiyat, kampanya, yorum, ekip fotoğrafı, kendi alan adı ve hasta verisi yok |
+| **Kullanıcı değeri** | Klinik birkaç dakikada paylaşılabilir bir sayfaya kavuşur; ara, yol tarifi ve randevu tek yerde |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Tasarlanacak (geçici taslak dal `taslak/klinik-web-sayfasi` `eaabcdd1`; A/B/C görünüm seçimi bekliyor; main'e alınmaz) |
+| **Bağımlılıklar** | TIER-001, ADR-033 (müşterinin görebilmesi için `www` geçişi; kullanıcı söyleyince), ADR-042 |
+| **Notlar** | APPT-034'ün yerine geçer. Koda geçmeden yeni ADR gerekir: sihirbaz değişikliği klinik kaydına mı yazılır, randevu anahtarı `ClinicOnlineBookingSettings` ile ilişkisi, adresi kim seçer ve değişince eski bağlantı, yayın akışı, WhatsApp önizlemesi için sunucudan meta etiket. Herkese açık bağlantıda randevu kodunun görünmesi tahmin edilemezlik varsayımını zayıflatır (ADR-042 notu). Veteriner reklam kuralları kontrol edilmedi |
+
+### TIER-003 — Otomatik hatırlatıcılar
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-003 |
+| **Başlık** | Otomatik hatırlatıcılar |
+| **Kategori** | TIER |
+| **Problem** | Bugün e-posta ile aşı ve randevu hatırlatması var; klinik diğer takipleri elle yapıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Klinik başına ayarlanabilir kurallar (ör. kontrol muayenesi, borç); kanal önce e-posta, SMS ve WhatsApp entegrasyonlar gelince. Bugünkü e-posta hatırlatması Temel'de kalır. Kural listesi tasarımda netleşir |
+| **Kullanıcı değeri** | Müşteri geri dönüşü elle takip gerektirmez |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001; kanal için INT-003, INT-004 |
+| **Notlar** | Ticari ileti sayılan gönderimlerde izin kaydı TIER-012 ile birlikte değerlendirilir |
+
+### TIER-004 — Gelişmiş raporlar
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-004 |
+| **Başlık** | Gelişmiş raporlar |
+| **Kategori** | TIER |
+| **Problem** | Rapor merkezi temel rakamları veriyor; dönem karşılaştırması ve daha derin kırılımlar yok |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Bugünkü raporlar Temel'de kalır; ek olarak dönem karşılaştırması ve hekim, hizmet gibi kırılımlar. Kapsam tasarımda netleşir |
+| **Kullanıcı değeri** | Klinik sahibi işin nereye gittiğini görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, REPORT-008 |
+| **Notlar** | — |
+
+### TIER-005 — Otomatik aşı sihirbazı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-005 |
+| **Başlık** | Otomatik aşı sihirbazı |
+| **Kategori** | TIER |
+| **Problem** | Aşı takibi var ama aşı takvimi hekim tarafından tek tek planlanıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Tür ve yaşa göre klinikçe tanımlı takvimden önerilen aşı planı; hekim onaylar. Bugünkü aşı takibi Temel'de kalır. Klinik içerik tasarımda netleşir |
+| **Kullanıcı değeri** | Aşı planı hızlanır, atlanan doz azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001 |
+| **Notlar** | Rakibin bu özellikle tam olarak ne yaptığı doğrulanmadı |
+
+### TIER-006 — Mobil barkod
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-006 |
+| **Başlık** | Mobil barkod |
+| **Kategori** | TIER |
+| **Problem** | Stok ve satışta ürün elle aranıyor |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Telefon kamerasıyla barkod okutarak stok ve satışta ürün bulma |
+| **Kullanıcı değeri** | Mal kabul ve satış hızlanır, yanlış ürün seçimi azalır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, MOBILE-004 |
+| **Notlar** | Ürün kartında barkod alanı ve tarayıcı kamera desteği tasarımda kontrol edilir |
+
+### TIER-007 — Patron ekranı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-007 |
+| **Başlık** | Patron ekranı |
+| **Kategori** | TIER |
+| **Problem** | Birden fazla şubesi olan işletme sahibi şubeleri tek tek açarak izliyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Tüm şubelerin ciro, tahsilat, borç ve iş yükünü tek özette gösteren ekran |
+| **Kullanıcı değeri** | Sahip işletmeyi tek bakışta görür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, REPORT-008 |
+| **Notlar** | — |
+
+### TIER-008 — Çoklu kasa ve nakit yönetimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-008 |
+| **Başlık** | Çoklu kasa ve nakit yönetimi |
+| **Kategori** | TIER |
+| **Problem** | Tahsilat ve gün sonu tek kasa gibi izleniyor; şube ve kasa bazında nakit takibi yok |
+| **Önerilen çözüm** | Paket: Kurumsal. Birden fazla kasa, kasalar arası aktarım, kasa bazında gün sonu |
+| **Kullanıcı değeri** | Nakit farkı kasa bazında görülür |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, FIN-002 |
+| **Notlar** | — |
+
+### TIER-009 — API erişimi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-009 |
+| **Başlık** | API erişimi |
+| **Kategori** | TIER |
+| **Problem** | Kurumsal müşteri kendi sistemleriyle veri alışverişi yapamıyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Kiracıya özel anahtarla, belgeli ve sınırlı dış API |
+| **Kullanıcı değeri** | Klinik kendi araçlarını Vetinity'ye bağlar |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001 |
+| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır |
+
+### TIER-010 — Size özel geliştirmeler
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-010 |
+| **Başlık** | Size özel geliştirmeler |
+| **Kategori** | TIER |
+| **Problem** | Kurumsal müşteri iş akışına göre küçük düzenlemeler istiyor |
+| **Önerilen çözüm** | Paket: Kurumsal. Vetinity içinde kalan ekran, rapor ve çıktı düzenlemeleri; uç istekler ve ürün dışı işler değil. Sitede bu sözle yazılı (dal `feat/web-007-paketler`) |
+| **Kullanıcı değeri** | Kurumsal müşteri ürünü kendi işine göre kullanır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Düşük |
+| **Durum** | Kısmen geliştirildi (site metni dalda, main'e alınmadı; talep alma ve sınırlama süreci yok) |
+| **Bağımlılıklar** | — |
+| **Notlar** | Kullanıcı kararı (2026-11-06): uç istekler değil, proje içinde kalan düzenlemeler |
+
+### TIER-011 — Hekim mobil uygulaması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-011 |
+| **Başlık** | Hekim mobil uygulaması |
+| **Kategori** | TIER |
+| **Problem** | Çalışan panele telefondan girebiliyor ama mağazadan kurulan ayrı bir uygulaması yok |
+| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Mağaza uygulaması; panelin telefondan kullanımı (MOBILE-004) bütün paketlerde kalır |
+| **Kullanıcı değeri** | Hekim hızlı erişim ve bildirim alır |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Yüksek |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TIER-001, MOBILE-004, AK-1b; mağaza hesapları |
+| **Notlar** | Dış bağımlı |
+
+### TIER-012 — İYS ve Tarbil araştırması
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TIER-012 |
+| **Başlık** | İYS ve Tarbil araştırması |
+| **Kategori** | TIER |
+| **Problem** | Bu iki resmî sistemin Vetinity için kapsamı ve zorunluluğu incelenmedi |
+| **Önerilen çözüm** | Paket: kilitlenmemesi önerilir (yasal işler kilitlenmez ilkesine yakın). Önce neyi kapsadıkları ve erişim koşulları araştırılır, sonra entegrasyon kararı |
+| **Kullanıcı değeri** | Toplu ileti ve resmî kayıt işleri programdan yönetilebilir |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Bilinmiyor |
+| **Durum** | Araştırılacak |
+| **Bağımlılıklar** | TIER-003 (İYS); hukuki değerlendirme |
+| **Notlar** | Paket kararı araştırmadan sonra kesinleşir |
 
 ## İlgili belgeler
 
