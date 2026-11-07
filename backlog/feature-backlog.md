@@ -3251,9 +3251,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Nakit farkı kasa bazında görülür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | İlk dilim geliştirildi (2026-11-08): main yerelde BE `cd99905c`, FE `48afaf08`, origin'e gönderilmedi. Rapor Merkezi > Gün sonu > "Kasa kontrolü": tek gün ve tek klinik için açılış ve sayılan nakit, günün nakit neti (kasa özetinin nakit satırı), olması gereken ve fark; fark varsa açıklama zorunlu. Kayıt kimin, ne zaman kaydettiğiyle tutulur; düzeltme eski kaydı gerekçeyle iptal edip yenisini yazar; son 30 günün sayımları listelenir. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, FIN-002 |
-| **Notlar** | — |
+| **Notlar** | Sözleşme backend `docs/CASH_COUNT_API_CONTRACT.md`. Paket yalnız Kurumsal (`PlanFeature.CashManagement`); sayım okuma her pakette, gün sonu raporu her pakette aynen kalır. Yeni izinler `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin); mevcut özel roller elle almalı (deploy notu). Migration `AddCashCounts` yalnız yerel DB'de. Ödeme ve tahsilat akışı değişmedi. Sonraki dilimler: birden fazla kasa, ödemeyi kasaya bağlama ve kasa bazında gün sonu, kasalar arası aktarım, kasaya giren ve çıkan nakit kaydı, günü kilitleme. Paketler tablosuna satır eklenmedi |
 
 ### TIER-009 — API erişimi
 
