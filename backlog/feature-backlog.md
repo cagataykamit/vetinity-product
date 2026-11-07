@@ -3139,9 +3139,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Sitede yazan paket farkı üründe gerçekten geçerli olur; üst paketin satın alma nedeni oluşur |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `e9ab6e70`, FE `a3bf35a8`, origin'e gönderilmedi. Paket düşürme ve deneme maddeleri çalışma varsayımı, kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | WEB-007, ADR-035 |
-| **Notlar** | Paket düşürme bugün üye sayısına bakmıyor, sınırı aşan üyeler kalıyor (WEB-007 testleriyle sabit) |
+| **Notlar** | Sözleşme backend `docs/PLAN_FEATURES_API_CONTRACT.md`. Paket düşürme B ile uygulandı: düşürme her zaman kabul, veri silinmez, fazla klinik ve üye çalışır, mevcut portal bağı açık kalır (bağ üzerinden randevu talebi dahil), yalnız yeni davet, bekleyen davetin kabulü ve yeni klinik kapanır. Reddedilen A: kullanım sığmıyorsa düşürme reddi ve Temel'e inince portalın durması. Deneme: TRIAL_LIMITS K7 korundu, şube sayısı sınırlanmaz; portal seçilen pakete göre kilitli |
 
 ### TIER-002 — Klinik web sitesi oluşturucu
 
@@ -3155,7 +3155,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ajanstan çıkmış gibi görünen kendi sitesine sihirbazla kavuşur; ara, yol tarifi ve randevu tek yerde |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek (tek sayfalık önceki tahmin Orta idi; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `6995bd54`, FE `5c6a7e3b`, origin'e gönderilmedi. Canlı değil: yayın altyapısı (Node süreci, ADR-033 geçişi), hazır fotoğraf seti ve hukuk görüşü bekliyor (ADR-045; `operations/CANLI-ISLETIM-KILAVUZU.md` 11.1). Son test: BE domain 986, application 3788, entegrasyon 1834 geçti, 2 atlandı; FE panel 2727, portal 190, site 16 geçti |
+| **Durum** | Geliştirildi (2026-11-07): origin'de BE `6995bd54`, FE `4214ba75`. Canlı değil: yayın altyapısı (Node süreci, ADR-033 geçişi), fotoğraf lisansı doğrulaması ve hukuk görüşü bekliyor (ADR-045; `operations/CANLI-ISLETIM-KILAVUZU.md` 11.1). Son test: BE domain 986, application 3788, entegrasyon 1834 geçti, 2 atlandı; FE panel 2758, portal 190, site 18 geçti |
 | **Bağımlılıklar** | ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
 | **Notlar** | APPT-034'ün yerine geçer. Yayın, adres, veri kaynağı ve randevu kararları ADR-045'te. Hazır fotoğraf seti kullanıcıdan gelecek (K7). Veteriner reklam kuralları kontrol edilmedi. Kapsamdaki SaaS fikirleri (2026-11-06): yayın öncesi zorunlu liste; önceki yayına dön, "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
