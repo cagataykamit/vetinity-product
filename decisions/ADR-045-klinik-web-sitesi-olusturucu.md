@@ -86,7 +86,9 @@ Randevu düğmesi ADR-042 talep akışına gider, model ikinci kez kurulmaz. E-p
 
 ### K13 — Paket (kullanıcı: "hepsinde olsun")
 
-Site oluşturucu Temel, Profesyonel ve Kurumsal'ın hepsindedir; önceki "Profesyonel ve Kurumsal" kararının yerine geçer. Paket kilidi gerekmez, TIER-001'e bağlı değildir. Paket düşürme siteyi etkilemez. Deneme süresi dolunca ne olacağı abonelik kuralına bağlanır, uygulamada netleştirilir. Paketler sayfasına satır, modül çalışınca eklenir (ADR-034).
+Site oluşturucu Temel, Profesyonel ve Kurumsal'ın hepsindedir; önceki "Profesyonel ve Kurumsal" kararının yerine geçer. Paket kilidi gerekmez, TIER-001'e bağlı değildir. Paket düşürme siteyi etkilemez. Paketler sayfasına satır, modül çalışınca eklenir (ADR-034).
+
+**Abonelik biterse (kullanıcı: "Hemen kapansın"):** deneme ya da dönem bitip abonelik salt okunur olduğunda ve iptalde site ek süre olmadan kapanır; müşteri açıklayıcı kapalı sayfa görür. Öneri: veri silinmez, ödeme yapılınca son yayınlanan sürüm kendiliğinden geri gelir; klinik elle kapattıysa kapalı kalır; pasif kiracıda site bulunamaz (404).
 
 ### K14 — İzolasyon ve içerik sınırları (öneri)
 
