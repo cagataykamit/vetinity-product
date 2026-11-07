@@ -72,7 +72,7 @@ Yayın öncesi zorunlu liste: ad, telefon, adres, en az bir saat satırı. Diğe
 
 ### K10 — Adres (öneri)
 
-`{adres}` klinik adından önerilir, klinik değiştirir; benzersizdir, ayrılmış sözcükler alınamaz. Değişince eski adres yeni adrese yönlenir ve başkasına verilmez; kısa bağlantı ve QR çalışmaya devam eder.
+`{adres}` klinik adından önerilir, klinik değiştirir; benzersizdir, ayrılmış sözcükler alınamaz. Değişince eski adres yeni adrese yönlenir ve başkasına verilmez; kısa bağlantı ve QR çalışmaya devam eder. Yayınlanmış site adresini en çok 3 kez değiştirebilir, sonrası için destekle iletişime geçer (kullanıcı). Hiç yayınlanmamış sitedeki değişiklik sayılmaz.
 
 ### K11 — Randevu (öneri)
 
