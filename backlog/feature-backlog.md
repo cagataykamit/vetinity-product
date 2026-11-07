@@ -311,7 +311,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dönem performansı tek ekranda; sayılar raporlarla birebir eşleşir |
 | **Öncelik** | P1 (öneri; zamanı kullanıcı kararı) |
 | **Tahmini zorluk** | Dilim 1 Orta, dilim 2 Orta, dilim 3 Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Dilim 1 uygulandı (2026-10-28; backend `PERFORMANCE_SUMMARY_API_CONTRACT.md` + panel Rapor Merkezi > Yönetim). Dilim 2'nin bir kısmı (geliş, tekil hasta sahibi, hizmet/ürün) ve dilim 3 (hekim bazlı muayene ve ciro) TIER-004 ile Profesyonel ve Kurumsal'da uygulandı (2026-11-08); atama kuralı kapsam taslağındaki öneri (ziyaretin sorumlu hekimi, ziyaretsiz muayenede kesinleştiren, satış atanmamış). Kalanlar pilot geri bildirimine göre |
+| **Durum** | Dilim 1 uygulandı (2026-10-28; backend `PERFORMANCE_SUMMARY_API_CONTRACT.md` + panel Rapor Merkezi > Yönetim). Dilim 2'nin bir kısmı (geliş, tekil hasta sahibi, hizmet/ürün) ve dilim 3 (hekim bazlı muayene ve ciro) TIER-004 ile Profesyonel ve Kurumsal'da uygulandı (2026-11-08); atama kuralı kapsam taslağındaki öneri (ziyaretin sorumlu hekimi, ziyaretsiz muayenede kesinleştiren, satış atanmamış). Şubeler özeti (tüm şubeler yan yana) TIER-007 ile Kurumsal'da uygulandı (2026-11-08); aynı dönem yüklemesini kullanır. Kalanlar pilot geri bildirimine göre |
 | **Bağımlılıklar** | REPORT-001, REPORT-005, REPORT-006 |
 | **Notlar** | Kapsam, metrik listesi (mevcut uçlarla karşılananlar işaretli), filtre, yetki, UX ve açık sorular → [İşletme performansı panosu kapsam taslağı](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Dilim 1–2 için ADR gerekmez (ADR-003 kapsamı, salt okuma, veri modeli/izin değişmez); dilim 3'te hekim ataması veri modelini değiştirirse ADR. Dilim 1'de yeni izin yok (bölüm bazlı mevcut okuma izinleri). Rakip: **E-Vet VKY** yönetim analitiği (aylık ciro/tahsilat değişimi, personel ve ürün tipi satışı, müşteri değişimi, aşı yapılan/bekleyen) — düzen kopyalanmaz → [e-vet.md](../competitors/e-vet.md#vky-modül); **DaySmart** Reports/Billing Dashboard göstergeleri → [daysmart.md](../competitors/daysmart.md#reports-dashboard). AI-101 aynı özet ucunu kullanır |
 
@@ -3235,9 +3235,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Sahip işletmeyi tek bakışta görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `039e53d3`, FE `6f26b27c`, origin'e gönderilmedi. Rapor Merkezi > Yönetim > "Şubeler özeti": erişilebilen tüm aktif şubelerin ciro, tahsilat, bugünkü açık alacak, geliş, muayene ve tamamlanan randevusu; toplam satırı ve önceki döneme göre fark; telefonda şube kartları. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, REPORT-008 |
-| **Notlar** | — |
+| **Notlar** | Sözleşme backend `docs/CLINICS_OVERVIEW_API_CONTRACT.md`. Paket yalnız Kurumsal (`PlanFeature.ClinicsOverview`); şube başına İşletme performansı her pakette kalır. Şube satırı aynı klinikle açılan özetle aynı hesap, entegrasyon testiyle sabit. Toplamda alacaklı müşteri tekil. Kapsam raporlarla aynı (Admin ve Owner kiracı geneli, diğerleri atandıkları klinikler). Yeni izin yok, migration yok. Pasif klinik listelenmez, aşı sayısı yok. Paketler tablosuna satır eklenmedi |
 
 ### TIER-008 — Çoklu kasa ve nakit yönetimi
 
