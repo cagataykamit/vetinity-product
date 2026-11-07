@@ -61,6 +61,12 @@ Durum sütunları değişmedi; aşağıdakiler çalışma varsayımıdır ve her
 - **C6 — WhatsApp:** personel `wa.me` bağlantısıyla kendi WhatsApp'ından gönderir; sistem göndermez, içerik asgari (hayvan adı, tarih, klinik adı). Personelin kişisel cihaz/hesap kullanımı ve WhatsApp'ın yurt dışı aktarımı (m.9) hukukçuya sorulmalı.
 - **FIN-005:** müşteri kredisi iadesi kasa çıkışı olarak gün sonu dökümüne girer; iade belgesi/fiş ve e-belge etkisi C2 (e-fatura) kapsamında ayrıca değerlendirilir.
 
+### Koda giren varsayımlar — otomatik hatırlatıcılar (2026-11-07; TIER-003)
+
+Durum sütunları değişmedi; hukuki görüş alınmadı. Kategori tek yerde yaşar (backend `OwnerNotificationChannelPolicy`):
+- **A4 — "Uzun süredir gelmedi" iletisi:** ticari elektronik ileti sayıldı, onaysız gönderilmez. `MarketingSendingEnabled` kapalı olduğu sürece hiç gönderilmez.
+- **A4 — Kontrol tarihi ve ödenmemiş bakiye hatırlatması:** mevcut hizmet ilişkisine dair bilgilendirme sayıldı, ticari ileti onayı aranmaz; hatırlatma istemeyen müşteriye gitmez. Hukukçuya sorulacak: bu iki ileti onay gerektirir mi?
+
 ## Nasıl kullanılır
 
 1. Bu dosya hukukçuya verilir. Her satırdaki **Soru** ve **Onay bekliyor** hücreleri cevaplanır.

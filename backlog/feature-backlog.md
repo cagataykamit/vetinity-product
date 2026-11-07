@@ -3171,9 +3171,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Müşteri geri dönüşü elle takip gerektirmez |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `0691420b`, FE `abc9ed4e`, origin'e gönderilmedi. Kontrol ve borç kuralı e-posta kuyruğuna ileti alır, teslimat görülmedi; "uzun süredir gelmedi" kuralı ticari ileti sayılabileceği için hukuki onay ve İYS kaydına kadar göndermez. Kural listesi ve varsayılanlar çalışma varsayımı, kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001; kanal için INT-003, INT-004 |
-| **Notlar** | Ticari ileti sayılan gönderimlerde izin kaydı TIER-012 ile birlikte değerlendirilir. Örnek kural (2026-11-06): "son ziyaretten N gün sonra dönmedi", klinik başına açılıp kapanır |
+| **Notlar** | Sözleşme backend `docs/AUTOMATED_REMINDERS_API_CONTRACT.md`. Kurallar: kontrol muayenesi (N gün önce, varsayılan 3), ödenmemiş bakiye (N gün sonra, 30), uzun süredir gelmedi (N gün sonra, 180). Klinik başına, varsayılan kapalı, yalnız e-posta. Açınca birikmiş kayıtlara ileti gitmez. Borç iletisinde tutar yazılmaz. Migration `AddClinicReminderRules` yalnız yerel DB'de |
 
 ### TIER-004 — Gelişmiş raporlar
 
@@ -3317,7 +3317,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Bilinmiyor |
 | **Durum** | Araştırılacak |
 | **Bağımlılıklar** | TIER-003 (İYS); hukuki değerlendirme |
-| **Notlar** | Paket kararı araştırmadan sonra kesinleşir |
+| **Notlar** | Paket kararı araştırmadan sonra kesinleşir. TIER-003 "uzun süredir gelmedi" kuralı bu araştırmaya bağlıdır: `OwnerNotificationChannelPolicy.MarketingSendingEnabled` kapalı. Açmadan önce İYS kaydı, ileti metnindeki ret ve kimlik yükümlülükleri ve onay kanalı (bugün yalnız portal bağı) netleşmeli |
 
 ### TIER-013 — AI eklentisi: kredi, kota ve fon
 

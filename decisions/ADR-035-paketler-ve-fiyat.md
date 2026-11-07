@@ -12,6 +12,7 @@
 - 2026-11-06: paketlerde genel kota yoktur; tek istisna her pakete eklenebilen AI eklentisidir (kredi, kota, fon; Profesyonel 500, Kurumsal 2.000 hediye kredi): [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md).
 - 2026-11-07: klinik web sitesi oluşturucu tüm paketlerde (kullanıcı: "hepsinde olsun"); 2026-11-06 dağılımındaki "Profesyonel ve Kurumsal'a klinik web sayfası" maddesinin yerine geçer: [ADR-045](ADR-045-klinik-web-sitesi-olusturucu.md) K13.
 - 2026-11-07: paket farkları uygulamada zorlanıyor (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Paket düşürme davranışı **çalışma varsayımıdır, kullanıcı onayı bekliyor** (B: veri silinmez, fazla klinik ve üye kalır, mevcut portal bağı açık kalır, yalnız yeni kullanım kapanır). Kötüye kullanım riski biliniyor: bir ay Kurumsal alıp şube açarak düşmek şubeleri Temel fiyatına tutar.
+- 2026-11-07: otomatik hatırlatıcılar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-003); paketler tablosuna satır eklendi. Kural listesi çalışma varsayımıdır, kullanıcı onayı bekliyor.
 
 ## Karar
 
