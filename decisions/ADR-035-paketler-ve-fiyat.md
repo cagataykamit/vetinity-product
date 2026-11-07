@@ -14,6 +14,7 @@
 - 2026-11-07: paket farkları uygulamada zorlanıyor (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Paket düşürme davranışı **çalışma varsayımıdır, kullanıcı onayı bekliyor** (B: veri silinmez, fazla klinik ve üye kalır, mevcut portal bağı açık kalır, yalnız yeni kullanım kapanır). Kötüye kullanım riski biliniyor: bir ay Kurumsal alıp şube açarak düşmek şubeleri Temel fiyatına tutar.
 - 2026-11-07: otomatik hatırlatıcılar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-003); paketler tablosuna satır eklendi. Kural listesi çalışma varsayımıdır, kullanıcı onayı bekliyor.
 - 2026-11-08: gelişmiş raporlar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-004): hekim, hizmet/ürün, kalem ve tür kırılımları. Özetteki önceki dönem karşılaştırması Temel'de kalır. Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor).
+- 2026-11-08: otomatik aşı sihirbazı Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-005): klinik aşı takvimi, takvimden önerilen plan, hekim onayıyla planlı aşı. Bugünkü aşı kaydı ve takibi Temel'de kalır. Başlangıç şablonu yalnız klinik isteyince yüklenir, tıbbi tavsiye değildir. Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor). Takvimin kiracı başına olması, izinler ve şablon değerleri çalışma varsayımıdır.
 
 ## Karar
 

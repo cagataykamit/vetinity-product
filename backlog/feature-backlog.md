@@ -3203,9 +3203,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Aşı planı hızlanır, atlanan doz azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `5d7ea8f9`, FE `ceba6c50`, origin'e gönderilmedi. Tanımlar > Aşı takvimi: tür + aşı başına ilk doz haftası, temel seri doz sayısı ve aralığı, tekrar aralığı; isteğe bağlı başlangıç şablonu (kedi, köpek; tıbbi tavsiye değildir). Hasta kartından "Aşı planı öner": kalan dozlar doğum tarihi ve uygulanmış dozlardan hesaplanır, hekim seçip tarihini değiştirerek onaylar, onaylananlar planlı aşı kaydı olur. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001 |
-| **Notlar** | Rakibin bu özellikle tam olarak ne yaptığı doğrulanmadı |
+| **Notlar** | Sözleşme backend `docs/VACCINATION_SCHEDULE_API_CONTRACT.md`. Paket Profesyonel ve Kurumsal (`PlanFeature.VaccinationWizard`); takvim okuma her pakette açık. Bugünkü aşı kaydı, planlı aşı ve aşı hatırlatması Temel'de kalır. Takvim kiracı başına. Yeni izin yok (takvim `VaccineDefinitions.Update`, öneri `Vaccinations.Read`, onay `Vaccinations.Create`). Migration `AddVaccinationScheduleItems` yalnız yerel DB'de. Paketler tablosuna satır eklenmedi. Rakibin özelliği doğrulanmadı; görünüm kopyalanmadı |
 
 ### TIER-006 — Mobil barkod
 
