@@ -3219,9 +3219,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Mal kabul ve satış hızlanır, yanlış ürün seçimi azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `878d5eab`, FE `0d76a443`, origin'e gönderilmedi. Gerçek telefon kamerasıyla doğrulama bekliyor |
 | **Bağımlılıklar** | TIER-001, MOBILE-004 |
-| **Notlar** | Ürün kartında barkod alanı ve tarayıcı kamera desteği tasarımda kontrol edilir |
+| **Notlar** | Ürün kartındaki barkod kiracı içinde benzersiz (pasif dahil), boş bırakılabilir; barkod alanı ve elle/okuyucuyla barkod araması her pakette açık. Kamerayla okutma Profesyonel ve Kurumsal'da (`MobileBarcode`); mal kabul, satış, ürün listesi ve ürün kartında. Önce tarayıcının yerel BarcodeDetector'ı, yoksa `barcode-detector` 3.2.3 (MIT) kütüphanesi; WASM dosyası kendi sunucumuzdan. Kamera yalnız HTTPS/localhost'ta açılır, izin reddinde elle giriş kalır. İlaç karekodundan (GS1 DataMatrix) yalnız GTIN alınır. Sözleşme backend `docs/MOBILE_BARCODE_API_CONTRACT.md`. Migration `AddProductBarcodeUniqueIndex` yalnız yerel DB'de; paylaşılan/üretim DB'de önce çift barkod kontrolü (sözleşme §6). Çalışma varsayımları (kullanıcı onayı bekliyor): pasif ürün dahil benzersizlik, ürün başına tek barkod, karekoddaki parti/SKT'nin mal kabule yazılmaması. Öneri (ayrı iş): karekoddan parti ve SKT'yi mal kabul satırına doldurmak |
 
 ### TIER-007 — Patron ekranı
 

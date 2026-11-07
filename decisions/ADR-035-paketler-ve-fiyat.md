@@ -15,6 +15,7 @@
 - 2026-11-07: otomatik hatırlatıcılar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-003); paketler tablosuna satır eklendi. Kural listesi çalışma varsayımıdır, kullanıcı onayı bekliyor.
 - 2026-11-08: gelişmiş raporlar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-004): hekim, hizmet/ürün, kalem ve tür kırılımları. Özetteki önceki dönem karşılaştırması Temel'de kalır. Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor).
 - 2026-11-08: otomatik aşı sihirbazı Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-005): klinik aşı takvimi, takvimden önerilen plan, hekim onayıyla planlı aşı. Bugünkü aşı kaydı ve takibi Temel'de kalır. Başlangıç şablonu yalnız klinik isteyince yüklenir, tıbbi tavsiye değildir. Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor). Takvimin kiracı başına olması, izinler ve şablon değerleri çalışma varsayımıdır.
+- 2026-11-08: mobil barkod Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-006): telefon kamerasıyla barkod okutarak mal kabulde, satışta ve ürün aramasında ürün bulma. Ürün kartındaki barkod alanı ve elle ya da okuyucuyla barkod araması Temel'de kalır (veri girişi kilitlenmez). Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor). Barkod benzersizliği ve karekoddan yalnız GTIN alınması çalışma varsayımıdır.
 
 ## Karar
 
