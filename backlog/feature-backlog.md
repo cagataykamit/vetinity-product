@@ -3155,7 +3155,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ajanstan çıkmış gibi görünen kendi sitesine sihirbazla kavuşur; ara, yol tarifi ve randevu tek yerde |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek (tek sayfalık önceki tahmin Orta idi; ölçülmedi) |
-| **Durum** | Tasarlandı: ADR-045 kabul edildi. Tıklanabilir taslak FE `taslak/klinik-web-sayfasi` `f703f27b` (main'e alınmaz); gerçek kod başlamadı |
+| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `6995bd54`, FE `5c6a7e3b`, origin'e gönderilmedi. Canlı değil: yayın altyapısı (Node süreci, ADR-033 geçişi), hazır fotoğraf seti ve hukuk görüşü bekliyor (ADR-045; `operations/CANLI-ISLETIM-KILAVUZU.md` 11.1). Son test: BE domain 986, application 3788, entegrasyon 1834 geçti, 2 atlandı; FE panel 2727, portal 190, site 16 geçti |
 | **Bağımlılıklar** | ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
 | **Notlar** | APPT-034'ün yerine geçer. Yayın, adres, veri kaynağı ve randevu kararları ADR-045'te. Hazır fotoğraf seti kullanıcıdan gelecek (K7). Veteriner reklam kuralları kontrol edilmedi. Kapsamdaki SaaS fikirleri (2026-11-06): yayın öncesi zorunlu liste; önceki yayına dön, "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
