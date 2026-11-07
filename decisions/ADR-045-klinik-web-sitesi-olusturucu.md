@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Önerildi (2026-11-07); onay bekliyor.** "Kullanıcı" yazan maddeler kullanıcının kararıdır. "Öneri" yazanlar ajan önerisidir, ayrıca onay alınmadı. Açık kalan tek ürün kararı K13.
+**Kabul edildi (2026-11-07).** "Kullanıcı" yazan maddeler kullanıcının kararıdır. "Öneri" yazanlar ajan önerisidir; kullanıcıya bildirildi, itiraz gelmedi. Kullanıcı farklı derse yalnız ilgili K maddesi değişir.
 
 Kaynak: kullanıcının 2026-11-07 tarihli modül metni, üç öncelikli özelliği ve taslak üzerindeki seçimleri. Taslak: FE `taslak/klinik-web-sayfasi`, `src/app/pages/taslak/site-olusturucu/`, `f703f27b` (main'e alınmaz).
 
@@ -84,9 +84,9 @@ Randevu düğmesi ADR-042 talep akışına gider, model ikinci kez kurulmaz. E-p
 - Google Fonts bağlantısı üründe yoktur, fontlar bizim sunucudan gelir. Üçüncü taraf harita gömülmez, bağlantı verilir.
 - Herkese açık görsel için ayrı küçük varlık türü ve boyutlandırma eklenir; `StoredFile`'daki hasta dosyalarının erişim kuralı değişmez.
 
-### K13 — Paket (AÇIK, kullanıcı kararı)
+### K13 — Paket (kullanıcı: "hepsinde olsun")
 
-Çalışma varsayımı: Profesyonel ve Kurumsal (ADR-035, TIER-002). Backend kuralı TIER-001 üzerinden zorlanır. Paket düşerse öneri: site yayından kalkar, veri silinmez, yükseltince geri gelir. Paketler sayfasına satır, modül çalışınca eklenir (ADR-034).
+Site oluşturucu Temel, Profesyonel ve Kurumsal'ın hepsindedir; önceki "Profesyonel ve Kurumsal" kararının yerine geçer. Paket kilidi gerekmez, TIER-001'e bağlı değildir. Paket düşürme siteyi etkilemez. Deneme süresi dolunca ne olacağı abonelik kuralına bağlanır, uygulamada netleştirilir. Paketler sayfasına satır, modül çalışınca eklenir (ADR-034).
 
 ### K14 — İzolasyon ve içerik sınırları (öneri)
 
@@ -100,12 +100,11 @@ Site kayıtları kiracı filtresi altındadır (ADR-040); herkese açık uç yal
 
 ## Uygulama sırası (öneri)
 
-1. TIER-001 paket kuralı (bu modülün kapısı).
-2. Backend: site, sürüm, adres; yönetim uçları; herkese açık görsel.
-3. Panel: motor ve dört paket taşınır; sihirbaz gerçek veriye bağlanır; önizleme.
-4. Site uygulaması ve SSR; randevuya bağlantı; SEO çıktıları, sitemap, robots.
-5. Yayın sonrası: QR ve paylaşım, adres yönlendirmesi, geçici kapatma, sürüme dönüş.
-6. Canlı: fotoğraf seti, ADR-033 geçişi, dağıtım (kullanıcı söyleyince).
+1. Backend: site, sürüm, adres; yönetim uçları; herkese açık görsel.
+2. Panel: motor ve dört paket taşınır; sihirbaz gerçek veriye bağlanır; önizleme.
+3. Site uygulaması ve SSR; randevuya bağlantı; SEO çıktıları, sitemap, robots.
+4. Yayın sonrası: QR ve paylaşım, adres yönlendirmesi, geçici kapatma, sürüme dönüş.
+5. Canlı: fotoğraf seti, ADR-033 geçişi, dağıtım (kullanıcı söyleyince).
 
 ## Değerlendirilen seçenekler
 

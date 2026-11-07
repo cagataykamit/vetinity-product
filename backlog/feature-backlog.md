@@ -3151,12 +3151,12 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Başlık** | Klinik web sitesi oluşturucu |
 | **Kategori** | TIER |
 | **Problem** | Web sitesi olmayan klinik, müşterisine gönderecek tek bir adres bulamıyor |
-| **Önerilen çözüm** | Ayrıntı ADR-045 (onay bekliyor). Klinik başına bir site, taslak ve yayın ayrı, sürüm geçmişi. 7 adımlı sihirbaz, yanında canlı önizleme; çok sayfalı site; dört konsept (Modern, Premium, Friendly, Nature) ve bölüm başına tasarım alternatifi; kural tabanlı tasarım önerisi; `vetinity.com/k/...` adresi. Paket: çalışma varsayımı Profesyonel ve Kurumsal (ADR-045 K13 açık). İlk sürümde yorum, kendi alan adı, fiyat, kampanya, hasta verisi ve AI yok |
+| **Önerilen çözüm** | Ayrıntı ADR-045. Klinik başına bir site, taslak ve yayın ayrı, sürüm geçmişi. 7 adımlı sihirbaz, yanında canlı önizleme; çok sayfalı site; dört konsept (Modern, Premium, Friendly, Nature) ve bölüm başına tasarım alternatifi; kural tabanlı tasarım önerisi; `vetinity.com/k/...` adresi. Paket: Temel, Profesyonel ve Kurumsal, hepsinde (ADR-045 K13). İlk sürümde yorum, kendi alan adı, fiyat, kampanya, hasta verisi ve AI yok |
 | **Kullanıcı değeri** | Klinik, ajanstan çıkmış gibi görünen kendi sitesine sihirbazla kavuşur; ara, yol tarifi ve randevu tek yerde |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek (tek sayfalık önceki tahmin Orta idi; ölçülmedi) |
-| **Durum** | Tasarlanıyor: ADR-045 onay bekliyor. Tıklanabilir taslak FE `taslak/klinik-web-sayfasi` `f703f27b` (main'e alınmaz); gerçek kod başlamadı |
-| **Bağımlılıklar** | TIER-001, ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
+| **Durum** | Tasarlandı: ADR-045 kabul edildi. Tıklanabilir taslak FE `taslak/klinik-web-sayfasi` `f703f27b` (main'e alınmaz); gerçek kod başlamadı |
+| **Bağımlılıklar** | ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
 | **Notlar** | APPT-034'ün yerine geçer. Yayın, adres, veri kaynağı ve randevu kararları ADR-045'te. Hazır fotoğraf seti kullanıcıdan gelecek (K7). Veteriner reklam kuralları kontrol edilmedi. Kapsamdaki SaaS fikirleri (2026-11-06): yayın öncesi zorunlu liste; önceki yayına dön, "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
 ### TIER-003 — Otomatik hatırlatıcılar
