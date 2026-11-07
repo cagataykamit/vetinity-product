@@ -105,6 +105,7 @@ Reklam sınırı (2026-11-07 kaynak okuması, hukuk görüşü değil): 6343 say
 - **Backend:** site, sürüm ve adres kayıtları, herkese açık görsel, yönetim ve herkese açık uçlar, sözleşme belgesi. Migration yalnız yerel veritabanına.
 - **Frontend:** paylaşılan motor ve dört paket, panelde Ayarlar kartı ve sihirbaz, ayrı site uygulaması. Taslak kod taşınırken `anyComponentStyle` bütçesi aşılıyor (panel 4 KB): bileşen başına stil bölünür ya da site uygulamasına ayrı bütçe verilir.
 - **Tanıtım:** çalışmadan sitede yazılmaz.
+- **Uygulama (2026-11-07):** 1-4. aşamalar yerel main'de: BE `6995bd54`, FE `5c6a7e3b`. Destek için platform yöneticisi menüsünde "Klinik adresleri" sayfası (`/panel/clinic-addresses`). Uygulamada verilen kararlar: kapalı site HTTP 503 ve `noindex`; klinik kaydı alanları açık eylemle yazılır; sayfayı açmak site oluşturmaz, ilk değişiklik oluşturur; alt sayfa adresi ilk başlıkta sabitlenir. Canlı değil; kalanlar `operations/CANLI-ISLETIM-KILAVUZU.md` 11.1.
 
 ## Uygulama sırası (öneri)
 
