@@ -13,6 +13,7 @@
 - 2026-11-07: klinik web sitesi oluşturucu tüm paketlerde (kullanıcı: "hepsinde olsun"); 2026-11-06 dağılımındaki "Profesyonel ve Kurumsal'a klinik web sayfası" maddesinin yerine geçer: [ADR-045](ADR-045-klinik-web-sitesi-olusturucu.md) K13.
 - 2026-11-07: paket farkları uygulamada zorlanıyor (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Paket düşürme davranışı **çalışma varsayımıdır, kullanıcı onayı bekliyor** (B: veri silinmez, fazla klinik ve üye kalır, mevcut portal bağı açık kalır, yalnız yeni kullanım kapanır). Kötüye kullanım riski biliniyor: bir ay Kurumsal alıp şube açarak düşmek şubeleri Temel fiyatına tutar.
 - 2026-11-07: otomatik hatırlatıcılar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-003); paketler tablosuna satır eklendi. Kural listesi çalışma varsayımıdır, kullanıcı onayı bekliyor.
+- 2026-11-08: gelişmiş raporlar Profesyonel ve Kurumsal'da çalışır hale geldi (TIER-004): hekim, hizmet/ürün, kalem ve tür kırılımları. Özetteki önceki dönem karşılaştırması Temel'de kalır. Paketler tablosuna satır eklenmedi (kullanıcı kararı bekliyor).
 
 ## Karar
 
