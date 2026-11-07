@@ -3187,9 +3187,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik sahibi işin nereye gittiğini görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `2fe30cc7`, FE `d41b2642`, origin'e gönderilmedi. İşletme performansı sayfasına "Kırılımlar": hekim (muayene, net ciro), hizmet/ürün, en çok ciro yapan 10 kalem, hayvan türü, geliş ve gelen hasta sahibi; her biri önceki dönemle. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, REPORT-008 |
-| **Notlar** | — |
+| **Notlar** | Sözleşme backend `docs/PERFORMANCE_BREAKDOWNS_API_CONTRACT.md`. Bugünkü raporlar ve özetteki önceki dönem karşılaştırması Temel'de kalır. Yeni izin `Reports.Performance` (Admin, Owner, ClinicAdmin; UX taslağı S1); mevcut özel roller elle almalı (deploy notu). Veri modeli değişmedi, migration yok. Alınmayanlar: ürün bazlı satış (ücret satırında ürün kimliği yok), yeni müşteri (içe aktarma işareti yok), geçen yılın aynı dönemi, hekim filtresi. Paketler tablosuna satır eklenmedi |
 
 ### TIER-005 — Otomatik aşı sihirbazı
 
