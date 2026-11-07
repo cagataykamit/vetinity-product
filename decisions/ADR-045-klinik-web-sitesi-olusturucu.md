@@ -55,12 +55,11 @@ Klinik kimliğine göre öneri istendi (kullanıcı). Öneri açık kurallarla �
 Klinik yüklemediği yerde Vetinity'nin hazır fotoğrafı görünür (kullanıcı). Seti kullanıcı sağlayabilir; sağlayana kadar taslaktaki fotoğraflar yer tutar.
 
 Öneri:
-- Set dosya olarak bizim depolamamızda durur, kaynak ve lisans kaydıyla. Üçüncü taraf adresinden çizilmez. Kullanıcının seti gelene kadar bu set canlıya çıkmaz; lisansı ve kişi hakkı doğrulanmadı.
-- Hazır fotoğraflar yalnız hayvan görselidir: klinik içi ya da çalışan görünmez, müşteri kliniği olduğu gibi sanmasın.
-- Galeri hazır fotoğrafla doldurulmaz; yükleme yoksa görünmez. Hekim kartında fotoğraf yoksa monogram çizilir.
+- Set dosya olarak bizim depolamamızda durur, kaynak ve lisans kaydıyla (FE `projects/site-engine/stock/KAYNAKLAR.json`). Üçüncü taraf adresinden çizilmez. Bugünkü 25 fotoğraf taslaktaki Unsplash seçimleridir; lisansı ve kişi hakkı doğrulanmadı, canlıdan önce doğrulanır ya da kullanıcının setiyle değiştirilir.
+- 2026-11-07 kullanıcı: "kendi fotolarımız olsun normalde isterlerse değiştirsinler". Hero, tanıtım, hizmet, özellik, sağlık rehberi, galeri ve paylaşım görseli boşsa hazır fotoğraf çizilir; önceki "set gelene kadar boş", "galeri dolmaz" ve "klinik içi görünmez" önerileri kalktı. Sitede "Bu sitedeki bazı görseller temsilidir." ibaresi görünür. Hekim kartında fotoğraf yoksa monogram çizilir.
 - Sihirbaz hangi görsellerin hazır fotoğraf olduğunu gösterir ve değiştirmeyi önerir. Yayında hazır fotoğraf "temsili görsel" ibaresi taşır.
 - Araştırma (`research/klinik-sitesi-kurallari-2026-11.md`): Unsplash ve Pexels koşulları, görselleri ürün içinde set olarak müşterilere sunmaya sınır getiriyor olabilir. Set için ürün içi kullanıma izin veren ücretli lisans ya da kendi çekim tercih edilir; her görsel için kaynak ve lisans kaydı tutulur. Sonuç hukukçuya sorulur.
-- Set gelene kadar kayıt noktası boş kalır; görselsiz düzenler çizilir.
+- Fotoğraf yüklenemezse görselsiz düzenler çizilir.
 
 ### K8 — Veri kaynağı (öneri)
 
