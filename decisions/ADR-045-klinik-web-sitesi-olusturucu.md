@@ -6,7 +6,7 @@
 
 Kaynak: kullanıcının 2026-11-07 tarihli modül metni, üç öncelikli özelliği ve taslak üzerindeki seçimleri. Taslak: FE `taslak/klinik-web-sayfasi`, `src/app/pages/taslak/site-olusturucu/`, `f703f27b` (main'e alınmaz).
 
-İlgili: [TIER-002](../backlog/feature-backlog.md#tier-002--kliniğe-özel-web-sayfası-ve-oluşturma-sihirbazı) (bu ADR ilk sürüm sınırlarını değiştirir), [ADR-033](ADR-033-alan-adi-ve-adres-duzeni.md), [ADR-034](ADR-034-tanitim-sitesi-konumlandirma.md), [ADR-035](ADR-035-paketler-ve-fiyat.md), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md), [ADR-042](ADR-042-online-randevu-talebi.md), [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md).
+İlgili: [TIER-002](../backlog/feature-backlog.md#tier-002--klinik-web-sitesi-oluşturucu) (bu ADR ilk sürüm sınırlarını değiştirir), [ADR-033](ADR-033-alan-adi-ve-adres-duzeni.md), [ADR-034](ADR-034-tanitim-sitesi-konumlandirma.md), [ADR-035](ADR-035-paketler-ve-fiyat.md), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md), [ADR-042](ADR-042-online-randevu-talebi.md), [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md).
 
 ## Bağlam
 
