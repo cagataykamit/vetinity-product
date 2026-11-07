@@ -3143,21 +3143,21 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | WEB-007, ADR-035 |
 | **Notlar** | Paket düşürme bugün üye sayısına bakmıyor, sınırı aşan üyeler kalıyor (WEB-007 testleriyle sabit) |
 
-### TIER-002 — Kliniğe özel web sayfası ve oluşturma sihirbazı
+### TIER-002 — Klinik web sitesi oluşturucu
 
 | Alan | Değer |
 |---|---|
 | **Kimlik** | TIER-002 |
-| **Başlık** | Kliniğe özel web sayfası ve oluşturma sihirbazı |
+| **Başlık** | Klinik web sitesi oluşturucu |
 | **Kategori** | TIER |
 | **Problem** | Web sitesi olmayan klinik, müşterisine gönderecek tek bir adres bulamıyor |
-| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Ayarlar > "Web sayfam" sekmesinde klinik başına 5 adımlı sihirbaz (bilgiler, görünüm, hizmetler ve tanıtım, saatler ve randevu, önizle ve yayınla); ortak şablon; bağlantı, QR ve WhatsApp paylaşımı; `vetinity.com/k/...` adresi. İlk sürümde fiyat, kampanya, yorum, ekip fotoğrafı, kendi alan adı ve hasta verisi yok |
-| **Kullanıcı değeri** | Klinik birkaç dakikada paylaşılabilir bir sayfaya kavuşur; ara, yol tarifi ve randevu tek yerde |
+| **Önerilen çözüm** | Ayrıntı ADR-045. Klinik başına bir site, taslak ve yayın ayrı, sürüm geçmişi. 7 adımlı sihirbaz, yanında canlı önizleme; çok sayfalı site; dört konsept (Modern, Premium, Friendly, Nature) ve bölüm başına tasarım alternatifi; kural tabanlı tasarım önerisi; `vetinity.com/k/...` adresi. Paket: Temel, Profesyonel ve Kurumsal, hepsinde (ADR-045 K13). İlk sürümde yorum, kendi alan adı, fiyat, kampanya, hasta verisi ve AI yok |
+| **Kullanıcı değeri** | Klinik, ajanstan çıkmış gibi görünen kendi sitesine sihirbazla kavuşur; ara, yol tarifi ve randevu tek yerde |
 | **Öncelik** | P2 |
-| **Tahmini zorluk** | Orta |
-| **Durum** | Tasarlanacak (geçici taslak dal `taslak/klinik-web-sayfasi` `eaabcdd1`; A/B/C görünüm seçimi bekliyor; main'e alınmaz) |
-| **Bağımlılıklar** | TIER-001, ADR-033 (müşterinin görebilmesi için `www` geçişi; kullanıcı söyleyince), ADR-042 |
-| **Notlar** | APPT-034'ün yerine geçer. Koda geçmeden yeni ADR gerekir: sihirbaz değişikliği klinik kaydına mı yazılır, randevu anahtarı `ClinicOnlineBookingSettings` ile ilişkisi, adresi kim seçer ve değişince eski bağlantı, yayın akışı, WhatsApp önizlemesi için sunucudan meta etiket. Herkese açık bağlantıda randevu kodunun görünmesi tahmin edilemezlik varsayımını zayıflatır (ADR-042 notu). Veteriner reklam kuralları kontrol edilmedi. Kapsama alınanlar (2026-11-06, SaaS taraması): yayın öncesi zorunlu liste; taslak ve yayın ayrı, "önceki yayına dön", "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
+| **Tahmini zorluk** | Yüksek (tek sayfalık önceki tahmin Orta idi; ölçülmedi) |
+| **Durum** | Tasarlandı: ADR-045 kabul edildi. Tıklanabilir taslak FE `taslak/klinik-web-sayfasi` `f703f27b` (main'e alınmaz); gerçek kod başlamadı |
+| **Bağımlılıklar** | ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
+| **Notlar** | APPT-034'ün yerine geçer. Yayın, adres, veri kaynağı ve randevu kararları ADR-045'te. Hazır fotoğraf seti kullanıcıdan gelecek (K7). Veteriner reklam kuralları kontrol edilmedi. Kapsamdaki SaaS fikirleri (2026-11-06): yayın öncesi zorunlu liste; önceki yayına dön, "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
 ### TIER-003 — Otomatik hatırlatıcılar
 
