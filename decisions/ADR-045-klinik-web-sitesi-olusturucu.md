@@ -58,7 +58,9 @@ Klinik yüklemediği yerde Vetinity'nin hazır fotoğrafı görünür (kullanıc
 - Set dosya olarak bizim depolamamızda durur, kaynak ve lisans kaydıyla. Üçüncü taraf adresinden çizilmez. Kullanıcının seti gelene kadar bu set canlıya çıkmaz; lisansı ve kişi hakkı doğrulanmadı.
 - Hazır fotoğraflar yalnız hayvan görselidir: klinik içi ya da çalışan görünmez, müşteri kliniği olduğu gibi sanmasın.
 - Galeri hazır fotoğrafla doldurulmaz; yükleme yoksa görünmez. Hekim kartında fotoğraf yoksa monogram çizilir.
-- Sihirbaz hangi görsellerin hazır fotoğraf olduğunu gösterir ve değiştirmeyi önerir.
+- Sihirbaz hangi görsellerin hazır fotoğraf olduğunu gösterir ve değiştirmeyi önerir. Yayında hazır fotoğraf "temsili görsel" ibaresi taşır.
+- Araştırma (`research/klinik-sitesi-kurallari-2026-11.md`): Unsplash ve Pexels koşulları, görselleri ürün içinde set olarak müşterilere sunmaya sınır getiriyor olabilir. Set için ürün içi kullanıma izin veren ücretli lisans ya da kendi çekim tercih edilir; her görsel için kaynak ve lisans kaydı tutulur. Sonuç hukukçuya sorulur.
+- Set gelene kadar kayıt noktası boş kalır; görselsiz düzenler çizilir.
 
 ### K8 — Veri kaynağı (öneri)
 
@@ -74,25 +76,29 @@ Yayın öncesi zorunlu liste: ad, telefon, adres, en az bir saat satırı. Diğe
 
 ### K11 — Randevu (öneri)
 
-Randevu düğmesi ADR-042 talep akışına gider, model ikinci kez kurulmaz. E-posta kodu ve hız sınırı aynı kalır, bu yüzden formda e-posta zorunludur (taslakta isteğe bağlıydı). Online randevu kapalıysa düğme telefona döner. Müsait saatler ADR-042 K3 sorgusundan gelir; herkese açık uç TIER-017'dir. Randevu kodunun site üzerinden görünmesi ADR-042'deki tahmin edilemezlik varsayımını zayıflatır: koruma kod doğrulama ve hız sınırına dayanır, klinik kodu yine yeniler.
+Randevu düğmesi kliniğin portal bağlantısındaki (`/randevu/{kod}`) mevcut talep formuna gider; site içinde ikinci form kurulmaz, kural ve e-posta kodu tek yerde kalır (2026-11-07 kararı). Taslaktaki site içi form ürüne geçmez. E-posta kodu ve hız sınırı aynı kalır. Online randevu kapalıysa düğme telefona döner. Bu sürümde sitede müsait saat gösterilmez; herkese açık uç TIER-017'dir. Randevu kodunun site üzerinden görünmesi ADR-042'deki tahmin edilemezlik varsayımını zayıflatır: koruma kod doğrulama ve hız sınırına dayanır, klinik kodu yine yeniler.
 
 ### K12 — Yayın altyapısı (öneri, teknik)
 
 - Site ayrı Angular uygulamasıdır (`projects/`): panel kodu ve oturumu ile aynı pakete girmez. Motor paylaşılan klasördedir, panel önizlemesi de onu kullanır.
 - Sayfalar sunucuda üretilir (Angular SSR): adresler dinamik olduğundan derleme anı prerender yetmez; paylaşım botları JS çalıştırmaz, ilk görünüm de hızlı olmalıdır.
 - Bu, sunucuda yeni bir Node süreci demektir. Barındırma, DNS ve yönlendirme işleri kullanıcı söyleyince yapılır; `vetinity.com/k/...` için ADR-033 geçişi gerekir. Ajan kendiliğinden dağıtım yapmaz.
-- Google Fonts bağlantısı üründe yoktur, fontlar bizim sunucudan gelir. Üçüncü taraf harita gömülmez, bağlantı verilir.
-- Herkese açık görsel için ayrı küçük varlık türü ve boyutlandırma eklenir; `StoredFile`'daki hasta dosyalarının erişim kuralı değişmez.
+- Google Fonts bağlantısı üründe yoktur, fontlar bizim sunucudan gelir (`@fontsource`, OFL-1.1; depoda Inter için aynı yol kullanılıyor). Üçüncü taraf harita gömülmez, bağlantı verilir.
+- Herkese açık görsel için ayrı küçük varlık türü eklenir; `StoredFile`'daki hasta dosyalarının erişim kuralı değişmez.
+- Görsel küçültme yüklemeden önce tarayıcıda yapılır, backend'e görsel kütüphanesi eklenmez (2026-11-07 kararı): lisans ve yerel bağımlılık yükü yoktur. Backend tür ve boyut sınırını yine zorlar. Ölçü sunucuda garanti edilmediği için tek görselden çok boyut üretilmez; gerekirse sonra değerlendirilir.
+- SSR ile hız sınırı: site sunucusundan gelen istekler tek IP görünür; gerçek istemci IP'sinin güvenli iletimi yayın altyapısıyla birlikte çözülür.
 
 ### K13 — Paket (kullanıcı: "hepsinde olsun")
 
 Site oluşturucu Temel, Profesyonel ve Kurumsal'ın hepsindedir; önceki "Profesyonel ve Kurumsal" kararının yerine geçer. Paket kilidi gerekmez, TIER-001'e bağlı değildir. Paket düşürme siteyi etkilemez. Paketler sayfasına satır, modül çalışınca eklenir (ADR-034).
 
-**Abonelik biterse (kullanıcı: "Hemen kapansın"):** deneme ya da dönem bitip abonelik salt okunur olduğunda ve iptalde site ek süre olmadan kapanır; müşteri açıklayıcı kapalı sayfa görür. Öneri: veri silinmez, ödeme yapılınca son yayınlanan sürüm kendiliğinden geri gelir; klinik elle kapattıysa kapalı kalır; pasif kiracıda site bulunamaz (404).
+**Abonelik biterse (kullanıcı: "Hemen kapansın"):** deneme ya da dönem bitip abonelik salt okunur olduğunda ve iptalde site ek süre olmadan kapanır; müşteri açıklayıcı kapalı sayfa görür. Öneri: veri silinmez, ödeme yapılınca son yayınlanan sürüm kendiliğinden geri gelir; klinik elle kapattıysa kapalı kalır; pasif kiracıda site bulunamaz (404). Salt okunur kiracı elle kapatamaz; site zaten kapalı olduğundan sorun oluşmaz.
 
 ### K14 — İzolasyon ve içerik sınırları (öneri)
 
-Site kayıtları kiracı filtresi altındadır (ADR-040); herkese açık uç yalnız yayınlanmış sürümün çıktısını döner, taslağı ya da kiracı kimliğini döndürmez. Hasta verisi siteye girmez. Sayfa içi hazır metinler elle yazılır; üstünlük ve tıbbi iddia içermez. Veteriner reklam kuralları kontrol edilmedi: bu çalışma varsayımıdır, bilgilendirme metni "taslak" uyarısıyla kalır.
+Site kayıtları kiracı filtresi altındadır (ADR-040); herkese açık uç yalnız yayınlanmış sürümün çıktısını döner, taslağı ya da kiracı kimliğini döndürmez. Hasta verisi siteye girmez. Sayfa içi hazır metinler elle yazılır; üstünlük, kliniğe dair doğrulanmamış iddia ve tıbbi iddia içermez.
+
+Reklam sınırı (2026-11-07 kaynak okuması, hukuk görüşü değil): 6343 sayılı Kanun md. 41 reklam ve propaganda niteliğindeki ifadeleri internette de yasaklıyor; hizmet listesi ve hekim tanıtımının nerede reklama dönüştüğü net değil. Çalışma varsayımı: site bilgilendirme amaçlıdır. Fiyat, kampanya, "ücretsiz", "garanti", "en iyi", rakip kıyası, müşteri yorumu, önce/sonra görseli sunulmaz. Sihirbaz serbest metindeki bu tür sözcüklerde uyarı verir, engellemez; uymak kliniğin sorumluluğundadır. Bilgilendirme metni ve bu uyarılar hukukçu görüşüne kadar "taslak" sayılır.
 
 ## Sonuçlar
 
