@@ -317,7 +317,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `ApiKeys.Manage` (Admin, Owner)
   - `CustomDevelopmentRequests.Manage` (Admin, Owner)
   
-  Seed yalnız hazır rollere bağlar; **kliniklerin kendi tanımladığı özel roller bu izinleri elle almalı** (sürüm notunda yazılır). Yerel DB'de `Owner` rol kaydı yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
+  Klinikler rol tanımlayamaz: roller ortaktır (Admin, Owner, ClinicAdmin, Veteriner, Sekreter); klinik yalnız bu rolleri üyelerine atar. Rol izinlerini yalnız platform yöneticisi değiştirebilir (`Roles.Write` hiçbir hazır rolde yok) ve değişiklik tüm kliniklere yansır. Sözleşmelerdeki "özel roller elle almalı" notu, veritabanında elle oluşturulmuş bir rol olursa geçerlidir; bugün yerel DB'de böyle bir rol yok, canlıda `OperationClaims` listesi kontrol edilir. Yerel DB'de `Owner` rol kaydı da yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
 - [ ] Paket kuralları canlıda etkin olur (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Mevcut kiracıların paketi ile kullanımı yayından önce karşılaştırılır; sınırı aşan kiracı varsa onunla önceden konuşulur.
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
