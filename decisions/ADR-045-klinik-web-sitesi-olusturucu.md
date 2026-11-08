@@ -75,7 +75,7 @@ Yayın öncesi zorunlu liste: ad, telefon, adres, en az bir saat satırı. Diğe
 
 ### K11 — Randevu (öneri)
 
-Randevu düğmesi kliniğin portal bağlantısındaki (`/randevu/{kod}`) mevcut talep formuna gider; site içinde ikinci form kurulmaz, kural ve e-posta kodu tek yerde kalır (2026-11-07 kararı). Taslaktaki site içi form ürüne geçmez. E-posta kodu ve hız sınırı aynı kalır. Online randevu kapalıysa düğme telefona döner. Bu sürümde sitede müsait saat gösterilmez; herkese açık uç TIER-017'dir. Randevu kodunun site üzerinden görünmesi ADR-042'deki tahmin edilemezlik varsayımını zayıflatır: koruma kod doğrulama ve hız sınırına dayanır, klinik kodu yine yeniler.
+Randevu düğmesi kliniğin portal bağlantısındaki (`/randevu/{kod}`) mevcut talep formuna gider; site içinde ikinci form kurulmaz, kural ve e-posta kodu tek yerde kalır (2026-11-07 kararı). Taslaktaki site içi form ürüne geçmez. E-posta kodu ve hız sınırı aynı kalır. Online randevu kapalıysa düğme telefona döner. Bu sürümde sitede müsait saat gösterilmez; herkese açık uç TIER-017'dir. (2026-11-08 notu, çalışma varsayımı, kullanıcı onayı bekliyor: TIER-017 ile Randevu sayfasında en yakın saatler gösteriliyor; form yine portal bağlantısında.) Randevu kodunun site üzerinden görünmesi ADR-042'deki tahmin edilemezlik varsayımını zayıflatır: koruma kod doğrulama ve hız sınırına dayanır, klinik kodu yine yeniler.
 
 ### K12 — Yayın altyapısı (öneri, teknik)
 

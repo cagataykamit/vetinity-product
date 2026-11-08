@@ -3399,7 +3399,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Talep doğru saate gelir, ileri geri arama azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `be317e9a`, FE `5c643119`, origin'e gönderilmedi. Herkese açık uç `GET /api/v1/public/sites/{slug}/next-available-slots` yalnız gün ve saat döner, hesap bağlantı formunun müsaitliğinden gelir ("Diğer / emin değilim": 30 dk, tüm hekimler). Saatler sitenin Randevu sayfasında görünür; seçilen saat portal talep formuna hazır gider (`?saat=`), seçilen nedene uymazsa form başka saat ister; talep klinik onaylayınca kesinleşir. Klinik gösterimi Ayarlar > Online randevu'dan kapatabilir (varsayılan açık, çalışma varsayımı). Migration `AddOnlineBookingShowNextAvailableSlots` yalnız yerel DB'de. Veteriner bul kartı TIER-015'e kaldı. Panel ayarı tarayıcıda görülmedi |
 | **Bağımlılıklar** | ADR-042, APPT-008, TIER-002 |
 | **Notlar** | "Kesin randevu" değil "talep" dili. Takvimle tutarlılık ve aynı anda seçim tasarımda ele alınır |
 
