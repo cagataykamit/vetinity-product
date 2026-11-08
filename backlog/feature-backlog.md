@@ -2835,7 +2835,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zamanında hatırlatma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi, kod tarafı (2026-11-05; dal `feat/push-altyapisi`, main'e alınmadı): cihaz jetonu kaydı/iptali, hesap düzeyi tercih, outbox üzerinden FCM HTTP v1 gönderimi (anahtar yoksa no-op), portalda "Anlık bildirim" bölümü. Açılış FCM anahtarı (kullanıcı) ve MOBILE-002 push eklentisine bağlı |
+| **Durum** | Geliştirildi, kod tarafı (2026-11-05; dal `feat/push-altyapisi` main'in içinde, 2026-11-09 kontrolü: dalda main dışı commit yok): cihaz jetonu kaydı/iptali, hesap düzeyi tercih, outbox üzerinden FCM HTTP v1 gönderimi (anahtar yoksa no-op), portalda "Anlık bildirim" bölümü. Açılış FCM anahtarı (kullanıcı) ve MOBILE-002 push eklentisine bağlı |
 | **Bağımlılıklar** | PORTAL-010 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K7; MOBILE-002 ile birlikte |
 
