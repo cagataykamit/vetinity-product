@@ -2397,7 +2397,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı web entegrasyonu |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`, origin'e gönderilmedi. Ayarlar > Online randevu > Sitenize ekleyin: satır içi stilli, erişilebilir "Online randevu al" bağlantısı, kopyala ve önizleme; `?kaynak=dis-site` (Talepler'de "Dış site"). Her pakette |
 | **Bağımlılıklar** | APPT-001, APPT-002 |
 | **Notlar** | — |
 
@@ -2413,7 +2413,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Site içi deneyim |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`. Başlıklı iframe ve yükseklik betiği; gömülüyken üst başlık yok, belgeler yeni sekmede. Yalnız `/randevu/*` gömülebilir; portal çerçevede diğer sayfaları çizmez (sözleşme §15). E-posta kodu gönderimi çerçevede denenmedi |
 | **Bağımlılıklar** | APPT-001 |
 | **Notlar** | Güvenlik ve responsive davranış değerlendirilmeli |
 
@@ -2429,7 +2429,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik markası korunur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`. Logo ve ana renk kliniğin yayındaki sitesinden (ADR-045), ikinci yükleme alanı yok; kontrastı yetmeyen renk uygulanmaz; sitesi olmayan klinikte varsayılan görünüm. Tarayıcıda görülmedi |
 | **Bağımlılıklar** | APPT-001 |
 | **Notlar** | — |
 
@@ -2973,7 +2973,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Somut kanıt; sahte görsel yok |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `e483b123`, origin'e gönderilmedi. Yerel ortamda Kurumsal deneme ve örnek klinik sentetik verisiyle 13 ekran, açık ve koyu tema: Bugün, muayene, kesinleştirme, hasta kartı, müşteri bakiyesi, gün sonu, stok, Muayene Kayıt Defteri, KVKK formu, aşı sihirbazı, gelişmiş raporlar, klinik web sitesi sihirbazı, telefonda Bugün. Eksik: portal, veri aktarma sihirbazı, mal kabul, Aşı Kayıt Defteri, şubeler özeti. Açık soru: örnek verideki gerçekçi adlar tanıtımda kalsın mı |
 | **Bağımlılıklar** | Panelde sentetik veri (TEST kayıtları) |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 7. Portal görseli yayınlanana kadar yok |
 
@@ -3495,7 +3495,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik doğru paketi daha hızlı seçer |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `e483b123`, origin'e gönderilmedi. Tabloda "Sadece farkları göster" (varsayılan kapalı, 48 satırdan 14'e). Kartlar bir önceki paketin tümü artı farkı sayıyor ve "Kimin için" satırı var; maddeler `PRICING_FEATURE_ROWS`'tan. Satıra `badge` alanı (AI çalışınca "Eklenti gerekir"). Destek satırı kullanıcı kararını bekliyor |
 | **Bağımlılıklar** | WEB-007 |
 | **Notlar** | Metin `PRICING_FEATURE_ROWS` verisinden üretilir, kopyalanmaz |
 
