@@ -310,7 +310,8 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `AddCustomDevelopmentRequests` (özel geliştirme talepleri, TIER-010)
   - `AddOnlineBookingShowNextAvailableSlots` (en yakın müsait saat, TIER-017)
   - `AddAppointmentOwnerLinks` (hatırlatmada onayla/iptal, TIER-019)
-  - Kullanıcı kararları dalı (paket düşürme A, deneme kuralı, ADR-046 ticari ileti kapısı) birleşince eklediği migration buraya yazılır.
+  - `AddMarketingGateAndOptOutLinks` (klinik başına ticari ileti kapısı ve ret bağlantıları, ADR-046; 2026-11-08 kullanıcı kararları)
+- [ ] Paket düşürme A (2026-11-08) canlıda etkin olur: sığmayan düşürme ve ücretliye geçiş 409 alır; dönem sonunda sınırı aşan planlı düşürme uygulanmaz. Eski B döneminden sınırı aşan kiracı varsa yayından önce konuşulur.
 - [ ] Ardından `DbMigrator seed`. Yeni izinler:
   - `Reports.Performance` (Admin, Owner, ClinicAdmin)
   - `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin)

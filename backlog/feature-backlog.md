@@ -3139,9 +3139,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Sitede yazan paket farkı üründe gerçekten geçerli olur; üst paketin satın alma nedeni oluşur |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `e9ab6e70`, FE `a3bf35a8`, origin'e gönderilmedi. Paket düşürme ve deneme maddeleri çalışma varsayımı, kullanıcı onayı bekliyor |
+| **Durum** | Geliştirildi (2026-11-07; kullanıcı kararlarıyla güncellendi 2026-11-08): ilk sürüm origin'de (BE `e9ab6e70`, FE `a3bf35a8`); kararlar yerel main'de BE `77239c6d`, FE `1edefc44`, origin'e gönderilmedi. Panel ekranları tarayıcıda görülmedi |
 | **Bağımlılıklar** | WEB-007, ADR-035 |
-| **Notlar** | Sözleşme backend `docs/PLAN_FEATURES_API_CONTRACT.md`. Paket düşürme B ile uygulandı: düşürme her zaman kabul, veri silinmez, fazla klinik ve üye çalışır, mevcut portal bağı açık kalır (bağ üzerinden randevu talebi dahil), yalnız yeni davet, bekleyen davetin kabulü ve yeni klinik kapanır. Reddedilen A: kullanım sığmıyorsa düşürme reddi ve Temel'e inince portalın durması. Deneme: TRIAL_LIMITS K7 korundu, şube sayısı sınırlanmaz; portal seçilen pakete göre kilitli |
+| **Notlar** | Sözleşme backend `docs/PLAN_FEATURES_API_CONTRACT.md`. Kullanıcı kararı (2026-11-08, ADR-035): **paket düşürme A**, aktif klinik ve üye (bekleyen davet dahil) hedef pakete sığmıyorsa planlı düşürme, denemede değişim ve ücretliye geçiş 409 alır; yanıt ve panel fazlalığı ve yapılacakları söyler; dönem sonunda sınır aşıldıysa planlı düşürme uygulanmaz, abonelik mevcut pakette kalır. Portalsız pakette bağ okuması ve bağ üzerinden randevu talebi kapanır; aydınlatma, veri talebi, tercihler ve hesap silme açık. **Deneme seçilen pakete göre**, çok klinik dahil (TRIAL_LIMITS K7 güncellendi). Açık: dönem sonunda uygulanmayan düşürme için e-posta yok; planlı düşürmenin dönem sonunda ödeme almadan yeni dönem başlatıp başlatmadığı ayrıca incelenmeli (`ScheduledPlanChangeProcessorHostedService`, bu işte değişmedi) |
 
 ### TIER-002 — Klinik web sitesi oluşturucu
 
