@@ -2767,7 +2767,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ayrı bir programda faturayı yeniden yazmaz; Vetinity eski sistemin yerini alabilir (canlıya geçiş koşulu) |
 | **Öncelik** | P1 (pilotun gölge döneminde gerekmez; eski sistemi bırakma aşamasında gerekli) |
 | **Tahmini zorluk** | Yüksek (tahmin: keşif + backend + entegratör + frontend; ölçülmedi) |
-| **Durum** | Karar bekliyor (kullanıcı 2026-10-13: detaylar sonra netleştirilecek) |
+| **Durum** | Başlanmadı; ADR-036 Dilim 0'ı bekliyor (2026-11-08 notu): kararlar ADR-036'da kabul (2026-10-21), kod yok. Bekleyen kullanıcı işleri: mali müşavir görüşmesi, entegratör teklifleri ve seçimi (AK-2), seçilen entegratörden sandbox hesabı. Dilim 1 (veri modeli) entegratör beklemeden yapılabilir |
 | **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
 | **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı). **2026-10-19:** açık sorular (1)–(4) [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) AK-1…AK-4'e taşındı (öneri: elle "Belge kes" + kapanışta öneri v1, tam otomatik v2) |
 

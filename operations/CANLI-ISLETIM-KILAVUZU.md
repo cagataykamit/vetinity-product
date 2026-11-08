@@ -299,8 +299,26 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 - [ ] Klinik sitesi yeni bir Node sürecidir (`dist/site/server/server.mjs`, frontend `docs/SITE_APP.md`): ortam değişkenleri `SITE_API_BASE_URL`, `SITE_PUBLIC_API_BASE_URL`, `SITE_PUBLIC_ORIGIN`, `SITE_ALLOWED_HOSTS`, `SITE_TRUSTED_PROXY_HOPS`; `vetinity.com/k/*` bu sürece yönlenir (ADR-033 geçişi); `vetinity.com/robots.txt` `/k/` yolunu kapatmaz. Site sunucusu API ile aynı makinede değilse `ForwardedHeaders:KnownProxies` ayarlanır. nginx'in `X-Forwarded-For` ilettiği doğrulanır.
 - [ ] Klinik sitesinin hazır fotoğraf seti lisans kaydıyla (ADR-045 K7): bugünkü 25 fotoğraf taslak Unsplash seçimleri; lisans canlıdan önce doğrulanır ya da set değiştirilir. Paketler sayfasına satır modül canlıda çalışınca eklenir (`pricing-plan.utils.ts`).
 - [ ] Platform yöneticisi yalnız kullanıcının kendi hesabıdır (2026-11-07). `create-platform-admin` var olan hesaba rol vermez; canlıda rol sahipleri kontrol edilir. Sabit parolalı `admin@example.com` hiçbir ortamda oluşturulmaz.
-- [ ] Push sağlayıcısı anahtarsız çalışır: `Push:Fcm` yoksa `NotConfiguredPushNotificationProvider` seçilir (gönderim yapmaz, yalnız log; portal "henüz etkin değil" der). Ticari ileti gönderimi kod sabitiyle kapalı (`OwnerNotificationChannelPolicy.MarketingSendingEnabled`; İYS/ETK hukuki görüşü bekler).
+- [ ] Push sağlayıcısı anahtarsız çalışır: `Push:Fcm` yoksa `NotConfiguredPushNotificationProvider` seçilir (gönderim yapmaz, yalnız log; portal "henüz etkin değil" der). Ticari ileti gönderimi kod sabitiyle kapalı (`OwnerNotificationChannelPolicy.MarketingSendingEnabled`; İYS/ETK hukuki görüşü bekler). Kullanıcı kararı (ADR-046, 2026-11-08): genel sabit yerine klinik başına kapı, varsayılan kapalı; kod dalda. Hukuk listesi C7 kapanmadan canlıda hiçbir klinik için açılmaz.
 - [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
+- [ ] Üst paket işleri (2026-11-07/08; TIER-001…019). Hepsi yalnız yerel DB'de uygulandı; canlıda zaman damgası sırasıyla:
+  - `AddClinicReminderRules` (otomatik hatırlatıcılar, TIER-003)
+  - `AddVaccinationScheduleItems` (aşı takvimi, TIER-005)
+  - `AddProductBarcodeUniqueIndex` (ürün barkodu, TIER-006). **Önce** canlı veride aynı kiracıda çift barkod olup olmadığı sorgulanır (backend `docs/MOBILE_BARCODE_API_CONTRACT.md` §6); çift varsa benzersiz indeks oluşmaz ve migration düşer.
+  - `AddCashCounts` (kasa sayımı, TIER-008)
+  - `AddApiKeysAndChangeTracking` (dış API anahtarları; müşteri, hayvan, randevu, aşı tablolarına `ChangedAtUtc` ve geriye dönük doldurma, TIER-009). Büyük tablolarda süre ölçülmedi; bakım penceresinde uygulanır.
+  - `AddCustomDevelopmentRequests` (özel geliştirme talepleri, TIER-010)
+  - `AddOnlineBookingShowNextAvailableSlots` (en yakın müsait saat, TIER-017)
+  - `AddAppointmentOwnerLinks` (hatırlatmada onayla/iptal, TIER-019)
+  - Kullanıcı kararları dalı (paket düşürme A, deneme kuralı, ADR-046 ticari ileti kapısı) birleşince eklediği migration buraya yazılır.
+- [ ] Ardından `DbMigrator seed`. Yeni izinler:
+  - `Reports.Performance` (Admin, Owner, ClinicAdmin)
+  - `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin)
+  - `ApiKeys.Manage` (Admin, Owner)
+  - `CustomDevelopmentRequests.Manage` (Admin, Owner)
+  
+  Seed yalnız hazır rollere bağlar; **kliniklerin kendi tanımladığı özel roller bu izinleri elle almalı** (sürüm notunda yazılır). Yerel DB'de `Owner` rol kaydı yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
+- [ ] Paket kuralları canlıda etkin olur (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Mevcut kiracıların paketi ile kullanımı yayından önce karşılaştırılır; sınırı aşan kiracı varsa onunla önceden konuşulur.
 
 **Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
 - [ ] `AllowedHosts` gerçek api alan adını içerir (ADR-033: `api.vetinity.com`); yoksa iyzico dönüşü ve webhook 400 alır.
@@ -309,6 +327,8 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 - [ ] Ad değişikliği: `PerformanceDiagnostics:MediatRSlowMs` → `PerformanceDiagnostics:MediatorSlowMs` (eski ad okunmaz).
 - [ ] Yeni ayar `Outbox:ClaimLeaseSeconds` (varsayılan 300; çok örnekli çalışmada outbox claim süresi).
 - [ ] iyzico canlı anahtarları yenilenmiş hâliyle gizli depoda (sandbox anahtarı kullanılmaz).
+- [ ] Dış API (TIER-009): anahtar başına istek sınırı `ExternalApi:PermitLimitPerMinute` (varsayılan 60). Ters vekil arkasında istek sınırı ve `Retry-After` davranışı canlıya yakın ortamda bir kez denenir. Swagger üretimde kapalı kalır.
+- [ ] Hatırlatma e-postalarındaki bağlantılar (TIER-019 onayla/iptal, ticari ileti ret bağlantısı) portalın canlı adresini gösterir; portal temel adresi ayarı canlı alan adıyla doğrulanır (ADR-033 `portal.vetinity.com`).
 - [ ] Push açılacaksa (MOBILE-003, kullanıcı kararıyla): Firebase projesi, yalnız Cloud Messaging yetkili hizmet hesabı; JSON `Push__Fcm__ServiceAccountJson` ortam değişkeninde ya da dosyası `Push__Fcm__ServiceAccountFile` yolunda (yalnız uygulama kullanıcısı okur), isteğe bağlı `Push__Fcm__ProjectId`. iOS için APNs anahtarı Firebase konsoluna yüklenir. Geçersiz değer API açılışını durdurur. Ayrıntı backend `docs/PORTAL_API_CONTRACT.md` §14.6.
 
 **Sunucu ve altyapı**
@@ -316,6 +336,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 - [ ] Alan adı düzeni (ADR-033): `www`, `panel`, `portal`, `api`; frontend CI'da `API_BASE_URL` canlı api adresi.
 - [ ] ClamAV: yüklenen dosyalar arka planda taranır, şüpheli dosya karantinaya alınır (karar verildi, kurulum burada).
 - [ ] Dosya deposu (`FileStorage:RootPath`) için disk yedeği; DB yedeğiyle aynı saklama düzeni (bölüm 9).
+- [ ] Barkod okuyucu (TIER-006): panel `vendor/zxing/zxing_reader.wasm` dosyasını kendi sunucusundan verir; web sunucusu `.wasm` dosyasını `application/wasm` türüyle sunmalı. Kamera yalnız HTTPS'te açılır. Gerçek telefonla okuma canlıdan önce bir kez denenir (iOS Safari ve Android).
 - [ ] PDF raporları için sunucuda Arial (Windows) ya da DejaVu Sans / Liberation Sans (Linux: `fonts-dejavu-core`) bulunmalı; yoksa PDF indirme 500 verir, CSV/Excel etkilenmez (REPORT-007).
 - [ ] İstemci IP'si: API IIS içinde (in-process) çalışırsa doğru okunur. Önüne ayrı bir ters vekil (nginx, Cloudflare vb.) konursa `ForwardedHeaders` yalnız loopback'e güvendiği için o vekilin adresi koda (`KnownProxies`/`KnownNetworks`) eklenmeli; yoksa giriş hız sınırı (IP başına 5/dk) tüm kullanıcılara ortak işler ve günlüklerde vekil IP'si görünür.
 
