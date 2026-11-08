@@ -4036,9 +4036,9 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 ## e-Fatura / e-SMM (modül)
 
-**Review status:** **PARTIAL** (2026-10-04).
+**Review status:** **PARTIAL** (2026-10-04; 2026-11-08 Ayarlar → E-Fatura Bilgileri eklendi).
 
-**PARTIAL gerekçesi:** Sol menü UI envanteri ve Fatura Yönetim Paneli pre-send workflow **gözlemlendi**; reviewed account’ta **e-Fatura kullanıcı bilgileri eksik** uyarısı nedeniyle gerçek external gönderim/alım lifecycle **doğrulanamadı**.
+**PARTIAL gerekçesi:** Sol menü UI envanteri, Fatura Yönetim Paneli pre-send workflow ve entegratör ayar alanları **gözlemlendi**; reviewed account’ta **e-Fatura kullanıcı bilgileri eksik** uyarısı nedeniyle gerçek external gönderim/alım lifecycle **doğrulanamadı**.
 
 **OBSERVED — alt menü:** Fatura Yönetim Paneli · Giden e-Faturalar · Gelen e-Faturalar.
 
@@ -4049,6 +4049,20 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 **OBSERVED — Taslakdaki Faturalar:** liste/pagination · search · checkbox · İşlemler · Taslak Tarihi · Müşteri · Toplam · Ödeme · üst **Gönder**.
 
 **INFERRED (UI-level lifecycle):** hazır → kaydet/taslak → gönder benzeri aşamalı invoice UI (backend state machine **iddia edilmez**).
+
+**OBSERVED (2026-11-08):** Hazırdaki Faturalar **müşteri başına** gruplanır; satır genişletilince kaynak işlemler alt tabloda görünür: # · İşlem Tipi (ör. **Doğrudan Satış**) · Fatura No · Toplam · Ödeme · Hasta · Veteriner · Sil. Satır İşlemler menüsünde yalnız **Kaydet**. Belge kesimi otomatik değil; kullanıcı seçip taslağa alır, taslaktan toplu **Gönder**. Hangi işlemlerin "hazır"a düştüğü (muayene ücretleri dahil mi; Ayarlar'daki "Tedavileri Satışa Aktar" ile ilişkisi) **NOT VERIFIED**.
+
+### Ayarlar — E-Fatura Bilgileri (2026-11-08)
+
+**OBSERVED — giriş:** Genel → Ayarlar (`/general/settings`) → **E-Fatura Bilgileri** bölümü.
+
+**OBSERVED — alanlar:** E-Fatura URL · Firma Adı · Firma Unvanı · Vergi No · Adı · Soyadı · Mersis No · Sicil No · **e-Fatura Sağlayıcısı** (seçim) · **e-Fatura Kullanıcı Adı** · **e-Fatura Şifresi** (gizli, göster düğmeli) · Bina Numarası · Ülke · Şehir · İlçe · Sokak · WSDL Api Url · RestAPI Url · Website · Açıklama Alanı 1–3.
+
+**OBSERVED — sağlayıcı seçenekleri:** **Altair** · **UyumSoft** (iki seçenek).
+
+**INFERRED:** Klinik, seçtiği özel entegratördeki **kendi hesabının** kullanıcı adı/şifresini girer; E-vet bu hesap üzerinden gönderir. ADR-036 AK-1 modeliyle (klinik kendi sözleşmesi, yazılım bağlanır) aynı yapı. Kimlik bilgisinin nasıl saklandığı, kontör/sözleşme ilişkisi ve E-vet'in bu firmalarla ticari ortaklığı **NOT VERIFIED**. İncelenen hesapta bölüm boş; değer girilmedi, Kaydet'e basılmadı.
+
+**OBSERVED — ilgili ayar (Müşteri/Hasta bölümü):** "Müşteri Zorunlu Alan(lar)" **klinik tarafından seçilen** çoklu seçim; incelenen hesapta Doğum Tarihi · Gsm · Kimlik No seçili. "Tekrarlı Kimlik Nr İzin Ver" ayrı ayar (Hayır). Yani müşteri kartındaki Kimlik No zorunluluğu **sabit ürün kuralı değil, klinik ayarı**; [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) notundaki "Kimlik No zorunlu" yorumu buna göre okunmalı.
 
 ### Giden e-Faturalar
 
@@ -4068,7 +4082,7 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 **OBSERVED:** e-Fatura/e-SMM yüzeyleri **konfigürasyon bağımlı**; canlı hesapta kullanıcı/entegrasyon bilgileri eksik → gerçek gönderim/alım workflow **doğrulanamadı**.
 
-**NOT VERIFIED:** Provider · GİB entegrasyon yöntemi · authentication · UBL/XML · e-SMM vs e-Fatura lifecycle farkları · draft persistence · gönderim status enum · incoming sync · retry · cancel/void/reject · credit note linkage · audit · authorization · attachment/PDF/XML download · Save/Gönder persistence.
+**NOT VERIFIED:** Provider kullanımı (seçenekler Altair · UyumSoft gözlendi, 2026-11-08; gerçek bağlantı denenmedi) · GİB entegrasyon yöntemi · authentication (kullanıcı adı/şifre alanı gözlendi; saklama biçimi bilinmiyor) · UBL/XML · e-SMM vs e-Fatura lifecycle farkları · draft persistence · gönderim status enum · incoming sync · retry · cancel/void/reject · credit note linkage · audit · authorization · attachment/PDF/XML download · Save/Gönder persistence.
 
 **Backlog cross-reference (exact semantic match, scope değişmedi):** [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) — competitor evidence only.
 
