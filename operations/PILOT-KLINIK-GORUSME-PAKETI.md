@@ -13,7 +13,7 @@ Bunlar netleşmeden kliniğe söz verme; görüşmede "bunu size yazılı iletec
 | 1 | Pilot ücreti | Öneri: pilot süresi (gölge 2 hafta + ilk 1 ay) ücretsiz; sonra ilk yıl indirim (ör. %50) ve "kurucu klinik" olarak fiyat sabitleme. Paket: Kurumsal açılır, pilot sonunda klinik kendi paketini seçer |
 | 2 | Pilot süresi | Öneri: 2 hafta gölge + 4 hafta gerçek kullanım; sonunda birlikte değerlendirme |
 | 3 | Başlangıç tarihi | Sunucu kurulumuna bağlı (bölüm 6). Kurulum ve doğrulama hazır olduktan sonra en az 1 hafta pay bırak; kesin tarih verme |
-| 4 | Sözleşme tarafı | Veri işleme sözleşmesi ve kullanım şartlarında Vetinity'nin unvanı boş (`[Şirket unvanı]`). Şahıs işletmesi mi, şirket mi? (mali müşavir sorusu, HBS/e-belge paketi madde 10) |
+| 4 | Sözleşme tarafı | **Karar (kullanıcı, 2026-11-09): Vetinity şahıs işletmesi olarak kurulacak.** Metinlerdeki `[Şirket unvanı]` yerine işletme sahibinin adı soyadı ve işletme adı, `[MERSİS/ticaret sicil no]` yerine vergi dairesi ve vergi numarası yazılır (kayıt tamamlanınca). Kuruluş tarihi, Bağ-Kur ve iş yeri adresi mali müşavir sorusu (HBS/e-belge paketi madde 10–12) |
 | 5 | Destek kanalı | Hangi telefon / WhatsApp / e-posta, hangi saatler; mesai dışında acil durumda kim aranır (kılavuz §12) |
 | 6 | Bakım saati | Öneri: hafta içi 23:00–01:00 |
 | 7 | Veri kaybı ve kesinti hedefi | Öneri: en çok 15 dk veri kaybı, en çok 4 saat kesinti (ADR-014 K2'yi yazılı kabul) |

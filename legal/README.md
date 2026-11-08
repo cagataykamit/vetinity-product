@@ -8,6 +8,7 @@ Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinlerin **ürün 
 
 - **Klinik** = veri sorumlusu (müşterisi/hasta sahibi verisini kendi amaçları için işler).
 - **Vetinity** = veri işleyen (SaaS; klinik adına barındırır ve işler). Kendi kullanıcı hesapları (klinik çalışanı, site ziyaretçisi) bakımından ise Vetinity veri sorumlusudur.
+- **Vetinity'nin hukuki yapısı (kullanıcı kararı, 2026-11-09): şahıs işletmesi.** Metinlerdeki `[Şirket unvanı]` yerine işletme sahibinin adı soyadı ve işletme adı, `[MERSİS/ticaret sicil no]` yerine vergi dairesi ve vergi numarası (ticaret sicil kaydı varsa o da) yazılır. Yer tutucular vergi kaydı tamamlanınca bir kerede doldurulur; aynı metnin kopyaları frontend'de de var (`legal-documents.utils.ts`, portal `portal-legal-documents.ts`) ve birlikte güncellenir, metin değişince sürüm numarası artar (TRIAL-009).
 
 ## Belgeler
 
