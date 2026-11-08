@@ -2887,7 +2887,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yetki kaldırma anında etkili olur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): izin değişim damgası (damgadan eski token 401, frontend sessiz yeniler; migration yok) ve token ömrü 30 dk (öneriyle kabul, 2026-11-09). Damga bellekte, tek API süreci varsayımı. Küçük, 1 backend dilimi. Sıraya alındı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `2a8092f2`, origin'e gönderilmedi. İzin değişim damgası: rol, rolün izinleri, izin tanımı, kiracı üyeliği ya da klinik ataması değişince damgadan eski erişim token'ı 401 alır, frontend sessiz yeniler; platform yöneticisi dahil. Erişim token ömrü 30 dk. Damga bellekte, tek API süreci varsayımı (`SECURITY_CONFIGURATION.md`). Yan düzeltme: rol-izin ekleme/çıkarma ve yönetim API'sinden rol kaldırma veritabanına kaydedilmiyordu. Not: canlıda `RevokeSessionsOnPermissionChange=true` rolün izin listesi değişince oturumu hemen kapatır (koordinatör önerisi: böyle kalsın). Yenilemede klinik ataması denetimi ayrı düzeltmede |
 | **Bağımlılıklar** | Aşama 9 |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O6; tasarım kararı gerekir |
 
@@ -3479,7 +3479,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik programa daha hızlı alışır, destek yükü azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `fcb8f5f0`, origin'e gönderilmedi. Bugün'de rolüne göre (ön büro, hekim, yönetici) 7 adımlık kapatılabilir kart; adımlar rol bazlı kullanıcı kılavuzundan, yalnız pakete bağlı olmayan ekranlara; adımın işi kaydedilince kendiliğinden, ya da elle işaretlenir; durum tarayıcıda kullanıcı başına; ilk görüldüğü günden 14 gün açılır, kullanıcı menüsünden yeniden açılır. Tarayıcıda yalnız yönetici görünümü denendi. Açık (küçük): kesin 14 gün için hesap özetine kullanıcının oluşturulma tarihi eklenebilir |
 | **Bağımlılıklar** | — |
 | **Notlar** | İçerik bakımı gerekir; AI ile arama TIER-014'ten sonra değerlendirilir |
 
