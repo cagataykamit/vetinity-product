@@ -3369,7 +3369,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Tahmini zorluk** | Yüksek |
 | **Durum** | Planlandı |
 | **Bağımlılıklar** | TIER-002, ADR-033 (`www` geçişi; kullanıcı söyleyince), TIER-017 |
-| **Notlar** | Fikir CodeBody "Uzman bul". Hangi paketlerde olacağı ve yeni müşteri ücreti kararı açık. Reklam kuralları kontrol edilmedi: "en iyi" gibi söz yok, metin hukuk gözüyle yazılır. İlk sürümde herkese açık yorum ve puan yok. Yeni ADR gerekir |
+| **Notlar** | Fikir CodeBody "Uzman bul". Kararlar [ADR-047](../decisions/ADR-047-veteriner-bul.md) (kullanıcı, 2026-11-08): tüm paketlerde, yeni müşteri ücreti yok, sıralama yakınlık ve "şu an açık" (ödemeyle değişmez), katılım kliniğin seçimi ve varsayılan kapalı, ilk sürümde yorum ve puan yok, "en iyi" gibi söz yok. Yayın ADR-033 geçişiyle |
 
 ### TIER-016 — Randevu talebinde kaynak bilgisi
 
