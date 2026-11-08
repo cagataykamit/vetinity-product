@@ -71,6 +71,8 @@ Gönderilecek metin (kısa):
 
 Not: Entegratörlerin bayilik/çözüm ortaklığı koşulları çoğunlukla vergi mükellefi (şahıs işletmesi veya şirket) ister. Teklifte "sandbox ve kliniklerin kendi hesabıyla API kullanımı" için gerçek kişi başvurusunun yeterli olup olmadığını ayrıca sorun; çözüm ortaklığı (E3) şirketleşmeye bağlı kalabilir. Bu ticari/vergisel karar mali müşavir görüşmesinde de açılmalı (bölüm 2'ye ek soru: şahıs işletmesi mi, şirket mi, ne zaman).
 
+**Rakip gözlemi (2026-11-08, [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08)):** E-vet SMART ayarlarında entegratör seçimi **Altair** ve **UyumSoft**; klinik o firmadaki kendi kullanıcı adı/şifresini giriyor (ADR-036 AK-1 ile aynı model). Teklif listesine **UyumSoft** eklenmeli; pilot kliniğin bugün kullandığı firma da sorulmalı (klinik zaten bir entegratörde hesaplıysa o firmayı desteklemek geçişi kolaylaştırır).
+
 Karşılaştırma tablosu: API kalitesi, sandbox hızı, fiyat, bayilik koşulu, destek. Test hesabı kimlik bilgileri yalnız user-secrets'a girer.
 
 ## 4. Bakanlık yazısı taslağı (HBS / ilgili genel müdürlük veya il müdürlüğü)
