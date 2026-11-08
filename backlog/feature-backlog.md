@@ -3383,8 +3383,8 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik vitrinin getirisini rakamla görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
-| **Bağımlılıklar** | ADR-042, TIER-015 |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `cd5573d5`, FE `5c669bff`, origin'e gönderilmedi. Talepte kaynak: Klinik bağlantısı, Kendi sitesi, Portal, Telefon / elle, Veteriner bul; eski talepler "Bilinmiyor". Kaynağı sunucu belirler (site `?kaynak=site` ekler, bilinmeyen değer klinik bağlantısı, portal talebi her zaman Portal); yalnız istatistik, kişisel veri değil. Panelde liste ve detayda rozet, Talepler sayfasında dönem için kaynak başına talep ve onaylanan sayısı. Telefon ve Veteriner bul değerleri tanımlı ama henüz üretilmiyor. Sözleşme backend `docs/ONLINE_APPOINTMENT_API_CONTRACT.md` §14. Migration `AddAppointmentRequestChannel` yalnız yerel DB'de. Panel tarayıcıda görülmedi |
+| **Bağımlılıklar** | ADR-042, ADR-047 (Veteriner bul beklenmeden yapıldı) |
 | **Notlar** | Müşteri eşleme yapılırsa KVKK aydınlatması gözden geçirilir |
 
 ### TIER-017 — Herkese açık en yakın müsait saat
