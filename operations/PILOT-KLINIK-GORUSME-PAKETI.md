@@ -46,7 +46,14 @@ Bunlar netleşmeden kliniğe söz verme; görüşmede "bunu size yazılı iletec
 
 ### 3.3 Resmî işler
 
-- **e-Fatura / e-SMM:** klinik şahıs mı, şirket mi; bugün belgeyi nereden kesiyor (program, GİB portal, muhasebeci)? Mali müşavirinin iletişimi (e-fatura görüşmesi için, HBS/e-belge paketi bölüm 2).
+- **e-Fatura / e-SMM:** klinik şahıs mı, şirket mi; bugün belgeyi nereden kesiyor (program, GİB portal, muhasebeci)? Mali müşavirinin iletişimi (e-fatura görüşmesi için, HBS/e-belge paketi bölüm 2). Ayrıca (ADR-036, 2026-11-08):
+  - Hangi belgeyi kesiyorsunuz: e-SMM mi, e-Arşiv fatura mı, ikisi mi? (İlk çalıştıracağımız yolu bu belirler.)
+  - Bir aracı firma (entegratör) kullanıyor musunuz, hangisi? (Varsa o firmayı desteklemek geçişi kolaylaştırır; teklif listesine eklenir.)
+  - Ayda kabaca kaç belge kesiyorsunuz? (Kontör maliyeti ve "pakete dahil belge" hesabı için.)
+  - Belgeyi ne zaman kesiyorsunuz: her ödemede mi, gün sonunda toplu mu, müşteri isteyince mi?
+  - Mama, aksesuar gibi ayrı ürün satışınız var mı?
+  - Kurumsal müşteriniz (belediye, barınak, şirket) var mı?
+  - Kimliğini vermek istemeyen müşteride ne yapıyorsunuz?
 - **HBS:** e-Reçete ve aşı (ATS) kaydını kim, ne zaman giriyor? Vetinity'deki HBS yardımcısını göster (bkz. HBS/e-belge paketi bölüm 1).
 - **KVKK:** müşteriye aydınlatma metni veriyor mu, açık rıza formu var mı; VERBİS kaydı var mı?
 
@@ -109,7 +116,7 @@ Gösterimde **söz verme**: e-fatura tarihi, SMS, mağaza uygulaması, otomatik 
 | Canlı sunucu (VPS, SQL Server, alan adları, e-posta, yedek) | **Yok, senin işin.** Kurulunca migration, ayar ve ilk doğrulama 1–2 gün (kılavuz §11.1) |
 | Hukuk metinleri | Taslak, hukukçu onayı bekliyor |
 | iyzico canlı anahtar | Yenilenmedi; pilot ücretsizse ödeme pilot başında gerekmez |
-| e-Fatura | Yok; gölge dönemde eski yerden kesilir, ilk ücretli müşteriden önce gerekli (ADR-036) |
+| e-Fatura | Belge kesme yok; gölge dönemde eski yerden kesilir, ilk ücretli müşteriden önce gerekli (ADR-036). Hazır olan: müşteride fatura bilgileri, klinikte mükellef bilgileri, ücrette KDV. Kesme, aracı firma seçilip test hesabı gelince yapılır |
 | SMS / WhatsApp otomatik | Yok; e-posta var, WhatsApp elle bağlantı |
 | Mağaza uygulaması | Yok; panel ve portal telefon tarayıcısında çalışır |
 | Klinik sitesi, Veteriner bul | Kod hazır; yayın alan adı geçişine (ADR-033) bağlı |
