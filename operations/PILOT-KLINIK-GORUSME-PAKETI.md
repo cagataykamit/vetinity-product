@@ -125,6 +125,9 @@ Gösterimde **söz verme**: e-fatura tarihi, SMS, mağaza uygulaması, otomatik 
 ## 7. Görüşmeden önce prova
 
 - [ ] Backend ve panel yerelde güncel main'den açılır, örnek klinikle yeni bir deneme kaydı yapılır, bölüm 4'teki akış baştan sona bir kez tıklanır.
+  - Açma: Claude uygulamasında "backend-api" ve "frontend-web" sunucuları (ya da API için `dotnet run --project src/Backend.Veteriner.Api --launch-profile https`, panel için `npm start`; `FileStorage__RootPath` ortam değişkeni verilmezse dosya yükleme ve veri dışa aktarma çalışmaz). Panel `http://localhost:4200`.
+  - Koordinatör provası (2026-11-09, güncel main BE `ae9c123e`, FE `74feaf82`): Bugün (uyarı rozetleri dahil), Randevular, Bekleme listesi, Hastalar, Muayeneler, Ücretler, Ürünler, Raporlar, İşletme performansı, Gün sonu, Şubeler özeti, Özet, Hatırlatmalar, Web sayfam, Verimi dışa aktar, API erişimi, Size özel geliştirmeler, Veteriner bul, Geçiş desteği ve Ayarlar açıldı; hata veren istek yok. Tek küçük bulgu: Temel/Profesyonel kiracıda "Şubeler özeti" kilit kutusu doğru görünüyor ama arkada bir istek 403 dönüyor (ekranda etkisi yok). Örnek klinikle kayıt tarayıcıda denenmedi (yerel oturum açıktı); entegrasyon testi geçiyor. Portal ve klinik sitesi bu provada açılmadı.
+  - Gösterimden önce tarayıcıda gizli pencere aç ve "Ücretsiz dene" > "Örnek klinikle başla" ile yeni kayıt yap; mevcut test hesabına girme.
 - [ ] Bilgisayar şarjda, internet yoksa da yerelde çalıştığı bilinir (SQL Server ve API aynı makinede).
 - [ ] Ekran ölçeği ve tarayıcı yakınlaştırması projeksiyon/ekran için ayarlı.
 - [ ] Bu paket çıktı ya da telefonda açık.
