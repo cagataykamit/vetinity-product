@@ -3431,7 +3431,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Gelmeme azalır, boşalan saat erken görülür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `ca7b24cd`, FE `a9bb8432`, origin'e gönderilmedi. Hatırlatma e-postasında tek kullanımlık "onayla / iptal et" bağlantısı; portalda kimliksiz `/randevu-yanit` sayfası, açmak durumu değiştirmez, eylem POST ile. Onay durumu değiştirmez, Bugün ve randevu detayında "Sahip onayladı" rozeti. İptal mevcut geçişle, neden "sahip e-postadan iptal etti", klinik bildirim merkezine düşer. Klinik iptal bağlantısını "Randevu varsayılanları"ndan kapatabilir (varsayılan açık). Token yalnız SHA-256 özetli, randevuya bağlı, randevu saatinde dolar; geçersiz bağlantıda sebep ayırt edilmez. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md`. Migration `AddAppointmentOwnerLinks` yalnız yerel DB'de. Panel tarayıcıda görülmedi. Bilinen boşluk: yeniden zamanlanan randevuda bağlantı geçersiz olur ve yeni hatırlatma gitmez |
 | **Bağımlılıklar** | APPT-013, APPT-014 |
 | **Notlar** | Bağlantı giriş istemez; yetki ve süre sınırı tasarımda ele alınır |
 
