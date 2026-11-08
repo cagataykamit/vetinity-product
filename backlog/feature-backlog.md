@@ -3463,9 +3463,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik verisini kaybetmeden daha kolay geçer |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
-| **Bağımlılıklar** | — |
-| **Notlar** | Hangi programlar ve ücretli mi ücretsiz mi açık. Kişi süresi ve KVKK sorumluluğu netleşmeli |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f242b3da`, FE `dd4f5a63`, origin'e gönderilmedi. İçe aktarmada "Hangi programdan geliyorsunuz?" (Kolayvet, E-vet, Genel Excel/CSV); seçime göre hazır sütun eşlemesi ("Hazır" etiketi), kullanıcı düzeltir; profiller backend'de tek yerde (`ImportSourceProfiles`), seçilen profil partide saklanır. Panelde "Geçiş desteği" talebi (program, yaklaşık kayıt sayısı, uygun gün ve saat aralıkları, not); her pakette açılır, Kurumsal'da ücretsiz, diğerlerinde "ücretli, fiyat size bildirilecek" (`PlanFeature.FreeMigrationSupport`, kodda tutar yok); kurulum görüşmesi 1 saat; kapsam müşteri, hasta, aşı geçmişi. Talep TIER-010 kaydının yeni konusu, platform talepler sayfasında "Geçiş desteği" filtresiyle. Sözleşme backend `docs/IMPORT_API_CONTRACT.md` §4.5, §7.15 ve `docs/CUSTOM_DEVELOPMENT_REQUESTS_API_CONTRACT.md` §11. Migration `AddDataMigrationSupport` yalnız yerel DB'de. Panel tarayıcıda görülmedi |
+| **Bağımlılıklar** | ADR-019, TIER-010 |
+| **Notlar** | Kullanıcı kararları (2026-11-09): önce Kolayvet ve E-vet, geçiş desteği Kurumsal'da ücretsiz, kurulum görüşmesi 1 saat. Eşlemelerin hiçbiri gerçek dosyayla doğrulanmadı: Kolayvet için kamuya açık sütun adı bulunamadı (profil eşlemesiz), E-vet eşlemeleri rakip incelemesindeki ekran sütunlarından, aşı için yok. Gerçek dosya gelince yalnız `ImportSourceProfiles` düzeltilip doğrulandı işaretlenir (pilot klinikten örnek dosya istenecek). KVKK: dosya e-postayla gönderilmez, klinik panele yükler, destek kliniğin izniyle ekran paylaşımında yardım eder; hukuk soruları `HUKUKI-ONAY-LISTESI` A12. Varsayımlar: aynı anda tek açık geçiş talebi, yalnız Admin/Owner açar |
 
 ### TIER-022 — İlk hafta rehberleri
 
