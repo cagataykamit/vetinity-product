@@ -317,6 +317,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `AddWaitlist` (bekleme listesi, TIER-018; işleyici `Waitlist:Processor`, varsayılan 60 sn)
   - `AddDataMigrationSupport` (içe aktarma kaynak profili ve geçiş desteği talebi, TIER-021)
   - `AddDataExportJobs` (tüm veri dışa aktarma)
+  - `AddCashRegisters` (çoklu kasa, TIER-008; her kliniğe Ana kasa açar ve mevcut nakit ödemeleri ona bağlar, tekrar çalıştırılabilir doldurma)
 - [ ] `FileStorage:RootPath` tanımlı olmalı: yoksa dosya yüklemeleri 503 döner ve tüm veri dışa aktarma işleri "Hazırlanamadı" olur. Yerel geliştirme ortamında da tanımlı değil (2026-11-09 tespiti).
 - [ ] `App:BaseUrl` canlı API kökü olarak verilir (ör. `https://api.vetinity.com`); boşsa e-postalarda .ics bağlantısı üretilmez (TIER-020).
 - [ ] Veteriner bul (TIER-015, ADR-047): ters vekil `vetinity.com/veteriner` ve `/veteriner/*` isteklerini (POST `/veteriner/_api/klinikler` dahil) `/k/*` ile aynı site Node sürecine yönlendirir. Canlıda `public/robots.txt` dosyasına `Sitemap: https://www.vetinity.com/veteriner/sitemap.xml` satırı eklenir. Tanıtım sitesine bağlantı sayfa canlıya çıkınca eklenir (ADR-034 karar 6). Bilinen küçük sorun: site sunucusunun satır içi kritik CSS'i font adresini `/media/...` yazıyor, ilk istek 404 alıp sonra `/k/media/...` yükleniyor; klinik sitelerinde de aynı (düzeltilmedi).
@@ -327,6 +328,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `ApiKeys.Manage` (Admin, Owner)
   - `CustomDevelopmentRequests.Manage` (Admin, Owner)
   - `DataExport.Manage` (Admin, Owner)
+  - `CashRegisters.Read` ve `CashMovements.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashRegisters.Manage` ve `CashMovements.Void` (Admin, Owner, ClinicAdmin)
   
   Klinikler rol tanımlayamaz: roller ortaktır (Admin, Owner, ClinicAdmin, Veteriner, Sekreter); klinik yalnız bu rolleri üyelerine atar. Rol izinlerini yalnız platform yöneticisi değiştirebilir (`Roles.Write` hiçbir hazır rolde yok) ve değişiklik tüm kliniklere yansır. Sözleşmelerdeki "özel roller elle almalı" notu, veritabanında elle oluşturulmuş bir rol olursa geçerlidir; bugün yerel DB'de böyle bir rol yok, canlıda `OperationClaims` listesi kontrol edilir. Yerel DB'de `Owner` rol kaydı da yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
 - [ ] Paket kuralları canlıda etkin olur (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Mevcut kiracıların paketi ile kullanımı yayından önce karşılaştırılır; sınırı aşan kiracı varsa onunla önceden konuşulur.
