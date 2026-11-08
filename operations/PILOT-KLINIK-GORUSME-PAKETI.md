@@ -14,7 +14,7 @@ Bunlar netleşmeden kliniğe söz verme; görüşmede "bunu size yazılı iletec
 | 2 | Pilot süresi | Öneri: 2 hafta gölge + 4 hafta gerçek kullanım; sonunda birlikte değerlendirme |
 | 3 | Başlangıç tarihi | Sunucu kurulumuna bağlı (bölüm 6). Kurulum ve doğrulama hazır olduktan sonra en az 1 hafta pay bırak; kesin tarih verme |
 | 4 | Sözleşme tarafı | **Karar (kullanıcı, 2026-11-09): Vetinity şahıs işletmesi olarak kurulacak.** Metinlerdeki `[Şirket unvanı]` yerine işletme sahibinin adı soyadı ve işletme adı, `[MERSİS/ticaret sicil no]` yerine vergi dairesi ve vergi numarası yazılır (kayıt tamamlanınca). Kuruluş tarihi, Bağ-Kur ve iş yeri adresi mali müşavir sorusu (HBS/e-belge paketi madde 10–12) |
-| 5 | Destek kanalı | Hangi telefon / WhatsApp / e-posta, hangi saatler; mesai dışında acil durumda kim aranır (kılavuz §12) |
+| 5 | Destek kanalı | **Karar (2026-11-09): WhatsApp destek hattı 0543 958 00 91**; panelin sol menüsünün altında "WhatsApp destek" bağlantısı hazır mesajla (klinik adıyla) açılır. Açık: hangi saatler, mesai dışında acil durumda kim aranır (kılavuz §12) |
 | 6 | Bakım saati | Öneri: hafta içi 23:00–01:00 |
 | 7 | Veri kaybı ve kesinti hedefi | Öneri: en çok 15 dk veri kaybı, en çok 4 saat kesinti (ADR-014 K2'yi yazılı kabul) |
 
