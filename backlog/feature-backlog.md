@@ -3415,7 +3415,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Boş saat dolar, kliniğin geliri korunur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `5df46457`, FE `6ca903fd`, origin'e gönderilmedi. Paket Profesyonel ve Kurumsal (kullanıcı kararı 2026-11-09). Personel panelden hasta sahibini ve hayvanı listeye ekler (istenen hekim, tür, tarih aralığı, gün ve saat tercihi, not); sıra eklenme zamanı, klinik kaydırabilir ya da kapatabilir. Randevu iptal edilince sıradaki uygun kayda e-postayla tek kullanımlık teklif gider (TIER-019 bağlantı tablosu; açmak durum değiştirmez). Teklif 2 saat ya da randevudan 1 saat öncesine kadar geçerli; süre dolunca ya da retle sıradakine geçilir; aynı saat için tek açık teklif. Kabulde randevu oluşur; saat dolduysa "saat doldu" denir. İşlem iletisidir, hatırlatma tercihine uyar. Bugün ve iptal ekranında "uygun X kişi var", kayıt geçmişi, kabul bildirimi, denetim kaydı. Otomatik teklif Randevu varsayılanlarından kapatılabilir (varsayılan açık). Sözleşme backend `docs/WAITLIST_API_CONTRACT.md`. Migration `AddWaitlist` yalnız yerel DB'de. Varsayımlar: sahip kendini ekleyemez, süreler, 3 günlük otomatik pencere. Panel ve portal tarayıcıda görülmedi |
 | **Bağımlılıklar** | TIER-001, TIER-019 |
 | **Notlar** | Fikir Jane App. Mesaj işlem iletisi olarak ayrılır (TIER-012); hasta sahibinin tercihine uyar |
 
