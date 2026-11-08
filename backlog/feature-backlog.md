@@ -3315,9 +3315,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Toplu ileti ve resmî kayıt işleri programdan yönetilebilir |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Bilinmiyor |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (2026-11-08): [İYS ve Tarbil araştırması](../research/iys-ve-tarbil-arastirmasi-2026-11.md). Hukuki görüş alınmadı; yorumlar çalışma varsayımı. Hukuk soruları `HUKUKI-ONAY-LISTESI` C7 |
 | **Bağımlılıklar** | TIER-003 (İYS); hukuki değerlendirme |
-| **Notlar** | Paket kararı araştırmadan sonra kesinleşir. TIER-003 "uzun süredir gelmedi" kuralı bu araştırmaya bağlıdır: `OwnerNotificationChannelPolicy.MarketingSendingEnabled` kapalı. Açmadan önce İYS kaydı, ileti metnindeki ret ve kimlik yükümlülükleri ve onay kanalı (bugün yalnız portal bağı) netleşmeli |
+| **Notlar** | Paket kararı araştırmadan sonra kesinleşir. TIER-003 "uzun süredir gelmedi" kuralı bu araştırmaya bağlıdır: `OwnerNotificationChannelPolicy.MarketingSendingEnabled` kapalı. Açmadan önce İYS kaydı, ileti metnindeki ret ve kimlik yükümlülükleri ve onay kanalı (bugün yalnız portal bağı) netleşmeli. Araştırma özeti: İYS kaydı ve onay kliniğin yükümlülüğü, kayıt eşiği yok; Vetinity klinik adına onay alamaz, yalnız araç sağlar. Hatırlatmalar (randevu, aşı, kontrol, borç) tanıtım içermedikçe onaysız; "uzun süredir gelmedi" ticari. 250.000'den az adresi olan klinik İYS API'ye yalnız yetkili entegratör üzerinden erişir; Vetinity'nin entegratör olması önerilmez (Tebliğ RG 18.09.2024/32666), yol: klinik İYS'ye kaydolur, entegratörü yetkilendirir, Vetinity o entegratörün API'sini kullanır; geçici yol CSV. Onay ve ret 3 iş günü içinde İYS'ye yazılmalı, ret her iletide aynı kanaldan, kimlik ve nitelik ibaresi, kayıtlar 3 yıl. `MarketingSendingEnabled` genel sabit yerine klinik başına kapı olmalı (ürün kararı, ADR). "Tarbil" HBS'nin alan adı; e-Reçete ve ATS INT-008'de; PETVET kimliklendirme yardımcısı ayrı madde olabilir; resmî web servis bulunamadı. Paket: İYS altyapısı ve HBS yardımcıları kilitlenmemeli |
 
 ### TIER-013 — AI eklentisi: kredi, kota ve fon
 
