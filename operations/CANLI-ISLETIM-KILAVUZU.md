@@ -311,6 +311,9 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `AddOnlineBookingShowNextAvailableSlots` (en yakın müsait saat, TIER-017)
   - `AddAppointmentOwnerLinks` (hatırlatmada onayla/iptal, TIER-019)
   - `AddMarketingGateAndOptOutLinks` (klinik başına ticari ileti kapısı ve ret bağlantıları, ADR-046; 2026-11-08 kullanıcı kararları)
+  - `AddAppointmentRequestChannel` (randevu talebinde kaynak, TIER-016)
+  - `AddClinicVetFinderListings` (Veteriner bul, TIER-015)
+- [ ] Veteriner bul (TIER-015, ADR-047): ters vekil `vetinity.com/veteriner` ve `/veteriner/*` isteklerini (POST `/veteriner/_api/klinikler` dahil) `/k/*` ile aynı site Node sürecine yönlendirir. Canlıda `public/robots.txt` dosyasına `Sitemap: https://www.vetinity.com/veteriner/sitemap.xml` satırı eklenir. Tanıtım sitesine bağlantı sayfa canlıya çıkınca eklenir (ADR-034 karar 6). Bilinen küçük sorun: site sunucusunun satır içi kritik CSS'i font adresini `/media/...` yazıyor, ilk istek 404 alıp sonra `/k/media/...` yükleniyor; klinik sitelerinde de aynı (düzeltilmedi).
 - [ ] Paket düşürme A (2026-11-08) canlıda etkin olur: sığmayan düşürme ve ücretliye geçiş 409 alır; dönem sonunda sınırı aşan planlı düşürme uygulanmaz. Eski B döneminden sınırı aşan kiracı varsa yayından önce konuşulur.
 - [ ] Ardından `DbMigrator seed`. Yeni izinler:
   - `Reports.Performance` (Admin, Owner, ClinicAdmin)

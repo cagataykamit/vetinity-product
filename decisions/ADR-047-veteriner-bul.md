@@ -32,3 +32,7 @@ Randevu talebinde kaynak bilgisi (kliniğin kendi sitesi, portal, bağlantı, te
 
 - Bir klinik listelendiği için ücret ödemez; sıralama tarafsızlığı satış iddiası olarak kullanılabilir.
 - Yeni müşteri ücreti ileride konursa bu ADR'nin K2 ve K3'ü birlikte yeniden değerlendirilir.
+
+## Uygulama notu
+
+2026-11-08: yerel main'de (BE `cc5802a7`, FE `1fb0c3f8`); yayın ADR-033 geçişini bekliyor. K8 eşiği 3 klinik (`VetFinderPages.MinClinicsToIndex`). TIER-016 "Veteriner bul" kaynağı artık üretiliyor.

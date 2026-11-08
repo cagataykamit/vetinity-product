@@ -3367,7 +3367,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik yeni müşteri kazanır, hayvan sahibi yakın kliniği kolay bulur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `cc5802a7`, FE `1fb0c3f8`, origin'e gönderilmedi; yayın ADR-033 geçişini bekliyor. Klinik Ayarlar > Veteriner bul'dan listelenmeyi açıp kapatır (varsayılan kapalı), 12 hizmetlik sabit listeden seçer, isteğe bağlı konum girer. Sayfalar `vetinity.com/veteriner/{il}/{ilçe}/{hizmet}`, site uygulamasında sunucuda çizilir; 3'ten az klinikli ve filtreli sayfalar `noindex`, site haritası `/veteriner/sitemap.xml`. Sıralama: önce "şu an açık", sonra konum verildiyse mesafe, yoksa aynı ilçe ve il. Kart: ad, il/ilçe, adres, telefon, hizmetler, saatler, en yakın müsait saat, site ve randevu bağlantısı (`?kaynak=veteriner-bul`). Sonuç yoksa aynı ildeki diğer ilçeler. Sözleşme backend `docs/VET_FINDER_API_CONTRACT.md`. Migration `AddClinicVetFinderListings` yalnız yerel DB'de. Panel ayarı tarayıcıda görülmedi. Varsayımlar: site şartı yok, "yakın ilçe" aynı il, ziyaretçi konumu yaklaşık 1 km'ye yuvarlanır ve saklanmaz |
 | **Bağımlılıklar** | TIER-002, ADR-033 (`www` geçişi; kullanıcı söyleyince), TIER-017 |
 | **Notlar** | Fikir CodeBody "Uzman bul". Kararlar [ADR-047](../decisions/ADR-047-veteriner-bul.md) (kullanıcı, 2026-11-08): tüm paketlerde, yeni müşteri ücreti yok, sıralama yakınlık ve "şu an açık" (ödemeyle değişmez), katılım kliniğin seçimi ve varsayılan kapalı, ilk sürümde yorum ve puan yok, "en iyi" gibi söz yok. Yayın ADR-033 geçişiyle |
 
