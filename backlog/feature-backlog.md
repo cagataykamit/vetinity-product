@@ -3267,9 +3267,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik kendi araçlarını Vetinity'ye bağlar |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | İlk dilim geliştirildi (2026-11-08): main yerelde BE `fe77e8e3`, FE `4f7889a1`, origin'e gönderilmedi. Kiracıya özel salt okunur anahtar (yalnız SHA-256 özeti saklanır, bir kez gösterilir), Ayarlar > API erişimi (oluştur, listele, iptal; yalnız Admin/Owner), `GET /api/external/v1/clients|pets|appointments|vaccinations` (imleçli sayfa, `updatedSince`, en çok 200 kayıt, anahtar başına 60/dk). Panel tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001 |
-| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır |
+| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır. Sözleşme backend `docs/EXTERNAL_API_CONTRACT.md`; verilen alanların tek yeri `ExternalReadFeatures.cs` ve sözleşme §5. Paket yalnız Kurumsal (`PlanFeature.ExternalApi`); paket düşünce anahtarlar silinmez, istekler 403. Yeni izin `ApiKeys.Manage`. Migration `AddApiKeysAndChangeTracking` (müşteri, hayvan, randevu, aşı tablolarına `ChangedAtUtc`) yalnız yerel DB'de. Hukuki sorular `HUKUKI-ONAY-LISTESI` A11. Sonraki dilimler: yazma uçları, webhook, şube kısıtlı ve süreli anahtar, silinen kaydın bildirimi, okuma denetimi. Paketler tablosuna satır eklenmedi |
 
 ### TIER-010 — Size özel geliştirmeler
 
