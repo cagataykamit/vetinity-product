@@ -671,7 +671,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esnek paket uygulama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). Küçük-orta, 2 dilim. Sıraya alındı |
 | **Bağımlılıklar** | EXAM-007 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
@@ -1151,7 +1151,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tek operasyonel kapanış; resepsiyon hızı; izlenebilirlik |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): tek "Hesabı kapat" paneli (backend özet okuma ucu + mevcut yazma uçları, parçalı tahsilat, borçla kapatma, bilgi fişi "fatura değildir" ibaresiyle); yeni bakım durumu yok. Orta-büyük, ~5 dilim. Kararlar (kullanıcı "sırayla yap", öneriyle, 2026-11-09): kapanış zamanı ve kapatan kişi ilk sürümde gelişe kalıcı yazılmaz; başka gelişlerden kalan borç varsayılan seçili gelmez, yalnız gösterilir. Sıraya alındı |
 | **Bağımlılıklar** | CHECKIN-005, RECORD-001 |
 | **Notlar** | DaySmart sandbox observation (~28:13–35:25). Belge paketi → [IDEA-018](../research/ideas.md#idea-018--consent-and-document-signature-workflow), [PATTERN-024](../research/patterns.md#pattern-024--event-to-document-package), [PORTAL-005](#portal-005--dijital-onam-ve-imza). **Clients Module:** customer-scoped billing — → [daysmart.md](../competitors/daysmart.md#client-billing). **Billing Module:** — → [daysmart.md](../competitors/daysmart.md#sandbox--billing--financial-operations). **Reports Module:** AR Reconciliation (reopened invoice warning), Accounts Receivable, EOD/Cash Reconciliation, Collections by Type — → [daysmart.md](../competitors/daysmart.md#reports-billing), [daysmart.md](../competitors/daysmart.md#reports-ar-reconciliation). **Kapsam dışı:** POS, e-belge → [INT-005](#int-005--e-fatura--e-smm), [INT-006](#int-006--pos-ve-online-ödeme). → [IDEA-027](../research/ideas.md#idea-027--checkout-as-visit-completion-orchestrator). **E-Vet SMART:** Yeni Ziyaret > Satış **Kaydet / Öde** — UI kopyalanmaz — → [e-vet.md](../competitors/e-vet.md#yeni-ziyaret). Global **Doğrudan Satış** **Kaydet / Öde** → Fatura Ödemesi; split tender (ör. Nakit + Kredi Kartı); linked payment blocks Direct Sale deletion; related payment removed → same sale record deletable (UI/product — FK/cascade **iddia edilmez**) — → [e-vet.md](../competitors/e-vet.md#ödeme-bağımlılığı-ve-silme-canlı-test) |
 
@@ -1219,7 +1219,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlılık |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): "Kopyasını oluştur" oluşturma formunu doldurur, ayrı uç yok; reçete (1. dilim), tedavi ve uygulama tekrarı (2. dilim); muayene ve aşı kapsam dışı (öneriyle kabul, 2026-11-09). Kopya mevcut kilit kurallarından geçer (ADR-013); kontrollü ilaçlı reçetede uyarı. Küçük, 2 dilim. Sıraya alındı |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | |
 
@@ -2887,7 +2887,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yetki kaldırma anında etkili olur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Araştırılacak |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): izin değişim damgası (damgadan eski token 401, frontend sessiz yeniler; migration yok) ve token ömrü 30 dk (öneriyle kabul, 2026-11-09). Damga bellekte, tek API süreci varsayımı. Küçük, 1 backend dilimi. Sıraya alındı |
 | **Bağımlılıklar** | Aşama 9 |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O6; tasarım kararı gerekir |
 
