@@ -50,26 +50,40 @@ Hekim kendi e-Devlet'iyle HBS'e girer; hasta bilgisi görünmeyecek şekilde ekr
 8. POS tahsilatından sonra e-SMM sırası.
 9. Entegratör kullanılırsa mükellefin yükümlülükleri (mali mühür, İVD kodu).
 
-Vetinity'nin kendi kuruluşu (yazılım işletmesi olarak):
+Vetinity'nin kendi kuruluşu (yazılım işletmesi olarak; **karar 2026-11-09: şahıs işletmesi**):
 
-10. İşletme türü: şahıs işletmesi mi, şirket (Ltd.) mi; ne zaman kurulmalı (ilk ücretli müşteri, entegratör çözüm ortaklığı şartı)?
+10. Şahıs işletmesi vergi kaydı ilk ücretli müşteriden ne kadar önce yapılmalı; faaliyet kodu (yazılım/SaaS) ne olmalı?
 11. Bağ-Kur/SGK: şu an SGK'lı değilim; işletme kurulunca Bağ-Kur (4/b) zorunluluğu, aylık prim tutarı ve başlangıç tarihi; istisna veya teşvik (genç girişimci vb.) var mı?
 12. İş yeri adresi olarak ev adresi: vergi kaydı ve fatura adresi için yeterli mi, sanal ofis gerekir mi?
 13. Sorumluluk sigortası: yazılım hatası veya veri kaybına karşı mesleki sorumluluk (ve siber) sigortası gerekli mi, tipik kapsam ve maliyet?
 
+Vetinity'nin kendi abonelik faturası (2026-11-08 eklendi; klinik e-belge işinden ayrı):
+
+14. Kliniklere abonelik satışında hangi belge: e-Arşiv fatura mı, alıcı e-Fatura mükellefiyse e-Fatura mı? Şahıs işletmesi olarak e-Arşiv/e-Fatura'ya en baştan mı geçilir, kâğıt fatura dönemi olur mu?
+15. Yazılım aboneliğinde KDV oranı (%20 varsayımı) ve stopaj gerekip gerekmediği.
+16. Yıllık peşin ödemede fatura bir kerede mi, aylık mı kesilir? Ödemesiz deneme ve indirim kodu faturaya nasıl yansır?
+17. Ödeme aracısı (iyzico) komisyonu için ayrıca belge gerekir mi; muhasebede nasıl gösterilir?
+18. Kontrol sorusu: klinik yazılımının aracı firma (özel entegratör) olmadan GİB'e otomatik belge gönderebileceği bir yol var mı? (Bizim varsayımımız: yok; tek gerçekçi yol entegratör API'si.)
+
 ## 3. Entegratör teklif isteği (en az iki firma)
+
+**Teklif istenecek firmalar (2026-11-08):** Paraşüt (API dokümanı en erişilebilir), BirFatura (API odaklı, ilan edilen kontör fiyatı düşük), UyumSoft (rakip E-vet'in seçeneklerinden) ve **pilot kliniğin bugün kullandığı entegratör**. Eleme şartı: **e-SMM'nin API'den kesilebilmesi** (her entegratör vermeyebilir, DOĞRULANMADI).
 
 Gönderilecek metin (kısa):
 
-> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyorum (şu an gerçek kişi olarak; şirket kuruluşu planlanıyor). Müşteri kliniklerimin kendi mükellef hesaplarıyla e-SMM, e-Arşiv ve e-Fatura keserken sizin API'nizi kullanmasını planlıyoruz. Şunları öğrenmek istiyoruz:
+> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyorum (şahıs işletmesi olarak; vergi kaydı tamamlanıyor). Müşteri kliniklerimin kendi mükellef hesaplarıyla e-SMM, e-Arşiv ve e-Fatura keserken sizin API'nizi kullanmasını planlıyoruz. Şunları öğrenmek istiyoruz:
 > 1. e-SMM, e-Arşiv ve e-Fatura için API dokümanı; belge oluşturma, iptal, durum sorgulama, PDF alma, e-Fatura mükellefi sorgusu.
 > 2. Test (sandbox) hesabı ve kimlik bilgisi verme süreci.
 > 3. Kimlik doğrulama modeli: her klinik kendi hesabıyla mı, bizim adımıza tek anlaşma mı (çözüm ortaklığı/bayilik koşulları)?
 > 4. Fiyat: kontör birim fiyatı, kurulum/yıllık ücret, arşiv ücreti, çok kiracılı kullanımda indirim.
 > 5. Aynı belgeyi iki kez göndermeyi önleyen idempotency desteği, webhook/durum bildirimi, hız sınırları.
 > 6. Belge saklama süresi ve veri çıkışı.
+> 7. e-SMM API üzerinden kesilebiliyor mu (e-Arşiv ve e-Fatura ile aynı API'de mi)?
+> 8. Sizde zaten hesabı olan bir klinik, mevcut hesabını bizim yazılımımıza bağlayabilir mi? Başka entegratörden geçişte ne gerekir?
+> 9. Vetinity kendi abonelik faturalarını da sizden kesebilir mi; bunun için ayrı hesap ve fiyat nedir?
+> 10. Çözüm ortaklığı modelinde (kontörü Vetinity alır, kliniklerin paketine belli sayıda belge dahil eder) birim fiyat, asgari alım ve bayilik şartları nedir? Size müşteri yönlendirmemiz karşılığında bir ortaklık programı var mı?
 
-Not: Entegratörlerin bayilik/çözüm ortaklığı koşulları çoğunlukla vergi mükellefi (şahıs işletmesi veya şirket) ister. Teklifte "sandbox ve kliniklerin kendi hesabıyla API kullanımı" için gerçek kişi başvurusunun yeterli olup olmadığını ayrıca sorun; çözüm ortaklığı (E3) şirketleşmeye bağlı kalabilir. Bu ticari/vergisel karar mali müşavir görüşmesinde de açılmalı (bölüm 2'ye ek soru: şahıs işletmesi mi, şirket mi, ne zaman).
+Not: Entegratörlerin bayilik/çözüm ortaklığı koşulları çoğunlukla vergi mükellefi ister. Vetinity şahıs işletmesi olacak (2026-11-09); teklifte şahıs işletmesinin çözüm ortaklığına (E3) yeterli olup olmadığını ve vergi kaydı tamamlanmadan sandbox hesabı verilip verilmediğini sorun. Kontörün pakete dahil edilip edilmeyeceği (ADR-036 AK-1/AK-6) teklifler ve pilot kliniğin aylık belge sayısı gelince kararlaştırılır.
 
 **Rakip gözlemi (2026-11-08, [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08)):** E-vet SMART ayarlarında entegratör seçimi **Altair** ve **UyumSoft**; klinik o firmadaki kendi kullanıcı adı/şifresini giriyor (ADR-036 AK-1 ile aynı model). Teklif listesine **UyumSoft** eklenmeli; pilot kliniğin bugün kullandığı firma da sorulmalı (klinik zaten bir entegratörde hesaplıysa o firmayı desteklemek geçişi kolaylaştırır).
 
