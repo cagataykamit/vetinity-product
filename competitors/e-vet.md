@@ -4060,6 +4060,8 @@ Tüm formüller · muhasebe doğruluğu · recalculation success/persistence · 
 
 **OBSERVED — sağlayıcı seçenekleri:** **Altair** · **UyumSoft** (iki seçenek).
 
+**Kullanıcı beyanı (2026-11-08):** e-SMM için **ayrı ekran yok**; e-SMM aynı Fatura Yönetim Paneli akışından ve Giden listesindeki e-Fatura / e-Smm seçicisiyle yürür. Belge türünün (e-SMM mi fatura mı) nerede ve nasıl seçildiği **NOT VERIFIED**.
+
 **INFERRED:** Klinik, seçtiği özel entegratördeki **kendi hesabının** kullanıcı adı/şifresini girer; E-vet bu hesap üzerinden gönderir. ADR-036 AK-1 modeliyle (klinik kendi sözleşmesi, yazılım bağlanır) aynı yapı. Kimlik bilgisinin nasıl saklandığı, kontör/sözleşme ilişkisi ve E-vet'in bu firmalarla ticari ortaklığı **NOT VERIFIED**. İncelenen hesapta bölüm boş; değer girilmedi, Kaydet'e basılmadı.
 
 **OBSERVED — ilgili ayar (Müşteri/Hasta bölümü):** "Müşteri Zorunlu Alan(lar)" **klinik tarafından seçilen** çoklu seçim; incelenen hesapta Doğum Tarihi · Gsm · Kimlik No seçili. "Tekrarlı Kimlik Nr İzin Ver" ayrı ayar (Hayır). Yani müşteri kartındaki Kimlik No zorunluluğu **sabit ürün kuralı değil, klinik ayarı**; [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) notundaki "Kimlik No zorunlu" yorumu buna göre okunmalı.
