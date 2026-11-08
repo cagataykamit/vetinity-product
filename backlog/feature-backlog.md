@@ -960,7 +960,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): hasta uyarı verisi Bugün yanıtında; satırda rozet render'ı doğrulanmadı |
+| **Durum** | Geliştirildi (2026-11-09; main yerelde FE `74feaf82`, origin'e gönderilmedi): Bugün tablo ve kartında hasta kartıyla aynı paylaşılan uyarı rozeti bileşeni; dar sütunda ve telefonda sarar, uyarı notu satırda görünür (tabloda tek satır, kartta 2 satır, tam metin ipucunda); renk tek başına anlam taşımaz (ikon, metin, aria-label). Tarayıcıda masaüstü, telefon ve koyu temada görüldü |
 | **Bağımlılıklar** | CHECKIN-007 |
 
 ### CHECKIN-014 — Hekim için "Benim hastalarım" filtresi

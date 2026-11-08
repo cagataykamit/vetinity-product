@@ -270,7 +270,7 @@ Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 - Gerçek ödeme **yalnız eski yöntemle** alınır; Vetinity'ye sonradan aynı tutarla girilir.
 - Hatalı girişleri silmeye çalışmayın: ücret/ödeme **iptal** edilir (yönetici), geliş **düzeltilir**, kesinleşmiş muayeneye **ek not** eklenir (kullanıcı kılavuzuna bakın). Pilotta test için ayrı "TEST" kayıt adı kullanılır **[ÖNERİ]**.
 - Gölge dönemi çıkış ölçütleri (örnek, klinikle netleşir **[YAPILACAK]**): iki hafta boyunca S1 yok, fark listesi kapanmış, kullanıcılar günlük akışı yardımsız tamamlıyor, bakiye uyumu.
-- Geri dönüş: Vetinity'yi bırakma kararı verilirse klinik zaten eski yöntemdedir; Vetinity verisi talep üzerine dışa aktarılır (dışa aktarma biçimi **[YAPILACAK]**; bugünkü rapor Excel/CSV dışa aktarımı tam veri dışa aktarımı değildir).
+- Geri dönüş: Vetinity'yi bırakma kararı verilirse klinik zaten eski yöntemdedir; Vetinity verisi klinik yöneticisi (Admin/Owner) tarafından Ayarlar > Verimi dışa aktar sayfasından tek ZIP pakette alınır: her tablo ayrı CSV (UTF-8, noktalı virgül, ilk sütun kayıt kimliği, zamanlar UTC ve İstanbul saatiyle, tutarlar ondalık noktayla), içinde BENIOKU.txt. Paket arka planda hazırlanır, hazır olunca bildirim gelir ve 7 gün saklanır; abonelik salt okunurken de çalışır. Biçim: backend `docs/DATA_EXPORT_API_CONTRACT.md` (2026-11-09). Yüklenen dosyaların içeriği (görüntü, lab ekleri) bu pakette yoktur; gerekirse ayrıca talep edilir **[YAPILACAK]**.
 - Pilot kapsamı önce Aşama 1–3 senaryolarıdır (muayene, geliş, ücret ve ödeme) (K9); diğer ekranlar kullanılabilir ama gölge dönemde kritik sayılmaz.
 - İlk gün: eğitim oturumu (kullanıcı kılavuzuyla), ilk hafta günlük kısa görüşme **[ÖNERİ]**.
 
@@ -316,6 +316,8 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `AddAppointmentOwnerLinkPurpose` (takvime ekle, TIER-020)
   - `AddWaitlist` (bekleme listesi, TIER-018; işleyici `Waitlist:Processor`, varsayılan 60 sn)
   - `AddDataMigrationSupport` (içe aktarma kaynak profili ve geçiş desteği talebi, TIER-021)
+  - `AddDataExportJobs` (tüm veri dışa aktarma)
+- [ ] `FileStorage:RootPath` tanımlı olmalı: yoksa dosya yüklemeleri 503 döner ve tüm veri dışa aktarma işleri "Hazırlanamadı" olur. Yerel geliştirme ortamında da tanımlı değil (2026-11-09 tespiti).
 - [ ] `App:BaseUrl` canlı API kökü olarak verilir (ör. `https://api.vetinity.com`); boşsa e-postalarda .ics bağlantısı üretilmez (TIER-020).
 - [ ] Veteriner bul (TIER-015, ADR-047): ters vekil `vetinity.com/veteriner` ve `/veteriner/*` isteklerini (POST `/veteriner/_api/klinikler` dahil) `/k/*` ile aynı site Node sürecine yönlendirir. Canlıda `public/robots.txt` dosyasına `Sitemap: https://www.vetinity.com/veteriner/sitemap.xml` satırı eklenir. Tanıtım sitesine bağlantı sayfa canlıya çıkınca eklenir (ADR-034 karar 6). Bilinen küçük sorun: site sunucusunun satır içi kritik CSS'i font adresini `/media/...` yazıyor, ilk istek 404 alıp sonra `/k/media/...` yükleniyor; klinik sitelerinde de aynı (düzeltilmedi).
 - [ ] Paket düşürme A (2026-11-08) canlıda etkin olur: sığmayan düşürme ve ücretliye geçiş 409 alır; dönem sonunda sınırı aşan planlı düşürme uygulanmaz. Eski B döneminden sınırı aşan kiracı varsa yayından önce konuşulur.
@@ -324,6 +326,7 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
   - `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin)
   - `ApiKeys.Manage` (Admin, Owner)
   - `CustomDevelopmentRequests.Manage` (Admin, Owner)
+  - `DataExport.Manage` (Admin, Owner)
   
   Klinikler rol tanımlayamaz: roller ortaktır (Admin, Owner, ClinicAdmin, Veteriner, Sekreter); klinik yalnız bu rolleri üyelerine atar. Rol izinlerini yalnız platform yöneticisi değiştirebilir (`Roles.Write` hiçbir hazır rolde yok) ve değişiklik tüm kliniklere yansır. Sözleşmelerdeki "özel roller elle almalı" notu, veritabanında elle oluşturulmuş bir rol olursa geçerlidir; bugün yerel DB'de böyle bir rol yok, canlıda `OperationClaims` listesi kontrol edilir. Yerel DB'de `Owner` rol kaydı da yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
 - [ ] Paket kuralları canlıda etkin olur (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Mevcut kiracıların paketi ile kullanımı yayından önce karşılaştırılır; sınırı aşan kiracı varsa onunla önceden konuşulur.

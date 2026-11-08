@@ -20,5 +20,7 @@ Veriler Türkiye'de [barındırma yeri] tutulur. Yurt dışına aktarım Kanun m
 **6. Süre sonu**
 Sonlandırmada Klinik verisini dışa aktarabilir; [süre] sonunda Vetinity verileri siler/anonimleştirir ve talep halinde yazılı teyit verir. Yasal saklama zorunluluğu bulunanlar o süre kadar ayrı tutulur.
 
+[Taslak ek, 2026-11-09, hukuki onay bekliyor: Klinik, hizmet süresince ve sonlandırmada panelden kendi verisinin tamamını makinece okunur biçimde (ZIP içinde CSV) alabilir. Pakete parola, oturum ve API kimlik bilgileri, hasta sahibi portal hesap bilgileri, gönderilen ileti içerikleri ve başka müşterilerin verisi dahil edilmez. Hazırlanan paket 7 gün saklanır ve sonra silinir; talep ve indirmeler denetim kaydına yazılır. Biçim ve verilen/verilmeyen alan tablosu: backend `DATA_EXPORT_API_CONTRACT.md` §6.]
+
 **7. Sorumluluk ve uygulanacak hukuk**
 Kullanım Şartları'ndaki sorumluluk ve uyuşmazlık hükümleri geçerlidir; bu sözleşme KVKK ve ilgili tebliğlere tabidir.
