@@ -3283,8 +3283,8 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kurumsal müşteri ürünü kendi işine göre kullanır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Kısmen geliştirildi (site metni dalda, main'e alınmadı; talep alma ve sınırlama süreci yok) |
-| **Bağımlılıklar** | — |
+| **Durum** | Talep alma ve sınırlamanın ilk dilimi geliştirildi (2026-11-08): main yerelde BE `cc430755`, FE `c6384adc`, origin'e gönderilmedi. Kurumsal kiracı Ayarlar > Size özel geliştirmeler'den başlık, konu (ekran/rapor/çıktı), hedef, ne istendiği ve öncelikle talep açar. Durumlar: Alındı → İnceleniyor → Planlandı / Kapsam dışı → Tamamlandı; kapsam dışında gerekçe kliniğe görünür. Aynı anda en çok 3 açık talep. Durumu yalnız platform yöneticisi değiştirir (`/panel/custom-development-requests`); değişiklik denetim kaydına maskeli yazılır. Alt pakette "üst pakete geç" kutusu, liste açık kalır. Site metni main'de. Tarayıcıda görülmedi. Sınır, yetki (Admin/Owner) ve durum akışı çalışma varsayımı, kullanıcı onayı bekliyor |
+| **Bağımlılıklar** | TIER-001, WEB-007 |
 | **Notlar** | Kullanıcı kararı (2026-11-06): uç istekler değil, proje içinde kalan düzenlemeler |
 
 ### TIER-011 — Hekim mobil uygulaması
