@@ -3447,7 +3447,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Randevu unutulma ihtimali azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Planlandı |
+| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `a54d53aa`, FE `ff235664`, origin'e gönderilmedi. Randevu hatırlatma e-postasına ve online talebin onay e-postasına Google Takvim ve .ics bağlantısı; portalda `/randevu-yanit` ve Randevularım'da "Takvime ekle" düğmeleri. Kayıtta yalnız klinik adı, adresi, telefonu, hayvan adı ve saat; teşhis, not, hekim yok. Saatler UTC, 1 saat önce uyarı. .ics bağlantısı TIER-019 bağlantı tablosunda ayrı, eylem yapamayan takvim tokeniyle; iptal ve yeniden zamanlamada geçersiz. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md` §8. Migration `AddAppointmentOwnerLinkPurpose` yalnız yerel DB'de. Üretimde `App:BaseUrl` gerekli. Randevularım ekranı ve gerçek takvim uygulamasına içe aktarma görülmedi. Bilinen boşluk sürüyor: yeniden zamanlanan randevuya yeni hatırlatma gitmiyor |
 | **Bağımlılıklar** | APPT-013 |
 | **Notlar** | APPT-032'nin ilk dilimi; takvim aboneliği orada kalır |
 
