@@ -1,8 +1,8 @@
-# Hukuki metin taslakları
+# Hukuki metinler
 
-Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinlerin **ürün ekibi tarafından hazırlanmış taslaklarını** tutur. ([ADR-024](../decisions/ADR-024-hukuki-metin-taslaklari.md): kullanıcı kararıyla ürün taslakları kendisi yazar; uzman incelemesi sonra yapılır.)
+Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinleri tutar; metinleri ürün ekibi yazar ([ADR-024](../decisions/ADR-024-hukuki-metin-taslaklari.md)). **Kullanıcı kararı (2026-11-09): hukukçu incelemesi beklenmez, metinler bu hâliyle yürürlüktedir (sürüm 1.0).**
 
-> **Uyarı:** Hiçbiri hukuki tavsiye değildir ve hukukçu tarafından onaylanmamıştır. Canlı klinik verisiyle kullanılmadan önce KVKK/veteriner mevzuatı konusunda uzman bir hukukçunun incelemesi gerekir. Köşeli parantezli `[...]` alanlar bilgi/karar gerektirir, doldurulmadan yayımlanmaz. İnceleme listesi: [roadmap/HUKUKI-ONAY-LISTESI.md](../roadmap/HUKUKI-ONAY-LISTESI.md).
+> Köşeli parantezli `[...]` alanlar (unvan, vergi no, adres, ücret ve süreler) bilgi gerektirir; vergi kaydı tamamlanınca bir kerede doldurulur. Eski inceleme listesi arşivdir: [roadmap/HUKUKI-ONAY-LISTESI.md](../roadmap/HUKUKI-ONAY-LISTESI.md).
 
 ## Taraflar (varsayım, A6)
 
@@ -14,15 +14,15 @@ Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinlerin **ürün 
 
 | Belge | Kim kime | Ürün yeri | Durum |
 |---|---|---|---|
-| [aydinlatma-metni.md](aydinlatma-metni.md) | Klinik → müşteri (hayvan sahibi) | Müşteri kartı, yazdırma; Ayarlar'da klinik başına şablon | Taslak, onay bekliyor |
-| [acik-riza-metni.md](acik-riza-metni.md) | Klinik → müşteri | ADR-021 formu; varsayılan metin (backend `ClinicKvkkFormTemplateDefaults`) | Taslak, onay bekliyor |
-| [gizlilik-politikasi.md](gizlilik-politikasi.md) | Vetinity → kullanıcılar | Herkese açık sayfa ve kayıt/giriş bağlantısı | Taslak, onay bekliyor |
-| [kullanim-sartlari.md](kullanim-sartlari.md) | Vetinity ↔ klinik | Herkese açık sayfa, sürümlü kabul (TRIAL-009) | Taslak, onay bekliyor |
-| [veri-isleme-sozlesmesi.md](veri-isleme-sozlesmesi.md) | Klinik ↔ Vetinity | Kayıtta kabul edilir, PDF olarak indirilebilir | Taslak, onay bekliyor |
-| [saklama-ve-imha-politikasi.md](saklama-ve-imha-politikasi.md) | Klinik iç belgesi / Vetinity | Klinik için şablon, Vetinity için iç politika | Taslak, onay bekliyor |
-| [portal-kullanim-sartlari.md](portal-kullanim-sartlari.md) | Vetinity ↔ hasta sahibi (portal kullanıcısı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında ve güncellemede sürümlü kabul (ADR-031 K4, ADR-029) | Taslak, onay bekliyor (AK-5) |
-| [portal-gizlilik-politikasi.md](portal-gizlilik-politikasi.md) | Vetinity → hasta sahibi (portal hesabı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında sürümlü kabul, portal içi bağlantı (ADR-031 K4, ADR-029) | Taslak, onay bekliyor (AK-5) |
+| [aydinlatma-metni.md](aydinlatma-metni.md) | Klinik → müşteri (hayvan sahibi) | Müşteri kartı, yazdırma; Ayarlar'da klinik başına şablon | Yürürlükte (1.0) |
+| [acik-riza-metni.md](acik-riza-metni.md) | Klinik → müşteri | ADR-021 formu; varsayılan metin (backend `ClinicKvkkFormTemplateDefaults`) | Yürürlükte (1.0) |
+| [gizlilik-politikasi.md](gizlilik-politikasi.md) | Vetinity → kullanıcılar | Herkese açık sayfa ve kayıt/giriş bağlantısı | Yürürlükte (1.0) |
+| [kullanim-sartlari.md](kullanim-sartlari.md) | Vetinity ↔ klinik | Herkese açık sayfa, sürümlü kabul (TRIAL-009) | Yürürlükte (1.0) |
+| [veri-isleme-sozlesmesi.md](veri-isleme-sozlesmesi.md) | Klinik ↔ Vetinity | Kayıtta kabul edilir, PDF olarak indirilebilir | Yürürlükte (1.0) |
+| [saklama-ve-imha-politikasi.md](saklama-ve-imha-politikasi.md) | Klinik iç belgesi / Vetinity | Klinik için şablon, Vetinity için iç politika | Yürürlükte (1.0) |
+| [portal-kullanim-sartlari.md](portal-kullanim-sartlari.md) | Vetinity ↔ hasta sahibi (portal kullanıcısı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında ve güncellemede sürümlü kabul (ADR-031 K4, ADR-029) | Yürürlükte (1.0) |
+| [portal-gizlilik-politikasi.md](portal-gizlilik-politikasi.md) | Vetinity → hasta sahibi (portal hesabı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında sürümlü kabul, portal içi bağlantı (ADR-031 K4, ADR-029) | Yürürlükte (1.0) |
 
 ## Sürümleme
 
-Her belgenin başında `Sürüm` ve `Taslak tarihi` bulunur. Yayımlanan her metin sürümü saklanır; kabul kayıtları sürüm numarasını tutar (TRIAL-009).
+Her belgenin başında `Sürüm` ve `Tarih` bulunur. Yayımlanan her metin sürümü saklanır; kabul kayıtları sürüm numarasını tutar (TRIAL-009).

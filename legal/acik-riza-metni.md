@@ -1,6 +1,6 @@
 # Açık Rıza Metni (klinik şablonu, ADR-021 formu)
 
-Sürüm: 0.2 (taslak) · Taslak tarihi: 2026-10-15 · Durum: hukuki onay bekliyor
+Sürüm: 1.0 · Tarih: 2026-11-09
 Bu metin backend `ClinicKvkkFormTemplateDefaults.Text` varsayılanıdır; klinik Ayarlar > KVKK form metninden değiştirebilir.
 
 Tasarım ilkesi (Kanun m.3/a, m.5/1): Açık rıza yalnızca **başka hukuki sebebe dayanmayan** işlemler için, **belirli bir konuya** ilişkin, **bilgilendirmeye dayalı** ve **özgür iradeyle** verilir. Hizmetin sunulması rızaya bağlanmaz; bu yüzden metin aydınlatma metninden ayrıdır ve yalnız hatırlatma/iletişim izni ile (varsa) isteğe bağlı iletişimi kapsar. Rızasız da hizmet verilir ve müşteri istediği zaman geri alabilir.

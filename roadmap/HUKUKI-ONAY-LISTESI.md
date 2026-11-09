@@ -1,5 +1,7 @@
 # Hukuki onay listesi (pilot öncesi)
 
+> **Arşiv (2026-11-09, kullanıcı kararı):** hukukçu incelemesi yapılmayacak; ürün ekibinin metinleri ve buradaki çalışma varsayımları sürüm 1.0 olarak yürürlüktedir. Liste geçmiş kaydı olarak tutulur, yeni madde eklenmez.
+
 Amaç: Vetinity'nin hukuki görüş gerektiren tüm noktalarını tek yerde toplamak. **Aşağıdaki hiçbir madde hukuki tavsiye değildir**; ürün ekibinin taslak ya da varsayımlarıdır, **KVKK/veteriner mevzuatı konusunda uzman bir hukukçu tarafından onaylanmadan canlı klinik verisiyle kullanılmamalıdır.** Her maddenin yanında kodda nerede durduğu yazılıdır.
 
 Durum değerleri: **Onay bekliyor** · **Soru** (hukukçuya cevaplatılacak) · **Onaylandı** (tarih, kim).

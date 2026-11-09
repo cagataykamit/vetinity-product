@@ -1,6 +1,6 @@
 # Vetinity Gizlilik Politikası (kullanıcı / site ziyaretçisi)
 
-Sürüm: 0.1 (taslak) · Taslak tarihi: 2026-10-15 · Durum: hukuki onay bekliyor
+Sürüm: 1.0 · Tarih: 2026-11-09
 
 Bu politika Vetinity'nin kendi kullanıcılarına (klinik yöneticisi ve çalışanları, site ziyaretçileri, deneme kaydı yapanlar) ilişkindir. Kliniklerin müşterilerinin (hayvan sahipleri) verileri bakımından veri sorumlusu ilgili kliniktir; Vetinity bu verileri klinik adına veri işleyen olarak işler ([veri işleme sözleşmesi](veri-isleme-sozlesmesi.md)).
 

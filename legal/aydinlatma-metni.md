@@ -1,6 +1,6 @@
 # Müşteri Aydınlatma Metni (klinik şablonu)
 
-Sürüm: 0.2 (taslak) · Taslak tarihi: 2026-10-21 (0.1: 2026-10-15; 0.2: fatura/e-belge amacı ve kimlik/vergi numarası, ADR-036) · Durum: hukuki onay bekliyor
+Sürüm: 1.0 · Tarih: 2026-11-09
 Yer tutucular: `{{clinicName}}`, `{{clientName}}`, `{{date}}`. Köşeli parantezli alanları klinik doldurur.
 
 ---

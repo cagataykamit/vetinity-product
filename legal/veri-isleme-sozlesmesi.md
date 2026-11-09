@@ -1,6 +1,6 @@
 # Veri İşleme Sözleşmesi (Klinik = veri sorumlusu, Vetinity = veri işleyen)
 
-Sürüm: 0.1 (taslak) · Taslak tarihi: 2026-10-15 · Durum: hukuki onay bekliyor (HUKUKI-ONAY-LISTESI A6)
+Sürüm: 1.0 · Tarih: 2026-11-09
 
 **1. Taraflar ve konu**
 Veri sorumlusu: abonelik kaydındaki Klinik. Veri işleyen: [Şirket unvanı] ("Vetinity"). Konu: Vetinity'nin, Hizmeti sunarken Klinik adına işlediği kişisel veriler (müşteri ve hasta sahibi kimlik/iletişim/finans verileri, hayvana ilişkin kayıtlar).
@@ -15,12 +15,12 @@ a) Verileri yalnız Klinik'in yazılı (Hizmet kullanımıyla verilen) talimatla
 Aydınlatma yükümlülüğünü, hukuki sebebin (gerekirse açık rızanın) varlığını, VERBİS ve saklama kararlarını, ilgili kişi taleplerinin yanıtlanmasını üstlenir; kullanıcı hesaplarını yetkili kişilere verir.
 
 **5. Yurt dışı aktarım**
-Veriler Türkiye'de [barındırma yeri] tutulur. Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz [hukuki inceleme: sağlayıcılar].
+Veriler Türkiye'de [barındırma yeri] tutulur. Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz.
 
 **6. Süre sonu**
 Sonlandırmada Klinik verisini dışa aktarabilir; [süre] sonunda Vetinity verileri siler/anonimleştirir ve talep halinde yazılı teyit verir. Yasal saklama zorunluluğu bulunanlar o süre kadar ayrı tutulur.
 
-[Taslak ek, 2026-11-09, hukuki onay bekliyor: Klinik, hizmet süresince ve sonlandırmada panelden kendi verisinin tamamını makinece okunur biçimde (ZIP içinde CSV) alabilir. Pakete parola, oturum ve API kimlik bilgileri, hasta sahibi portal hesap bilgileri, gönderilen ileti içerikleri ve başka müşterilerin verisi dahil edilmez. Hazırlanan paket 7 gün saklanır ve sonra silinir; talep ve indirmeler denetim kaydına yazılır. Biçim ve verilen/verilmeyen alan tablosu: backend `DATA_EXPORT_API_CONTRACT.md` §6.]
+Klinik, hizmet süresince ve sonlandırmada panelden kendi verisinin tamamını makinece okunur biçimde (ZIP içinde CSV) alabilir. Pakete parola, oturum ve API kimlik bilgileri, hasta sahibi portal hesap bilgileri, gönderilen ileti içerikleri ve başka müşterilerin verisi dahil edilmez. Hazırlanan paket 7 gün saklanır ve sonra silinir; talep ve indirmeler denetim kaydına yazılır. Biçim ve verilen/verilmeyen alan tablosu: backend `DATA_EXPORT_API_CONTRACT.md` §6.
 
 **7. Sorumluluk ve uygulanacak hukuk**
 Kullanım Şartları'ndaki sorumluluk ve uyuşmazlık hükümleri geçerlidir; bu sözleşme KVKK ve ilgili tebliğlere tabidir.
