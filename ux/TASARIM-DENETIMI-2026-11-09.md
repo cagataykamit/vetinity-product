@@ -283,6 +283,7 @@ Paket özeti (token'lardan): Modern Instrument Sans, beyaz/`#14171a`, ana `#0f4c
 ## 9. Karar gerektirenler (kullanıcıya)
 
 1. Marka rengi: panel/portal `definePreset` ile turkuaz mı kalacak emerald mı; giriş/kayıt sayfaları tanıtım diline mi çekilecek (0. bölüm #4).
+   - **Karar (2026-11-09, kullanıcı: "a yı yap"):** Palet **A · Turkuaz birincil**. Birincil açıkta `#0c8079` + beyaz yazı (4,8:1), koyuda `#2dd4bf` + `#042f2e`; logo turkuazı `#0fa39a` yalnız simge, grafik ve 24 px+ başlıkta; ikincil lacivert `#0b1d3a`; nötr iki temada slate; durum renkleri başarı `#15803d`/`#4ade80`, uyarı `#b45309`/`#fbbf24`, hata `#b91c1c`/`#f87171`. Karşılaştırılan seçenekler (B lacivert, C derin turkuaz, D lacivert yazılı logo rengi, E yalnız emerald→turkuaz) ve kontrast tablosu FE `taslak/hesabi-kapat` dalında `/taslak/marka` sayfasında. Bugünkü emerald beyaz yazıyla 2,5:1 olduğu için geçiş aynı zamanda okunurluk düzeltmesi. İlk adım panel preset'i (`definePreset`), yüzey ve PrimeNG durum renkleri; Tailwind durum sınıfları (ör. `text-red-500`, yüzlerce kullanım), portal birleştirmesi ve giriş/kayıt sayfaları sonraki adım.
 2. Tanıtımda hasta sahibi portalı "var" mı "geliştiriliyor" mu (ADR-034/031 güncellemesi) (T2); deneme/demo sırası ADR notu (T3); kayıtta tek klinik adı alanı (T6); AK-6 iletişim bilgileri (T7).
 3. Kasa'nın Raporlar'dan Para sekmesine taşınması (2.1).
 4. Bugün satırında "Başlat"ın kaderi (kaldır / menüye al / "Muayene aç" ile birleştir) ve Acil anahtarının gösterimi (1.4).
