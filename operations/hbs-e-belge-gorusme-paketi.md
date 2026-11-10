@@ -65,29 +65,28 @@ Vetinity'nin kendi abonelik faturası (2026-11-08 eklendi; klinik e-belge işind
 17. Ödeme aracısı (iyzico) komisyonu için ayrıca belge gerekir mi; muhasebede nasıl gösterilir?
 18. Kontrol sorusu: klinik yazılımının aracı firma (özel entegratör) olmadan GİB'e otomatik belge gönderebileceği bir yol var mı? (Bizim varsayımımız: yok; tek gerçekçi yol entegratör API'si.)
 
-## 3. Entegratör teklif isteği (en az iki firma)
+## 3. Entegratör API ve test hesabı başvurusu
 
-**Teklif istenecek firmalar (2026-11-08):** Paraşüt (API dokümanı en erişilebilir), BirFatura (API odaklı, ilan edilen kontör fiyatı düşük), UyumSoft (rakip E-vet'in seçeneklerinden) ve **pilot kliniğin bugün kullandığı entegratör**. Eleme şartı: **e-SMM'nin API'den kesilebilmesi** (her entegratör vermeyebilir, DOĞRULANMADI).
+**Bu bir fiyat teklifi değildir (kullanıcı, 2026-11-10).** ADR-036 AK-1 modelinde klinik entegratörle kendi sözleşmesini yapar, kontörü kendisi öder; Vetinity entegratöre ödeme yapmaz. Vetinity'nin istediği: **API dokümanı** (bağlantı kodunu bir kez yazmak için) ve **test (sandbox) hesabı** (gerçek belge kesmeden denemek için; genelde ücretsiz, DOĞRULANMADI). Bazı firmalar yazılım firmasından ücretsiz "yazılım/entegrasyon ortağı" kaydı isteyebilir (DOĞRULANMADI). Fiyat yalnız bilgi amaçlı sorulur: kliniğe yaklaşık maliyeti söylemek ve ileride "pakete dahil belge" seçeneğini (AK-1/AK-6, açık) değerlendirmek için.
+
+**Başvurulacak firmalar (2026-11-10):** Paraşüt (API dokümanı en erişilebilir), BirFatura (API odaklı), UyumSoft (rakip E-vet'in seçeneklerinden), Nilvera, NES, Sovos ve **pilot kliniğin bugün kullandığı entegratör**. İlk desteklenecek firma şu sırayla seçilir: **e-SMM'nin API'den kesilebilmesi (eleme şartı**, her entegratör vermeyebilir, DOĞRULANMADI), pilot kliniğin ve kliniklerin yaygın kullandığı firma, doküman ve test hesabının hızı.
 
 Gönderilecek metin (kısa):
 
-> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyorum (şahıs işletmesi olarak; vergi kaydı tamamlanıyor). Müşteri kliniklerimin kendi mükellef hesaplarıyla e-SMM, e-Arşiv ve e-Fatura keserken sizin API'nizi kullanmasını planlıyoruz. Şunları öğrenmek istiyoruz:
-> 1. e-SMM, e-Arşiv ve e-Fatura için API dokümanı; belge oluşturma, iptal, durum sorgulama, PDF alma, e-Fatura mükellefi sorgusu.
-> 2. Test (sandbox) hesabı ve kimlik bilgisi verme süreci.
-> 3. Kimlik doğrulama modeli: her klinik kendi hesabıyla mı, bizim adımıza tek anlaşma mı (çözüm ortaklığı/bayilik koşulları)?
-> 4. Fiyat: kontör birim fiyatı, kurulum/yıllık ücret, arşiv ücreti, çok kiracılı kullanımda indirim.
-> 5. Aynı belgeyi iki kez göndermeyi önleyen idempotency desteği, webhook/durum bildirimi, hız sınırları.
-> 6. Belge saklama süresi ve veri çıkışı.
-> 7. e-SMM API üzerinden kesilebiliyor mu (e-Arşiv ve e-Fatura ile aynı API'de mi)?
-> 8. Sizde zaten hesabı olan bir klinik, mevcut hesabını bizim yazılımımıza bağlayabilir mi? Başka entegratörden geçişte ne gerekir?
-> 9. Vetinity kendi abonelik faturalarını da sizden kesebilir mi; bunun için ayrı hesap ve fiyat nedir?
-> 10. Çözüm ortaklığı modelinde (kontörü Vetinity alır, kliniklerin paketine belli sayıda belge dahil eder) birim fiyat, asgari alım ve bayilik şartları nedir? Size müşteri yönlendirmemiz karşılığında bir ortaklık programı var mı?
+> Veteriner klinik yönetim yazılımı (Vetinity) geliştiriyorum (şahıs işletmesi olarak; vergi kaydı tamamlanıyor). Müşteri kliniklerimin sizde **kendi hesaplarını açıp** e-SMM, e-Arşiv ve e-Fatura belgelerini Vetinity içinden, sizin API'niz üzerinden kesmesini planlıyoruz. Yazılım firması olarak entegrasyon geliştirmek için şunları rica ediyorum:
+> 1. e-SMM, e-Arşiv ve e-Fatura için API dokümanı: belge oluşturma, iptal, durum sorgulama, PDF alma, e-Fatura mükellefi sorgusu. e-SMM aynı API'den kesilebiliyor mu?
+> 2. Geliştirme için test (sandbox) hesabı; başvuru süreci ve bir ücreti var mı?
+> 3. Yazılım firmaları için entegrasyon/yazılım ortağı programınız var mı, şartları nedir?
+> 4. Kimlik doğrulama: kliniğin kendi hesabını yazılımımıza nasıl bağlarız (API anahtarı, OAuth, kullanıcı adı/şifre)? Sizde zaten hesabı olan klinik aynı hesabı kullanabilir mi?
+> 5. Aynı belgenin iki kez gönderilmesini önleyen destek (idempotency), durum bildirimi (webhook), hız sınırları.
+> 6. Bilgi amaçlı: kliniğin ödeyeceği kontör birim fiyatı ve yıllık/arşiv ücreti.
+> 7. Vetinity'nin kendi abonelik faturalarını kesmek için sizde hesap açabilir miyim?
 
-Not: Entegratörlerin bayilik/çözüm ortaklığı koşulları çoğunlukla vergi mükellefi ister. Vetinity şahıs işletmesi olacak (2026-11-09); teklifte şahıs işletmesinin çözüm ortaklığına (E3) yeterli olup olmadığını ve vergi kaydı tamamlanmadan sandbox hesabı verilip verilmediğini sorun. Kontörün pakete dahil edilip edilmeyeceği (ADR-036 AK-1/AK-6) teklifler ve pilot kliniğin aylık belge sayısı gelince kararlaştırılır.
+Not: Kontörün pakete dahil edilmesi (çözüm ortaklığı, E3) şimdilik sorulmaz; ADR-036 AK-1/AK-6 açık kararı, pilot kliniğin aylık belge sayısı ve kullanıcı kararıyla ayrıca açılır. Yanıtlar bu belgenin altına (tarih, firma, kişisel veri olmadan) işlenir.
 
-**Rakip gözlemi (2026-11-08, [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08)):** E-vet SMART ayarlarında entegratör seçimi **Altair** ve **UyumSoft**; klinik o firmadaki kendi kullanıcı adı/şifresini giriyor (ADR-036 AK-1 ile aynı model). Teklif listesine **UyumSoft** eklenmeli; pilot kliniğin bugün kullandığı firma da sorulmalı (klinik zaten bir entegratörde hesaplıysa o firmayı desteklemek geçişi kolaylaştırır).
+**Rakip gözlemi (2026-11-08, [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08)):** E-vet SMART ayarlarında entegratör seçimi **Altair** ve **UyumSoft**; klinik o firmadaki kendi kullanıcı adı/şifresini giriyor (ADR-036 AK-1 ile aynı model). Pilot kliniğin bugün kullandığı firma da sorulur (klinik zaten bir entegratörde hesaplıysa o firmayı desteklemek geçişi kolaylaştırır).
 
-Karşılaştırma tablosu: API kalitesi, sandbox hızı, fiyat, bayilik koşulu, destek. Test hesabı kimlik bilgileri yalnız user-secrets'a girer.
+Karşılaştırma tablosu: e-SMM API'si, doküman kalitesi, test hesabı hızı, ortaklık şartı, kliniğe kontör fiyatı, destek. Test hesabı kimlik bilgileri yalnız user-secrets'a girer.
 
 ## 4. Bakanlık yazısı taslağı (HBS / ilgili genel müdürlük veya il müdürlüğü)
 
