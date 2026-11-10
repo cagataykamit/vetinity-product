@@ -35,3 +35,7 @@
 - AK-6: iletişim bilgileri, tüzel kişi adı, destek saatleri (kullanıcı).
 - Pilot fiyatı belirlenince karar 4 (b) seçeneğine geçilir; sınırların tek doğrusu backend kataloğu (WEB-007). **2026-11-05:** (b) uygulandı (WEB-007, geçici fiyat; ADR-035 notu); katalog alınamazsa sitede tutar yerine "Fiyat için bize yazın" çıkar.
 - Hastane paketi: kapsam ve zaman ayrı ADR (sonraki iş; backlog ENT- altında aday).
+
+## Ek (2026-11-10)
+
+Kullanıcı: "küçük yazısını kaldıralım, biz büyük firmaları da hedefliyoruz." Karar 1 güncellendi: ana kitle tek hekimli klinikten çok şubeli işletmeye her ölçekte veteriner kliniği; sitede "küçük klinik" ifadesi yok (Hakkımızda, ana sayfa "Kime göre?", alt bilgi, SSS). Kime göre kartları (tek hekimli, birkaç kullanıcılı, birden fazla şube) aynen kalır. Hastane ayrı paket kararı değişmedi; sitede hâlâ yer almaz. Temel paket açıklaması ("tek hekimli ya da küçük ekipli") paketi tanımladığı için kalır.
