@@ -1102,7 +1102,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Mevcut müşteri verisiyle geçiş |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (ADR-012; canlıya geçişten önce yeniden değerlendirilir). **2026-11-10:** içe aktarmada açılış bakiyesi (devir ücreti) TIER-023 / ADR-048 ile gelir; elle açılış bakiyesi kaydı ve eski ödeme bağlama hâlâ ertelendi |
+| **Durum** | Ertelendi (ADR-012; canlıya geçişten önce yeniden değerlendirilir). **2026-11-10:** içe aktarmada açılış bakiyesi (devir ücreti) TIER-024 / ADR-048 ile gelir; elle açılış bakiyesi kaydı ve eski ödeme bağlama hâlâ ertelendi |
 | **Bağımlılıklar** | FIN-002 |
 
 ### FIN-008 — Hizmet kataloğu
@@ -3467,11 +3467,11 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | ADR-019, TIER-010 |
 | **Notlar** | Kullanıcı kararları (2026-11-09): önce Kolayvet ve E-vet, geçiş desteği Kurumsal'da ücretsiz, kurulum görüşmesi 1 saat. Eşlemelerin hiçbiri gerçek dosyayla doğrulanmadı: Kolayvet için kamuya açık sütun adı bulunamadı (profil eşlemesiz), E-vet eşlemeleri rakip incelemesindeki ekran sütunlarından, aşı için yok. Gerçek dosya gelince yalnız `ImportSourceProfiles` düzeltilip doğrulandı işaretlenir (pilot klinikten örnek dosya istenecek). KVKK: dosya e-postayla gönderilmez, klinik panele yükler, destek kliniğin izniyle ekran paylaşımında yardım eder; hukuk soruları `HUKUKI-ONAY-LISTESI` A12. Varsayımlar: aynı anda tek açık geçiş talebi, yalnız Admin/Owner açar |
 
-### TIER-023 — Tam veri geçişi (klinik geçmiş, bakiye, hesap hareketleri, randevu, ürün)
+### TIER-024 — Tam veri geçişi (klinik geçmiş, bakiye, hesap hareketleri, randevu, ürün)
 
 | Alan | Değer |
 |---|---|
-| **Kimlik** | TIER-023 |
+| **Kimlik** | TIER-024 |
 | **Başlık** | Tam veri geçişi |
 | **Kategori** | TIER |
 | **Problem** | Büyük ve eski programdan geçen klinik muayene, bakiye ve randevu geçmişini bırakmaz; içe aktarma yalnız müşteri, hasta ve aşıyı alıyordu |
