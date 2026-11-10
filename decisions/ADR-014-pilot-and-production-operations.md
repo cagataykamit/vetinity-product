@@ -15,7 +15,7 @@
 | K5 | E-posta | Alan adına bağlı e-posta gönderim hizmeti (SPF/DKIM); sızan Gmail uygulama parolası iptal edilir (önceki "kabul edilen risk" kararı geçersiz); D10 gerçek gönderim testi bu hesapla, parola yalnız gizli depoya girer, sohbete yazılmaz. |
 | K6 | Query DB | Pilotta okuma bayrakları **kapalı**; pilot hacminde yavaşlık ölçülürse (Dilim 9) açılır. |
 | K7 | Varsayılan yönetici | Sabit parolalı varsayılan yönetici üretimde oluşturulmaz; ilk yönetici güvenli kurulum komutuyla yaratılır (Dilim 1). |
-| K8 | İçe aktarma | Müşteri + hasta + aşı geçmişi; tüm klinik geçmiş (muayene, ödeme) ilk sürümde yok. |
+| K8 | İçe aktarma | Müşteri + hasta + aşı geçmişi; tüm klinik geçmiş (muayene, ödeme) ilk sürümde yok. **2026-11-10: sınır kalktı**, kapsam [ADR-048](ADR-048-tam-veri-gecisi.md) (klinik geçmiş, açık bakiye, hesap hareketleri, gelecek randevular, ürün kartları). |
 | K9 | Zamanlama | Pilot kapsamı önce Aşama 1–3 senaryoları (muayene, geliş, ücret ve ödeme); Aşama 4–8 kalanı pilotla paralel gelir. |
 
 ## Sonuçlar

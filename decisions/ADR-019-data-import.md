@@ -30,3 +30,7 @@
 ## Ek karar (2026-10-14, kullanıcı: "baştan arka plana alalım")
 
 - **K13 Doğrulama çalışma biçimi:** doğrulama (kuru çalıştırma) de K11 gibi **arka plan işi** olur: kullanıcı "Doğrula"ya basınca iş kuyruğa alınır, ekranda ilerleme izlenir, sekme kapansa da sürer; senkron istek zaman aşımı riski kalkar. Gerekçe: T ölçümünde 5.000 müşteri / 8.000 hayvan / 20.000 aşı için doğrulama ~38 sn; pilot dosya boyutu bilinmiyor. Uygulama T performans düzeltmesi (karesel ikinci parti doğrulaması) birleştikten sonra backend + frontend dilimi olarak yapılır; uç sözleşmesi geriye dönük kırılmayacak şekilde (durum/ilerleme B4 ilerleme ucu deseniyle) tasarlanır.
+
+## Ek (2026-11-10) — tam geçiş
+
+Kapsam [ADR-048](ADR-048-tam-veri-gecisi.md) ile genişledi: klinik geçmiş (salt okunur eski program kaydı), açık bakiye (devir ücreti), hesap hareketleri (salt okunur), gelecek randevular, ürün ve hizmet kartları. K1–K13 aynen geçerli; K3 randevu hatırlatmalarını da kapsar; K7 yeni kayıt türleri için ADR-048 "Geri alma" bölümüyle yeniden yazıldı (partinin kendi kayıtları bağ sayılmaz, diğer her bağ engeldir).
