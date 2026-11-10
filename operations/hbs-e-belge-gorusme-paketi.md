@@ -123,3 +123,14 @@ Gönderim kanalı ve imza kullanıcıdadır; yanıtı keşif belgesine D9 olarak
 
 ## Yanıtlar gelince
 Yanıtları bu belgenin altına (tarih + kaynak, kişisel veri olmadan) ekleyin; ajan keşif tablosunu ve ADR-036 açık kararlarını (AK-1…AK-8) günceller.
+
+### Entegratör başvuruları
+
+| Tarih | Firma | Kanal | Durum |
+|---|---|---|---|
+| 2026-11-10 | Nilvera | Destek e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | BirFatura | Entegrasyon e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | Paraşüt | İletişim kanalı | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | UyumSoft | İletişim / iş ortaklığı kanalı | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | NES | İş ortaklığı e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | Sovos (Digital Planet) | İş ortağı e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
