@@ -130,7 +130,7 @@ Yanıtları bu belgenin altına (tarih + kaynak, kişisel veri olmadan) ekleyin;
 |---|---|---|---|
 | 2026-11-10 | Nilvera | Destek e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
 | 2026-11-10 | BirFatura | Entegrasyon e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
-| 2026-11-10 | Paraşüt | İletişim kanalı | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | Paraşüt | İletişim kanalı | **Yanıt geldi (2026-11-10):** API bilgileri `devhub.parasut.com` → "API Başvurusu Yap" ile alınır; Paraşüt kullanıcısı "Paraşüt ile Giriş Yap", ardından "Paraşüt Kullanıcı Başvuru Formu"ndaki zorunlu alanlar → API bilgileri (istemci kimliği/sırrı). Kullanıcı eylemi: Paraşüt hesabı ve başvuru; geliştirme için Staging ortamı (staging hesabı 6 ayda silinir, devhub). e-SMM API'si hâlâ teyit edilmedi |
 | 2026-11-10 | UyumSoft | İletişim / iş ortaklığı kanalı | Gönderildi (kullanıcı), yanıt bekleniyor |
 | 2026-11-10 | NES | İş ortaklığı e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
 | 2026-11-10 | Sovos (Digital Planet) | İş ortağı e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
