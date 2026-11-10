@@ -33,7 +33,7 @@ Sertifikalar Let's Encrypt (certbot, webroot `/var/www/letsencrypt`), 2027-02-08
 |---|---|
 | Yayın klasörleri | `/var/www/vetinity/production/{web,portal,api,dbmigrator,site}`; bir önceki `web` sürümü `web-eski` |
 | API servisi | `vetinity-api.service` (kullanıcı `vetinity`, `Restart=always`), ayarlar `EnvironmentFile=/etc/vetinity/production/api.env` |
-| Site servisi | `vetinity-site.service` (Node SSR, `127.0.0.1:4400`), ayarları servis dosyasında (`SITE_*`) |
+| Site servisi | `vetinity-site.service` (Node SSR, port 4400; tüm arayüzlerde dinler, dışarıya güvenlik duvarı kapatır), ayarları servis dosyasında (`SITE_*`) |
 | nginx | `/etc/nginx/sites-available/vetinity-{http,api,www,panel,portal}` ve `/etc/nginx/snippets/vetinity-{guvenlik,site-proxy}.conf` |
 | Yüklenen dosyalar | `/var/lib/vetinity/files` (`FileStorage__RootPath`) |
 | Yedekler | `/var/backups/vetinity/gunluk/<gün>`; betik `/opt/vetinity/yedek.sh` (bölüm 9) |
@@ -49,6 +49,16 @@ Sertifikalar Let's Encrypt (certbot, webroot `/var/www/letsencrypt`), 2027-02-08
 - SQL Server 2022 aynı sunucuda (Zonguldak ile paylaşılır). `max server memory` 3072 MB (kullanıcı onayı 2026-11-10).
 - Vetinity veritabanları: `VetinityCommandDb` (komut) ve `VetinityQueryDb` (sorgu). Uygulama yalnız `vetinity_app` girişiyle bağlanır; `sa` yalnız yedek doğrulaması ve bakım içindir.
 - API açılışta migration çalıştırmaz. Şema değişikliği yalnız `DbMigrator` ile yapılır (bölüm 5.3).
+- **`/opt/mssql/bin/sqlservr` veya `mssql-conf` root olarak çalıştırılmaz** (`--version` dahil). Bu, `/var/opt/mssql/.system/system/{lsa,security}.hiv` dosyalarını `root`'a geçirir; çalışan sunucu etkilenmez ama bir sonraki başlangıçta SQL Server "Unable to set persistent hive root" / `Permission denied` ile açılmaz ve iki site de durur (2026-11-11 olayı, yeniden başlatmada görüldü, yaklaşık 8 dk kesinti). Sürüm için `dpkg -s mssql-server | grep Version`. Olursa çözüm: `chown mssql:mssql` + `chmod 660` bu iki dosyaya, `systemctl reset-failed mssql-server`, `systemctl start mssql-server`.
+- SQL Server güncellemesi (`mssql-server` paketi) işletim sistemi güncellemelerinden ayrı, yedekten sonra ve bakım penceresinde yapılır; iki sitenin veritabanını birden yükseltir. 2026-11-11'de 16.0.4195 kurulu, 16.0.4315 bekliyor.
+
+### 1.5 Sunucu güvenliği (2026-11-11 incelemesi)
+
+- Güvenlik duvarı (ufw): gelen varsayılan red; açık yalnız 80, 443 (nginx) ve 3522 (SSH). 1433 (SQL) ve 4400 (site) dışarıdan kapalı (dışarıdan denendi). Kullanılmayan 22 ve 587 kuralları 2026-11-11'de kaldırıldı.
+- fail2ban: SSH (3522) için 10 dakikada 5 hatalı giriş → 1 saat engel (`/etc/fail2ban/jail.local`). Durum: `fail2ban-client status sshd`.
+- SSH: X11 yönlendirme kapalı (`/etc/ssh/sshd_config.d/10-vetinity-sertlestirme.conf`). nginx: yalnız TLS 1.2/1.3, sürüm bilgisi gizli (`/etc/nginx/nginx.conf`; önceki hâli `/root/nginx.conf.yedek-2026-11-11`).
+- Otomatik güvenlik güncellemeleri açık (unattended-upgrades). Çekirdek güncellemesi yeniden başlatma ister (`/var/run/reboot-required`); 2026-11-11'de 50 paket güncellendi ve sunucu yeniden başlatıldı (çekirdek 5.15.0-203).
+- **Açık:** SSH'ye root parolayla da girilebiliyor (`PasswordAuthentication yes`, `PermitRootLogin yes`); kullanıcı için SSH anahtarı kurulduktan sonra parola kapatılır. `vrdyn` adlı sudo yetkili kullanıcı (son giriş Mart 2025, büyük olasılıkla sağlayıcının kurulum hesabı) kullanıcıya sorulacak. Site sürecinin yalnız `127.0.0.1`'de dinlemesi kod değişikliği ister (`projects/site/src/server.ts` `app.listen` adres almıyor). Yeni bağımlılık isteyen 6 paket (`netplan.io`, `snapd` vb.) bekletildi.
 
 ## 2. Roller ve sorumluluklar
 
