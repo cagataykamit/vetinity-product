@@ -332,14 +332,14 @@ Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 - [x] SMTP girişi doğrulandı (Gmail uygulama şifresi).
 - [x] Gece yedeği, şifreli Drive kopyası, geri yükleme provası (bölüm 9).
 - [x] SQL Server bellek sınırı 3072 MB.
+- [x] PDF raporları için DejaVu Sans kurulu (`/usr/share/fonts/truetype/dejavu`, `fonts-dejavu-core`; 2026-11-11 doğrulandı). Sunucuda `fc-list` yok; yazı tipini dosya yoluyla kontrol edin.
 - [x] UptimeRobot ile dış izleme (bölüm 7).
 - [x] Site Node süreci (`/k/*`, `/veteriner*`) nginx arkasında; nginx aynı makinede olduğundan API'nin `ForwardedHeaders` (yalnız loopback'e güven) ayarı yeterli.
 
 ### 11.2 Açık olanlar
 
 - [ ] **iyzico canlı anahtarları** (`Billing__Iyzico__ApiKey`/`SecretKey` henüz yok): şahıs işletmesinin vergi kaydı ve iyzico üye işyeri başvurusu kullanıcıda. Deneme süreleri bitmeden gerekli. Ardından gerçek kartla küçük tutarlı ödeme uçtan uca denenir (ödeme → dönüş → abonelik etkin; webhook günlükte görülür).
-- [ ] **PDF raporları için yazı tipi:** sunucuda DejaVu/Liberation yazı tipi yok (2026-11-11 `fc-list`); PDF indirme 500 verebilir, CSV/Excel etkilenmez (REPORT-007). Çözüm `apt install fonts-dejavu-core` — sunucu geneli paket, kullanıcı onayıyla.
-- [ ] **ClamAV kurulu değil** (2026-11-11): yüklenen dosyalar taranmıyor. Kurulumu sunucu geneli; kullanıcı onayıyla.
+- [ ] **Virüs taraması yok:** backend `IFileMalwareScanner` v1'de tarama yapmayan uygulamadır (backend `docs/IMAGING_API_CONTRACT.md`); yalnız ClamAV kurmak dosyaları taramaz. Gereken: clamd ile konuşan tarayıcı uygulaması (kod işi) + ClamAV kurulumu (kullanıcı onayı 2026-11-11; clamd imzaları yaklaşık 1–1,5 GB bellek kullanır, ölçülmedi).
 - [ ] Gerçek bir e-postanın (davet, hatırlatma, parola sıfırlama) canlıdan gidip ulaştığı denenmedi.
 - [ ] Barkod okuyucu gerçek telefonla (iOS Safari, Android) denenmedi.
 - [ ] Klinik sitesi hazır fotoğraf setinin lisansı (ADR-045 K7).
@@ -358,7 +358,7 @@ Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 5. Olay sonrası inceleme notlarının saklanacağı yer (ürün deposu mu?).
 6. Gölge dönem çıkış ölçütleri ve fark listesinin tutulacağı araç.
 7. RPO/RTO sayıları (ADR-014 K2). Bugünkü düzende veri kaybı en çok 1 gündür (gece yedeği); daha kısası işlem günlüğü yedeği ister.
-8. Sunucu geneli kurulumlar: PDF yazı tipi ve ClamAV (bölüm 11.2).
+8. Sunucu geneli kurulum: ClamAV (bölüm 11.2).
 
 ## 13. Doğrulanmayanlar
 
