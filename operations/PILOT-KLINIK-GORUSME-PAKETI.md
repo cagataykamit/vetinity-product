@@ -48,7 +48,7 @@ Bunlar netleşmeden kliniğe söz verme; görüşmede "bunu size yazılı iletec
 
 - **e-Fatura / e-SMM:** klinik şahıs mı, şirket mi; bugün belgeyi nereden kesiyor (program, GİB portal, muhasebeci)? Mali müşavirinin iletişimi (e-fatura görüşmesi için, HBS/e-belge paketi bölüm 2). Ayrıca (ADR-036, 2026-11-08):
   - Hangi belgeyi kesiyorsunuz: e-SMM mi, e-Arşiv fatura mı, ikisi mi? (İlk çalıştıracağımız yolu bu belirler.)
-  - Bir aracı firma (entegratör) kullanıyor musunuz, hangisi? (Varsa o firmayı desteklemek geçişi kolaylaştırır; teklif listesine eklenir.)
+  - Bir aracı firma (entegratör) kullanıyor musunuz, hangisi? (Varsa o firmayı desteklemek geçişi kolaylaştırır; başvuru listesine eklenir.)
   - Ayda kabaca kaç belge kesiyorsunuz? (Kontör maliyeti ve "pakete dahil belge" hesabı için.)
   - Belgeyi ne zaman kesiyorsunuz: her ödemede mi, gün sonunda toplu mu, müşteri isteyince mi?
   - Mama, aksesuar gibi ayrı ürün satışınız var mı?
