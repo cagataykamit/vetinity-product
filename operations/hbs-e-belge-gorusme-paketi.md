@@ -88,6 +88,19 @@ Not: Kontörün pakete dahil edilmesi (çözüm ortaklığı, E3) şimdilik soru
 
 Karşılaştırma tablosu: e-SMM API'si, doküman kalitesi, test hesabı hızı, ortaklık şartı, kliniğe kontör fiyatı, destek. Test hesabı kimlik bilgileri yalnız user-secrets'a girer.
 
+**Ön tarama (2026-11-10, web araması; resmî yanıt değil, DOĞRULANMADI):**
+
+| Firma | Herkese açık API dokümanı | e-SMM API'si | Test ortamı | Başvuru kanalı |
+|---|---|---|---|---|
+| Nilvera | Var: `developer.nilvera.com` | Dokümanda "e-SMM API" bölümü var | Ayrı test ortamı (`apitest.nilvera.com`), ayrı API anahtarı; OAuth 2.0 / API anahtarı | Test hesabı kaydı kullanıcıda; doküman başvurusuz okunabiliyor |
+| BirFatura | Talep üzerine | Belge türleri arasında e-SMM listeleniyor; API'de e-SMM görülmedi | Sitede "test ortamı ücretsiz" deniyor | Entegrasyon e-posta adresi sitede; adres sitede doğrulanarak yazılmalı. API e-ticaret sipariş çekme modeline yakın görünüyor, bizim modele uyumu sorulmalı |
+| Paraşüt | Aramada resmî geliştirici portalı bulunamadı (önceki oturumda `apidocs.parasut.com` açılamadı) | Üçüncü taraf kaynağa göre var | Destek ekibinden (üçüncü taraf kaynak) | Destek / iletişim formu |
+| Sovos | e-Fatura API dokümanı `api.fitbulut.com` altında | Bulunamadı | Bulunamadı | Kurumsal iletişim formu (sovos.com/tr) |
+| UyumSoft | Bulunamadı | e-SMM özel entegratörü | Bulunamadı | İletişim formu (uyumsoft.com) |
+| NES | Bulunamadı | Bulunamadı | Bulunamadı | İletişim formu |
+
+Sonuç: **Nilvera** başvuru beklemeden doküman okunabilen ve e-SMM API'si görünen tek aday; ilk teknik inceleme oradan başlayabilir. Diğerlerine yukarıdaki metin gönderilir.
+
 ## 4. Bakanlık yazısı taslağı (HBS / ilgili genel müdürlük veya il müdürlüğü)
 
 **Muhatap ve kanal (DOĞRULANMADI; öneri):** T.C. Tarım ve Orman Bakanlığı. e-Reçete duyuru ve talimatı **Gıda ve Kontrol Genel Müdürlüğü (GKGM)** sayfalarında, veteriner sağlık ürünleri sayfası **Hayvan Sağlığı ve Yetiştiriciliği Genel Müdürlüğü (HAYGEM)** altında; HAYBİS modülünü Tarım Reformu Genel Müdürlüğü koordine etmiş (2018 haberi). Hangisinin yanıtlayacağı belirsiz olduğundan başvuru "Tarım ve Orman Bakanlığı"na yapılır, metinde HBS e-Reçete/ATS birimi istenir. Kanal: **CİMER (cimer.gov.tr) → Bilgi Edinme (4982 sayılı Kanun)**, e-Devlet ile, ücretsiz; başvuru kayıtlı, yanıt süresi kanunda 15 iş günü (uzatma +15, DOĞRULANMADI). Kendi il tarım müdürlüğüne dilekçe ikinci seçenek.
