@@ -58,7 +58,7 @@ Sertifikalar Let's Encrypt (certbot, webroot `/var/www/letsencrypt`), 2027-02-08
 - fail2ban: SSH (3522) için 10 dakikada 5 hatalı giriş → 1 saat engel (`/etc/fail2ban/jail.local`). Durum: `fail2ban-client status sshd`.
 - SSH: X11 yönlendirme kapalı (`/etc/ssh/sshd_config.d/10-vetinity-sertlestirme.conf`). nginx: yalnız TLS 1.2/1.3, sürüm bilgisi gizli (`/etc/nginx/nginx.conf`; önceki hâli `/root/nginx.conf.yedek-2026-11-11`).
 - Otomatik güvenlik güncellemeleri açık (unattended-upgrades). Çekirdek güncellemesi yeniden başlatma ister (`/var/run/reboot-required`); 2026-11-11'de 50 paket güncellendi ve sunucu yeniden başlatıldı (çekirdek 5.15.0-203).
-- **Açık:** SSH'ye root parolayla da girilebiliyor (`PasswordAuthentication yes`, `PermitRootLogin yes`); kullanıcı için SSH anahtarı kurulduktan sonra parola kapatılır. `vrdyn` adlı sudo yetkili kullanıcı (son giriş Mart 2025, büyük olasılıkla sağlayıcının kurulum hesabı) kullanıcıya sorulacak. Site sürecinin yalnız `127.0.0.1`'de dinlemesi kod değişikliği ister (`projects/site/src/server.ts` `app.listen` adres almıyor). Yeni bağımlılık isteyen 6 paket (`netplan.io`, `snapd` vb.) bekletildi.
+- **Açık:** SSH'ye root parolayla da girilebiliyor (`PasswordAuthentication yes`, `PermitRootLogin yes`); kullanıcı için SSH anahtarı kurulduktan sonra parola kapatılır. `vrdyn` sudo yetkili kullanıcı VPS sağlayıcısınındır; **dokunulmaz** (kullanıcı, 2026-11-11). Site sürecinin yalnız `127.0.0.1`'de dinlemesi kod değişikliği ister (`projects/site/src/server.ts` `app.listen` adres almıyor). Yeni bağımlılık isteyen 6 paket (`netplan.io`, `snapd` vb.) bekletildi.
 
 ## 2. Roller ve sorumluluklar
 
