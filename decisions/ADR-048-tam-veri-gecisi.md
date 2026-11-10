@@ -68,3 +68,9 @@ Muayene ve ödeme geçmişi gelince "bağı olan kayıt" kümesi büyüyor. Kura
 - ezyVet: `docs.ezyvet.com/discover-resources/onboarding-resources-for-new-ezyvet-customers/cornerstone-data-conversions` (sayfa açılmadı; bilgi arama alıntısından, doğrulanmadı)
 - IDEXX Neo: `idexxneosupport.zendesk.com/hc/en-us/articles/360007591453` (403; bilgi arama alıntısından, doğrulanmadı)
 - VetBis, Vetsoft, E-vet ve diğer Türk ürünleri için kalem düzeyinde kaynak bulunamadı.
+
+## Uygulama notu (2026-11-10)
+
+- Devir ücreti otomatik borç hatırlatmasına da hatırlatmalar serbest bırakılana kadar girmez (aşı ve randevuyla aynı kural).
+- Ürün geri alma nedenleri kodda ücret önerisi ve muayene şablonu bağlarıdır; ücret satırı ürün bağı tutmadığı için "ücret" nedeni yoktur.
+- Hacim (yerel, 24.500 satır, yedi tablo): doğrulama ~4 sn, uygulama ~89 sn, geri alma ~60 sn; doğrulama sorgu sayısı satır sayısından bağımsız (backend `IMPORT_PERFORMANCE_FINDINGS.md` bölüm 9).
