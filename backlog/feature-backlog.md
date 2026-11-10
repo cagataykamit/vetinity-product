@@ -671,7 +671,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esnek paket uygulama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). Küçük-orta, 2 dilim. Sıraya alındı |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); canlıya yayınlanmadı |
 | **Bağımlılıklar** | EXAM-007 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
@@ -1219,7 +1219,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlılık |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): "Kopyasını oluştur" oluşturma formunu doldurur, ayrı uç yok; reçete (1. dilim), tedavi ve uygulama tekrarı (2. dilim); muayene ve aşı kapsam dışı (öneriyle kabul, 2026-11-09). Kopya mevcut kilit kurallarından geçer (ADR-013); kontrollü ilaçlı reçetede uyarı. Küçük, 2 dilim. Sıraya alındı |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): "Kopyasını oluştur" oluşturma formunu doldurur, ayrı uç yok; reçete (1. dilim), tedavi ve uygulama tekrarı (2. dilim); muayene ve aşı kapsam dışı (öneriyle kabul, 2026-11-09). Kopya mevcut kilit kurallarından geçer (ADR-013); kontrollü ilaçlı reçetede uyarı. **Tamamlandı (2026-11-11):** iki dilim frontend `main`e birleşti (`71633052`); canlıya yayınlanmadı |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | |
 
