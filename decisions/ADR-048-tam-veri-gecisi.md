@@ -48,7 +48,7 @@ Muayene ve ödeme geçmişi gelince "bağı olan kayıt" kümesi büyüyor. Kura
 
 ### Finans, kasa ve e-belge yalıtımı
 
-- İçe aktarılan her ücret işaretlidir (`Charges.ImportBatchId`). Ciro ve gün sonu okuması (tek yer: finans olay okuyucusu) işaretli ücreti dışlar. Kasa sayımı yalnız ödemeden türediği için etkilenmez: içe aktarma ödeme yazmaz. E-belge akışı ([ADR-036](ADR-036-hbs-ve-e-belge-entegrasyonu.md)) uygulandığında işaretli ücret için belge düzenlemez; bu kural e-belge diliminin kabul koşuludur.
+- İçe aktarılan her ücret işaretlidir (`Charges.ImportBatchId`). Ciro ve gün sonu okuması (tek yer: finans olay okuyucusu) işaretli ücreti dışlar. Kasa sayımı yalnız ödemeden türediği için etkilenmez: içe aktarma ödeme yazmaz. E-belge akışı ([ADR-036](ADR-036-hbs-ve-e-belge-entegrasyonu.md)) uygulandığında işaretli ücret için belge düzenlemez; bu kural e-belge diliminin kabul koşuludur. **Uygulandı (2026-11-11, backend `11b87b90`):** devir ücreti belgesiz listesine, hatırlatma sayacına, ödemeden ve otomatik kesmeye girmez; elle seçim `EDocuments.ImportedCharge` (409) ile reddedilir; ücret listesinde "e-Belge kes" eylemi gösterilmez (frontend `f5c239ee`). Kural tek yerde: `EDocumentRules.IsDocumentableCharge`.
 - Hesap hareketleri ve klinik geçmiş ayrı tablolardır; hiçbir finans, defter ya da rapor sorgusu onları okumaz.
 
 ## Sonuçlar
