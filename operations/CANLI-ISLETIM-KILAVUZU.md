@@ -1,29 +1,64 @@
 # Vetinity canlı işletim kılavuzu
 
-**Durum:** Taslak v0.1 (2026-10-13). Aşama 9 Dilim 11. Kaynaklar: [ADR-014](../decisions/ADR-014-pilot-and-production-operations.md) (K1–K9), backend `docs/ASAMA9_READINESS.md` (keşif; yalnız kod/belge okuması), backend `docs/deploy/*` ve `docs/cqrs/cqrs-11b-operations-runbook.md`.
+**Durum:** v1.0 (2026-11-11). Ürün 2026-11-10'dan beri canlıda. Staging yok (kullanıcı kararı 2026-11-10); yayınlar doğrudan canlıya yapılır. Kaynaklar: [ADR-014](../decisions/ADR-014-pilot-and-production-operations.md) (K1–K9), [ADR-033](../decisions/ADR-033-alan-adi-ve-adres-duzeni.md) (alan adı düzeni), backend `docs/deploy/*` ve `docs/cqrs/cqrs-11b-operations-runbook.md`.
 
 ## Bu belge nasıl okunur
 
-- Bu belge **yöntem ve beklentiyi** yazar. Ürün canlıda değildir; altyapı henüz kurulmamıştır.
-- **[YAPILACAK]** = henüz kurulmamış veya kararlaştırılmamış. Uydurma değer yoktur; boşluklar `<...>` ile işaretlidir ve doldurulacaktır.
+- Bölüm 1, 5, 7 ve 9 **sunucunun bugünkü gerçek kurulumunu** yazar (2026-11-10 kurulumu, 2026-11-11 sunucudan okunarak doğrulandı). Diğer bölümler yöntem ve beklentidir.
+- **[YAPILACAK]** = henüz kurulmamış veya kararlaştırılmamış. Boşluklar `<...>` ile işaretlidir.
 - **[ÖNERİ]** = kullanıcı kararı bekleyen öneri (bölüm 12).
-- Hosting yönetilen bulut (Azure) varsayımıyla düşünülmüştür (ADR-014 K1) ama adımlar platformdan bağımsız yazıldı. Platform adı geçen yerde "yönetilen platform" denir.
+- Gizli bilgiler (parola, anahtar, bağlantı dizesi) bu belgeye **yazılmaz**; yalnız durdukları dosyanın yolu yazılır.
 - Bu belge hukuki tavsiye değildir (bölüm 8).
 
-## 1. Mevcut durum özeti (neden çoğu madde "yapılacak")
+## 1. Canlı ortam
 
-Backend keşfi (2026-10-13) ve sonraki backend belgeleri (`docs/CI_CD.md`, `docs/SECURITY_CONFIGURATION.md`; `docs/MONITORING_ALERTING_CONTRACT.md` ayrı dalda, henüz `main`'de değil) okunarak güncellendi (2026-10-14). Belge/kod okuması; hiçbir ortama bağlanılmadı, iş akışları çalıştırılmadı:
+### 1.1 Adresler
 
-| Konu | Durum |
+| Yüzey | Adres | Ne sunar |
+|---|---|---|
+| Tanıtım sitesi | `https://www.vetinity.com` | Angular SPA (`web`); `vetinity.com` → `www` 301. `/k/*` (klinik siteleri) ve `/veteriner*` (Veteriner bul) site Node sürecine gider |
+| Klinik paneli | `https://panel.vetinity.com` | Aynı `web` paketi; `/` → `/panel` 302. Panel dışı yollar `www`'ye, `www`'deki `/panel`, `/auth`, `/join` yolları panele yönlenir (nginx + uygulama içi yüzey koruması) |
+| Hasta sahibi portalı | `https://portal.vetinity.com` | Portal SPA; `/randevu/*` başka sitelere gömülebilir |
+| API | `https://api.vetinity.com` | .NET 10 API (nginx → `127.0.0.1:5100`) |
+
+Sertifikalar Let's Encrypt (certbot, webroot `/var/www/letsencrypt`), 2027-02-08'e kadar geçerli, kendiliğinden yenilenir. DNS Porkbun'da.
+
+### 1.2 Sunucu
+
+- Kullanıcının VPS'i: `185.149.103.114`, Ubuntu 22.04, 8 GB bellek, 150 GB disk (2026-11-11'de %15 dolu). SSH bağlantı noktası `3522`, anahtarla (`~/.ssh/vetinity_deploy`), `root`.
+- **Aynı sunucuda başka bir site (Zonguldak) çalışır.** Onun veritabanına, dosyalarına ve nginx yapılandırmasına dokunulmaz. Sistem genelindeki .NET 9 onun içindir, kaldırılmaz/yükseltilmez. Sunucu genelinde bir değişiklik (paket kurma, SQL Server ayarı, nginx ana yapılandırması) önce kullanıcıya sorulur.
+- Vetinity'nin çalışma zamanları ayrı klasördedir: .NET 10 `/opt/dotnet10`, Node 24 `/opt/node24`.
+
+| Ne | Yer |
 |---|---|
-| Üretim/staging ortamı | Kurulu olduğuna dair kanıt yok; yalnız tasarım/runbook belgeleri var (Windows IIS hedefli; ADR-014 K1 bunu yedek plan sayar) |
-| CI/CD, sürüm etiketi | CI iş akışı tanımlı (`.github/workflows/ci.yml`: derleme + test + artifact + idempotent migration betikleri; `v*` etiketiyle SemVer). **GitHub'da henüz çalışmadı** (`CI_CD.md`: ilk koşuda ayar gerekebilir). **Dağıtım (CD) ve hosting yok.** Telemetri sürümü kodda sabit `1.0.0` (derleme sürümünü okumaz) |
-| Yedekleme / geri yükleme | Repoda tanımlı değil, hiç denenmedi |
-| Hata izleme / uyarı aracı | Hesap/araç yok. Kod tarafı (izleme dalında, `main`'de değil): korelasyon kimliği, `IErrorReporter` soyutlaması (varsayılan yalnız günlüğe yazar), outbox eşikleri, `ops.*` metrikleri. Üretim günlüğü stdout'a JSON (platform toplar); `/health/live`, `/health/ready`; OTLP yalnız `OTEL_EXPORTER_OTLP_ENDPOINT` verilirse. Toplayıcı, uptime izleyici ve uyarı kanalı kurulu değil |
-| Olay yönetimi / destek | Yok (bu belge ilk taslak) |
-| Sabit parolalı varsayılan yönetici | Development dışında artık oluşturulmaz; ilk yönetici `DbMigrator create-platform-admin` ile (`SECURITY_CONFIGURATION.md`). Üretim açılış doğrulaması eksik/yer tutucu gizli ayarlarda API'yi başlatmaz. Üretimde `seed` yalnız etiketli birleşik sürümden |
+| Yayın klasörleri | `/var/www/vetinity/production/{web,portal,api,dbmigrator,site}`; bir önceki `web` sürümü `web-eski` |
+| API servisi | `vetinity-api.service` (kullanıcı `vetinity`, `Restart=always`), ayarlar `EnvironmentFile=/etc/vetinity/production/api.env` |
+| Site servisi | `vetinity-site.service` (Node SSR, port 4400; tüm arayüzlerde dinler, dışarıya güvenlik duvarı kapatır), ayarları servis dosyasında (`SITE_*`) |
+| nginx | `/etc/nginx/sites-available/vetinity-{http,api,www,panel,portal}` ve `/etc/nginx/snippets/vetinity-{guvenlik,site-proxy}.conf` |
+| Yüklenen dosyalar | `/var/lib/vetinity/files` (`FileStorage__RootPath`) |
+| Yedekler | `/var/backups/vetinity/gunluk/<gün>`; betik `/opt/vetinity/yedek.sh` (bölüm 9) |
 
-Bu nedenle aşağıdaki prosedürler **go-live öncesi hazırlık hedefidir**. Gerçek ortam kurulunca her maddenin yanındaki `<...>` alanları doldurulur ve prosedür provası yapılır (bölüm 11).
+### 1.3 Ayarlar ve gizli bilgiler
+
+- API ayarları yalnız `api.env` ortam değişkenlerindedir (`root:vetinity`, 640; klasör 750). `appsettings.Production.json` yayına girmez. İçindeki anahtar adları: `ASPNETCORE_*`, `DOTNET_*`, `ConnectionStrings__DefaultConnection` / `__QueryConnection` (veritabanı girişi `vetinity_app`), `Jwt__*`, `AllowedHosts`, `AllowedOrigins__0..3` (panel, portal, www, apex), `App__BaseUrl`, `App__FrontendBaseUrl`, `OwnerPortal__PortalBaseUrl`, `Smtp__*` (Gmail, `vetinity.app@gmail.com`, uygulama şifresi), `DemoRequests__NotifyEmail`, `FileStorage__*`, `PetProjection__WriteEvents=false`, `PaymentProjection__WriteEvents=false`, `RefreshTokenCleanup__Enabled=true`, `Billing__*` (iyzico).
+- Yalnız `root`'un okuyabildiği gizli dosyalar (içerikleri hiçbir yere yazılmaz, sohbete yapıştırılmaz): `/root/.vetinity-sa` (SQL `sa`), `/etc/vetinity/production/.db-pass` (`vetinity_app`), `/etc/vetinity/production/.smtp-pass`, `/root/.vetinity-gdrive-client` (Drive bağlantısı), `/root/VETINITY-YEDEK-SIFRESI.txt` (yedek şifreleme parolaları).
+- Gizli değerleri sunucu dosyalarına **kullanıcı kendisi girer**; ajan parola yazmaz.
+
+### 1.4 Veritabanı
+
+- SQL Server 2022 aynı sunucuda (Zonguldak ile paylaşılır). `max server memory` 3072 MB (kullanıcı onayı 2026-11-10).
+- Vetinity veritabanları: `VetinityCommandDb` (komut) ve `VetinityQueryDb` (sorgu). Uygulama yalnız `vetinity_app` girişiyle bağlanır; `sa` yalnız yedek doğrulaması ve bakım içindir.
+- API açılışta migration çalıştırmaz. Şema değişikliği yalnız `DbMigrator` ile yapılır (bölüm 5.3).
+- **`/opt/mssql/bin/sqlservr` veya `mssql-conf` root olarak çalıştırılmaz** (`--version` dahil). Bu, `/var/opt/mssql/.system/system/{lsa,security}.hiv` dosyalarını `root`'a geçirir; çalışan sunucu etkilenmez ama bir sonraki başlangıçta SQL Server "Unable to set persistent hive root" / `Permission denied` ile açılmaz ve iki site de durur (2026-11-11 olayı, yeniden başlatmada görüldü, yaklaşık 8 dk kesinti). Sürüm için `dpkg -s mssql-server | grep Version`. Olursa çözüm: `chown mssql:mssql` + `chmod 660` bu iki dosyaya, `systemctl reset-failed mssql-server`, `systemctl start mssql-server`.
+- SQL Server güncellemesi (`mssql-server` paketi) işletim sistemi güncellemelerinden ayrı, yedekten sonra ve bakım penceresinde yapılır; iki sitenin veritabanını birden yükseltir. 2026-11-11'de 16.0.4195 kurulu, 16.0.4315 bekliyor.
+
+### 1.5 Sunucu güvenliği (2026-11-11 incelemesi)
+
+- Güvenlik duvarı (ufw): gelen varsayılan red; açık yalnız 80, 443 (nginx) ve 3522 (SSH). 1433 (SQL) ve 4400 (site) dışarıdan kapalı (dışarıdan denendi). Kullanılmayan 22 ve 587 kuralları 2026-11-11'de kaldırıldı.
+- fail2ban: SSH (3522) için 10 dakikada 5 hatalı giriş → 1 saat engel (`/etc/fail2ban/jail.local`). Durum: `fail2ban-client status sshd`.
+- SSH: X11 yönlendirme kapalı (`/etc/ssh/sshd_config.d/10-vetinity-sertlestirme.conf`). nginx: yalnız TLS 1.2/1.3, sürüm bilgisi gizli (`/etc/nginx/nginx.conf`; önceki hâli `/root/nginx.conf.yedek-2026-11-11`).
+- Otomatik güvenlik güncellemeleri açık (unattended-upgrades). Çekirdek güncellemesi yeniden başlatma ister (`/var/run/reboot-required`); 2026-11-11'de 50 paket güncellendi ve sunucu yeniden başlatıldı (çekirdek 5.15.0-203).
+- **Açık:** SSH'ye root parolayla da girilebiliyor (`PasswordAuthentication yes`, `PermitRootLogin yes`); kullanıcı için SSH anahtarı kurulduktan sonra parola kapatılır. `vrdyn` sudo yetkili kullanıcı VPS sağlayıcısınındır; **dokunulmaz** (kullanıcı, 2026-11-11). Site sürecinin yalnız `127.0.0.1`'de dinlemesi kod değişikliği ister (`projects/site/src/server.ts` `app.listen` adres almıyor). Yeni bağımlılık isteyen 6 paket (`netplan.io`, `snapd` vb.) bekletildi.
 
 ## 2. Roller ve sorumluluklar
 
@@ -33,7 +68,7 @@ Bu nedenle aşağıdaki prosedürler **go-live öncesi hazırlık hedefidir**. G
 | Nöbetçi mühendis | `<ad>` **[YAPILACAK]** | Uyarıyı alır, ilk müdahaleyi yapar, durumu günceller |
 | Pilot klinik irtibatı | `<ad, telefon>` **[YAPILACAK]** | Klinikte sorunu bildiren ve duyuruyu alan tek kişi |
 | KVKK danışmanı / avukat | `<ad>` **[YAPILACAK]** (ADR-014 K3) | Kişisel veri ihlali değerlendirmesi |
-| Platform sağlayıcı desteği | Bulut hesabı açılınca **[YAPILACAK]** | Altyapı kesintileri, yedekten dönüş |
+| VPS sağlayıcısı | `<firma, destek kanalı>` **[YAPILACAK]** | Sunucu/ağ kesintileri; sunucu kaybında yeni makine |
 
 Küçük ekipte bir kişi birden fazla rolü üstlenebilir; yine de her olay için **tek olay yöneticisi** adı yazılır.
 
@@ -94,7 +129,7 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 
 ## 4. Destek kanalı: pilot klinik hatayı nasıl bildirir
 
-**Kanal:** `<e-posta adresi / telefon / mesajlaşma grubu>` **[YAPILACAK – kullanıcı kararı; alan adı ve e-posta hizmeti kurulunca]**. Pilotta tek kanal tercih edilir; acil durumda telefon.
+**Kanal:** Vetinity WhatsApp destek hattı (panel menüsünün en altındaki "WhatsApp destek"; numara frontend `vetinity-support.constants.ts`). Mesaj klinik adıyla hazır açılır. Destek saatleri `<saatler>` **[YAPILACAK – kullanıcı kararı]**.
 
 **Klinik için kısa yönerge (olduğu gibi paylaşılabilir):**
 
@@ -116,36 +151,52 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 
 ### 5.1 Bugünkü gerçek durum
 
-- CI tanımlı (`ci.yml`; tetik: `main`'e push, `v*` etiketi, PR, elle) ve GitHub'da her `main` push'unda koşuyor (backend: derleme + birim, LocalDB entegrasyon; frontend ayrı iş akışı). `main` dal koruması kullanıcı işi. **Otomatik dağıtım yok**: CI yalnız derler, test eder, artifact üretir.
-- Sürüm = git etiketi (`vMAJOR.MINOR.PATCH` veya `-rc.1`), yalnız testleri geçmiş `main` commit'ine; iş akışı bunu zorlamaz. Etiketsiz koşu `0.0.0-ci.<koşu no>` alır. Etiket push'u kullanıcı işi. Uygulama içi telemetri sürümü hâlâ sabit `1.0.0` (bilinen boşluk).
-- Artifact'lar: `api-<sürüm>`, `dbmigrator-<sürüm>`, `migrations-<sürüm>`, test sonuçları (etiket koşuları 90 gün, diğerleri 30 gün saklanır).
-- Bilinen tuzak: `Api.csproj` yayından `appsettings.Production.json`'u her zaman dışlar; üretim yapılandırması platform ortam değişkenlerinden gelmeli (`AllowedOrigins`, `AllowedHosts`, `Jwt:Key`, bağlantı dizeleri, `Smtp:*`; eksikse API açılmaz). Kural Dilim 3'te netleşecek **[YAPILACAK]**.
-- API açılışta migration/seed **çalıştırmaz**; veritabanı değişikliği yalnız `DbMigrator` komutlarıyla yapılır (`migrate`, `migrate-query`, `seed`).
-- EF migration'ında **geri alma (down) yoktur**; veritabanını geri almanın yolu **yedekten dönüş** (backend runbook'u: "yedekten dönüş").
-- İdempotent migration betikleri CI'da üretilir (`migrations-<sürüm>`: `AppDbContext.sql` komut DB, `QueryDbContext.sql` sorgu DB); **hiçbir DB'ye otomatik uygulanmaz**. Betik izin/seed verisi eklemez.
-- Tam entegrasyon test paketi yeşil (2026-10-28, `d091bc1b`: 1684 geçti, 2 bilinçli atlanan performans ölçümü, 0 başarısız; yerelde ~9 dk). CI'da `integration-tests` işi Windows + LocalDB'de koşar. Sürüm kesmeden önce kırmızı koşu varsa nedeni not edilir.
+- **Otomatik dağıtım yok.** Yayın, geliştirici bilgisayarında derlenen paketin `scp` ile sunucuya gönderilmesiyle yapılır (bölüm 5.3). Her canlı yayın kullanıcı onayıyla yapılır.
+- CI tanımlı (`ci.yml`; `main`'e push, `v*` etiketi, PR, elle) ve yalnız derler, test eder, artifact üretir. Sürüm etiketi bugün kullanılmıyor; yayınlanan sürüm `main` commit'idir (yayın notunda commit hash'i yazılır).
+- Yayından önce yerel `main` testten geçer: frontend `npx ng test vetinity-web --watch=false` (2026-11-11: 375 dosya, 2997 test), backend birim + ilgili entegrasyon testleri.
+- EF migration'ında **geri alma (down) yoktur**; veritabanını geri almanın yolu **yedekten dönüş**tür.
+- Frontend paketleri canlı adresleri derleme ayarından alır (`environment.ts`: `apiBaseUrl`, `publicOrigin`, `panelOrigin`; portal `portalApiBaseUrl`). Canlı paket varsayılan (production) yapılandırmayla derlenir.
 
 ### 5.2 Sürüm öncesi (her canlı yayından önce)
 
-- [ ] Yayın içeriği listelendi (hangi commit/etiket, hangi migration var, izin/seed değişikliği var mı).
-- [ ] Etiketli, birleşik sürüm; bu commit için CI koşusu görüldü ve `migrations-<sürüm>` artifact'ı indirildi. **Seed yalnız etiketli birleşik sürümden çalıştırılır**; farklı dallardan seed izinleri birbirinden siler.
-- [ ] Testler: Domain + Application + ilgili entegrasyon sınıfları geçti; tam paket sonucu ve bilinen kırıklar açıkça not edildi.
-- [ ] Staging'de aynı sürümle migration + temel kabul denendi **[YAPILACAK – staging kurulunca]**.
-- [ ] **Yedek alındı ve alındığı doğrulandı** (bölüm 5.3 adım 1).
-- [ ] Migration varsa betik **gözden geçirildi** (sütun/tablo silme, tür daralması, veri kaybı riski) ve **kullanıcı onayı alındı** (migration başına; paylaşılan/üretim DB'ye onaysız uygulanmaz).
-- [ ] Bakım penceresi planlandı ve klinik bilgilendirildi (bölüm 6).
-- [ ] Geri alma planı yazılı: önceki yayın paketi saklı, yedek noktasının saati kayıtlı.
-- [ ] Yeni izinler (`*.Read` vb.) varsa: özel roller elle güncellenecek mi, notlandı.
+- [ ] Yayın içeriği listelendi (hangi commit, hangi migration var, izin/seed değişikliği var mı).
+- [ ] Testler geçti; bilinen kırıklar açıkça not edildi.
+- [ ] Migration varsa: betik **gözden geçirildi** (sütun/tablo silme, tür daralması, veri kaybı riski) ve **kullanıcı onayı alındı** (canlı DB'ye onaysız uygulanmaz). Uygulamadan hemen önce elle yedek alındı (bölüm 9.3).
+- [ ] Kullanıcıyı etkileyen kesinti varsa klinik bilgilendirildi (bölüm 6). Yalnız ön yüz yayını kesintisizdir.
+- [ ] Geri alma yolu belli: önceki paket sunucuda saklı (`web-eski` vb.), yedek noktasının saati kayıtlı.
+- [ ] Yeni izin varsa `seed` gerekeceği ve kullanıcıların çıkış-giriş yapacağı not edildi.
 
-### 5.3 Yayın adımları (özet)
+### 5.3 Yayın adımları
 
-1. **Yedek:** veritabanı yedek noktası kaydedilir (saat + doğrulama). Yönetilen platformda anlık görüntü/nokta-zaman yedeği de not edilir.
-2. Bakım penceresi başlar; gerekirse klinik kullanıcılar çıkış yapar.
-3. Yeni API paketi dağıtılır; gizli bilgiler platformun gizli deposundan gelir (dosyaya yazılmaz).
-4. Migration: ya `DbMigrator migrate` (komut DB) + `migrate-query` (sorgu DB'si; pilotta okuma bayrakları kapalı olsa da bağlantı ve şema zorunludur) ya da CI'dan inen idempotent betikler (`AppDbContext.sql`, `QueryDbContext.sql`; `sqlcmd`/SSMS/platform aracı). Hangisinin kullanılacağı ve komut sırası **[YAPILACAK – Dilim 3 üretim runbook'unda doğrulanacak]**.
-5. Yalnız gerekiyorsa `seed` (etiketli sürümden; yeni izin eklenmişse gerekir). `seed` oturumları iptal etmez: sonrasında kullanıcılar **çıkış-giriş** yapar (izinler yenilensin). Üretimde `seed` varsayılan yönetici oluşturmaz; ilk yönetici yalnız kurulumda `create-platform-admin` ile.
-6. Doğrulama: `/health/ready` yeşil; giriş; Bugün açılır; bir test hastasıyla geliş → muayene taslağı (test kaydı politikası klinikle konuşulur); rapor sayfası açılır.
-7. Pencere kapanır, klinik bilgilendirilir.
+Komutlar geliştirici bilgisayarındaki Git Bash'te çalışır. `SSH="ssh -i ~/.ssh/vetinity_deploy -p 3522 -o BatchMode=yes root@185.149.103.114"`, `scp` için `-P 3522`. Sunucuya gönderilen betiklerde Windows satır sonu (`\r`) temizlenir.
+
+**Panel ve tanıtım sitesi (`web`)** — kesintisiz:
+
+1. `npx ng build vetinity-web` → `dist/vetinity-web/browser`.
+2. `tar czf web.tgz -C dist/vetinity-web browser`, sunucuya `/root/web-<tarih>.tgz` olarak gönder.
+3. Sunucuda: `web-yeni` klasörüne aç; `cp -rn web/. web-yeni/` ile **eski dosyaları da koru** (açık sekmeler ve service worker eski parçaları isteyebilir); `chown -R vetinity:vetinity web-yeni`; `mv web web-eski` (önceki `web-eski` silinir); `mv web-yeni web`; `.tgz` silinir.
+4. Doğrula: `curl -s https://panel.vetinity.com/auth/login | grep -o 'main-[A-Z0-9]*\.js'` yerel `dist/.../index.html` ile aynı; o dosya `200 application/javascript`; `https://www.vetinity.com/` 200.
+5. Kullanıcılar yeni sürümü iki yenilemede görür (ilki service worker'ı günceller): **Ctrl+F5 iki kez**.
+
+**Portal (`portal`)**: `npx ng build portal`, aynı yöntemle `/var/www/vetinity/production/portal`'a.
+
+**API (`api`)** — birkaç saniyelik kesinti:
+
+1. `dotnet publish src/Backend.Veteriner.Api -c Release -r linux-x64 --self-contained false -o <çıktı>`.
+2. Paketi gönder; sunucuda `api-yeni`'ye aç, `chown -R vetinity:vetinity`, `systemctl stop vetinity-api`, `mv api api-eski`, `mv api-yeni api`, `systemctl start vetinity-api`.
+3. Doğrula: `systemctl is-active vetinity-api`; sunucuda `curl -s http://127.0.0.1:5100/health/ready` (dışarıya yalnız `/health/live` açık); `journalctl -u vetinity-api -n 50` içinde hata yok; panelde giriş.
+
+**Migration ve seed (`dbmigrator`)** — yalnız kullanıcı onayıyla, önce elle yedek (bölüm 9.3):
+
+1. `dotnet publish src/Backend.Veteriner.DbMigrator -c Release -r linux-x64 --self-contained false`, `/var/www/vetinity/production/dbmigrator`'a.
+2. Sunucuda, `dbmigrator` klasöründe, uygulama kullanıcısıyla ve API ayarlarıyla:
+   `sudo -u vetinity bash -c 'set -a; . /etc/vetinity/production/api.env; set +a; /opt/dotnet10/dotnet Backend.Veteriner.DbMigrator.dll <komut>'`
+3. Komut sırası: `migrate` (komut DB) → `migrate-query` (sorgu DB) → gerekiyorsa `seed` (yeni izin eklendiyse). `seed` oturumları iptal etmez; yeni izinler için kullanıcılar çıkış-giriş yapar. Üretimde `seed` varsayılan yönetici oluşturmaz.
+4. Sonra API yayını (yeni kod yeni şemayı bekler). Şema eski kodla uyumsuzsa migration ile API yayını arka arkaya yapılır.
+
+**Klinik siteleri ve Veteriner bul (`site`)**: `npx ng build site` → `dist/site`; `site-yeni`'ye aç, `mv`, `systemctl restart vetinity-site`; doğrula: `https://www.vetinity.com/veteriner` 200.
+
+**nginx**: değişiklik `sites-available` dosyasında yapılır, `nginx -t` geçmeden `systemctl reload nginx` yapılmaz. Zonguldak yapılandırmasına dokunulmaz.
 
 ### 5.4 Geri alma
 
@@ -153,13 +204,14 @@ Olaydan sonra en geç 5 iş günü içinde, suçlayıcı olmayan biçimde yazıl
 
 | Durum | Geri alma yolu |
 |---|---|
-| Yalnız uygulama kodu, migration yok | Önceki yayın paketine dön, yeniden başlat, `/health/ready` ve temel akışı doğrula |
-| Yapılandırma / özellik bayrağı kaynaklı | Bayrağı önceki değerine al, yeniden başlat (CQRS runbook'undaki bayrak geri alma) |
-| Migration uygulandı, veri yazılmadı veya önemsiz | Önceki yayın paketi + gerekirse yedekten dönüş; migration down olmadığından şema geri alma kararı **ayrıca** verilir |
-| Migration uygulandı ve yeni veri yazıldı | Yedekten dönüş **yeni yazılan verileri kaybettirir** → önce ürün sahibine karar sor; kaybolacak kayıtlar listelenip kliniğe bildirilir; mümkünse kayıtlar elle yeniden girilir |
-| Seed nedeniyle izin kaybı | Doğru etiketli sürümden seed'i yeniden çalıştır, kullanıcılar çıkış-giriş yapsın |
+| Ön yüz (`web`/`portal`) | `mv web web-bozuk; mv web-eski web` (portal için aynı); kullanıcılar Ctrl+F5 iki kez |
+| API, migration yok | `systemctl stop vetinity-api; mv api api-bozuk; mv api-eski api; systemctl start vetinity-api`; `/health/ready` ve giriş doğrulanır |
+| Ayar kaynaklı | `api.env`'deki değeri önceki hâline al, `systemctl restart vetinity-api` |
+| Migration uygulandı, veri yazılmadı veya önemsiz | Önceki API paketi + gerekirse yayın öncesi yedekten dönüş; şema geri alma kararı **ayrıca** verilir |
+| Migration uygulandı ve yeni veri yazıldı | Yedekten dönüş **yeni yazılan verileri kaybettirir** → önce ürün sahibine sorulur; kaybolacak kayıtlar listelenip kliniğe bildirilir |
+| Seed nedeniyle izin kaybı | Doğru `main` sürümünden `seed` yeniden çalışır, kullanıcılar çıkış-giriş yapar |
 
-Geri alma sonrası olay kaydı ve (S1/S2 için) olay sonrası inceleme zorunludur. **Sürüm geri alma provası** staging'de en az bir kez yapılmadan canlı yayın yapılmaz **[YAPILACAK – Dilim 10]**.
+Geri alma sonrası olay kaydı ve (S1/S2 için) olay sonrası inceleme zorunludur.
 
 ## 6. Bakım penceresi
 
@@ -168,48 +220,39 @@ Geri alma sonrası olay kaydı ve (S1/S2 için) olay sonrası inceleme zorunludu
 - **Acil bakım:** güvenlik açığı veya veri bütünlüğü riski varsa pencere beklenmez; S1 akışı + önceden telefonla haber.
 - **Pencerede yapılanlar:** yayın, migration, platform güncellemesi, geri yükleme provası (gerekirse).
 - **Kaçınılacak zamanlar:** klinik yoğun saatleri; ay sonu kapanışı **[ÖNERİ – klinikle teyit]**.
-- Yönetilen platformun kendi bakımları (işletim sistemi/runtime yaması) platformun penceresine bağlıdır; bu pencereler öğrenilip klinikle çakışma kontrol edilir **[YAPILACAK]**.
+- Sunucu işletim sistemi güncellemeleri ve yeniden başlatma aynı sunucudaki diğer siteyi de etkiler; yalnız kullanıcıya sorularak ve bakım penceresinde yapılır.
 
 **Bakım duyuru şablonu:**
 > Konu: Vetinity planlı bakım – `<tarih>`
 > `<Tarih>` `<başlangıç>`–`<bitiş>` arasında Vetinity kısa süreli kullanılamayabilir. Bu sürede yeni kayıt girmeyin; işi kâğıda yazıp bakım sonrası girin. Bakım bitince size yazacağız. Sorun olursa: `<iletişim>`.
 
-## 7. İzleme ve uyarı beklentileri
+## 7. İzleme ve uyarı
 
-### 7.1 Bugün var olanlar (kod okumasına göre)
+### 7.1 Kurulu olanlar (2026-11-10)
 
-- `/health/live` (süreç ayakta mı), `/health/ready` (komut DB, sorgu DB, outbox, projeksiyonlar; sorunda 503).
-- Outbox sağlığı: ölü mektup (dead-letter) varsa Unhealthy; bekleyen > 500 ise Degraded.
-- Üretim şablonunda günlük stdout'a yapılandırılmış JSON (platform toplar; dosya sink'i varsayılan kapalı); yavaş SQL günlüğü (eşik 200 ms).
-- Hata yanıtlarında `traceId`/`correlationId`.
-- OpenTelemetry iz/metrik çıktısı (toplayıcı yapılandırılırsa).
+- **UptimeRobot** (kullanıcının hesabı): dört adres dışarıdan düzenli yoklanır: `www`, `panel`, `portal` ve `https://api.vetinity.com/health/live`. Kesintide uyarı hesap e-postasına gider. 2026-11-10'da dördü de yeşil.
+- Sağlık uçları: `/health/live` herkese açık (süreç ayakta mı). `/health/ready` ve diğer `/health` yolları nginx'te yalnız `127.0.0.1`'e açık; sunucuda `curl -s http://127.0.0.1:5100/health/ready` ile bakılır (komut DB, sorgu DB, outbox, projeksiyonlar; sorunda 503).
+- Uygulama günlüğü: `journalctl -u vetinity-api` ve `journalctl -u vetinity-site`. Hata yanıtlarında `traceId`/`correlationId` vardır; destek talebinde bu kimlikle günlükte aranır.
+- Outbox sağlığı `/health/ready` içinde: ölü mektup varsa Unhealthy; bekleyen > 500 ise Degraded.
+- Yedek günlüğü: `/var/log/vetinity-yedek.log` (bölüm 9).
+- Sertifika yenileme: certbot zamanlayıcısı; bitiş 2027-02-08.
 
-### 7.1b İzleme kod katmanı (backend `MONITORING_ALERTING_CONTRACT.md`; ayrı dalda, `main`'e birleşmedi)
-
-- `X-Correlation-ID` başlığı ve ProblemDetails `correlationId`: destek taleplerinde bu kimlik istenir (bölüm 4).
-- Beklenmeyen (5xx) hatalar `IErrorReporter` ile raporlanır; varsayılan uygulama yalnız günlüğe yazar ve `ops.errors.unhandled.total` sayar. Dış hata izleme hizmeti **bağlı değil** (hesap/DSN gerekir).
-- Outbox eşikleri `/health/ready` içinde: dead-letter > 0 Unhealthy; en eski bekleyen ≥ 120 sn Degraded, ≥ 600 sn Unhealthy; bekleyen > 500 Degraded. Metrikler: `ops.outbox.pending`, `ops.outbox.dead_letter`, `ops.outbox.oldest_pending_age` (son `/health/ready` sonucundan beslenir; uptime izleyici bu ucu en az dakikada bir çağırmalı).
-- Sözleşmenin önerdiği uyarılar (kanal kurulunca): hazır değil 503 ≥ 2 dk; canlı değil ≥ 1 dk; dead-letter > 0; outbox gecikmesi ≥ 600 sn; 5 dk'da 5'ten fazla beklenmeyen hata; projeksiyon Unhealthy. Eşikler pilot verisiyle ayarlanmadı; gerçek metrik adları toplayıcıda doğrulanmalı.
-
-### 7.2 Beklenen ama kurulmamış olanlar **[YAPILACAK – Dilim 5: hesap ve kanal kullanıcı işi]**
+### 7.2 Kurulmamış olanlar **[YAPILACAK]**
 
 | Beklenti | Neden |
 |---|---|
-| `/health/ready` ve `/health/live` dışarıdan düzenli yoklama (uptime) + uyarı kanalı | Kimse bakmadan sessiz kesinti olmasın |
-| Hata izleme ve merkezi günlük toplama | Hata günlükleri tek yerde aransın |
-| 5xx oranı uyarısı | Yayın sonrası bozulmayı yakalamak |
-| Outbox ölü mektup ve projeksiyon gecikmesi uyarısı | Gece kalan işlerin farkına varmak |
-| Yavaş sorgu uyarısı | Pilot hacminde performans (K6: yavaşlık ölçülürse Query DB açılır) |
-| Yedek başarısı/başarısızlığı uyarısı | Yedeksiz kalmamak |
-| Sertifika/alan adı bitiş uyarısı | Beklenmedik kesinti |
-| E-posta gönderim hatası uyarısı | Hatırlatma/davet gitmiyor olabilir ("gönderildi" = SMTP'ye iletildi, teslim izi yok) |
+| `/health/ready` için dış uyarı | Bugün dışarıdan yalnız `live` yoklanıyor; DB veya outbox sorunu uyarı üretmez |
+| Hata izleme ve merkezi günlük toplama | Günlükler yalnız sunucuda; 5xx artışı kendiliğinden fark edilmez |
+| Yedek başarısızlığı uyarısı | Betik hata kodu döner ama kimseye haber vermez; günlük elle kontrol edilir |
+| Disk doluluk uyarısı | Yedekler ve dosyalar aynı diskte |
+| E-posta gönderim hatası uyarısı | "Gönderildi" = SMTP'ye iletildi; teslim izi yok |
 
-Uyarı eşikleri ve alıcılar, araç seçilince yazılır: `<eşik>` / `<alıcı>`. Her uyarının "alındığında ne yapılır" notu olmalıdır (uyarı yorgunluğunu önlemek için).
+Her uyarının "alındığında ne yapılır" notu yazılır (uyarı yorgunluğunu önlemek için).
 
 ### 7.3 Günlük/haftalık kontrol **[ÖNERİ, araçlar kurulana dek elle]**
 
-- Günlük (mesai başı): `/health/ready` yeşil mi, yedek dün gece alındı mı, açık S1/S2 var mı.
-- Haftalık: hata ve yavaş sorgu günlüklerine göz at, bekleyen destek kayıtları, disk/veritabanı boyutu.
+- Günlük (mesai başı): UptimeRobot yeşil mi; `tail -5 /var/log/vetinity-yedek.log` son satır `INFO: bitti` mi; açık S1/S2 var mı.
+- Haftalık: `journalctl -u vetinity-api --since "-7 days" -p err`; disk (`df -h /`); `/health/ready`; bekleyen destek kayıtları.
 
 ## 8. KVKK: kişisel veri ihlali karar noktaları
 
@@ -232,30 +275,45 @@ Her şüphede danışmana gitmek bir yük değil, kuraldır: "bu ihlal değildir
 
 ## 9. Yedek ve geri yükleme
 
-### 9.1 Hedefler (ADR-014 K2)
+### 9.1 Kurulu düzen (2026-11-10)
 
-- Günlük tam yedek + sık işlem günlüğü yedeği (yönetilen platformun otomatik yedeği); hedef **veri kaybı dakikalar düzeyinde**.
-- Saklama **30 gün**, **ayrı konumda**.
-- **Ayda bir geri yükleme provası.**
-- Sorgu DB'si yedeği zorunlu değil (komut DB'den yeniden üretilebilir; ancak geri yükleme süresini kısaltır).
-- RPO/RTO sayıları Dilim 4'te yazılı kabul edilecek: **RPO = `<dakika>`, RTO = `<dakika/saat>`** **[YAPILACAK – şimdilik sayı verilmez]**.
-- Şu an hiçbiri kurulu değildir; yedek ve prova olmadan canlıya çıkılmaz (ADR-014 go-live koşulu).
+- **Her gece 02:30** (`/etc/cron.d/vetinity-yedek`) `/opt/vetinity/yedek.sh` çalışır; çıktısı `/var/log/vetinity-yedek.log`. Betik yalnız Vetinity verisine dokunur.
+- Yedeklenenler: `VetinityCommandDb` ve `VetinityQueryDb` tam yedek (`COMPRESSION, CHECKSUM`; yedeği `vetinity_app` alır), her biri `RESTORE VERIFYONLY` ile doğrulanır (`sa` ile; bu yetki uygulama girişine verilmez); `/var/lib/vetinity/files` klasörü `tar.gz`.
+- **Sunucuda:** `/var/backups/vetinity/gunluk/<YYYY-AA-GG>/` (yalnız `root`), **14 gün** saklanır.
+- **Sunucu dışında:** Google Drive (`vetinity.app` hesabı, `vetinity-yedek` klasörü), rclone `crypt` ile **şifreli** (`gcrypt:` uzak adı); kopya `rclone cryptcheck` ile doğrulanır, **30 gün** saklanır. Drive kopyası başarısızsa yerel yedek yine tamamdır, betik hata koduyla biter (`ERROR: Drive kopyasi basarisiz`).
+- Şifreleme parolaları `/root/VETINITY-YEDEK-SIFRESI.txt`'de; **kullanıcı bu dosyanın bir kopyasını sunucu dışında güvenli yerde tutar** (sunucu kaybolursa Drive yedeği bu parolalar olmadan açılamaz).
+- Veri kaybı en çok **1 gün** (gece yedeği arası; işlem günlüğü yedeği yok). RPO/RTO kabulü bölüm 12'de.
+- 2026-11-10'da geri yükleme provası yapıldı ve geçti (yedek ayrı bir geçici veritabanına açıldı).
 
-### 9.2 Aylık geri yükleme provası kontrol listesi
+### 9.2 Kontrol
 
-Prova **üretimi değil**, ayrı bir hedefe (staging/geçici veritabanı) geri yükler.
+- Son yedek: `tail -5 /var/log/vetinity-yedek.log` → `INFO: Drive kopyasi dogrulandi` ve `INFO: bitti`.
+- Yerel liste: `ls -la /var/backups/vetinity/gunluk/`.
+- Drive listesi: `rclone lsl gcrypt:gunluk | tail` (adlar şifresiz görünür, içerik şifreli).
 
-- [ ] Prova tarihi ve sorumlusu belirlendi; önceki provanın aksiyonları kapandı.
-- [ ] Yedek zinciri seçildi: son tam yedek + sonraki işlem günlükleri / seçilen hedef zaman noktası (örn. "dün 14:37").
-- [ ] Yedeklerin **yaşı ve sürekliliği** kontrol edildi (boşluk var mı, 30 gün saklama korunuyor mu, ayrı konumda mı).
-- [ ] Geri yükleme başlangıç saati yazıldı (RTO ölçümü için kronometre).
-- [ ] Komut DB seçilen zaman noktasına geri yüklendi; kayıt sayıları, son kayıt zamanı ve **kayıp tahmini (RPO ölçümü)** not edildi.
-- [ ] Gerekirse sorgu DB'si yeniden üretildi/geri yüklendi; API geri yüklenen veriye bağlandı (gizli bilgiler platformdan).
-- [ ] `/health/ready` yeşil; giriş; örnek hasta/muayene/ücret/ödeme kayıtları açıldı; bakiye toplamı örnekle uyumlu.
-- [ ] Geri yüklenen ortamdaki kişisel veri provadan sonra **silindi** (kopya kalmadı).
-- [ ] Ölçülen RPO/RTO yazıldı; hedefle karşılaştırıldı; sapma aksiyona bağlandı.
-- [ ] Prova sonuç notu kaydedildi (tarih, kim, süre, sorun, aksiyon).
-- [ ] Yedek şifrelemesi ve erişim yetkileri gözden geçirildi (kimler yedeğe erişebilir).
+### 9.3 Elle yedek (migration ve riskli işlemden önce)
+
+`/opt/vetinity/yedek.sh` elle çalıştırılır (aynı günün klasörüne zaman damgalı yeni dosyalar ekler). Bittiğinde günlükte `INFO: bitti` görülmeden migration uygulanmaz.
+
+### 9.4 Geri yükleme
+
+1. Olay yöneticisi ve ürün sahibi karar verir (yeni yazılan veri kaybolur; bölüm 5.4).
+2. Gerekirse yedek Drive'dan indirilir: `rclone copy gcrypt:gunluk/<gün> /var/opt/mssql/geri-yukle/` (SQL Server kullanıcısı `mssql` okuyabilmeli).
+3. `systemctl stop vetinity-api vetinity-site`.
+4. `sa` ile `RESTORE DATABASE [VetinityCommandDb] FROM DISK = N'<yol>' WITH REPLACE, CHECKSUM` (sorgu DB'si için aynı). Dosyalar gerekiyorsa `tar xzf dosyalar_<ts>.tar.gz -C /var/lib/vetinity` (sahip `vetinity:vetinity`).
+5. `systemctl start vetinity-api vetinity-site`; `/health/ready`, giriş, örnek hasta/muayene/ödeme kaydı.
+6. Geri yükleme klasöründeki kopyalar silinir; olay kaydına yedek noktasının saati yazılır.
+
+### 9.5 Aylık geri yükleme provası
+
+Prova **canlı veritabanına değil**, geçici bir veritabanına (`VetinityProva_<tarih>` gibi) yapılır.
+
+- [ ] Son gecenin yedeği seçildi; yedeklerin yaşı ve sürekliliği kontrol edildi (14 gün yerel, 30 gün Drive).
+- [ ] Başlangıç saati yazıldı (RTO ölçümü).
+- [ ] `RESTORE ... WITH MOVE` ile geçici ada açıldı; kayıt sayıları ve son kayıt zamanı not edildi (RPO ölçümü).
+- [ ] Bir Drive kopyası da indirilip şifresi çözülerek açıldı (sunucu kaybı senaryosu).
+- [ ] Geçici veritabanı ve indirilen dosyalar provadan sonra **silindi** (kişisel veri kopyası kalmaz).
+- [ ] Ölçülen süreler ve sorunlar not edildi.
 
 Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 
@@ -274,90 +332,32 @@ Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 - Pilot kapsamı önce Aşama 1–3 senaryolarıdır (muayene, geliş, ücret ve ödeme) (K9); diğer ekranlar kullanılabilir ama gölge dönemde kritik sayılmaz.
 - İlk gün: eğitim oturumu (kullanıcı kılavuzuyla), ilk hafta günlük kısa görüşme **[ÖNERİ]**.
 
-## 11. Go-live öncesi hazırlık özeti (hepsi açık)
+## 11. Canlıya çıkış durumu (2026-11-11)
 
-ADR-014'e göre canlı koşulları: Dilim 1 (sertleştirme), 3 (ortam), 4 (yedek + geri yükleme provası), 5 (izleme), 6 (e-posta), 7 (içe aktarma), KVKK danışmanlığı ve Dilim 10 provası. Bu kılavuz için ek olarak:
+### 11.1 Tamamlananlar (2026-11-10)
 
-- [ ] Bölüm 2 iletişim bilgileri dolduruldu.
-- [ ] Destek kanalı kuruldu ve klinik bilgilendirildi.
-- [ ] Olay yönetimi masa başı provası yapıldı (örnek S1 senaryosu, şablonlarla).
-- [ ] Sürüm geri alma provası ve yedekten dönüş provası yapıldı.
-- [ ] Bakım penceresi klinikle anlaşıldı.
-- [ ] KVKK danışmanı atandı, ihlal akışı (bölüm 8) onunla gözden geçirildi.
-- [ ] Bu kılavuzdaki **[YAPILACAK]** ve `<...>` alanları kalmadı veya bilinçli ertelendi.
+- [x] Dört adres, sertifikalar ve nginx yönlendirmeleri (ADR-033); `.wasm` dosyası `application/wasm` ile sunulur; panel ve portal gömme başlıkları (`/randevu/*` gömülebilir, diğerleri `frame-ancestors 'none'`, `X-Frame-Options: DENY`).
+- [x] Tüm migration'lar canlı komut ve sorgu DB'sine uygulandı, ardından `seed`. Canlı `api.env` ayarları (bölüm 1.3); `AllowedHosts` api adını içerir; projeksiyon olay yazımı kapalı; `FileStorage__RootPath` ve `App__BaseUrl` tanımlı.
+- [x] İlk platform yöneticisi kullanıcının kendi hesabıdır; kliniksiz giriş yönetim sayfalarıyla açılır.
+- [x] SMTP girişi doğrulandı (Gmail uygulama şifresi).
+- [x] Gece yedeği, şifreli Drive kopyası, geri yükleme provası (bölüm 9).
+- [x] SQL Server bellek sınırı 3072 MB.
+- [x] PDF raporları için DejaVu Sans kurulu (`/usr/share/fonts/truetype/dejavu`, `fonts-dejavu-core`; 2026-11-11 doğrulandı). Sunucuda `fc-list` yok; yazı tipini dosya yoluyla kontrol edin.
+- [x] UptimeRobot ile dış izleme (bölüm 7).
+- [x] Site Node süreci (`/k/*`, `/veteriner*`) nginx arkasında; nginx aynı makinede olduğundan API'nin `ForwardedHeaders` (yalnız loopback'e güven) ayarı yeterli.
 
-### 11.1 İlk canlı kurulumda bekleyen teknik adımlar (2026-10-28)
+### 11.2 Açık olanlar
 
-Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygulandı. Canlıya geçiş kullanıcı söyleyince, bölüm 5.2–5.3 sırasıyla yapılır.
-
-**Veritabanı**
-- [ ] Migration'lar: `AddBillingPeriod` (yıllık ödeme, BILL-001), `AddCheckoutDuplicatePaymentRefund` (çift ödeme iadesi, BILL-005), `AddOwnerAccountDeletion` (portal hesap silme, ADR-041), `AddUserLoginLockout` (panel hesap kilidi, SEC-001), `AddReportFavorites` ve `AddReportSavedFilters` (rapor favorileri ve kayıtlı filtreler, REPORT-003/004), `AddRecordChanges`, `AddAdministrationRouteSiteAndManufacturer`, `AddPrescriptionCancellationAndLateEntry`, `AddOnlineAppointmentRequestsAndNotifications`, `AddExaminationPackagePrice` (P1 Dalga 2–3), `AddClinicalSnippets` (klinik metin parçaları, EXAM-011/012) ve `AddVisitPreparation` (geliş hazırlığı, CHECKIN-001…005; P1 Dalga 4a). Hepsi yalnız yerel DB'de uygulandı. Ardından `DbMigrator seed` (yeni izinler `AppointmentRequests.Manage`, `ClinicalSnippets.Read/Create/Update/Deactivate`; yerelde birleşik main'den 2026-11-02'de çalıştırıldı).
-- [ ] P1 Dalga 4b migration'ları: `AddClientCredits` (müşteri kredisi ve mahsup, FIN-005), `AddPortalPreferencesDataRequestsAndSettings` (portal bildirim tercihleri, KVKK veri talebi, klinik portal ayarı; PORTAL-007/009). Yalnız yerel DB'de uygulandı (2026-11-01). Yeni izin yok, seed gerekmez. Dalga 4a migration'larıyla zaman damgaları iç içe; canlıda sıra `AddClinicalSnippets`, `AddClientCredits`, `AddVisitPreparation`, `AddPortalPreferencesDataRequestsAndSettings` (birleşik main'de snapshot doğrulandı, bekleyen model değişikliği yok).
-- [ ] `AddClinicDistrict` (kliniğe isteğe bağlı ilçe alanı, `Clinics.District` nvarchar(100) null; klinik seçicideki "İlçe, İl" satırı). Yalnız yerel DB'de uygulandı (2026-11-05). Yeni izin yok, seed gerekmez; mevcut kliniklerde ilçe boş kalır, klinik ayarları formundan girilir.
-- [ ] `AddOwnerPushDevices` (hasta sahibi push cihaz jetonları, `OwnerPushDevices` tablosu; MOBILE-003). Yalnız yerel DB'de uygulandı (2026-11-05). Yeni izin yok, seed gerekmez; tablo boş başlar, cihazlar portal/mobil uygulamadan kaydolur.
-- [ ] `AddClinicSites`, `AddClinicSiteAddressChangeAllowance` (klinik web sitesi; ADR-045). Yalnız yerel DB'de uygulandı (2026-11-07). Yeni izin yok, seed gerekmez; tablolar boş başlar.
-- [ ] Klinik sitesi yeni bir Node sürecidir (`dist/site/server/server.mjs`, frontend `docs/SITE_APP.md`): ortam değişkenleri `SITE_API_BASE_URL`, `SITE_PUBLIC_API_BASE_URL`, `SITE_PUBLIC_ORIGIN`, `SITE_ALLOWED_HOSTS`, `SITE_TRUSTED_PROXY_HOPS`; `vetinity.com/k/*` bu sürece yönlenir (ADR-033 geçişi); `vetinity.com/robots.txt` `/k/` yolunu kapatmaz. Site sunucusu API ile aynı makinede değilse `ForwardedHeaders:KnownProxies` ayarlanır. nginx'in `X-Forwarded-For` ilettiği doğrulanır.
-- [ ] Klinik sitesinin hazır fotoğraf seti lisans kaydıyla (ADR-045 K7): bugünkü 25 fotoğraf taslak Unsplash seçimleri; lisans canlıdan önce doğrulanır ya da set değiştirilir. Paketler sayfasına satır modül canlıda çalışınca eklenir (`pricing-plan.utils.ts`).
-- [ ] Platform yöneticisi yalnız kullanıcının kendi hesabıdır (2026-11-07). `create-platform-admin` var olan hesaba rol vermez; canlıda rol sahipleri kontrol edilir. Sabit parolalı `admin@example.com` hiçbir ortamda oluşturulmaz.
-- [ ] Push sağlayıcısı anahtarsız çalışır: `Push:Fcm` yoksa `NotConfiguredPushNotificationProvider` seçilir (gönderim yapmaz, yalnız log; portal "henüz etkin değil" der). Ticari ileti gönderimi kod sabitiyle kapalı (`OwnerNotificationChannelPolicy.MarketingSendingEnabled`; İYS/ETK hukuki görüşü bekler). Kullanıcı kararı (ADR-046, 2026-11-08): genel sabit yerine klinik başına kapı, varsayılan kapalı; kod dalda. Hukuk listesi C7 kapanmadan canlıda hiçbir klinik için açılmaz.
-- [ ] SQL Server bellek sınırı (`max server memory`) ve servis hesabına "Lock pages in memory".
-- [ ] Üst paket işleri (2026-11-07/08; TIER-001…019). Hepsi yalnız yerel DB'de uygulandı; canlıda zaman damgası sırasıyla:
-  - `AddClinicReminderRules` (otomatik hatırlatıcılar, TIER-003)
-  - `AddVaccinationScheduleItems` (aşı takvimi, TIER-005)
-  - `AddProductBarcodeUniqueIndex` (ürün barkodu, TIER-006). **Önce** canlı veride aynı kiracıda çift barkod olup olmadığı sorgulanır (backend `docs/MOBILE_BARCODE_API_CONTRACT.md` §6); çift varsa benzersiz indeks oluşmaz ve migration düşer.
-  - `AddCashCounts` (kasa sayımı, TIER-008)
-  - `AddApiKeysAndChangeTracking` (dış API anahtarları; müşteri, hayvan, randevu, aşı tablolarına `ChangedAtUtc` ve geriye dönük doldurma, TIER-009). Büyük tablolarda süre ölçülmedi; bakım penceresinde uygulanır.
-  - `AddCustomDevelopmentRequests` (özel geliştirme talepleri, TIER-010)
-  - `AddOnlineBookingShowNextAvailableSlots` (en yakın müsait saat, TIER-017)
-  - `AddAppointmentOwnerLinks` (hatırlatmada onayla/iptal, TIER-019)
-  - `AddMarketingGateAndOptOutLinks` (klinik başına ticari ileti kapısı ve ret bağlantıları, ADR-046; 2026-11-08 kullanıcı kararları)
-  - `AddAppointmentRequestChannel` (randevu talebinde kaynak, TIER-016)
-  - `AddClinicVetFinderListings` (Veteriner bul, TIER-015)
-  - `AddAppointmentOwnerLinkPurpose` (takvime ekle, TIER-020)
-  - `AddWaitlist` (bekleme listesi, TIER-018; işleyici `Waitlist:Processor`, varsayılan 60 sn)
-  - `AddDataMigrationSupport` (içe aktarma kaynak profili ve geçiş desteği talebi, TIER-021)
-  - `AddDataExportJobs` (tüm veri dışa aktarma)
-  - `AddCashRegisters` (çoklu kasa, TIER-008; her kliniğe Ana kasa açar ve mevcut nakit ödemeleri ona bağlar, tekrar çalıştırılabilir doldurma)
-- [ ] Portal yayın sunucusu gömme başlıkları (APPT-021, backend sözleşme `ONLINE_APPOINTMENT_API_CONTRACT.md` §15): `/randevu/*` için `Content-Security-Policy: frame-ancestors *` ve `X-Frame-Options` yok; portalın diğer yolları ve panelin tamamı için `frame-ancestors 'none'` ve `X-Frame-Options: DENY`.
-- [ ] `FileStorage:RootPath` tanımlı olmalı: yoksa dosya yüklemeleri 503 döner ve tüm veri dışa aktarma işleri "Hazırlanamadı" olur. Yerel geliştirme ortamında da tanımlı değil (2026-11-09 tespiti).
-- [ ] `App:BaseUrl` canlı API kökü olarak verilir (ör. `https://api.vetinity.com`); boşsa e-postalarda .ics bağlantısı üretilmez (TIER-020).
-- [ ] Veteriner bul (TIER-015, ADR-047): ters vekil `vetinity.com/veteriner` ve `/veteriner/*` isteklerini (POST `/veteriner/_api/klinikler` dahil) `/k/*` ile aynı site Node sürecine yönlendirir. Canlıda `public/robots.txt` dosyasına `Sitemap: https://www.vetinity.com/veteriner/sitemap.xml` satırı eklenir. Tanıtım sitesine bağlantı sayfa canlıya çıkınca eklenir (ADR-034 karar 6). Bilinen küçük sorun: site sunucusunun satır içi kritik CSS'i font adresini `/media/...` yazıyor, ilk istek 404 alıp sonra `/k/media/...` yükleniyor; klinik sitelerinde de aynı (düzeltilmedi).
-- [ ] Paket düşürme A (2026-11-08) canlıda etkin olur: sığmayan düşürme ve ücretliye geçiş 409 alır; dönem sonunda sınırı aşan planlı düşürme uygulanmaz. Eski B döneminden sınırı aşan kiracı varsa yayından önce konuşulur.
-- [ ] Ardından `DbMigrator seed`. Yeni izinler:
-  - `Reports.Performance` (Admin, Owner, ClinicAdmin)
-  - `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin)
-  - `ApiKeys.Manage` (Admin, Owner)
-  - `CustomDevelopmentRequests.Manage` (Admin, Owner)
-  - `DataExport.Manage` (Admin, Owner)
-  - `CashRegisters.Read` ve `CashMovements.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashRegisters.Manage` ve `CashMovements.Void` (Admin, Owner, ClinicAdmin)
-  
-  Klinikler rol tanımlayamaz: roller ortaktır (Admin, Owner, ClinicAdmin, Veteriner, Sekreter); klinik yalnız bu rolleri üyelerine atar. Rol izinlerini yalnız platform yöneticisi değiştirebilir (`Roles.Write` hiçbir hazır rolde yok) ve değişiklik tüm kliniklere yansır. Sözleşmelerdeki "özel roller elle almalı" notu, veritabanında elle oluşturulmuş bir rol olursa geçerlidir; bugün yerel DB'de böyle bir rol yok, canlıda `OperationClaims` listesi kontrol edilir. Yerel DB'de `Owner` rol kaydı da yoktu, seed bu izinleri yalnız Admin'e bağladı; canlıda `Owner` rol kaydı ve bağları kontrol edilir.
-- [ ] Paket kuralları canlıda etkin olur (TIER-001): Temel'de portal daveti, Temel ve Profesyonel'de ikinci aktif klinik reddedilir. Mevcut kiracıların paketi ile kullanımı yayından önce karşılaştırılır; sınırı aşan kiracı varsa onunla önceden konuşulur.
-
-**Uygulama ayarları (ortam değişkeni; `appsettings.Production.json` yayına girmez)**
-- [ ] `AllowedHosts` gerçek api alan adını içerir (ADR-033: `api.vetinity.com`); yoksa iyzico dönüşü ve webhook 400 alır.
-- [ ] `PetProjection__WriteEvents=false` ve `PaymentProjection__WriteEvents=false`. Kullanılmayan hasta ve ödeme projeksiyonlarının olayları outbox'a yazılmaz; yoksa varsayılan `true` ile tablo hiç boşalmadan büyür. Projeksiyon bir gün açılacaksa sıra: `WriteEvents=true` → backfill → `Enabled=true` (backend `docs/cqrs/cqrs-17a…`, `cqrs-12c-7…`).
-- [ ] `Billing:DefaultCheckoutProvider` = `Iyzico` (Manual yalnız geliştirme; Stripe yıllıkta reddedilir).
-- [ ] Ad değişikliği: `PerformanceDiagnostics:MediatRSlowMs` → `PerformanceDiagnostics:MediatorSlowMs` (eski ad okunmaz).
-- [ ] Yeni ayar `Outbox:ClaimLeaseSeconds` (varsayılan 300; çok örnekli çalışmada outbox claim süresi).
-- [ ] iyzico canlı anahtarları yenilenmiş hâliyle gizli depoda (sandbox anahtarı kullanılmaz).
-- [ ] Dış API (TIER-009): anahtar başına istek sınırı `ExternalApi:PermitLimitPerMinute` (varsayılan 60). Ters vekil arkasında istek sınırı ve `Retry-After` davranışı canlıya yakın ortamda bir kez denenir. Swagger üretimde kapalı kalır.
-- [ ] Hatırlatma e-postalarındaki bağlantılar (TIER-019 onayla/iptal, ticari ileti ret bağlantısı) portalın canlı adresini gösterir; portal temel adresi ayarı canlı alan adıyla doğrulanır (ADR-033 `portal.vetinity.com`).
-- [ ] Push açılacaksa (MOBILE-003, kullanıcı kararıyla): Firebase projesi, yalnız Cloud Messaging yetkili hizmet hesabı; JSON `Push__Fcm__ServiceAccountJson` ortam değişkeninde ya da dosyası `Push__Fcm__ServiceAccountFile` yolunda (yalnız uygulama kullanıcısı okur), isteğe bağlı `Push__Fcm__ProjectId`. iOS için APNs anahtarı Firebase konsoluna yüklenir. Geçersiz değer API açılışını durdurur. Ayrıntı backend `docs/PORTAL_API_CONTRACT.md` §14.6.
-
-**Sunucu ve altyapı**
-- [ ] .NET 10 Hosting Bundle (IIS) ya da eşdeğer çalışma zamanı.
-- [ ] Alan adı düzeni (ADR-033): `www`, `panel`, `portal`, `api`; frontend CI'da `API_BASE_URL` canlı api adresi.
-- [ ] ClamAV: yüklenen dosyalar arka planda taranır, şüpheli dosya karantinaya alınır (karar verildi, kurulum burada).
-- [ ] Dosya deposu (`FileStorage:RootPath`) için disk yedeği; DB yedeğiyle aynı saklama düzeni (bölüm 9).
-- [ ] Barkod okuyucu (TIER-006): panel `vendor/zxing/zxing_reader.wasm` dosyasını kendi sunucusundan verir; web sunucusu `.wasm` dosyasını `application/wasm` türüyle sunmalı. Kamera yalnız HTTPS'te açılır. Gerçek telefonla okuma canlıdan önce bir kez denenir (iOS Safari ve Android).
-- [ ] PDF raporları için sunucuda Arial (Windows) ya da DejaVu Sans / Liberation Sans (Linux: `fonts-dejavu-core`) bulunmalı; yoksa PDF indirme 500 verir, CSV/Excel etkilenmez (REPORT-007).
-- [ ] İstemci IP'si: API IIS içinde (in-process) çalışırsa doğru okunur. Önüne ayrı bir ters vekil (nginx, Cloudflare vb.) konursa `ForwardedHeaders` yalnız loopback'e güvendiği için o vekilin adresi koda (`KnownProxies`/`KnownNetworks`) eklenmeli; yoksa giriş hız sınırı (IP başına 5/dk) tüm kullanıcılara ortak işler ve günlüklerde vekil IP'si görünür.
-
-**İlk açılış doğrulaması**
-- [ ] İlk platform yöneticisi `DbMigrator create-platform-admin` ile açılır; bir kez giriş yapılır ve yönetici sayfaları (satış ortakları, deneme metrikleri, çift ödemeler) açılır.
-- [ ] Gerçek kartla küçük tutarlı bir iyzico ödemesi uçtan uca denenir (ödeme → dönüş → abonelik etkin); webhook'un da geldiği günlükten görülür.
-- [ ] Arka plan işleri canlıya yakın ortamda bir tur gözlenir: içe aktarma, hatırlatma gönderimi, outbox claim (O3), ödeme uzlaştırma.
+- [ ] **iyzico canlı anahtarları** (`Billing__Iyzico__ApiKey`/`SecretKey` henüz yok): şahıs işletmesinin vergi kaydı ve iyzico üye işyeri başvurusu kullanıcıda. Deneme süreleri bitmeden gerekli. Ardından gerçek kartla küçük tutarlı ödeme uçtan uca denenir (ödeme → dönüş → abonelik etkin; webhook günlükte görülür).
+- [ ] **Virüs taraması yok:** backend `IFileMalwareScanner` v1'de tarama yapmayan uygulamadır (backend `docs/IMAGING_API_CONTRACT.md`); yalnız ClamAV kurmak dosyaları taramaz. Gereken: clamd ile konuşan tarayıcı uygulaması (kod işi) + ClamAV kurulumu (kullanıcı onayı 2026-11-11; clamd imzaları yaklaşık 1–1,5 GB bellek kullanır, ölçülmedi).
+- [ ] Gerçek bir e-postanın (davet, hatırlatma, parola sıfırlama) canlıdan gidip ulaştığı denenmedi.
+- [ ] Barkod okuyucu gerçek telefonla (iOS Safari, Android) denenmedi.
+- [ ] Klinik sitesi hazır fotoğraf setinin lisansı (ADR-045 K7).
+- [ ] Veteriner bul site haritası `robots.txt`'ye eklenmedi (`Sitemap: https://www.vetinity.com/veteriner/sitemap.xml`); bugün yalnız ana site haritası var.
+- [ ] Push sağlayıcısı yok (`Push:Fcm` tanımsız; portal "henüz etkin değil" der). Ticari ileti gönderimi kapalı (ADR-046).
+- [ ] SQL Server servis hesabına "Lock pages in memory" verilmedi (Linux'ta isteğe bağlı; paylaşılan sunucuda yapılmaması daha güvenli).
+- [ ] Arka plan işleri canlıda bir tur gözlenmedi: içe aktarma, hatırlatma gönderimi, ödeme uzlaştırma.
+- [ ] Bölüm 2 rolleri, destek saatleri, bakım penceresi ve gölge dönem ölçütleri (bölüm 12).
 
 ## 12. Kullanıcı kararı gerektirenler
 
@@ -367,15 +367,14 @@ Kod `main`'de hazır; aşağıdakiler yalnız yerel geliştirme ortamında uygul
 4. Bakım penceresi için tercih edilen saat.
 5. Olay sonrası inceleme notlarının saklanacağı yer (ürün deposu mu?).
 6. Gölge dönem çıkış ölçütleri ve fark listesinin tutulacağı araç.
-7. RPO/RTO sayıları (ADR-014 K2 Dilim 4'te kabul edilecek).
+7. RPO/RTO sayıları (ADR-014 K2). Bugünkü düzende veri kaybı en çok 1 gündür (gece yedeği); daha kısası işlem günlüğü yedeği ister.
+8. Sunucu geneli kurulum: ClamAV (bölüm 11.2).
 
 ## 13. Doğrulanmayanlar
 
-- Hiçbir ortama bağlanılmadı; sağlık uçları, yedekler, uyarılar çalıştırılmadı. Yukarıda "var" denen her şey backend belgesi/kod okumasından alındı.
-- Yönetilen bulut (Azure) hizmetlerinin yedek/geri yükleme özellikleri, saklama süreleri ve komutları bu belgede **anlatılmadı** (hesap yok; platforma özgü adımlar kurulumda eklenecek).
-- `DbMigrator` komut sırası ve Query DB'nin pilotta (bayraklar kapalı) şema güncelleme gereksinimi üretim runbook'unda doğrulanacak.
+- Bölüm 1, 7 ve 9 sunucudan 2026-11-11'de okundu (servis dosyaları, klasörler, `api.env` anahtar adları, cron, yedek betiği). Gece yedeğinin cron'la ilk kendiliğinden koşusu 2026-11-11 02:30'dur; bu belge yazılırken henüz koşmamıştı (elle koşular başarılıydı).
+- UptimeRobot'un tam izleme adresleri ve uyarı alıcısı kullanıcının hesabında; belgeye kullanıcının aktardığı biçimde yazıldı.
+- Bölüm 5.3'teki API, portal ve site yayın adımları 2026-11-10 ilk kurulumundaki yöntemdir; `api-eski` ile geri alma henüz denenmedi. `web` yayını ve `web-eski` 2026-11-11'de iki kez kullanıldı.
+- Drive yedeğinin başka bir makinede indirilip açılması (sunucu kaybı senaryosu) denenmedi.
 - Kişisel veri ihlaline ilişkin yasal süreler ve sorumluluk dağılımı doğrulanmadı (hukuki konu).
-- Hesap kilitleme yok; izin değişikliğinde oturum iptali yalnız dört yönetim komutuyla ve access token süresi kadar gecikmeyle (backend `SECURITY_CONFIGURATION.md`'den alındı, kod çalıştırılmadı). Bölüm 8 adım 3 ihtiyatlı yazıldı.
-- Backend `CI_CD.md`, `SECURITY_CONFIGURATION.md` ve izleme sözleşmesi okundu; CI iş akışları GitHub'da çalışmadığı için CI davranışı doğrulanmadı. İzleme sözleşmesi `main`'de değil, değişebilir.
-- Destek erişimi (davet/üyelikten çıkarma) backend belgesinde de "uç yolları ve arayüz adımları doğrulanmadı" diye geçiyor.
 - Önem derecesi süreleri, mesai saatleri ve nöbet düzeni öneridir; hiçbiri kararlaştırılmadı.
