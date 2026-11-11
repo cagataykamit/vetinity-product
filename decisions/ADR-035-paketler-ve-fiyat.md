@@ -44,7 +44,7 @@
 | Rol bazlı yetki, denetim kaydı | ✔ | ✔ | ✔ |
 | Hasta sahibi portalı (aşı, randevu, bakiye; telefonda ana ekrana eklenebilir) | — | ✔ | ✔ |
 | Çok klinik yönetimi ve klinikler arası yetki | — | — | ✔ |
-| Destek | E-posta | E-posta, öncelikli | Özel iletişim, kurulum desteği |
+| Destek | E-posta ve WhatsApp | E-posta ve WhatsApp, öncelikli | Özel iletişim, kurulum desteği |
 
 İlkeler: yasal zorunlu kayıt defterleri ve KVKK araçları hiçbir kademede kilitlenmez (mevzuata uyum ücretli basamak olmaz); fark kullanıcı sayısı, çok klinik ve hasta portalıdır. Hasta sahibi **mağaza uygulaması** yayına çıkana kadar sitede "mağazada" ifadesi kullanılmaz. SMS hatırlatma, e-fatura, online ödeme, online randevu yoktur ve sitede "yok/yakında" diye reklam edilmez; "Bugün yok" bölümü dürüst olarak kalır ("Şu an yok" kısa liste).
 
