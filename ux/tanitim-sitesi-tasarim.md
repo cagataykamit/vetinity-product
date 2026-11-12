@@ -67,6 +67,12 @@ Kaldırılır: sahte önizleme kartı, 4'lü "stats strip", "Neden Vetinity?" te
 ### 5.2 Özellikler (`/ozellikler`)
 Sayfa başlığı kalıbı. Ardından 6 bölüm, her biri iki sütun (sağ/sol dönüşümlü), metin + gerçek ekran: Geliş ve bekleme (Bugün) · Muayene (çalışma alanı, şablon, sözlük, kesinleştirme) · Hasta kartı ve zaman çizelgesi · Tahsilat ve bakiye (ödeme al, kısmi ödeme, borç raporu) · Stok ve satış (parti/SKT, mal kabul, doğrudan satış) · Raporlar (rapor merkezi, gün sonu). Sol kenarda yapışkan bölüm dizini (masaüstü), mobilde yok. Sonda çağrı kartı.
 
+**Klinik web sitesi vitrini (2026-11-12, kullanıcı isteği: "web sayfası olduğu bile belli değil").** Altı bölümden sonra, kart gruplarından önce kendi başına bölüm (`#klinik-web-sitesi`): açık teal yüzeyde çerçeveli alan; "Kliniğinizin kendi web sitesi" başlığı, dört hazır tasarımın görseli (2×2), sihirbazın yedi adımı, sihirbaz ekranı ve sitenin randevu, Veteriner bul ve klinik kaydıyla bağı. Ana sayfada güvenlik ile geçiş arasında kısa hali (dört tasarım yan yana + Özellikler'e bağlantı).
+
+- Tasarım görselleri panel ekranı değil, yayınlanmış örnek sitenin ilk ekranıdır: aynı sentetik "Örnek Veteriner Kliniği", dört tasarım, hazır fotoğraflar; 1280×800 WebP, `public/marketing/sites/`. Yeniden üretim: `site` uygulaması örnek yapılandırmayla açılır, başlıksız Chromium ile çekilir.
+- **İlke 1'e istisna:** bu görsellerin üstünde ince bir adres şeridi vardır (`www.vetinity.com/k/klinik-adiniz`). Amaç süs değil bilgi: ziyaretçi bunun bir web sitesi olduğunu ve hangi adreste yayınlandığını buradan anlar. Tarayıcı düğmeleri (üç nokta, sekme) çizilmez; panel ekranlarında şerit yoktur.
+- Sihirbaz ekranı "Hasta sahibine ulaşın" grubundan vitrine taşındı; o grubun kendi ekranı yok.
+
 ### 5.3 Defterler ve KVKK (`/kayit-defterleri-ve-kvkk`)
 Sayfa başlığı. Bölüm A "Kayıt defterleri": 5 defter + Aşı Bilgi raporu tablo biçiminde (defter · ne zaman dolar · çıktı) + defter ekranı + yazdırma önizlemesi küçük; gri not (resmî biçim doğrulaması). Bölüm B "KVKK": 4 adım (aydınlatma → açık rıza formu → rıza kaydı ve sürüm → veri kopyası/talep süreci) ikon şeridi + form ekranı; gri not. Bölüm C "Erişim ve iz": roller, izinler, denetim izi, kilitleme — 4 küçük kart. Çağrı.
 
