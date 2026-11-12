@@ -49,8 +49,22 @@ Söylenmeyecekler (bugün): SMS/WhatsApp, e-Fatura, POS, online randevu, cihaz/P
 | Hukuki | `/gizlilik`, `/kullanim-sartlari`, `/veri-isleme-sozlesmesi`, + `/cerez-politikasi` (analitik eklenirse) | Mevcut; taslak bandı kalır | ADR-024 | — |
 | Blog | **Şimdi gerek yok.** Pilot sonrası "klinik rehberleri" (defter nasıl tutulur, KVKK'da klinik ne yapmalı) SEO için değerli; içerik üretme kapasitesi yoksa açılmaz | | Sonra |
 
-Üst menü (masaüstü): Özellikler · Defterler ve KVKK · Geçiş · Paketler · SSS · İletişim | Giriş yap · Ücretsiz dene. **Mobil: hamburger menü zorunlu** (bugün yok).
-Alt bilgi: aynı bağlantılar + Hakkımızda/Destek + hukuki metinler + iletişim bilgisi (tüzel kişi adı, e-posta; AK-6).
+Üst menü (2026-11-12, kullanıcı onayı: "tamam meünüyü güncelle o zaman"; Fable analizi):
+
+- **Masaüstü:** Özellikler ▾ · Defterler ve KVKK · Geçiş · Paketler · İletişim | Veteriner bul | Giriş yap · Ücretsiz dene.
+- **Özellikler ▾ (açılır):** tıklama ya da klavyeyle açılır, üzerine gelince açılmaz. Alt öğeler /ozellikler bölümlerine gider:
+  - Klinik web siteniz ve online randevu (`#hasta-sahibi`), altında "Hasta sahibi sizi Veteriner bul'da da bulur"
+  - Geliş ve muayene (`#gelis`)
+  - Tahsilat ve stok (`#tahsilat`)
+  - Raporlar ve gün sonu (`#raporlar`)
+  - Klinik içi araçlar (`#klinik-ici`)
+  - Tüm özellikler
+- **SSS üst menüden çıktı:** alt bilgide durur. Paketler ve Geçiş sayfalarında kendi SSS bölümleri, ana sayfada "Tüm sorular" bağlantısı var.
+- **Veteriner bul (`/veteriner`, ADR-047):** hasta sahibine yönelik olduğu için klinik menüsünden ayrı; sağda, konum simgeli ikincil bağlantı, düğme değil. Ayrı `site` projesinden sunulur; Angular rotası olmadığı için düz `href` kullanılır. Mobil menüde ve alt bilgide de bulunur.
+- **Hasta sahibi portalı menüde yok:** ADR-034 karar 6'ya göre portal yalnız "geliştiriliyor" olarak geçer; menüye eklenmesi ayrı karar.
+- **Mobil:** 1200 px altında hamburger menü (eşik `xl`; 992–1199 px arasında öğeler tek satıra sığmıyor). Özellikler kapalı başlayan akordeondur.
+
+Alt bilgi: Ürün (Özellikler, Defterler ve KVKK, Geçiş, Paketler, Veteriner bul) + Destek (SSS, İletişim, Hakkımızda, Giriş yap) + hukuki metinler + iletişim bilgisi (tüzel kişi adı, e-posta; AK-6).
 
 ## 3. Ana sayfa omurgası (bölüm bölüm)
 
