@@ -128,9 +128,39 @@ Yanıtları bu belgenin altına (tarih + kaynak, kişisel veri olmadan) ekleyin;
 
 | Tarih | Firma | Kanal | Durum |
 |---|---|---|---|
-| 2026-11-10 | Nilvera | Destek e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
+| 2026-11-10 | Nilvera | Destek e-postası | **Yanıt geldi (2026-11-12):** test ortamı bilgileri gönderildi; ayrıntı ve doküman incelemesi aşağıda, "Nilvera test ortamı ve API incelemesi" bölümünde |
 | 2026-11-10 | BirFatura | Entegrasyon e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
 | 2026-11-10 | Paraşüt | İletişim kanalı | **Yanıt geldi (2026-11-10):** API bilgileri `devhub.parasut.com` → "API Başvurusu Yap" ile alınır; Paraşüt kullanıcısı "Paraşüt ile Giriş Yap", ardından "Paraşüt Kullanıcı Başvuru Formu"ndaki zorunlu alanlar → API bilgileri (istemci kimliği/sırrı). Kullanıcı eylemi: Paraşüt hesabı ve başvuru; geliştirme için Staging ortamı (staging hesabı 6 ayda silinir, devhub). Başvuruda istenen yönlendirme adresi (redirect URL, OAuth dönüşü): **en çok 3 adres, sonradan değiştirilemez** (değişiklik = yeni başvuru; Paraşüt formu, kullanıcı aktarımı 2026-11-10). Kalıcı olduğu için yol **sürüm içermez** ve ADR-033 düzeninin üç ortamına verilir: `https://localhost:7173/api/e-documents/parasut/callback` (yerel), `https://api-staging.vetinity.com/api/e-documents/parasut/callback`, `https://api.vetinity.com/api/e-documents/parasut/callback`. **Dilim 3b'de Paraşüt dönüş ucu tam bu yolla yazılır** (`api/v1` altında değil). Paraşüt test (staging) ve canlı başvurularının ayrı olup olmadığı DOĞRULANMADI. **e-SMM API'si teyit edildi (2026-11-11, resmî OpenAPI `devhub.parasut.com/openapi.json`: `POST /{şirket}/e_smms`; eleme şartı karşılanıyor).** **2026-11-11:** kullanıcı staging hesabını açtı (`uygulama-staging.parasut.com`), API başvurusu onaylandı; istemci kimliği ve sırrı geliştirici makinesinde API projesinin user-secrets deposunda: `EDocuments:Parasut:ClientId`, `EDocuments:Parasut:ClientSecret` (değerler hiçbir belgeye yazılmaz). Dilim 3b bu anahtar adlarını okur; canlı değerler ayrı alınır ve `api.env`e kullanıcı girer |
 | 2026-11-10 | UyumSoft | İletişim / iş ortaklığı kanalı | Gönderildi (kullanıcı), yanıt bekleniyor |
 | 2026-11-10 | NES | İş ortaklığı e-postası | **Yanıt geldi (2026-11-12, kullanıcı aktarımı):** e-Fatura, e-Arşiv, e-İrsaliye tek API; e-SMM aynı API içinde (dokümanla DOĞRULANMADI). Test ortamı ücretsiz, başvuru e-postayla. Yazılım ortağı programı: yıllık sabit ücret yok, kontör üzerinden gelir paylaşımı (katalog ekte). Bağlantı: her klinik kendi NES hesabını açar ve API anahtarı (token) verir; OAuth yok; mevcut NES hesabı kullanılabilir. Çift gönderim koruması yok, belge başına benzersiz UUID bizden; webhook yok, durum sorgulanır; sınır dakikada 60 istek. Kontör fiyatı için proje bilgisi istendi (site adresi, aktif müşteri sayısı, hedef). Kendi abonelik faturalarımız için NES hesabı açılabilir. Ekler (API dokümanı, katalog) henüz bize ulaşmadı. **2026-11-12:** kullanıcı dönüş yaptı ve test (sandbox) hesabı istedi |
 | 2026-11-10 | Sovos (Digital Planet) | İş ortağı e-postası | Gönderildi (kullanıcı), yanıt bekleniyor |
+
+### Nilvera test ortamı ve API incelemesi (2026-11-12)
+
+**Test ortamı (Nilvera e-postası, kullanıcı aktarımı).** Parolalar bu belgeye ve depoya yazılmaz (proje kuralı); Nilvera e-postasında durur, geliştirmede API projesinin user-secrets deposuna girilir.
+
+| | Test kurum 1 | Test kurum 2 |
+|---|---|---|
+| Portal kullanıcısı | `test01@nilvera.com` | `test02@nilvera.com` |
+| VKN | 1234567801 | 1234567802 |
+| PK etiketi | `urn:mail:defaultpk@nilvera.com` | aynı |
+| GB etiketi | `urn:mail:defaultgb@nilvera.com` | aynı |
+
+- Test portalı: `https://portaltest.nilvera.com`. Doküman: `https://developer.nilvera.com` (V1 API).
+- İki test kurumu, e-Fatura alıcı–gönderici akışını iki taraflı denemeye yarar.
+
+**Doküman incelemesi** (`developer.nilvera.com`, ajan okuması; uç adlarının bir kısmı yalnız dizinden alındı, test ortamında doğrulanmadı):
+
+| Konu | Bulgu |
+|---|---|
+| Belge türleri | e-Fatura, e-Arşiv, **e-SMM** (ayrı API bölümü: model/XML/Base64 gönderim, taslak, PDF/HTML, iptal, statü) |
+| Kimlik doğrulama | `Authorization: Bearer <API anahtarı>`. Anahtar portalda "API Tanımları > Yeni Anahtar" ile üretilir, bir kez gösterilir, süresiz ya da son tarihli, yetki (scope) seçilir. OAuth yönlendirmesi yok. Her klinik kendi Nilvera hesabının anahtarını verir (tek anahtarla çok firma yönetimi belgede yok) |
+| Taban adres | Canlı `https://api.nilvera.com/{api}`, test `https://apitest.nilvera.com/{api}` (`earchive`, `general`, …) |
+| Gönderim | e-Arşiv JSON model: `POST /earchive/Send/Model`; gövdede `InvoiceInfo.UUID` **istemci verir**; yanıt `UUID`, `InvoiceNumber` |
+| Çift gönderim | Aynı istek tekrar gelirse **409** ("sistemde daha önce bulunduğunda"); UUID belge başına sabit üretilirse tekrar gönderim güvenli. Belgede "idempotent" denmiyor; testte doğrulanacak |
+| Durum, PDF, iptal | Statü sorgusu; PDF/HTML/XML indirme; iptal `PUT /earchive/Invoices/{UUID}/Cancel` ve iptali geri alma (e-SMM için de var) |
+| Bildirim | Webhook bulunamadı; "Bilgilendirme Ayarları" kuralları var, kanalı belirsiz. Durum sorgulamayla izlenir |
+| Mükellef sorgusu | `GET /general/GlobalCompany` (liste); VKN ve unvanla sorgu uçları |
+| İstek sınırı | Okunan sayfalarda yok |
+
+**Değerlendirme:** Ortak e-belge sayfasına ikinci sağlayıcı olarak uygun. Bağlantı Paraşüt'ten basit (anahtar yapıştırma), e-SMM resmî olarak var, çift gönderime karşı 409 ve istemci UUID'si var. NES'e göre artısı 409 davranışı ve dokümanın açık olması; fiyat ve iş ortaklığı koşulları henüz bilinmiyor.
