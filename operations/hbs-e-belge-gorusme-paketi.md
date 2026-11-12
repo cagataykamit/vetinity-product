@@ -125,7 +125,7 @@ Gönderim kanalı ve imza kullanıcıdadır; yanıtı keşif belgesine D9 olarak
 Yanıtları bu belgenin altına (tarih + kaynak, kişisel veri olmadan) ekleyin; ajan keşif tablosunu ve ADR-036 açık kararlarını (AK-1…AK-8) günceller.
 
 ### Entegratör başvuruları
-**Strateji (kullanıcı kararı 2026-11-12):** Her sağlayıcı bağlanmaz; yalnız Vetinity'ye sürekli gelir payı veren e-belge sağlayıcıları sisteme alınır. Tek sağlayıcıya bağlanılmaz; birden fazla sağlayıcıyla çalışmayı kısıtlayan (münhasırlık, rekabet yasağı) sözleşme imzalanmaz. Yalnız ilk yıl ödenen komisyon yeterli sayılmaz.
+**Strateji (kullanıcı kararları 2026-11-12):** Vetinity'ye sürekli gelir payı veren e-belge sağlayıcıları **önerilir**: yeni klinik kurulumda önce bunları görür, "Önerilen" olarak işaretlenir. Kliniklerin yaygın kullandığı sağlayıcılar, pay vermeseler de **desteklenir** (geçişte kliniğe sağlayıcı değiştirtmemek için); bunlara da ortaklık programı sorulur. Tek sağlayıcıya bağlanılmaz; birden fazla sağlayıcıyla çalışmayı kısıtlayan (münhasırlık, rekabet yasağı) sözleşme imzalanmaz. Yalnız ilk yıl ödenen komisyon yeterli sayılmaz. Ortaklıksız bağlanan sağlayıcıların API kullanım şartları canlıya çıkmadan ticari yazılım kullanımı açısından kontrol edilir (Nilvera, Paraşüt: DOĞRULANMADI).
 
 
 | Tarih | Firma | Kanal | Durum |
