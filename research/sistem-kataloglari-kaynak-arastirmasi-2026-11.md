@@ -569,9 +569,70 @@ D grubundaki adlar standart ders kitabı terimleri; sıklık kaynağıyla doğru
 
 ---
 
-## 12. Değişiklik günlüğü
+## 12. Uygulama (2026-11-13)
+
+Kullanıcı kararı (2026-11-13): öneriler uluslararası veteriner literatürüne göre uygulansın; aşı sınıfı ayrı alan olsun (Y1); renk ile desen ayrılsın (Y4).
+
+**Dallar:** BE `feature/katalog-kaynak` (`3b15a349`, `606f6498`), FE `feature/katalog-kaynak` (`f7ff1a62`). İkisi de `feature/katalog-literatur` üzerine kuruldu. Push ve merge yapılmadı. Migration yalnız yerel DB'ye uygulandı. Sözleşme belgesi: BE `docs/CATALOG_COAT_AND_VACCINE_CATEGORY_API_CONTRACT.md`.
+
+### Uygulananlar
+
+- **Tür ve ırk:**
+  - T1, T-E1, T-E2.
+  - K1–K10 (K9 `feature/katalog-literatur`'da yapılmıştı), K-E1–K-E27.
+  - C1–C6, kedi eklemeleri, D1–D12, §4.7 eklemeleri.
+  - Tekir, Sarman ve Smokin ırklı kediler seed'le dönüştürülür. Irk "Ev Kedisi (Kısa Tüylü)" olur. Renk ve desen boşsa şöyle doldurulur:
+    - Tekir: tekir deseni
+    - Sarman: kızıl renk ve tekir deseni
+    - Smokin: siyah-beyaz
+- **Renk ve desen (Y4):**
+  - Renk kataloğunda her satıra `Kind` (renk/desen) alanı geldi; hastaya `PatternId` eklendi.
+  - Benekli, Çizgili, Alacalı, Kaplan Çizgili (eski Kırçıllı) ve Üç Renkli desen oldu. Bu renkleri taşıyan hastalarda değer desen alanına taşındı.
+  - R1–R3: Kırçıllı-Beyaz ve Kahverengi-Kırçıllı satırları renk ve desene ayrıldı, sonra pasifleşti.
+  - §5.2 eklendi; aşağıdaki iki sapma dışında.
+- **Aşı (Y1, Y2, Y3):**
+  - `Category` alanı eklendi: Core / NonCore / NotRecommended / ParasiteControl. `IsCore` kilit anlamında kaldı.
+  - A1–A12 ve A-E1–A-E18 uygulandı.
+  - §6.4'teki varsayılan aralıklar ve tür bağı uygulandı.
+  - Antiparaziter uygulamalar ayrı katalog açmak yerine aynı katalogda `ParasiteControl` sınıfıyla ayrıldı. Böylece karne ve hatırlatma akışı değişmedi.
+  - Aşı takvimi başlangıç şablonu WSAVA'ya uyarlandı: karma 8., 12. ve 16. hafta; köpek koronavirüs çıkarıldı.
+- **Şikâyet ve tanı:** Ş1–Ş5, 30 şikâyet; N1–N2, 58 tanı.
+- **Şablon:** M1, M2, M-E1–M-E9.
+- **Seed mekanizması (Y7):**
+  - Sistem kayıtları için yeniden adlandırma, pasifleştirme ve "boşsa doldur" listeleri eklendi (ırk, aşı, terim, şablon).
+  - Güncellemede, hastada zaten kayıtlı olan pasif ırk, renk ya da desen değişmeden kalabilir.
+- **İçe aktarma:**
+  - Eski adlar takma ad oldu.
+  - Desen değeri hastanın desen alanına yazılır.
+  - `karma` gibi bir takma ad birden çok hedef verebilir; hastanın türündeki tek kayıt seçilir.
+
+### §5–§7'den sapmalar
+
+- **"Sarman (Kızıl Tekir)" renk olarak eklenmedi.** Renk ile desen ayrıldığı için sarman, kızıl renk ve tekir deseni olarak tutuluyor (FIFe: renk `d`, desen `21–25`).
+- **"Ahreç" at donu eklenmedi.** Karşılığı kaynakla doğrulanamadı. Diğer altı don eklendi; at donlarının adına "(At)" eklendi.
+- **Kedi "Melez" satırı kaldı.** Uzun tüylü melezi kısa tüylü saymamak için "Ev Kedisi (Kısa Tüylü / Uzun Tüylü)" ayrıca eklendi.
+
+### Bu turda yapılmayanlar (öneri olarak açık)
+
+- **Y5:** Klinik terimlere tür etiketi.
+- **Y6:** Zoonoz ve ihbar işareti. İkisi de literatür uyumu değil, kullanım kolaylığı; ayrı bir iş olarak değerlendirilmeli.
+- **Desen hasta listesinde ve okuma modelinde yok.** Yalnız detayda ve formda görünüyor.
+- **İçe aktarmada kürk adı ırk olarak gelirse ("Tekir")** ırk "Ev Kedisi (Kısa Tüylü)" olur ama desen otomatik doldurulmaz. Seed dönüşümü yalnız mevcut kayıtlara uygulanır.
+
+### Yayın sırası (canlı, onayla)
+
+1. `DbMigrator migrate`
+2. `DbMigrator seed`
+3. `DbMigrator backfill-pet-projections`
+
+Ayrıntı için BE sözleşmesinin §4 bölümüne bakın.
+
+---
+
+## 13. Değişiklik günlüğü
 
 | Tarih | Değişiklik | Commit | Kaynak |
 |---|---|---|---|
-| 2026-11-12 | Literatüre göre ad düzeltmeleri (§2) | BE `2c1652d7`, `dabbb21d` (`feature/katalog-literatur`, main'de değil) | FCI, FIFe, Bakanlık adları |
-| 2026-11-12 | Bu araştırma | (bu belge) | §3 |
+| 2026-11-12 | Literatüre göre ad düzeltmeleri (§2) | BE `2c1652d7`, `dabbb21d`, `7b8997ed` (`feature/katalog-literatur`, main'de değil) | FCI, FIFe, Bakanlık adları |
+| 2026-11-12 | Bu araştırma | `e300a8c` | §3 |
+| 2026-11-13 | Önerilerin uygulanması (§12) | BE `3b15a349`, `606f6498`; FE `f7ff1a62` (`feature/katalog-kaynak`) | §3 |
