@@ -51,18 +51,12 @@ Söylenmeyecekler (bugün): SMS/WhatsApp, e-Fatura, POS, online randevu, cihaz/P
 
 Üst menü (2026-11-12, kullanıcı onayı: "tamam meünüyü güncelle o zaman"; Fable analizi):
 
-- **Masaüstü:** Özellikler ▾ · Defterler ve KVKK · Geçiş · Paketler · İletişim | Veteriner bul | Giriş yap · Ücretsiz dene.
-- **Özellikler ▾ (açılır):** tıklama ya da klavyeyle açılır, üzerine gelince açılmaz. Alt öğeler /ozellikler bölümlerine gider:
-  - Klinik web siteniz ve online randevu (`#hasta-sahibi`), altında "Hasta sahibi sizi Veteriner bul'da da bulur"
-  - Geliş ve muayene (`#gelis`)
-  - Tahsilat ve stok (`#tahsilat`)
-  - Raporlar ve gün sonu (`#raporlar`)
-  - Klinik içi araçlar (`#klinik-ici`)
-  - Tüm özellikler
+- **Masaüstü:** Özellikler · Defterler ve KVKK · Geçiş · Paketler · İletişim | Veteriner bul | Giriş yap · Ücretsiz dene.
+- **Özellikler tek bağlantı (2026-11-12, kullanıcı kararı: "özelliklerin altında tıklamaya gerek yok tek olsun özellikler üst menüde"):** açılır alt menü kaldırıldı; /ozellikler sayfasına gider. Klinik web sitesi ve diğer bölümler sayfanın kendi bölüm dizininde.
 - **SSS üst menüden çıktı:** alt bilgide durur. Paketler ve Geçiş sayfalarında kendi SSS bölümleri, ana sayfada "Tüm sorular" bağlantısı var.
 - **Veteriner bul (`/veteriner`, ADR-047):** hasta sahibine yönelik olduğu için klinik menüsünden ayrı; sağda, konum simgeli ikincil bağlantı, düğme değil. Ayrı `site` projesinden sunulur; Angular rotası olmadığı için düz `href` kullanılır. Mobil menüde ve alt bilgide de bulunur.
 - **Hasta sahibi portalı menüde yok:** ADR-034 karar 6'ya göre portal yalnız "geliştiriliyor" olarak geçer; menüye eklenmesi ayrı karar.
-- **Mobil:** 1200 px altında hamburger menü (eşik `xl`; 992–1199 px arasında öğeler tek satıra sığmıyor). Özellikler kapalı başlayan akordeondur.
+- **Mobil:** 1200 px altında hamburger menü (eşik `xl`; 992–1199 px arasında öğeler tek satıra sığmıyor).
 
 Alt bilgi: Ürün (Özellikler, Defterler ve KVKK, Geçiş, Paketler, Veteriner bul) + Destek (SSS, İletişim, Hakkımızda, Giriş yap) + hukuki metinler + iletişim bilgisi (tüzel kişi adı, e-posta; AK-6).
 
