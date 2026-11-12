@@ -463,6 +463,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | Menü satırlarının (sayfa ve grup listesi) kesinleşmesi |
 | **Notlar** | Frontend dalı `feature/menu-secenek-a`; kapalı şerit grup adı kaybı ve simge ağırlığı gözlemleri 2026-10-13 ekran görüntülerinden |
 
+### UX-010 — İngilizce dil desteği
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | UX-010 |
+| **Başlık** | Ürünün İngilizce sürümü |
+| **Kategori** | UX |
+| **Problem** | Ürün yalnız Türkçe. Arayüz metinleri kodun içine yazılı; i18n altyapısı bilinçli olarak kurulmadı (roadmap/KOD-INCELEME-2026-10-27.md) |
+| **Önerilen çözüm** | Kapsam tasarlanacak: panel, hasta sahibi portalı, tanıtım sitesi, klinik siteleri, Veteriner bul, e-posta şablonları, PDF çıktıları, hata mesajları. Dil seçimi kullanıcı, klinik ya da hasta sahibi düzeyinde olabilir. Tarih, para ve sayı biçimi dile göre değişir. Türkiye'ye özgü kayıt defterleri, KVKK ve e-belge metinleri kapsam kararı ister. Angular i18n mi, çalışma anında yüklenen çeviri dosyaları mı, karar ADR ile verilir |
+| **Kullanıcı değeri** | İngilizce konuşan hekim, personel ve hasta sahipleri; yurt dışı pazara açılma |
+| **Öncelik** | Belirlenmedi |
+| **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi). Bütün arayüz metinlerinin koddan çıkarılması gerekir |
+| **Durum** | Planlandı (kullanıcı isteği 2026-11-12: "Bir ara da ingilizce kısmını da yapıcaz projenin onu da yapılacaklara ekle") |
+| **Bağımlılıklar** | Kapsam ve dil seçimi kararı (ADR) |
+| **Notlar** | Zamanlaması kullanıcıda; pilot ve canlıya çıkış işlerinden sonra |
+
 ---
 
 ## EXAM — Muayene deneyimi
