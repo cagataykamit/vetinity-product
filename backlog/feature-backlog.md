@@ -6,7 +6,7 @@
 
 Planlandı · Araştırılacak · Tasarlanacak · Geliştiriliyor · Kısmen geliştirildi (main'de, kapsamın bir kısmı eksik; eksik parantezde) · Geliştirildi (main'de; doğrulanmayan kısım parantezde) · Tamamlandı · Ertelendi
 
-Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum satırı aynı commit dalgasında güncellenir. Son toplu senkron: 2026-10-24 kod incelemesi (bkz. roadmap/KOD-INCELEME-2026-10-24.md).
+Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum satırı aynı commit dalgasında güncellenir. Son toplu senkron: 2026-11-14 git kontrolü; "origin'e gönderilmedi" yazan maddelerin kodu canlı sürümde (backend `3c50d963`, panel `181b14ed`). Güncel tek bakış: [durum panosu](../roadmap/DURUM-PANOSU.md). Önceki: 2026-10-24 kod incelemesi (bkz. roadmap/KOD-INCELEME-2026-10-24.md).
 
 ## Kategori kimlikleri
 
@@ -179,7 +179,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; şeffaf onboarding ve hesap erişimi |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Uygulandı (2026-10-16, ADR-029; metinler taslak, hukuki onay bekliyor) |
+| **Durum** | Uygulandı, canlıda (2026-10-16, ADR-029). Metinler yayında; hukukçu görüşü beklenmiyor (kullanıcı kararı 2026-11-09) |
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Trial/onboarding girişinde de uygulanır; yalnızca trial'a özgü değildir. DaySmart sandbox gözlemi (giriş akışı) — tenant/kullanıcı kapsamı ve audit **doğrulanmadı** → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance) |
 
@@ -687,7 +687,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esnek paket uygulama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); canlıya yayınlanmadı |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
 | **Bağımlılıklar** | EXAM-007 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
@@ -976,7 +976,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-09; main yerelde FE `74feaf82`, origin'e gönderilmedi): Bugün tablo ve kartında hasta kartıyla aynı paylaşılan uyarı rozeti bileşeni; dar sütunda ve telefonda sarar, uyarı notu satırda görünür (tabloda tek satır, kartta 2 satır, tam metin ipucunda); renk tek başına anlam taşımaz (ikon, metin, aria-label). Tarayıcıda masaüstü, telefon ve koyu temada görüldü |
+| **Durum** | Geliştirildi (2026-11-09; main'de FE `74feaf82`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde)): Bugün tablo ve kartında hasta kartıyla aynı paylaşılan uyarı rozeti bileşeni; dar sütunda ve telefonda sarar, uyarı notu satırda görünür (tabloda tek satır, kartta 2 satır, tam metin ipucunda); renk tek başına anlam taşımaz (ikon, metin, aria-label). Tarayıcıda masaüstü, telefon ve koyu temada görüldü |
 | **Bağımlılıklar** | CHECKIN-007 |
 
 ### CHECKIN-014 — Hekim için "Benim hastalarım" filtresi
@@ -1088,7 +1088,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Peşin ödeme/avans ve fazla ödeme senaryoları |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): fazla ödeme ve avans kredi olur (`Payment.Settle`), FIFO mahsup ücretin tahsis sayacını kullanır, gerekçeli geri alma ve tam iade (gün sonu dökümünde "Kredi iadesi"), kredisi kullanılmış ödeme iptal edilemez. Sözleşme backend `docs/CLIENT_CREDIT_API_CONTRACT.md`; migration `AddClientCredits` (yalnız yerel DB). Açık soru: açık ücreti olan müşteriye ücrete bağlanmadan avans (ekran şu an yalnız açık ücret yokken sunuyor) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): fazla ödeme ve avans kredi olur (`Payment.Settle`), FIFO mahsup ücretin tahsis sayacını kullanır, gerekçeli geri alma ve tam iade (gün sonu dökümünde "Kredi iadesi"), kredisi kullanılmış ödeme iptal edilemez. Sözleşme backend `docs/CLIENT_CREDIT_API_CONTRACT.md`; migration `AddClientCredits` (canlı sürüm bu şemayı kullanıyor; canlı DB'ye bakılmadı). Açık soru: açık ücreti olan müşteriye ücrete bağlanmadan avans (ekran şu an yalnız açık ücret yokken sunuyor) |
 | **Bağımlılıklar** | FIN-001, FIN-002, FIN-003 |
 
 ### FIN-006 — Çoklu para birimi
@@ -1235,7 +1235,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlılık |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): "Kopyasını oluştur" oluşturma formunu doldurur, ayrı uç yok; reçete (1. dilim), tedavi ve uygulama tekrarı (2. dilim); muayene ve aşı kapsam dışı (öneriyle kabul, 2026-11-09). Kopya mevcut kilit kurallarından geçer (ADR-013); kontrollü ilaçlı reçetede uyarı. **Tamamlandı (2026-11-11):** iki dilim frontend `main`e birleşti (`71633052`); canlıya yayınlanmadı |
+| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): "Kopyasını oluştur" oluşturma formunu doldurur, ayrı uç yok; reçete (1. dilim), tedavi ve uygulama tekrarı (2. dilim); muayene ve aşı kapsam dışı (öneriyle kabul, 2026-11-09). Kopya mevcut kilit kurallarından geçer (ADR-013); kontrollü ilaçlı reçetede uyarı. **Tamamlandı (2026-11-11):** iki dilim frontend `main`e birleşti (`71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | |
 
@@ -1415,7 +1415,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yasal uyum; güven |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): sürümlü kabul ve aydınlatma vardı; eklenen: bildirim tercihleri (push tercihi, hatırlatma, ticari ileti onayı — gönderim kapalı, İYS/ETK hukuki görüş bekler) ve "Verilerimle ilgili talep" (KVKK başvurusu, 30 gün, klinik gelen kutusuna düşer, yanıt e-postası). Hukuki noktalar çalışma varsayımı (HUKUKI-ONAY-LISTESI "Koda giren varsayımlar — Dalga 4b"). Migration `AddPortalPreferencesDataRequestsAndSettings` (yalnız yerel DB) |
+| **Durum** | Geliştirildi (P1 Dalga 4b, 2026-11-01; main + origin; main'e 2026-11-02, origin'e 2026-11-04): sürümlü kabul ve aydınlatma vardı; eklenen: bildirim tercihleri (push tercihi, hatırlatma, ticari ileti onayı — gönderim kapalı, İYS/ETK hukuki görüş bekler) ve "Verilerimle ilgili talep" (KVKK başvurusu, 30 gün, klinik gelen kutusuna düşer, yanıt e-postası). Hukuki noktalar çalışma varsayımı (HUKUKI-ONAY-LISTESI "Koda giren varsayımlar — Dalga 4b"). Migration `AddPortalPreferencesDataRequestsAndSettings` (canlı sürüm bu şemayı kullanıyor; canlı DB'ye bakılmadı) |
 | **Bağımlılıklar** | PORTAL-006, TRIAL-009 |
 | **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4; Vetinity'nin rolü ve İYS/ETK için hukuki görüş şart (AK-5); [HUKUKI-ONAY-LISTESI](../roadmap/HUKUKI-ONAY-LISTESI.md)'ne eklenir |
 
@@ -1479,7 +1479,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hasta sahibi verisi üzerinde denetim; mağaza koşulu; kliniğin KVKK izi bozulmaz |
 | **Öncelik** | P1 (mağaza yayınından önce zorunlu; öneri) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Uygulandı (2026-10-28; ADR-041 kabul, backend + portal + panel; yerelde tarayıcıda uçtan uca denendi). Canlı DB migration'ı bekliyor |
+| **Durum** | Uygulandı (2026-10-28; ADR-041 kabul, backend + portal + panel; yerelde tarayıcıda uçtan uca denendi). Canlıda; migration'lar 2026-11-10 canlı kurulumda uygulandı (CANLI-ISLETIM-KILAVUZU 11.1) |
 | **Bağımlılıklar** | PORTAL-006, PORTAL-009 |
 | **Notlar** | [ADR-041](../decisions/ADR-041-portal-hesap-silme.md) (seçenek C kabul: anonimleştirme + bağ kapatma; bekleme süresi yok). Uçlar: backend `docs/PORTAL_API_CONTRACT.md` §5.10. Hukuki bağımlılıklar çalışma varsayımıyla (ÇV-1…7), HUKUKI-ONAY-LISTESI C6. Klinikteki verilerin silinmesi kapsam dışı → [PORTAL-007](#portal-007--portal-kvkk-sürümlü-kabul-bildirim-tercihi-veri-talebi). Backend önce; migration kullanıcı onayıyla |
 
@@ -2413,7 +2413,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı web entegrasyonu |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`, origin'e gönderilmedi. Ayarlar > Online randevu > Sitenize ekleyin: satır içi stilli, erişilebilir "Online randevu al" bağlantısı, kopyala ve önizleme; `?kaynak=dis-site` (Talepler'de "Dış site"). Her pakette |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `f80ef4f2`, FE `d1b5cb02`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Ayarlar > Online randevu > Sitenize ekleyin: satır içi stilli, erişilebilir "Online randevu al" bağlantısı, kopyala ve önizleme; `?kaynak=dis-site` (Talepler'de "Dış site"). Her pakette |
 | **Bağımlılıklar** | APPT-001, APPT-002 |
 | **Notlar** | — |
 
@@ -2429,7 +2429,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Site içi deneyim |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`. Başlıklı iframe ve yükseklik betiği; gömülüyken üst başlık yok, belgeler yeni sekmede. Yalnız `/randevu/*` gömülebilir; portal çerçevede diğer sayfaları çizmez (sözleşme §15). E-posta kodu gönderimi çerçevede denenmedi |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `f80ef4f2`, FE `d1b5cb02`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Başlıklı iframe ve yükseklik betiği; gömülüyken üst başlık yok, belgeler yeni sekmede. Yalnız `/randevu/*` gömülebilir; portal çerçevede diğer sayfaları çizmez (sözleşme §15). E-posta kodu gönderimi çerçevede denenmedi |
 | **Bağımlılıklar** | APPT-001 |
 | **Notlar** | Güvenlik ve responsive davranış değerlendirilmeli |
 
@@ -2445,7 +2445,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik markası korunur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f80ef4f2`, FE `d1b5cb02`. Logo ve ana renk kliniğin yayındaki sitesinden (ADR-045), ikinci yükleme alanı yok; kontrastı yetmeyen renk uygulanmaz; sitesi olmayan klinikte varsayılan görünüm. Tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `f80ef4f2`, FE `d1b5cb02`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Logo ve ana renk kliniğin yayındaki sitesinden (ADR-045), ikinci yükleme alanı yok; kontrastı yetmeyen renk uygulanmaz; sitesi olmayan klinikte varsayılan görünüm. Tarayıcıda görülmedi |
 | **Bağımlılıklar** | APPT-001 |
 | **Notlar** | — |
 
@@ -2751,7 +2751,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yasal uyumluluk |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce; ADR-036 AK-7 kabul, 2026-10-21) |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Kısmen: ADR-036 Dilim 1 (müşteri fatura kimliği, klinik mükellef ayarı, ücrette KDV/satır türü) backend ve panelde main'de (2026-11-08 tespiti). Belge kesme (Dilim 3–5) başlanmadı; entegratör API/sandbox başvurusu ve seçimi bekliyor (fiyat teklifi değil; Vetinity entegratöre ödeme yapmaz) |
+| **Durum** | Kısmen, canlıda (2026-11-14 git kontrolü): ADR-036 Dilim 1 (veri modeli) ve Dilim 3–4 (belge kes, liste, PDF, iptal) Nilvera ile canlı sürümde; e-SMM, e-Arşiv ve e-Fatura Nilvera test ortamında uçtan uca denendi (canlıda gerçek belge kesimi denenmedi). Paraşüt kodu var, canlıda ayarla kapalı (kullanıcı kararı 2026-11-13). e-Fatura ticari senaryo ve "Alıcı reddetti" durumu main'de (BE `6add514c`, panel `7b53100b`), canlıya çıkmadı. Diğer entegratörler: [görüşme paketi](../operations/hbs-e-belge-gorusme-paketi.md) |
 | **Bağımlılıklar** | TRIAL-004 |
 | **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes). **E-Vet SMART (2026-09-27):** Doğrudan Satış e-Fatura\|SMM Notu alanları; **VIDEO OBSERVED** gelgeç müşteride e-Fatura düzenlenememe anlatımı — live kural **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#ana-satış-ekranı). **E-Vet SMART (2026-10-04):** sol menü e-Fatura/e-SMM UI + Fatura Yönetim Paneli pre-send workflow; reviewed account config eksik → external lifecycle **NOT VERIFIED** — → [e-vet.md](../competitors/e-vet.md#e-fatura--e-smm-modül) (competitor evidence; scope değişmedi). **Keşif (2026-10-19):** kullanıcı beyanı "zorunlu"; serbest hekim hizmeti e-SMM, şirket klinik ve ayrı ticari satış fatura (e-Arşiv / e-Fatura), yol özel entegratör API'si — [keşif](../research/hbs-ve-e-belge-kesfi-2026-10.md), karar taslağı [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) (Dilim 3–5). Öncelik P1, ilk ücretli canlı müşteriden önce (ADR-036 AK-7 kabul, 2026-10-21). **E-Vet SMART (2026-11-08):** Ayarlar'da entegratör seçimi (Altair, UyumSoft) ve kliniğin kendi entegratör kullanıcı adı/şifresi; e-SMM ayrı ekran değil (kullanıcı beyanı) — → [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08). **2026-11-08 netleştirmeleri** (başvuru listesi, ilk yol pilot kliniğe göre, Vetinity'nin kendi faturası ayrı, kontörün pakete dahil edilmesi sonra): [ADR-036 Sonuçlar](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md#sonuçlar) |
 
@@ -2783,7 +2783,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ayrı bir programda faturayı yeniden yazmaz; Vetinity eski sistemin yerini alabilir (canlıya geçiş koşulu) |
 | **Öncelik** | P1 (pilotun gölge döneminde gerekmez; eski sistemi bırakma aşamasında gerekli) |
 | **Tahmini zorluk** | Yüksek (tahmin: keşif + backend + entegratör + frontend; ölçülmedi) |
-| **Durum** | Kısmen: ADR-036 Dilim 1 (veri modeli: müşteri fatura kimliği, klinik mükellef ayarı, ücrette KDV/satır türü) backend ve panelde main'de (2026-11-08 tespiti; önceki "kod yok" notu yanlıştı). Belge kesme akışı (Dilim 3–4: elle "Belge kes", kapanışta öneri) başlanmadı. Bekleyen kullanıcı işleri: mali müşavir görüşmesi, entegratörlere API dokümanı ve sandbox başvurusu (fiyat teklifi değil), seçim (AK-2) |
+| **Durum** | Kısmen, canlıda (2026-11-14 git kontrolü): elle "Belge kes", ödemede kes ve otomatik kesme (Kapalı / Ödeme alınınca / Gün sonunda; varsayılan kapalı; çift kesim koruması ve durdurma) Nilvera ile canlı sürümde (ADR-036, 2026-11-11/12 kararları). Ziyaret/satış kapanışında öneri CHECKOUT-001'e bağlı. Canlıda gerçek belge kesimi denenmedi |
 | **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
 | **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı). **2026-10-19:** açık sorular (1)–(4) [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) AK-1…AK-4'e taşındı (öneri: elle "Belge kes" + kapanışta öneri v1, tam otomatik v2) |
 
@@ -2887,7 +2887,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Parola tahmin saldırısına karşı koruma (canlıya çıkış koşulu) |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (main + origin, 2026-10-29). Migration `AddUserLoginLockout` yalnız yerel DB'de; canlıda kılavuz 11.1 |
+| **Durum** | Geliştirildi (main + origin, 2026-10-29). Canlıda; migration'lar 2026-11-10 canlı kurulumda uygulandı (CANLI-ISLETIM-KILAVUZU 11.1) |
 | **Bağımlılıklar** | Aşama 9 canlıya çıkış kontrol listesi |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O3; migration gerektirir |
 
@@ -2903,7 +2903,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yetki kaldırma anında etkili olur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `2a8092f2`, origin'e gönderilmedi. İzin değişim damgası: rol, rolün izinleri, izin tanımı, kiracı üyeliği ya da klinik ataması değişince damgadan eski erişim token'ı 401 alır, frontend sessiz yeniler; platform yöneticisi dahil. Erişim token ömrü 30 dk. Damga bellekte, tek API süreci varsayımı (`SECURITY_CONFIGURATION.md`). Yan düzeltme: rol-izin ekleme/çıkarma ve yönetim API'sinden rol kaldırma veritabanına kaydedilmiyordu. Not: canlıda `RevokeSessionsOnPermissionChange=true` rolün izin listesi değişince oturumu hemen kapatır (koordinatör önerisi: böyle kalsın). Yenilemede klinik ataması denetimi ayrı düzeltmede |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `2a8092f2`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). İzin değişim damgası: rol, rolün izinleri, izin tanımı, kiracı üyeliği ya da klinik ataması değişince damgadan eski erişim token'ı 401 alır, frontend sessiz yeniler; platform yöneticisi dahil. Erişim token ömrü 30 dk. Damga bellekte, tek API süreci varsayımı (`SECURITY_CONFIGURATION.md`). Yan düzeltme: rol-izin ekleme/çıkarma ve yönetim API'sinden rol kaldırma veritabanına kaydedilmiyordu. Not: canlıda `RevokeSessionsOnPermissionChange=true` rolün izin listesi değişince oturumu hemen kapatır (koordinatör önerisi: böyle kalsın). Yenilemede klinik ataması denetimi ayrı düzeltmede |
 | **Bağımlılıklar** | Aşama 9 |
 | **Notlar** | `docs/SECURITY_REVIEW_2026-10.md` O6; tasarım kararı gerekir |
 
@@ -2989,7 +2989,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Somut kanıt; sahte görsel yok |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `e483b123`, origin'e gönderilmedi. Yerel ortamda Kurumsal deneme ve örnek klinik sentetik verisiyle 13 ekran, açık ve koyu tema: Bugün, muayene, kesinleştirme, hasta kartı, müşteri bakiyesi, gün sonu, stok, Muayene Kayıt Defteri, KVKK formu, aşı sihirbazı, gelişmiş raporlar, klinik web sitesi sihirbazı, telefonda Bugün. Eksik: portal, veri aktarma sihirbazı, mal kabul, Aşı Kayıt Defteri, şubeler özeti. Açık soru: örnek verideki gerçekçi adlar tanıtımda kalsın mı |
+| **Durum** | Geliştirildi (2026-11-09): main'de FE `e483b123`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Yerel ortamda Kurumsal deneme ve örnek klinik sentetik verisiyle 13 ekran, açık ve koyu tema: Bugün, muayene, kesinleştirme, hasta kartı, müşteri bakiyesi, gün sonu, stok, Muayene Kayıt Defteri, KVKK formu, aşı sihirbazı, gelişmiş raporlar, klinik web sitesi sihirbazı, telefonda Bugün. Eksik: portal, veri aktarma sihirbazı, mal kabul, Aşı Kayıt Defteri, şubeler özeti. Açık soru: örnek verideki gerçekçi adlar tanıtımda kalsın mı |
 | **Bağımlılıklar** | Panelde sentetik veri (TEST kayıtları) |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 7. Portal görseli yayınlanana kadar yok |
 
@@ -3021,7 +3021,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Fiyat belirsizliği güven kaybına yol açmaz; site ürünle çelişmez |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Düşük–Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-05, 2026-11-06 fiyat ve sınır güncellemesi; main yerelde BE `e7fae61f`, FE `33031488`, origin'e gönderilmedi): fiyat Temel ₺890 / Profesyonel ₺1.790 / Kurumsal ₺3.790 aylık, KDV hariç (kullanıcı onayı; `appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından (₺8.900 / ₺17.900 / ₺37.900); kullanıcı sınırı backend kataloğundan (3/5/15), klinik sınırı yazılmaz. Karşılaştırma tablosu 35 satır, koyu başlıklı görünüm, yok işareti kırmızı çarpı (2026-11-06, kullanıcı seçimi; 34 satır endpoint + ekran olarak kodda doğrulandı, 35. satır "Size özel geliştirmeler" hizmet taahhüdü, TIER-010); davet ekranında sınır mesajı üst paketi söyler. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
+| **Durum** | Geliştirildi (2026-11-05, 2026-11-06 fiyat ve sınır güncellemesi; main'de BE `e7fae61f`, FE `33031488`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde)): fiyat Temel ₺890 / Profesyonel ₺1.790 / Kurumsal ₺3.790 aylık, KDV hariç (kullanıcı onayı; `appsettings.json` `Billing:PlanPricesMinor`, tek okuyan kod `SubscriptionPlanPrices`; checkout, panel özeti ve site aynı kural); yıllık tutar `YearlyBilledMonths` kuralından (₺8.900 / ₺17.900 / ₺37.900); kullanıcı sınırı backend kataloğundan (3/5/15), klinik sınırı yazılmaz. Karşılaştırma tablosu 35 satır, koyu başlıklı görünüm, yok işareti kırmızı çarpı (2026-11-06, kullanıcı seçimi; 34 satır endpoint + ekran olarak kodda doğrulandı, 35. satır "Size özel geliştirmeler" hizmet taahhüdü, TIER-010); davet ekranında sınır mesajı üst paketi söyler. Anonim `GET /api/v1/public/subscription-plans`; site katalog alınamazsa "Fiyat için bize yazın". /pricing → /paketler yönlendirmesi zaten vardı. Canlıda ücretli checkout açılmadı (iyzico `PlanPricesTry` 0 kaldı). Tarayıcıda gözle bakılmadı |
 | **Bağımlılıklar** | AK-2, TRIAL-004, TRIAL-007 |
 | **Notlar** | [research/tanitim-sitesi-analizi-2026-10.md](../research/tanitim-sitesi-analizi-2026-10.md) bölüm 3.6 |
 
@@ -3071,7 +3071,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yıllık ödeyen klinik indirim alır, nakit akışı öne çekilir |
 | **Öncelik** | P1 (sitede yıllık seçenek bu işe bağlı) |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Geliştirildi (main + origin, backend + frontend, 2026-10-26; durum 2026-10-29 git ile senkronlandı). Migration `AddBillingPeriod` yalnız yerel DB'de; canlı listesinde (CANLI-ISLETIM-KILAVUZU §11.1) |
+| **Durum** | Geliştirildi (main + origin, backend + frontend, 2026-10-26; durum 2026-10-29 git ile senkronlandı). Canlıda; migration'lar 2026-11-10 canlı kurulumda uygulandı (CANLI-ISLETIM-KILAVUZU 11.1) |
 | **Bağımlılıklar** | ADR-035, ADR-037, PARTNER-001 |
 | **Notlar** | Kullanıcı kararları (2026-10-26): aylıktan yıllığa hemen geçilir, mevcut ayın kalan günleri düşülür; yıllıktan aylığa dönem sonunda; dönem sonu aylıkla aynı (otomatik yenileme yok, salt okunur + yeniden ödeme); sağlayıcı iyzico + Manual (Stripe yıllıkta reddedilir); sitede Aylık/Yıllık anahtarı. Sözleşme: backend `docs/SUBSCRIPTION_YEARLY_BILLING_API_CONTRACT.md`. Tarayıcıda: paketler anahtarı ve abonelik sayfasında "Yıllığa geç" denendi; iyzico sandbox ödeme formu yerel ağdan açılamadı (DNS), yıllık ödeme ucu entegrasyon testiyle (Manual) doğrulandı. Ödeme akışı riskleri ayrı işlerde: BILL-002, BILL-003 |
 
@@ -3155,7 +3155,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Sitede yazan paket farkı üründe gerçekten geçerli olur; üst paketin satın alma nedeni oluşur |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce) |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-07; kullanıcı kararlarıyla güncellendi 2026-11-08): ilk sürüm origin'de (BE `e9ab6e70`, FE `a3bf35a8`); kararlar yerel main'de BE `77239c6d`, FE `1edefc44`, origin'e gönderilmedi. Panel ekranları tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-07; kullanıcı kararlarıyla güncellendi 2026-11-08): ilk sürüm origin'de (BE `e9ab6e70`, FE `a3bf35a8`); kararlar main'de BE `77239c6d`, FE `1edefc44`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Panel ekranları tarayıcıda görülmedi |
 | **Bağımlılıklar** | WEB-007, ADR-035 |
 | **Notlar** | Sözleşme backend `docs/PLAN_FEATURES_API_CONTRACT.md`. Kullanıcı kararı (2026-11-08, ADR-035): **paket düşürme A**, aktif klinik ve üye (bekleyen davet dahil) hedef pakete sığmıyorsa planlı düşürme, denemede değişim ve ücretliye geçiş 409 alır; yanıt ve panel fazlalığı ve yapılacakları söyler; dönem sonunda sınır aşıldıysa planlı düşürme uygulanmaz, abonelik mevcut pakette kalır. Portalsız pakette bağ okuması ve bağ üzerinden randevu talebi kapanır; aydınlatma, veri talebi, tercihler ve hesap silme açık. **Deneme seçilen pakete göre**, çok klinik dahil (TRIAL_LIMITS K7 güncellendi). Açık: dönem sonunda uygulanmayan düşürme için e-posta yok. Düzeltildi (2026-11-09, BE `8be30f0f`): planlı düşürme dönem sonunda ödemesiz yeni dönem açıyordu (denemede de ücretli döneme çeviriyordu); artık yalnız paketi değiştirir, ödeme yoksa abonelik salt okunur kalır |
 
@@ -3171,7 +3171,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ajanstan çıkmış gibi görünen kendi sitesine sihirbazla kavuşur; ara, yol tarifi ve randevu tek yerde |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek (tek sayfalık önceki tahmin Orta idi; ölçülmedi) |
-| **Durum** | Geliştirildi (2026-11-07): origin'de BE `6995bd54`, FE `4214ba75`. Canlı değil: yayın altyapısı (Node süreci, ADR-033 geçişi), fotoğraf lisansı doğrulaması ve hukuk görüşü bekliyor (ADR-045; `operations/CANLI-ISLETIM-KILAVUZU.md` 11.1). Son test: BE domain 986, application 3788, entegrasyon 1834 geçti, 2 atlandı; FE panel 2758, portal 190, site 18 geçti |
+| **Durum** | Geliştirildi (2026-11-07): origin'de BE `6995bd54`, FE `4214ba75`. Canlıda: site Node süreci (`/k/*`) ve ADR-033 geçişi 2026-11-10 canlı kurulumda (`operations/CANLI-ISLETIM-KILAVUZU.md` 11.1). Açık: hazır fotoğraf setinin lisansı (ADR-045 K7). Son test: BE domain 986, application 3788, entegrasyon 1834 geçti, 2 atlandı; FE panel 2758, portal 190, site 18 geçti |
 | **Bağımlılıklar** | ADR-045, ADR-033 (müşterinin görebilmesi için geçiş; kullanıcı söyleyince), ADR-042, TIER-017 |
 | **Notlar** | APPT-034'ün yerine geçer. Yayın, adres, veri kaynağı ve randevu kararları ADR-045'te. Hazır fotoğraf seti kullanıcıdan gelecek (K7). Veteriner reklam kuralları kontrol edilmedi. Kapsamdaki SaaS fikirleri (2026-11-06): yayın öncesi zorunlu liste; önceki yayına dön, "değişiklik var" şeridi; boş bölüm görünmez; adres değişince eski bağlantı ve QR çalışır; sayfayı geçici kapatma; Google görünümü otomatik, ayar Gelişmiş'te; önizleme önce telefon, bağlantı ve QR yayından sonra; canlı örnek sayfa. En yakın müsait saat TIER-017 |
 
@@ -3187,9 +3187,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Müşteri geri dönüşü elle takip gerektirmez |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-07): main yerelde BE `0691420b`, FE `abc9ed4e`, origin'e gönderilmedi. Kontrol ve borç kuralı e-posta kuyruğuna ileti alır, teslimat görülmedi; "uzun süredir gelmedi" kuralı ticari ileti sayılabileceği için hukuki onay ve İYS kaydına kadar göndermez. Kural listesi ve varsayılanlar çalışma varsayımı, kullanıcı onayı bekliyor |
+| **Durum** | Geliştirildi (2026-11-07): main'de BE `0691420b`, FE `abc9ed4e`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Kontrol ve borç kuralı e-posta kuyruğuna ileti alır, teslimat görülmedi; "uzun süredir gelmedi" kuralı ticari ileti sayılabileceği için hukuki onay ve İYS kaydına kadar göndermez. Kural listesi ve varsayılanlar çalışma varsayımı, kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001; kanal için INT-003, INT-004 |
-| **Notlar** | Sözleşme backend `docs/AUTOMATED_REMINDERS_API_CONTRACT.md`. Kurallar: kontrol muayenesi (N gün önce, varsayılan 3), ödenmemiş bakiye (N gün sonra, 30), uzun süredir gelmedi (N gün sonra, 180). Klinik başına, varsayılan kapalı, yalnız e-posta. Açınca birikmiş kayıtlara ileti gitmez. Borç iletisinde tutar yazılmaz. Migration `AddClinicReminderRules` yalnız yerel DB'de |
+| **Notlar** | Sözleşme backend `docs/AUTOMATED_REMINDERS_API_CONTRACT.md`. Kurallar: kontrol muayenesi (N gün önce, varsayılan 3), ödenmemiş bakiye (N gün sonra, 30), uzun süredir gelmedi (N gün sonra, 180). Klinik başına, varsayılan kapalı, yalnız e-posta. Açınca birikmiş kayıtlara ileti gitmez. Borç iletisinde tutar yazılmaz. Migration `AddClinicReminderRules`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı) |
 
 ### TIER-004 — Gelişmiş raporlar
 
@@ -3203,7 +3203,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik sahibi işin nereye gittiğini görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `2fe30cc7`, FE `d41b2642`, origin'e gönderilmedi. İşletme performansı sayfasına "Kırılımlar": hekim (muayene, net ciro), hizmet/ürün, en çok ciro yapan 10 kalem, hayvan türü, geliş ve gelen hasta sahibi; her biri önceki dönemle. Varsayımlar kullanıcı onayı bekliyor |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `2fe30cc7`, FE `d41b2642`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). İşletme performansı sayfasına "Kırılımlar": hekim (muayene, net ciro), hizmet/ürün, en çok ciro yapan 10 kalem, hayvan türü, geliş ve gelen hasta sahibi; her biri önceki dönemle. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, REPORT-008 |
 | **Notlar** | Sözleşme backend `docs/PERFORMANCE_BREAKDOWNS_API_CONTRACT.md`. Bugünkü raporlar ve özetteki önceki dönem karşılaştırması Temel'de kalır. Yeni izin `Reports.Performance` (Admin, Owner, ClinicAdmin; UX taslağı S1); mevcut özel roller elle almalı (deploy notu). Veri modeli değişmedi, migration yok. Alınmayanlar: ürün bazlı satış (ücret satırında ürün kimliği yok), yeni müşteri (içe aktarma işareti yok), geçen yılın aynı dönemi, hekim filtresi. Paketler tablosuna satır eklenmedi |
 
@@ -3219,9 +3219,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Aşı planı hızlanır, atlanan doz azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `5d7ea8f9`, FE `ceba6c50`, origin'e gönderilmedi. Tanımlar > Aşı takvimi: tür + aşı başına ilk doz haftası, temel seri doz sayısı ve aralığı, tekrar aralığı; isteğe bağlı başlangıç şablonu (kedi, köpek; tıbbi tavsiye değildir). Hasta kartından "Aşı planı öner": kalan dozlar doğum tarihi ve uygulanmış dozlardan hesaplanır, hekim seçip tarihini değiştirerek onaylar, onaylananlar planlı aşı kaydı olur. Varsayımlar kullanıcı onayı bekliyor |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `5d7ea8f9`, FE `ceba6c50`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Tanımlar > Aşı takvimi: tür + aşı başına ilk doz haftası, temel seri doz sayısı ve aralığı, tekrar aralığı; isteğe bağlı başlangıç şablonu (kedi, köpek; tıbbi tavsiye değildir). Hasta kartından "Aşı planı öner": kalan dozlar doğum tarihi ve uygulanmış dozlardan hesaplanır, hekim seçip tarihini değiştirerek onaylar, onaylananlar planlı aşı kaydı olur. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001 |
-| **Notlar** | Sözleşme backend `docs/VACCINATION_SCHEDULE_API_CONTRACT.md`. Paket Profesyonel ve Kurumsal (`PlanFeature.VaccinationWizard`); takvim okuma her pakette açık. Bugünkü aşı kaydı, planlı aşı ve aşı hatırlatması Temel'de kalır. Takvim kiracı başına. Yeni izin yok (takvim `VaccineDefinitions.Update`, öneri `Vaccinations.Read`, onay `Vaccinations.Create`). Migration `AddVaccinationScheduleItems` yalnız yerel DB'de. Paketler tablosuna satır eklenmedi. Rakibin özelliği doğrulanmadı; görünüm kopyalanmadı |
+| **Notlar** | Sözleşme backend `docs/VACCINATION_SCHEDULE_API_CONTRACT.md`. Paket Profesyonel ve Kurumsal (`PlanFeature.VaccinationWizard`); takvim okuma her pakette açık. Bugünkü aşı kaydı, planlı aşı ve aşı hatırlatması Temel'de kalır. Takvim kiracı başına. Yeni izin yok (takvim `VaccineDefinitions.Update`, öneri `Vaccinations.Read`, onay `Vaccinations.Create`). Migration `AddVaccinationScheduleItems`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Paketler tablosuna satır eklenmedi. Rakibin özelliği doğrulanmadı; görünüm kopyalanmadı |
 
 ### TIER-006 — Mobil barkod
 
@@ -3235,9 +3235,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Mal kabul ve satış hızlanır, yanlış ürün seçimi azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `878d5eab`, FE `0d76a443`, origin'e gönderilmedi. Gerçek telefon kamerasıyla doğrulama bekliyor |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `878d5eab`, FE `0d76a443`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Gerçek telefon kamerasıyla doğrulama bekliyor |
 | **Bağımlılıklar** | TIER-001, MOBILE-004 |
-| **Notlar** | Ürün kartındaki barkod kiracı içinde benzersiz (pasif dahil), boş bırakılabilir; barkod alanı ve elle/okuyucuyla barkod araması her pakette açık. Kamerayla okutma Profesyonel ve Kurumsal'da (`MobileBarcode`); mal kabul, satış, ürün listesi ve ürün kartında. Önce tarayıcının yerel BarcodeDetector'ı, yoksa `barcode-detector` 3.2.3 (MIT) kütüphanesi; WASM dosyası kendi sunucumuzdan. Kamera yalnız HTTPS/localhost'ta açılır, izin reddinde elle giriş kalır. İlaç karekodundan (GS1 DataMatrix) yalnız GTIN alınır. Sözleşme backend `docs/MOBILE_BARCODE_API_CONTRACT.md`. Migration `AddProductBarcodeUniqueIndex` yalnız yerel DB'de; paylaşılan/üretim DB'de önce çift barkod kontrolü (sözleşme §6). Çalışma varsayımları (kullanıcı onayı bekliyor): pasif ürün dahil benzersizlik, ürün başına tek barkod, karekoddaki parti/SKT'nin mal kabule yazılmaması. Öneri (ayrı iş): karekoddan parti ve SKT'yi mal kabul satırına doldurmak |
+| **Notlar** | Ürün kartındaki barkod kiracı içinde benzersiz (pasif dahil), boş bırakılabilir; barkod alanı ve elle/okuyucuyla barkod araması her pakette açık. Kamerayla okutma Profesyonel ve Kurumsal'da (`MobileBarcode`); mal kabul, satış, ürün listesi ve ürün kartında. Önce tarayıcının yerel BarcodeDetector'ı, yoksa `barcode-detector` 3.2.3 (MIT) kütüphanesi; WASM dosyası kendi sunucumuzdan. Kamera yalnız HTTPS/localhost'ta açılır, izin reddinde elle giriş kalır. İlaç karekodundan (GS1 DataMatrix) yalnız GTIN alınır. Sözleşme backend `docs/MOBILE_BARCODE_API_CONTRACT.md`. Migration `AddProductBarcodeUniqueIndex`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı); paylaşılan/üretim DB'de önce çift barkod kontrolü (sözleşme §6). Çalışma varsayımları (kullanıcı onayı bekliyor): pasif ürün dahil benzersizlik, ürün başına tek barkod, karekoddaki parti/SKT'nin mal kabule yazılmaması. Öneri (ayrı iş): karekoddan parti ve SKT'yi mal kabul satırına doldurmak |
 
 ### TIER-007 — Patron ekranı
 
@@ -3251,7 +3251,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Sahip işletmeyi tek bakışta görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `039e53d3`, FE `6f26b27c`, origin'e gönderilmedi. Rapor Merkezi > Yönetim > "Şubeler özeti": erişilebilen tüm aktif şubelerin ciro, tahsilat, bugünkü açık alacak, geliş, muayene ve tamamlanan randevusu; toplam satırı ve önceki döneme göre fark; telefonda şube kartları. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `039e53d3`, FE `6f26b27c`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Rapor Merkezi > Yönetim > "Şubeler özeti": erişilebilen tüm aktif şubelerin ciro, tahsilat, bugünkü açık alacak, geliş, muayene ve tamamlanan randevusu; toplam satırı ve önceki döneme göre fark; telefonda şube kartları. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, REPORT-008 |
 | **Notlar** | Sözleşme backend `docs/CLINICS_OVERVIEW_API_CONTRACT.md`. Paket yalnız Kurumsal (`PlanFeature.ClinicsOverview`); şube başına İşletme performansı her pakette kalır. Şube satırı aynı klinikle açılan özetle aynı hesap, entegrasyon testiyle sabit. Toplamda alacaklı müşteri tekil. Kapsam raporlarla aynı (Admin ve Owner kiracı geneli, diğerleri atandıkları klinikler). Yeni izin yok, migration yok. Pasif klinik listelenmez, aşı sayısı yok. Paketler tablosuna satır eklenmedi |
 
@@ -3267,9 +3267,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Nakit farkı kasa bazında görülür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Çoklu kasa geliştirildi (2026-11-09): main yerelde BE `24556f37`, FE `88156abf`, origin'e gönderilmedi. Paket Profesyonel ve Kurumsal (kullanıcı kararı). Kasalar (silinemeyen Ana kasa), nakit tahsilat/satış/kredi iadesinde kasa seçimi (yalnız birden fazla aktif kasa varsa), kasaya giriş/çıkış (gelir/gider türüyle), kasalar arası aktarım (iki bacak, birlikte iptal), kasa bazında sayım, kasa hareketleri raporu (devreden, dönem sonu; CSV/Excel). Temel'de görünmeyen tek Ana kasa. Tarayıcıda uçtan uca denendi (masaüstü ve 375 px); Temel kilit kutusu görülmedi. Sözleşme backend `docs/CASH_REGISTERS_API_CONTRACT.md`. Yeni izinler `CashRegisters.Read`/`Manage`, `CashMovements.Create`/`Void`. Migration `AddCashRegisters` (mevcut nakit ödemeler Ana kasaya bağlanır) yalnız yerel DB'de. Açık küçük işler: kasa raporunda "işlemi yapan" tahsilatta e-posta, harekette ad olarak görünüyor; ödeme detayında kasa görünmüyor. Sonraki dilimler: banka hesapları, günü kilitleme, kullanıcı başına kasa yetkisi. İlk dilim (2026-11-08, BE `cd99905c`, FE `48afaf08`): Rapor Merkezi > Gün sonu > "Kasa kontrolü": tek gün ve tek klinik için açılış ve sayılan nakit, günün nakit neti (kasa özetinin nakit satırı), olması gereken ve fark; fark varsa açıklama zorunlu. Kayıt kimin, ne zaman kaydettiğiyle tutulur; düzeltme eski kaydı gerekçeyle iptal edip yenisini yazar; son 30 günün sayımları listelenir. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
+| **Durum** | Çoklu kasa geliştirildi (2026-11-09): main'de BE `24556f37`, FE `88156abf`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Paket Profesyonel ve Kurumsal (kullanıcı kararı). Kasalar (silinemeyen Ana kasa), nakit tahsilat/satış/kredi iadesinde kasa seçimi (yalnız birden fazla aktif kasa varsa), kasaya giriş/çıkış (gelir/gider türüyle), kasalar arası aktarım (iki bacak, birlikte iptal), kasa bazında sayım, kasa hareketleri raporu (devreden, dönem sonu; CSV/Excel). Temel'de görünmeyen tek Ana kasa. Tarayıcıda uçtan uca denendi (masaüstü ve 375 px); Temel kilit kutusu görülmedi. Sözleşme backend `docs/CASH_REGISTERS_API_CONTRACT.md`. Yeni izinler `CashRegisters.Read`/`Manage`, `CashMovements.Create`/`Void`. Migration `AddCashRegisters` (mevcut nakit ödemeler Ana kasaya bağlanır): canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Açık küçük işler: kasa raporunda "işlemi yapan" tahsilatta e-posta, harekette ad olarak görünüyor; ödeme detayında kasa görünmüyor. Sonraki dilimler: banka hesapları, günü kilitleme, kullanıcı başına kasa yetkisi. İlk dilim (2026-11-08, BE `cd99905c`, FE `48afaf08`): Rapor Merkezi > Gün sonu > "Kasa kontrolü": tek gün ve tek klinik için açılış ve sayılan nakit, günün nakit neti (kasa özetinin nakit satırı), olması gereken ve fark; fark varsa açıklama zorunlu. Kayıt kimin, ne zaman kaydettiğiyle tutulur; düzeltme eski kaydı gerekçeyle iptal edip yenisini yazar; son 30 günün sayımları listelenir. Tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, FIN-002 |
-| **Notlar** | Sözleşme backend `docs/CASH_COUNT_API_CONTRACT.md`. Paket yalnız Kurumsal (`PlanFeature.CashManagement`); sayım okuma her pakette, gün sonu raporu her pakette aynen kalır. Yeni izinler `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin); mevcut özel roller elle almalı (deploy notu). Migration `AddCashCounts` yalnız yerel DB'de. Ödeme ve tahsilat akışı değişmedi. Sonraki dilimler: birden fazla kasa, ödemeyi kasaya bağlama ve kasa bazında gün sonu, kasalar arası aktarım, kasaya giren ve çıkan nakit kaydı, günü kilitleme. Paketler tablosuna satır eklenmedi |
+| **Notlar** | Sözleşme backend `docs/CASH_COUNT_API_CONTRACT.md`. Paket yalnız Kurumsal (`PlanFeature.CashManagement`); sayım okuma her pakette, gün sonu raporu her pakette aynen kalır. Yeni izinler `CashCounts.Read` ve `CashCounts.Create` (Admin, Owner, ClinicAdmin, Sekreter), `CashCounts.Correct` (Admin, Owner, ClinicAdmin); mevcut özel roller elle almalı (deploy notu). Migration `AddCashCounts`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Ödeme ve tahsilat akışı değişmedi. Sonraki dilimler: birden fazla kasa, ödemeyi kasaya bağlama ve kasa bazında gün sonu, kasalar arası aktarım, kasaya giren ve çıkan nakit kaydı, günü kilitleme. Paketler tablosuna satır eklenmedi |
 
 ### TIER-009 — API erişimi
 
@@ -3283,9 +3283,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik kendi araçlarını Vetinity'ye bağlar |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | İlk dilim geliştirildi (2026-11-08): main yerelde BE `fe77e8e3`, FE `4f7889a1`, origin'e gönderilmedi. Kiracıya özel salt okunur anahtar (yalnız SHA-256 özeti saklanır, bir kez gösterilir), Ayarlar > API erişimi (oluştur, listele, iptal; yalnız Admin/Owner), `GET /api/external/v1/clients|pets|appointments|vaccinations` (imleçli sayfa, `updatedSince`, en çok 200 kayıt, anahtar başına 60/dk). Panel tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
+| **Durum** | İlk dilim geliştirildi (2026-11-08): main'de BE `fe77e8e3`, FE `4f7889a1`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Kiracıya özel salt okunur anahtar (yalnız SHA-256 özeti saklanır, bir kez gösterilir), Ayarlar > API erişimi (oluştur, listele, iptal; yalnız Admin/Owner), `GET /api/external/v1/clients|pets|appointments|vaccinations` (imleçli sayfa, `updatedSince`, en çok 200 kayıt, anahtar başına 60/dk). Panel tarayıcıda görülmedi. Varsayımlar kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001 |
-| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır. Sözleşme backend `docs/EXTERNAL_API_CONTRACT.md`; verilen alanların tek yeri `ExternalReadFeatures.cs` ve sözleşme §5. Paket yalnız Kurumsal (`PlanFeature.ExternalApi`); paket düşünce anahtarlar silinmez, istekler 403. Yeni izin `ApiKeys.Manage`. Migration `AddApiKeysAndChangeTracking` (müşteri, hayvan, randevu, aşı tablolarına `ChangedAtUtc`) yalnız yerel DB'de. Hukuki sorular `HUKUKI-ONAY-LISTESI` A11. Sonraki dilimler: yazma uçları, webhook, şube kısıtlı ve süreli anahtar, silinen kaydın bildirimi, okuma denetimi. Paketler tablosuna satır eklenmedi |
+| **Notlar** | KVKK ve kiracı izolasyonu ([ADR-040](../decisions/ADR-040-kiraci-izolasyonu-global-filtre.md)) tasarımda ele alınır. Sözleşme backend `docs/EXTERNAL_API_CONTRACT.md`; verilen alanların tek yeri `ExternalReadFeatures.cs` ve sözleşme §5. Paket yalnız Kurumsal (`PlanFeature.ExternalApi`); paket düşünce anahtarlar silinmez, istekler 403. Yeni izin `ApiKeys.Manage`. Migration `AddApiKeysAndChangeTracking` (müşteri, hayvan, randevu, aşı tablolarına `ChangedAtUtc`): canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Hukuki sorular `HUKUKI-ONAY-LISTESI` A11. Sonraki dilimler: yazma uçları, webhook, şube kısıtlı ve süreli anahtar, silinen kaydın bildirimi, okuma denetimi. Paketler tablosuna satır eklenmedi |
 
 ### TIER-010 — Size özel geliştirmeler
 
@@ -3299,7 +3299,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kurumsal müşteri ürünü kendi işine göre kullanır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Talep alma ve sınırlamanın ilk dilimi geliştirildi (2026-11-08): main yerelde BE `cc430755`, FE `c6384adc`, origin'e gönderilmedi. Kurumsal kiracı Ayarlar > Size özel geliştirmeler'den başlık, konu (ekran/rapor/çıktı), hedef, ne istendiği ve öncelikle talep açar. Durumlar: Alındı → İnceleniyor → Planlandı / Kapsam dışı → Tamamlandı; kapsam dışında gerekçe kliniğe görünür. Aynı anda en çok 3 açık talep. Durumu yalnız platform yöneticisi değiştirir (`/panel/custom-development-requests`); değişiklik denetim kaydına maskeli yazılır. Alt pakette "üst pakete geç" kutusu, liste açık kalır. Site metni main'de. Tarayıcıda görülmedi. Sınır, yetki (Admin/Owner) ve durum akışı çalışma varsayımı, kullanıcı onayı bekliyor |
+| **Durum** | Talep alma ve sınırlamanın ilk dilimi geliştirildi (2026-11-08): main'de BE `cc430755`, FE `c6384adc`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Kurumsal kiracı Ayarlar > Size özel geliştirmeler'den başlık, konu (ekran/rapor/çıktı), hedef, ne istendiği ve öncelikle talep açar. Durumlar: Alındı → İnceleniyor → Planlandı / Kapsam dışı → Tamamlandı; kapsam dışında gerekçe kliniğe görünür. Aynı anda en çok 3 açık talep. Durumu yalnız platform yöneticisi değiştirir (`/panel/custom-development-requests`); değişiklik denetim kaydına maskeli yazılır. Alt pakette "üst pakete geç" kutusu, liste açık kalır. Site metni main'de. Tarayıcıda görülmedi. Sınır, yetki (Admin/Owner) ve durum akışı çalışma varsayımı, kullanıcı onayı bekliyor |
 | **Bağımlılıklar** | TIER-001, WEB-007 |
 | **Notlar** | Kullanıcı kararı (2026-11-06): uç istekler değil, proje içinde kalan düzenlemeler |
 
@@ -3383,7 +3383,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik yeni müşteri kazanır, hayvan sahibi yakın kliniği kolay bulur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `cc5802a7`, FE `1fb0c3f8`, origin'e gönderilmedi; yayın ADR-033 geçişini bekliyor. Klinik Ayarlar > Veteriner bul'dan listelenmeyi açıp kapatır (varsayılan kapalı), 12 hizmetlik sabit listeden seçer, isteğe bağlı konum girer. Sayfalar `vetinity.com/veteriner/{il}/{ilçe}/{hizmet}`, site uygulamasında sunucuda çizilir; 3'ten az klinikli ve filtreli sayfalar `noindex`, site haritası `/veteriner/sitemap.xml`. Sıralama: önce "şu an açık", sonra konum verildiyse mesafe, yoksa aynı ilçe ve il. Kart: ad, il/ilçe, adres, telefon, hizmetler, saatler, en yakın müsait saat, site ve randevu bağlantısı (`?kaynak=veteriner-bul`). Sonuç yoksa aynı ildeki diğer ilçeler. Sözleşme backend `docs/VET_FINDER_API_CONTRACT.md`. Migration `AddClinicVetFinderListings` yalnız yerel DB'de. Panel ayarı tarayıcıda görülmedi. Varsayımlar: site şartı yok, "yakın ilçe" aynı il, ziyaretçi konumu yaklaşık 1 km'ye yuvarlanır ve saklanmaz |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `cc5802a7`, FE `1fb0c3f8`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde); ADR-033 geçişi 2026-11-10'da tamamlandı. Klinik Ayarlar > Veteriner bul'dan listelenmeyi açıp kapatır (varsayılan kapalı), 12 hizmetlik sabit listeden seçer, isteğe bağlı konum girer. Sayfalar `vetinity.com/veteriner/{il}/{ilçe}/{hizmet}`, site uygulamasında sunucuda çizilir; 3'ten az klinikli ve filtreli sayfalar `noindex`, site haritası `/veteriner/sitemap.xml`. Sıralama: önce "şu an açık", sonra konum verildiyse mesafe, yoksa aynı ilçe ve il. Kart: ad, il/ilçe, adres, telefon, hizmetler, saatler, en yakın müsait saat, site ve randevu bağlantısı (`?kaynak=veteriner-bul`). Sonuç yoksa aynı ildeki diğer ilçeler. Sözleşme backend `docs/VET_FINDER_API_CONTRACT.md`. Migration `AddClinicVetFinderListings`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Panel ayarı tarayıcıda görülmedi. Varsayımlar: site şartı yok, "yakın ilçe" aynı il, ziyaretçi konumu yaklaşık 1 km'ye yuvarlanır ve saklanmaz |
 | **Bağımlılıklar** | TIER-002, ADR-033 (`www` geçişi; kullanıcı söyleyince), TIER-017 |
 | **Notlar** | Fikir CodeBody "Uzman bul". Kararlar [ADR-047](../decisions/ADR-047-veteriner-bul.md) (kullanıcı, 2026-11-08): tüm paketlerde, yeni müşteri ücreti yok, sıralama yakınlık ve "şu an açık" (ödemeyle değişmez), katılım kliniğin seçimi ve varsayılan kapalı, ilk sürümde yorum ve puan yok, "en iyi" gibi söz yok. Yayın ADR-033 geçişiyle |
 
@@ -3399,7 +3399,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik vitrinin getirisini rakamla görür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `cd5573d5`, FE `5c669bff`, origin'e gönderilmedi. Talepte kaynak: Klinik bağlantısı, Kendi sitesi, Portal, Telefon / elle, Veteriner bul; eski talepler "Bilinmiyor". Kaynağı sunucu belirler (site `?kaynak=site` ekler, bilinmeyen değer klinik bağlantısı, portal talebi her zaman Portal); yalnız istatistik, kişisel veri değil. Panelde liste ve detayda rozet, Talepler sayfasında dönem için kaynak başına talep ve onaylanan sayısı. Telefon ve Veteriner bul değerleri tanımlı ama henüz üretilmiyor. Sözleşme backend `docs/ONLINE_APPOINTMENT_API_CONTRACT.md` §14. Migration `AddAppointmentRequestChannel` yalnız yerel DB'de. Panel tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `cd5573d5`, FE `5c669bff`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Talepte kaynak: Klinik bağlantısı, Kendi sitesi, Portal, Telefon / elle, Veteriner bul; eski talepler "Bilinmiyor". Kaynağı sunucu belirler (site `?kaynak=site` ekler, bilinmeyen değer klinik bağlantısı, portal talebi her zaman Portal); yalnız istatistik, kişisel veri değil. Panelde liste ve detayda rozet, Talepler sayfasında dönem için kaynak başına talep ve onaylanan sayısı. Telefon ve Veteriner bul değerleri tanımlı ama henüz üretilmiyor. Sözleşme backend `docs/ONLINE_APPOINTMENT_API_CONTRACT.md` §14. Migration `AddAppointmentRequestChannel`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Panel tarayıcıda görülmedi |
 | **Bağımlılıklar** | ADR-042, ADR-047 (Veteriner bul beklenmeden yapıldı) |
 | **Notlar** | Müşteri eşleme yapılırsa KVKK aydınlatması gözden geçirilir |
 
@@ -3415,7 +3415,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Talep doğru saate gelir, ileri geri arama azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `be317e9a`, FE `5c643119`, origin'e gönderilmedi. Herkese açık uç `GET /api/v1/public/sites/{slug}/next-available-slots` yalnız gün ve saat döner, hesap bağlantı formunun müsaitliğinden gelir ("Diğer / emin değilim": 30 dk, tüm hekimler). Saatler sitenin Randevu sayfasında görünür; seçilen saat portal talep formuna hazır gider (`?saat=`), seçilen nedene uymazsa form başka saat ister; talep klinik onaylayınca kesinleşir. Klinik gösterimi Ayarlar > Online randevu'dan kapatabilir (varsayılan açık, çalışma varsayımı). Migration `AddOnlineBookingShowNextAvailableSlots` yalnız yerel DB'de. Veteriner bul kartı TIER-015'e kaldı. Panel ayarı tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `be317e9a`, FE `5c643119`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Herkese açık uç `GET /api/v1/public/sites/{slug}/next-available-slots` yalnız gün ve saat döner, hesap bağlantı formunun müsaitliğinden gelir ("Diğer / emin değilim": 30 dk, tüm hekimler). Saatler sitenin Randevu sayfasında görünür; seçilen saat portal talep formuna hazır gider (`?saat=`), seçilen nedene uymazsa form başka saat ister; talep klinik onaylayınca kesinleşir. Klinik gösterimi Ayarlar > Online randevu'dan kapatabilir (varsayılan açık, çalışma varsayımı). Migration `AddOnlineBookingShowNextAvailableSlots`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Veteriner bul kartı TIER-015'e kaldı. Panel ayarı tarayıcıda görülmedi |
 | **Bağımlılıklar** | ADR-042, APPT-008, TIER-002 |
 | **Notlar** | "Kesin randevu" değil "talep" dili. Takvimle tutarlılık ve aynı anda seçim tasarımda ele alınır |
 
@@ -3431,7 +3431,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Boş saat dolar, kliniğin geliri korunur |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `5df46457`, FE `6ca903fd`, origin'e gönderilmedi. Paket Profesyonel ve Kurumsal (kullanıcı kararı 2026-11-09). Personel panelden hasta sahibini ve hayvanı listeye ekler (istenen hekim, tür, tarih aralığı, gün ve saat tercihi, not); sıra eklenme zamanı, klinik kaydırabilir ya da kapatabilir. Randevu iptal edilince sıradaki uygun kayda e-postayla tek kullanımlık teklif gider (TIER-019 bağlantı tablosu; açmak durum değiştirmez). Teklif 2 saat ya da randevudan 1 saat öncesine kadar geçerli; süre dolunca ya da retle sıradakine geçilir; aynı saat için tek açık teklif. Kabulde randevu oluşur; saat dolduysa "saat doldu" denir. İşlem iletisidir, hatırlatma tercihine uyar. Bugün ve iptal ekranında "uygun X kişi var", kayıt geçmişi, kabul bildirimi, denetim kaydı. Otomatik teklif Randevu varsayılanlarından kapatılabilir (varsayılan açık). Sözleşme backend `docs/WAITLIST_API_CONTRACT.md`. Migration `AddWaitlist` yalnız yerel DB'de. Varsayımlar: sahip kendini ekleyemez, süreler, 3 günlük otomatik pencere. Panel ve portal tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `5df46457`, FE `6ca903fd`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Paket Profesyonel ve Kurumsal (kullanıcı kararı 2026-11-09). Personel panelden hasta sahibini ve hayvanı listeye ekler (istenen hekim, tür, tarih aralığı, gün ve saat tercihi, not); sıra eklenme zamanı, klinik kaydırabilir ya da kapatabilir. Randevu iptal edilince sıradaki uygun kayda e-postayla tek kullanımlık teklif gider (TIER-019 bağlantı tablosu; açmak durum değiştirmez). Teklif 2 saat ya da randevudan 1 saat öncesine kadar geçerli; süre dolunca ya da retle sıradakine geçilir; aynı saat için tek açık teklif. Kabulde randevu oluşur; saat dolduysa "saat doldu" denir. İşlem iletisidir, hatırlatma tercihine uyar. Bugün ve iptal ekranında "uygun X kişi var", kayıt geçmişi, kabul bildirimi, denetim kaydı. Otomatik teklif Randevu varsayılanlarından kapatılabilir (varsayılan açık). Sözleşme backend `docs/WAITLIST_API_CONTRACT.md`. Migration `AddWaitlist`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Varsayımlar: sahip kendini ekleyemez, süreler, 3 günlük otomatik pencere. Panel ve portal tarayıcıda görülmedi |
 | **Bağımlılıklar** | TIER-001, TIER-019 |
 | **Notlar** | Fikir Jane App. Mesaj işlem iletisi olarak ayrılır (TIER-012); hasta sahibinin tercihine uyar |
 
@@ -3447,7 +3447,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Gelmeme azalır, boşalan saat erken görülür |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `ca7b24cd`, FE `a9bb8432`, origin'e gönderilmedi. Hatırlatma e-postasında tek kullanımlık "onayla / iptal et" bağlantısı; portalda kimliksiz `/randevu-yanit` sayfası, açmak durumu değiştirmez, eylem POST ile. Onay durumu değiştirmez, Bugün ve randevu detayında "Sahip onayladı" rozeti. İptal mevcut geçişle, neden "sahip e-postadan iptal etti", klinik bildirim merkezine düşer. Klinik iptal bağlantısını "Randevu varsayılanları"ndan kapatabilir (varsayılan açık). Token yalnız SHA-256 özetli, randevuya bağlı, randevu saatinde dolar; geçersiz bağlantıda sebep ayırt edilmez. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md`. Migration `AddAppointmentOwnerLinks` yalnız yerel DB'de. Panel tarayıcıda görülmedi. Yeniden zamanlanan randevuda eski bağlantı geçersiz olur, yeni saat için bir hatırlatma yeni bağlantılarla gider (düzeltme 2026-11-09, BE `8be30f0f`) |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `ca7b24cd`, FE `a9bb8432`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Hatırlatma e-postasında tek kullanımlık "onayla / iptal et" bağlantısı; portalda kimliksiz `/randevu-yanit` sayfası, açmak durumu değiştirmez, eylem POST ile. Onay durumu değiştirmez, Bugün ve randevu detayında "Sahip onayladı" rozeti. İptal mevcut geçişle, neden "sahip e-postadan iptal etti", klinik bildirim merkezine düşer. Klinik iptal bağlantısını "Randevu varsayılanları"ndan kapatabilir (varsayılan açık). Token yalnız SHA-256 özetli, randevuya bağlı, randevu saatinde dolar; geçersiz bağlantıda sebep ayırt edilmez. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md`. Migration `AddAppointmentOwnerLinks`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Panel tarayıcıda görülmedi. Yeniden zamanlanan randevuda eski bağlantı geçersiz olur, yeni saat için bir hatırlatma yeni bağlantılarla gider (düzeltme 2026-11-09, BE `8be30f0f`) |
 | **Bağımlılıklar** | APPT-013, APPT-014 |
 | **Notlar** | Bağlantı giriş istemez; yetki ve süre sınırı tasarımda ele alınır |
 
@@ -3463,7 +3463,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Randevu unutulma ihtimali azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (2026-11-08): main yerelde BE `a54d53aa`, FE `ff235664`, origin'e gönderilmedi. Randevu hatırlatma e-postasına ve online talebin onay e-postasına Google Takvim ve .ics bağlantısı; portalda `/randevu-yanit` ve Randevularım'da "Takvime ekle" düğmeleri. Kayıtta yalnız klinik adı, adresi, telefonu, hayvan adı ve saat; teşhis, not, hekim yok. Saatler UTC, 1 saat önce uyarı. .ics bağlantısı TIER-019 bağlantı tablosunda ayrı, eylem yapamayan takvim tokeniyle; iptal ve yeniden zamanlamada geçersiz. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md` §8. Migration `AddAppointmentOwnerLinkPurpose` yalnız yerel DB'de. Üretimde `App:BaseUrl` gerekli. Randevularım ekranı ve gerçek takvim uygulamasına içe aktarma görülmedi. Yeniden zamanlanan randevuya yeni saat için hatırlatma gider (2026-11-09) |
+| **Durum** | Geliştirildi (2026-11-08): main'de BE `a54d53aa`, FE `ff235664`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Randevu hatırlatma e-postasına ve online talebin onay e-postasına Google Takvim ve .ics bağlantısı; portalda `/randevu-yanit` ve Randevularım'da "Takvime ekle" düğmeleri. Kayıtta yalnız klinik adı, adresi, telefonu, hayvan adı ve saat; teşhis, not, hekim yok. Saatler UTC, 1 saat önce uyarı. .ics bağlantısı TIER-019 bağlantı tablosunda ayrı, eylem yapamayan takvim tokeniyle; iptal ve yeniden zamanlamada geçersiz. Sözleşme backend `docs/APPOINTMENT_OWNER_LINK_API_CONTRACT.md` §8. Migration `AddAppointmentOwnerLinkPurpose`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Üretimde `App:BaseUrl` gerekli. Randevularım ekranı ve gerçek takvim uygulamasına içe aktarma görülmedi. Yeniden zamanlanan randevuya yeni saat için hatırlatma gider (2026-11-09) |
 | **Bağımlılıklar** | APPT-013 |
 | **Notlar** | APPT-032'nin ilk dilimi; takvim aboneliği orada kalır |
 
@@ -3479,7 +3479,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik verisini kaybetmeden daha kolay geçer |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde BE `f242b3da`, FE `dd4f5a63`, origin'e gönderilmedi. İçe aktarmada "Hangi programdan geliyorsunuz?" (Kolayvet, E-vet, Genel Excel/CSV); seçime göre hazır sütun eşlemesi ("Hazır" etiketi), kullanıcı düzeltir; profiller backend'de tek yerde (`ImportSourceProfiles`), seçilen profil partide saklanır. Panelde "Geçiş desteği" talebi (program, yaklaşık kayıt sayısı, uygun gün ve saat aralıkları, not); her pakette açılır, Kurumsal'da ücretsiz, diğerlerinde "ücretli, fiyat size bildirilecek" (`PlanFeature.FreeMigrationSupport`, kodda tutar yok); kurulum görüşmesi 1 saat; kapsam müşteri, hasta, aşı geçmişi. Talep TIER-010 kaydının yeni konusu, platform talepler sayfasında "Geçiş desteği" filtresiyle. Sözleşme backend `docs/IMPORT_API_CONTRACT.md` §4.5, §7.15 ve `docs/CUSTOM_DEVELOPMENT_REQUESTS_API_CONTRACT.md` §11. Migration `AddDataMigrationSupport` yalnız yerel DB'de. Panel tarayıcıda görülmedi |
+| **Durum** | Geliştirildi (2026-11-09): main'de BE `f242b3da`, FE `dd4f5a63`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). İçe aktarmada "Hangi programdan geliyorsunuz?" (Kolayvet, E-vet, Genel Excel/CSV); seçime göre hazır sütun eşlemesi ("Hazır" etiketi), kullanıcı düzeltir; profiller backend'de tek yerde (`ImportSourceProfiles`), seçilen profil partide saklanır. Panelde "Geçiş desteği" talebi (program, yaklaşık kayıt sayısı, uygun gün ve saat aralıkları, not); her pakette açılır, Kurumsal'da ücretsiz, diğerlerinde "ücretli, fiyat size bildirilecek" (`PlanFeature.FreeMigrationSupport`, kodda tutar yok); kurulum görüşmesi 1 saat; kapsam müşteri, hasta, aşı geçmişi. Talep TIER-010 kaydının yeni konusu, platform talepler sayfasında "Geçiş desteği" filtresiyle. Sözleşme backend `docs/IMPORT_API_CONTRACT.md` §4.5, §7.15 ve `docs/CUSTOM_DEVELOPMENT_REQUESTS_API_CONTRACT.md` §11. Migration `AddDataMigrationSupport`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı). Panel tarayıcıda görülmedi |
 | **Bağımlılıklar** | ADR-019, TIER-010 |
 | **Notlar** | Kullanıcı kararları (2026-11-09): önce Kolayvet ve E-vet, geçiş desteği Kurumsal'da ücretsiz, kurulum görüşmesi 1 saat. Eşlemelerin hiçbiri gerçek dosyayla doğrulanmadı: Kolayvet için kamuya açık sütun adı bulunamadı (profil eşlemesiz), E-vet eşlemeleri rakip incelemesindeki ekran sütunlarından, aşı için yok. Gerçek dosya gelince yalnız `ImportSourceProfiles` düzeltilip doğrulandı işaretlenir (pilot klinikten örnek dosya istenecek). KVKK: dosya e-postayla gönderilmez, klinik panele yükler, destek kliniğin izniyle ekran paylaşımında yardım eder; hukuk soruları `HUKUKI-ONAY-LISTESI` A12. Varsayımlar: aynı anda tek açık geçiş talebi, yalnız Admin/Owner açar |
 
@@ -3511,7 +3511,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik programa daha hızlı alışır, destek yükü azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `fcb8f5f0`, origin'e gönderilmedi. Bugün'de rolüne göre (ön büro, hekim, yönetici) 7 adımlık kapatılabilir kart; adımlar rol bazlı kullanıcı kılavuzundan, yalnız pakete bağlı olmayan ekranlara; adımın işi kaydedilince kendiliğinden, ya da elle işaretlenir; durum tarayıcıda kullanıcı başına; ilk görüldüğü günden 14 gün açılır, kullanıcı menüsünden yeniden açılır. Tarayıcıda yalnız yönetici görünümü denendi. Açık (küçük): kesin 14 gün için hesap özetine kullanıcının oluşturulma tarihi eklenebilir |
+| **Durum** | Geliştirildi (2026-11-09): main'de FE `fcb8f5f0`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Bugün'de rolüne göre (ön büro, hekim, yönetici) 7 adımlık kapatılabilir kart; adımlar rol bazlı kullanıcı kılavuzundan, yalnız pakete bağlı olmayan ekranlara; adımın işi kaydedilince kendiliğinden, ya da elle işaretlenir; durum tarayıcıda kullanıcı başına; ilk görüldüğü günden 14 gün açılır, kullanıcı menüsünden yeniden açılır. Tarayıcıda yalnız yönetici görünümü denendi. Açık (küçük): kesin 14 gün için hesap özetine kullanıcının oluşturulma tarihi eklenebilir |
 | **Bağımlılıklar** | — |
 | **Notlar** | İçerik bakımı gerekir; AI ile arama TIER-014'ten sonra değerlendirilir |
 
@@ -3527,7 +3527,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik doğru paketi daha hızlı seçer |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Düşük |
-| **Durum** | Geliştirildi (2026-11-09): main yerelde FE `e483b123`, origin'e gönderilmedi. Tabloda "Sadece farkları göster" (varsayılan kapalı, 48 satırdan 14'e). Kartlar bir önceki paketin tümü artı farkı sayıyor ve "Kimin için" satırı var; maddeler `PRICING_FEATURE_ROWS`'tan. Satıra `badge` alanı (AI çalışınca "Eklenti gerekir"). Destek satırı kullanıcı kararını bekliyor |
+| **Durum** | Geliştirildi (2026-11-09): main'de FE `e483b123`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Tabloda "Sadece farkları göster" (varsayılan kapalı, 48 satırdan 14'e). Kartlar bir önceki paketin tümü artı farkı sayıyor ve "Kimin için" satırı var; maddeler `PRICING_FEATURE_ROWS`'tan. Satıra `badge` alanı (AI çalışınca "Eklenti gerekir"). Destek satırı kullanıcı kararını bekliyor |
 | **Bağımlılıklar** | WEB-007 |
 | **Notlar** | Metin `PRICING_FEATURE_ROWS` verisinden üretilir, kopyalanmaz |
 
