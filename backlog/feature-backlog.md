@@ -3495,7 +3495,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik geçmişini ve alacağını kaybetmeden geçer |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Büyük |
-| **Durum** | Geliştirildi (2026-11-10), birleştirilmedi: BE dal `feature/tam-gecis` (`ea286a0c`), FE dal `feature/tam-gecis` (`b8db4161`), push yok. Karar [ADR-048](../decisions/ADR-048-tam-veri-gecisi.md); sözleşme backend `docs/IMPORT_API_CONTRACT.md` bölüm 12. Migration `AddFullDataMigration` yalnız yerel DB’de. Tarayıcıda denenmedi |
+| **Durum** | Geliştirildi ve canlıda (main'e birleşti; canlı yayın 2026-11-14). Karar [ADR-048](../decisions/ADR-048-tam-veri-gecisi.md); sözleşme backend `docs/IMPORT_API_CONTRACT.md` bölüm 12. **2026-11-14 pilot doğrulaması (E-vet):** sahibi değişen hayvan, aynı adlı hasta belirsizliği, zincirleme eleme, sahipsiz hasta, erken tamamlanmış görev ve ekran anlaşılırlığı bulguları; düzeltmeler B1–B7 sırasıyla yapılıyor, pilot aktarma bunlardan sonra yeniden yapılacak ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md)) |
 | **Bağımlılıklar** | ADR-019, TIER-021, FIN-007 (açılış bakiyesi içe aktarmada çözülür) |
 | **Notlar** | Alınmaz: belge/ek, stok miktarı, alacak (negatif) bakiye, geçmiş randevu, yapılandırılmış reçete/lab. Geçiş desteği talebinin kapsam metni yeni kapsama göre güncellenir |
 
