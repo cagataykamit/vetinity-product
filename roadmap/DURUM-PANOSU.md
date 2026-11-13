@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-14 (durum panosu oturumu; koordinatör bildirimi: AI kota kararı, mobil, ilk hafta taslakları). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, son canlı yayının (2026-11-14 00:13–00:16; backend `3c50d963`, panel `181b14ed`) atası. Canlı sunucuya ve veritabanına bakılmadı; ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-14 02:50 (durum panosu oturumu; 02:40 yayını sunucuda salt okunur doğrulandı). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, son canlı yayının (2026-11-14 02:40; backend `d56a01c5`, panel büyük olasılıkla `9420ca94`) atası. Backend sürümü API dosyasından, migration geçmişi canlı DB'den okundu; panel sürümü paket içeriğinden çıkarıldı (commit doğrulanmadı). Ekranlar canlıda denenmedi. Bu yayının sürüm notu yok, `origin/main` henüz eski yayında (BE `3c50d963`, panel `181b14ed`).
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Canlı ortamda yalnız E-vet yedeğinin doğrulama denemesi yapıldı; gerçek klinik kullanımı yok. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -24,13 +24,12 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 
 | İş | Nerede | Durum | Not |
 |---|---|---|---|
-| E-vet pilot aktarma düzeltmeleri B1–B6 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md), ürün dalı `docs/evet-pilot-bulgulari`) | E-vet içe aktarma oturumu. BE `feature/evet-sahip-degisimi` (+6 commit: B1, B2, B3, B4, B5), FE aynı ad (+1: B6 çakışan satır) | Geliştiriliyor | Pilot aktarma bu düzeltmeler canlıya çıkınca yeniden yapılacak. Main'e alma ve canlı onay ister |
-| E-vet menü yolları (B7) | BE/FE `fix/evet-menu-yollari` (BE `32b55ea7`, FE `f1ae8c57`) | Dalda, birleşmedi | Küçük düzeltme; B1–B6 ile birlikte çıkabilir |
+| E-vet pilot aktarma düzeltmeleri B1–B7 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md), ürün dalı `docs/evet-pilot-bulgulari`) | BE main `d56a01c5`, FE main `9420ca94` (`feature/evet-sahip-degisimi` ve `fix/evet-menu-yollari` birleşti) | Canlıda (2026-11-14 02:40) | Sıradaki adım: pilot aktarmanın yeniden yapılması. Ürün dalı `docs/evet-pilot-bulgulari` main'e alınmadı |
 | Hasta sahibi mobil uygulaması (MOBILE-002) | FE `feature/mobil-magaza` (+8, son `3c44efe5`), ürün `docs/mobil-magaza` (+1) | Geliştiriliyor | Android emülatörde giriş/kilit çalıştı. Kalan: Firebase ve gerçek push, iOS (Mac), App Links, imzalı paket, mağaza kaydı |
 | İlk hafta rehberi kartı yeni tasarım (TIER-022) | İlk hafta tasarım oturumu, FE `taslak/ilk-hafta-rehberi` | Geliştiriliyor | Fable oturumu birkaç tasarım taslağı hazırlıyor; seçim kullanıcıda |
 | Tanıtım sitesinde e-belge bölümü | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Özellikler sayfasında e-Fatura/e-Arşiv/e-SMM bölümü, paket tablosu satırı, SSS düzeltmesi. Sahibi ve onay durumu doğrulanmadı |
 | AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün dalı `docs/ai-kota` (`ba01a24`) | Dalda, birleşmedi | TIER-013/014 satırları bu dalda güncellendi; main'e alma onayı |
-| Nilvera e-Fatura ticari senaryo + bekleme listesi test düzeltmesi | BE main `6add514c`, panel main `7b53100b` | Main'de, canlıya çıkmadı | Migration var: `AddEDocumentBuyerAnswer`. Bekleme listesi değişikliği yalnız test |
+| Nilvera e-Fatura ticari senaryo + bekleme listesi test düzeltmesi | BE `6add514c`, panel `7b53100b` | Canlıda (2026-11-14 02:40, E-vet düzeltmeleriyle aynı yayın) | Migration `AddEDocumentBuyerAnswer` canlı DB'de. Gerçek alıcı reddi akışı denenmedi |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -39,9 +38,8 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. Backend `6add514c` + panel `7b53100b`: e-Fatura ticari senaryo, "Alıcı reddetti" durumu, e-Fatura düzeltme yolu. Migration `AddEDocumentBuyerAnswer` canlı DB'ye (önce elle yedek). **Paketler hazır (2026-11-14):** testler geçti (BE ilgili filtreler, panel 3100/3100), migration yalnız üç boş bırakılabilir sütun ekliyor, yayın planı paylaşılan notlarda (`yayin-plani-e-fatura-ticari.md`). Canlıya çıkış onayı bekliyor.
-2. E-vet düzeltmeleri (B1–B7) bitince: main'e alma ve canlı. Ardından pilot aktarmanın yeniden yapılması.
-3. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
+1. 02:40 yayını (BE `d56a01c5`, panel `9420ca94`) için: sürüm notu yazılması ve `origin/main`'e push. Yayını yapan oturum belli değil; sunucuda 02:30 (gece) ve 02:41 yedekleri var; migration'ın hangi yedekten sonra uygulandığı doğrulanmadı.
+2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
 1. RECORD-006 / [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md) birleşik kayıt modeli: AK-1…9 (taslak 2026-11-01'den beri bekliyor)). Pilot başlamadan çözülmesi öneriliyor: tedavi ve yatış iptal edilemiyor; tedavi, reçete ve aşıda aynı anda düzenlemeye karşı koruma yok. Kullanıcı en iyi yolu Fable oturumuna sormak istedi (oturum henüz açılmadı).
