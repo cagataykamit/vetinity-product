@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Kabul edildi (2026-11-06, kullanıcı).** Model kabul edildi; aşağıdaki kredi miktarları ve satış fiyatları **örnek ve ticari varsayımdır**, gerçek kullanım ölçülünce kesinleşir. Kod yok. [ADR-008](ADR-008-embedded-ai-assistant.md)'in kota ve maliyet maddesini ve AI-007/AI-008'deki "kotalı, ücretli ek paket" kararını (2026-10-30) somutlaştırır; AI'nin yalnız taslak üretmesi kuralı aynen geçerlidir.
+**Kabul edildi (2026-11-06, kullanıcı); değiştirildi (2026-11-14, kullanıcı: her pakette dahil, kullanıcı başına kota, ek kredi, pilotta erken deneme — bkz. "Değişiklik — 2026-11-14").** Model kabul edildi; aşağıdaki kredi miktarları ve satış fiyatları **örnek ve ticari varsayımdır**, gerçek kullanım ölçülünce kesinleşir. Kod yok. [ADR-008](ADR-008-embedded-ai-assistant.md)'in kota ve maliyet maddesini ve AI-007/AI-008'deki "kotalı, ücretli ek paket" kararını (2026-10-30) somutlaştırır; AI'nin yalnız taslak üretmesi kuralı aynen geçerlidir.
 
 ## Bağlam
 
@@ -27,6 +27,25 @@ AI maliyeti kullanım başına oluşur; pakete sınırsız gömülürse maliyet 
 7. **Kota bitince** yalnız AI durur, klinik iş akışı devam eder (ADR-008 madde 6). %80'de ve bitişte uyarı verilir.
 8. **Maliyet sınırları.** İstek başına en fazla token, kullanıcı başına dakikalık istek sınırı, klinik başına aylık kredi sınırı, tüm sistem için aylık harcama alarmı ve durdurma. Her isteğin gerçek token ve maliyeti kaydedilir (AI-008); klinik verisi normal loglara yazılmaz.
 9. **Dolar bazlı hesap, TL satış.** Maliyet ve kredi değeri dolar üzerinden izlenir. Site ve ödeme TL'dir; TL tarifesi kura göre dönemsel güncellenir, alınmış dönem ve fon değişmez. Değerler tek yerde yaşar (backend ayarı), sitede kopyalanmaz.
+
+## Değişiklik — 2026-11-14 (kullanıcı kararı): her pakette dahil, kullanıcı başına kota
+
+Kullanıcı: "Her pakette küçük bir ücretsiz kota olsun, üst paketlerde kota büyüsün, yoğun kullanan klinik için ek kredi satılsın; bu yönde ilerleyelim." Madde 1, 5 ve 6 şöyle değişir; diğer maddeler geçerli.
+
+- **D1 — Her pakette dahil kota (madde 5'in yerine).** AI her pakette, kotalı olarak dahildir; satışta "yapay zekâ dahil" denir. Kota **kullanıcı başına** tanımlanır, klinikte havuzlanır: klinik havuzu = paket kotası × aktif kullanıcı sayısı. Bir kullanıcı ayda kendi payının en çok 2 katını harcayabilir; böylece tek kişi havuzu bitiremez. Yönetici kullanıcı başına sınırı düşürebilir.
+
+| Paket | Aylık kredi / kullanıcı (örnek) | Yaklaşık kullanım | En yüksek maliyet / kullanıcı |
+|---|---|---|---|
+| Temel | 100 | günde ~5 standart istek | ~$0,09 |
+| Profesyonel | 300 | günde ~14 | ~$0,27 |
+| Kurumsal | 800 | günde ~36 | ~$0,72 |
+
+  Hesap madde 2 ve 4'teki varsayımla: 1 kredi = Hızlı AI (Haiku) standart istek, en yüksek maliyet kredi başına ~$0,0009. Rakamlar örnektir; pilot ölçümüyle kesinleşir.
+- **D2 — Ek kredi (madde 1 ve 6'nın yerine).** Ayrı aylık "eklenti" zorunlu değildir; dahil kotayı aşan klinik **ek kredi paketi** alır (madde 4'teki tablo ek kredi fiyatlaması için örnek kalır; "Ek fon" satırı esas alınır). Ek kredi devreder, dahil kota devretmez. Önce kullanıcının dahil payı, sonra klinik havuzu, sonra ek kredi harcanır.
+- **D3 — Üst düzey AI (Sonnet).** Dahil kota yalnız Hızlı AI (Haiku) içindir; Üst düzey AI ek krediyle kullanılır (madde 2'deki 20 kredi oranı).
+- **D4 — Pilotta erken deneme.** Ücretli ödeme canlıya açılmadan, pilot klinikte ücretsiz deneme yapılır: yalnız Hızlı AI, ilk özellik hasta geçmişi özeti (AI-002), pilot kliniğe özel açma ayarı, tüm sistem için düşük aylık harcama sınırı (Console'da ve backend'de). Amaç gerçek token/maliyet ölçümü ve kalite karşılaştırması (birkaç örnekte Sonnet ile).
+- **D5 — API hesabı.** Kullanıcı Claude Console'da (platform.claude.com) kuruluş hesabı açar, kredi yükler, aylık harcama sınırı koyar ve API anahtarını sunucuya kendisi girer; anahtar sohbete ve depoya yazılmaz. Bireysel Claude aboneliği kullanılmaz (Bağlam).
+- **D6 — Kendi sunucuda açık model kullanılmaz** (2026-11-14 değerlendirmesi): canlı sunucuda çalıştırmak API/SQL'i yavaşlatır, ekran kartlı sunucu API maliyetinin çok üstündedir, küçük açık modeller Türkçe tıbbi metinde zayıftır. Yerel işleme yasal zorunluluk olursa yeniden değerlendirilir.
 
 ## Riskler ve açık noktalar
 
