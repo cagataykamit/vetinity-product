@@ -573,7 +573,7 @@ D grubundaki adlar standart ders kitabı terimleri; sıklık kaynağıyla doğru
 
 Kullanıcı kararı (2026-11-13): öneriler uluslararası veteriner literatürüne göre uygulansın; aşı sınıfı ayrı alan olsun (Y1); renk ile desen ayrılsın (Y4).
 
-**Dallar:** BE `feature/katalog-kaynak` (`3b15a349`, `606f6498`), FE `feature/katalog-kaynak` (`f7ff1a62`). İkisi de `feature/katalog-literatur` üzerine kuruldu. Push ve merge yapılmadı. Migration yalnız yerel DB'ye uygulandı. Sözleşme belgesi: BE `docs/CATALOG_COAT_AND_VACCINE_CATEGORY_API_CONTRACT.md`.
+**Dallar:** BE `feature/katalog-kaynak` (`3b15a349`, `606f6498`), FE `feature/katalog-kaynak` (`f7ff1a62`). İkisi de `feature/katalog-literatur` üzerine kuruldu. 2026-11-13'te `main`e birleştirildi, 2026-11-14'te canlıya yayınlandı ([sürüm notu](../release-notes/2026-11-14-katalog-ve-e-belge.md)). Sözleşme belgesi: BE `docs/CATALOG_COAT_AND_VACCINE_CATEGORY_API_CONTRACT.md`.
 
 ### Uygulananlar
 
