@@ -1,6 +1,6 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-14 (durum panosu oturumu). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Son güncelleme:** 2026-11-14 (durum panosu oturumu; koordinatör bildirimi: AI kota kararı, mobil, ilk hafta taslakları). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, son canlı yayının (2026-11-14 00:13–00:16; backend `3c50d963`, panel `181b14ed`) atası. Canlı sunucuya ve veritabanına bakılmadı; ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
@@ -11,7 +11,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 90 | 4 | 2 (MOBILE-002 geliştiriliyor, RECORD-006 karar) | 9 (AI) |
+| P1 | 105 | 90 | 4 | 3 (MOBILE-002 geliştiriliyor, RECORD-006 karar, AI-002 pilotta erken deneme) | 8 (AI) |
 | P2 | 61 | 26 | 5 | 24 (14 planlı, 10 araştırılacak) | 6 |
 | P3 | 10 | 0 | 0 | 9 (2 planlı, 7 araştırılacak) | 1 |
 | Belirlenmemiş | 1 | 0 | 0 | 1 (UX-010 İngilizce) | 0 |
@@ -24,9 +24,10 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 |---|---|---|---|
 | E-vet pilot aktarma düzeltmeleri B1–B6 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md), ürün dalı `docs/evet-pilot-bulgulari`) | E-vet içe aktarma oturumu. BE `feature/evet-sahip-degisimi` (+6 commit: B1, B2, B3, B4, B5), FE aynı ad (+1: B6 çakışan satır) | Geliştiriliyor | Pilot aktarma bu düzeltmeler canlıya çıkınca yeniden yapılacak. Main'e alma ve canlı onay ister |
 | E-vet menü yolları (B7) | BE/FE `fix/evet-menu-yollari` (BE `32b55ea7`, FE `f1ae8c57`) | Dalda, birleşmedi | Küçük düzeltme; B1–B6 ile birlikte çıkabilir |
-| Hasta sahibi mobil uygulaması (MOBILE-002) | FE `feature/mobil-magaza` (+8), ürün `docs/mobil-magaza` (+1) | Geliştiriliyor | Android emülatörde giriş/kilit çalıştı. Kalan: Firebase ve gerçek push, iOS (Mac), App Links, imzalı paket, mağaza kaydı |
-| İlk hafta rehberi kartı yeni tasarım (TIER-022) | İlk hafta tasarım oturumu, FE `taslak/ilk-hafta-rehberi` | Geliştiriliyor | Taslak dal; henüz commit yok |
+| Hasta sahibi mobil uygulaması (MOBILE-002) | FE `feature/mobil-magaza` (+8, son `3c44efe5`), ürün `docs/mobil-magaza` (+1) | Geliştiriliyor | Android emülatörde giriş/kilit çalıştı. Kalan: Firebase ve gerçek push, iOS (Mac), App Links, imzalı paket, mağaza kaydı |
+| İlk hafta rehberi kartı yeni tasarım (TIER-022) | İlk hafta tasarım oturumu, FE `taslak/ilk-hafta-rehberi` | Geliştiriliyor | Fable oturumu birkaç tasarım taslağı hazırlıyor; seçim kullanıcıda |
 | Tanıtım sitesinde e-belge bölümü | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Özellikler sayfasında e-Fatura/e-Arşiv/e-SMM bölümü, paket tablosu satırı, SSS düzeltmesi. Sahibi ve onay durumu doğrulanmadı |
+| AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün dalı `docs/ai-kota` (`ba01a24`) | Dalda, birleşmedi | TIER-013/014 satırları bu dalda güncellendi; main'e alma onayı |
 | Nilvera e-Fatura ticari senaryo + bekleme listesi test düzeltmesi | BE main `6add514c`, panel main `7b53100b` | Main'de, canlıya çıkmadı | Migration var: `AddEDocumentBuyerAnswer`. Bekleme listesi değişikliği yalnız test |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
@@ -42,19 +43,21 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 
 **Ürün kararı**
 1. RECORD-006 / [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md) birleşik kayıt modeli: AK-1…9 (taslak 2026-11-01'den beri bekliyor).
-2. Mobil mağaza hesapları (ADR-031 AK-4): Apple'da şahıs işletmesi bireysel kaydolur (satıcı adı kişi adı görünür). Google Play'de kuruluş hesabı D-U-N-S ister; kişisel hesapta yayından önce 12 kişi/14 gün kapalı test zorunlu.
+2. Mobil mağaza hesapları (ADR-031 AK-4): bireysel hesap mı, önce limited şirket kurmak mı? Apple'da şahıs işletmesi bireysel kaydolur (satıcı adı kişi adı görünür). Google Play'de kuruluş hesabı D-U-N-S ister; kişisel hesapta yayından önce 12 kişi/14 gün kapalı test zorunlu.
 3. [Canlı işletim kılavuzu](../operations/CANLI-ISLETIM-KILAVUZU.md) bölüm 12: önem derecesi süreleri, destek kanalı ve mesai, nöbet, bakım penceresi, olay notlarının yeri, gölge dönem ölçütleri, RPO/RTO, ClamAV.
-4. Çalışma varsayımı olarak canlıda olan kurallar: TIER-004 kırılımlar, TIER-007 şubeler özeti, TIER-010 özel geliştirme talebi sınırı ve yetkisi.
+4. İlk hafta rehberi kartı: Fable taslaklarından birini seçmek.
+5. Çalışma varsayımı olarak canlıda olan kurallar: TIER-004 kırılımlar, TIER-007 şubeler özeti, TIER-010 özel geliştirme talebi sınırı ve yetkisi.
 
 **Sunucu ve hesap işleri (kullanıcıda)**
 1. iyzico canlı anahtarı yok: vergi kaydı ve üye işyeri başvurusu. Bu olmadan denemeden ücretli plana geçiş (TRIAL-007, BILL-*) canlıda çalışmaz.
-2. Firebase projesi ve FCM anahtarı (MOBILE-002/003; portal "henüz etkin değil" diyor).
-3. SSH: anahtar kurulduktan sonra parola ve root girişini kapatma.
-4. SQL Server güncellemesi (16.0.4195 → 16.0.4315): bakım penceresinde, yedekten sonra; Zonguldak veritabanını da etkiler.
-5. Veteriner bul site haritasını `robots.txt`'ye ekleme.
-6. Virüs taraması: dosya yüklemelerinde tarama yok (kod işi + ClamAV).
-7. Canlıdan gerçek e-posta (davet, hatırlatma, parola sıfırlama) gidişi denenmedi.
-8. Şahıs işletmesi unvanı ve vergi numarası gelince hukuki metinlerdeki yer tutucular doldurulacak.
+2. Claude Console API hesabı, kredi yükleme, harcama sınırı ve anahtarın sunucuya girilmesi (pilotta AI erken deneme için).
+3. Firebase projesi ve FCM anahtarı (MOBILE-002/003; portal "henüz etkin değil" diyor).
+4. SSH: anahtar kurulduktan sonra parola ve root girişini kapatma.
+5. SQL Server güncellemesi (16.0.4195 → 16.0.4315): bakım penceresinde, yedekten sonra; Zonguldak veritabanını da etkiler.
+6. Veteriner bul site haritasını `robots.txt`'ye ekleme.
+7. Virüs taraması: dosya yüklemelerinde tarama yok (kod işi + ClamAV).
+8. Canlıdan gerçek e-posta (davet, hatırlatma, parola sıfırlama) gidişi denenmedi.
+9. Şahıs işletmesi unvanı ve vergi numarası gelince hukuki metinlerdeki yer tutucular doldurulacak.
 
 ## Dış yanıt bekleyenler
 
@@ -112,25 +115,25 @@ Canlıda: 27
 
 ## P1 (105 madde)
 
-Geliştiriliyor: 1 · Karar bekliyor (kullanıcı): 1 · Canlıda (kısmen): 4 · Canlıda: 90 · Ertelendi: 9
+Geliştiriliyor: 1 · Karar bekliyor (kullanıcı): 1 · Planlandı: 1 · Canlıda (kısmen): 4 · Canlıda: 90 · Ertelendi: 8
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | FE dal `feature/mobil-magaza`; Apple/Google hesap türü kararı ve Firebase kullanıcıda |
 | [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) | Birleşik record modeli ve tip-bazlı dinamik form | Karar bekliyor (kullanıcı) | ADR-043 taslak; AK-1…9 kararı bekliyor, kod yok |
+| [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Planlandı | Pilotta Haiku ile ücretsiz erken deneme (ADR-044 güncellemesi, dal `docs/ai-kota`); Claude API hesabı kullanıcıda |
 | [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda (kısmen) | Dilim 1–3 canlıda; kalanı pilot geri bildirimine göre |
 | [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda (kısmen) | Kilit ve ek not var; kilit açma bilinçli yok (ADR-013) |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" main'de, canlıya çıkmadı; Paraşüt kapalı |
 | [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle kes + otomatik kesme (varsayılan kapalı) Nilvera ile canlıda |
-| [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-004](../backlog/feature-backlog.md#ai-004--ai-taburcu-talimatı) | AI taburcu talimatı | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-007](../backlog/feature-backlog.md#ai-007--ai-kullanım-kotası) | AI kullanım kotası | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-008](../backlog/feature-backlog.md#ai-008--ai-maliyet-takibi) | AI maliyet takibi | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-009](../backlog/feature-backlog.md#ai-009--ai-çıktı-onay-akışı) | AI çıktı onay akışı | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
-| [AI-010](../backlog/feature-backlog.md#ai-010--ai-audit-metadatası) | AI audit metadatası | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
+| [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-004](../backlog/feature-backlog.md#ai-004--ai-taburcu-talimatı) | AI taburcu talimatı | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-007](../backlog/feature-backlog.md#ai-007--ai-kullanım-kotası) | AI kullanım kotası | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-008](../backlog/feature-backlog.md#ai-008--ai-maliyet-takibi) | AI maliyet takibi | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-009](../backlog/feature-backlog.md#ai-009--ai-çıktı-onay-akışı) | AI çıktı onay akışı | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
+| [AI-010](../backlog/feature-backlog.md#ai-010--ai-audit-metadatası) | AI audit metadatası | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
 
 <details><summary>Canlıda olanlar (90)</summary>
 
@@ -247,8 +250,8 @@ Planlandı: 14 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 26 
 | [WEB-008](../backlog/feature-backlog.md#web-008--tanıtım-sitesinin-ayrı-derlemesi-ve-çerezsiz-ziyaret-sayacı) | Tanıtım sitesinin ayrı derlemesi ve çerezsiz ziyaret sayacı | Planlandı |  |
 | [TIER-011](../backlog/feature-backlog.md#tier-011--hekim-mobil-uygulaması) | Hekim mobil uygulaması | Planlandı |  |
 | [TIER-012](../backlog/feature-backlog.md#tier-012--iys-ve-tarbil-araştırması) | İYS ve Tarbil araştırması | Planlandı | Araştırma bitti, ADR-046 kabul; ticari ileti gönderimi canlıda kapalı |
-| [TIER-013](../backlog/feature-backlog.md#tier-013--ai-eklentisi-kredi-kota-ve-fon) | AI eklentisi: kredi, kota ve fon | Planlandı | AI işleri pilot sonrası (ADR-044) |
-| [TIER-014](../backlog/feature-backlog.md#tier-014--ai-altyapısı-ve-ilk-özellik-denemesi) | AI altyapısı ve ilk özellik denemesi | Planlandı | AI işleri pilot sonrası (ADR-044) |
+| [TIER-013](../backlog/feature-backlog.md#tier-013--ai-eklentisi-kredi-kota-ve-fon) | AI eklentisi: kredi, kota ve fon | Planlandı | ADR-044 güncellendi (dal `docs/ai-kota`, main'e alınmadı): her pakette kullanıcı başına kota (örnek Temel 100 / Profesyonel 300 / Kurumsal 800 kredi/ay), ek kredi satışı |
+| [TIER-014](../backlog/feature-backlog.md#tier-014--ai-altyapısı-ve-ilk-özellik-denemesi) | AI altyapısı ve ilk özellik denemesi | Planlandı | ADR-044 güncellendi (dal `docs/ai-kota`, main'e alınmadı): her pakette kullanıcı başına kota (örnek Temel 100 / Profesyonel 300 / Kurumsal 800 kredi/ay), ek kredi satışı |
 | [PORTAL-005](../backlog/feature-backlog.md#portal-005--dijital-onam-ve-imza) | Dijital onam ve imza | Araştırılacak |  |
 | [MSG-001](../backlog/feature-backlog.md#msg-001--klinik-inbox) | Klinik inbox | Araştırılacak |  |
 | [MSG-002](../backlog/feature-backlog.md#msg-002--iki-yönlü-mesajlaşma) | İki yönlü mesajlaşma | Araştırılacak |  |
@@ -269,7 +272,7 @@ Planlandı: 14 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 26 
 | [FIN-007](../backlog/feature-backlog.md#fin-007--eski-ödemelerin-bağlanması-ve-açılış-bakiyesi) | Eski ödemelerin bağlanması ve açılış bakiyesi | Ertelendi | İçe aktarmada açılış bakiyesi var (TIER-024); elle kayıt ertelendi |
 | [FIN-009](../backlog/feature-backlog.md#fin-009--düzeltme-yetkisinin-kontrollü-gevşetilmesi) | Düzeltme yetkisinin kontrollü gevşetilmesi | Ertelendi |  |
 | [RECORD-007](../backlog/feature-backlog.md#record-007--muayene-yeniden-açma-ve-revizyon-geçmişi) | Muayene yeniden açma ve revizyon geçmişi | Ertelendi |  |
-| [AI-006](../backlog/feature-backlog.md#ai-006--doğal-dille-hasta-kayıtlarında-arama) | Doğal dille hasta kayıtlarında arama | Ertelendi | Pilot sonrası, ücretli AI ek paketi (ADR-044) |
+| [AI-006](../backlog/feature-backlog.md#ai-006--doğal-dille-hasta-kayıtlarında-arama) | Doğal dille hasta kayıtlarında arama | Ertelendi | ADR-044 değişti (dal `docs/ai-kota`): her pakette kotalı dahil olacak; pilot sonrası |
 
 <details><summary>Canlıda olanlar (26)</summary>
 
