@@ -39,7 +39,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. Backend `6add514c` + panel `7b53100b`: e-Fatura ticari senaryo, "Alıcı reddetti" durumu, e-Fatura düzeltme yolu. Migration `AddEDocumentBuyerAnswer` canlı DB'ye (önce elle yedek).
+1. Backend `6add514c` + panel `7b53100b`: e-Fatura ticari senaryo, "Alıcı reddetti" durumu, e-Fatura düzeltme yolu. Migration `AddEDocumentBuyerAnswer` canlı DB'ye (önce elle yedek). **Paketler hazır (2026-11-14):** testler geçti (BE ilgili filtreler, panel 3100/3100), migration yalnız üç boş bırakılabilir sütun ekliyor, yayın planı paylaşılan notlarda (`yayin-plani-e-fatura-ticari.md`). Canlıya çıkış onayı bekliyor.
 2. E-vet düzeltmeleri (B1–B7) bitince: main'e alma ve canlı. Ardından pilot aktarmanın yeniden yapılması.
 3. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
