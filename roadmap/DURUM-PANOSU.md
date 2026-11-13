@@ -4,6 +4,8 @@
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, son canlı yayının (2026-11-14 00:13–00:16; backend `3c50d963`, panel `181b14ed`) atası. Canlı sunucuya ve veritabanına bakılmadı; ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
+**Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Canlı ortamda yalnız E-vet yedeğinin doğrulama denemesi yapıldı; gerçek klinik kullanımı yok. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
+
 Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı · Dalda, birleşmedi · Geliştiriliyor · Karar bekliyor (kullanıcı) · Dış yanıt bekliyor · Planlandı · Araştırılacak · Ertelendi.
 
 ## Özet
@@ -42,7 +44,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 3. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
-1. RECORD-006 / [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md) birleşik kayıt modeli: AK-1…9 (taslak 2026-11-01'den beri bekliyor).
+1. RECORD-006 / [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md) birleşik kayıt modeli: AK-1…9 (taslak 2026-11-01'den beri bekliyor)). Pilot başlamadan çözülmesi öneriliyor: tedavi ve yatış iptal edilemiyor; tedavi, reçete ve aşıda aynı anda düzenlemeye karşı koruma yok. Kullanıcı en iyi yolu Fable oturumuna sormak istedi (oturum henüz açılmadı).
 2. Mobil mağaza hesapları (ADR-031 AK-4): bireysel hesap mı, önce limited şirket kurmak mı? Apple'da şahıs işletmesi bireysel kaydolur (satıcı adı kişi adı görünür). Google Play'de kuruluş hesabı D-U-N-S ister; kişisel hesapta yayından önce 12 kişi/14 gün kapalı test zorunlu.
 3. [Canlı işletim kılavuzu](../operations/CANLI-ISLETIM-KILAVUZU.md) bölüm 12: önem derecesi süreleri, destek kanalı ve mesai, nöbet, bakım penceresi, olay notlarının yeri, gölge dönem ölçütleri, RPO/RTO, ClamAV.
 4. İlk hafta rehberi kartı: Fable taslaklarından birini seçmek.
