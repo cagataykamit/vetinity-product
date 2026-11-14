@@ -90,3 +90,13 @@ Belirteç güncelleme ve iptalde zorunlu olduğu için (2), (3) ve (4)'te backen
 - **Değişmeyenler:** veri modeli tabloları, kayıt defteri biçimleri (iptal işareti dışında), HBS alanları, ücret önerisi ve stok kuralları, portal kapsamı (ADR-031).
 - **Riskler:** zorunlu belirteç sözleşme kırıcıdır (backend ve panel birlikte yayınlanmalı); iptal edilen kayıtların tüm okuma yollarından (açık işler, hatırlatmalar, raporlar, dışa aktarma) doğru dışlanması dilim başına ayrıca denetlenmeli.
 - **Ertelenen:** klinik tanımlı ek alanlar; şablonda kayıt türü satırları ve item rules (EXAM-014); tüm türlere dosya eki (RECORD-003); muayene yeniden açma (RECORD-007).
+
+## Uygulama durumu (2026-11-14)
+
+Pilot öncesi dilimler ve AK-6, AK-10, lab rozeti uygulandı; **main'e birleşmedi, push ve yayın yok**. Dal `feature/kayit-modeli-adr043` (backend ve panel).
+
+- Backend: `18e6bcc1` iptal kuralı (K4), `50bd148d` yatış iptali, `e63e5f84` sürüm denetimli güncellemelerin değişiklik geçmişine yazılması (hata düzeltmesi), `7f3f5e6d` aşı, `9f21bb4b` reçete, `3f798cba` tedavi, `b2026314` görüntüleme geçmişi, `555c948d` AK-6, `3038c0d0` AK-10, `a8af1855` lab rozeti.
+- Panel: `3fdc0500`, `a5249cf3`, `474d6732`, `9f443202`, `c25009d7`, `5b512cc1`, `fa047079`.
+- Migration'lar (yalnız yerel): `AddHospitalizationCancellation`, `AddVaccinationCancellationAndRowVersion`, `AddPrescriptionRowVersion`, `AddTreatmentCancellationAndRowVersion`, `AddTreatmentAndVaccinationLateEntry`, `AddLabResultLateEntryMark`.
+- **Yayın notu:** aşı, reçete ve tedavide `rowVersion` güncelleme ve iptalde zorunlu (sözleşme kırıcı); backend ve panel aynı yayında çıkmalıdır.
+- Kapsam dışı bırakılan: hasta sahibi portalında iptal edilen aşının görünmesi (ADR-031 sözleşmesi; ayrı karar).
