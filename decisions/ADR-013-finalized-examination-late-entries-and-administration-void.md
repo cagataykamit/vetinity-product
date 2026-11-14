@@ -30,3 +30,13 @@ Bu ADR'deki "reçete kilidi aynen kalır" çizgisi, aynı ilkelerle (orijinal ko
 - **Reçete iptali:** reçete silinmez, gerekçeyle iptal edilir; iptal edilen reçete değiştirilemez. Yetki `Prescriptions.Update` (lab iptaliyle aynı, yeni izin yok). İptal edilen reçete zaman çizelgesinde varsayılan gizli, HBS takibine girmez; kayıt defterlerinde çıkarılmaz, "İptal" durumuyla görünür ve filtreyle gizlenebilir.
 - **Kesinleşmiş muayeneye reçete:** uygulama kaydındaki gibi zorunlu gerekçeyle "Kesinleştirmeden sonra eklendi" olarak yazılır; mevcut reçete değişmez.
 - Uygulama: backend `feat/recete-iptali` (migration `AddPrescriptionCancellationAndLateEntry`), P1 Dalga 2.
+
+## Ek 2 (2026-11-14): tedavi ve aşıda geç kayıt, tanısal kayıtta rozet (ADR-043 AK-6, AK-4)
+
+Kesinleşmiş muayeneye yeni kayıt için kural iki sınıfa indi ([ADR-043](ADR-043-birlesik-klinik-kayit-modeli.md) K3):
+
+- **Tedavi edici kayıtlar** (uygulama, reçete, tedavi, aşı): zorunlu gerekçeyle (5–500) "Kesinleştirmeden sonra eklendi" olarak yazılır. Tedavi ve aşı için bu ADR'deki "kilit aynen kalır" çizgisi kalkar; aşıda ürünlü ve ürünsüz ayrımı yapılmaz.
+- **Tanısal kayıtlar** (lab, görüntüleme): serbest; "sonradan eklendi" rozeti taşır, gerekçe istenmez.
+- Yatış kesinleşmiş muayeneye bağlanmaz (değişmedi).
+
+Mevcut kayıt kilidi değişmez: kesinleşmiş muayeneye bağlı kayıt düzenlenmez; düzeltme gerekçeli iptal ve yeni kayıttır.
