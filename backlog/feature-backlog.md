@@ -2835,9 +2835,9 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Mağazada bulunma, güvenilir push |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Planlandı |
+| **Durum** | Geliştiriliyor (2026-11-13, FE dal `feature/mobil-magaza`, main'e alınmadı): Capacitor 8 paketi (iskelet `fccc38dd`) üzerine anlık bildirim (izin, açılışta jeton yenileme, çıkışta jeton kaldırma, dokununca ilgili ekran), cihaz anahtar deposunda oturum, Hesabım > Uygulama kilidi (parmak izi/yüz; varsayılan kapalı; 5 dk arka plan sonrası yeniden kilit). Android debug derlemesi Android 16 emülatöründe yerel backend'le denendi: giriş, oturumun kalıcılığı, kilit ve kilitten çıkış çalıştı; portal 257 test geçti. Kalan: Firebase (kullanıcı) ve gerçek push denemesi, üretim `AllowedOrigins`'e `https://localhost` + `capacitor://localhost`, iOS derlemesi ve FCM jetonu (Mac), App Links/Universal Links sunucu dosyaları, imzalı .aab, mağaza kaydı. Ayrıntı FE `docs/PORTAL_MOBIL_PAKET.md` |
 | **Bağımlılıklar** | MOBILE-001, MOBILE-003, PORTAL-011 |
-| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; mağaza/push davranışı uygulama aşamasında güncel kaynaktan doğrulanmalı; AK-4. Mağazalar uygulama içi hesap silme istiyor → PORTAL-011 ([ADR-041](../decisions/ADR-041-portal-hesap-silme.md)) |
+| **Notlar** | [ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K5; AK-4. Mağazalar uygulama içi hesap silme istiyor → PORTAL-011 ([ADR-041](../decisions/ADR-041-portal-hesap-silme.md), portalda var). **Açık karar (AK-4, 2026-11-13):** Apple kuruluş üyeliğini yalnız tüzel kişiliğe açıyor; şahıs işletmesi bireysel kaydoluyor, App Store'da satıcı adı kişi adı görünüyor (şirket kurulunca kuruluşa çevrilebilir). Google Play'de kuruluş hesabı D-U-N-S istiyor; alınamazsa kişisel hesapta üretim öncesi 12 kişi/14 gün kapalı test zorunlu |
 
 ### MOBILE-003 — Push bildirim altyapısı
 
