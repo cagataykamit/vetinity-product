@@ -777,6 +777,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | HOSP-001, TIMELINE-001 |
 | **Notlar** | Filtre/tarih aralığı → [TIMELINE-003](#timeline-003--timeline-filtreleri). **Competitor evidence:** E-Vet hasta kartı Hospitalizasyon Geçmişi + global süreklilik — → [e-vet.md](../competitors/e-vet.md#hospitalizasyon-geçmişi) · [global modül](../competitors/e-vet.md#global-hospitalizasyon-modül). **TBD:** “Tedavisi var mı?” benzeri göstergenin veri kaynağı; inpatient treatment schedule |
 
+### HOSP-004 — Vital ölçümü ve yatış izlemi
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | HOSP-004 |
+| **Başlık** | Vital ölçümü ve yatış izlemi |
+| **Kategori** | Hospitalization |
+| **Problem** | Vitaller yalnız muayenenin dört alanında; yatan hastada gün içinde tekrarlanan ölçümler (ateş, nabız, solunum, kilo) kaydedilemiyor ve eğilimi görülemiyor |
+| **Önerilen çözüm** | Ayrı tipli kayıt türü "vital ölçümü" (zaman damgalı sayısal değerler; yatışa veya muayeneye bağlanabilir); hasta kartında ve yatış detayında eğilim grafiği. Kilo geçmişi muayene vitalleri ile bu kaydı birleştirir. ADR-043 tabanına uyar (klinik kapsamı, değişiklik geçmişi, zaman çizelgesi, gerekçeli iptal) |
+| **Kullanıcı değeri** | Yatış izlemi; klinik eğilimin görünürlüğü |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
+| **Durum** | Backlog (ADR-043 AK-9, 2026-11-14) |
+| **Bağımlılıklar** | HOSP-001, [RECORD-006](#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) |
+| **Notlar** | DaySmart History "Vitals" filtresi → [daysmart.md](../competitors/daysmart.md#records). Prosedür ayrı tür olarak açılmadı (ADR-043 AK-9); hizmet bağı gerekirse tedavi kaydına eklenir |
+
 ---
 
 ## CHECKIN — Check-in orkestrasyonu
@@ -1267,7 +1283,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Tutarlı klinik kayıt modeli; ortak lifecycle |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırıldı (P1 Dalga 4b, 2026-11-01): öneri B — kayıtlar ayrı ve tipli kalır, ortak çekirdek (tek tür sözlüğü, kilit politikası, iptal/geç kayıt değer nesneleri) + frontend tür kayıt defteri ve ortak form kabuğu. [Araştırma](../research/record-006-birlesik-kayit-modeli-2026-11.md), [ADR-043 taslak](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md); AK-1…9 kullanıcı kararı bekler. Kod yok |
+| **Durum** | Karar verildi (2026-11-14, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md) kabul): tek tablo ve JSON yok; kayıtlar ayrı ve tipli kalır, ortak kurallar tek yerde, tutarsızlıklar dilimlerle kapanır. Tek "Record" formu yapılmaz (hasta kartında "Kayıt ekle" menüsü); prosedür ayrı tür açılmaz; vital ölçümü [HOSP-004](#hosp-004--vital-ölçümü-ve-yatış-izlemi). Pilot öncesi dilimler: yatış iptali, aşı/reçete/tedavi eşzamanlılık belirteci, aşı ve tedavi gerekçeli iptali, görüntüleme değişiklik geçmişi, tedavi ve aşıya gerekçeli geç kayıt (ADR-013 Ek 2), güncellemede hasta değişiminin kapanması, lab rozeti. Pilot öncesi dilimler geliştirildi (2026-11-14, dal `feature/kayit-modeli-adr043`, main'e birleşmedi, yayın yok; ayrıntı ADR-043 "Uygulama durumu"). Pilot sonrası: kilit kuralı API'den, panel tür kayıt defteri, fırsatçı form birleştirme. Araştırma: [ilk](../research/record-006-birlesik-kayit-modeli-2026-11.md), [ikinci değerlendirme](../research/adr043-degerlendirme-fable-2026-11.md) |
 | **Bağımlılıklar** | RECORD-001 |
 | **Notlar** | DaySmart sandbox observation (2026-08-02 bölüm 3); generic record architecture adayı → [IDEA-026](../research/ideas.md#idea-026--unified-dynamic-record-model), [PATTERN-020](../research/patterns.md#pattern-020--unified-record-with-dynamic-type-forms). **Canlı sandbox — Patients Module:** Records/Pharmacy/Labs/Images/Vaccines/Vitals History filtreleri aynı timeline read-model → [daysmart.md](../competitors/daysmart.md#records) |
 
