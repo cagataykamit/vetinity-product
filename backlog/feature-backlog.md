@@ -3347,7 +3347,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Her klinik AI'yi ihtiyacı kadar alır, Vetinity için maliyet öngörülebilir kalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı (tarife örnek, gerçek kullanımla kesinleşir) |
+| **Durum** | Planlandı (tarife örnek, gerçek kullanımla kesinleşir). **2026-11-14 değişiklik (ADR-044):** AI her pakette kotalı dahil; kota kullanıcı başına (örnek Temel 100, Profesyonel 300, Kurumsal 800 kredi/ay), klinikte havuzlanır, kişi kendi payının en çok 2 katını harcar; aşımda ek kredi; dahil kota yalnız Hızlı AI (Haiku) |
 | **Bağımlılıklar** | TIER-001, AI-007, AI-008, ücretli ödemenin canlıya açılması, tek seferlik ödeme |
 | **Notlar** | Pilottan sonra (kullanıcı kararı 2026-10-30). Hukuk doğrulanmadı: dövizle fiyatlama, yurt dışı veri aktarımı, fon iadesi. Çalışmadan sitede yazılmaz. Kapsama alınanlar (2026-11-06, SaaS taraması): kalan kredi ve fon, özellik bazlı tüketim ekranı (hasta adı yok); harcama sırası tek cümle; teknik hatada kredi düşmez, liste açık ("beğenmedim" kapsam dışı); "kota bitince yalnız AI durur" her yerde aynı, Fon ekle bağlantısı; aylık eklenti ve ek fon yan yana, "otomatik para çekilmez". Açık karar: fon ömrü ve iade kuralı |
 
@@ -3363,7 +3363,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Fiyat ve kalite varsayımla değil gerçek veriyle belirlenir |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Planlandı. **2026-11-14:** pilotta ödeme altyapısını beklemeden ücretsiz erken deneme kararı (ADR-044 D4): yalnız Haiku, hasta geçmişi özeti, pilot kliniğe özel açma ayarı, düşük aylık harcama sınırı. Ön koşul: kullanıcı Claude Console API hesabını açıp anahtarı sunucuya girer (D5) |
 | **Bağımlılıklar** | ADR-008, ADR-044, AI-002, AI-008 |
 | **Notlar** | İlk özellik kullanıcı kararı (2026-11-06). Sesli not (AI-005 + AI-001) sonraya kalır. Kırmızı bayrak taraması alınmaz (ADR-008 sınırı). Deneme klinikleri bilgilendirilir; kimlik bilgisi mümkün olduğunca gönderilmez. Her gerçek istek para tutar |
 
