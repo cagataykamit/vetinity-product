@@ -4,6 +4,8 @@
 
 **Taslak — öneri; kullanıcı onayı bekler (2026-11-01).** Kabul edilmedi. Kaynak araştırma: [research/record-006-birlesik-kayit-modeli-2026-11.md](../research/record-006-birlesik-kayit-modeli-2026-11.md). Backlog: [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form). İlgili: [ADR-006](ADR-006-patient-timeline.md), [ADR-013](ADR-013-finalized-examination-late-entries-and-administration-void.md), [ADR-015](ADR-015-batch-based-stock-and-registers.md), [ADR-018](ADR-018-charge-suggestion-and-service-catalog.md), [ADR-036](ADR-036-hbs-ve-e-belge-entegrasyonu.md). Kullanıcı farklı karar verirse yalnız ilgili K maddesi değişir.
 
+**İkinci değerlendirme (2026-11-14, Fable 5.2):** [research/adr043-degerlendirme-fable-2026-11.md](../research/adr043-degerlendirme-fable-2026-11.md). Boşluklar güncel kodda yeniden doğrulandı; AK-4, AK-6, AK-8 ve AK-9 için farklı öneri, K2 ve K4 için daraltma önerisi ve yeni AK-10 içerir. Aşağıdaki metin 2026-11-01 önerisidir, değiştirilmedi.
+
 ## Bağlam
 
 - Klinik kayıtlar sekiz ayrı aggregate ve tabloda: muayene, tedavi, reçete, aşı, uygulama, lab, görüntüleme, yatış. Silme ucu hiçbirinde yok.
