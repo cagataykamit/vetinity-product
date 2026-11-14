@@ -93,7 +93,7 @@ Belirteç güncelleme ve iptalde zorunlu olduğu için (2), (3) ve (4)'te backen
 
 ## Uygulama durumu (2026-11-14)
 
-Pilot öncesi dilimler ve AK-6, AK-10, lab rozeti uygulandı; **main'e birleşmedi, push ve yayın yok**. Dal `feature/kayit-modeli-adr043` (backend ve panel).
+Pilot öncesi dilimler ve AK-6, AK-10, lab rozeti uygulandı; **yerel main'e birleşti (2026-11-15: backend `dc36b64d`, panel `da734556`), push ve yayın yok**. Dal `feature/kayit-modeli-adr043` (backend ve panel).
 
 - Backend: `18e6bcc1` iptal kuralı (K4), `50bd148d` yatış iptali, `e63e5f84` sürüm denetimli güncellemelerin değişiklik geçmişine yazılması (hata düzeltmesi), `7f3f5e6d` aşı, `9f21bb4b` reçete, `3f798cba` tedavi, `b2026314` görüntüleme geçmişi, `555c948d` AK-6, `3038c0d0` AK-10, `a8af1855` lab rozeti.
 - Panel: `3fdc0500`, `a5249cf3`, `474d6732`, `9f443202`, `c25009d7`, `5b512cc1`, `fa047079`.
