@@ -127,7 +127,7 @@ Geliştiriliyor: 1 · Karar bekliyor (kullanıcı): 1 · Planlandı: 1 · Canlı
 | [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Planlandı | Pilotta Haiku ile ücretsiz erken deneme (ADR-044 güncellemesi main'de); Claude API hesabı kullanıcıda |
 | [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda (kısmen) | Dilim 1–3 canlıda; kalanı pilot geri bildirimine göre |
 | [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda (kısmen) | Kilit ve ek not var; kilit açma bilinçli yok (ADR-013) |
-| [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" main'de, canlıya çıkmadı; Paraşüt kapalı |
+| [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
 | [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle kes + otomatik kesme (varsayılan kapalı) Nilvera ile canlıda |
 | [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
 | [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
