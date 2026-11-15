@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-16 02:10 (durum panosu oturumu; koordinatör bildirimi: 02:02 yayını; canlı sürüm sunucuda okundu). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `9930dd02`, panel ve site `7fa375e8` (`main-OKRAOFCU.js`; 2026-11-16 02:02), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md). Üç depoda main = origin. Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; koordinatör bildirimi: UX dalga 2 FE main'e birleşti). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `9930dd02`, panel ve site `7fa375e8` (`main-OKRAOFCU.js`; 2026-11-16 02:02), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md). BE ve ürün deposunda main = origin; FE main canlının önünde: `b06674a1` (UX dalga 2), push yok. Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -34,7 +34,8 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Deneme kaydında kötüye kullanım önlemi (TRIAL) | BE `e0994451`, FE `5765fdc6`, ürün main | Canlıda (2026-11-15 06:33) | E-posta kodu, tek e-posta/vergi no kuralı ve Turnstile (anahtarlar 2026-11-16 gecesi girildi) çalışıyor |
 | Kullanıcı dostu denetimi ([belge](../research/kullanici-dostu-denetim-2026-11-15.md)) | Ürün main (`docs/kullanici-dostu-denetim` birleşti) | Tamamlandı | Bulgular H1–H19, O4; düzeltmeler dalga dalga yapılıyor (aşağıda) |
 | UX düzeltmeleri dalga 1 (H1–H19, O4) | BE `5f9a7307`, panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Diyalogda Enter kaydeder, kaldırma onay ister, boş liste metinleri, ödeme al tek tıkla, Türkçe hata metinleri, müşteri telefonu yeni kayıtta zorunlu (H17), KVKK varsayılan metinleri klinik bilgisiyle dolar (H8), portalda iptal edilmiş aşı gösterilmez. Migration yok. |
-| UX dalga 2 (formlar) ve dalga 4 (randevu iptalinde geri al, sonra takvim) | UX dalga 2 ve dalga 4 oturumları | Geliştiriliyor | Takvim tasarımı seçildi: taslak A + "Boş saat bul" paneli |
+| UX dalga 2 (O1 yerinde ekleme, O2 kaydedilmemiş değişiklik koruması, O3/B4 Kaydet hep etkin ve eksik alanlar gösterilir, O8 odak, Ctrl+Enter, kısayollar) | FE main `b06674a1` (`feature/ux-dalga2`) | Main'de, canlıya çıkmadı | 3255 panel testi geçti (koordinatör bildirimi). Push ve yayın yok |
+| UX dalga 4 (randevu iptalinde geri al, sonra takvim) | UX dalga 4 oturumu | Geliştiriliyor | Takvim tasarımı seçildi: taslak A + "Boş saat bul" paneli |
 | Aktarma doğrulama ekranı (taslak A) | FE `8e8b8d92` (`feature/aktarma-dogrulama-a`) | Canlıda (2026-11-15 20:53) | Sürüm notu main'de |
 | Aktarma yükleme adımı (taslak B: her ekranda tek soru) ve E-vet aynı adlı hayvan ipucu | panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Taslaklar `taslak/aktarma-yukleme` (A–D) |
 | E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak; mükerrer anahtarına hekim, kilo, ateş) | BE `9930dd02`, panel `a41c7869` | Canlıda (2026-11-16 02:02) | Migration yok |
@@ -52,7 +53,8 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
+1. FE main `b06674a1` (UX dalga 2): push ve panel yayını. Migration yok.
+2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
