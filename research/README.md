@@ -16,6 +16,7 @@ Bu klasör, Vetinity'nin uzun vadeli **ürün araştırma merkezidir**. Rakip g�
 | [hbs-ve-e-belge-kesfi-2026-10.md](hbs-ve-e-belge-kesfi-2026-10.md) | HBS (e-Reçete, ATS aşı kaydı, kimliklendirme) ve e-belge (e-SMM / e-Arşiv / e-Fatura) keşfi: yükümlülükler, entegrasyon yolları, doğrulanan/doğrulanmayan tablosu; ADR-036 taslak |
 | [sistem-kataloglari-kaynak-arastirmasi-2026-11.md](sistem-kataloglari-kaynak-arastirmasi-2026-11.md) | Sistem katalogları (tür, ırk, renk, aşı, şikâyet, tanı, şablon) için kaynak ve lisans araştırması: FCI/FIFe, HBS ruhsatlı aşılar, WSAVA, VeNom/SNOMED lisansı; 53 düzeltme, 228 ekleme önerisi; güncel tutma takvimi |
 | [adr043-degerlendirme-fable-2026-11.md](adr043-degerlendirme-fable-2026-11.md) | ADR-043 (birleşik klinik kayıt modeli) ikinci değerlendirmesi: altı boşluğun güncel kodda doğrulanması, AK-1…9 için bağımsız öneri ve mevcut öneriden farklar, pilot öncesi dilim sırası |
+| [kullanici-dostu-denetim-2026-11-15.md](kullanici-dostu-denetim-2026-11-15.md) | Kullanıcı dostu olma denetimi: panel ve portal tarayıcıda gezildi; en önemli 10 bulgu, hızlı kazanımlar, orta ve büyük işler, tıklama sayıları |
 
 ---
 
