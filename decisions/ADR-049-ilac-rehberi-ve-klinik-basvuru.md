@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Önerildi (2026-11-15).** Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. **Ek (2026-11-16):** açık karar 8 kullanıcı tarafından verildi (AI ile ayırıcı tanı desteği, seçenek A). Aşağıdaki K1–K7 **öneridir**; "Açık kullanıcı kararları" bölümündeki maddeler kullanıcı onayı bekler. Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
+**Kabul edildi (2026-11-16, kullanıcı: "tamam önerilerini kabul ediyorum"); önerildi 2026-11-15.** Kararlar 1–7'de önerilen seçenek, karar 8'de A seçildi. Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. Bakanlık verisinin toplu alımı, kullanıcının göndereceği izin talebine bağlıdır (karar 2). Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
 
 ## Bağlam
 
@@ -47,7 +47,7 @@ Rakip ekranları ayrı başvuru araçlarıdır: hasta kaydıyla bağı yoktur, h
 
 Rakibin ~1,8 bin ürünlük kataloğu, D2'deki 1.749 kaydın ölçeğine yakın. Rakibin bu kaynağı kullandığı **NOT VERIFIED**; kullansa bile bu bize izin vermez. **Rakibin içeriği (ürün metinleri, hastalık bilgileri, parametre listeleri, puanlama) hiçbir biçimde alınmaz**; E-vet aktarımında (ADR-048) rehber verisi zaten yok, eklenmez.
 
-## Kararlar (öneri)
+## Kararlar
 
 | # | Konu | Öneri | Gerekçe |
 |---|---|---|---|
@@ -62,8 +62,7 @@ Rakibin ~1,8 bin ürünlük kataloğu, D2'deki 1.749 kaydın ölçeğine yakın.
 ### Yapılmayanlar ve yeniden değerlendirme koşulu
 
 - **Olası tanı listesi (lab, semptom, nekropsi):** Şu üç koşul birlikte sağlanmadan açılmaz: (a) lisanslı ya da kendi yazdığımız, kaynağı gösterilen bilgi tabanı, (b) veteriner klinik patoloji uzmanının içerik sorumluluğu ve doğrulaması, (c) [AI yol haritası](../ai/ai-roadmap.md) Aşama 3 değerlendirme kriterleri. Nekropsi kaydı Vetinity'nin hedef kitlesinde (pet kliniği) nadirdir; backlog'a madde açılmaz, rakip notunda kalır.
-- **AI ile ayırıcı tanı desteği (açık karar 8, kullanıcı kararı 2026-11-16: seçenek A).** Kural tabanlı tanı ekranı yapılmaz; yerine hasta kaydını okuyan AI yardımcısı gelir. Bu madde kabul edildi; ADR'nin geri kalanı (K1–K7, açık kararlar 1–7) önerili durumda.
-  - **Yeri:** AI-105 (lab özeti) genişletilir; ayrı ekran değil, lab sonucu ve muayene ekranında yan panel (ADR-008).
+- **AI ile ayırıcı tanı desteği (açık karar 8, kullanıcı kararı 2026-11-16: seçenek A).** Kural tabanlı tanı ekranı yapılmaz; yerine hasta kaydını okuyan AI yardımcısı gelir.  - **Yeri:** AI-105 (lab özeti) genişletilir; ayrı ekran değil, lab sonucu ve muayene ekranında yan panel (ADR-008).
   - **Girdi:** hastanın türü, yaşı, ırkı, şikâyet ve muayene bulguları, K5'teki yapılandırılmış lab satırları (referans aralığı ve işaretle) ve önceki sonuçlar. Hekimin elle "düşük/yüksek" işaretlemesi gerekmez.
   - **Çıktı:** "Düşünülebilecek durumlar" başlığı; her satırda hastanın hangi değerine ve bulgusuna dayandığı, hangisinin uymadığı ve ayırt etmek için hangi tetkikin eksik olduğu. "Teşhis", "olasılık" ve yüzde kullanılmaz.
   - **Sınır:** Taslaktır; hekim onaylamadan kayda yazılmaz (AI-009). Tedavi ve doz önermez. AI kapalıysa ya da kota bittiyse klinik akış etkilenmez. Kota [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md) 2026-11-14 değişikliğine göre her pakette.
@@ -88,7 +87,9 @@ Rakibin ~1,8 bin ürünlük kataloğu, D2'deki 1.749 kaydın ölçeğine yakın.
 - **Teknik (öneri, sözleşme backend'de yazılır):** global katalog tablosu ve etken madde tablosu (tek migration), eşitleme komutu (DbMigrator ya da yönetim komutu; HBS'e istek yalnız eşitlemede), `Product` üzerinde isteğe bağlı katalog bağı, `LabResult` sonuç satırları (ayrı migration). Yeni izinler: rehber okuma her rolde; katalog bağı mevcut `Products.Update`.
 - **Ürün belgeleri:** tanıtım sitesine bu iş çalışmadan yazılmaz (ADR-034 karar 6).
 
-## Açık kullanıcı kararları
+## Kullanıcı kararları
+
+Hepsi verildi (2026-11-16): 1–7'de "Öneri" sütunundaki seçenek kabul edildi, 8'de A seçildi. Aşağıda "açık karar N" diye anılan maddeler bu tablodur.
 
 | # | Karar | Seçenekler | Öneri |
 |---|---|---|---|
