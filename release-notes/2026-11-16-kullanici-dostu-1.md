@@ -47,3 +47,30 @@
   - Backend: 1314 domain, 4302 uygulama ve 2102 entegrasyon testi geçti, 3 test atlandı.
   - Panel: 3200 testin hepsi geçti.
   - Portal: 267 testin hepsi geçti.
+
+## Ek yayın: 2026-11-16 02:02 (TSİ), E-vet aktarma ve görsel düzeltmeler
+
+**Yayınlanan:**
+- Backend `main` `9930dd02`.
+- Panel `main` `7fa375e8` (`main-OKRAOFCU.js`).
+- Klinik siteleri (`site`) aynı commit'ten.
+
+Portal değişmedi. Migration yok. Yedek 02:02'de alındı. API ve site sağlıklı, günlükte hata yok.
+
+- **E-vet aktarma:**
+  - Kayıtsız günlerdeki boş muayene satırı, hastanın geçmişine tarih ve hekimle "Geliş" kaydı olarak aktarılıyor. Aynı gün başka kaydı olan satır yine atlanıyor. Gerçek dosyada 1.281 satır geliş olarak geliyor, 3.036 satır atlanıyor.
+  - Mükerrer kontrolüne kilo, ateş ve hekim de katıldı.
+  - Mükerrer nedeni ikiye ayrıldı: "Dosyada aynı satır iki kez var" ve "Daha önceki aktarmada geldi".
+  - Aynı adlı hayvanlar tür, tarih, kilo, mikroçip ve Aşı Bilgi raporuyla kendiliğinden ayrılıyor.
+  - Ayrılamayan satırlarda kullanıcıya soruluyor; soruda aşı ve muayene ayrıntısı gösteriliyor. "İkisi aynı hayvan" seçeneği türü farklı adaylarda çıkmıyor.
+- **Görsel düzeltmeler:**
+  - Koyu temada kart çerçevesi.
+  - Görünür "Hayvan" yazıları "Hasta" oldu.
+  - Özet sayfasındaki "Detay" bağlantıları tek biçimde.
+  - Stoktaki mor "Dışa aktar" düğmeleri düzeltildi.
+  - Klinik sitesi sihirbazında Türkçe adlar ve tasarım adları (Modern, Zarif, Samimi, Doğal).
+  - Sihirbazın hazır paletleri tek kaynakta toplandı ve kontrast eşiğini (4,5:1) geçiyor.
+- **Testler:**
+  - Backend: 1315 domain, 4321 uygulama ve 2103 entegrasyon testi geçti, 3 test atlandı.
+  - Panel: 3206 testin hepsi geçti.
+  - Klinik sitesi: 42 testin hepsi geçti.
