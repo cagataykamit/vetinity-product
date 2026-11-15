@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-16 01:15 (durum panosu oturumu; git ve canlı sunucu taraması, salt okunur). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (2026-11-16 01:10 sunucuda okundu): backend `e0994451` (2026-11-15 06:29), panel `main-Z4MWYXRK.js` (2026-11-15 20:53; FE origin `8e8b8d92`, aktarma doğrulama ekranı), portal `main-42Q2BAXM.js` (06:30). Yerel main canlının önünde ve push edilmedi: BE `5f9a7307` (+7 commit), FE `5cb278f0` (+24 commit). Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; koordinatör bildirimi: 01:23 yayını, sunucu güvenliği, kararlar; canlı sürüm sunucuda okundu). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `5f9a7307`, panel `5cb278f0` (`main-LXRG4QBO.js`), portal `main-ZS3H6KLO.js` (2026-11-16 01:23, [sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md)); origin = bu sürüm. Yerel main önde, push yok: BE `9930dd02`, FE `7fa375e8`. Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -31,18 +31,19 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün main (`docs/ai-kota` birleşti) | Karar verildi | Kod yok; Claude API hesabı kullanıcıda |
 | Nilvera e-Fatura ticari senaryo | BE `6add514c`, panel `7b53100b` | Canlıda (2026-11-14 02:40) | Migration `AddEDocumentBuyerAnswer` canlı DB'de. Gerçek alıcı reddi akışı denenmedi |
 | Birleşik kayıt modeli pilot öncesi dilimleri (RECORD-006, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md)) | BE `dc36b64d`, panel `da734556` | Canlıda (2026-11-15 03:35) | Gerekçeli iptal (yatış, aşı, tedavi), eşzamanlılık koruması, gerekçeli geç kayıt, hasta değişmezliği, görüntüleme geçmişi. 6 eklemeli migration; yedek 03:31. Kalan dilimler ADR-043'te; vital ölçümü HOSP-004 (P2) |
-| Deneme kaydında kötüye kullanım önlemi (TRIAL) | BE `e0994451`, FE `5765fdc6`, ürün main | Canlıda (2026-11-15 06:33) | E-posta kodu, tek e-posta/vergi no kuralı çalışıyor; Turnstile anahtarı girilmediği için insan doğrulaması atlanıyor (Cloudflare hesabı kullanıcıda). SMS doğrulaması kullanıcı kararıyla çıkarıldı; INT-003 (SMS) ertelendi (main'deki backlog'da henüz Planlandı) |
+| Deneme kaydında kötüye kullanım önlemi (TRIAL) | BE `e0994451`, FE `5765fdc6`, ürün main | Canlıda (2026-11-15 06:33) | E-posta kodu, tek e-posta/vergi no kuralı ve Turnstile (anahtarlar 2026-11-16 gecesi girildi) çalışıyor |
 | Kullanıcı dostu denetimi ([belge](../research/kullanici-dostu-denetim-2026-11-15.md)) | Ürün main (`docs/kullanici-dostu-denetim` birleşti) | Tamamlandı | Bulgular H1–H19, O4; düzeltmeler dalga dalga yapılıyor (aşağıda) |
-| UX düzeltmeleri dalga 1 (H1–H19, O4) | BE main `5f9a7307` (`feature/ux-dalga1-be`), FE main `0bc63aa6` (`feature/ux-dalga1`) | Main'de, canlıya çıkmadı | Diyalogda Enter kaydeder, kaldırma onay ister, boş liste metinleri, ödeme al tek tıkla, Türkçe hata metinleri, müşteri telefonu yeni kayıtta zorunlu (H17), KVKK varsayılan metinleri klinik bilgisiyle dolar (H8), portalda iptal edilmiş aşı gösterilmez. Migration yok. Push yok |
-| UX düzeltmeleri dalga 2 ve dalga 4 | UX dalga 2 ve dalga 4 oturumları; FE `feature/ux-dalga2` (henüz commit yok) | Geliştiriliyor | |
+| UX düzeltmeleri dalga 1 (H1–H19, O4) | BE `5f9a7307`, panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Diyalogda Enter kaydeder, kaldırma onay ister, boş liste metinleri, ödeme al tek tıkla, Türkçe hata metinleri, müşteri telefonu yeni kayıtta zorunlu (H17), KVKK varsayılan metinleri klinik bilgisiyle dolar (H8), portalda iptal edilmiş aşı gösterilmez. Migration yok. |
+| UX dalga 2 (formlar) ve dalga 4 (randevu iptalinde geri al, sonra takvim) | UX dalga 2 ve dalga 4 oturumları | Geliştiriliyor | Takvim tasarımı seçildi: taslak A + "Boş saat bul" paneli |
 | Aktarma doğrulama ekranı (taslak A) | FE `8e8b8d92` (`feature/aktarma-dogrulama-a`) | Canlıda (2026-11-15 20:53) | Sürüm notu main'de |
-| Aktarma yükleme adımı (taslak B: her ekranda tek soru) ve E-vet aynı adlı hayvan ipucu | FE main `5cb278f0` (`feature/aktarma-yukleme-b`, `c3b492c4`) | Main'de, canlıya çıkmadı | Taslaklar `taslak/aktarma-yukleme` (A–D) |
-| E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak) | BE ve FE `feature/evet-belirsiz-hasta` (BE +6, FE +2) | Dalda, birleşmedi | E-vet aktarma oturumu çalışıyor |
-| Virüs taraması (dosya yüklemeleri) | Virüs tarama oturumu, BE `feature/virus-tarama` (henüz commit yok) | Geliştiriliyor | ClamAV kurulumu sunucu işi; onay ister |
-| İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+8) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı CİMER günlük sınırı nedeniyle 2026-11-17'ye kaldı |
-| KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün dalı `docs/kvkk-yer-tutucu` (+1) | Dalda, birleşmedi | |
-| Takvim ızgara taslağı | FE `taslak/takvim-izgara` (henüz commit yok) | Geliştiriliyor | |
-| Site tasarımı | Site tasarım oturumu (boşta) | Doğrulanmadı | Dalı ve sonucu panoya bildirilmedi |
+| Aktarma yükleme adımı (taslak B: her ekranda tek soru) ve E-vet aynı adlı hayvan ipucu | panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Taslaklar `taslak/aktarma-yukleme` (A–D) |
+| E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak; mükerrer anahtarına hekim, kilo, ateş) | BE main `9930dd02`, FE main `a41c7869` | Main'de, canlıya çıkmadı | Testler sürüyor, ardından yayın. Push yok |
+| Görsel hızlı düzeltmeler | FE main `7fa375e8` (`feature/gorsel-hizli`) | Main'de, canlıya çıkmadı | E-vet belirsiz hastayla birlikte çıkacak. Push yok |
+| Virüs taraması (dosya yüklemeleri, ClamAV) | Virüs tarama oturumu, BE `feature/virus-tarama` | Geliştiriliyor | Kod dalda, testler sürüyor; ClamAV kurulumu sunucu işi |
+| İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+10) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı 2026-11-16'da CİMER'den "İstek" olarak gönderildi |
+| KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
+| Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; kodlama UX dalga 4'te |
+| Tanıtım sitesi tasarımı | Site tasarım oturumu (Fable) | Geliştiriliyor | Taslaklar hazırlanıyor; seçim kullanıcıda |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -51,7 +52,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. Yerel main (BE `5f9a7307`, FE `5cb278f0`): UX dalga 1, aktarma yükleme adımı B, E-vet ad ipucu. Migration yok. Push ve yayın onayı.
+1. Yerel main (BE `9930dd02`, FE `7fa375e8`): E-vet belirsiz hasta ve görsel hızlı düzeltmeler. Testler sürüyor; koordinatör testten sonra yayınlayacak.
 2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
@@ -60,15 +61,18 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 3. [Canlı işletim kılavuzu](../operations/CANLI-ISLETIM-KILAVUZU.md) bölüm 12: önem derecesi süreleri, destek kanalı ve mesai, nöbet, bakım penceresi, olay notlarının yeri, gölge dönem ölçütleri, RPO/RTO, ClamAV.
 4. ~~İlk hafta rehberi kartı~~ Seçildi ve canlıda (karşılama afişi, 03:11).
 5. Çalışma varsayımı olarak canlıda olan kurallar: TIER-004 kırılımlar, TIER-007 şubeler özeti, TIER-010 özel geliştirme talebi sınırı ve yetkisi.
+6. ~~Takvim tasarımı~~ Karar verildi (2026-11-16): taslak A + "Boş saat bul" paneli.
+7. ~~Randevu çakışma kuralı~~ Karar verildi (2026-11-16): hekimli randevularda yalnız aynı hekimin randevuları çakışma sayılır.
+8. ~~Model kullanımı~~ Karar verildi (2026-11-16): Fable yalnız tasarım işlerinde.
 
 **Sunucu ve hesap işleri (kullanıcıda)**
 1. iyzico canlı anahtarı yok: vergi kaydı ve üye işyeri başvurusu. Bu olmadan denemeden ücretli plana geçiş (TRIAL-007, BILL-*) canlıda çalışmaz.
 2. Claude Console API hesabı: **ertelendi** (2026-11-15, masraf yok). AI erken denemesi hesap açılınca.
 3. Firebase projesi ve FCM anahtarı (ücretsiz, ama yalnız mağaza uygulamasıyla anlamlı; MOBILE-002/003).
-4. SSH: anahtar kurulduktan sonra parola ve root girişini kapatma.
-5. SQL Server güncellemesi (16.0.4195 → 16.0.4315): bakım penceresinde, yedekten sonra; Zonguldak veritabanını da etkiler.
+4. ~~SSH~~ Yapıldı (2026-11-16 gecesi): parolayla giriş kapalı, root yalnız anahtarla (sunucuda doğrulandı).
+5. ~~SQL Server güncellemesi~~ Yapıldı (2026-11-16 gecesi): CU28 (16.0.4325).
 6. Veteriner bul site haritasını `robots.txt`'ye ekleme.
-7. Virüs taraması: kod işi virüs tarama oturumunda başladı; ClamAV kurulumu sunucu işi.
+7. Virüs taraması: kod dalda, testler sürüyor (virüs tarama oturumu); ClamAV kurulumu sunucu işi.
 8. Canlıdan gerçek e-posta (davet, hatırlatma, parola sıfırlama) gidişi denenmedi.
 9. Şahıs işletmesi unvanı ve vergi numarası gelince hukuki metinlerdeki yer tutucular doldurulacak.
 
