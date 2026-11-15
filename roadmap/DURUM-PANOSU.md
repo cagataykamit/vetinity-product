@@ -1,6 +1,6 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; UX 3. dalga oturumu bildirimi; git: muayene taslağı FE main'de). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `9930dd02`, panel ve site `7fa375e8` (`main-OKRAOFCU.js`; 2026-11-16 02:02), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md). Ürün deposunda main = origin. Main canlının önünde, push yok: BE `f0112187`, FE `2939d284`. Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
@@ -27,7 +27,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | E-vet pilot aktarma düzeltmeleri B1–B7 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md)) | BE `d56a01c5`, FE `9420ca94` | Canlıda (2026-11-14 02:40) | İkinci tur (ilerleme, yenileme, belirsiz hasta seçimi, atlananları indirme, kısa ad kuralı) BE `e0994451`, FE `5765fdc6` ile canlıda (2026-11-15 06:33). Kullanıcı aktarmayı yeniden deneyecek |
 | Hasta sahibi mobil uygulaması (MOBILE-002) | FE main `fc24ebc0` (dal `feature/mobil-magaza` birleşti), portal canlıda | Geliştiriliyor | Web portalında davranış değişmez; yerel özellikler yalnız mağaza paketinde. Kalan: Firebase ve gerçek push, iOS (Mac), App Links, imzalı paket, mağaza kaydı |
 | İlk hafta rehberi karşılama afişi (TIER-022) | FE main `9f49fb1c` (`feature/ilk-hafta-karsilama`) | Canlıda (2026-11-14 03:11) | Kart, karşılama afişi oldu; adımlara kısa ad ve simge |
-| Tanıtım sitesinde e-belge bölümü | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Özellikler sayfasında e-Fatura/e-Arşiv/e-SMM bölümü, paket tablosu satırı, SSS düzeltmesi. Sahibi ve onay durumu doğrulanmadı |
+| Tanıtım sitesinde e-belge bölümü (eski tasarım) | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Aynı içerik C tasarımına uyarlanmış: `feature/tanitim-sitesi-c-e-belge`. C seçilirse bu dal gereksiz kalır (doğrulanmadı) |
 | AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün main (`docs/ai-kota` birleşti) | Karar verildi | Kod yok; Claude API hesabı kullanıcıda |
 | Nilvera e-Fatura ticari senaryo | BE `6add514c`, panel `7b53100b` | Canlıda (2026-11-14 02:40) | Migration `AddEDocumentBuyerAnswer` canlı DB'de. Gerçek alıcı reddi akışı denenmedi |
 | Birleşik kayıt modeli pilot öncesi dilimleri (RECORD-006, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md)) | BE `dc36b64d`, panel `da734556` | Canlıda (2026-11-15 03:35) | Gerekçeli iptal (yatış, aşı, tedavi), eşzamanlılık koruması, gerekçeli geç kayıt, hasta değişmezliği, görüntüleme geçmişi. 6 eklemeli migration; yedek 03:31. Kalan dilimler ADR-043'te; vital ölçümü HOSP-004 (P2) |
@@ -46,7 +46,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+10) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı 2026-11-16'da CİMER'den "İstek" olarak gönderildi |
 | KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
 | Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; kodlama UX dalga 4'te |
-| Tanıtım sitesi tasarımı | Site tasarım oturumu (Fable) | Geliştiriliyor | Taslaklar hazırlanıyor; seçim kullanıcıda |
+| Tanıtım sitesi yeni tasarım: C "Sıcak klinik" | FE `feature/tanitim-sitesi-c` (`ab715102`, +6); üstünde `feature/tanitim-sitesi-c-e-belge` (`34b83610`, +2: e-belge bölümü yeni düzende, tüm paketlerde; SSS ve Hakkımızda düzeltmesi) | Dalda, birleşmedi | Build ve tanıtım testleri geçti (oturum bildirimi). Main'e alma ve `www` yayını bekliyor |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -56,7 +56,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 
 **Canlıya çıkış**
 1. Main (BE `f0112187`, FE `2939d284`): UX dalga 2, randevu iptalinde Geri al, takvim hekim sütunları, muayene taslağı, virüs taraması. Migration yok. Tam test sonrası push ve yayın; virüs taraması için sunucuya ClamAV kurulumu. FE `feature/ux-dalga3` main'e alınıp aynı yayına katılabilir.
-2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
+2. Tanıtım sitesi C "Sıcak klinik" + e-belge bölümü (FE `feature/tanitim-sitesi-c-e-belge`, `34b83610`): main'e alma ve `www` yayını. Eski `feature/ozellikler-e-belge` dalının yerine geçiyor gibi görünüyor.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
