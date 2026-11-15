@@ -51,7 +51,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Anında erişim; satış sürtünmesi olmadan değerlendirme |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi). **Kötüye kullanım önlemleri (2026-11-15; kullanıcı kararı: deneme açık kalır, önce Turnstile ve tek e-posta / tek vergi numarasıyla tek deneme; SMS telefon doğrulaması yapılmadı, INT-003 ertelendi):** kayıt e-postaya gelen 6 haneli kodla doğrulanır (10 dk, 5 deneme, 60 sn yeniden gönderme, adres/IP/genel günlük sınır); kod isteği Cloudflare Turnstile ister; bir e-posta (`+etiket` aynı sayılır) ve bir vergi numarasıyla (VKN/TCKN, sağlama algoritması) tek deneme; vergi numarası şimdilik zorunlu (tek ayar `TrialSignup:RequireTaxIdentityNumber`) ve fatura profiline yazılır; alanın altında "Her işletme bir kez ücretsiz deneyebilir…" notu. Turnstile ayrıca portal giriş kodu, parola sıfırlama ve online randevu kodunda. Dallar `feature/deneme-kotuye-kullanim` (backend + panel/portal), main'e alınmadı, canlıda değil. Sözleşme: backend `docs/TRIAL_SIGNUP_ABUSE_API_CONTRACT.md`. **Canlıya çıkış koşulu:** Cloudflare Turnstile anahtarları sunucuya girilmeden yayınlanırsa yeni deneme kaydı, portal kodla giriş ve online randevu talebi 503 ile durur |
 | **Bağımlılıklar** | TRIAL-004, TRIAL-007 |
 | **Notlar** | Canlı demo büyük/kurumsal müşteriler için opsiyonel kalır → [ADR-001](../decisions/ADR-001-self-service-trial-strategy.md). Sürümlü kullanım şartları/hukuki metin kabulü (genel ürün yeteneği) → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance), [TRIAL-009](#trial-009--sürümlü-kullanım-şartları-ve-hukuki-metin-kabulü)
 
@@ -2735,7 +2735,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Otomatik hatırlatmalar |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-11-15: SMS'e şimdilik ödeme yapılmayacak). Deneme kaydı için başlanan SMS telefon doğrulaması (Netgsm OTP) geri alındı; yerine e-posta kodu ve Cloudflare Turnstile (TRIAL-001) |
 | **Bağımlılıklar** | TRIAL-004 |
 | **Notlar** | Trial'da gerçek SMS sınırlandırılır. **E-Vet SMART:** Takvim SMS bakiye; Hatırlatma / Düzenle modal gönder / Sms Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-takvim-modül). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Doğrudan Satış Geçmişi **Sms Gönder** → Durum modal (SMS Id + success indicator); carrier delivery **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
