@@ -34,6 +34,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | SEC- | Güvenlik ve sertleştirme |
 | WEB- | Tanıtım sitesi (www) |
 | TIER- | Paket farkları ve üst paket işleri |
+| REF- | Klinik başvuru bilgisi (ilaç rehberi, lab değer işareti) |
 
 ---
 
@@ -3546,6 +3547,24 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Durum** | Geliştirildi (2026-11-09): main'de FE `e483b123`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Tabloda "Sadece farkları göster" (varsayılan kapalı, 48 satırdan 14'e). Kartlar bir önceki paketin tümü artı farkı sayıyor ve "Kimin için" satırı var; maddeler `PRICING_FEATURE_ROWS`'tan. Satıra `badge` alanı (AI çalışınca "Eklenti gerekir"). Destek satırı kullanıcı kararını bekliyor |
 | **Bağımlılıklar** | WEB-007 |
 | **Notlar** | Metin `PRICING_FEATURE_ROWS` verisinden üretilir, kopyalanmaz |
+
+## REF — Klinik başvuru bilgisi
+
+### REF-001 — İlaç rehberi ve lab değer işareti
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | REF-001 |
+| **Başlık** | İlaç rehberi ve lab değer işareti |
+| **Kategori** | REF |
+| **Problem** | Hekim reçete yazarken ürünün etken maddesini, hedef türünü ve onaylı ürün bilgisini başka bir siteden arıyor; lab sonucu serbest metin olduğu için düşük/yüksek değerler ve önceki sonuçlarla değişim görünmüyor. E-vet'te ayrı İlaç Rehberi ve DataVet Lab ekranları var (kullanıcı, 2026-11-12: "bizim bunları da yapmamız lazım") |
+| **Önerilen çözüm** | Dilim 1: global, salt okunur ruhsatlı ürün kataloğu (Bakanlık HBS ruhsatlı veteriner ilaçları; yalnız olgu alanları; Ürün Özellikleri Özeti'ne bağlantı, metin kopyalanmaz) ve etken madde, ürün, ruhsat sahibine göre arama. Dilim 2: ürün kartında isteğe bağlı katalog bağı; reçete ve uygulamada etken madde ve engellemeyen hedef tür notu; etken maddeye göre stoktaki ürünler. Dilim 3: lab sonucunda isteğe bağlı yapılandırılmış satırlar (parametre, değer, birim, sonuçla gelen referans aralığı), hesaplanan düşük/normal/yüksek işareti ve aynı parametrenin eğilimi. Olası tanı listesi ve ilaç etkileşimi **kapsam dışı** |
+| **Kullanıcı değeri** | Reçete ve stokta doğru ürün bilgisi iş akışının içinde; lab sonuçları okunur ve karşılaştırılabilir; cihaz entegrasyonu ve AI lab özeti için yapılandırılmış veri |
+| **Öncelik** | P2 (öneri) |
+| **Tahmini zorluk** | Orta (Dilim 1–2), Orta (Dilim 3) |
+| **Durum** | Araştırılacak: kullanıcı kararı bekliyor ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) önerildi, 2026-11-15; 7 açık kullanıcı kararı). Dilim 1'in verisi Bakanlık izni sorusuna bağlı (ADR-049 açık karar 2) |
+| **Bağımlılıklar** | ADR-049; Dilim 3 için INT-001 isteğe bağlı; AI-105 bu veriyi sonradan kullanır |
+| **Notlar** | Kaynak HBS sorgusu 2026-11-15'te 1.749 kayıt; etken madde adları normalize değil, eşleme bizde. Rakip içeriği alınmaz; görünüm kopyalanmaz. Tanı, doz ve tedavi önermez; "olası teşhis", "%" ifadesi kullanılmaz (ADR-008, AI-105 ile tutarlı). Global referans aralığı tablosu sunulmaz (aralık laboratuvara özgü). Paket önerisi: her pakette. Nekropsi ve semptom "olası hastalık" ekranları için madde açılmadı → [e-vet.md](../competitors/e-vet.md#nekropsi-modül) |
 
 ## İlgili belgeler
 
