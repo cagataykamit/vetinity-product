@@ -1,10 +1,10 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-15 03:45 (durum panosu oturumu; koordinatör bildirimi: ADR-043 yayını, push; canlı sürüm sunucuda doğrulandı). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Son güncelleme:** 2026-11-15 06:35 (koordinatör: deneme kaydı güvenliği ve E-vet aktarma düzeltmeleri yayını, push). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası: backend `dc36b64d` ve panel `da734556` (`main-2FCBIK34.js`; 2026-11-15 03:31–03:35, [sürüm notu](../release-notes/2026-11-15-kayit-modeli.md)), portal `fc24ebc0` (`main-ALYH5NUA.js`). Backend sürümü API dosyasından, panel dosyası canlı adresten okundu. BE, FE ve ürün deposunda main = origin. Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
-**Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deniyor (2026-11-14 03:11 sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
+**Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
 
 Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı · Dalda, birleşmedi · Geliştiriliyor · Karar bekliyor (kullanıcı) · Dış yanıt bekliyor · Planlandı · Araştırılacak · Ertelendi.
 
@@ -24,14 +24,14 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 
 | İş | Nerede | Durum | Not |
 |---|---|---|---|
-| E-vet pilot aktarma düzeltmeleri B1–B7 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md)) | BE `d56a01c5`, FE `9420ca94` | Canlıda (2026-11-14 02:40) | Kullanıcı pilotta aktarmayı yeniden deniyor. Bulgu belgesi main'de |
+| E-vet pilot aktarma düzeltmeleri B1–B7 ([bulgular](../research/evet-pilot-aktarma-bulgulari-2026-11-14.md)) | BE `d56a01c5`, FE `9420ca94` | Canlıda (2026-11-14 02:40) | İkinci tur (ilerleme, yenileme, belirsiz hasta seçimi, atlananları indirme, kısa ad kuralı) BE `e0994451`, FE `5765fdc6` ile canlıda (2026-11-15 06:33). Kullanıcı aktarmayı yeniden deneyecek |
 | Hasta sahibi mobil uygulaması (MOBILE-002) | FE main `fc24ebc0` (dal `feature/mobil-magaza` birleşti), portal canlıda | Geliştiriliyor | Web portalında davranış değişmez; yerel özellikler yalnız mağaza paketinde. Kalan: Firebase ve gerçek push, iOS (Mac), App Links, imzalı paket, mağaza kaydı |
 | İlk hafta rehberi karşılama afişi (TIER-022) | FE main `9f49fb1c` (`feature/ilk-hafta-karsilama`) | Canlıda (2026-11-14 03:11) | Kart, karşılama afişi oldu; adımlara kısa ad ve simge |
 | Tanıtım sitesinde e-belge bölümü | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Özellikler sayfasında e-Fatura/e-Arşiv/e-SMM bölümü, paket tablosu satırı, SSS düzeltmesi. Sahibi ve onay durumu doğrulanmadı |
 | AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün main (`docs/ai-kota` birleşti) | Karar verildi | Kod yok; Claude API hesabı kullanıcıda |
 | Nilvera e-Fatura ticari senaryo | BE `6add514c`, panel `7b53100b` | Canlıda (2026-11-14 02:40) | Migration `AddEDocumentBuyerAnswer` canlı DB'de. Gerçek alıcı reddi akışı denenmedi |
 | Birleşik kayıt modeli pilot öncesi dilimleri (RECORD-006, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md)) | BE `dc36b64d`, panel `da734556` | Canlıda (2026-11-15 03:35) | Gerekçeli iptal (yatış, aşı, tedavi), eşzamanlılık koruması, gerekçeli geç kayıt, hasta değişmezliği, görüntüleme geçmişi. 6 eklemeli migration; yedek 03:31. Kalan dilimler ADR-043'te; vital ölçümü HOSP-004 (P2) |
-| Deneme kaydında kötüye kullanım önlemi (TRIAL) | Deneme oturumu; BE `feature/deneme-kotuye-kullanim`, ürün `docs/deneme-kotuye-kullanim` | Geliştiriliyor | Turnstile, e-posta kodu, vergi numarası. SMS doğrulaması kullanıcı kararıyla çıkarıldı; INT-003 (SMS) ertelendi (main'deki backlog'da henüz Planlandı) |
+| Deneme kaydında kötüye kullanım önlemi (TRIAL) | BE `e0994451`, FE `5765fdc6`, ürün main | Canlıda (2026-11-15 06:33) | E-posta kodu, tek e-posta/vergi no kuralı çalışıyor; Turnstile anahtarı girilmediği için insan doğrulaması atlanıyor (Cloudflare hesabı kullanıcıda). SMS doğrulaması kullanıcı kararıyla çıkarıldı; INT-003 (SMS) ertelendi (main'deki backlog'da henüz Planlandı) |
 | Kullanıcı dostu denetimi | Fable oturumu | Geliştiriliyor | Yalnız inceleme, kod yok |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
@@ -230,7 +230,7 @@ Geliştiriliyor: 1 · Planlandı: 1 · Canlıda (kısmen): 4 · Canlıda: 91 · 
 | [BILL-004](../backlog/feature-backlog.md#bill-004--ödeme-alınıyor-ama-abonelik-açılmıyor-iptal-sonrası-geçersiz-token) | Ödeme alınıyor ama abonelik açılmıyor; iptal sonrası "Geçersiz token" | Canlıda | iyzico sandbox'ta denendi; canlı anahtar yok |
 | [BILL-005](../backlog/feature-backlog.md#bill-005--çift-ödeme-aynı-denemede-ikinci-ödeme-otomatik-iade) | Çift ödeme: aynı denemede ikinci ödeme otomatik iade | Canlıda | iyzico sandbox'ta denendi; canlı anahtar yok |
 | [TIER-001](../backlog/feature-backlog.md#tier-001--paket-özelliklerinin-uygulamada-zorlanması) | Paket özelliklerinin uygulamada zorlanması | Canlıda | Panel ekranları tarayıcıda görülmedi |
-| [TIER-024](../backlog/feature-backlog.md#tier-024--tam-veri-geçişi-klinik-geçmiş-bakiye-hesap-hareketleri-randevu-ürün) | Tam veri geçişi (klinik geçmiş, bakiye, hesap hareketleri, randevu, ürün) | Canlıda | E-vet pilot doğrulamasında B1–B7 çıktı; düzeltmeler dalda, aktarma onlardan sonra |
+| [TIER-024](../backlog/feature-backlog.md#tier-024--tam-veri-geçişi-klinik-geçmiş-bakiye-hesap-hareketleri-randevu-ürün) | Tam veri geçişi (klinik geçmiş, bakiye, hesap hareketleri, randevu, ürün) | Canlıda | E-vet pilot düzeltmeleri iki turda canlıda (2026-11-14 02:40, 2026-11-15 06:33); kullanıcı yeniden deneyecek |
 
 </details>
 
