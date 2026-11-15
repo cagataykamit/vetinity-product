@@ -3562,7 +3562,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Reçete ve stokta doğru ürün bilgisi iş akışının içinde; lab sonuçları okunur ve karşılaştırılabilir; cihaz entegrasyonu ve AI lab özeti için yapılandırılmış veri |
 | **Öncelik** | P2 (öneri) |
 | **Tahmini zorluk** | Orta (Dilim 1–2), Orta (Dilim 3) |
-| **Durum** | Araştırılacak: kullanıcı kararı bekliyor ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) önerildi, 2026-11-15; 7 açık kullanıcı kararı; 8. karar verildi 2026-11-16: tanı desteği AI-105 ile, kural tabanlı ekran yok). Dilim 1'in verisi Bakanlık izni sorusuna bağlı (ADR-049 açık karar 2) |
+| **Durum** | Planlandı ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) kabul edildi, 2026-11-16; tanı desteği AI-105 ile, kural tabanlı ekran yok). Dilim 1'in verisi Bakanlık iznine bağlı: talebi kullanıcı gönderir, izin gelmeden toplu alım yok; model ve ekran işi paralel başlayabilir. Roadmap'e alınmadı |
 | **Bağımlılıklar** | ADR-049; Dilim 3 için INT-001 isteğe bağlı; AI-105 bu veriyi sonradan kullanır |
 | **Notlar** | Kaynak HBS sorgusu 2026-11-15'te 1.749 kayıt; etken madde adları normalize değil, eşleme bizde. Rakip içeriği alınmaz; görünüm kopyalanmaz. Tanı, doz ve tedavi önermez; "olası teşhis", "%" ifadesi kullanılmaz (ADR-008, AI-105 ile tutarlı). Global referans aralığı tablosu sunulmaz (aralık laboratuvara özgü). Paket önerisi: her pakette. Nekropsi ve semptom "olası hastalık" ekranları için madde açılmadı → [e-vet.md](../competitors/e-vet.md#nekropsi-modül) |
 
