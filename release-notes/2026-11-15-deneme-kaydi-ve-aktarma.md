@@ -45,3 +45,15 @@
   - Backend: 1314 domain ve 4291 uygulama testinin hepsi geçti; entegrasyonda 2102 geçti, 3 atlandı.
   - Panel: 3138 testin hepsi geçti.
   - Portal: 258 testin hepsi geçti.
+
+## Ek yayın: 2026-11-15 20:53 (TSİ), aktarma doğrulama ekranı
+
+**Yayınlanan:** panel `main` `8e8b8d92` (`main-Z4MWYXRK.js`). Yalnız panel; backend, migration ve portal değişmedi.
+
+- **Doğrulama sonucu ekranı yeniden düzenlendi (taslak A):**
+  - En üstte tek cümlelik sonuç ve oran çubuğu var. Hemen altında sizden seçim bekleyen değerler duruyor; yanlarında "Atla" ve "Geri al" düğmeleri var.
+  - Ayrıntılar katlı duruyor. Üç sonuç her yerde aynı adla geçiyor: Aktarılacak, Bilerek atlanacak, Aktarılamayacak.
+  - "Aktarılacak" bölümünde bir tabloya tıklayınca o tablonun satırları açılıyor.
+  - Hatırlatmalar tek bir notta toplandı.
+  - Alttaki düğme çubuğu ekrana yapışık. "Onay adımına geç" kapalıysa nedeni yanında yazıyor.
+- **Testler:** Panelin 3152 testinin hepsi geçti. Ekran sahte veriyle masaüstü ve telefon genişliğinde denendi; gerçek arka uçla denenmedi.
