@@ -14,6 +14,8 @@
 | **DataVet Lab** (Pet, Büyükbaş) | Tür seçimi; BOS, Biyokimya, Hemogram vb. parametrelerde Yok/Düşük/Normal/Yüksek seçimi; sağda "Olası Hastalıklar" listesi ve eşleşme oranı; "Karşılaştır" | Puanlama formülü, bilgi tabanının kaynağı, klinik doğrulama; hasta kaydına yazma yok |
 | **Semptom ve Nekropsi** | Semptom ya da nekropsi bulgusu işaretleyince "Olası Hastalıklar" listesi | Aynı |
 
+Kullanıcının 2026-11-15 ekran görüntüsü (DataVet Lab Pet, köpek, Biyokimya sekmesi; iki parametre "Düşük", biri "Normal" işaretli): listede tek satır "Olası Teşhis", Lab⅓ "1/13", Lab% "8%". Yüzde, o hastalığa bağlı 13 parametreden eşleşen birinin oranı gibi görünüyor (1/13 ≈ %7,7); olasılık hesabı olduğuna dair işaret yok. Tek parametrenin eşleşmesi bir hastalığı "Olası Teşhis" başlığıyla listeye çıkarıyor.
+
 Rakip ekranları ayrı başvuru araçlarıdır: hasta kaydıyla bağı yoktur, hekim değeri elle işaretler. [Rakip analizi](../roadmap/RAKIP-ANALIZI-2026-10.md) bu alanı "Yok, öncelik düşük–orta" olarak yazmıştı.
 
 ### Vetinity'de bugün ne var (backend `main` `e0994451`, 2026-11-15 okuması)
