@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Önerildi (2026-11-15).** Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. Aşağıdaki K1–K7 **öneridir**; "Açık kullanıcı kararları" bölümündeki maddeler kullanıcı onayı bekler. Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
+**Önerildi (2026-11-15).** Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. **Ek (2026-11-16):** açık karar 8 kullanıcı tarafından verildi (AI ile ayırıcı tanı desteği, seçenek A). Aşağıdaki K1–K7 **öneridir**; "Açık kullanıcı kararları" bölümündeki maddeler kullanıcı onayı bekler. Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
 
 ## Bağlam
 
@@ -62,13 +62,13 @@ Rakibin ~1,8 bin ürünlük kataloğu, D2'deki 1.749 kaydın ölçeğine yakın.
 ### Yapılmayanlar ve yeniden değerlendirme koşulu
 
 - **Olası tanı listesi (lab, semptom, nekropsi):** Şu üç koşul birlikte sağlanmadan açılmaz: (a) lisanslı ya da kendi yazdığımız, kaynağı gösterilen bilgi tabanı, (b) veteriner klinik patoloji uzmanının içerik sorumluluğu ve doğrulaması, (c) [AI yol haritası](../ai/ai-roadmap.md) Aşama 3 değerlendirme kriterleri. Nekropsi kaydı Vetinity'nin hedef kitlesinde (pet kliniği) nadirdir; backlog'a madde açılmaz, rakip notunda kalır.
-- **Seçenek: AI ile ayırıcı tanı desteği (açık karar 8).** Kural tabanlı tanı ekranının yerine, hasta kaydını okuyan AI yardımcısı. Kullanıcı 2026-11-16'da bu yolun ADR'ye seçenek olarak eklenmesini istedi; karar verilmedi.
+- **AI ile ayırıcı tanı desteği (açık karar 8, kullanıcı kararı 2026-11-16: seçenek A).** Kural tabanlı tanı ekranı yapılmaz; yerine hasta kaydını okuyan AI yardımcısı gelir. Bu madde kabul edildi; ADR'nin geri kalanı (K1–K7, açık kararlar 1–7) önerili durumda.
   - **Yeri:** AI-105 (lab özeti) genişletilir; ayrı ekran değil, lab sonucu ve muayene ekranında yan panel (ADR-008).
   - **Girdi:** hastanın türü, yaşı, ırkı, şikâyet ve muayene bulguları, K5'teki yapılandırılmış lab satırları (referans aralığı ve işaretle) ve önceki sonuçlar. Hekimin elle "düşük/yüksek" işaretlemesi gerekmez.
   - **Çıktı:** "Düşünülebilecek durumlar" başlığı; her satırda hastanın hangi değerine ve bulgusuna dayandığı, hangisinin uymadığı ve ayırt etmek için hangi tetkikin eksik olduğu. "Teşhis", "olasılık" ve yüzde kullanılmaz.
   - **Sınır:** Taslaktır; hekim onaylamadan kayda yazılmaz (AI-009). Tedavi ve doz önermez. AI kapalıysa ya da kota bittiyse klinik akış etkilenmez. Kota [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md) 2026-11-14 değişikliğine göre her pakette.
   - **Ön koşullar:** K5 (yapılandırılmış lab) önce gelir. [AI yol haritası](../ai/ai-roadmap.md) Aşama 3 kriterleri uygulanır. Satış ve tanıtım metnine girmeden önce pilot hekimlerle doğruluk ölçülür; örneğin geçmiş vakalarda öneri hekimin koyduğu tanıyla karşılaştırılır. Lisanslı veteriner bilgi tabanı olmadığından model kaynak gösteremez; açıklama hastanın kendi verisine dayanır.
-  - **ADR-008 ile ilişki:** "AI tanı koymaz" kuralı kalır; bu seçenek tanı koymaz, hekime ayırıcı tanı taslağı sunar. Seçilirse ADR-008'e bu yönde bir ek düşülür.
+  - **ADR-008 ile ilişki:** "AI tanı koymaz" kuralı kalır; bu iş tanı koymaz, hekime ayırıcı tanı taslağı sunar. ADR-008'e ek düşüldü (2026-11-16).
 - **İlaç etkileşimi:** Lisanslı kaynak (ör. ticari veteriner ilaç veritabanı) şartları ve fiyatı öğrenilip Türkiye ürünleriyle etken madde üzerinden eşlenebildiği gösterilmeden yapılmaz. Kendi etkileşim listemizi yazmak önerilmez: yanlış negatif, "uyarı yoksa güvenli" algısı yaratır.
 
 ## Değerlendirilen alternatifler
@@ -99,7 +99,7 @@ Rakibin ~1,8 bin ürünlük kataloğu, D2'deki 1.749 kaydın ölçeğine yakın.
 | 5 | Paket (K7) | A: her pakette. B: rehber her pakette, lab eğilimi ve hedef tür notu Profesyonel ve Kurumsal'da. | **A.** |
 | 6 | Menüdeki yeri | A: ayrı menü öğesi yok; rehber global aramada, ürün kartında ve reçete satırında açılır, ayrıca Stok grubunda "İlaç rehberi" sayfası. B: Klinik grubunda ayrı öğe. | **A** (menü büyümesi sınırlı tutuluyor, Aşama 8 kararı). |
 | 7 | Olası tanı listesi ve etkileşim için ileride kaynak araştırması | A: şimdi yok, yeniden değerlendirme koşulu bu ADR'de kalır. B: ticari veritabanı sağlayıcısından teklif istenir. | **A.** |
-| 8 | Tanı desteği AI ile mi verilecek? ("Yapılmayanlar" bölümündeki seçenek) | A: AI-105 genişletilerek, K5'ten sonra, pilotta doğruluk ölçülerek; kural tabanlı ekran yok. B: AI tanı desteği de yok, yalnız lab özeti (bugünkü AI-105). C: kural tabanlı ekran (rakip gibi) ve AI birlikte. | **A.** |
+| 8 | Tanı desteği AI ile mi verilecek? ("Yapılmayanlar" bölümündeki seçenek) | A: AI-105 genişletilerek, K5'ten sonra, pilotta doğruluk ölçülerek; kural tabanlı ekran yok. B: AI tanı desteği de yok, yalnız lab özeti (bugünkü AI-105). C: kural tabanlı ekran (rakip gibi) ve AI birlikte. | **Karar verildi: A** (kullanıcı, 2026-11-16: "A … tamamdır"). |
 
 ## Doğrulanmayanlar
 
