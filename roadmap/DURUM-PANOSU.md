@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; koordinatör bildirimi: 01:23 yayını, sunucu güvenliği, kararlar; canlı sürüm sunucuda okundu). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `5f9a7307`, panel `5cb278f0` (`main-LXRG4QBO.js`), portal `main-ZS3H6KLO.js` (2026-11-16 01:23, [sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md)); origin = bu sürüm. Yerel main önde, push yok: BE `9930dd02`, FE `7fa375e8`. Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-16 02:10 (durum panosu oturumu; koordinatör bildirimi: 02:02 yayını; canlı sürüm sunucuda okundu). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `9930dd02`, panel ve site `7fa375e8` (`main-OKRAOFCU.js`; 2026-11-16 02:02), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md). Üç depoda main = origin. Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -37,8 +37,8 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | UX dalga 2 (formlar) ve dalga 4 (randevu iptalinde geri al, sonra takvim) | UX dalga 2 ve dalga 4 oturumları | Geliştiriliyor | Takvim tasarımı seçildi: taslak A + "Boş saat bul" paneli |
 | Aktarma doğrulama ekranı (taslak A) | FE `8e8b8d92` (`feature/aktarma-dogrulama-a`) | Canlıda (2026-11-15 20:53) | Sürüm notu main'de |
 | Aktarma yükleme adımı (taslak B: her ekranda tek soru) ve E-vet aynı adlı hayvan ipucu | panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Taslaklar `taslak/aktarma-yukleme` (A–D) |
-| E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak; mükerrer anahtarına hekim, kilo, ateş) | BE main `9930dd02`, FE main `a41c7869` | Main'de, canlıya çıkmadı | Testler sürüyor, ardından yayın. Push yok |
-| Görsel hızlı düzeltmeler | FE main `7fa375e8` (`feature/gorsel-hizli`) | Main'de, canlıya çıkmadı | E-vet belirsiz hastayla birlikte çıkacak. Push yok |
+| E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak; mükerrer anahtarına hekim, kilo, ateş) | BE `9930dd02`, panel `a41c7869` | Canlıda (2026-11-16 02:02) | Migration yok |
+| Görsel hızlı düzeltmeler | Panel ve site `7fa375e8` (`feature/gorsel-hizli`) | Canlıda (2026-11-16 02:02) | |
 | Virüs taraması (dosya yüklemeleri, ClamAV) | Virüs tarama oturumu, BE `feature/virus-tarama` | Geliştiriliyor | Kod dalda, testler sürüyor; ClamAV kurulumu sunucu işi |
 | İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+10) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı 2026-11-16'da CİMER'den "İstek" olarak gönderildi |
 | KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
@@ -52,8 +52,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. Yerel main (BE `9930dd02`, FE `7fa375e8`): E-vet belirsiz hasta ve görsel hızlı düzeltmeler. Testler sürüyor; koordinatör testten sonra yayınlayacak.
-2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
+1. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
