@@ -77,13 +77,13 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 | Kim | Ne | Durum |
 |---|---|---|
 | Nilvera | Test hesabı; iş birliği / gelir payı programı | Test hesabı geldi (2026-11-12), canlıya Nilvera ile çıkıldı. İş birliği yanıtının durumu belgelerde yok, teyit edilecek |
-| Paraşüt | Staging'de e-Arşiv iş hatası ve e-SMM'nin açılması | Destek yanıtı bekleniyor (2026-11-12 ayrıntılı yanıt gönderildi). Canlıda Paraşüt kapalı |
+| Paraşüt | Staging'de e-Arşiv iş hatası ve e-SMM'nin açılması | Yanıt geldi (2026-11-16): staging'de e-SMM hesabı açılmıyor. Paraşüt canlıda kapalı kalır; e-SMM Nilvera ile. Paraşüt yalnız klinik isterse, kendi gerçek hesabıyla doğrulanır |
 | Uyumsoft | Ortaklık | Sözleşmeli teklif reddedildi. Uyumsoft "sözleşmesiz, hak edişsiz iş ortaklığı" önerdi; plan: "desteklenen" sağlayıcı, API dokümanı ve test hesabı istenecek, entegrasyon Nilvera'dan sonra |
 | NES | Test hesabı, API dokümanı, kontör fiyatı | Test hesabı istendi (2026-11-12), ekler gelmedi |
 | BirFatura | Entegrasyon başvurusu | Yanıt bekleniyor (2026-11-12 yeniden gönderildi) |
 | Sovos (Digital Planet) | İş ortaklığı | Yanıt bekleniyor (2026-11-10'dan beri) |
 | Apple / Google | Geliştirici hesapları | Ertelendi (2026-11-15, masraf yok) |
-| Tarım ve Orman Bakanlığı | HBS web servis sorusu (ADR-036 D9); ruhsatlı ürün listesi izin talebi (ADR-049) | İzin talebi yazısı hazır, CİMER günlük sınırı nedeniyle 2026-11-17'de gönderilecek (dal `docs/adr-049-klinik-basvuru`). HBS sorusunun durumu belgelerde yok |
+| Tarım ve Orman Bakanlığı | HBS web servis sorusu (ADR-036 D9); ruhsatlı ürün listesi izin talebi (ADR-049) | Gönderildi (2026-11-16, CİMER, başvuru türü "İstek"): HBS web servisi ve ruhsatlı veteriner ilaçları listesinin kullanım izni tek yazıda. Yanıt bekleniyor (en geç 30 gün) |
 
 ## Öncelik başına durum
 
