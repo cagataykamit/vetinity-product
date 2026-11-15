@@ -1,7 +1,7 @@
 # Açık Rıza Metni (klinik şablonu, ADR-021 formu)
 
-Sürüm: 1.0 · Tarih: 2026-11-09
-Bu metin backend `ClinicKvkkFormTemplateDefaults.Text` varsayılanıdır; klinik Ayarlar > KVKK form metninden değiştirebilir.
+Sürüm: 1.1 · Tarih: 2026-11-16
+Bu metin backend `ClinicKvkkFormTemplateDefaults.TextFor(Consent, clinic)` varsayılanıdır; klinik Ayarlar > KVKK form metninden değiştirebilir. Klinik adresi ve e-postası sunucuda klinik kaydından yazılır; metinde köşeli parantezli alan yoktur.
 
 Tasarım ilkesi (Kanun m.3/a, m.5/1): Açık rıza yalnızca **başka hukuki sebebe dayanmayan** işlemler için, **belirli bir konuya** ilişkin, **bilgilendirmeye dayalı** ve **özgür iradeyle** verilir. Hizmetin sunulması rızaya bağlanmaz; bu yüzden metin aydınlatma metninden ayrıdır ve yalnız hatırlatma/iletişim izni ile (varsa) isteğe bağlı iletişimi kapsar. Rızasız da hizmet verilir ve müşteri istediği zaman geri alabilir.
 
@@ -18,7 +18,7 @@ Aşı, randevu, kontrol ve tedavi takibi gibi hayvanıma ilişkin hatırlatma ve
 Bu rıza kampanya, reklam veya ticari nitelikte ileti göndermeyi kapsamaz. Bu tür iletiler için ayrıca ayrı bir izin alınır.
 
 **3. Rızanın serbestliği ve geri alınması**
-Rıza vermememin veya sonradan geri almamın, Kliniğin bana veteriner hizmeti sunmasını etkilemeyeceğini biliyorum. Rızamı dilediğim zaman, [başvuru kanalı: yazılı başvuru adresi veya e-posta, klinik doldurur] üzerinden Kliniğe bildirerek geri alabilirim. Geri alma, geri almadan önce yapılmış işlemlerin hukuka uygunluğunu etkilemez.
+Rıza vermememin veya sonradan geri almamın, Kliniğin bana veteriner hizmeti sunmasını etkilemeyeceğini biliyorum. Rızamı dilediğim zaman Kliniğe yazılı olarak (‹klinik adresi›) ya da e-postayla (‹klinik e-postası›) bildirerek geri alabilirim. Geri alma, geri almadan önce yapılmış işlemlerin hukuka uygunluğunu etkilemez.
 
 **4. Haklarım**
 Kanun'un 11. maddesi kapsamındaki haklarımın ve bunları nasıl kullanabileceğimin Aydınlatma Metninde belirtildiğini biliyorum.
@@ -28,6 +28,10 @@ Kanun'un 11. maddesi kapsamındaki haklarımın ve bunları nasıl kullanabilece
 Veri Sahibi: {{clientName}}      Tarih: {{date}}      İmza:
 
 ---
+
+## Klinik bilgisinin yazılması (sunucu kuralı, v1.1)
+
+Madde 3'teki `‹…›` yerleri klinik kaydından gelir: yalnız adres varsa "Kliniğe yazılı olarak (‹klinik adresi›)", yalnız e-posta varsa "Kliniğe yazılı olarak ya da e-postayla (‹klinik e-postası›)", ikisi de yoksa "Kliniğe bildirerek geri alabilirim". Eksik bilgi Ayarlar'da uyarı olarak görünür (`missingClinicDetails`). v1.1 değişikliği (2026-11-16, H8): köşeli parantezli başvuru kanalı kaldırıldı.
 
 ## Önceki varsayılan metne göre değişenler (inceleme notu)
 
