@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Kabul edildi (2026-11-16, kullanıcı: "tamam önerilerini kabul ediyorum"); önerildi 2026-11-15.** Kararlar 1–7'de önerilen seçenek, karar 8'de A seçildi. Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. Bakanlık verisinin toplu alımı, kullanıcının göndereceği izin talebine bağlıdır (karar 2). Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
+**Kabul edildi (2026-11-16, kullanıcı: "tamam önerilerini kabul ediyorum"); önerildi 2026-11-15.** Kararlar 1–7'de önerilen seçenek, karar 8'de A seçildi. Kod yok. Tetikleyen: kullanıcı 2026-11-12'de pilot kliniğin E-vet verisini aktarırken E-vet'in İlaç Rehberi ve DataVet Lab ekranlarını gösterip "bizim bunları da yapmamız lazım" dedi. Kullanıcı kuralı gereği klinik pratiği sorusu sorulmadı; kapsam rakip pratiğinden ve kaynak araştırmasından türetildi. Bakanlık verisinin toplu alımı, kullanıcının göndereceği izin talebine bağlıdır (karar 2; yazı: [operations/bakanlik-ilac-listesi-izin-talebi.md](../operations/bakanlik-ilac-listesi-izin-talebi.md)). Backlog: [REF-001](../backlog/feature-backlog.md#ref-001--ilaç-rehberi-ve-lab-değer-işareti).
 
 ## Bağlam
 
