@@ -51,8 +51,8 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Anında erişim; satış sürtünmesi olmadan değerlendirme |
 | **Öncelik** | P0 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi). **Telefon doğrulaması (2026-11-15; kullanıcı kararı: deneme açık kalır, toplu/sahte hesap riskine karşı SMS koduyla doğrulama):** kayıtta cep telefonu zorunlu; kod 6 hane, 5 dk geçerli, 5 deneme, 60 sn yeniden gönderme; numara, IP ve genel günlük sınır; bir numarayla yalnız bir deneme; doğrulanan numara kullanıcıda saklanır; denetimde numara maskeli. Dal `feature/deneme-telefon-dogrulama` (backend + panel), main'e alınmadı, canlıda değil. Sözleşme: backend `docs/TRIAL_PHONE_VERIFICATION_API_CONTRACT.md`. **Canlıya çıkış koşulu:** Netgsm hesabı, onaylı SMS başlığı, OTP paketi; sağlayıcı ayarlanmadan yayınlanırsa yeni deneme kaydı 503 ile durur |
-| **Bağımlılıklar** | TRIAL-004, TRIAL-007, INT-003 |
+| **Durum** | Geliştirildi (main + origin, 2026-10-24 kod incelemesi) |
+| **Bağımlılıklar** | TRIAL-004, TRIAL-007 |
 | **Notlar** | Canlı demo büyük/kurumsal müşteriler için opsiyonel kalır → [ADR-001](../decisions/ADR-001-self-service-trial-strategy.md). Sürümlü kullanım şartları/hukuki metin kabulü (genel ürün yeteneği) → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance), [TRIAL-009](#trial-009--sürümlü-kullanım-şartları-ve-hukuki-metin-kabulü)
 
 ### TRIAL-002 — Örnek klinik onboarding seçimi
@@ -2735,7 +2735,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Otomatik hatırlatmalar |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (2026-11-15, dal `feature/deneme-telefon-dogrulama`, main'e alınmadı): sağlayıcıdan bağımsız SMS katmanı (`ISmsSender`, `Sms:Provider`), Netgsm OTP bağdaştırıcısı (SMS API v3) ve geliştirme için günlüğe yazan sahte sağlayıcı. İlk kullanım deneme kaydı telefon doğrulaması (TRIAL-001). Hatırlatma/bildirim SMS'i (APPT-023), toplu gönderim ve SMS bakiyesi yok. Gerçek Netgsm hesabıyla denenmedi |
+| **Durum** | Planlandı |
 | **Bağımlılıklar** | TRIAL-004 |
 | **Notlar** | Trial'da gerçek SMS sınırlandırılır. **E-Vet SMART:** Takvim SMS bakiye; Hatırlatma / Düzenle modal gönder / Sms Geçmişi — → [e-vet.md](../competitors/e-vet.md#global-takvim-modül). **E-Vet SMART (2026-10-01):** Müşteri Kartı → Doğrudan Satış Geçmişi **Sms Gönder** → Durum modal (SMS Id + success indicator); carrier delivery **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#müşteri-modül) |
 
