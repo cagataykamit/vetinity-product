@@ -1,6 +1,6 @@
 # Vetinity Hasta Sahibi Portalı Gizlilik Politikası
 
-Sürüm: 1.0 · Tarih: 2026-11-09
+Sürüm: 1.1 · Tarih: 2026-11-15
 
 Bu politika, hasta sahibi portalını (web ve mobil uygulama) kullanan kişilerin **portal hesabına** ilişkin verilerinin nasıl işlendiğini anlatır ([ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4). Portal'da gördüğünüz klinik kayıtlarının veri sorumlusu ilgili kliniktir; o kayıtlar için kliniğinizin aydınlatma metni geçerlidir ([aydınlatma metni şablonu](aydinlatma-metni.md)). Klinik çalışanları ve site ziyaretçileri için ayrı [gizlilik politikası](gizlilik-politikasi.md) geçerlidir.
 
@@ -11,7 +11,7 @@ Bu politika, hasta sahibi portalını (web ve mobil uygulama) kullanan kişileri
 
 *a) Portal hesabı verileri*
 - Hesap: e-posta adresi, görünen ad, parola (yalnız geri döndürülemez özet olarak; parolasız girişte hiç tutulmaz).
-- Giriş ve güvenlik: giriş kayıtları (zaman, başarılı/başarısız deneme, kullanılan yöntem), tek kullanımlık kodların geçerlilik ve deneme bilgisi, kilitleme durumu, IP adresi, Portal'da hangi kaydın görüntülendiğine ilişkin erişim kaydı (kim, ne zaman, hangi kayıt; içerik değil).
+- Giriş ve güvenlik: giriş kayıtları (zaman, başarılı/başarısız deneme, kullanılan yöntem), tek kullanımlık kodların geçerlilik ve deneme bilgisi, kilitleme durumu, IP adresi, Portal'da hangi kaydın görüntülendiğine ilişkin erişim kaydı (kim, ne zaman, hangi kayıt; içerik değil). Giriş kodu, parola sıfırlama kodu ve online randevu doğrulama kodu isteklerinde Cloudflare Turnstile'ın işlediği IP adresi ve tarayıcı/cihaz bilgisi gibi teknik sinyaller.
 - Cihaz ve oturum: oturum ve yenileme jetonları, cihaz/tarayıcı türü, "tüm cihazlardan çıkış" için oturum listesi; bildirim izni verirseniz bildirim cihaz jetonu (v1).
 - Bildirim tercihi: hangi bildirim türünü hangi kanaldan almak istediğiniz.
 - Kabul kayıtları: bu politikanın ve [portal kullanım şartlarının](portal-kullanim-sartlari.md) kabul ettiğiniz sürümü ve zamanı.
@@ -21,11 +21,11 @@ Bu politika, hasta sahibi portalını (web ve mobil uygulama) kullanan kişileri
 Hayvanlarınızın temel bilgileri (ad, tür, ırk, doğum tarihi, mikroçip, kilo), randevularınız, aşı geçmişi ve yaklaşan aşı/kontrol, bakiye ve ödeme durumu, reçete ve tedavi özeti (sade dilde, kliniğin açtığı ölçüde), kliniğin iletişim bilgileri. **Muayene notları, laboratuvar sonuçları ve görüntüler Portal'da gösterilmez** (ADR-031 AK-8). Bu kayıtlar Portal için ayrıca toplanmaz; kliniğin mevcut kaydından salt okunur gösterilir.
 
 **3. Amaçlar ve hukuki sebepler**
-Hesabın açılması, girişin sağlanması ve klinik kayıtlarının size gösterilmesi (Kanun m.5/2-c, sözleşmenin ifası); hesap güvenliği, yetkisiz erişimin ve kötüye kullanımın önlenmesi, erişim kaydı (m.5/2-f meşru menfaat;); şartların ve politikanın sürümlü kabulünün ispatı (m.5/2-e hakkın tesisi ve korunması); işlemsel bildirimler — giriş kodu, parola sıfırlama, randevu ve aşı hatırlatması (m.5/2-c; tercihinizle kapatılabilir); tanıtım/kampanya iletileri yalnız açık rızanızla.
+Hesabın açılması, girişin sağlanması ve klinik kayıtlarının size gösterilmesi (Kanun m.5/2-c, sözleşmenin ifası); hesap güvenliği, yetkisiz erişimin ve kötüye kullanımın önlenmesi, erişim kaydı (m.5/2-f meşru menfaat;); şartların ve politikanın sürümlü kabulünün ispatı (m.5/2-e hakkın tesisi ve korunması); işlemsel bildirimler — giriş kodu, parola sıfırlama, randevu ve aşı hatırlatması (m.5/2-c; tercihinizle kapatılabilir); tanıtım/kampanya iletileri yalnız açık rızanızla. Kod isteklerinde otomatik (bot) kötüye kullanımı önlemek için Cloudflare Turnstile ile güvenlik doğrulaması yapılır (m.5/2-f meşru menfaat).
 
 **4. Aktarım**
 - **Bağlı klinik:** hesabınızın o klinikteki bağ durumu (davet, bağlı, erişim kapatıldı) ve Portal'dan ilettiğiniz talepler yalnız ilgili kliniğe görünür. Parolanız, oturum ve cihaz bilgileriniz kliniğe aktarılmaz.
-- **Hizmet sağlayıcılar:** barındırma ve altyapı, e-posta gönderim sağlayıcısı [sağlayıcı belirlenmedi], bildirim (push) hizmeti — v1'de, uygulama mağazası platformlarının bildirim altyapısı [yurt dışına aktarım: sağlayıcı, ülke ve Kanun m.9 mekanizması buraya yazılır].
+- **Hizmet sağlayıcılar:** barındırma ve altyapı, güvenlik doğrulaması (Cloudflare Turnstile; Cloudflare, Inc., ABD), e-posta gönderim sağlayıcısı [sağlayıcı belirlenmedi], bildirim (push) hizmeti — v1'de, uygulama mağazası platformlarının bildirim altyapısı [yurt dışına aktarım: sağlayıcı, ülke ve Kanun m.9 mekanizması buraya yazılır].
 - **Yetkili kurumlar:** mevzuatın zorunlu kıldığı hallerde.
 Verileriniz satılmaz ve reklam amacıyla paylaşılmaz.
 
