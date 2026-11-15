@@ -56,6 +56,7 @@ Vetinity, gizlenen veya yalnızca satış temsilcisinin ekran paylaşımında g�
 - Trial süresi ve kısıtlamalar abonelik modülünde yönetilmeli
 - Trial metrikleri toplanmalı ([TRIAL-008](../backlog/feature-backlog.md))
 - Canlı demo akışı ayrı kanal olarak korunmalı ([TRIAL-005](../backlog/feature-backlog.md))
+- 2026-11-15 (kullanıcı kararı): rakipler denemeyi kapalı tutsa da deneme açık kalır. Toplu ve sahte hesap riskine karşı deneme kaydı cep telefonuna gelen tek kullanımlık SMS koduyla doğrulanır; bir numarayla yalnız bir deneme açılır ([TRIAL-001](../backlog/feature-backlog.md), [INT-003](../backlog/feature-backlog.md); backend `docs/TRIAL_PHONE_VERIFICATION_API_CONTRACT.md`). Deneme süresi ve diğer kontroller ayrıca konuşuluyor.
 
 ## İlgili belgeler
 
