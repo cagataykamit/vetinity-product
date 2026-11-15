@@ -1,6 +1,6 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-14 03:20 (durum panosu oturumu; koordinatör bildirimi: 03:11 panel/portal yayını, push, belge dallarının main'e alınması, ADR-043 kabulü). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Son güncelleme:** 2026-11-15 (durum panosu oturumu; git kontrolü: ADR-043 kodu yerel main'de). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası: backend `d56a01c5` (02:40 yayını; sürüm API dosyasından, migration geçmişi canlı DB'den okundu), panel ve portal FE `fc24ebc0` (03:11 yayını; panel `main-IZZU74HA.js`, portal `main-ALYH5NUA.js` canlı adreslerde görüldü, commit koordinatörün bildirimi). BE, FE ve ürün deposunda main = origin (2026-11-14 03:11 push). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
@@ -13,7 +13,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 90 | 4 | 3 (MOBILE-002 geliştiriliyor, kodu main'de; RECORD-006 karar verildi, kodlanıyor; AI-002 pilotta erken deneme) | 8 (AI) |
+| P1 | 105 | 90 | 4 | 3 (MOBILE-002 geliştiriliyor, kodu main'de; RECORD-006 pilot öncesi dilimleri yerel main'de, canlıya çıkmadı; AI-002 pilotta erken deneme) | 8 (AI) |
 | P2 | 61 | 26 | 5 | 24 (14 planlı, 10 araştırılacak) | 6 |
 | P3 | 10 | 0 | 0 | 9 (2 planlı, 7 araştırılacak) | 1 |
 | Belirlenmemiş | 1 | 0 | 0 | 1 (UX-010 İngilizce) | 0 |
@@ -30,7 +30,8 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Tanıtım sitesinde e-belge bölümü | FE `feature/ozellikler-e-belge` (+3, 2026-11-12) | Dalda, birleşmedi | Özellikler sayfasında e-Fatura/e-Arşiv/e-SMM bölümü, paket tablosu satırı, SSS düzeltmesi. Sahibi ve onay durumu doğrulanmadı |
 | AI kota kararı (ADR-044 güncellemesi: her pakette kotalı AI, kullanıcı başına kota, ek kredi, pilotta Haiku ile erken deneme) | Ürün main (`docs/ai-kota` birleşti) | Karar verildi | Kod yok; Claude API hesabı kullanıcıda |
 | Nilvera e-Fatura ticari senaryo | BE `6add514c`, panel `7b53100b` | Canlıda (2026-11-14 02:40) | Migration `AddEDocumentBuyerAnswer` canlı DB'de. Gerçek alıcı reddi akışı denenmedi |
-| Birleşik kayıt modeli kodlaması (RECORD-006, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md)) | ADR-043 oturumu (Opus); ürün dalı `docs/adr043-fable-degerlendirme` (`3f15a74`, ADR kabul edildi, main'e alınmadı) | Geliştiriliyor | Fable önerileriyle kabul. Pilottan önce: tedavi/yatış iptali, gerekçesiz aşı iptali, eşzamanlılık belirteci |
+| Birleşik kayıt modeli pilot öncesi dilimleri (RECORD-006, [ADR-043](../decisions/ADR-043-birlesik-klinik-kayit-modeli.md)) | BE main `dc36b64d`, FE main `da734556` (`feature/kayit-modeli-adr043` birleşti); ürün main `d86ddf9` | Main'de, canlıya çıkmadı | Yatış, tedavi ve aşıda gerekçeli iptal; tedavi, reçete, aşıda eşzamanlılık belirteci; tedavi/aşı/lab geç kayıt; düzenlemede hasta değişmez; görüntüleme değişiklik geçmişi. 6 migration. Push yok |
+| Deneme kaydında kötüye kullanım önlemi (TRIAL) | Deneme telefon oturumu; BE `feature/deneme-kotuye-kullanim` (+7), ürün `docs/deneme-kotuye-kullanim` (+3) | Geliştiriliyor | SMS telefon doğrulaması kullanıcı kararıyla geri alındı; dalın kalan içeriği doğrulanmadı |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -39,8 +40,9 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. 02:40 yayınının (BE `d56a01c5`) sürüm notu: yayını yapan oturum belli değil; sunucuda 02:30 (gece) ve 02:41 yedekleri var, migration'ın hangi yedekten sonra uygulandığı doğrulanmadı. 03:11 panel/portal yayınının notu da görülmedi.
-2. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
+1. ADR-043 kayıt modeli (BE `dc36b64d`, FE `da734556`): 6 migration canlı DB'ye (önce elle yedek), API ve panel yayını, push. Pilot aktarmasından önce çıkması önerilir.
+2. 02:40 yayınının (BE `d56a01c5`) sürüm notu: yayını yapan oturum belli değil; sunucuda 02:30 (gece) ve 02:41 yedekleri var, migration'ın hangi yedekten sonra uygulandığı doğrulanmadı. 03:11 panel/portal yayınının notu da görülmedi.
+3. FE `feature/ozellikler-e-belge` (tanıtım sitesi e-belge bölümü): main'e alma ve `www` yayını.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
@@ -121,7 +123,7 @@ Geliştiriliyor: 1 · Karar bekliyor (kullanıcı): 1 · Planlandı: 1 · Canlı
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | Kod FE main'de, web portalı canlıda (`fc24ebc0`); Apple/Google hesap türü kararı ve Firebase bekliyor |
-| [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) | Birleşik record modeli ve tip-bazlı dinamik form | Geliştiriliyor | ADR-043 kabul edildi (dal `docs/adr043-fable-degerlendirme`, main'e alınmadı); kodlama ADR-043 oturumunda |
+| [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) | Birleşik record modeli ve tip-bazlı dinamik form | Main'de, canlıya çıkmadı | ADR-043 kabul edildi; pilot öncesi dilimler BE `dc36b64d` / FE `da734556` yerel main'de |
 | [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Planlandı | Pilotta Haiku ile ücretsiz erken deneme (ADR-044 güncellemesi main'de); Claude API hesabı kullanıcıda |
 | [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda (kısmen) | Dilim 1–3 canlıda; kalanı pilot geri bildirimine göre |
 | [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda (kısmen) | Kilit ve ek not var; kilit açma bilinçli yok (ADR-013) |
