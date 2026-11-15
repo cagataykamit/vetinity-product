@@ -56,6 +56,7 @@ Vetinity, gizlenen veya yalnızca satış temsilcisinin ekran paylaşımında g�
 - Trial süresi ve kısıtlamalar abonelik modülünde yönetilmeli
 - Trial metrikleri toplanmalı ([TRIAL-008](../backlog/feature-backlog.md))
 - Canlı demo akışı ayrı kanal olarak korunmalı ([TRIAL-005](../backlog/feature-backlog.md))
+- 2026-11-15 (kullanıcı kararları): rakipler denemeyi kapalı tutsa da deneme açık kalır. Toplu ve sahte hesaba karşı: kayıt e-posta koduyla doğrulanır, kod isteği Cloudflare Turnstile ister, bir e-posta adresiyle ve bir vergi/TC kimlik numarasıyla yalnız bir deneme açılır (vergi numarası şimdilik zorunlu, karar değerlendiriliyor; tek ayarla gevşetilebilir). SMS telefon doğrulaması ücret nedeniyle yapılmadı ([INT-003](../backlog/feature-backlog.md) ertelendi). Ayrıntı: [TRIAL-001](../backlog/feature-backlog.md), backend `docs/TRIAL_SIGNUP_ABUSE_API_CONTRACT.md`.
 
 ## İlgili belgeler
 
