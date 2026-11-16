@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `8cab1afe`, panel ve tanıtım `43c2bff7` (`main-AKGG5PH7.js`; 2026-11-16 18:40), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `b7afdfbf`, panel ve tanıtım `faf4ce00` (`main-WCYXYUFV.js`; 2026-11-16 22:38), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -50,7 +50,10 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Hasta sahibi portalı ve portaldan randevu talebi tüm paketlerde, Temel dahil ([ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md), kullanıcı kararı 2026-11-16) | BE `8cab1afe`, panel `43c2bff7` (`feature/portal-tum-paketler`) | Canlıda (2026-11-16 18:40) | Paket kapıları ileride yeniden kilitlemek için kodda kalır. Paket "Kimin için" metinleri düzeltildi |
 | E-vet türü boş (Diğer) hastanın aşıları: tür aşılardan çıkarılır, çıkarılamazsa aşı uyarıyla gelir | BE `8cab1afe`, panel `43c2bff7` (`feature/evet-tur-asidan`) | Canlıda (2026-11-16 18:40) | |
 | Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `8cab1afe`, panel `43c2bff7` (`feature/aktarma-notlari`) | Canlıda (2026-11-16 18:40) | Migration `AddImportBatchWarnings` (koordinatör bildirimi; canlı DB'de ben okumadım). `/health/ready` 200 |
-| Takvimde planlı aşı katmanı | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 18:40) |
+| Aktarma geri alma 30 gün sonra kesinleşir, aktarma listesi sade | BE `b7afdfbf`, panel `faf4ce00` | Canlıda (2026-11-16 22:38) | |
+| Geçici SQL hatasında (kilitlenme, 1205) yeniden deneme ve komut DB'de RCSI ([ADR-050](../decisions/ADR-050-veritabani-okuma-surumleme-ve-gecici-hata.md)) | BE `b7afdfbf`; [işletim notu](../operations/veritabani-rcsi.md) | Canlıda (2026-11-16 22:38) | RCSI ayarını canlı DB'de ben okumadım (koordinatör bildirimi). `/health/ready` 200 |
+| Takvim: planlı aşılar, filtre, ay görünümü | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 22:38) |
+| Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 22:38) |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
