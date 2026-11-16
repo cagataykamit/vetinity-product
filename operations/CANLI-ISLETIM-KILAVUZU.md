@@ -349,7 +349,7 @@ Prova sonucu alınmamış bir yedeğe "çalışıyor" denmez.
 ### 11.2 Açık olanlar
 
 - [ ] **iyzico canlı anahtarları** (`Billing__Iyzico__ApiKey`/`SecretKey` henüz yok): şahıs işletmesinin vergi kaydı ve iyzico üye işyeri başvurusu kullanıcıda. Deneme süreleri bitmeden gerekli. Ardından gerçek kartla küçük tutarlı ödeme uçtan uca denenir (ödeme → dönüş → abonelik etkin; webhook günlükte görülür).
-- [ ] **Virüs taraması yok:** backend `IFileMalwareScanner` v1'de tarama yapmayan uygulamadır (backend `docs/IMAGING_API_CONTRACT.md`); yalnız ClamAV kurmak dosyaları taramaz. Gereken: clamd ile konuşan tarayıcı uygulaması (kod işi) + ClamAV kurulumu (kullanıcı onayı 2026-11-11; clamd imzaları yaklaşık 1–1,5 GB bellek kullanır, ölçülmedi).
+- [ ] **Virüs taraması kapalı:** clamd ile konuşan tarayıcı backend `feature/virus-tarama` dalında yazıldı (yayında değil; ayar `FileScanning__Enabled`, varsayılan kapalı). Kalan: ClamAV kurulumu ve API'de açma, adımlar `CLAMAV-KURULUM.md` (kullanıcı onayı 2026-11-11; clamd imzaları yaklaşık 1–1,5 GB bellek kullanır, ölçülmedi).
 - [ ] Gerçek bir e-postanın (davet, hatırlatma, parola sıfırlama) canlıdan gidip ulaştığı denenmedi.
 - [ ] Barkod okuyucu gerçek telefonla (iOS Safari, Android) denenmedi.
 - [ ] Klinik sitesi hazır fotoğraf setinin lisansı (ADR-045 K7).
