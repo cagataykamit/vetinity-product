@@ -51,3 +51,15 @@
 - **Yazı tipi:** Nunito uygulamanın kendi dosyalarından yükleniyor (dış yazı tipi sunucusu yok).
 - **Özellikler'de e-belge bölümü:** e-Fatura/e-Arşiv tüm paketlerde; metin "desteklenen e-belge sağlayıcıları" diyor, sağlayıcı adı yok. SSS ve Hakkımızda'daki "e-Fatura yok" ifadeleri kaldırıldı.
 - **Bilinen sınırlar:** Tarayıcıda kullanıcı ve ajan baktı (1440/768/375, açık/koyu); ekran okuyucu, klavye ve sayfa hızı (LCP/CLS) ölçülmedi. Bazı ekran görüntüleri telefonda küçük kalıyor. Testler: panel 3313 testin hepsi geçti; son hizalama düzeltmesi yalnız CSS, ayrıca derlendi.
+
+## Ek yayın: 2026-11-16 18:40 (TSİ), portal tüm paketlerde, E-vet tür düzeltmesi, aktarma notları
+
+**Yayınlanan:** backend `main` `8cab1afe`, panel `main` `43c2bff7` (`main-AKGG5PH7.js`). Portal derlemesi değişmedi (`main-ZS3H6KLO.js`), yeniden yayınlanmadı.
+**Migration:** `AddImportBatchWarnings` (`ImportBatches.WarningsJson`); `migrate` ve `migrate-query` çalıştırıldı, seed gerekmedi.
+**Yedek:** Migration'dan önce elle yedek alındı (18:39, Drive kopyası doğrulandı).
+**Doğrulama:** API `/health/ready` 200, tüm girdiler Healthy; yayın sonrası günlükte hata yok; panel yeni `main` dosyasıyla açılıyor; www 200.
+
+- **Hasta sahibi portalı ve portaldan randevu talebi Temel dahil tüm paketlerde** (kullanıcı kararı, ADR-035). Paket kartlarındaki "Kimin için" metinleri düzeltildi: Temel "Tek şubeli, küçük ekipli klinik", Profesyonel "Tek şubeli, ekibi büyüyen klinik", Kurumsal "Birden çok şubesi ya da büyük ekibi olan klinik".
+- **E-vet aktarması, türü belirsiz hasta:** E-vet türü seçilmemiş hastaya "Diğer" yazıyor. Böyle bir hastanın türe özgü aşıları hep aynı türü gösteriyorsa hasta o türle gelir (ör. yalnız köpek aşısı olan hasta Köpek); önizlemede "Türü aşılarından çıkarıldı" notu çıkar. Aşılar farklı türleri gösteriyorsa ya da türe özgü aşı yoksa tür Diğer kalır, aşılar reddedilmez, uyarıyla gelir. Türü açıkça yazılı ve aşıyla çelişen satır eskisi gibi reddedilir.
+- **Aktarma notları satır satır:** "Dosya okunurken N not çıktı" paneli her notu tek satırda gösterir: sayı, ne olacağı, konu, tür (karar, dikkat, bilgi, aktarılmayacak). Karar bekleyen not baştan açık gelir ve "Sizden beklenen"e götürür; ayrıntı tıklayınca açılır; başlıktaki tür sayıları filtre. Notlar aktarmaya kaydedilir; sayfa yenilenince ya da geçmişten açılınca kaybolmaz.
+- **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Aktarma notları gerçek bir E-vet yedeğiyle değil, yerel örnek yedekle denendi; bu yayından önce yapılmış aktarmaların notları kayıtlı olmadığı için eski partilerde görünmez. Nottan satır incelemesine filtreyle gitme sonraki işte. Testler: backend 1326 domain, 4343 uygulama ve 2131 entegrasyon testi geçti, 4 atlandı; panel 3329 testten 3328'i birleşik koşuda geçti, düşen 1 test (`primeng-select-behavior`, eşzamanlı backend testi yükü altında zamanlama) tek başına 4/4 geçti.
