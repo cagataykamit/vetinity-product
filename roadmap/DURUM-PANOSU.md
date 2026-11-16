@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `f0112187` (03:47), panel ve tanıtım `bf166f4a` (`main-2IMRSHC5.js`; 2026-11-16 15:28), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `8cab1afe`, panel ve tanıtım `43c2bff7` (`main-AKGG5PH7.js`; 2026-11-16 18:40), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -47,9 +47,10 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
 | Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; canlıda (03:47) |
 | Tanıtım sitesi yeni tasarım: C "Sıcak klinik" ve Özellikler'de e-belge bölümü | FE `bf166f4a` (`feature/tanitim-sitesi-c`, `feature/tanitim-sitesi-c-e-belge`) | Canlıda (2026-11-16 15:28) | `www` 200 (sunucuda okundu). Açık: `ux/tanitim-sitesi-tasarim.md` C'ye göre güncellenmedi. Eski `feature/ozellikler-e-belge` main'e alınmadı; yerine C dalı geçti |
-| Hasta sahibi portalı ve portaldan randevu talebi tüm paketlerde, Temel dahil (ADR-035, kullanıcı kararı 2026-11-16) | BE `adfada06`, FE `b8d5fdad` (`feature/portal-tum-paketler`) | Dalda, birleşmedi | Testler ve build geçti (oturum bildirimi). Paket kapıları ileride yeniden kilitlemek için kodda kalır. Paket "Kimin için" metinleri düzeltildi. Ürün deposunda ADR-035 güncellemesi bulunamadı. Main'e alma ve yayın koordinatörde |
-| E-vet türü boş (Diğer) hastanın aşıları: tür aşılardan çıkarılır, çıkarılamazsa aşı uyarıyla gelir | BE `452baa0e`, FE `b6efb23f` (`feature/evet-tur-asidan`) | Dalda, birleşmedi | Testler geçti (oturum bildirimi). Main'e alma ve yayın koordinatörde |
-| Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `b1ddc189`, FE `31190c10` (`feature/aktarma-notlari`; E-vet tür dalını da içerir) | Dalda, birleşmedi | Testler geçti (oturum bildirimi). Migration `AddImportBatchWarnings` yalnız yerel DB'de; canlıda yedekle uygulanmalı. Main'e alma ve yayın koordinatörde |
+| Hasta sahibi portalı ve portaldan randevu talebi tüm paketlerde, Temel dahil ([ADR-035](../decisions/ADR-035-paketler-ve-fiyat.md), kullanıcı kararı 2026-11-16) | BE `8cab1afe`, panel `43c2bff7` (`feature/portal-tum-paketler`) | Canlıda (2026-11-16 18:40) | Paket kapıları ileride yeniden kilitlemek için kodda kalır. Paket "Kimin için" metinleri düzeltildi |
+| E-vet türü boş (Diğer) hastanın aşıları: tür aşılardan çıkarılır, çıkarılamazsa aşı uyarıyla gelir | BE `8cab1afe`, panel `43c2bff7` (`feature/evet-tur-asidan`) | Canlıda (2026-11-16 18:40) | |
+| Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `8cab1afe`, panel `43c2bff7` (`feature/aktarma-notlari`) | Canlıda (2026-11-16 18:40) | Migration `AddImportBatchWarnings` (koordinatör bildirimi; canlı DB'de ben okumadım). `/health/ready` 200 |
+| Takvimde planlı aşı katmanı | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 18:40) |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -60,9 +61,9 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 **Canlıya çıkış**
 1. ~~Main yayını (UX dalga 2–4, Geri al, takvim, muayene taslağı, virüs taraması)~~ Yapıldı (2026-11-16 03:47): BE `f0112187`, panel `7ad9e655`; ClamAV kuruldu. Üç depo push edildi.
 2. ~~Tanıtım sitesi C + e-belge bölümü~~ Yapıldı (2026-11-16 15:28): FE `bf166f4a` canlıda, push edildi.
-3. Portal tüm paketlerde (BE `adfada06`, FE `b8d5fdad`): main'e alma, push ve yayın.
-4. E-vet türü aşılardan çıkarma (BE `452baa0e`, FE `b6efb23f`): main'e alma, push ve yayın.
-5. Aktarma notları (BE `b1ddc189`, FE `31190c10`, migration `AddImportBatchWarnings`): main'e alma, push, canlı DB'ye migration ve yayın.
+3. ~~Portal tüm paketlerde~~ Yapıldı (2026-11-16 18:40).
+4. ~~E-vet türü aşılardan çıkarma~~ Yapıldı (2026-11-16 18:40).
+5. ~~Aktarma notları~~ Yapıldı (2026-11-16 18:40): BE `8cab1afe`, panel `43c2bff7`, migration `AddImportBatchWarnings`. Üç depo push edildi.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
