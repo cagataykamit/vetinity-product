@@ -148,7 +148,7 @@ Geliştiriliyor: 1 · Planlandı: 1 · Canlıda (kısmen): 4 · Canlıda: 91 · 
 | [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda (kısmen) | Dilim 1–3 canlıda; kalanı pilot geri bildirimine göre |
 | [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda (kısmen) | Kilit ve ek not var; kilit açma bilinçli yok (ADR-013) |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
-| [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle kes + otomatik kesme (varsayılan kapalı) Nilvera ile canlıda |
+| [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle "Belge kes", ödeme alırken kesme ve otomatik kesme (varsayılan kapalı) Nilvera ile canlıda. Eksik: resepsiyon hastanın hesabını kapatırken panelin "Bu ziyaret için e-belge kesilsin mi?" diye sorması; bu soru "Hesabı kapat" ekranıyla (CHECKOUT-001) gelecek. Canlıda gerçek belge kesilmedi |
 | [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
 | [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
 | [AI-004](../backlog/feature-backlog.md#ai-004--ai-taburcu-talimatı) | AI taburcu talimatı | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
@@ -263,7 +263,7 @@ Planlandı: 15 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 26 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [UX-009](../backlog/feature-backlog.md#ux-009--menü-görünümünün-son-hali-satırlar-netleşince) | Menü görünümünün son hali (satırlar netleşince) | Planlandı |  |
-| [CHECKOUT-001](../backlog/feature-backlog.md#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu) | Ziyaret kapanışı ve tahsilat orkestrasyonu | Planlandı | Tasarım onaylı (`taslak/hesabi-kapat`); kodlamaya hazır, ~5 dilim |
+| [CHECKOUT-001](../backlog/feature-backlog.md#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu) | Ziyaret kapanışı ve tahsilat orkestrasyonu | Planlandı | "Hesabı kapat" ekranı: muayene bitince resepsiyon ücretleri, ödemeyi (kısmi ya da borç bırakarak) ve bilgi fişini tek yan panelde bitirir. Tasarım onaylı (`taslak/hesabi-kapat`); kodlamaya hazır, ~5 dilim |
 | [APPT-023](../backlog/feature-backlog.md#appt-023--sms-bildirimleri) | SMS bildirimleri | Planlandı |  |
 | [APPT-024](../backlog/feature-backlog.md#appt-024--randevu-talebi-geçmişi-ve-denetim-izi) | Randevu talebi geçmişi ve denetim izi | Planlandı |  |
 | [APPT-025](../backlog/feature-backlog.md#appt-025--kaynak-bazlı-takvim) | Kaynak bazlı takvim | Planlandı |  |
