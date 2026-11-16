@@ -13,7 +13,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 91 | 4 | 2 (MOBILE-002 geliştiriliyor, kodu main'de; AI-002 pilotta erken deneme) | 8 (AI) |
+| P1 | 105 | 93 | 2 | 2 (MOBILE-002 geliştiriliyor, kodu main'de; AI-002 pilotta erken deneme) | 8 (AI) |
 | P2 | 62 | 26 | 5 | 25 (15 planlı, 10 araştırılacak) | 6 |
 | P3 | 10 | 0 | 0 | 9 (2 planlı, 7 araştırılacak) | 1 |
 | Belirlenmemiş | 1 | 0 | 0 | 1 (UX-010 İngilizce) | 0 |
@@ -139,14 +139,12 @@ Canlıda: 27
 
 ## P1 (105 madde)
 
-Geliştiriliyor: 1 · Planlandı: 1 · Canlıda (kısmen): 4 · Canlıda: 91 · Ertelendi: 8
+Geliştiriliyor: 1 · Planlandı: 1 · Canlıda (kısmen): 2 · Canlıda: 93 · Ertelendi: 8
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | Kod FE main'de, web portalı canlıda (`fc24ebc0`); Apple/Google hesap türü kararı ve Firebase bekliyor |
 | [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Planlandı | Pilotta Haiku ile ücretsiz erken deneme (ADR-044 güncellemesi main'de); Claude API hesabı kullanıcıda |
-| [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda (kısmen) | Dilim 1–3 canlıda; kalanı pilot geri bildirimine göre |
-| [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda (kısmen) | Kilit ve ek not var; kilit açma bilinçli yok (ADR-013) |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
 | [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle "Belge kes", ödeme alırken kesme ve otomatik kesme (varsayılan kapalı) Nilvera ile canlıda. Eksik: resepsiyon hastanın hesabını kapatırken panelin "Bu ziyaret için e-belge kesilsin mi?" diye sorması; bu soru "Hesabı kapat" ekranıyla (CHECKOUT-001) gelecek. Canlıda gerçek belge kesilmedi |
 | [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
@@ -158,10 +156,12 @@ Geliştiriliyor: 1 · Planlandı: 1 · Canlıda (kısmen): 4 · Canlıda: 91 · 
 | [AI-009](../backlog/feature-backlog.md#ai-009--ai-çıktı-onay-akışı) | AI çıktı onay akışı | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
 | [AI-010](../backlog/feature-backlog.md#ai-010--ai-audit-metadatası) | AI audit metadatası | Ertelendi | ADR-044 değişti (main'de): her pakette kotalı dahil olacak; pilot sonrası |
 
-<details><summary>Canlıda olanlar (91)</summary>
+<details><summary>Canlıda olanlar (93)</summary>
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
+| [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda | Tamamlandı sayıldı (kullanıcı, 2026-11-16): üç bölüm canlıda; yeni gösterge istenirse ayrı iş açılır |
+| [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda | Tamamlandı sayıldı (kullanıcı, 2026-11-16): kilit ve ek not var; kilit açma bilerek yok (ADR-013) |
 | [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) | Birleşik record modeli ve tip-bazlı dinamik form | Canlıda | ADR-043 pilot öncesi dilimleri 2026-11-15 yayınında (BE `dc36b64d`, panel `da734556`) |
 | [TRIAL-002](../backlog/feature-backlog.md#trial-002--örnek-klinik-onboarding-seçimi) | Örnek klinik onboarding seçimi | Canlıda |  |
 | [TRIAL-003](../backlog/feature-backlog.md#trial-003--örnek-klinik-sentetik-seed-verileri) | Örnek klinik sentetik seed verileri | Canlıda |  |
