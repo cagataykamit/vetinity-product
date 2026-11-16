@@ -46,6 +46,8 @@ K7'nin özü değişmez: yalnız partinin oluşturduğu kayıt silinir, bağı o
 
 Muayene ve ödeme geçmişi gelince "bağı olan kayıt" kümesi büyüyor. Kural yine denetimle sağlanır, varsayımla değil: partinin kendi kayıtları bağ sayılmaz, diğer her bağ engeldir.
 
+Geri alma uygulamadan sonra 30 gün açıktır; süre dolunca aktarma kesinleşir (2026-11-16, [ADR-019](ADR-019-data-import.md) "Ek (2026-11-16)"). Bu, yeni türlerin hepsi için de geçerlidir.
+
 ### Finans, kasa ve e-belge yalıtımı
 
 - İçe aktarılan her ücret işaretlidir (`Charges.ImportBatchId`). Ciro ve gün sonu okuması (tek yer: finans olay okuyucusu) işaretli ücreti dışlar. Kasa sayımı yalnız ödemeden türediği için etkilenmez: içe aktarma ödeme yazmaz. E-belge akışı ([ADR-036](ADR-036-hbs-ve-e-belge-entegrasyonu.md)) uygulandığında işaretli ücret için belge düzenlemez; bu kural e-belge diliminin kabul koşuludur. **Uygulandı (2026-11-11, backend `11b87b90`):** devir ücreti belgesiz listesine, hatırlatma sayacına, ödemeden ve otomatik kesmeye girmez; elle seçim `EDocuments.ImportedCharge` (409) ile reddedilir; ücret listesinde "e-Belge kes" eylemi gösterilmez (frontend `f5c239ee`). Kural tek yerde: `EDocumentRules.IsDocumentableCharge`.

@@ -49,6 +49,7 @@ Sertifikalar Let's Encrypt (certbot, webroot `/var/www/letsencrypt`), 2027-02-08
 - SQL Server 2022 aynı sunucuda (Zonguldak ile paylaşılır). `max server memory` 3072 MB (kullanıcı onayı 2026-11-10).
 - Vetinity veritabanları: `VetinityCommandDb` (komut) ve `VetinityQueryDb` (sorgu). Uygulama yalnız `vetinity_app` girişiyle bağlanır; `sa` yalnız yedek doğrulaması ve bakım içindir.
 - API açılışta migration çalıştırmaz. Şema değişikliği yalnız `DbMigrator` ile yapılır (bölüm 5.3).
+- `VetinityCommandDb` için READ_COMMITTED_SNAPSHOT açılacak (ADR-050, migration `EnableReadCommittedSnapshot`, canlıya henüz uygulanmadı). Uygularken birkaç saniyelik kesinti olur; adımlar [veritabani-rcsi.md](veritabani-rcsi.md).
 - **`/opt/mssql/bin/sqlservr` veya `mssql-conf` root olarak çalıştırılmaz** (`--version` dahil). Bu, `/var/opt/mssql/.system/system/{lsa,security}.hiv` dosyalarını `root`'a geçirir; çalışan sunucu etkilenmez ama bir sonraki başlangıçta SQL Server "Unable to set persistent hive root" / `Permission denied` ile açılmaz ve iki site de durur (2026-11-11 olayı, yeniden başlatmada görüldü, yaklaşık 8 dk kesinti). Sürüm için `dpkg -s mssql-server | grep Version`. Olursa çözüm: `chown mssql:mssql` + `chmod 660` bu iki dosyaya, `systemctl reset-failed mssql-server`, `systemctl start mssql-server`.
 - SQL Server güncellemesi (`mssql-server` paketi) işletim sistemi güncellemelerinden ayrı, yedekten sonra ve bakım penceresinde yapılır; iki sitenin veritabanını birden yükseltir. 2026-11-11'de 16.0.4195 kurulu, 16.0.4315 bekliyor.
 
