@@ -48,6 +48,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; canlıda (03:47) |
 | Tanıtım sitesi yeni tasarım: C "Sıcak klinik" ve Özellikler'de e-belge bölümü | FE `bf166f4a` (`feature/tanitim-sitesi-c`, `feature/tanitim-sitesi-c-e-belge`) | Canlıda (2026-11-16 15:28) | `www` 200 (sunucuda okundu). Açık: `ux/tanitim-sitesi-tasarim.md` C'ye göre güncellenmedi. Eski `feature/ozellikler-e-belge` main'e alınmadı; yerine C dalı geçti |
 | Hasta sahibi portalı ve portaldan randevu talebi tüm paketlerde, Temel dahil (ADR-035, kullanıcı kararı 2026-11-16) | BE `adfada06`, FE `b8d5fdad` (`feature/portal-tum-paketler`) | Dalda, birleşmedi | Testler ve build geçti (oturum bildirimi). Paket kapıları ileride yeniden kilitlemek için kodda kalır. Paket "Kimin için" metinleri düzeltildi. Ürün deposunda ADR-035 güncellemesi bulunamadı. Main'e alma ve yayın koordinatörde |
+| E-vet türü boş (Diğer) hastanın aşıları: tür aşılardan çıkarılır, çıkarılamazsa aşı uyarıyla gelir | BE `452baa0e`, FE `b6efb23f` (`feature/evet-tur-asidan`) | Dalda, birleşmedi | Testler geçti (oturum bildirimi). Main'e alma ve yayın koordinatörde |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -59,6 +60,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 1. ~~Main yayını (UX dalga 2–4, Geri al, takvim, muayene taslağı, virüs taraması)~~ Yapıldı (2026-11-16 03:47): BE `f0112187`, panel `7ad9e655`; ClamAV kuruldu. Üç depo push edildi.
 2. ~~Tanıtım sitesi C + e-belge bölümü~~ Yapıldı (2026-11-16 15:28): FE `bf166f4a` canlıda, push edildi.
 3. Portal tüm paketlerde (BE `adfada06`, FE `b8d5fdad`): main'e alma, push ve yayın.
+4. E-vet türü aşılardan çıkarma (BE `452baa0e`, FE `b6efb23f`): main'e alma, push ve yayın.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
