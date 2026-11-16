@@ -4,7 +4,7 @@ Yüklenen dosyaların virüs taraması için clamd kurulumu. Backend kodu hazır
 
 - Kullanıcı onayı: ClamAV kurulumu 2026-11-11 (CANLI-ISLETIM-KILAVUZU.md bölüm 11.2).
 - Sunucu: Ubuntu 22.04, 8 GB bellek. Aynı makinede Zonguldak sitesi var. clamd yalnız `127.0.0.1`'de dinler, Zonguldak'ın dosyalarına ve ayarlarına dokunulmaz.
-- Bu belgedeki adımlar sunucuda henüz uygulanmadı ve denenmedi. Komutlar `root` ile çalıştırılır.
+- Uygulandı: 2026-11-16 03:45–03:47 (ClamAV 1.5.4). Kurulumdan önce boş bellek 5,4 GB olduğu için `ConcurrentDatabaseReload` varsayılan (açık) kaldı. `StreamMaxLength 25M` paket ayarında zaten vardı; yalnız `TCPSocket` ve `TCPAddr` eklendi. Ölçülen bellek: clamd ~970 MB. EICAR yakalandı, `/health/ready` içinde `clamav` "clamd yanıt veriyor."
 
 ## 1. Önce bellek
 
