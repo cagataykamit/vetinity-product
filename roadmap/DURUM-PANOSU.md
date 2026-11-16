@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `9930dd02`, panel ve site `7fa375e8` (`main-OKRAOFCU.js`; 2026-11-16 02:02), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-1.md). Ürün deposunda main = origin. Main canlının önünde, push yok: BE `f0112187`, FE `2939d284`. Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `f0112187`, panel ve tanıtım `7ad9e655` (`main-X4GKS45I.js`; 2026-11-16 03:47), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -34,18 +34,18 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Deneme kaydında kötüye kullanım önlemi (TRIAL) | BE `e0994451`, FE `5765fdc6`, ürün main | Canlıda (2026-11-15 06:33) | E-posta kodu, tek e-posta/vergi no kuralı ve Turnstile (anahtarlar 2026-11-16 gecesi girildi) çalışıyor |
 | Kullanıcı dostu denetimi ([belge](../research/kullanici-dostu-denetim-2026-11-15.md)) | Ürün main (`docs/kullanici-dostu-denetim` birleşti) | Tamamlandı | Bulgular H1–H19, O4; düzeltmeler dalga dalga yapılıyor (aşağıda) |
 | UX düzeltmeleri dalga 1 (H1–H19, O4) | BE `5f9a7307`, panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Diyalogda Enter kaydeder, kaldırma onay ister, boş liste metinleri, ödeme al tek tıkla, Türkçe hata metinleri, müşteri telefonu yeni kayıtta zorunlu (H17), KVKK varsayılan metinleri klinik bilgisiyle dolar (H8), portalda iptal edilmiş aşı gösterilmez. Migration yok. |
-| UX dalga 2 (O1 yerinde ekleme, O2 kaydedilmemiş değişiklik koruması, O3/B4 Kaydet hep etkin ve eksik alanlar gösterilir, O8 odak, Ctrl+Enter, kısayollar) | FE main `b06674a1` (`feature/ux-dalga2`) | Main'de, canlıya çıkmadı | 3255 panel testi geçti (koordinatör bildirimi). Push ve yayın yok |
-| Randevu iptalinde Geri al (B2) ve takvim hekim sütunları (B1, taslak A) | BE main `f0112187`, FE main `0c072cc8` (`feature/randevu-iptal-geri-al`, `feature/takvim-izgara`) | Main'de, canlıya çıkmadı | Birleşik main'de tam test sürüyor. "Boş saat bul" paneli ve takvimin kalanı UX dalga 4'te. Migration yok. Push yok |
-| Muayene yazılanları tarayıcı taslağına kaydedilir, açılışta sürdürülsün mü sorulur (B3) | FE main `2939d284` (`feature/muayene-taslak`) | Main'de, canlıya çıkmadı | Oturuma bağlı taslak; açık çıkışta silinir. Push yok |
-| UX 3. dalga (O5 tablette dokunma hedefi ve telefonda sabit Kaydet, O6 filtre korunur ve İptal geri döndürür, O7 paket dışı ve salt okunur nedenleri, O9 Bugün'den randevu al ve boş saat düğmeleri, O10 ücrette hizmet/ürün önerisi) | FE `feature/ux-dalga3` (+9, main ile birleştirildi) | Dalda, birleşmedi | 3312 test geçti, build başarılı (oturum bildirimi). Main'e alma ve yayın bekliyor |
+| UX dalga 2 (O1 yerinde ekleme, O2 kaydedilmemiş değişiklik koruması, O3/B4 Kaydet hep etkin ve eksik alanlar gösterilir, O8 odak, Ctrl+Enter, kısayollar) | FE `7ad9e655` (`feature/ux-dalga2`) | Canlıda (2026-11-16 03:47) | Migration yok |
+| Randevu iptalinde Geri al (B2), takvim hekim sütunları ve "Boş saat bul" (B1, taslak A) | BE `f0112187`, FE `7ad9e655` (`feature/randevu-iptal-geri-al`, `feature/takvim-izgara`) | Canlıda (2026-11-16 03:47) | Hekimli randevuda çakışma yalnız aynı hekim için. Migration yok |
+| Muayene yazılanları tarayıcı taslağına kaydedilir, açılışta sürdürülsün mü sorulur (B3) | FE `7ad9e655` (`feature/muayene-taslak`) | Canlıda (2026-11-16 03:47) | Oturuma bağlı taslak; açık çıkışta silinir |
+| UX 3. dalga (O5 tablette dokunma hedefi ve telefonda sabit Kaydet, O6 filtre korunur ve İptal geri döndürür, O7 paket dışı ve salt okunur nedenleri, O9 Bugün'den randevu al ve boş saat düğmeleri, O10 ücrette hizmet/ürün önerisi) | FE `7ad9e655` (`feature/ux-dalga3` birleşti) | Canlıda (2026-11-16 03:47) | Kısıtlı rollü hesapla ve paketi kilitli klinikle denenmedi |
 | Aktarma doğrulama ekranı (taslak A) | FE `8e8b8d92` (`feature/aktarma-dogrulama-a`) | Canlıda (2026-11-15 20:53) | Sürüm notu main'de |
 | Aktarma yükleme adımı (taslak B: her ekranda tek soru) ve E-vet aynı adlı hayvan ipucu | panel `5cb278f0` | Canlıda (2026-11-16 01:23) | Taslaklar `taslak/aktarma-yukleme` (A–D) |
 | E-vet belirsiz hasta (doğum tarihi, aşı türü, mikroçip ile kendiliğinden bağlama; boş muayene geliş olarak; mükerrer anahtarına hekim, kilo, ateş) | BE `9930dd02`, panel `a41c7869` | Canlıda (2026-11-16 02:02) | Migration yok |
 | Görsel hızlı düzeltmeler | Panel ve site `7fa375e8` (`feature/gorsel-hizli`) | Canlıda (2026-11-16 02:02) | |
-| Virüs taraması (dosya yüklemeleri, ClamAV) | BE main `f0112187` (`feature/virus-tarama`) | Main'de, canlıya çıkmadı | Tam test sürüyor. Canlıda çalışması için sunucuya ClamAV kurulması gerekir (onay ister) |
+| Virüs taraması (dosya yüklemeleri, ClamAV) | BE `f0112187` (`feature/virus-tarama`) | Canlıda (2026-11-16 03:47) | ClamAV 1.5.4 sunucuda çalışıyor, tarama açık, `/health/ready` 200 (sunucuda okundu). Gerçek dosya yüklenerek denenmedi; EICAR clamd'ye doğrudan gönderildi. [Kurulum](../operations/CLAMAV-KURULUM.md) |
 | İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+10) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı 2026-11-16'da CİMER'den "İstek" olarak gönderildi |
 | KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
-| Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; kodlama UX dalga 4'te |
+| Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; canlıda (03:47) |
 | Tanıtım sitesi yeni tasarım: C "Sıcak klinik" | FE `feature/tanitim-sitesi-c` (`ab715102`, +6); üstünde `feature/tanitim-sitesi-c-e-belge` (`34b83610`, +2: e-belge bölümü yeni düzende, tüm paketlerde; SSS ve Hakkımızda düzeltmesi) | Dalda, birleşmedi | Build ve tanıtım testleri geçti (oturum bildirimi). Main'e alma ve `www` yayını bekliyor |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
@@ -55,7 +55,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. Main (BE `f0112187`, FE `2939d284`): UX dalga 2, randevu iptalinde Geri al, takvim hekim sütunları, muayene taslağı, virüs taraması. Migration yok. Tam test sonrası push ve yayın; virüs taraması için sunucuya ClamAV kurulumu. FE `feature/ux-dalga3` main'e alınıp aynı yayına katılabilir.
+1. ~~Main yayını (UX dalga 2–4, Geri al, takvim, muayene taslağı, virüs taraması)~~ Yapıldı (2026-11-16 03:47): BE `f0112187`, panel `7ad9e655`; ClamAV kuruldu. Üç depo push edildi.
 2. Tanıtım sitesi C "Sıcak klinik" + e-belge bölümü (FE `feature/tanitim-sitesi-c-e-belge`, `34b83610`): main'e alma ve `www` yayını. Eski `feature/ozellikler-e-belge` dalının yerine geçiyor gibi görünüyor.
 
 **Ürün kararı**
@@ -75,7 +75,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 4. ~~SSH~~ Yapıldı (2026-11-16 gecesi): parolayla giriş kapalı, root yalnız anahtarla (sunucuda doğrulandı).
 5. ~~SQL Server güncellemesi~~ Yapıldı (2026-11-16 gecesi): CU28 (16.0.4325).
 6. Veteriner bul site haritasını `robots.txt`'ye ekleme.
-7. Virüs taraması: kod main'de (`f0112187`); sunucuya ClamAV kurulumu bekliyor.
+7. ~~Virüs taraması~~ Yapıldı (2026-11-16 03:47): ClamAV 1.5.4 sunucuda, tarama açık.
 8. Canlıdan gerçek e-posta (davet, hatırlatma, parola sıfırlama) gidişi denenmedi.
 9. Şahıs işletmesi unvanı ve vergi numarası gelince hukuki metinlerdeki yer tutucular doldurulacak.
 
