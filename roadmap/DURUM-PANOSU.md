@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `f0112187`, panel ve tanıtım `7ad9e655` (`main-X4GKS45I.js`; 2026-11-16 03:47), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `f0112187` (03:47), panel ve tanıtım `bf166f4a` (`main-2IMRSHC5.js`; 2026-11-16 15:28), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -46,7 +46,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | İlaç rehberi ve klinik başvuru bilgisi (ADR-049, REF-001, AI-105) | Ürün dalı `docs/adr-049-klinik-basvuru` (+10) | Dalda, birleşmedi | ADR-049 kabul edildi; DataVet benzeri ilaç rehberi; AI ayırıcı tanı desteği (karar 8). Bakanlığa ruhsatlı ürün listesi izin yazısı 2026-11-16'da CİMER'den "İstek" olarak gönderildi |
 | KVKK metinleri v1.1 (köşeli parantezli alanlar kalktı, H8) | Ürün main (`docs/kvkk-yer-tutucu` birleşti) | Tamamlandı | Paneldeki varsayılan metinler 01:23 yayınında |
 | Takvim ızgara taslağı | FE `taslak/takvim-izgara` | Karar verildi | Taslak A + "Boş saat bul" seçildi; canlıda (03:47) |
-| Tanıtım sitesi yeni tasarım: C "Sıcak klinik" | FE `feature/tanitim-sitesi-c` (`ab715102`, +6); üstünde `feature/tanitim-sitesi-c-e-belge` (`34b83610`, +2: e-belge bölümü yeni düzende, tüm paketlerde; SSS ve Hakkımızda düzeltmesi) | Dalda, birleşmedi | Build ve tanıtım testleri geçti (oturum bildirimi). Main'e alma ve `www` yayını bekliyor |
+| Tanıtım sitesi yeni tasarım: C "Sıcak klinik" ve Özellikler'de e-belge bölümü | FE `bf166f4a` (`feature/tanitim-sitesi-c`, `feature/tanitim-sitesi-c-e-belge`) | Canlıda (2026-11-16 15:28) | `www` 200 (sunucuda okundu). Açık: `ux/tanitim-sitesi-tasarim.md` C'ye göre güncellenmedi. Eski `feature/ozellikler-e-belge` main'e alınmadı; yerine C dalı geçti |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -56,7 +56,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 
 **Canlıya çıkış**
 1. ~~Main yayını (UX dalga 2–4, Geri al, takvim, muayene taslağı, virüs taraması)~~ Yapıldı (2026-11-16 03:47): BE `f0112187`, panel `7ad9e655`; ClamAV kuruldu. Üç depo push edildi.
-2. Tanıtım sitesi C "Sıcak klinik" + e-belge bölümü (FE `feature/tanitim-sitesi-c-e-belge`, `34b83610`): main'e alma ve `www` yayını. Eski `feature/ozellikler-e-belge` dalının yerine geçiyor gibi görünüyor.
+2. ~~Tanıtım sitesi C + e-belge bölümü~~ Yapıldı (2026-11-16 15:28): FE `bf166f4a` canlıda, push edildi.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
