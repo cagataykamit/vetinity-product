@@ -52,7 +52,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `8cab1afe`, panel `43c2bff7` (`feature/aktarma-notlari`) | Canlıda (2026-11-16 18:40) | Migration `AddImportBatchWarnings` (koordinatör bildirimi; canlı DB'de ben okumadım). `/health/ready` 200 |
 | Aktarma geri alma 30 gün sonra kesinleşir, aktarma listesi sade | BE `b7afdfbf`, panel `faf4ce00` | Canlıda (2026-11-16 22:38) | |
 | Geçici SQL hatasında (kilitlenme, 1205) yeniden deneme ve komut DB'de RCSI ([ADR-050](../decisions/ADR-050-veritabani-okuma-surumleme-ve-gecici-hata.md)) | BE `b7afdfbf`; [işletim notu](../operations/veritabani-rcsi.md) | Canlıda (2026-11-16 22:38) | RCSI ayarını canlı DB'de ben okumadım (koordinatör bildirimi). `/health/ready` 200 |
-| Takvim: planlı aşılar, filtre, ay görünümü | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 22:38) |
+| Takvim: planlı aşı katmanı, ayrıntı balonu, randevuyu pencerede açma, filtreler, ay görünümü | BE `883af239` (+6), FE `e4907244` (+7) (`feature/takvim-asi-katmani`) | Dalda, birleşmedi | Kod ve testler tamam (oturum bildirimi); doğrulama, main'e alma ve yayın bekliyor |
 | Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 22:38) |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
