@@ -41,3 +41,13 @@
   - Backend: 1325 domain, 4329 uygulama ve 2129 entegrasyon testi geçti, 4 test atlandı.
   - Panel: 3289 test geçti (B1–B3 ve 2. dalga birleşimi). 3. dalga dalında main ile birleşik hâlde 3312 test geçti; birleşik main ağacı bu dalla aynı.
   - Portal: 267 testin hepsi geçti.
+
+## Ek yayın: 2026-11-16 15:28 (TSİ), tanıtım sitesi yeni tasarım ve e-belge bölümü
+
+**Yayınlanan:** panel/site `main` `bf166f4a` (`main-2IMRSHC5.js`, `styles-ZDST4IPE.css`). Backend ve portal değişmedi. Migration yok. Yedek 15:28'de alındı.
+**Doğrulama:** www ana sayfa, Özellikler, Paketler, İletişim ve panel 200; canlıda Özellikler'de e-belge bölümü görünüyor, başlıklar Nunito ile çiziliyor.
+
+- **Tanıtım sitesi "Sıcak klinik" tasarımında (kullanıcı seçimi C):** ana sayfa, Özellikler, Defterler ve KVKK, Geçiş, Paketler, İletişim. Dört renk tonu (açık ve koyu tema tek yerden), fosforlu vurgu, eğik yapışkan not görselleri; düğmeler lacivert-teal. Ekran görüntüleri büyük ve yakın çekimli, telefonda dar parça gösteriliyor, Özellikler'de bölüm dizini kaydırdıkça işaretleniyor.
+- **Yazı tipi:** Nunito uygulamanın kendi dosyalarından yükleniyor (dış yazı tipi sunucusu yok).
+- **Özellikler'de e-belge bölümü:** e-Fatura/e-Arşiv tüm paketlerde; metin "desteklenen e-belge sağlayıcıları" diyor, sağlayıcı adı yok. SSS ve Hakkımızda'daki "e-Fatura yok" ifadeleri kaldırıldı.
+- **Bilinen sınırlar:** Tarayıcıda kullanıcı ve ajan baktı (1440/768/375, açık/koyu); ekran okuyucu, klavye ve sayfa hızı (LCP/CLS) ölçülmedi. Bazı ekran görüntüleri telefonda küçük kalıyor. Testler: panel 3313 testin hepsi geçti; son hizalama düzeltmesi yalnız CSS, ayrıca derlendi.
