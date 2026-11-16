@@ -63,3 +63,16 @@
 - **E-vet aktarması, türü belirsiz hasta:** E-vet türü seçilmemiş hastaya "Diğer" yazıyor. Böyle bir hastanın türe özgü aşıları hep aynı türü gösteriyorsa hasta o türle gelir (ör. yalnız köpek aşısı olan hasta Köpek); önizlemede "Türü aşılarından çıkarıldı" notu çıkar. Aşılar farklı türleri gösteriyorsa ya da türe özgü aşı yoksa tür Diğer kalır, aşılar reddedilmez, uyarıyla gelir. Türü açıkça yazılı ve aşıyla çelişen satır eskisi gibi reddedilir.
 - **Aktarma notları satır satır:** "Dosya okunurken N not çıktı" paneli her notu tek satırda gösterir: sayı, ne olacağı, konu, tür (karar, dikkat, bilgi, aktarılmayacak). Karar bekleyen not baştan açık gelir ve "Sizden beklenen"e götürür; ayrıntı tıklayınca açılır; başlıktaki tür sayıları filtre. Notlar aktarmaya kaydedilir; sayfa yenilenince ya da geçmişten açılınca kaybolmaz.
 - **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Aktarma notları gerçek bir E-vet yedeğiyle değil, yerel örnek yedekle denendi; bu yayından önce yapılmış aktarmaların notları kayıtlı olmadığı için eski partilerde görünmez. Nottan satır incelemesine filtreyle gitme sonraki işte. Testler: backend 1326 domain, 4343 uygulama ve 2131 entegrasyon testi geçti, 4 atlandı; panel 3329 testten 3328'i birleşik koşuda geçti, düşen 1 test (`primeng-select-behavior`, eşzamanlı backend testi yükü altında zamanlama) tek başına 4/4 geçti.
+
+## Ek yayın: 2026-11-16 22:38 (TSİ), aktarma geri alma süresi, kilitlenme düzeltmesi, RCSI
+
+**Yayınlanan:** backend `main` `b7afdfbf`, panel `main` `faf4ce00` (`main-WCYXYUFV.js`). Portal değişmedi.
+**Migration:** `EnableReadCommittedSnapshot` (ADR-050, [işletim notu](../operations/veritabani-rcsi.md)). Komut veritabanında READ_COMMITTED_SNAPSHOT açıldı; Zonguldak veritabanına dokunulmadı. Öncesinde migration girişinin yetkisi doğrulandı (db_owner), süren aktarma işi yoktu. `migrate` ve `migrate-query` çalıştırıldı.
+**Yedek:** Migration'dan önce elle yedek alındı (22:38).
+**Doğrulama:** `is_read_committed_snapshot_on = 1`; API `/health/ready` 200, tüm girdiler Healthy; yayın sonrası günlükte uyarı yok; panel yeni `main` dosyasıyla açılıyor.
+
+- **Neden:** 21:38'de DOGUSZONGULDAK'ın aktarma geri alması 3750/8799 birimde durdu. Yalnız okuyan bir basınç ölçümü outbox güncellemesiyle kilitlendi (SQL 1205) ve iş tümüyle başarısız sayıldı. Veri bozulmadı; her birim kendi işleminde.
+- **Geçici veritabanı hataları işi düşürmez:** aktarma, geri alma, outbox, projeksiyon ve hatırlatma işçileri kilitlenme ve benzeri geçici hatalarda kısa bekleyip üç kez daha dener (`TransientSqlRetry`, kural tek yerde).
+- **Geri alma 30 gün açık:** aktarma uygulandıktan 30 gün sonra kesinleşir; listede son tarih yazar, süre dolunca "Kesinleşti" görünür ve geri al sayfası açıklama gösterir.
+- **Sade liste:** aktarma listesi varsayılan olarak geçerli partileri gösterir; geri alınanlar ve kapanmış taslaklar "Durum" filtresinden açılır.
+- **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Kilitlenme gerçek yük altında değil, testte sahte 1205 hatasıyla canlandırıldı. RCSI'yle davranışı değişebilen üç yer ve zaten yarışa açık yerler (token yenileme, randevu çakışması, sınırlar) ayrı işte ele alınıyor. Testler: backend 1337 domain, 4343 uygulama ve 2142 entegrasyon testi geçti, 4 atlandı; panel 3340, portal 267, site 42 testin hepsi geçti.

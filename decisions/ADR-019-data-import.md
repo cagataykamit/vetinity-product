@@ -34,3 +34,11 @@
 ## Ek (2026-11-10) — tam geçiş
 
 Kapsam [ADR-048](ADR-048-tam-veri-gecisi.md) ile genişledi: klinik geçmiş (salt okunur eski program kaydı), açık bakiye (devir ücreti), hesap hareketleri (salt okunur), gelecek randevular, ürün ve hizmet kartları. K1–K13 aynen geçerli; K3 randevu hatırlatmalarını da kapsar; K7 yeni kayıt türleri için ADR-048 "Geri alma" bölümüyle yeniden yazıldı (partinin kendi kayıtları bağ sayılmaz, diğer her bağ engeldir).
+
+## Ek (2026-11-16) — geri alma süresi ve sade liste
+
+Kullanıcı kararı (2026-11-16). Canlıda ilk gerçek aktarma (E-vet yedeği, binlerce müşteri/hasta/aşı) sonrası iki risk görüldü: geri alma süresizdi, aylar sonra klinikte dokunulmamış binlerce kayıt tek tıkla silinebilirdi; geri alınmış deneme partileri listeyi kalabalıklaştırıyordu.
+
+- **K7 eki — geri alma süresi:** geri alma uygulamadan sonra **30 gün** açık; süre dolunca aktarma **kesinleşir**. Süre uygulama anından (yarıda kalan uygulamada son doğrulama anından) sayılır ve bütün geri alınabilir durumlara uygulanır. Yarım kalmış geri alma (kısmen geri alınmış ya da hatayla durmuş) süre dolunca **yeniden denenemez**: kalan kayıtlar bağı olduğu için korunmuş ya da süre boyunca kullanılmıştır; onları sonradan silmek bu kuralın önlediği şeydir. Başlamış geri alma işi süre dolsa da biter. K9'daki 30 günlük satır verisi temizliği ayrı kuraldır.
+- **Liste:** içe aktarma geçmişi varsayılan olarak yalnız geçerli partileri gösterir; geri alınan, silinen ve süresi dolan taslaklar "Durum" filtresinden ("Tümü" ya da kendi durumu) görülür.
+- Kural tek yerde (backend domain); uç ayrıntısı backend `docs/IMPORT_API_CONTRACT.md` bölüm 7.5, 7.12 ve 9.1. Panelde süre içindeki partide son tarih, dolmuşta "Kesinleşti" görünür.
