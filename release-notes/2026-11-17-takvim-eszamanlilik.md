@@ -13,3 +13,15 @@
 - **Oturum yenileme:** refresh token tek kullanımlık; aynı anda ikinci yenileme yeni jeton almaz. Panel ve portalda sekmeler yenilemeyi Web Locks ile sırayla yapar; çıkış ve yenileme yarışı 500 vermez.
 - **Geri al sayfası:** geri alınamayan kayıtlar adıyla, nedeniyle ve bağlı oldukları kayıtla gruplu gösterilir.
 - **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Geri alma süresinin 15 güne inmesi ve güncelleme aktarması bu yayında yok, kendi dallarında hazır. Testler: backend 1337 domain, 4383 uygulama ve 2164 entegrasyon testi geçti, 4 atlandı; panel 3386 testten 3385'i birleşik koşuda geçti, düşen 1 test (`date-input` gün seçince panel kapanır, eşzamanlı backend testi yükü altında zamanlama) tek başına 20/20 geçti; portal 268, site 42 testin hepsi geçti.
+
+## Ek yayın: 2026-11-17 22:50 (TSİ), geri alma 15 gün, güncelleme aktarması, aktarma satırlarının saklanması
+
+**Yayınlanan:** backend `main` `6cda9ba7`, panel `main` `3bdbb891` (`main-42FFWWBN.js`). Portal değişmedi (`main-IUS6NQD7.js`), yeniden yayınlanmadı.
+**Migration:** `AddImportSourceLinks` (ADR-051, kaynak kimliği eşleme tablosu); `migrate` ve `migrate-query` çalıştırıldı. Canlıda aktarma partisi yoktu, geriye dönük doldurulacak kayıt çıkmadı.
+**Yedek:** Migration'dan önce elle yedek alındı (22:50, Drive kopyası doğrulandı).
+**Doğrulama:** API `/health/ready` 200, tüm girdiler Healthy; yayın sonrası günlükte uyarı yok; panel yeni `main` dosyasıyla açılıyor.
+
+- **Geri alma 15 gün:** aktarma uygulandıktan sonra 15 gün geri alınabilir. Aktarma ekranı başlatmadan önce "Aktarmadan sonra 15 gün içinde geri alabilirsiniz", bitince kalan günü ve son anı yazar; liste ve geri al sayfası kalan günü gösterir.
+- **Güncelleme aktarması (ADR-051):** aynı programdan ikinci yedek mükerrer kayıt yaratmaz. Müşteri ve hasta önce programın kendi numarasıyla (E-vet müşteri no, hasta no) eşleşir; klinik kayıtta da mükerrer denetimi var. Önizlemenin en üstünde "Bu dosya önceki aktarmayla büyük ölçüde örtüşüyor: X yeni müşteri, Y yeni hasta… gelecek" özeti çıkar. Mevcut müşterinin bakiyesi dosyadakinden farklıysa farklar listelenir; varsayılan atlamaktır, tek seçimle farklar devir olarak açılır; geri almada bu hareketler de silinir.
+- **Aktarma satırlarının saklanması (ADR-051 eki):** aktarılmış partinin satır ayrıntısı geri alma süresi dolunca silinir; parti kaydı ve sayıları kalır, ekran "satır ayrıntısı saklanmıyor" der. Aktarılmamış ya da tamamen geri alınmış parti aynı süre sonra kaydıyla silinir (denetim kaydı `ImportBatch.Deleted`). Ayrı 30 günlük saklama sabiti kalktı; süre tek yerde.
+- **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Güncelleme aktarması yerelde ikinci E-vet yedeğiyle uçtan uca denendi, canlıda gerçek yedekle denenmedi. Performans testi koşulmadı. Testler: backend 1340 domain, 4402 uygulama ve 2167 entegrasyon testi geçti, 4 atlandı; panel 3401 testten 3400'ü geçti, düşen 1 test bu yayındaki metin değişikliğini bekleyen eski ifadeydi, düzeltildi ve geçti; portal 268, site 42 testin hepsi geçti.
