@@ -15,8 +15,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | P0 | 27 | 27 | 0 | 0 | 0 |
 | P1 | 105 | 93 | 2 | 2 (MOBILE-002 geliştiriliyor, kodu main'de; AI-002 pilotta erken deneme) | 8 (AI) |
 | P2 | 62 | 26 | 5 | 25 (15 planlı, 10 araştırılacak) | 6 |
-| P3 | 10 | 0 | 0 | 9 (2 planlı, 7 araştırılacak) | 1 |
-| Belirlenmemiş | 1 | 0 | 0 | 1 (UX-010 İngilizce) | 0 |
+| P3 | 11 | 0 | 0 | 10 (3 planlı, 7 araştırılacak) | 1 |
 
 Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları, tasarım taslakları) aşağıda "Şu an yürüyenler"de.
 
@@ -340,14 +339,15 @@ Planlandı: 15 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 26 
 
 </details>
 
-## P3 (10 madde)
+## P3 (11 madde)
 
-Planlandı: 2 · Araştırılacak: 7 · Ertelendi: 1
+Planlandı: 3 · Araştırılacak: 7 · Ertelendi: 1
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [APPT-030](../backlog/feature-backlog.md#appt-030--whatsapp-bildirimleri) | WhatsApp bildirimleri | Planlandı |  |
 | [APPT-033](../backlog/feature-backlog.md#appt-033--qr-kod-ile-randevu-sayfası) | QR kod ile randevu sayfası | Planlandı |  |
+| [UX-010](../backlog/feature-backlog.md#ux-010--ingilizce-dil-desteği) | İngilizce dil desteği | Planlandı | P3'e alındı (kullanıcı, 2026-11-17): sonra yapılacak |
 | [EXAM-014](../backlog/feature-backlog.md#exam-014--item-rules-bundle-ve-record-oluşturma) | Item rules (bundle ve record oluşturma) | Araştırılacak |  |
 | [APPT-027](../backlog/feature-backlog.md#appt-027--javascript-booking-widget) | JavaScript booking widget | Araştırılacak |  |
 | [APPT-028](../backlog/feature-backlog.md#appt-028--online-depozito) | Online depozito | Araştırılacak |  |
@@ -356,11 +356,3 @@ Planlandı: 2 · Araştırılacak: 7 · Ertelendi: 1
 | [APPT-032](../backlog/feature-backlog.md#appt-032--ics--apple-calendar--outlook-desteği) | .ics / Apple Calendar / Outlook desteği | Araştırılacak |  |
 | [APPT-035](../backlog/feature-backlog.md#appt-035--ai-destekli-uygun-saat-önerisi) | AI destekli uygun saat önerisi | Araştırılacak |  |
 | [APPT-034](../backlog/feature-backlog.md#appt-034--mini-klinik-sayfası) | Mini klinik sayfası | Ertelendi | TIER-002 kapsamına alındı |
-
-## Belirlenmemiş (1 madde)
-
-Planlandı: 1
-
-| Kimlik | Başlık | Durum | Not |
-|---|---|---|---|
-| [UX-010](../backlog/feature-backlog.md#ux-010--ingilizce-dil-desteği) | İngilizce dil desteği | Planlandı | Kullanıcı isteği 2026-11-12; öncelik belirlenmedi |
