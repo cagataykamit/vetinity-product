@@ -39,6 +39,12 @@ Kapsam [ADR-048](ADR-048-tam-veri-gecisi.md) ile genişledi: klinik geçmiş (sa
 
 Kullanıcı kararı (2026-11-16). Canlıda ilk gerçek aktarma (E-vet yedeği, binlerce müşteri/hasta/aşı) sonrası iki risk görüldü: geri alma süresizdi, aylar sonra klinikte dokunulmamış binlerce kayıt tek tıkla silinebilirdi; geri alınmış deneme partileri listeyi kalabalıklaştırıyordu.
 
-- **K7 eki — geri alma süresi:** geri alma uygulamadan sonra **30 gün** açık; süre dolunca aktarma **kesinleşir**. Süre uygulama anından (yarıda kalan uygulamada son doğrulama anından) sayılır ve bütün geri alınabilir durumlara uygulanır. Yarım kalmış geri alma (kısmen geri alınmış ya da hatayla durmuş) süre dolunca **yeniden denenemez**: kalan kayıtlar bağı olduğu için korunmuş ya da süre boyunca kullanılmıştır; onları sonradan silmek bu kuralın önlediği şeydir. Başlamış geri alma işi süre dolsa da biter. K9'daki 30 günlük satır verisi temizliği ayrı kuraldır.
+- **K7 eki — geri alma süresi:** geri alma uygulamadan sonra **30 gün** açık (2026-11-17 eki ile **15 gün**); süre dolunca aktarma **kesinleşir**. Süre uygulama anından (yarıda kalan uygulamada son doğrulama anından) sayılır ve bütün geri alınabilir durumlara uygulanır. Yarım kalmış geri alma (kısmen geri alınmış ya da hatayla durmuş) süre dolunca **yeniden denenemez**: kalan kayıtlar bağı olduğu için korunmuş ya da süre boyunca kullanılmıştır; onları sonradan silmek bu kuralın önlediği şeydir. Başlamış geri alma işi süre dolsa da biter. K9'daki 30 günlük satır verisi temizliği ayrı kuraldır.
 - **Liste:** içe aktarma geçmişi varsayılan olarak yalnız geçerli partileri gösterir; geri alınan, silinen ve süresi dolan taslaklar "Durum" filtresinden ("Tümü" ya da kendi durumu) görülür.
 - Kural tek yerde (backend domain); uç ayrıntısı backend `docs/IMPORT_API_CONTRACT.md` bölüm 7.5, 7.12 ve 9.1. Panelde süre içindeki partide son tarih, dolmuşta "Kesinleşti" görünür.
+
+## Ek (2026-11-17) — geri alma süresi 15 gün
+
+Kullanıcı kararı (2026-11-17): "30 gün çok uzun, 15 gün yapalım." Geri alma uygulamadan sonra **15 gün** açık; kural ve diğer ayrıntılar 2026-11-16 ekiyle aynı. K9'daki 30 günlük satır verisi saklaması değişmedi (ayrı kural). Süre backend'de tek sabittir; aynı süreye bağlı her kural (ör. güncelleme aktarmasının "geri alma süresi dolunca" adımı) bu sabiti okur, ayrı sayı yazmaz.
+
+Panel kalan günü öne çıkarır, kesin tarih yanında durur: listede "12 gün daha geri alınabilir · 2 Aralık 15:57'ye kadar", son günde vurgulu "Bugün son gün"; geri al sayfasında "Bu aktarmayı 12 gün daha geri alabilirsiniz (2 Aralık 2026, 15:57'ye kadar)"; aktarmadan önce "Aktarmadan sonra 15 gün içinde geri alabilirsiniz". Gün İstanbul takvim gününe göre sayılır: son an yarınsa "1 gün daha", bugünse "bugün son gün".
