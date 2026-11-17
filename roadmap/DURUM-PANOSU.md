@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `b7afdfbf`, panel ve tanıtım `faf4ce00` (`main-WCYXYUFV.js`; 2026-11-16 22:38), portal `main-ZS3H6KLO.js` (01:23). [Sürüm notu](../release-notes/2026-11-16-kullanici-dostu-2.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `d807f4bc`, panel ve tanıtım `0c2ac5e7` (`main-RAVWKYPP.js`), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-17-takvim-eszamanlilik.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Kullanıcı E-vet aktarmasını düzeltilmiş sürümle pilotta yeniden deneyecek (2026-11-15 06:33 yayını sonrası). "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -51,9 +51,11 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `8cab1afe`, panel `43c2bff7` (`feature/aktarma-notlari`) | Canlıda (2026-11-16 18:40) | Migration `AddImportBatchWarnings` (koordinatör bildirimi; canlı DB'de ben okumadım). `/health/ready` 200 |
 | Aktarma geri alma 30 gün sonra kesinleşir, aktarma listesi sade | BE `b7afdfbf`, panel `faf4ce00` | Canlıda (2026-11-16 22:38) | |
 | Geçici SQL hatasında (kilitlenme, 1205) yeniden deneme ve komut DB'de RCSI ([ADR-050](../decisions/ADR-050-veritabani-okuma-surumleme-ve-gecici-hata.md)) | BE `b7afdfbf`; [işletim notu](../operations/veritabani-rcsi.md) | Canlıda (2026-11-16 22:38) | RCSI ayarını canlı DB'de ben okumadım (koordinatör bildirimi). `/health/ready` 200 |
-| Takvim: planlı aşı katmanı, ayrıntı balonu, randevuyu pencerede açma, filtreler, ay görünümü | BE main `6303eb31`, FE main `639d5ac2` (`feature/takvim-asi-katmani` birleşti) | Main'de, canlıya çıkmadı | Push ve yayın yok |
-| Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | BE main `073e5c8b`, FE main `0a8bebea` (`feature/eszamanlilik-aciklari` birleşti) | Main'de, canlıya çıkmadı | Push ve yayın yok |
-| Yeni başlayan dallar: aktarma geri almada kalan kayıtlar, güncelleme aktarması (BE + FE), kasa sayımı kilidi (BE) | `feature/geri-alma-kalan-kayitlar`, `feature/guncelleme-aktarmasi`, `fix/kasa-sayimi-kilit` | Geliştiriliyor | 2026-11-17: dallar main'den açıldı, henüz commit yok |
+| Takvim: planlı aşı katmanı, ayrıntı balonu, randevuyu pencerede açma, filtreler, ay görünümü | BE `d807f4bc`, panel `0c2ac5e7` (`feature/takvim-asi-katmani`) | Canlıda (2026-11-17 21:03) | |
+| Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | BE `d807f4bc`, panel `0c2ac5e7`, portal `main-IUS6NQD7.js` (`feature/eszamanlilik-aciklari`) | Canlıda (2026-11-17 21:03) | Migration `RefreshTokenRevokedAtConcurrencyToken` (yalnız model özeti, şema değişmez) |
+| Aktarma geri almada kalan kayıtlar (adıyla, zincir hâlinde gruplu) ve kasa sayımında Ana kasa 500 hatası | BE `d807f4bc`, panel `0c2ac5e7` (`feature/geri-alma-kalan-kayitlar`, `fix/kasa-sayimi-kilit`) | Canlıda (2026-11-17 21:03) | |
+| Aktarma geri alma süresi 15 gün (30 yerine) | BE `13804cae` (+2), FE `e1dba357` (+1) (`feature/geri-alma-15-gun`), ürün `docs/geri-alma-15-gun` (+1) | Dalda, birleşmedi | Birleştirme kullanıcı onayında (koordinatör bildirimi) |
+| Güncelleme aktarması: kaynak kimliğiyle eşleme, bakiye farkı, önizleme özeti; aktarma satırı ve parti saklama kuralı (ADR-051) | BE `6029df91` (+9), FE `5e1e3da6` (+5) (`feature/guncelleme-aktarmasi`) | Dalda, birleşmedi | Migration `AddImportSourceLinks` (geriye dönük doldurma var); canlıda yedekle uygulanmalı. Birleştirme kullanıcı onayında |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -62,12 +64,9 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-1. ~~Main yayını (UX dalga 2–4, Geri al, takvim, muayene taslağı, virüs taraması)~~ Yapıldı (2026-11-16 03:47): BE `f0112187`, panel `7ad9e655`; ClamAV kuruldu. Üç depo push edildi.
-2. ~~Tanıtım sitesi C + e-belge bölümü~~ Yapıldı (2026-11-16 15:28): FE `bf166f4a` canlıda, push edildi.
-3. ~~Portal tüm paketlerde~~ Yapıldı (2026-11-16 18:40).
-4. ~~E-vet türü aşılardan çıkarma~~ Yapıldı (2026-11-16 18:40).
-5. ~~Aktarma notları~~ Yapıldı (2026-11-16 18:40): BE `8cab1afe`, panel `43c2bff7`, migration `AddImportBatchWarnings`. Üç depo push edildi.
-6. Main (BE `073e5c8b`, FE `0a8bebea`): takvim aşı katmanı ve ay görünümü, eşzamanlılık açıkları. Push ve yayın.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40 ve 2026-11-17 21:03 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında).
+1. Aktarma geri alma süresi 15 gün (`feature/geri-alma-15-gun`, `docs/geri-alma-15-gun`): main'e alma, push ve yayın.
+2. Güncelleme aktarması ve saklama kuralı (`feature/guncelleme-aktarmasi`, migration `AddImportSourceLinks`): main'e alma, push, canlı DB'ye migration ve yayın.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
