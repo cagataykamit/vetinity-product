@@ -18,9 +18,11 @@
 
 **Öneri:** Her günün başlığında tek satırlık bir sayaç olsun: "13 aşı · 3 gecikmiş". Sayaca tıklanınca o günün aşı listesi sağdan açılan panelde görünsün. Gün görünümünde bu panel baştan açık gelsin.
 
+**Bant neden kurulmuştu, sorun nerede?** Bantın kurulma gerekçesi doğruydu. Planlı aşının saati yok, yalnız günü var; E-vet'ten aktarılan 5754 sonraki doz tarihi de aynı durumda. Vade kuralı gün bazlı (ADR-028). Aşı randevu yerini doldurmaz. Asıl sorun bandın ayrı olması değil, sınırsız uzayıp ızgarayı aşağı itmesi. Görünen aralıktaki bütün gecikmiş aşılar da banda giriyor ve bant günde 10–20 aşıyla hiç denenmemişti. Öneri bu yüzden bandı kaldırmıyor, tek satıra indiriyor. Taslak gerçek yoğunlukla çizildi: hafta toplamı 77 aşı, gün başına 4–17 aşı.
+
 | Seçenek | Karar | Gerekçe |
 |---|---|---|
-| Saat ızgarasına yerleştirmek | Ret | Planlı aşının saati yok. Sözleşme §5.2: "Vadeli satırda saat anlamlı değildir." Izgaraya koymak için saat uydurmak gerekir, bütün aşılar 09:00'a yığılır. Kart randevu gibi görünür ama çakışma ve "Boş saat bul" hesabına girmez (§5.2 "Randevu değildir"). Günde 15–20 aşı kartı randevuları da ezer. |
+| Saat ızgarasına yerleştirmek | Ret | Planlı aşının saati yok. Sözleşme §5.2: "Vadeli satırda saat anlamlı değildir." E-vet'ten aktarılan 5754 sonraki doz tarihi de yalnız gün taşıyor. Izgaraya koymak için saat uydurmak gerekir, bütün aşılar 09:00'a yığılır. Izgarada blok olarak duran aşı o saati dolu gösterir. Kart randevu gibi görünür ama çakışma ve "Boş saat bul" hesabına girmez (§5.2 "Randevu değildir"). Günde 15–20 aşı kartı randevuları da ezer. |
 | **Gün başlığında sayaç, tıklanınca liste** | **Seçildi** | Izgara her gün aynı yükseklikte kalır; aşı sayısı ne olursa olsun randevular yukarı itilmez. "Bugün kaç aşı var, kaçı gecikmiş" takvimde görünmeye devam eder; 2026-11-16 kararı (aşı takvimde görünsün) korunur. Liste panelde olduğu için aşı adı tam yazılır ve eylemler ("Aşıyı yap", "Randevu ver") yanında durur. Backend değişikliği gerekmez: sayaç `GET /vaccinations/calendar/summary`, liste `GET /vaccinations/calendar` (§5.2, §7). |
 | Ayrı sekme ya da görünüm | Ret | Gün planlanırken aşı bilgisi gözden çıkar; 2026-11-16 kararına ters düşer. Ayrı liste ihtiyacını mevcut aşı listesi (`/vaccinations?onlyOverdue=true`) zaten karşılıyor. Paneldeki "Haftanın tüm aşıları" bağlantısı oraya gider. |
 | Varsayılanda kapalı katman | Ret | Gecikmiş aşı gözden kaçar. Katman açılınca da bugünkü sorun aynen geri gelir. |
@@ -29,7 +31,7 @@ Bu, rakiplerin klinik pratiğiyle de örtüşüyor: aşı vadesi takvimde görü
 
 **Ayrıntılar** (`#hafta`, `#hafta-asi`, `#gun`):
 
-- **Sayaç:** Her gün başlığının altında 22 px yüksekliğinde tek satır. İçinde kalkan simgesi, "N aşı" ve gecikmiş varsa kırmızıyla "· N gecikmiş". Başka durum renklendirilmez. Aşı yoksa satırın yeri boş kalır, böylece sütunlar hizalı kalır. Kapalı ve boş günde (pazar) yalnız sayı görünür.
+- **Sayaç:** Her gün başlığının altında 22 px yüksekliğinde tek satır. İçinde kalkan simgesi, "N aşı" ve gecikmiş varsa kırmızıyla "· N gecikmiş". Başka durum renklendirilmez. Gecikmiş sayı ayrı tutulur: hem sayaçta ayrı yazılır hem panelde ayrı grup olarak, en üstte gösterilir. Sayacın yüksekliği aşı sayısından bağımsızdır; günde 20 aşı da 2 aşı da aynı tek satırı kaplar. Aşı yoksa satırın yeri boş kalır, böylece sütunlar hizalı kalır. Kapalı ve boş günde (pazar) yalnız sayı görünür.
 - **Araç çubuğu:** Mevcut "77 aşı" sayacı tarih başlığının yanında kalır ("32 randevu · 77 aşı"). Tıklanınca haftanın listesi açılır, liste günlere göre gruplanır.
 - **Panel (hafta görünümü):** Sağdan açılır, genişliği 352 px. Izgarayı karartmaz, pencere de değildir. × ya da Esc ile kapanır. Seçili günün sayacı vurgulanır. Panelin üstünde şu açıklama yazar: "Planlı aşı randevu değildir; saati yoktur, gün içinde yapılır." Sekmeler: "Yapılacak / Yapıldı / Tümü". Geçmiş günlerde bunlar "Gecikmiş / Uygulandı / Tümü" olur.
 - **Panel (gün görünümü):** Sağda sürekli açık, 330 px. Sekmeler: "Bugünün aşıları 17 | Boş saat bul". Hafta görünümünde "Boş saat bul" araç çubuğunda bir düğme olur ve aynı panelde açılır. Bugünkü kalıcı sağ sütun hafta görünümünden kalkar ve günlere yer açılır.
