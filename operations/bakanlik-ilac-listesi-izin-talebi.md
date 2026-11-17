@@ -56,3 +56,4 @@ Yanıtı tarih ve kanal bilgisiyle bu belgenin altına ekleyin (kişisel veri ol
 | Tarih | Kanal | Durum |
 |---|---|---|
 | 2026-11-16 | CİMER | Gönderilemedi: günlük başvuru sınırı dolu (kullanıcı). 2026-11-17'de gönderilecek |
+| 2026-11-17 | CİMER | **Gönderildi** (kullanıcı). Başvuru numarası kullanıcıda, bu belgeye yazılmadı. Yanıt bekleniyor |
