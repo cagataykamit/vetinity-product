@@ -43,3 +43,25 @@
 - Frontend `feature/guncelleme-aktarmasi`: `d96a0aaf` (özet), `3f5b88ff` (bakiye farkı seçimi, geri alma satırı), `db106994` (testler).
 - Bilinen sınır: hiç yeni kayıt olmayan, yalnız bakiye farkı taşıyan dosya uygulanamaz (`canCommit` yeni kayıt ister). Gerekirse ayrı karar.
 - Push, merge, canlı DB migration'ı yapılmadı.
+
+## Ek: aktarma satırlarının saklanması (2026-11-17, kullanıcı kararı koordinatör üzerinden)
+
+### Bağlam
+
+- Bakım işi 30 gün sonra yalnız satırların JSON alanlarını boşaltıyordu (ADR-019 K9); satırlar sonsuza dek kalıyordu. Tek klinikte 5 aktarma 49.516 satır üretti; binlerce klinikte gereksiz büyür.
+- Geri alma artık süreyle sınırlı (ADR-019 eki; kullanıcı kararıyla 15 gün, ayrı dalda). Süre dolunca satırların işi kalmaz: geri alma satırların hedef kimliğini kullanır, süre dolunca geri alma başlatılamaz.
+- Kaynak kimliği bu yüzden satırlarda değil, ayrı `ImportSourceLinks` tablosundadır (1. karar).
+
+### Kararlar
+
+1. **Süre tek sabittir:** satır ve parti saklaması geri alma süresini (`ImportBatch.RollbackWindow`) kullanır; ayrı saklama sabiti (`PayloadRetention`, 30 gün) kalkar.
+2. **Aktarılmış parti** (`Committed`, `CommitFailed`, `PartiallyRolledBack`, `RollbackFailed`): geri alma süresi dolunca (`rollbackDeadlineUtc`) satırlar **tamamen silinir**. Parti kaydı, özet sayıları ve "ne zaman, kim, kaç kayıt" bilgisi kalır; `payloadPurgedAtUtc` dolar.
+3. **Aktarılmamış ya da tamamen geri alınmış parti** (`RolledBack`, `Discarded`, `Expired`): son hareketten geri alma süresi kadar sonra **parti kaydı satırlarıyla birlikte silinir**; geçmiş listesinde görünmez. Silmeden önce partiye başvuran kayıt (aşı, ücret, müşteri alacağı, eski program klinik kaydı ve hesap hareketi, randevu) aranır; varsa parti silinmez, günlüğe sayı yazılır. Silmeden önce denetim günlüğüne tek satır özet yazılır (parti kimliği, durum, oluşturan kullanıcı kimliği, oluşturma ve son hareket anı, tablo sayıları; kişisel veri yok).
+4. **Parçalı silme:** satırlar küçük parçalarla silinir, uzun kilit tutulmaz; yarıda kalırsa sonraki tur sürer.
+5. **Ekran:** satırı silinmiş partide satır listesi, hata raporu ve geri alma önizlemesi bozulmaz; "Bu aktarma kesinleşti, satır ayrıntısı saklanmıyor" denir. Geçmiş listesindeki "geri alınanlar" filtresinin kısa ömürlü olduğu ekranda söylenir.
+
+### Sonuçlar
+
+- `ImportBatchRows` yalnız geri alma süresi boyunca büyür; sonra sıfıra iner.
+- Kesinleşmiş partide satır bazında inceleme ve hata raporu yoktur; yalnız sayılar kalır. Bu bilinçli bir kayıptır (geri alma da yapılamaz).
+- KVKK açısından kişisel veri (satır içeriği) eskisinden daha kısa saklanır.
