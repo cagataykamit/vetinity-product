@@ -1,142 +1,192 @@
-# Randevu takvimi: yeniden tasarım taslağı (2026-11-18)
+# Randevu takvimi: yeniden tasarım taslağı (2026-11-18, 2. tur)
 
 **Durum:** Taslak, onay bekliyor. Kod yazılmadı. Onaydan sonra kodu Opus yazacak.
 **Kapsam:** Panelde `/panel/appointments/calendar`: hafta, gün ve ay görünümleri.
-**Taslak:** [`takvim-taslak/takvim-taslak.html`](takvim-taslak/takvim-taslak.html). Statik bir sayfa; veriler uydurmadır, gerçek hasta ya da sahip adı yoktur. Görünüm adresin sonundaki `#` ile seçilir: `#hafta`, `#hafta-asi`, `#gun`, `#ay`, `#renkler`. Koyu tema için `?dark` eklenir.
+**Taslak:** [`takvim-taslak/takvim-taslak.html`](takvim-taslak/takvim-taslak.html). Statik bir sayfa; veriler uydurmadır, gerçek hasta ya da sahip adı yoktur. Görünüm adresin sonundaki `#` ile seçilir: `#hafta`, `#hafta-ayrintili`, `#hafta-izgara`, `#hafta-ayarlar`, `#gun`, `#ay`, `#renkler`. Koyu tema için `?dark` eklenir.
 **Ekran görüntüleri:** `takvim-taslak/1536-*.png`. Kullanıcının ekranı 1920×1080, ölçek %125 (tarayıcı içi 1536×728 CSS piksel). Görüntüler bu boyutta, başsız Chrome ile alındı.
 
-## Sorun (canlıdaki görünüm, 2026-11-18)
+**2. turda ne değişti:** 1. turda aşılar gün başlığında bir sayaç ve yan panelde bir listeydi. Kullanıcı, aynı klinik ve aynı hafta için E-vet takviminin ekran görüntülerini gönderdi ve şu düzeni istedi: **aşı ve randevu tek akışta, saatler görünür**. Yönlendirmesi "kopyalamasın, daha iyisini, kullanıcı dostu olanı yapalım; olmadı kullanıcıya seçenek sunarız" oldu. Bu tur o yönde kuruldu. 1. turun sayaç ve panel önerisi geri çekildi.
 
-- Planlı aşılar ızgaranın üstündeki "aşı" bandında satır satır duruyor: günde 10–20 renkli çip var, her çipte kısaltılmış aşı adı, altında "+10 aşı" ya da "Daha az". Bant ekranın yarısını kaplıyor.
-- Randevular bandın altında kalıyor. Görmek için aşağı kaydırmak gerekiyor. Kartlar küçük ve hepsi aynı gri.
-- Renkler randevuyu değil aşıyı anlatıyor. Pazartesi sütunu baştan sona kırmızı, bugün sarı, ileri günler siyah. Durum çoğunlukla tarihten geldiği için renk yeni bir bilgi taşımıyor.
+## Sorun
+
+Canlıdaki görünüm, 2026-11-18:
+
+- Planlı aşılar ızgaranın üstünde ayrı bir bantta duruyor. Günde 10–20 renkli çip var ve bant ekranın yarısını kaplıyor. Randevular altta kalıyor ve kaydırmadan görünmüyor.
 - Kullanıcının sözü: "Saatler belli değil, takvime bakıyorum ne olduğu belli değil."
+- Bandın kurulma gerekçesi doğruydu: aşı randevu yeri doldurmaz, çakışma ve "Boş saat bul" hesabına girmez. Sorun bandın ayrı olması değil, sınırsız uzayıp ızgarayı aşağı itmesiydi.
 
-**Birinci amaç:** Takvime bakınca kimin ne zaman geleceği bir bakışta okunsun. İlk ekranda mesai saatleri ızgaraya sığsın, kaydırma gerekmesin.
+**E-vet'ten alınan klinik pratik** (görünüm alınmadı):
 
-## 1. Planlı aşılar: gün başlığında tek satırlık sayaç ve sağ panelde liste
+- Aşı ve randevu gün içinde saate göre tek listede duruyor.
+- Yapılacak aşı görevlerinin bir saati var.
+- Tür ve durum ayrı gösteriliyor.
+- Tamamlananlar takvimde kalıyor.
 
-**Öneri:** Her günün başlığında tek satırlık bir sayaç olsun: "13 aşı · 3 gecikmiş". Sayaca tıklanınca o günün aşı listesi sağdan açılan panelde görünsün. Gün görünümünde bu panel baştan açık gelsin.
+E-vet'te zayıf bulduğumuz yerler:
 
-**Bant neden kurulmuştu, sorun nerede?** Bantın kurulma gerekçesi doğruydu. Planlı aşının saati yok, yalnız günü var; E-vet'ten aktarılan 5754 sonraki doz tarihi de aynı durumda. Vade kuralı gün bazlı (ADR-028). Aşı randevu yerini doldurmaz. Asıl sorun bandın ayrı olması değil, sınırsız uzayıp ızgarayı aşağı itmesi. Görünen aralıktaki bütün gecikmiş aşılar da banda giriyor ve bant günde 10–20 aşıyla hiç denenmemişti. Öneri bu yüzden bandı kaldırmıyor, tek satıra indiriyor. Taslak gerçek yoğunlukla çizildi: hafta toplamı 77 aşı, gün başına 4–17 aşı.
+- Hafta kartı 3 satır ve her satır "…" ile kesiliyor. Tür ("Aşıla…") ve hasta adı çoğu kartta okunmuyor.
+- Tür için ayrı bir renk ekseni kullanılıyor (turuncu aşı, yeşil kontrol, mavi diğer). Bu renkler durum renkleriyle aynı aileden: yeşil hem "kontrol" hem "tamamlandı" anlamına geliyor.
+- Ay hücresi sınırsız uzuyor. Tamamlananlar da tek tek listeleniyor, yani bitmiş iş dikkat isteyen işle aynı ağırlıkta.
+- Aşının saati çoğu zaman randevu saati değil. 00:14, 06:10, 20:17, 21:53 gibi saatler var; aynı sahibin dört aşısı 12:01–12:03 arasına dizilmiş. Bu saatler büyük olasılıkla görevin girildiği an. Randevu gibi bir blok olarak çizilince sahte doluluk yaratıyor.
 
-| Seçenek | Karar | Gerekçe |
-|---|---|---|
-| Saat ızgarasına yerleştirmek | Ret | Planlı aşının saati yok. Sözleşme §5.2: "Vadeli satırda saat anlamlı değildir." E-vet'ten aktarılan 5754 sonraki doz tarihi de yalnız gün taşıyor. Izgaraya koymak için saat uydurmak gerekir, bütün aşılar 09:00'a yığılır. Izgarada blok olarak duran aşı o saati dolu gösterir. Kart randevu gibi görünür ama çakışma ve "Boş saat bul" hesabına girmez (§5.2 "Randevu değildir"). Günde 15–20 aşı kartı randevuları da ezer. |
-| **Gün başlığında sayaç, tıklanınca liste** | **Seçildi** | Izgara her gün aynı yükseklikte kalır; aşı sayısı ne olursa olsun randevular yukarı itilmez. "Bugün kaç aşı var, kaçı gecikmiş" takvimde görünmeye devam eder; 2026-11-16 kararı (aşı takvimde görünsün) korunur. Liste panelde olduğu için aşı adı tam yazılır ve eylemler ("Aşıyı yap", "Randevu ver") yanında durur. Backend değişikliği gerekmez: sayaç `GET /vaccinations/calendar/summary`, liste `GET /vaccinations/calendar` (§5.2, §7). |
-| Ayrı sekme ya da görünüm | Ret | Gün planlanırken aşı bilgisi gözden çıkar; 2026-11-16 kararına ters düşer. Ayrı liste ihtiyacını mevcut aşı listesi (`/vaccinations?onlyOverdue=true`) zaten karşılıyor. Paneldeki "Haftanın tüm aşıları" bağlantısı oraya gider. |
-| Varsayılanda kapalı katman | Ret | Gecikmiş aşı gözden kaçar. Katman açılınca da bugünkü sorun aynen geri gelir. |
+## Önerilen düzen: tek akış, saat önde
 
-Bu, rakiplerin klinik pratiğiyle de örtüşüyor: aşı vadesi takvimde görünür, iş ise ayrı bir hatırlatma ya da aşı listesinden yürütülür (E-vet "Hatırlatma listesi", [RAKIP-IS-AKISI](RAKIP-IS-AKISI-CALISMASI-2026-10.md) §1.2). Bizde ikisi aynı ekranda: sayaç takvimde, liste yan panelde.
+**Temel kural:** Gün, saate göre sıralı tek bir akıştır. Randevu ve aşı aynı listededir ve saat her satırın en başında durur. Böylece "kim ne zaman geliyor" yukarıdan aşağı okunur.
 
-**Ayrıntılar** (`#hafta`, `#hafta-asi`, `#gun`):
+### Hafta: liste (varsayılan)
 
-- **Sayaç:** Her gün başlığının altında 22 px yüksekliğinde tek satır. İçinde kalkan simgesi, "N aşı" ve gecikmiş varsa kırmızıyla "· N gecikmiş". Başka durum renklendirilmez. Gecikmiş sayı ayrı tutulur: hem sayaçta ayrı yazılır hem panelde ayrı grup olarak, en üstte gösterilir. Sayacın yüksekliği aşı sayısından bağımsızdır; günde 20 aşı da 2 aşı da aynı tek satırı kaplar. Aşı yoksa satırın yeri boş kalır, böylece sütunlar hizalı kalır. Kapalı ve boş günde (pazar) yalnız sayı görünür.
-- **Araç çubuğu:** Mevcut "77 aşı" sayacı tarih başlığının yanında kalır ("32 randevu · 77 aşı"). Tıklanınca haftanın listesi açılır, liste günlere göre gruplanır.
-- **Panel (hafta görünümü):** Sağdan açılır, genişliği 352 px. Izgarayı karartmaz, pencere de değildir. × ya da Esc ile kapanır. Seçili günün sayacı vurgulanır. Panelin üstünde şu açıklama yazar: "Planlı aşı randevu değildir; saati yoktur, gün içinde yapılır." Sekmeler: "Yapılacak / Yapıldı / Tümü". Geçmiş günlerde bunlar "Gecikmiş / Uygulandı / Tümü" olur.
-- **Panel (gün görünümü):** Sağda sürekli açık, 330 px. Sekmeler: "Bugünün aşıları 17 | Boş saat bul". Hafta görünümünde "Boş saat bul" araç çubuğunda bir düğme olur ve aynı panelde açılır. Bugünkü kalıcı sağ sütun hafta görünümünden kalkar ve günlere yer açılır.
-- **Liste satırı:**
-  - Durum şeridi.
-  - **Hasta** · sahip.
-  - Aşının tam adı (kısaltma yok).
-  - Aynı gün o hastanın randevusu varsa "◷ 14:00 randevusu var" rozeti. Eşleştirme istemcide `petId` ile yapılır, iki liste zaten elde. Yeni uç gerekmez.
-  - Sağda "Aşıyı yap" düğmesi. Tıklanınca mevcut kural işler (§5.2): `Planned` için düzenleme, `NextDue` için yeni aşı.
-  - ⋯ menüsünde "Randevu ver" ve "Aşı kaydını aç".
-  - Uygulanmış aşıda düğme yerine "✓ 09:04" yazar. `Applied` satırında saat anlamlıdır.
-- **Filtreler:** Bugünkü davranış aynen kalır. Hekim filtresi bir hekime ayarlıyken sayaç ve panel gizlenir, çünkü aşı kaydında hekim yok (§6.3). Tür filtresindeki "Planlı aşılar" seçeneği kalır.
-- **Telefon:** Ajandadaki "Aşılar · randevu değildir" kutusu tek satırlık sayaca dönüşür. Dokununca liste aşağı doğru açılır.
+`1536-hafta.png`, ayrıntılı hâli `1536-hafta-ayrintili.png`.
 
-## 2. Randevular ızgarada nasıl okunur olur
+- Her gün bir sütundur. Saat ızgarası yoktur, öğeler saate göre sıralıdır. Boş saat yer kaplamaz, yoğun gün de sığar.
+- **Gün başlığı:** "16 Pazartesi" ve altında "5 randevu · 13 aşı · 4 gecikmiş". Yalnız gecikmiş sayısı kırmızıdır.
+- **Akışın başı:**
+  - "✓ 8 aşı uygulandı ▸": uygulanmış aşılar tek satıra toplanır, tıklanınca açılır.
+  - "SAATSİZ · 2": saati bilinmeyen aşılar. Saat uydurulmaz.
+- **Bugün sütunu:** Şimdiki saatin geçtiği yere ana renkte "14:20 ———" ayracı girer.
+- **Randevu kartı:**
+  - 1. satır: saat aralığı (kalın), tür (gri etiket), hekim baş harfi.
+  - 2. satır: **hasta** · sahip.
+  - "Ayrıntılı" seçilirse 3. satırda hekimin tam adı.
+- **Aşı satırı:**
+  - Kısa hâlde tek satır: saat · kalkan simgesi · **hasta** · aşı adı.
+  - Ayrıntılı hâlde ikinci satıra sahip gelir.
+- **Randevulu hastanın aşısı:** Aynı gün aynı hastanın randevusu varsa aşı ayrı satır olmaz, randevu kartının altında görünür ("Kedi karma (FVRCP) · Aşıyı yap"). Hasta bir kez okunur, iş tek yerde biter. Eşleştirme istemcide `petId` ile yapılır.
+- **Kısaltma sırası:** Yer daralınca önce sahip adı, sonra tür kısalır. Saat ve hasta adı en son kısalır.
+- **Kapalı gün:** Taralı gösterilir ve daha dar olur. O güne düşen aşılar yine görünür.
+- **Yoğun gün:** Gün uzunsa sütunlar birlikte kayar, başlık sabit kalır. Kaydırma artık gün içinde ileri saate gitmek demek. Bugünkü gibi aşı bandını geçip randevuyu aramak gerekmez.
 
-**Ölçek: mesai saatleri ekrana sığar** (`#hafta`, `#gun`)
+### Gün: saat ızgarası (varsayılan)
 
-- Izgaranın aralığı, gösterilen günlerin çalışma saatleriyle o günlerdeki randevuların birleşimidir; tam saate yuvarlanır. Mesai dışındaki bir randevu (örneğin cumartesi kapanıştan sonra) aralığı genişletir. Kart, taralı alanın üstünde görünür.
-- Dakika başına piksel sabit değildir: `clamp(ızgara yüksekliği / aralık, 0,8, 1,6)`. Bugün 1,6 px/dk sabit. Kullanıcının ekranında 09:00–18:00 aralığı yaklaşık 0,9 px/dk'ya denk gelir: bir saat yaklaşık 54 px, 30 dakikalık randevu yaklaşık 27 px. İlk açılışta kaydırma olmaz; `scrollToMinute` yalnız "Tüm gün" modunda kalır.
-- Saatler için iki düğme eklenir: "Mesai | Tüm gün". "Tüm gün" 00:00–24:00 aralığını bugünkü ölçekle ve kaydırmalı gösterir.
-- Dikey yer kazanmak için şunlar kalkar ya da sıkışır (toplam yaklaşık 150 px):
-  - Kart içindeki "Randevu takvimi" başlığı kalkar; sekme zaten "Takvim" diyor.
-  - "Bekleyen talepler (0)" düğmesi kalkar. Talep sayısı "Talepler" sekmesinde rozet olarak görünür.
-  - Tür ve Durum filtreleri, üstlerindeki etiketlerle birlikte tek satıra iner.
-  - Aşı bandı kalkar.
-- Kapalı ve boş gün (pazar) sütunu 58 px'e daralır. Diğer günler genişler: 1536 px ekranda gün başına yaklaşık 200 px.
+`1536-gun.png`
 
-**Kart: önce saat, sonra hasta, sonra sahip**
+- **Sütunlar:** Hekim başına bir sütun ("6 randevu · 4 bekliyor"), yanında ayrı bir **"Aşılar"** sütunu.
+- **Aşılar sütunu:**
+  - Aşı randevu bloğu gibi çizilmez, yer kaplıyor görünmez.
+  - Yarım saatlik dilimde ilk aşı tek satır olarak görünür, kalanlar "+N" olur. Dilimde en acil durum öne alınır.
+  - Saatsiz ve mesai sonrası aşılar sütun başlığında sayı olarak durur ("2 saatsiz · 1 mesai sonrası ▾"). Tıklanınca açılır.
+- **Ölçek:** Izgara, gösterilen günün çalışma saatleriyle o günün randevularının birleşimine ekrana sığacak şekilde ölçeklenir. Kullanıcının ekranında 09:00–18:00 kaydırmasız sığıyor, bir saat yaklaşık 54 px. Mesai dışındaki aşı ızgarayı genişletmez.
+- **Kart:** Geniş olduğu için tek satır: "**09:00–09:30 Karamel** · Emre Aksoy · Aşı · Karma (DHPPi+L)".
+- **Şimdi çizgisi:** Ana renkte, kartların altından geçer. Saat sütununda "14:20" yazar.
 
-| Kart yüksekliği | İçerik |
+### Hafta: saat ızgarası (seçenek)
+
+`1536-hafta-izgara.png`
+
+- Saat dilimini görmek isteyen (örneğin boş yer arayan resepsiyon) içindir.
+- Randevular blok olarak çizilir. Aşılar her gün sütununun sağındaki ince şeritte, yarım saatlik dilimde **sayı** olarak görünür; üzerine gelince liste açılır. Mesai dışındaki aşılar kenarda "↑1 / ↓1" olarak durur.
+- Dar sütunda hasta adı kısalıyor. Varsayılan bu yüzden liste.
+
+### Ay
+
+`1536-ay.png`
+
+- Hücre başlığında "6 rnd · 9 aşı · 3 gecikmiş" yazar.
+- Altında yalnız **dikkat isteyenler** saatiyle listelenir: gecikmişler, bugünün bekleyenleri, ilerinin ilk üçü. Kalanlar "+N daha" olur.
+- Tamamlananlar sayıya girer, satır olarak gösterilmez. Hepsi bitmişse "✓ hepsi tamamlandı" yazar.
+- Hücre uzamaz; hücreye tıklanınca o güne geçilir.
+- Veri kaynağı: 42 günlük `GET /appointments/calendar` (sınır 45 gün) ve aynı aralık için `GET /vaccinations/calendar`.
+
+## Durum ve tür: iki ayrı eksen
+
+`1536-renkler.png`
+
+**Durum = renk.** Kullanıcının 2026-11-16'da seçtiği dört renk aynen kalır: bugün sarı, gelecek koyu, gecikmiş kırmızı, tamamlanan yeşil. Renk yalnız sol şeritte ve simgede kullanılır.
+
+| Durum | Görünüm |
 |---|---|
-| 40 px'ten az (30 dk) | Tek satır: [durum simgesi] **09:30** **Zeytin** · S. Aydın [EA]. Gün görünümünde kart geniş olduğu için şöyle yazılır: **09:00–09:30 Karamel** · Emre Aksoy · Aşı. |
-| 40 px ve üstü | 1. satırda saat aralığı ve hekim rozeti, 2. satırda **Hasta** · sahip. |
-| 56 px ve üstü | 3. satır eklenir: tür · hekimin tam adı. |
-| Çakışan şeritler (hafta) | Yalnız saat ve hasta yazar, hekim rozeti düşer. Ayrıntı balonda. |
-
-- **Kısaltma sırası:** Yer daralınca önce sahip adı kısalır ("S. Aydın"), sonra hasta adı. Saat hiç kısalmaz; rakamlar sabit genişliktedir.
-- **Hekim:**
-  - Hafta görünümünde nötr bir baş harf rozeti (EA) gösterilir. Tam ad rozetin `title`'ında ve balonda yer alır.
-  - Hekimsiz randevuda rozet kesik çizgili "–" olur.
-  - Tek hekimli klinikte rozet hiç gösterilmez.
-  - Gün görünümünde hekim zaten sütundur; sütun başlığında "6 randevu · 4 bekliyor" yazar.
-  - Hekim başına zemin rengi (`VET_TONES`) kalkar; gerekçe 3. bölümde.
-- **Gün başlığı:** "16 Pazartesi … 5 randevu" ve altında aşı sayacı. Bugünün numarası dolu kutu içinde gösterilir ve sütun hafif tonlanır. Ayrı "Bugün" rozeti kalkar.
-- **Şimdi çizgisi:** Ana renkte (koyu turkuaz) olur, kartların altından geçer. Saat sütununda şimdiki saat yazar ("14:20"). O an süren randevunun çevresine sarı bir halka gelir.
-- Ayrıntı balonu ve randevu penceresi bugünkü gibi kalır (`calendar-bubble`).
-
-**Ay görünümü** (`#ay`)
-
-- Hücrenin başlığında gün numarası ve "6 randevu" yazar; gecikmiş varsa kırmızıyla "· 1 gecikmiş" eklenir.
-- Altında ilk iki randevu saatiyle gösterilir ("▌09:00 Karamel"). Kalanlar için "+N randevu" yazar.
-- En altta tek satırlık aşı sayacı vardır.
-- Kapalı günün başlığında "kapalı" yazar.
-- Hücreye tıklanınca o güne geçilir. Randevu satırları için 42 günlük `GET /appointments/calendar` çağrısı gerekir; sınır 45 gün olduğu için sığar. Aşılar özet ucundan gelmeye devam eder (bkz. açık soru 2).
-
-## 3. Durum renkleri: renk şeritte, zemin yalnız gecikmişte
-
-Kullanıcının 2026-11-16'da seçtiği dört renk aynen kalır (`calendar-layer.utils.ts`, `vaccineChipClass` yorumu): bugün sarı, gelecek siyah, gecikmiş kırmızı, tamamlanan yeşil. Değişen şey rengin nasıl uygulandığı:
-
-| Durum | Kart |
-|---|---|
-| Gelecek | Beyaz zemin, koyu 4 px sol şerit. Varsayılan, sakin görünüm. |
-| Bugün (bekliyor) | Beyaz zemin, sarı şerit. Sütun hafif tonlu. O an süren randevunun çevresi sarı. |
+| Gelecek | Koyu şerit, beyaz zemin. Varsayılan, sakin görünüm. |
+| Bugün | Sarı şerit. O an süren randevunun çevresi sarı. |
 | Gecikmiş | Kırmızı şerit, açık kırmızı zemin, "!" simgesi, saat kırmızı. Zemin rengi yalnız bu durumda kullanılır. |
-| Tamamlanan | Yeşil şerit, "✓" simgesi, soluk yazı. |
-| Gelmedi / iptal | Gri şerit, taralı zemin, üstü çizili yazı, "Gelmedi" etiketi. Durum filtresine girmez (§6.1). |
-| Çakışma | Kırmızı halka; bugünkü gibi kalır. |
+| Tamamlanan | Yeşil şerit, "✓", soluk yazı. Uygulanan aşılar tek satıra toplanır. |
+| Gelmedi / iptal | Gri şerit, taralı zemin, üstü çizili, "Gelmedi" etiketi. Bugünkü kodda kehribar renkte ve "Bugün" sarısıyla karışıyor. |
 
-- **Kural: renk istisnayı işaretler.** Haftada 77 tam dolgulu çip olunca renk her yere yayılıyor ve hiçbir şeyi ayırt etmiyor (`#renkler`, orta sütun). Şerit ve simgeyle göz önce gecikmişi, sonra saati görür. Simge ve yazı durumu ayrıca taşıdığı için renk körü kullanıcı da durumu okuyabilir.
-- **Aynı dil her yerde:** Filtre çipleri renk açıklaması işini görür; çiplerdeki şerit kartlardaki şeritle aynıdır. Aşı panelindeki satır şeridi ve ay hücresindeki çizgi de aynı renkleri kullanır.
-- **Hekim rengi kalkar:** Turuncu "bugün", gül rengi "gecikmiş", açık yeşil "tamamlandı" gibi okunuyor. İki ayrı renk sistemi aynı kartta yarışıyor.
-- **Şimdi çizgisi kırmızı olmaz:** Kırmızı yalnız gecikmiş ve çakışma için ayrılır.
-- **Gelmedi rengi değişir:** Bugünkü kodda "Gelmedi" kehribar rengi (`statusBar` 3 → `amber`) ve "Bugün" sarısıyla karışıyor. Taslakta gri ve taralı.
-- **Koyu tema:** Aynı renk değişkenleri koyu temada da tanımlı (`1536-hafta-koyu.png`).
+**Tür = biçim, renk değil.**
+
+- **Randevu:** Çerçeveli kart, saat *aralığı*, gri tür etiketi (Kontrol, Muayene, Operasyon…).
+- **Aşı:** Çerçevesiz satır, kalkan simgesi, tek *an*. "Randevu yeri doldurmaz" bilgisi görünüşten okunur.
+- **Neden türe renk yok:** Tür listesi kliniğe göre uzuyor (nedenler), renkle ayırt edilemez. Durum renkleriyle de karışır; E-vet'teki "yeşil kontrol mü, tamamlandı mı" sorunu bundan doğuyor.
+
+**Diğer kurallar:**
+
+- Hekim, nötr bir baş harf rozetiyle gösterilir (EA). Hekim başına zemin rengi (`VET_TONES`) kalkar.
+- Şimdi çizgisi ana renktedir. Kırmızı yalnız gecikmiş ve çakışma içindir.
+- Filtredeki durum çipleri renk açıklaması işini görür; çiplerdeki şerit kartlardaki şeritle aynıdır.
+
+## Kullanıcıya görünüm seçeneği
+
+`1536-hafta-ayarlar.png`
+
+Tek bir düzen herkese uymayabilir: hekim günü saat ızgarasında, resepsiyon haftayı listede görmek isteyebilir. Araç çubuğundaki "Görünüm" düğmesi beş seçenek açar:
+
+| Seçenek | Değerler | Varsayılan |
+|---|---|---|
+| Hafta | Liste / Saat ızgarası | **Liste** |
+| Gün | Saat ızgarası / Liste | **Saat ızgarası** |
+| Ayrıntı | Kısa / Ayrıntılı | **Kısa** |
+| Aşılar | Akışta / Gizli | **Akışta** |
+| Uygulanan aşılar | Tek satırda / Hepsi | **Tek satırda** |
+
+- **Varsayılanların gerekçesi:**
+  - Haftada amaç kimin ne zaman geleceğini okumak; liste bunu yoğun günde de kaydırmasız yapar.
+  - Günde amaç slot ve hekim dağılımı; bunu ızgara verir.
+  - Aşılar akışta olur, çünkü kullanıcı bunu istedi ve gecikmiş aşı gözden kaçmamalı.
+- **Hatırlama:** Seçim **kullanıcı başına** hatırlanır, klinik başına değil; aynı klinikte hekim ve resepsiyon farklı seçebilir. İlk sürümde tarayıcıda saklanır. Bugünkü filtreler de böyle saklanıyor (`vetinity.calendar.filters`, `calendar-layer.utils.ts`), aynı desen izlenir.
+- Klinik genelinde bir varsayılan ve sunucuda kullanıcı tercihi ilk sürümde yok; gerekirse sonra eklenir. "Varsayılana dön" bağlantısı var.
+- "Aşılar: Gizli" seçeneği, Tür filtresinden "Planlı aşılar"ı kaldırmakla aynı sonucu verir; kural tek yerde, `calendarRequestFor` içinde kalır. Düğme yalnız kısayoldur.
+
+## Backend: aşı saatinin korunması (ayrı madde)
+
+Takvim tek akışa geçerse aşının bir saati olması gerekir. Bugün sorun iki yerde:
+
+1. **E-vet aktarması saati atıyor.** `EVetBackupConverter.cs:612` sonraki aşı tarihini saatiyle alıyor (`last.DueAt = due.Start`), ama `:789` satıra `yyyy-MM-dd` olarak yazıyor. Saat burada kayboluyor. `Vaccination.DueAtUtc` `DateTime` olduğu için saati tutabilir; kaybın nedeni şema değil, aktarma.
+2. **Saatin bilinip bilinmediği ayırt edilemiyor.** Panelden girilen planlı aşı yalnız tarih taşıyor. Sözleşme §5.2 bunu açıkça yazıyor: "vadeli satırda saat anlamlı değildir". Saatli ve saatsiz kayıt aynı alanda olunca istemci hangisinin gerçek saat olduğunu bilemez.
+
+**Öneri:**
+
+- `Vaccination`'a `DueTimeSpecified` (bool, varsayılan `false`) eklenir.
+  - **Migration gerekir.** Mevcut kayıtlar `false` olur, yani bugünkü gibi saatsiz kalır.
+  - E-vet aktarması tarihi saatle yazar ve `true` işaretler.
+  - Panelin aşı formuna isteğe bağlı "Saat" alanı eklenir.
+  - `GET /vaccinations/calendar` yanıtına `timeSpecified` alanı eklenir. Sözleşme §5.2 güncellenir: saatli satır akışta saatiyle yer alır, saatsiz satır "Saatsiz" grubuna girer.
+  - Vade ve gecikme kuralı gün bazlı kalır (ADR-028). Saat yalnız sıralama ve gösterim içindir. Hatırlatma, çakışma ve boş saat hesabı değişmez.
+- **Elenen seçenek:** "Saat 00:00 ise saatsiz say" kuralı. E-vet'te gece yarısına yakın gerçek saatler var (00:14), kural kırılgan olur.
+- **Yayındaki veri:** Pilot kliniğin daha önce aktarılmış 5754 sonraki doz tarihinin saati yeniden aktarma yapılmadan geri gelmez. Bu, güncelleme aktarmasıyla (ADR-051) ya da yeniden aktarmayla yapılabilir; canlı veriye dokunduğu için kullanıcı onayı gerekir. Saat gelene kadar bu kayıtlar "Saatsiz" grubunda görünür.
+- **Ayrıca,** randevu takvimi yanıtına `state` (`CalendarItemState?`) eklenmeli. Kural backend'de tek yerde (`CalendarItemStateRule.ForAppointment`); filtrede ve özette kullanılıyor ama takvim yanıtında yok. Bu ekleme geriye dönük uyumludur, migration gerekmez.
 
 ## Uygulama notları (Opus için)
 
-1. **Backend (önce):** `AppointmentCalendarItemDto` alanına `state` (`CalendarItemState?`) eklenmeli. Kural backend'de tek yerde duruyor (`CalendarItemStateRule.ForAppointment`); filtrede ve özet ucunda kullanılıyor ama takvim yanıtında yok. Böylece istemci "bugün mü, gecikmiş mi" hesabını kendi yapmaz. Ekleme geriye dönük uyumlu, migration gerekmez. Sözleşme §6.1'e bir satır eklenir.
-2. **Frontend:**
-   - `calendar-vaccine-strip` kalkar, yerine gün başlığında sayaç ve panel gelir.
-   - `appointment-calendar-grid`:
-     - `allDay` bandı kalkar.
-     - `PX_PER_MIN` hesaplanan bir değere dönüşür.
-     - `VET_TONES` ve `toneClass` kalkar; `vetDotClass` filtrede kullanılıyorsa nötr baş harfe dönüşür.
-     - Kart düzeni yukarıdaki tabloya göre yeniden yapılır.
-     - Kapalı ve boş sütun daralır.
-   - `appointment-calendar-month` hücresi değişir.
-   - `calendar-grid.utils` içinde `gridBounds` aralığı "çalışma saati ∪ randevu" olarak hesaplanır.
-   - Renk sınıfları tek yerde, `calendar-layer.utils` içinde durur; `vaccineChipClass` şerit sınıfına dönüşür.
-3. **Mevcut uçlar yeter:** Sayaç için `vaccinations/calendar/summary`, panel için `vaccinations/calendar`, ay görünümündeki randevu satırları için `appointments/calendar` kullanılır.
+**Sıra:** Önce backend (saat bayrağı ve migration, aktarma, `timeSpecified`, randevu `state`), sonra frontend.
+
+**Frontend:**
+
+- `calendar-vaccine-strip` kalkar.
+- `appointment-calendar-grid`:
+  - `allDay` bandı kalkar.
+  - `PX_PER_MIN` hesaplanan bir değere dönüşür.
+  - `VET_TONES` kalkar.
+  - Hafta için aşı sayı şeridi, gün için "Aşılar" sütunu eklenir.
+- Hafta listesi için yeni bir bileşen gerekir (gün sütunu ve tek akış).
+- `appointment-calendar-month` hücresi değişir.
+- Görünüm seçenekleri `calendar-layer.utils` içindeki depolama deseniyle saklanır.
+- Renk sınıfları tek yerde durur.
+
+**Telefon:** Ajanda zaten liste. Aynı tek akış kuralı uygulanır; ayrı bir "Aşılar" kutusu kalmaz.
 
 ## Açık sorular
 
-1. Bir günün çalışma saati 14 saati aşıyorsa (örneğin yerel denemedeki pazar 01:00–23:59) bunu veri hatası sayıp aralığı randevulardan ve 08:00–20:00'den mi alalım? Yoksa çalışma saatine olduğu gibi uyalım mı? Taslak, çalışma saatinin olduğu gibi alındığını varsayıyor.
-2. Ay hücresinde randevu satırları istiyor muyuz? İstersek 42 günlük randevu listesi çekilir; istemezsek bugünkü gibi yalnız sayı ve durum noktası kalır.
-3. Hafta görünümünde aşı paneli kapalı başlıyor. Gün görünümünde açık. Bu ayrım uygun mu?
+1. **Migration onayı:** `DueTimeSpecified` alanı ve pilot klinik verisinde aşı saatinin yeniden aktarılması onaylanıyor mu?
+2. **Ay hücresi:** 42 günlük randevu ve aşı listesi çekmek kabul edilebilir mi? Alternatif: yalnız gecikmişler ve sayı.
+3. **Saat ızgarası ve E-vet saatleri:** E-vet'ten gelen aşı saatleri randevu saati değil (00:14, 06:10, 21:53). Bunlar da saat ızgarasına konsun mu? Yoksa yalnız panelden saatiyle girilen aşılar mı saatli sayılsın, aktarılan saat yalnız sıralamada mı kullanılsın?
 
 ## Ekran görüntüleri
 
 | Dosya | Ne gösterir |
 |---|---|
-| `1536-hafta.png` | Hafta, ilk açılış: 09:00–18:00 kaydırmasız sığıyor, gün başlığında aşı sayacı |
-| `1536-hafta-asi-paneli.png` | Hafta, bugünün sayacına tıklanmış: sağ panelde aşılar |
-| `1536-gun.png` | Gün, iki hekim sütunu ve sağda "Bugünün aşıları" |
-| `1536-ay.png` | Ay, hücrede ilk iki randevu ve aşı sayacı |
-| `1536-renkler.png` | Durum renkleri, tam dolgunun neden seçilmediği, sayaç biçimleri |
+| `1536-hafta.png` | Hafta, liste, kısa (varsayılan): aşı ve randevu tek akışta, saat önde |
+| `1536-hafta-ayrintili.png` | Hafta, liste, ayrıntılı: aşıda sahip, randevuda hekimin tam adı |
+| `1536-hafta-ayarlar.png` | "Görünüm" seçenekleri açık |
+| `1536-hafta-izgara.png` | Hafta, saat ızgarası seçeneği: aşı sağ şeritte sayı |
+| `1536-gun.png` | Gün, saat ızgarası: hekim sütunları ve "Aşılar" sütunu |
+| `1536-ay.png` | Ay: yalnız dikkat isteyenler, tamamlananlar sayıda |
+| `1536-renkler.png` | Durum (renk) ve tür (biçim) eksenleri |
 | `1536-hafta-koyu.png` | Hafta, koyu tema |

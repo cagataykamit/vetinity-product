@@ -5,26 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Takvim taslağı</title>
 <!--
-  Randevu takvimi yeniden tasarım taslağı (2026-11-18). Statik; veriler uydurmadır (gerçek hasta/sahip adı yok).
-  Görünüm adres çubuğundaki # ile seçilir: #hafta, #hafta-asi, #gun, #ay, #renkler. ?dark koyu tema.
+  Randevu takvimi yeniden tasarım taslağı, 2. tur (2026-11-18): aşı ve randevu tek akışta, saat her zaman görünür;
+  durum = renk (şerit), tür = biçim + simge + etiket. Statik; veriler uydurmadır (gerçek hasta/sahip adı yok).
+  Görünüm adres çubuğundaki # ile: #hafta, #hafta-ayrintili, #hafta-izgara, #hafta-ayarlar, #gun, #ay, #renkler. ?dark koyu tema.
   Açıklama: ../takvim-yeniden-tasarim.md
 -->
 <style>
 :root {
-  --bg: #f4f6f7; --surface: #ffffff; --surface-2: #f8fafa; --border: #e2e6e8; --line: #edf0f1; --line-strong: #dfe4e6;
+  --bg: #f4f6f7; --surface: #ffffff; --surface-2: #f7f9f9; --border: #e2e6e8; --line: #edf0f1; --line-strong: #dfe4e6;
   --text: #182226; --muted: #637078; --faint: #98a3a9;
   --primary: #0f766e; --primary-soft: #e7f3f1; --primary-text: #ffffff;
-  --st-upcoming: #1f2a30; --st-today: #e0a800; --st-overdue: #d92d20; --st-done: #16a34a;
-  --soft-today: #fff8db; --soft-overdue: #fdf0ee; --soft-done: #f1f8f3;
-  --hatch: rgba(120, 135, 140, .13); --shadow: 0 10px 30px rgba(16, 32, 40, .14);
+  --st-up: #1f2a30; --st-today: #e0a800; --st-overdue: #d92d20; --st-done: #16a34a; --st-noshow: #98a3a9;
+  --soft-overdue: #fdf0ee;
+  --hatch: rgba(120, 135, 140, .13); --shadow: 0 10px 30px rgba(16, 32, 40, .16);
   --chip: #eef1f2; --now: #0f766e;
 }
 html.dark {
   --bg: #0f1518; --surface: #161e22; --surface-2: #1a2327; --border: #2a353a; --line: #1f292d; --line-strong: #2a353a;
   --text: #e8eef0; --muted: #9aa7ad; --faint: #6c7a80;
   --primary: #2bb3a3; --primary-soft: #12302d; --primary-text: #08201d;
-  --st-upcoming: #e8eef0; --st-today: #f5c518; --st-overdue: #f2665a; --st-done: #3ccf73;
-  --soft-today: #2e2a12; --soft-overdue: #3a1d1b; --soft-done: #15301f;
+  --st-up: #e8eef0; --st-today: #f5c518; --st-overdue: #f2665a; --st-done: #3ccf73; --st-noshow: #6c7a80;
+  --soft-overdue: #3a1d1b;
   --hatch: rgba(160, 175, 180, .10); --shadow: 0 10px 30px rgba(0, 0, 0, .5);
   --chip: #253035; --now: #2bb3a3;
 }
@@ -36,179 +37,182 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* Panel çerçevesi (sadeleştirilmiş) */
 .top { height: 46px; display: flex; align-items: center; gap: 14px; padding: 0 18px; background: var(--surface); border-bottom: 1px solid var(--border); }
-.logo { font-weight: 700; font-size: 19px; letter-spacing: .2px; color: var(--text); width: 160px; }
+.logo { font-weight: 700; font-size: 19px; width: 160px; }
 .logo b { color: var(--primary); }
 .search { margin-left: auto; width: 190px; height: 28px; border: 1px solid var(--border); border-radius: 6px; color: var(--faint); padding: 5px 10px; font-size: 12px; }
 .clinic { font-weight: 600; font-size: 12px; color: var(--muted); }
 .shell { display: flex; height: calc(100% - 46px); }
 .side { width: 190px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 14px 0; }
 .side h6 { margin: 12px 18px 6px; font-size: 10.5px; letter-spacing: .6px; color: var(--muted); }
-.side a { display: block; padding: 7px 18px; color: var(--text); text-decoration: none; font-size: 13px; }
+.side a { display: block; padding: 7px 18px; font-size: 13px; }
 .side a.on { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
-main { flex: 1; min-width: 0; padding: 8px 20px 10px; display: flex; flex-direction: column; }
+main { flex: 1; min-width: 0; padding: 8px 20px 10px; display: flex; flex-direction: column; position: relative; }
 
 .tabs { display: flex; gap: 22px; border-bottom: 1px solid var(--border); height: 34px; align-items: flex-end; flex: none; }
 .tabs span { padding-bottom: 8px; color: var(--muted); }
 .tabs span.on { color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--primary); }
 .tabs i { font-style: normal; background: var(--st-overdue); color: #fff; border-radius: 9px; padding: 0 6px; font-size: 11px; margin-left: 4px; }
-
 .bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex: none; }
 .bar + .bar { margin-top: 6px; }
 .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--surface); }
-.seg span { padding: 4px 11px; font-size: 12.5px; }
+.seg span { padding: 4px 11px; font-size: 12.5px; white-space: nowrap; }
 .seg span + span { border-left: 1px solid var(--border); }
 .seg span.on { background: var(--primary); color: var(--primary-text); font-weight: 600; }
 .nav { display: inline-flex; align-items: center; gap: 4px; }
 .nav .ib { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 6px; display: grid; place-items: center; background: var(--surface); color: var(--muted); }
 .nav .tb { height: 26px; border: 1px solid var(--border); border-radius: 6px; padding: 0 10px; background: var(--surface); font-size: 12.5px; }
-.range { font-size: 16px; font-weight: 600; margin-left: 4px; }
+.range { font-size: 16px; font-weight: 600; margin-left: 4px; white-space: nowrap; }
 .range small { font-weight: 400; color: var(--muted); font-size: 12.5px; margin-left: 8px; }
 .sp { flex: 1; }
-.btn { height: 30px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; font-size: 12.5px; display: inline-flex; align-items: center; gap: 6px; }
+.btn { height: 30px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; font-size: 12.5px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .btn.pri { background: var(--primary); border-color: var(--primary); color: var(--primary-text); }
-.sel { height: 28px; min-width: 150px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); padding: 4px 10px; font-size: 12.5px; display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; }
+.btn.on { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-soft); }
+.btn em { font-style: normal; font-weight: 400; color: var(--muted); }
+.sel { height: 28px; min-width: 140px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); padding: 4px 10px; font-size: 12.5px; display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; }
 .sel em { font-style: normal; color: var(--muted); font-size: 11px; }
 .flabel { font-size: 11.5px; color: var(--muted); }
 .chip { height: 26px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); padding: 0 10px 0 8px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
-.chip .bar4 { width: 4px; height: 13px; border-radius: 2px; }
-.mini-seg span { padding: 3px 9px; font-size: 12px; }
+.chip .b4 { width: 4px; height: 13px; border-radius: 2px; }
+.ico-vx { flex: none; }
 
-/* Takvim kartı */
-.cal { position: relative; flex: 1; min-height: 0; margin-top: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; }
-.calmain { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.ghead, .gbody { display: grid; }
-.ghead { border-bottom: 1px solid var(--line-strong); flex: none; }
-.gbody { flex: 1; min-height: 0; overflow: hidden; position: relative; }
-.tcol { position: relative; border-right: 1px solid var(--line); }
-.tlabel { position: absolute; right: 6px; font-size: 11px; color: var(--muted); transform: translateY(-50%); }
-.tlabel.now { color: var(--now); font-weight: 700; background: var(--surface); padding: 0 2px; }
-.dh { padding: 6px 8px 7px; border-left: 1px solid var(--line); min-width: 0; }
+.cal { position: relative; flex: 1; min-height: 0; margin-top: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+
+/* ===== Hafta: liste (tek akış) ===== */
+.wl-head, .wl-body { display: grid; }
+.wl-head { border-bottom: 1px solid var(--line-strong); flex: none; }
+.wl-body { flex: 1; min-height: 0; overflow: hidden; }
+.dh { padding: 6px 8px 6px; border-left: 1px solid var(--line); min-width: 0; }
+.dh:first-child { border-left: 0; }
 .dh.today { background: var(--primary-soft); }
 .dh1 { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; overflow: hidden; }
 .dh1 .num { font-size: 18px; font-weight: 700; line-height: 20px; }
 .dh.today .num { background: var(--primary); color: var(--primary-text); border-radius: 5px; padding: 0 5px; }
-.dh.narrow { padding: 6px 5px 7px; }
-.dh.narrow .dn { font-size: 11.5px; color: var(--muted); font-weight: 400; }
 .dh1 .dn { font-weight: 600; }
-.dh1 .cnt { margin-left: auto; color: var(--muted); font-size: 11.5px; }
-.badge { font-size: 10px; background: var(--primary); color: var(--primary-text); border-radius: 4px; padding: 0 5px; font-weight: 600; align-self: center; }
-.vx { margin-top: 5px; height: 22px; width: 100%; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); display: flex; align-items: center; gap: 5px; padding: 0 7px; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; }
-.vx svg { flex: none; }
-.vx b { color: var(--text); font-weight: 600; }
-.vx .od { color: var(--st-overdue); font-weight: 600; }
-.vx .chev { margin-left: auto; color: var(--faint); }
-.vx.on { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-soft); color: var(--text); }
-.vhead { padding: 6px 10px 7px; border-left: 1px solid var(--line); }
-.vhead .vn { font-weight: 600; font-size: 13.5px; }
-.vhead .vs { color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+.dh2 { margin-top: 3px; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dh2 b { color: var(--text); font-weight: 600; }
+.dh2 .od { color: var(--st-overdue); font-weight: 600; }
+.dcol { border-left: 1px solid var(--line); padding: 6px 6px 10px; min-width: 0; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+.dcol:first-child { border-left: 0; }
+.dcol > * { flex: none; }
+.dcol.today { background: color-mix(in srgb, var(--primary-soft) 40%, transparent); }
+.dcol.closed { background: repeating-linear-gradient(135deg, transparent 0 6px, var(--hatch) 6px 8px); }
+.closed-note { font-size: 11px; color: var(--muted); padding: 2px 2px 4px; }
+.grpl { font-size: 10.5px; font-weight: 700; letter-spacing: .4px; color: var(--muted); text-transform: uppercase; padding: 3px 2px 1px; }
+.fold { font-size: 11.5px; color: var(--muted); padding: 2px 6px; border-radius: 4px; display: flex; gap: 5px; align-items: center; white-space: nowrap; overflow: hidden; }
+.fold .ok { color: var(--st-done); font-weight: 700; }
+.fold .chev { margin-left: auto; color: var(--faint); }
+.nowsep { display: flex; align-items: center; gap: 6px; color: var(--now); font-size: 11px; font-weight: 700; margin: 2px 0; }
+.nowsep::after { content: ""; flex: 1; height: 2px; background: var(--now); border-radius: 1px; }
 
-.col { position: relative; border-left: 1px solid var(--line); }
-.col.today { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+/* Randevu kartı (biçim: çerçeveli kart, süre aralığı) */
+.ap { border: 1px solid var(--border); border-left: 4px solid var(--st-up); border-radius: 5px; background: var(--surface); padding: 3px 6px 4px; box-shadow: 0 1px 2px rgba(16, 32, 40, .05); min-width: 0; }
+.r { display: flex; align-items: center; gap: 5px; white-space: nowrap; min-width: 0; }
+.r + .r { margin-top: 1px; }
+.t { font-weight: 700; flex: none; }
+.ty { color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; flex: 0 100 auto; min-width: 0; }
+.p { font-weight: 600; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
+.o { color: var(--muted); overflow: hidden; text-overflow: ellipsis; flex: 0 100 auto; min-width: 0; }
+.vet { margin-left: auto; flex: none; font-size: 10px; font-weight: 700; color: var(--muted); background: var(--chip); border-radius: 3px; padding: 0 4px; line-height: 15px; }
+.vet.none { background: none; border: 1px dashed var(--faint); }
+.mk { flex: none; width: 13px; height: 13px; border-radius: 50%; display: grid; place-items: center; font-size: 9.5px; font-weight: 800; color: #fff; }
+.sub { font-size: 11.5px; color: var(--muted); }
+.nest { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text); margin-top: 2px; padding-top: 2px; border-top: 1px dashed var(--line-strong); white-space: nowrap; overflow: hidden; }
+.nest .sb { margin-left: auto; font-size: 10.5px; color: var(--primary); font-weight: 600; }
+
+/* Aşı satırı (biçim: çerçevesiz satır, tek an; randevu yeri doldurmaz) */
+.vx { border-left: 3px solid var(--st-up); padding: 1px 6px 1px 6px; border-radius: 0 4px 4px 0; background: var(--surface-2); min-width: 0; font-size: 12px; }
+.vx .t { font-weight: 600; }
+.vx .p { font-weight: 600; flex: none; max-width: 60%; }
+.vx .vn { color: var(--text); overflow: hidden; text-overflow: ellipsis; flex: 0 50 auto; min-width: 0; }
+
+/* Durum ekseni: yalnız renk (şerit) + simge; zemin yalnız gecikmişte */
+.s-today { border-left-color: var(--st-today); }
+.s-overdue { border-left-color: var(--st-overdue); }
+.ap.s-overdue { background: var(--soft-overdue); }
+.vx.s-overdue { background: var(--soft-overdue); }
+.s-overdue .t { color: var(--st-overdue); }
+.s-overdue .mk { background: var(--st-overdue); }
+.s-done { border-left-color: var(--st-done); }
+.s-done .p, .s-done .t, .s-done .vn { color: var(--muted); }
+.s-done .mk { background: var(--st-done); }
+.s-noshow { border-left-color: var(--st-noshow); background: repeating-linear-gradient(135deg, var(--surface-2) 0 6px, var(--hatch) 6px 8px); }
+.s-noshow .t, .s-noshow .p { text-decoration: line-through; color: var(--muted); }
+.tag { font-size: 10px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 0 3px; flex: none; }
+.live { box-shadow: 0 0 0 1.5px var(--st-today); }
+
+/* ===== Saat ızgarası (hafta seçeneği, gün varsayılanı) ===== */
+.ghead, .gbody { display: grid; }
+.ghead { border-bottom: 1px solid var(--line-strong); flex: none; }
+.gbody { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+.tcol { position: relative; border-right: 1px solid var(--line); }
+.tl { position: absolute; right: 6px; font-size: 11px; color: var(--muted); transform: translateY(-50%); }
+.tl.now { color: var(--now); font-weight: 700; background: var(--surface); padding: 0 2px; }
+.gcol { position: relative; border-left: 1px solid var(--line); }
+.gcol.today { background: color-mix(in srgb, var(--primary-soft) 40%, transparent); }
 .hl { position: absolute; left: 0; right: 0; border-top: 1px solid var(--line-strong); }
 .hl.half { border-top: 1px dashed var(--line); }
 .hatch { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(135deg, transparent 0 6px, var(--hatch) 6px 8px); }
 .closed-label { position: absolute; top: 10px; left: 0; right: 0; text-align: center; color: var(--muted); font-size: 11.5px; }
-.narrow .closed-label { writing-mode: vertical-rl; transform: rotate(180deg); top: 12px; left: 50%; right: auto; margin-left: -8px; }
 .nowline { position: absolute; left: 0; right: 0; height: 2px; background: var(--now); z-index: 2; }
 .nowline::before { content: ""; position: absolute; left: -4px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--now); }
+.gb { position: absolute; z-index: 3; padding: 1px 2px; }
+.gb .ap { height: 100%; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 1px 6px; }
+.rail { position: absolute; top: 0; bottom: 0; right: 0; width: 28px; border-left: 1px dashed var(--line-strong); }
+.pin { position: absolute; z-index: 3; height: 18px; border-radius: 4px; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); box-shadow: inset 3px 0 0 var(--st-up); padding-left: 2px; }
+.pin.s-today { box-shadow: inset 3px 0 0 var(--st-today); }
+.pin.s-overdue { box-shadow: inset 3px 0 0 var(--st-overdue); color: var(--st-overdue); }
+.pin.s-done { box-shadow: inset 3px 0 0 var(--st-done); color: var(--muted); }
+.edge { position: absolute; font-size: 10.5px; color: var(--muted); text-align: center; z-index: 3; }
+.gvx { position: absolute; left: 4px; right: 4px; z-index: 3; }
+.gvx .vx { height: 100%; display: flex; align-items: center; }
+.gvx .r { width: 100%; }
+.gvx .more { margin-left: auto; font-size: 10.5px; font-weight: 700; color: var(--primary); flex: none; }
+.vh { padding: 6px 10px 6px; border-left: 1px solid var(--line); min-width: 0; }
+.vh .vn2 { font-weight: 600; font-size: 13.5px; display: flex; align-items: center; gap: 6px; }
+.vh .vs { color: var(--muted); font-size: 11.5px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Randevu kartı: renk = durum (sol şerit + simge); hekim = baş harf rozeti */
-.ap { position: absolute; z-index: 3; padding: 1px 2px; }
-.card { height: 100%; border-radius: 5px; border: 1px solid var(--border); border-left: 4px solid var(--st-upcoming); background: var(--surface); padding: 2px 6px 2px 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(16, 32, 40, .06); display: flex; flex-direction: column; justify-content: center; }
-.card .l1, .card .l2, .card .l3 { display: flex; align-items: center; gap: 5px; white-space: nowrap; min-width: 0; }
-.card .l2, .card .l3 { margin-top: 1px; }
-.card .t { font-weight: 700; flex: none; }
-.card .p { font-weight: 600; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
-.card .o { color: var(--muted); overflow: hidden; text-overflow: ellipsis; flex: 0 100 auto; min-width: 0; }
-.card .l3 { color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; }
-.card .vet { margin-left: auto; flex: none; font-size: 10px; font-weight: 700; color: var(--muted); background: var(--chip); border-radius: 3px; padding: 0 4px; line-height: 15px; }
-.card .vet.none { background: none; border: 1px dashed var(--faint); }
-.card .ico { flex: none; width: 14px; height: 14px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; }
-.card.s-today { border-left-color: var(--st-today); }
-.card.s-overdue { border-left-color: var(--st-overdue); background: var(--soft-overdue); }
-.card.s-overdue .t { color: var(--st-overdue); }
-.card.s-overdue .ico { background: var(--st-overdue); }
-.card.s-done { border-left-color: var(--st-done); background: var(--surface-2); }
-.card.s-done .p, .card.s-done .t { color: var(--muted); font-weight: 600; }
-.card.s-done .ico { background: var(--st-done); }
-.card.s-noshow { border-left-color: var(--faint); background: repeating-linear-gradient(135deg, var(--surface-2) 0 6px, var(--hatch) 6px 8px); }
-.card.s-noshow .t, .card.s-noshow .p { text-decoration: line-through; color: var(--muted); }
-.card.s-noshow .tag { font-size: 10px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 0 3px; flex: none; }
-.card.conflict { box-shadow: 0 0 0 1.5px var(--st-overdue); }
-.card.s-live { box-shadow: 0 0 0 1.5px var(--st-today), 0 1px 2px rgba(16, 32, 40, .06); }
-
-/* Sağ panel (hafta: tıklayınca açılır, gün: açık) */
-.rail { width: 330px; flex: none; border-left: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; min-height: 0; }
-.drawer { position: absolute; top: 0; right: 0; bottom: 0; width: 352px; z-index: 20; box-shadow: var(--shadow); border-left: 1px solid var(--border); }
-.rh { padding: 10px 14px 8px; border-bottom: 1px solid var(--line-strong); }
-.rh1 { display: flex; align-items: center; gap: 8px; }
-.rh1 h3 { margin: 0; font-size: 14.5px; }
-.rh1 .x { margin-left: auto; color: var(--muted); font-size: 18px; line-height: 1; }
-.rh .sub { color: var(--muted); font-size: 11.5px; margin-top: 2px; }
-.rtabs { display: flex; gap: 16px; padding: 0 14px; border-bottom: 1px solid var(--line-strong); }
-.rtabs span { padding: 8px 0 7px; color: var(--muted); font-size: 12.5px; }
-.rtabs span.on { color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--primary); }
-.rtabs span i { font-style: normal; font-size: 11px; color: var(--muted); margin-left: 3px; }
-.rseg { padding: 8px 14px 6px; }
-.rlist { flex: 1; min-height: 0; overflow: hidden; }
-.grp { padding: 7px 14px 3px; font-size: 11px; font-weight: 700; letter-spacing: .4px; color: var(--muted); text-transform: uppercase; }
-.vrow { display: flex; gap: 9px; padding: 6px 14px 7px; border-bottom: 1px solid var(--line); align-items: flex-start; }
-.vrow .bar4 { width: 4px; align-self: stretch; border-radius: 2px; flex: none; }
-.vrow .vt { flex: 1; min-width: 0; }
-.vrow .v1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.vrow .v1 b { font-weight: 600; }
-.vrow .v1 span { color: var(--muted); }
-.vrow .v2 { color: var(--text); font-size: 12px; margin-top: 1px; }
-.vrow .v3 { margin-top: 3px; display: inline-flex; gap: 4px; align-items: center; font-size: 11px; color: var(--primary); background: var(--primary-soft); border-radius: 3px; padding: 0 5px; }
-.vrow .va { flex: none; display: flex; gap: 4px; align-items: center; }
-.vrow .sb { height: 24px; padding: 0 8px; border: 1px solid var(--border); border-radius: 5px; font-size: 11.5px; font-weight: 600; background: var(--surface); }
-.vrow .km { width: 24px; height: 24px; border-radius: 5px; color: var(--muted); font-size: 15px; line-height: 1; }
-.vrow.done .v1 b, .vrow.done .v2 { color: var(--muted); }
-.vrow.done .when { font-size: 11px; color: var(--st-done); font-weight: 600; }
-.rfoot { padding: 9px 14px; border-top: 1px solid var(--line-strong); font-size: 12px; color: var(--primary); font-weight: 600; display: flex; justify-content: space-between; }
-.rfoot span { color: var(--muted); font-weight: 400; }
-
-/* Ay */
-.mgrid { display: grid; grid-template-columns: repeat(7, 1fr); flex: 1; min-height: 0; }
+/* ===== Ay ===== */
 .mwk { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--line-strong); flex: none; }
 .mwk div { padding: 6px 8px; font-size: 11.5px; color: var(--muted); font-weight: 600; }
-.mc { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4px 7px 5px; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+.mgrid { display: grid; grid-template-columns: repeat(7, 1fr); grid-template-rows: repeat(6, 1fr); flex: 1; min-height: 0; }
+.mc { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4px 6px 4px; min-width: 0; display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
 .mc:nth-child(7n) { border-right: 0; }
 .mc.out { background: var(--surface-2); }
-.mc.out .mn, .mc.out .ml { opacity: .45; }
+.mc.out > * { opacity: .5; }
 .mc.today { background: var(--primary-soft); }
-.mh { display: flex; align-items: center; gap: 6px; }
-.mn { font-weight: 700; font-size: 13px; width: 22px; height: 20px; display: grid; place-items: center; border-radius: 10px; }
+.mh { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.mn { font-weight: 700; font-size: 13px; min-width: 22px; height: 20px; display: grid; place-items: center; border-radius: 10px; }
 .mc.today .mn { background: var(--primary); color: var(--primary-text); }
-.mh .mcnt { margin-left: auto; font-size: 11px; color: var(--muted); }
-.ml { display: flex; gap: 5px; align-items: center; font-size: 11.5px; white-space: nowrap; overflow: hidden; margin-top: 1px; }
-.ml .bar4 { width: 3px; height: 11px; border-radius: 2px; flex: none; }
-.ml b { font-weight: 600; }
-.ml.more { color: var(--primary); font-weight: 600; padding-left: 8px; }
-.mv { margin-top: auto; font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; }
-.mv .od { color: var(--st-overdue); font-weight: 600; }
-.mc.closed .mh .mcnt { font-style: italic; }
+.mh .mcnt { margin-left: auto; font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+.mh .od { color: var(--st-overdue); font-weight: 600; }
+.ml { display: flex; gap: 4px; align-items: center; font-size: 11.5px; white-space: nowrap; overflow: hidden; border-left: 3px solid var(--st-up); padding-left: 4px; }
+.ml.s-today { border-left-color: var(--st-today); } .ml.s-overdue { border-left-color: var(--st-overdue); } .ml.s-done { border-left-color: var(--st-done); } .ml.s-noshow { border-left-color: var(--st-noshow); }
+.ml.s-done b, .ml.s-done span { color: var(--muted); }
+.ml.s-overdue b { color: var(--st-overdue); }
+.ml b { font-weight: 600; flex: none; }
+.ml span { overflow: hidden; text-overflow: ellipsis; }
+.mmore { font-size: 11px; color: var(--primary); font-weight: 600; padding-left: 7px; }
 
-/* Renk sayfası */
-.sheet { flex: 1; overflow: hidden; padding: 14px 4px; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 20px; }
+/* ===== Görünüm ayarları ===== */
+.pop { position: absolute; z-index: 30; top: 82px; right: 236px; width: 350px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 14px 10px; }
+.pop h4 { margin: 0 0 8px; font-size: 13.5px; }
+.prow { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 8px; margin-bottom: 8px; }
+.prow > span:first-child { font-size: 12px; color: var(--muted); }
+.pop .seg span { padding: 3px 9px; font-size: 12px; }
+.pop .note { font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--line-strong); padding-top: 8px; margin-top: 4px; }
+.pop .reset { color: var(--primary); font-weight: 600; font-size: 12px; margin-top: 6px; display: inline-block; }
+
+/* ===== Renkler ===== */
+.sheet { flex: 1; overflow: hidden; padding: 14px 18px; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 22px; }
 .sheet h4 { margin: 0 0 4px; font-size: 13.5px; }
 .sheet p { margin: 0 0 10px; color: var(--muted); font-size: 12px; }
-.demo { position: relative; height: 54px; margin-bottom: 8px; }
-.demo.s1 { height: 28px; }
-.demo .ap { position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding: 0; }
-.cap { font-size: 11.5px; color: var(--muted); margin: -4px 0 10px; }
-.oldchip { display: inline-flex; align-items: center; gap: 4px; border: 1px solid; border-radius: 4px; padding: 1px 6px; font-size: 12px; font-weight: 600; margin: 0 4px 6px 0; }
-.box { border: 1px solid var(--border); border-radius: 8px; padding: 12px; background: var(--surface); }
-.no { color: var(--st-overdue); font-weight: 700; }
-.ok { color: var(--st-done); font-weight: 700; }
+.mx { display: grid; grid-template-columns: 92px 1fr 1fr; gap: 6px 8px; align-items: center; }
+.mx .hd { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+.mx .lb { font-size: 12px; font-weight: 600; }
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="logo">Vet<b>inity</b></div>
-  <div class="search">Ara…  Ctrl K</div>
-  <div class="clinic">ÖRNEK KLİNİK</div>
-</header>
+<header class="top"><div class="logo">Vet<b>inity</b></div><div class="search">Ara…  Ctrl K</div><div class="clinic">ÖRNEK KLİNİK</div></header>
 <div class="shell">
   <nav class="side">
     <h6>GÜNLÜK İŞ</h6><a>Bugün</a><a class="on">Randevular</a>
@@ -219,289 +223,369 @@ main { flex: 1; min-width: 0; padding: 8px 20px 10px; display: flex; flex-direct
   <main id="main"></main>
 </div>
 <script>
-const SHIELD = '<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2 2.5 3.3v4.2c0 3.4 2.3 6.1 5.5 7.3 3.2-1.2 5.5-3.9 5.5-7.3V3.3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+const SHIELD = '<svg class="ico-vx" width="11" height="11" viewBox="0 0 16 16" aria-label="Aşı"><path d="M8 1.2 2.5 3.3v4.2c0 3.4 2.3 6.1 5.5 7.3 3.2-1.2 5.5-3.9 5.5-7.3V3.3z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
 const H = (h, m = 0) => h * 60 + m;
 const clock = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
 const NOW = H(14, 20);
 const VETS = { EA: 'Dr. Ece Arslan', MK: 'Dr. Murat Kaya' };
-const ST = { up: 's-up', today: 's-today', overdue: 's-overdue', done: 's-done', noshow: 's-noshow' };
-const STATE_COLOR = { up: 'var(--st-upcoming)', today: 'var(--st-today)', overdue: 'var(--st-overdue)', done: 'var(--st-done)' };
+const COLOR = { up: 'var(--st-up)', today: 'var(--st-today)', overdue: 'var(--st-overdue)', done: 'var(--st-done)', noshow: 'var(--st-noshow)' };
+const shortName = (n) => { const p = n.split(' '); return p.length > 1 ? p[0][0] + '. ' + p.slice(1).join(' ') : n; };
 
-// a(saat, dakika, süre, hasta, sahip, hekim, tür, durum)
-const a = (h, m, d, pet, owner, vet, type, st) => ({ s: H(h, m), e: H(h, m) + d, pet, owner, vet, type, st });
+// ---- Veri (uydurma) ----
+// a(saat, dk, süre, hasta, sahip, hekim, tür, durum, aşı?) — aynı gün randevusu olan hastanın aşısı kartın içinde görünür.
+const a = (h, m, d, pet, owner, vet, type, st, vac) => ({ kind: 'ap', s: H(h, m), e: H(h, m) + d, pet, owner, vet, type, st, vac });
 const DAYS = [
-  { num: 16, name: 'Pazartesi', open: [H(9), H(18)], vx: { total: 13, overdue: 3 }, appts: [
+  { num: 16, name: 'Pazartesi', open: [H(9), H(18)], past: true, appts: [
     a(9, 30, 30, 'Zeytin', 'Selin Aydın', 'EA', 'Kontrol', 'done'),
     a(10, 15, 45, 'Tarçın', 'Kerem Öztürk', 'MK', 'Muayene', 'done'),
-    a(11, 0, 30, 'Pamuk', 'Deniz Kurt', 'EA', 'Aşı', 'overdue'),
+    a(11, 0, 30, 'Pamuk', 'Deniz Kurt', 'EA', 'Aşı', 'overdue', 'Kuduz'),
     a(14, 0, 60, 'Boncuk', 'Hakan Şahin', 'MK', 'Kısırlaştırma', 'done'),
-    a(16, 30, 30, 'Fıstık', 'Elif Demir', 'EA', 'Kontrol', 'noshow')] },
-  { num: 17, name: 'Salı', open: [H(9), H(18)], vx: { total: 8, overdue: 2 }, appts: [
-    a(9, 0, 30, 'Limon', 'Burak Çelik', 'EA', 'Aşı', 'done'),
+    a(16, 30, 30, 'Fıstık', 'Elif Demir', 'EA', 'Kontrol', 'noshow')], vax: { n: 12, overdue: 3, untimed: 1, odd: [H(7, 40)] } },
+  { num: 17, name: 'Salı', open: [H(9), H(18)], past: true, appts: [
+    a(9, 0, 30, 'Limon', 'Burak Çelik', 'EA', 'Aşı', 'done', 'Karma (DHPPi+L)'),
     a(9, 0, 30, 'Maya', 'Gizem Tekin', 'MK', 'Muayene', 'done'),
     a(11, 30, 30, 'Fırtına', 'Okan Polat', 'MK', 'Kontrol', 'done'),
     a(13, 0, 90, 'Şans', 'Aslı Koç', 'EA', 'Operasyon', 'done'),
     a(15, 30, 30, 'Bal', 'Cem Erdem', 'MK', 'Kontrol', 'overdue'),
-    a(17, 0, 45, 'Reis', 'Nur Yalçın', 'EA', 'Muayene', 'done')] },
-  { num: 18, name: 'Çarşamba', today: true, open: [H(9), H(18)], vx: { total: 17, overdue: 0 }, appts: [
-    a(9, 0, 30, 'Karamel', 'Emre Aksoy', 'EA', 'Aşı', 'done'),
+    a(17, 0, 45, 'Reis', 'Nur Yalçın', 'EA', 'Muayene', 'done')], vax: { n: 7, overdue: 2, untimed: 0, odd: [H(20, 10)] } },
+  { num: 18, name: 'Çarşamba', open: [H(9), H(18)], today: true, appts: [
+    a(9, 0, 30, 'Karamel', 'Emre Aksoy', 'EA', 'Aşı', 'done', 'Karma (DHPPi+L)'),
     a(9, 30, 30, 'Kurabiye', 'Sevgi Arslan', 'MK', 'Kontrol', 'done'),
     a(10, 30, 45, 'Odin', 'Tolga Kılıç', 'EA', 'Muayene', 'done'),
-    a(11, 30, 30, 'Leo', 'Merve Can', 'MK', 'Aşı', 'done'),
+    a(11, 30, 30, 'Leo', 'Merve Can', 'MK', 'Aşı', 'done', 'Kuduz'),
     a(12, 30, 30, 'Kuki', 'Barış Öz', 'EA', 'Kontrol', 'today'),
     a(14, 0, 60, 'Cesur', 'Ahmet Güneş', 'MK', 'Diş taşı temizliği', 'today'),
-    a(14, 0, 30, 'Minnoş', 'Zeynep Aras', 'EA', 'Aşı', 'today'),
+    a(14, 0, 30, 'Minnoş', 'Zeynep Aras', 'EA', 'Aşı', 'today', 'Kedi karma (FVRCP)'),
     a(15, 30, 30, 'Sansa', 'Fatma Uçar', 'EA', 'Kontrol', 'today'),
     a(16, 0, 30, 'Garfield', 'Ali Rıza Er', 'MK', 'Muayene', 'today'),
     a(17, 0, 45, 'Pati', 'Ceren Ay', 'EA', 'Muayene', 'today')] },
-  { num: 19, name: 'Perşembe', open: [H(9), H(18)], vx: { total: 15, overdue: 0 }, appts: [
+  { num: 19, name: 'Perşembe', open: [H(9), H(18)], appts: [
     a(9, 30, 30, 'Karabaş', 'Ozan Bilgin', 'EA', 'Kontrol', 'up'),
     a(10, 0, 60, 'Lokum', 'İrem Sarı', 'MK', 'Kısırlaştırma', 'up'),
-    a(13, 30, 30, 'Mavi', 'Kaan Ateş', 'EA', 'Aşı', 'up'),
-    a(16, 30, 30, 'Pırtık', 'Esra Tuna', 'MK', 'Kontrol', 'up')] },
-  { num: 20, name: 'Cuma', open: [H(9), H(18)], vx: { total: 14, overdue: 0 }, appts: [
-    a(9, 0, 30, 'Pofuduk', 'Seda Ekinci', 'EA', 'Aşı', 'up'),
+    a(13, 30, 30, 'Mavi', 'Kaan Ateş', 'EA', 'Aşı', 'up', 'Kuduz'),
+    a(16, 30, 30, 'Pırtık', 'Esra Tuna', 'MK', 'Kontrol', 'up')], vax: { n: 14, untimed: 2, odd: [H(19, 5)] } },
+  { num: 20, name: 'Cuma', open: [H(9), H(18)], appts: [
+    a(9, 0, 30, 'Pofuduk', 'Seda Ekinci', 'EA', 'Aşı', 'up', 'İç-dış parazit'),
     a(11, 0, 45, 'Rocky', 'Mert Önal', 'MK', 'Muayene', 'up'),
     a(12, 0, 30, 'Tekir', 'Yasemin Bora', 'EA', 'Kontrol', 'up'),
-    a(15, 0, 30, 'Çakıl', 'Volkan Er', null, 'Aşı', 'up')] },
-  { num: 21, name: 'Cumartesi', open: [H(9), H(14)], vx: { total: 6, overdue: 0 }, appts: [
+    a(15, 0, 30, 'Çakıl', 'Volkan Er', null, 'Aşı', 'up', 'Karma (DHPPi+L)')], vax: { n: 12, untimed: 1, odd: [H(6, 30)] } },
+  { num: 21, name: 'Cumartesi', open: [H(9), H(14)], appts: [
     a(10, 0, 30, 'Tarzan', 'Gül Oral', 'MK', 'Kontrol', 'up'),
-    a(12, 30, 30, 'Prenses', 'Sinan Uz', 'MK', 'Aşı', 'up'),
-    a(15, 0, 30, 'Fındık', 'Melis Kara', 'MK', 'Kontrol', 'up')] },
-  { num: 22, name: 'Pazar', open: null, vx: { total: 4, overdue: 0 }, appts: [] }
+    a(12, 30, 30, 'Prenses', 'Sinan Uz', 'MK', 'Aşı', 'up', 'Kedi karma (FVRCP)'),
+    a(15, 0, 30, 'Fındık', 'Melis Kara', 'MK', 'Kontrol', 'up')], vax: { n: 5, untimed: 0, odd: [] } },
+  { num: 22, name: 'Pazar', open: null, appts: [], vax: { n: 4, untimed: 1, odd: [] } }
 ];
 
-// v(hasta, sahip, aşı, randevu saati?, uygulama saati?)
-const v = (pet, owner, vac, appt, at) => ({ pet, owner, vac, appt, at });
-const VAX_TODO = [
-  v('Minnoş', 'Zeynep Aras', 'Kedi karma (FVRCP)', '14:00'),
-  v('Pamuk', 'Deniz Kurt', 'Kuduz'),
-  v('Sarman', 'Hülya Aktaş', 'İç-dış parazit'),
-  v('Rex', 'Cengiz Uysal', 'Karma (DHPPi+L), 2. doz'),
-  v('Fındık', 'Melis Kara', 'Bronşin (KC)'),
-  v('Tontiş', 'Pınar Gök', 'Kedi lösemisi (FeLV)'),
-  v('Zeus', 'Onur Taş', 'Kuduz'),
-  v('Kömür', 'Sibel Ateş', 'İç-dış parazit'),
-  v('Lucy', 'Can Yurt', 'Karma (DHPPi+L)'),
-  v('Mırmır', 'Ebru Dağ', 'Kedi karma (FVRCP)'),
-  v('Şila', 'Hande Sezer', 'Mantar (dermatofit)')
-];
-const VAX_DONE = [
-  v('Karamel', 'Emre Aksoy', 'Karma (DHPPi+L)', null, '09:04'),
-  v('Nane', 'Aylin Su', 'İç-dış parazit', null, '10:12'),
-  v('Leo', 'Merve Can', 'Kuduz', null, '11:41'),
-  v('Tarçın', 'Gökhan İnce', 'Kedi karma (FVRCP)', null, '12:05'),
-  v('Badem', 'Selda Kurt', 'İç-dış parazit', null, '13:20'),
-  v('Kont', 'Rıza Bal', 'Kuduz', null, '13:55')
+// Bugünün aşıları; saat yoksa null (panelden saatsiz girilmiş ya da saati bilinmiyor).
+const v = (t, pet, owner, vac, st) => ({ kind: 'vx', s: t, pet, owner, vac, st });
+DAYS[2].vaxList = [
+  v(H(9, 4), 'Nane', 'Aylin Su', 'İç-dış parazit', 'done'),
+  v(H(10, 12), 'Badem', 'Selda Kurt', 'İç-dış parazit', 'done'),
+  v(H(10, 30), 'Pamuk', 'Deniz Kurt', 'Kuduz', 'today'),
+  v(H(11, 0), 'Sarman', 'Hülya Aktaş', 'İç-dış parazit', 'today'),
+  v(H(12, 5), 'Tarçın', 'Gökhan İnce', 'Kedi karma (FVRCP)', 'done'),
+  v(H(12, 10), 'Rex', 'Cengiz Uysal', 'Karma (DHPPi+L), 2. doz', 'today'),
+  v(H(13, 20), 'Kont', 'Rıza Bal', 'Kuduz', 'done'),
+  v(H(13, 50), 'Fındık', 'Melis Kara', 'Bronşin (KC)', 'today'),
+  v(H(14, 30), 'Tontiş', 'Pınar Gök', 'Kedi lösemisi (FeLV)', 'today'),
+  v(H(14, 50), 'Zeus', 'Onur Taş', 'Kuduz', 'today'),
+  v(H(15, 16), 'Kömür', 'Sibel Ateş', 'İç-dış parazit', 'today'),
+  v(H(15, 35), 'Lucy', 'Can Yurt', 'Karma (DHPPi+L)', 'today'),
+  v(H(20, 21), 'Simit', 'Levent Ak', 'Kuduz', 'today'),
+  v(null, 'Mırmır', 'Ebru Dağ', 'Kedi karma (FVRCP)', 'today'),
+  v(null, 'Şila', 'Hande Sezer', 'Mantar (dermatofit)', 'today')
 ];
 
+// Diğer günlerin aşıları üretilir (belirlenimci).
+const PETS = ['Sarman', 'Kömür', 'Rex', 'Lucy', 'Zeus', 'Mırmır', 'Tontiş', 'Nane', 'Badem', 'Kont', 'Kartopu', 'Pırpır', 'Zilli', 'Şeker', 'Tosun', 'Paspas', 'Kaju', 'Simit', 'Bıdık', 'Hera'];
+const OWNERS = ['Hülya Aktaş', 'Cengiz Uysal', 'Pınar Gök', 'Onur Taş', 'Sibel Ateş', 'Can Yurt', 'Ebru Dağ', 'Hande Sezer', 'Aylin Su', 'Selda Kurt', 'Rıza Bal', 'Gökhan İnce', 'Levent Ak', 'Derya Çam', 'Tuncay Ilgaz', 'Nihan Özer', 'Barış Yel', 'Oya Tan', 'Kemal Sav', 'Figen Er'];
+const VACS = ['İç-dış parazit', 'Kuduz', 'Karma (DHPPi+L)', 'Kedi karma (FVRCP)', 'İç-dış parazit', 'Kedi lösemisi (FeLV)', 'Bronşin (KC)', 'İç parazit'];
+let seed = 7; const rnd = (n) => (seed = (seed * 1103515245 + 12345) % 2147483648) % n;
+for (const d of DAYS) {
+  if (d.vaxList) continue;
+  const list = [];
+  const timed = d.vax.n - d.vax.untimed - d.vax.odd.length;
+  const [o, c] = d.open || [H(9, 30), H(17)];
+  for (let i = 0; i < timed; i++) list.push(o + rnd(c - o - 20));
+  list.push(...d.vax.odd);
+  list.sort((x, y) => x - y);
+  for (let i = 0; i < d.vax.untimed; i++) list.unshift(null);
+  let od = d.vax.overdue || 0;
+  d.vaxList = list.map((t, i) => {
+    const k = (d.num * 3 + i * 7) % PETS.length;
+    let st = 'up';
+    if (d.past) st = od > 0 && i % 4 === 1 ? (od--, 'overdue') : 'done';
+    return v(t, PETS[k], OWNERS[(k + d.num) % OWNERS.length], VACS[(i + d.num) % VACS.length], st);
+  });
+  if (d.past) d.vaxList.forEach((x) => { if (od > 0 && x.st === 'done') { x.st = 'overdue'; od--; } });
+}
+// Randevu kartındaki aşı (tür "Aşı") günün aşı sayısına girer.
+const vaxCount = (d) => d.vaxList.length + d.appts.filter((x) => x.vac).length;
+const vaxOverdue = (d) => d.vaxList.filter((x) => x.st === 'overdue').length + d.appts.filter((x) => x.vac && x.st === 'overdue').length;
+
+// ---- Ortak araç çubuğu ----
 const view = (location.hash || '#hafta').slice(1);
 if (location.search.includes('dark')) document.documentElement.classList.add('dark');
 const main = document.getElementById('main');
 
-function toolbar(kind) {
-  const views = ['Gün', 'Hafta', 'Ay'].map((x) => `<span class="${(kind === 'gun' && x === 'Gün') || (kind === 'ay' && x === 'Ay') || ((kind === 'hafta' || kind === 'renk') && x === 'Hafta') ? 'on' : ''}">${x}</span>`).join('');
+function toolbar(kind, layoutLabel, popOpen) {
+  const on = (x) => (kind === 'gun' && x === 'Gün') || (kind === 'ay' && x === 'Ay') || (kind === 'hafta' && x === 'Hafta');
   const title = kind === 'gun' ? '18 Kasım 2026, Çarşamba' : kind === 'ay' ? 'Kasım 2026' : '16–22 Kasım 2026';
-  const sub = kind === 'gun' ? '10 randevu · 17 aşı' : kind === 'ay' ? '' : '32 randevu · 77 aşı';
+  const total = DAYS.reduce((s, d) => s + vaxCount(d), 0);
+  const sub = kind === 'gun' ? `10 randevu · ${vaxCount(DAYS[2])} aşı` : kind === 'ay' ? '' : `32 randevu · ${total} aşı`;
   const chips = [['Bugün', 'today'], ['Gelecek', 'up'], ['Gecikmiş', 'overdue'], ['Tamamlanan', 'done']]
-    .map(([l, k]) => `<span class="chip"><span class="bar4" style="background:${STATE_COLOR[k]}"></span>${l}</span>`).join('');
+    .map(([l, k]) => `<span class="chip"><span class="b4" style="background:${COLOR[k]}"></span>${l}</span>`).join('');
   return `
     <div class="tabs"><span>Liste</span><span class="on">Takvim</span><span>Talepler<i>2</i></span><span>Bekleme listesi</span></div>
     <div class="bar">
-      <span class="seg">${views}</span>
+      <span class="seg">${['Gün', 'Hafta', 'Ay'].map((x) => `<span class="${on(x) ? 'on' : ''}">${x}</span>`).join('')}</span>
       <span class="nav"><span class="ib">‹</span><span class="tb">Bugün</span><span class="ib">›</span></span>
       <span class="range tnum">${title}<small>${sub}</small></span>
       <span class="sp"></span>
-      ${kind === 'gun' ? '' : '<button class="btn">⌕ Boş saat bul</button>'}
+      ${layoutLabel ? `<button class="btn ${popOpen ? 'on' : ''}">☷ Görünüm <em>${layoutLabel}</em> ▾</button>` : ''}
+      <button class="btn">⌕ Boş saat bul</button>
       <button class="btn pri">+ Yeni randevu</button>
     </div>
     <div class="bar">
       <span class="sel">Tüm hekimler <em>▾</em></span>
-      <span class="sel">Tür: tümü <em>▾</em></span>
+      <span class="sel">Tür: randevu + aşı <em>▾</em></span>
       <span class="flabel">Durum</span>${chips}
-      <span class="sp"></span>
-      ${kind === 'ay' ? '' : '<span class="flabel">Saatler</span><span class="seg mini-seg"><span class="on">Mesai</span><span>Tüm gün</span></span>'}
     </div>`;
 }
 
-/** Çakışan kartları yan yana şeritlere böler. */
-function layout(appts) {
-  const list = [...appts].sort((x, y) => x.s - y.s || y.e - x.e);
-  let cluster = [], end = -1;
-  const flush = () => { const n = Math.max(...cluster.map((c) => c.lane)) + 1; cluster.forEach((c) => (c.lanes = n)); cluster = []; };
+// ---- Öğe çizimleri ----
+function vetChip(it) {
+  return it.vet ? `<span class="vet" title="${VETS[it.vet]}">${it.vet}</span>` : '<span class="vet none" title="Hekim seçilmedi">–</span>';
+}
+function mark(st) {
+  return st === 'overdue' ? '<span class="mk" title="Gecikmiş">!</span>' : st === 'done' ? '<span class="mk" title="Tamamlandı">✓</span>' : '';
+}
+/** Randevu kartı; detail: 3. satır (hekim adı) ve sahip tam adı. */
+function apCard(it, detail) {
+  const live = it.st === 'today' && it.s <= NOW && it.e > NOW ? ' live' : '';
+  const noshow = it.st === 'noshow' ? '<span class="tag">Gelmedi</span>' : '';
+  const nest = it.vac ? `<div class="nest">${SHIELD}<span>${it.vac}</span>${it.st === 'today' ? '<span class="sb">Aşıyı yap</span>' : ''}</div>` : '';
+  const l3 = detail ? `<div class="r sub">${VETS[it.vet] || 'Hekim seçilmedi'}</div>` : '';
+  return `<div class="ap s-${it.st}${live}">
+    <div class="r">${mark(it.st)}<span class="t tnum">${clock(it.s)}–${clock(it.e)}</span>${noshow}<span class="ty">${it.type}</span>${vetChip(it)}</div>
+    <div class="r"><span class="p">${it.pet}</span><span class="o">· ${detail ? it.owner : shortName(it.owner)}</span></div>${l3}${nest}</div>`;
+}
+/** Aşı satırı: kısa = tek satır (saat, hasta, aşı); ayrıntılı = ikinci satırda sahip. */
+function vxRow(it, detail) {
+  const t = it.s === null ? '' : `<span class="t tnum">${clock(it.s)}</span>`;
+  if (detail) return `<div class="vx s-${it.st}"><div class="r">${mark(it.st)}${t}${SHIELD}<span class="vn">${it.vac}</span></div><div class="r"><span class="p">${it.pet}</span><span class="o">· ${it.owner}</span></div></div>`;
+  return `<div class="vx s-${it.st}"><div class="r">${mark(it.st)}${t}${SHIELD}<span class="p">${it.pet}</span><span class="vn">· ${it.vac}</span></div></div>`;
+}
+
+// ---- Hafta: liste (varsayılan) ----
+function dayHead(d) {
+  const n = vaxCount(d), od = vaxOverdue(d);
+  return `<div class="dh ${d.today ? 'today' : ''}"><div class="dh1"><span class="num">${d.num}</span><span class="dn">${d.name}</span></div>
+    <div class="dh2"><b>${d.appts.length}</b> randevu · <b>${n}</b> aşı${od ? ` <span class="od">· ${od} gecikmiş</span>` : ''}</div></div>`;
+}
+function renderWeekList(detail, popOpen) {
+  main.innerHTML = toolbar('hafta', detail ? 'Liste · ayrıntılı' : 'Liste · kısa', popOpen) + '<section class="cal" id="cal"></section>' + (popOpen ? settingsPop() : '');
+  const cols = DAYS.map((d) => (!d.open && !d.appts.length ? '0.8fr' : '1fr')).join(' ');
+  const body = DAYS.map((d) => {
+    const untimed = d.vaxList.filter((x) => x.s === null);
+    const doneVx = d.vaxList.filter((x) => x.s !== null && x.st === 'done');
+    const flow = [...d.appts, ...d.vaxList.filter((x) => x.s !== null && x.st !== 'done')].sort((x, y) => x.s - y.s || (x.kind === 'ap' ? -1 : 1));
+    let html = '';
+    if (!d.open) html += '<div class="closed-note">Kapalı</div>';
+    if (doneVx.length) html += `<div class="fold"><span class="ok">✓</span>${doneVx.length} aşı uygulandı<span class="chev">▸</span></div>`;
+    if (untimed.length) html += `<div class="grpl">Saatsiz · ${untimed.length}</div>` + untimed.map((x) => vxRow(x, detail)).join('');
+    let nowDone = !d.today;
+    for (const it of flow) {
+      if (!nowDone && it.s > NOW) { html += `<div class="nowsep tnum">${clock(NOW)}</div>`; nowDone = true; }
+      html += it.kind === 'ap' ? apCard(it, detail) : vxRow(it, detail);
+    }
+    return `<div class="dcol ${d.today ? 'today' : ''} ${!d.open ? 'closed' : ''}">${html}</div>`;
+  }).join('');
+  document.getElementById('cal').innerHTML = `<div class="wl-head" style="grid-template-columns:${cols}">${DAYS.map(dayHead).join('')}</div><div class="wl-body" style="grid-template-columns:${cols}">${body}</div>`;
+}
+
+function settingsPop() {
+  const row = (label, opts, on) => `<div class="prow"><span>${label}</span><span class="seg">${opts.map((o, i) => `<span class="${i === on ? 'on' : ''}">${o}</span>`).join('')}</span></div>`;
+  return `<div class="pop"><h4>Takvim görünümü</h4>
+    ${row('Hafta', ['Liste', 'Saat ızgarası'], 0)}
+    ${row('Gün', ['Saat ızgarası', 'Liste'], 0)}
+    ${row('Ayrıntı', ['Kısa', 'Ayrıntılı'], 0)}
+    ${row('Aşılar', ['Akışta', 'Gizli'], 0)}
+    ${row('Uygulanan aşılar', ['Tek satırda', 'Hepsi'], 0)}
+    <div class="note">Seçim size özel; bu tarayıcıda hatırlanır. Hekim ızgarayı, resepsiyon listeyi seçebilir.</div>
+    <span class="reset">Varsayılana dön</span></div>`;
+}
+
+// ---- Saat ızgarası (hafta seçeneği ve gün) ----
+function layout(list) {
+  list = [...list].sort((x, y) => x.s - y.s || y.e - x.e);
+  let cl = [], end = -1;
+  const flush = () => { const n = Math.max(...cl.map((c) => c.lane)) + 1; cl.forEach((c) => (c.lanes = n)); cl = []; };
   for (const it of list) {
-    if (it.s >= end && cluster.length) flush();
-    const used = cluster.filter((c) => c.e > it.s).map((c) => c.lane);
+    if (it.s >= end && cl.length) flush();
+    const used = cl.filter((c) => c.e > it.s).map((c) => c.lane);
     let lane = 0; while (used.includes(lane)) lane++;
-    it.lane = lane; cluster.push(it); end = Math.max(end, it.e);
+    it.lane = lane; cl.push(it); end = Math.max(end, it.e);
   }
-  if (cluster.length) flush();
+  if (cl.length) flush();
   return list;
 }
-
-const shortName = (n) => { const p = n.split(' '); return p.length > 1 ? p[0][0] + '. ' + p.slice(1).join(' ') : n; };
-
-function cardHtml(it, h, opts) {
-  const cls = 'card ' + ST[it.st] + (it.live ? ' s-live' : '');
-  const ico = it.st === 'overdue' ? '<span class="ico" title="Gecikmiş">!</span>' : it.st === 'done' ? '<span class="ico" title="Tamamlandı">✓</span>' : '';
-  const tag = it.st === 'noshow' ? '<span class="tag">Gelmedi</span>' : '';
-  const vet = opts.showVet && !(it.lanes > 1 && opts.narrowLanes) ? (it.vet ? `<span class="vet" title="${VETS[it.vet]}">${it.vet}</span>` : '<span class="vet none" title="Hekim seçilmedi">–</span>') : '';
-  const narrow = it.lanes > 1 && opts.narrowLanes;
-  const range = `${clock(it.s)}–${clock(it.e)}`;
-  if (h >= 40) {
-    const l3 = h >= 56 ? `<div class="l3">${it.type}${opts.showVet && it.vet ? ' · ' + VETS[it.vet] : ''}</div>` : '';
-    return `<div class="${cls}"><div class="l1">${ico}<span class="t tnum">${narrow ? clock(it.s) : range}</span>${tag}${vet}</div>
-      <div class="l2"><span class="p">${it.pet}</span>${narrow ? '' : `<span class="o">· ${opts.wide ? it.owner + ' · ' + it.type : shortName(it.owner)}</span>`}</div>${opts.wide ? '' : l3}</div>`;
-  }
-  const extra = opts.wide ? `<span class="o">· ${it.owner}</span><span class="o">· ${it.type}</span>` : narrow ? '' : `<span class="o">· ${shortName(it.owner)}</span>`;
-  return `<div class="${cls}"><div class="l1">${ico}<span class="t tnum">${opts.wide ? range : clock(it.s)}</span>${tag}<span class="p">${it.pet}</span>${extra}${vet}</div></div>`;
-}
-
-/** Saat ızgarası: sütun = gün (hafta) ya da hekim (gün). Ölçek, mesai saatleri ekrana sığacak şekilde hesaplanır. */
+/** Aralık = çalışma saati ∪ randevular; aşı aralığı genişletmez (mesai dışı aşı kenarda sayı olur). */
 function grid(host, cols, opts) {
-  const template = '46px ' + cols.map((c) => (c.narrow ? '58px' : 'minmax(0,1fr)')).join(' ');
+  const tpl = '46px ' + cols.map((c) => c.width || 'minmax(0,1fr)').join(' ');
   const opens = cols.filter((c) => c.open).flatMap((c) => c.open);
-  const ap = cols.flatMap((c) => c.appts);
-  let start = Math.min(...opens, ...ap.map((x) => x.s)); let end = Math.max(...opens, ...ap.map((x) => x.e));
-  start = Math.floor(start / 60) * 60; end = Math.ceil(end / 60) * 60;
-  host.innerHTML = `<div class="ghead" style="grid-template-columns:${template}"><div></div>${cols.map((c) => c.head).join('')}</div>
-    <div class="gbody" style="grid-template-columns:${template}"><div class="tcol"></div>${cols.map(() => '<div class="col"></div>').join('')}</div>`;
+  const aps = cols.flatMap((c) => c.appts || []);
+  const start = Math.floor(Math.min(...opens, ...aps.map((x) => x.s)) / 60) * 60;
+  const end = Math.ceil(Math.max(...opens, ...aps.map((x) => x.e)) / 60) * 60;
+  host.innerHTML = `<div class="ghead" style="grid-template-columns:${tpl}"><div></div>${cols.map((c) => c.head).join('')}</div>
+    <div class="gbody" style="grid-template-columns:${tpl}"><div class="tcol"></div>${cols.map(() => '<div class="gcol"></div>').join('')}</div>`;
   const body = host.querySelector('.gbody');
-  const ppm = Math.max(0.8, Math.min(1.6, (body.clientHeight - 6) / (end - start)));
-  const y = (m) => (m - start) * ppm + 4;
+  const ppm = Math.max(0.8, Math.min(1.6, (body.clientHeight - 8) / (end - start)));
+  const y = (m) => (m - start) * ppm + 5;
   const tcol = body.querySelector('.tcol');
-  for (let m = start + 60; m < end; m += 60) tcol.insertAdjacentHTML('beforeend', `<div class="tlabel tnum" style="top:${y(m)}px">${clock(m)}</div>`);
-  tcol.insertAdjacentHTML('beforeend', `<div class="tlabel tnum" style="top:${y(start) + 6}px">${clock(start)}</div>`);
-  if (opts.now !== undefined) tcol.insertAdjacentHTML('beforeend', `<div class="tlabel tnum now" style="top:${y(opts.now)}px">${clock(opts.now)}</div>`);
-  body.querySelectorAll('.col').forEach((el, i) => {
+  for (let m = start; m < end; m += 60) tcol.insertAdjacentHTML('beforeend', `<div class="tl tnum" style="top:${m === start ? y(m) + 6 : y(m)}px">${clock(m)}</div>`);
+  tcol.insertAdjacentHTML('beforeend', `<div class="tl tnum now" style="top:${y(NOW)}px">${clock(NOW)}</div>`);
+  body.querySelectorAll('.gcol').forEach((el, i) => {
     const c = cols[i];
     if (c.today) el.classList.add('today');
-    if (c.narrow) el.classList.add('narrow');
-    let html = '';
-    for (let m = start; m < end; m += 30) html += `<div class="hl ${m % 60 ? 'half' : ''}" style="top:${y(m)}px"></div>`;
-    if (!c.open) html += `<div class="hatch" style="top:${y(start)}px;height:${y(end) - y(start)}px"></div><div class="closed-label">Kapalı</div>`;
-    else {
-      if (c.open[0] > start) html += `<div class="hatch" style="top:${y(start)}px;height:${y(c.open[0]) - y(start)}px"></div>`;
-      if (c.open[1] < end) html += `<div class="hatch" style="top:${y(c.open[1])}px;height:${y(end) - y(c.open[1])}px"></div>`;
-    }
-    for (const it of layout(c.appts)) {
-      const h = (it.e - it.s) * ppm;
-      html += `<div class="ap" style="top:${y(it.s)}px;height:${h}px;left:${(it.lane / it.lanes) * 100}%;width:${100 / it.lanes}%">${cardHtml(it, h - 2, opts)}</div>`;
-    }
-    if (c.today && opts.now !== undefined) html += `<div class="nowline" style="top:${y(opts.now) - 1}px"></div>`;
-    el.innerHTML = html;
+    let h = '';
+    for (let m = start; m < end; m += 30) h += `<div class="hl ${m % 60 ? 'half' : ''}" style="top:${y(m)}px"></div>`;
+    if (c.kind !== 'vx') {
+      if (!c.open) h += `<div class="hatch" style="top:${y(start)}px;height:${y(end) - y(start)}px"></div><div class="closed-label">Kapalı</div>`;
+      else {
+        if (c.open[0] > start) h += `<div class="hatch" style="top:${y(start)}px;height:${y(c.open[0]) - y(start)}px"></div>`;
+        if (c.open[1] < end) h += `<div class="hatch" style="top:${y(c.open[1])}px;height:${y(end) - y(c.open[1])}px"></div>`;
+      }
+      const railW = c.rail ? 28 : 0;
+      for (const it of layout(c.appts)) {
+        const ht = (it.e - it.s) * ppm;
+        h += `<div class="gb" style="top:${y(it.s)}px;height:${ht}px;left:calc((100% - ${railW}px) * ${it.lane / it.lanes});width:calc((100% - ${railW}px) / ${it.lanes})">${gridCard(it, ht - 2, opts, it.lanes > 1)}</div>`;
+      }
+      if (c.rail) h += railHtml(c.vax, start, end, y);
+    } else h += vaxColumn(c.vax, start, end, y, ppm);
+    if (c.today) h += `<div class="nowline" style="top:${y(NOW) - 1}px"></div>`;
+    el.innerHTML = h;
   });
-  return { ppm, start, end };
+}
+function gridCard(it, h, opts, narrow) {
+  const nest = it.vac && opts.wide ? ` · ${SHIELD} ${it.vac}` : '';
+  const live = it.st === 'today' && it.s <= NOW && it.e > NOW ? ' live' : '';
+  const vet = opts.showVet && !narrow ? vetChip(it) : '';
+  if (h >= 40) return `<div class="ap s-${it.st}${live}"><div class="r">${mark(it.st)}<span class="t tnum">${clock(it.s)}–${clock(it.e)}</span>${opts.wide ? `<span class="ty">${it.type}${nest}</span>` : ''}${vet}</div>
+    <div class="r"><span class="p">${it.pet}</span><span class="o">· ${opts.wide ? it.owner : shortName(it.owner)}</span></div></div>`;
+  const tail = opts.wide ? `<span class="o">· ${it.owner} · ${it.type}${nest}</span>` : narrow ? '' : `<span class="o">· ${shortName(it.owner)}</span>`;
+  return `<div class="ap s-${it.st}${live}"><div class="r">${mark(it.st)}<span class="t tnum">${opts.wide ? clock(it.s) + '–' + clock(it.e) : clock(it.s)}</span><span class="p">${it.pet}</span>${tail}${vet}</div></div>`;
+}
+const worst = (list) => ['overdue', 'today', 'up', 'done'].find((s) => list.some((x) => x.st === s));
+/** Hafta ızgarasında aşı: sütunun sağında ince şerit, yarım saatlik dilimde sayı; mesai dışı kenarda ↑/↓. */
+function railHtml(vax, start, end, y) {
+  let h = '<div class="rail"></div>';
+  const timed = vax.filter((x) => x.s !== null);
+  const before = timed.filter((x) => x.s < start), after = timed.filter((x) => x.s >= end);
+  for (let m = start; m < end; m += 30) {
+    const b = timed.filter((x) => x.s >= m && x.s < m + 30);
+    if (b.length) h += `<div class="pin s-${worst(b)}" style="top:${y(m) + 2}px;right:3px;width:22px" title="${b.map((x) => clock(x.s) + ' ' + x.pet + ' · ' + x.vac).join('&#10;')}">${b.length}</div>`;
+  }
+  if (before.length) h += `<div class="edge" style="top:${y(start) - 3}px;right:1px;width:26px">↑${before.length}</div>`;
+  if (after.length) h += `<div class="edge" style="top:${y(end) - 14}px;right:1px;width:26px">↓${after.length}</div>`;
+  return h;
+}
+/** Gün ızgarasında "Aşılar" sütunu: yarım saatlik dilimde ilk aşı + "+N"; mesai dışı ve saatsizler başlıkta. */
+function vaxColumn(vax, start, end, y, ppm) {
+  let h = '';
+  const timed = vax.filter((x) => x.s !== null && x.s >= start && x.s < end);
+  for (let m = start; m < end; m += 30) {
+    const b = timed.filter((x) => x.s >= m && x.s < m + 30);
+    if (!b.length) continue;
+    const f = b.find((x) => x.st === worst(b));
+    h += `<div class="gvx" style="top:${y(m) + 1}px;height:${30 * ppm - 3}px"><div class="vx s-${worst(b)}"><div class="r">${mark(f.st)}<span class="t tnum">${clock(f.s)}</span>${SHIELD}<span class="p">${f.pet}</span><span class="vn">· ${f.vac}</span>${b.length > 1 ? `<span class="more">+${b.length - 1}</span>` : ''}</div></div></div>`;
+  }
+  return h;
 }
 
-function vxPill(vx, active, narrow) {
-  if (narrow) return `<button class="vx" title="${vx.total} aşı">${SHIELD}<b>${vx.total}</b></button>`;
-  return `<button class="vx ${active ? 'on' : ''}">${SHIELD}<b>${vx.total} aşı</b>${vx.overdue ? `<span class="od">· ${vx.overdue} gecikmiş</span>` : ''}<span class="chev">›</span></button>`;
-}
-
-function weekHead(d, active) {
-  if (!d.open && !d.appts.length) return `<div class="dh narrow"><div class="dh1"><span class="num">${d.num}</span><span class="dn">Paz</span></div>${vxPill(d.vx, false, true)}</div>`;
-  return `<div class="dh ${d.today ? 'today' : ''}"><div class="dh1"><span class="num">${d.num}</span><span class="dn">${d.name}</span><span class="cnt">${d.appts.length} randevu</span></div>${vxPill(d.vx, active)}</div>`;
-}
-
-function vaxRows(list, done) {
-  return list.map((x) => `<div class="vrow ${done ? 'done' : ''}"><span class="bar4" style="background:${done ? 'var(--st-done)' : 'var(--st-today)'}"></span>
-    <div class="vt"><div class="v1"><b>${x.pet}</b> <span>· ${x.owner}</span></div><div class="v2">${x.vac}</div>
-    ${x.appt ? `<div class="v3">◷ ${x.appt} randevusu var</div>` : ''}</div>
-    <div class="va">${done ? `<span class="when tnum">✓ ${x.at}</span>` : '<button class="sb">Aşıyı yap</button>'}<button class="km" title="Randevu ver · Aşı kaydını aç">⋯</button></div></div>`).join('');
-}
-
-function vaxPanel(drawer) {
-  return `<aside class="rail ${drawer ? 'drawer' : ''}">
-    ${drawer ? `<div class="rh"><div class="rh1"><h3>Aşılar · 18 Kasım Çarşamba</h3><button class="x" title="Kapat">×</button></div>
-      <div class="sub">Planlı aşı randevu değildir; saati yoktur, gün içinde yapılır.</div></div>` :
-      `<div class="rtabs"><span class="on">Bugünün aşıları<i>17</i></span><span>Boş saat bul</span></div>`}
-    <div class="rseg"><span class="seg mini-seg"><span class="on">Yapılacak 11</span><span>Yapıldı 6</span><span>Tümü 17</span></span></div>
-    <div class="rlist"><div class="grp">Bugün yapılacak · 11</div>${vaxRows(VAX_TODO, false)}<div class="grp">Uygulandı · 6</div>${vaxRows(VAX_DONE, true)}</div>
-    <div class="rfoot">${drawer ? 'Haftanın tüm aşıları (77) ›' : 'Aşı listesine git ›'}<span>${drawer ? 'Gecikmiş: 5' : 'Hekim atanmaz'}</span></div>
-  </aside>`;
-}
-
-function renderWeek(withDrawer) {
-  main.innerHTML = toolbar('hafta') + `<section class="cal"><div class="calmain" id="cm"></div>${withDrawer ? vaxPanel(true) : ''}</section>`;
-  const cols = DAYS.map((d) => ({ head: weekHead(d, withDrawer && d.today), open: d.open, appts: d.appts.map((x) => ({ ...x, live: d.today && x.s <= NOW && x.e > NOW })), today: d.today, narrow: !d.open && !d.appts.length }));
-  grid(document.getElementById('cm'), cols, { showVet: true, narrowLanes: true, now: NOW });
+function renderWeekGrid() {
+  main.innerHTML = toolbar('hafta', 'Saat ızgarası') + '<section class="cal" id="cal"></section>';
+  const cols = DAYS.map((d) => ({
+    head: dayHead(d), open: d.open, appts: d.appts, vax: d.vaxList, today: d.today, rail: true,
+    width: !d.open && !d.appts.length ? '0.8fr' : null
+  }));
+  grid(document.getElementById('cal'), cols, { showVet: true });
 }
 
 function renderDay() {
-  main.innerHTML = toolbar('gun') + `<section class="cal"><div class="calmain" id="cm"></div>${vaxPanel(false)}</section>`;
+  main.innerHTML = toolbar('gun', 'Saat ızgarası') + '<section class="cal" id="cal"></section>';
   const d = DAYS[2];
-  const cols = Object.entries(VETS).map(([k, name]) => {
-    const appts = d.appts.filter((x) => x.vet === k).map((x) => ({ ...x, live: x.s <= NOW && x.e > NOW }));
-    const left = appts.filter((x) => x.st === 'today').length;
-    return { head: `<div class="vhead"><div class="vn">${name}</div><div class="vs">${appts.length} randevu · ${left} bekliyor</div></div>`, open: d.open, appts, today: true };
+  const vets = Object.entries(VETS).map(([k, name]) => {
+    const appts = d.appts.filter((x) => x.vet === k);
+    return { head: `<div class="vh"><div class="vn2">${name}</div><div class="vs">${appts.length} randevu · ${appts.filter((x) => x.st === 'today').length} bekliyor</div></div>`, open: d.open, appts, today: true };
   });
-  grid(document.getElementById('cm'), cols, { showVet: false, wide: true, now: NOW });
+  const untimed = d.vaxList.filter((x) => x.s === null);
+  const late = d.vaxList.filter((x) => x.s !== null && x.s >= H(18));
+  const done = d.vaxList.filter((x) => x.st === 'done').length + d.appts.filter((x) => x.vac && x.st === 'done').length;
+  const vhead = `<div class="vh"><div class="vn2">${SHIELD} Aşılar · ${vaxCount(d)}</div>
+    <div class="vs">${done} uygulandı · <b style="color:var(--text)">${untimed.length} saatsiz</b> · ${late.length} mesai sonrası ▾</div></div>`;
+  grid(document.getElementById('cal'), [...vets, { head: vhead, kind: 'vx', vax: d.vaxList, today: true, width: '300px' }], { wide: true });
 }
 
+// ---- Ay ----
 function renderMonth() {
-  main.innerHTML = toolbar('ay') + `<section class="cal"><div class="calmain" id="cm"></div></section>`;
+  main.innerHTML = toolbar('ay', 'Liste · kısa') + '<section class="cal" id="cal"></section>';
   const names = ['Zeytin', 'Tarçın', 'Pamuk', 'Boncuk', 'Limon', 'Maya', 'Fırtına', 'Şans', 'Bal', 'Reis', 'Karamel', 'Leo', 'Kuki', 'Cesur', 'Karabaş', 'Lokum', 'Mavi', 'Rocky', 'Tekir', 'Tarzan'];
   const cells = [];
   const first = new Date(2026, 9, 26);
   for (let i = 0; i < 42; i++) {
     const dt = new Date(first); dt.setDate(first.getDate() + i);
-    const dn = dt.getDate(), mon = dt.getMonth(), dow = i % 7;
-    const out = mon !== 10;
-    const wk = DAYS.find((x) => x.num === dn && mon === 10);
-    const seed = (dn * 7 + mon * 3) % 11;
-    let appts, vx;
-    if (wk) { appts = wk.appts.map((x) => ({ s: x.s, pet: x.pet, st: x.st })); vx = wk.vx; }
-    else {
-      const n = dow === 6 ? 0 : dow === 5 ? 2 + (seed % 2) : 3 + (seed % 6);
-      const past = mon < 10 || (mon === 10 && dn < 18);
-      appts = Array.from({ length: n }, (_, k) => ({ s: H(9 + k, k % 2 ? 30 : 0), pet: names[(dn + k * 3) % names.length], st: past ? (k === 2 && seed % 3 === 0 ? 'overdue' : 'done') : 'up' }));
-      const total = dow === 6 ? 2 + (seed % 3) : 6 + ((seed * 5) % 13);
-      vx = { total, overdue: past ? seed % 4 : 0 };
+    const dn = dt.getDate(), mon = dt.getMonth(), dow = i % 7, out = mon !== 10;
+    const wk = mon === 10 ? DAYS.find((x) => x.num === dn) : null;
+    const past = mon < 10 || (mon === 10 && dn < 18);
+    let items, nAp, nVx, od;
+    if (wk) {
+      items = [...wk.appts, ...wk.vaxList.filter((x) => x.s !== null && x.st !== 'done')].sort((x, y) => x.s - y.s);
+      nAp = wk.appts.length; nVx = vaxCount(wk); od = vaxOverdue(wk) + wk.appts.filter((x) => x.st === 'overdue' && !x.vac).length;
+    } else {
+      const s = (dn * 7 + mon * 3) % 11;
+      nAp = dow === 6 ? 0 : dow === 5 ? 2 : 3 + (s % 5); nVx = dow === 6 ? 2 + (s % 3) : 6 + ((s * 5) % 12); od = past ? s % 4 : 0;
+      items = past ? Array.from({ length: od }, (_, k) => ({ kind: 'vx', s: H(10 + k * 2, 10 + k * 7), pet: PETS[(dn + k * 5) % PETS.length], vac: VACS[(dn + k) % VACS.length], st: 'overdue' }))
+        : Array.from({ length: Math.min(5, nAp + nVx) }, (_, k) => k % 2 === 0 && nAp
+        ? { kind: 'ap', s: H(9 + k, k ? 30 : 0), pet: names[(dn + k) % names.length], st: past ? 'done' : 'up' }
+        : { kind: 'vx', s: H(9 + k, 10), pet: PETS[(dn + k) % PETS.length], vac: VACS[(dn + k) % VACS.length], st: past ? (k === 1 && od ? 'overdue' : 'done') : 'up' });
     }
-    const shown = appts.slice(0, 2).map((x) => `<div class="ml"><span class="bar4" style="background:${x.st === 'noshow' ? 'var(--faint)' : STATE_COLOR[x.st]}"></span><b class="tnum">${clock(x.s)}</b>${x.pet}</div>`).join('');
-    const more = appts.length > 2 ? `<div class="ml more">+${appts.length - 2} randevu</div>` : '';
-    const od = appts.filter((x) => x.st === 'overdue').length;
-    cells.push(`<div class="mc ${out ? 'out' : ''} ${mon === 10 && dn === 18 ? 'today' : ''} ${dow === 6 ? 'closed' : ''}">
-      <div class="mh"><span class="mn">${dn}</span><span class="mcnt">${dow === 6 ? 'kapalı' : appts.length ? appts.length + ' randevu' + (od ? ` · <span style="color:var(--st-overdue);font-weight:600">${od} gecikmiş</span>` : '') : ''}</span></div>
-      ${shown}${more}
-      <div class="mv">${SHIELD}${vx.total} aşı${vx.overdue ? `<span class="od">· ${vx.overdue} gecikmiş</span>` : ''}</div></div>`);
+    // Hücrede dikkat isteyenler: tamamlananlar sayıya girer, satır olarak gösterilmez; bugün yalnız şimdiden sonrası ve bekleyenler.
+    const open = items.filter((x) => x.st !== 'done' && x.st !== 'noshow');
+    const shown = open.slice(0, 3).map((x) => `<div class="ml s-${x.st}"><b class="tnum">${clock(x.s)}</b>${x.kind === 'vx' ? SHIELD : ''}<span>${x.pet}${x.kind === 'vx' ? ' · ' + x.vac : ''}</span></div>`).join('');
+    const rest = open.length - Math.min(3, open.length);
+    const allDone = !open.length && nAp + nVx && past ? '<div class="ml s-done"><span>✓ hepsi tamamlandı</span></div>' : '';
+    cells.push(`<div class="mc ${out ? 'out' : ''} ${mon === 10 && dn === 18 ? 'today' : ''}">
+      <div class="mh"><span class="mn">${dn}</span><span class="mcnt">${dow === 6 && !nAp ? 'kapalı · ' : ''}${nAp ? nAp + ' rnd · ' : ''}${nVx} aşı${od ? ` <span class="od">· ${od} gecikmiş</span>` : ''}</span></div>
+      ${shown}${allDone}${rest > 0 ? `<div class="mmore">+${rest} daha</div>` : ''}</div>`);
   }
-  document.getElementById('cm').innerHTML = `<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div><div class="mgrid" style="grid-template-rows:repeat(6,1fr)">${cells.join('')}</div>`;
+  document.getElementById('cal').innerHTML = `<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div><div class="mgrid">${cells.join('')}</div>`;
 }
 
+// ---- Renkler: iki eksen ----
 function renderColors() {
-  main.innerHTML = toolbar('renk') + `<section class="cal" style="padding:6px 16px"><div class="sheet" id="sh"></div></section>`;
-  const demo = (it, h, opts = { showVet: true }) => `<div class="demo ${h < 40 ? 's1' : ''}" style="height:${h}px"><div class="ap">${cardHtml({ ...it, lanes: 1 }, h, opts)}</div></div>`;
-  const base = { s: H(14), e: H(14, 30), pet: 'Minnoş', owner: 'Zeynep Aras', vet: 'EA', type: 'Aşı' };
-  const rows = [
-    ['up', 'Gelecek', 'Beyaz kart, koyu şerit. Varsayılan hâl; bakışta okunacak olan saat ve hasta.'],
-    ['today', 'Bugün (bekliyor)', 'Sarı şerit. Sütunun kendisi de "bugün" tonunda; şu an süren randevunun çevresi sarı.'],
-    ['overdue', 'Gecikmiş', 'Kırmızı şerit, açık kırmızı zemin, ! simgesi, kırmızı saat. Tek "dikkat" rengi.'],
-    ['done', 'Tamamlanan', 'Yeşil şerit, ✓ simgesi, soluk yazı: iş bitti, göz üzerinden geçsin.'],
-    ['noshow', 'Gelmedi / iptal', 'Gri şerit, taralı zemin, üstü çizili; durum filtresine girmez.']
-  ];
+  main.innerHTML = toolbar('hafta', 'Liste · kısa') + '<section class="cal"><div class="sheet" id="sh"></div></section>';
+  const ap = (st) => apCard({ kind: 'ap', s: H(14), e: H(14, 30), pet: 'Minnoş', owner: 'Zeynep Aras', vet: 'EA', type: 'Kontrol', st }, false);
+  const vx = (st) => vxRow({ kind: 'vx', s: H(14, 30), pet: 'Tontiş', owner: 'Pınar Gök', vac: 'Kedi lösemisi (FeLV)', st }, false);
+  const rows = [['up', 'Gelecek'], ['today', 'Bugün'], ['overdue', 'Gecikmiş'], ['done', 'Tamamlanan'], ['noshow', 'Gelmedi / iptal']];
   document.getElementById('sh').innerHTML = `
-    <div><h4>Önerilen: renk şeritte, kart beyaz</h4><p>Durum dört renkle (kullanıcının seçtiği renkler korunur) ama yalnız 4 px sol şerit + simge olarak. Zemin rengi yalnız gecikmişte. Renk körü kullanıcı için simge ve yazı da durumu taşır.</p>
-      ${rows.map(([st, l, c]) => `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start">
-        <div>${demo({ ...base, st, live: st === 'today' }, 46)}</div><div>${demo({ ...base, st }, 26)}</div></div><div class="cap"><b style="color:var(--text)">${l}.</b> ${c}</div>`).join('')}
+    <div><h4>İki eksen: durum renkte, tür biçimde</h4><p>Durum dört renkle (kullanıcının seçtiği renkler) yalnız sol şeritte ve simgede. Tür renkle değil biçimle ayrılır: randevu çerçeveli kart ve saat <i>aralığı</i>; aşı çerçevesiz satır, kalkan simgesi ve tek <i>an</i>. İki renk sistemi aynı kartta yarışmaz.</p>
+      <div class="mx"><span></span><span class="hd">Randevu</span><span class="hd">Aşı</span>
+      ${rows.map(([st, l]) => `<span class="lb">${l}</span><div>${ap(st)}</div><div>${st === 'noshow' ? '<span class="sub">— (aşıda yok)</span>' : vx(st)}</div>`).join('')}</div>
+      <p style="margin-top:12px">Randevu türü (Kontrol, Muayene, Operasyon…) kartta gri etiket. Türe renk verilmez: tür listesi kliniğe göre uzar, renkle ayırt edilemez; durum renkleriyle de karışır.</p>
     </div>
-    <div><h4>Neden tam dolgu değil</h4><p>Bugünkü aşı çipleri tam dolgulu (sarı zemin, siyah çerçeve, yeşil zemin). Haftada 77 çip olunca renk her yere yayılıyor; bir sütunun tamamı aynı renge boyanıyor çünkü durum çoğunlukla tarihten geliyor (geçmiş gün kırmızı/yeşil, bugün sarı, ileri siyah).</p>
-      <div class="box">
-        <span class="oldchip" style="background:#fef08a;border-color:#eab308;color:#422006">${SHIELD} Sarman · İç-dış par…</span>
-        <span class="oldchip" style="background:#fef08a;border-color:#eab308;color:#422006">${SHIELD} Kömür · İç-dış par…</span>
-        <span class="oldchip" style="background:#fef2f2;border-color:#ef4444;color:#b91c1c">${SHIELD} Tontiş · Kedi karma…</span>
-        <span class="oldchip" style="background:#f0fdf4;border-color:#16a34a;color:#166534">${SHIELD} Nane · Dış parazit</span>
-        <span class="oldchip" style="background:#fff;border-color:#111;color:#111">${SHIELD} Zeus · İç-dış parazit</span>
-      </div>
-      <p style="margin-top:10px">Kural: <b>renk istisnayı işaretler</b>. Gecikmiş dışındaki durumlar sakin; göz önce gecikmişi, sonra saati görür.</p>
-      <h4 style="margin-top:16px">Hekim rengi kalkar</h4><p>Hafta görünümünde hekim başına zemin rengi (turkuaz, mor, turuncu, gül, yeşil…) durum renkleriyle çakışıyor: turuncu "bugün", gül "gecikmiş", yeşil "tamamlandı" gibi okunuyor. Hekim nötr baş harf rozetiyle gösterilir (<span class="card" style="display:inline;border:0;padding:0;background:none;box-shadow:none"><span class="vet" style="display:inline-block">EA</span></span>), tam adı balonda. Gün görünümünde hekim zaten sütundur, rozet yok.</p>
-      <h4 style="margin-top:16px">Şimdi çizgisi</h4><p>Kırmızı değil, ana renk (koyu turkuaz). Kırmızı yalnız gecikmiş ve çakışma için kalır.</p>
+    <div><h4>Randevulu hastanın aşısı kartın içinde</h4><p>Aynı gün aynı hastanın randevusu varsa aşı ayrı satır olmaz, randevu kartının altında görünür. Hasta bir kez okunur, iş tek yerde biter.</p>
+      ${apCard({ kind: 'ap', s: H(14), e: H(14, 30), pet: 'Minnoş', owner: 'Zeynep Aras', vet: 'EA', type: 'Aşı', st: 'today', vac: 'Kedi karma (FVRCP)' }, false)}
+      <h4 style="margin-top:16px">Saatsiz aşı</h4><p>Panelden saatsiz girilen ya da saati bilinmeyen aşı günün başında "Saatsiz" başlığı altında. Saat uydurulmaz.</p>
+      <div class="grpl">Saatsiz · 1</div>${vxRow({ kind: 'vx', s: null, pet: 'Mırmır', owner: 'Ebru Dağ', vac: 'Kedi karma (FVRCP)', st: 'today' }, false)}
+      <h4 style="margin-top:16px">Uygulanan aşılar tek satır</h4><p>Bitmiş iş dikkat istemez: tıklanınca açılır. Görünüm ayarından "Hepsi" seçilebilir.</p>
+      <div class="fold" style="background:var(--surface-2)"><span class="ok">✓</span>6 aşı uygulandı<span class="chev">▸</span></div>
     </div>
-    <div><h4>Aşı sayacı (gün başlığı)</h4><p>Tek satır, sabit yükseklik; aşı sayısı ne olursa olsun ızgara yukarı itilmez. Yalnız gecikmiş sayısı renkli.</p>
-      <div style="width:200px">${vxPill({ total: 13, overdue: 3 })}${vxPill({ total: 17, overdue: 0 })}${vxPill({ total: 17, overdue: 0 }, true)}</div>
-      <p style="margin-top:8px">Sırasıyla: geçmiş gün, bugün, seçili (sağ panel açık). Kapalı ve boş gün daralır, yalnız sayı kalır: <span style="display:inline-block;width:58px;vertical-align:middle">${vxPill({ total: 4 }, false, true)}</span></p>
-      <h4 style="margin-top:16px">Ay hücresi</h4><p>İlk iki randevu saatiyle, kalanı "+N randevu"; en altta tek satır aşı sayacı. Gecikmiş sayısı başlıkta kırmızı.</p>
+    <div><h4>Şimdi ayracı</h4><p>Listede saat geçince ayraç, ızgarada aynı renkte çizgi. Kırmızı değil; kırmızı yalnız gecikmiş.</p>
+      <div class="nowsep tnum" style="width:180px">14:20</div>
+      <h4 style="margin-top:16px">Aşı randevu yeri doldurmaz</h4><p>Izgarada aşı blok olarak çizilmez; blok o saati dolu gösterir. Hafta ızgarasında sütunun sağında ince şeritte yarım saatlik dilimde sayı; gün ızgarasında ayrı "Aşılar" sütunu.</p>
+      <div style="position:relative;height:24px;width:40px"><div class="pin s-today" style="top:2px;left:3px;width:22px">3</div></div>
+      <h4 style="margin-top:16px">Hekim</h4><p>Nötr baş harf rozeti (<span class="vet" style="display:inline-block;margin:0">EA</span>), tam ad balonda. Hekim zemin rengi kalkar.</p>
     </div>`;
 }
 
@@ -509,10 +593,10 @@ function render() {
   if (view === 'gun') renderDay();
   else if (view === 'ay') renderMonth();
   else if (view === 'renkler') renderColors();
-  else renderWeek(view === 'hafta-asi');
+  else if (view === 'hafta-izgara') renderWeekGrid();
+  else renderWeekList(view === 'hafta-ayrintili', view === 'hafta-ayarlar');
 }
 render();
-// Ölçek pencere yüksekliğinden gelir: boyut değişince yeniden çiz.
 addEventListener('resize', render);
 </script>
 </body>
