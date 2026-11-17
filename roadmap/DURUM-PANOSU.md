@@ -52,8 +52,9 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Aktarma notları paneli (taslak A): dosya notları partiye yazılır, sihirbazda satır satır panel | BE `8cab1afe`, panel `43c2bff7` (`feature/aktarma-notlari`) | Canlıda (2026-11-16 18:40) | Migration `AddImportBatchWarnings` (koordinatör bildirimi; canlı DB'de ben okumadım). `/health/ready` 200 |
 | Aktarma geri alma 30 gün sonra kesinleşir, aktarma listesi sade | BE `b7afdfbf`, panel `faf4ce00` | Canlıda (2026-11-16 22:38) | |
 | Geçici SQL hatasında (kilitlenme, 1205) yeniden deneme ve komut DB'de RCSI ([ADR-050](../decisions/ADR-050-veritabani-okuma-surumleme-ve-gecici-hata.md)) | BE `b7afdfbf`; [işletim notu](../operations/veritabani-rcsi.md) | Canlıda (2026-11-16 22:38) | RCSI ayarını canlı DB'de ben okumadım (koordinatör bildirimi). `/health/ready` 200 |
-| Takvim: planlı aşı katmanı, ayrıntı balonu, randevuyu pencerede açma, filtreler, ay görünümü | BE `883af239` (+6), FE `e4907244` (+7) (`feature/takvim-asi-katmani`) | Dalda, birleşmedi | Kod ve testler tamam (oturum bildirimi); doğrulama, main'e alma ve yayın bekliyor |
-| Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | — | Geliştiriliyor | Koordinatör bildirimi (2026-11-16 22:38) |
+| Takvim: planlı aşı katmanı, ayrıntı balonu, randevuyu pencerede açma, filtreler, ay görünümü | BE main `6303eb31`, FE main `639d5ac2` (`feature/takvim-asi-katmani` birleşti) | Main'de, canlıya çıkmadı | Push ve yayın yok |
+| Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | BE main `073e5c8b`, FE main `0a8bebea` (`feature/eszamanlilik-aciklari` birleşti) | Main'de, canlıya çıkmadı | Push ve yayın yok |
+| Yeni başlayan dallar: aktarma geri almada kalan kayıtlar, güncelleme aktarması (BE + FE), kasa sayımı kilidi (BE) | `feature/geri-alma-kalan-kayitlar`, `feature/guncelleme-aktarmasi`, `fix/kasa-sayimi-kilit` | Geliştiriliyor | 2026-11-17: dallar main'den açıldı, henüz commit yok |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -67,6 +68,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 3. ~~Portal tüm paketlerde~~ Yapıldı (2026-11-16 18:40).
 4. ~~E-vet türü aşılardan çıkarma~~ Yapıldı (2026-11-16 18:40).
 5. ~~Aktarma notları~~ Yapıldı (2026-11-16 18:40): BE `8cab1afe`, panel `43c2bff7`, migration `AddImportBatchWarnings`. Üç depo push edildi.
+6. Main (BE `073e5c8b`, FE `0a8bebea`): takvim aşı katmanı ve ay görünümü, eşzamanlılık açıkları. Push ve yayın.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
