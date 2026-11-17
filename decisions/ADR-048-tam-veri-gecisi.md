@@ -46,7 +46,7 @@ K7'nin özü değişmez: yalnız partinin oluşturduğu kayıt silinir, bağı o
 
 Muayene ve ödeme geçmişi gelince "bağı olan kayıt" kümesi büyüyor. Kural yine denetimle sağlanır, varsayımla değil: partinin kendi kayıtları bağ sayılmaz, diğer her bağ engeldir.
 
-Geri alma uygulamadan sonra 30 gün açıktır; süre dolunca aktarma kesinleşir (2026-11-16, [ADR-019](ADR-019-data-import.md) "Ek (2026-11-16)"). Bu, yeni türlerin hepsi için de geçerlidir.
+Geri alma uygulamadan sonra 15 gün açıktır; süre dolunca aktarma kesinleşir ([ADR-019](ADR-019-data-import.md) "Ek (2026-11-16)", süre 2026-11-17 ekiyle 30 günden 15 güne indi). Bu, yeni türlerin hepsi için de geçerlidir.
 
 ### Finans, kasa ve e-belge yalıtımı
 
