@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Önerildi (2026-11-17).** Görev koordinatör oturumundan geldi; kararlar rakip pratiğinden türetildi ("sor değil, öner"). Uygulama backend ve frontend `feature/guncelleme-aktarmasi` dallarında; canlıya uygulanmadı. Sözleşme: backend `docs/IMPORT_API_CONTRACT.md` bölüm 14.
+**Kabul edildi (2026-11-17).** Kullanıcı istedi (yeni yedeğin mükerrer yaratmaması, süre dolunca yalnız aktarılanların kalması) ve birleştirmeyi onayladı; ayrıntı kararlar rakip pratiğinden türetildi. Uygulama backend ve frontend `main`'de (geri alma süresi 15 günle birlikte). Sözleşme: backend `docs/IMPORT_API_CONTRACT.md` bölüm 14 ve 10.1.
 
 ## Bağlam
 
