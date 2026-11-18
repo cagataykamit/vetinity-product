@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yapay zekâ arayüzü taslağı</title>
+<!--
+  Yapay zekâ özelliklerinin panel arayüzü (2026-11-19). Statik, tıklanır taslak; veriler uydurmadır.
+  Sol alttaki çizgili "Taslak" panelinden bölüm, seçenek (A yan panel, B sayfa içi, C pencere) ve durum seçilir.
+  Bölümler: G = hasta geçmişi özeti (AI-002), M = muayene notunu alanlara ayırma (AI-001),
+  S = hasta sahibine açıklama (AI-003), T = taburcu / evde bakım talimatı (AI-004). M, S ve T ortak taslak → onay desenini (AI-009) kullanır.
+  Adres: #G-A-sonuc, #M-B-taslak, #T-C-taslak …; sonuna -koyu eklenirse koyu tema açılır.
+  Ölçü: 1536×730 CSS piksel (1920×1080 ekran, %125 ölçek). Renkler vetinity-preset.ts'ten (primary.600 #0c8079).
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeicons@8.0.2/primeicons.css">
+<style>
+:root {
+  --bg: #f4f6f8; --surface: #ffffff; --surface-2: #f8fafc; --border: #e2e8f0; --line: #eef2f6;
+  --text: #0f172a; --muted: #475569; --faint: #94a3b8;
+  --primary: #0c8079; --primary-h: #0a655f; --primary-50: #eefcfb; --primary-100: #d3f4f0; --on-primary: #ffffff;
+  --amber: #b45309; --amber-bg: #fef3c7; --amber-dot: #f59e0b;
+  --green: #15803d; --green-bg: #dcfce7;
+  --red: #b91c1c; --red-bg: #fee2e2;
+  /* Yapay zekâ: yalnız "makineden geldi, henüz doğrulanmadı" işareti için. Eylem rengi her zaman ana renktir. */
+  --ai: #6d4fc2; --ai-bg: #f5f2ff; --ai-border: #c9bbf5; --ai-hl: #ebe4ff;
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05);
+  --pop: 0 10px 30px rgba(15, 23, 42, .18);
+  --side: -8px 0 24px rgba(15, 23, 42, .08);
+}
+html.dark {
+  --bg: #09090b; --surface: #18181b; --surface-2: #1f1f23; --border: #3f3f46; --line: #27272a;
+  --text: #f4f4f5; --muted: #a1a1aa; --faint: #71717a;
+  --primary: #2dd4bf; --primary-h: #5eead4; --primary-50: #0d2b29; --primary-100: #123a37; --on-primary: #042f2e;
+  --amber: #fcd34d; --amber-bg: #3a2c0b; --amber-dot: #f59e0b;
+  --green: #86efac; --green-bg: #12301d;
+  --red: #fca5a5; --red-bg: #3b1515;
+  --ai: #c4b5fd; --ai-bg: #1e1830; --ai-border: #4c3f78; --ai-hl: #2c2348;
+  --shadow: none; --pop: 0 10px 30px rgba(0, 0, 0, .6); --side: -8px 0 24px rgba(0, 0, 0, .5);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.45 Inter, "Segoe UI", system-ui, sans-serif; overflow: hidden; }
+a { color: inherit; text-decoration: none; cursor: pointer; }
+button { font: inherit; color: inherit; cursor: pointer; }
+textarea, input { font: inherit; color: var(--text); }
+.tnum { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.grow { flex: 1; }
+
+/* ---------- Kabuk ---------- */
+.top { height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.logo { width: 200px; font-weight: 700; font-size: 22px; display: flex; align-items: center; gap: 12px; }
+.logo i { font-size: 18px; color: var(--muted); }
+.logo b { color: var(--primary); }
+.search { width: 190px; height: 34px; border: 1px solid var(--border); border-radius: 8px; color: var(--faint); padding: 7px 10px; font-size: 13px; margin-left: auto; }
+.clinic { font-weight: 600; font-size: 14px; }
+.top .ic { color: var(--muted); font-size: 17px; }
+.shell { display: flex; height: calc(100% - 56px); }
+.side { width: 240px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 10px 0; overflow: hidden; }
+.side h6 { margin: 14px 20px 4px; font-size: 11.5px; letter-spacing: .8px; font-weight: 700; }
+.side a { display: flex; align-items: center; gap: 10px; padding: 8px 20px; font-size: 14.5px; }
+.side a i { width: 18px; }
+.side a.on { background: var(--primary-50); color: var(--primary); font-weight: 600; }
+main { flex: 1; min-width: 0; overflow-y: auto; padding: 14px 24px 90px; transition: padding-right .15s; }
+main.pushed { padding-right: 464px; }
+
+/* ---------- Taslak paneli (ürünün parçası değil) ---------- */
+.draft { position: fixed; left: 10px; bottom: 10px; width: 220px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-50); font-size: 12px; box-shadow: var(--shadow); }
+.draft .dh { display: flex; align-items: center; justify-content: space-between; font-size: 11px; letter-spacing: .6px; }
+.draft a { display: block; padding: 3px 2px; font-size: 11px; letter-spacing: -.1px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.draft a.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.draft .row { display: grid; gap: 4px; }
+.draft .r2 { grid-template-columns: 1fr 1fr; }
+.draft .r3 { grid-template-columns: 1fr 1fr 1fr; }
+.draft .lbl { color: var(--muted); font-size: 11px; margin-top: 2px; }
+.draft .dnote { color: var(--muted); font-size: 11.5px; line-height: 1.35; }
+.draft .lnk { border: 0; background: none; color: var(--primary); padding: 0 0 0 8px; font-weight: 600; font-size: 11.5px; }
+
+/* ---------- Genel parçalar ---------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow); min-width: 0; }
+.card h5 { margin: 0; font-size: 16px; font-weight: 600; }
+.ch { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.btn { height: 34px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; color: var(--text); }
+.btn:hover { background: var(--surface-2); }
+.btn.pri { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.btn.pri:hover { background: var(--primary-h); }
+.btn.out { border-color: var(--primary); color: var(--primary); background: transparent; }
+.btn.txt { border-color: transparent; background: transparent; color: var(--muted); }
+.btn.txt:hover { color: var(--text); background: var(--surface-2); }
+.btn.sm { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn.xs { height: 26px; padding: 0 8px; font-size: 12.5px; border-radius: 5px; }
+.btn.ico { width: 30px; padding: 0; justify-content: center; border-color: transparent; background: transparent; color: var(--muted); border-radius: 50%; }
+.btn.ico:hover { background: var(--surface-2); color: var(--text); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.btn .pi-sparkles { color: var(--ai); }
+.btn.pri .pi-sparkles { color: inherit; }
+.btn.aib.act { border-color: var(--ai-border); background: var(--ai-bg); }
+.pl { color: var(--primary); font-weight: 600; }
+.g12 { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+main.pushed .g12 { grid-template-columns: minmax(0, 1fr); }
+main.pushed .hrow { flex-wrap: wrap; }
+main.pushed .hmain { flex-basis: calc(100% - 80px); }
+main.pushed .hacts { width: 100%; justify-content: flex-start; padding-left: 74px; }
+.toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(20px); opacity: 0; pointer-events: none; z-index: 200; background: #0f172a; color: #f8fafc; padding: 10px 16px; border-radius: 8px; font-size: 13.5px; transition: .2s; box-shadow: var(--pop); display: flex; gap: 10px; align-items: center; }
+html.dark .toast { background: #f4f4f5; color: #18181b; }
+.toast.on { opacity: 1; transform: translateX(-50%); }
+
+/* ---------- Hasta kartı ---------- */
+.backl { display: inline-block; color: var(--primary); font-weight: 600; font-size: 13.5px; margin-bottom: 10px; }
+.hrow { display: flex; gap: 18px; align-items: flex-start; }
+.av { width: 56px; height: 56px; border-radius: 50%; background: var(--primary-50); display: grid; place-items: center; font-size: 26px; flex: none; }
+.hmain { flex: 1; min-width: 0; }
+.hmain h1 { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; }
+.idl { margin: 4px 0 0; color: var(--muted); font-size: 13.5px; }
+.own { margin: 10px 0 0; display: flex; gap: 22px; align-items: center; }
+.own .ph i { font-size: 12px; margin-right: 5px; }
+.badges { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.bdg { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; padding: 2px 9px; border-radius: 12px; }
+.bdg.red { background: var(--red-bg); color: var(--red); }
+.bdg.amber { background: var(--amber-bg); color: var(--amber); }
+.bdg.green { background: var(--green-bg); color: var(--green); }
+.bdg.gray { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+.anote { margin: 6px 0 0; font-size: 13.5px; }
+.hacts { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; }
+.aioff { display: inline-flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.aioff small { color: var(--muted); font-size: 12px; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
+.kpis dt { font-size: 12.5px; color: var(--muted); }
+.kpis dd { margin: 2px 0 0; font-weight: 600; font-size: 14px; }
+.kpis dd span { font-weight: 400; }
+.abar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.tiles > div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--surface-2); }
+.tiles dt { font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); font-weight: 600; }
+.tiles dd { margin: 4px 0 0; font-size: 13.5px; font-weight: 600; }
+.tiles dd small { font-weight: 400; color: var(--muted); }
+.todo { list-style: none; margin: 0; padding: 0; }
+.todo li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.todo li:last-child { border-bottom: 0; }
+.todo i { margin-top: 3px; color: var(--muted); }
+.todo small { display: block; color: var(--muted); font-size: 12.5px; }
+.fchips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.fchips a { font-size: 12.5px; padding: 3px 10px; border-radius: 14px; border: 1px solid var(--border); font-weight: 600; color: var(--muted); }
+.fchips a.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { display: grid; grid-template-columns: 92px 26px 1fr; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; align-items: start; }
+.tl li:last-child { border-bottom: 0; }
+.tl .d { color: var(--muted); font-size: 12.5px; }
+.tl .t { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-50); color: var(--primary); display: grid; place-items: center; font-size: 11px; }
+.tl b { font-weight: 600; }
+.tl small { display: block; color: var(--muted); }
+.dl { margin: 0; }
+.dl > div { padding: 7px 0; border-bottom: 1px solid var(--line); }
+.dl > div:last-child { border-bottom: 0; }
+.dl dt { font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); font-weight: 600; }
+.dl dd { margin: 2px 0 0; font-weight: 500; }
+
+/* ---------- AI ortak dil ---------- */
+.aic { color: var(--ai); }
+.tag-ai { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .3px; padding: 1px 8px; border-radius: 10px; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); }
+.tag-ai i { font-size: 10px; }
+.chip-ai { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 0 7px; border-radius: 9px; color: var(--ai); background: var(--ai-bg); vertical-align: 1px; margin-left: 6px; cursor: help; text-transform: none; letter-spacing: 0; }
+.chip-ai i { font-size: 9.5px; }
+.dstrip { display: grid; grid-template-columns: 18px 1fr; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--ai-border); background: var(--ai-bg); font-size: 13px; }
+.dstrip > i { color: var(--ai); margin-top: 2px; }
+.dstrip b { display: block; font-size: 13.5px; }
+.dstrip span { color: var(--muted); }
+.cov { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--muted); }
+.cov i { font-size: 11px; margin-right: 4px; }
+.cov b { color: var(--text); font-weight: 600; }
+.cnote { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+.cnote i { margin-top: 2px; font-size: 12px; }
+.cnote.warn { background: var(--amber-bg); border-color: transparent; color: var(--text); }
+.cnote.warn i { color: var(--amber); }
+.secs { display: flex; flex-direction: column; gap: 14px; }
+.sec h6 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.sec h6 .n { font-weight: 600; color: var(--faint); }
+.sec ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.sec li { padding-left: 12px; border-left: 2px solid var(--line); font-size: 13.5px; }
+.sec li .srcs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.sec.alert li { border-left-color: var(--red); }
+.sec.alert h6 { color: var(--red); }
+.src { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--primary); font-weight: 600; padding: 0 6px; border-radius: 5px; border: 1px solid var(--line); background: var(--surface); }
+.src:hover { border-color: var(--primary); }
+.src i { font-size: 10.5px; }
+.src.od { color: var(--amber); }
+.skel { display: flex; flex-direction: column; gap: 10px; }
+.skel i { display: block; height: 11px; border-radius: 6px; background: linear-gradient(90deg, var(--line), var(--surface-2), var(--line)); background-size: 200% 100%; animation: sh 1.2s infinite linear; }
+@keyframes sh { from { background-position: 200% 0; } to { background-position: 0 0; } }
+.loadh { display: flex; gap: 10px; align-items: center; font-size: 13.5px; }
+.loadh .pi-spinner { color: var(--ai); }
+.aimsg { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 6px 2px; }
+.aimsg .mi { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--muted); }
+.aimsg.warn .mi { background: var(--amber-bg); color: var(--amber); }
+.aimsg b { display: block; font-size: 14.5px; margin-top: 1px; }
+.aimsg p { margin: 3px 0 10px; color: var(--muted); font-size: 13px; }
+
+/* A · Yan panel */
+.apanel { position: fixed; top: 56px; right: 0; bottom: 0; width: 440px; background: var(--surface); border-left: 1px solid var(--border); box-shadow: var(--side); z-index: 30; display: flex; flex-direction: column; }
+.ap-h { display: flex; align-items: center; gap: 8px; padding: 14px 16px 10px; }
+.ap-h h4 { margin: 0; font-size: 16px; font-weight: 600; }
+.ap-h .btn.ico { margin-left: auto; }
+.ap-b { flex: 1; overflow-y: auto; padding: 2px 16px 16px; display: flex; flex-direction: column; gap: 12px; }
+.ap-f { display: flex; align-items: center; gap: 8px; padding: 10px 16px 12px; border-top: 1px solid var(--line); }
+.ap-f .grow { font-size: 12px; color: var(--muted); }
+
+/* B · Sayfa içi kart */
+.aicard { border: 1px dashed var(--ai-border); margin-top: 16px; }
+.aicard .ch { margin-bottom: 10px; }
+.aicard .cols { columns: 2; column-gap: 28px; }
+.aicard .cols .sec { break-inside: avoid; margin-bottom: 14px; }
+.aicard .head2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 12px; }
+
+/* C · Pencere */
+.mask { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); z-index: 40; display: grid; place-items: center; }
+.dlg { width: 920px; max-width: 95vw; height: calc(100vh - 60px); max-height: 660px; background: var(--surface); border-radius: 12px; box-shadow: var(--pop); display: flex; flex-direction: column; overflow: hidden; }
+.dlg.fit { height: auto; }
+.dlg-h { display: flex; align-items: center; gap: 10px; padding: 16px 20px 10px; }
+.dlg-h h3 { margin: 0; font-size: 17px; }
+.dlg-h .btn.ico { margin-left: auto; }
+.dlg-b { flex: 1; min-height: 0; padding: 0 20px 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.dlg-f { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 20px 14px; border-top: 1px solid var(--line); }
+.dlg-f .grow { font-size: 12.5px; color: var(--muted); }
+.split { flex: 1; min-height: 0; display: grid; grid-template-columns: 210px 1fr; gap: 18px; }
+.snav { display: flex; flex-direction: column; gap: 2px; border-right: 1px solid var(--line); padding-right: 12px; overflow-y: auto; }
+.snav a { display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 6px; font-size: 13.5px; font-weight: 500; }
+.snav a:hover { background: var(--surface-2); }
+.snav a.on { background: var(--primary-50); color: var(--primary); font-weight: 600; }
+.snav a.alert { color: var(--red); }
+.snav a span { color: var(--faint); font-weight: 500; }
+.snav .cov { flex-direction: column; margin-top: auto; padding: 10px; border-top: 1px solid var(--line); }
+.scont { overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 16px; }
+.split2 { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.split2 > div { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.colh { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.notebox { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; font-size: 14px; line-height: 1.7; background: var(--surface-2); }
+.notebox span[data-f] { border-radius: 3px; transition: background .1s; }
+.notebox span.hl { background: var(--ai-hl); box-shadow: 0 0 0 2px var(--ai-hl); }
+.srcbox { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 13px; background: var(--surface-2); }
+.srcbox b { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); margin-top: 8px; }
+.srcbox b:first-child { margin-top: 0; }
+.srcbox p { margin: 2px 0 0; }
+
+/* Taslak alanları (AI-001 / AI-003 / AI-004) */
+.dfld { display: flex; flex-direction: column; gap: 4px; }
+.dfld .dl1 { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+.dfld .dl1 .edt { display: none; font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.dfld.ed .dl1 .edt { display: inline; }
+.dfld.hl .dta { box-shadow: 0 0 0 2px var(--ai-hl); }
+.dta { width: 100%; border: 1px dashed var(--ai-border); background: var(--ai-bg); border-radius: 8px; padding: 8px 10px; resize: vertical; font-size: 13.5px; line-height: 1.5; }
+.dta:focus { outline: 2px solid var(--primary); outline-offset: -1px; border-style: solid; background: var(--surface); }
+.dfld.ed .dta { border-style: solid; border-color: var(--border); background: var(--surface); }
+.dfld.empty { flex-direction: row; justify-content: space-between; font-size: 13px; padding: 7px 10px; border: 1px dashed var(--border); border-radius: 8px; color: var(--muted); }
+.dfld.empty b { color: var(--text); font-weight: 600; }
+.vit4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.vit4 label { font-size: 11.5px; color: var(--muted); display: block; }
+.vit4 input { width: 100%; height: 32px; border: 1px dashed var(--ai-border); background: var(--ai-bg); border-radius: 6px; padding: 0 8px; }
+.cfl { font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.seg2 { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; background: var(--surface); }
+.seg2 a { padding: 1px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.seg2 a.on { background: var(--primary); color: var(--on-primary); }
+.hintl { font-size: 12.5px; color: var(--muted); display: flex; gap: 6px; align-items: flex-start; }
+.hintl i { margin-top: 2px; font-size: 12px; }
+.ta { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; background: var(--surface); resize: vertical; line-height: 1.55; }
+.ta:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+details.nt summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); }
+details.nt p { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+
+/* Muayene formu */
+.pgh { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.pgh h1 { margin: 0; font-size: 22px; font-weight: 700; }
+.pgh p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; }
+.pgh .acts { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.pstrip { display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin-bottom: 14px; }
+.pstrip .av { width: 36px; height: 36px; font-size: 18px; }
+.pstrip b { font-size: 15px; }
+.fcard { margin-bottom: 14px; }
+.fcard h5 { margin-bottom: 12px; }
+.ff { margin-bottom: 12px; }
+.ff:last-child { margin-bottom: 0; }
+.ff > label { display: flex; align-items: center; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.ff .req { color: var(--red); margin-left: 3px; }
+.ff textarea, .ff input { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; background: var(--surface); resize: vertical; line-height: 1.5; }
+.ff input { height: 36px; }
+.ff.aim textarea, .ff.aim input { border-left: 3px solid var(--ai-border); }
+.vrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.infob { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; background: var(--ai-bg); border: 1px dashed var(--ai-border); font-size: 13.5px; }
+.infob i.pi-sparkles { color: var(--ai); }
+.sug { border: 1px dashed var(--ai-border); background: var(--ai-bg); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; font-size: 13.5px; }
+.sug .sh { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--ai); margin-bottom: 4px; }
+.sug .sh .grow { }
+.sug .old { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.sug.done { display: none; }
+.stickyb { position: sticky; top: -14px; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 0 0 14px; border-radius: 10px; background: var(--surface); border: 1px dashed var(--ai-border); box-shadow: 0 4px 10px rgba(15, 23, 42, .06); font-size: 13.5px; }
+.stickyb .pi-sparkles { color: var(--ai); }
+.fsave { display: flex; gap: 8px; margin-top: 4px; }
+
+/* Muayene özeti / yatış */
+.wgrid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+main.pushed .wgrid { grid-template-columns: minmax(0, 1fr); }
+.rec .rs { margin-bottom: 12px; }
+.rec .rs h6 { margin: 0 0 2px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); font-weight: 600; display: flex; align-items: center; }
+.rec .rs p { margin: 0; white-space: pre-wrap; }
+.vits { display: flex; gap: 18px; flex-wrap: wrap; }
+.vits span small { color: var(--muted); margin-right: 4px; }
+.okl { display: flex; gap: 8px; align-items: center; color: var(--green); font-weight: 600; font-size: 13.5px; }
+.saved { white-space: pre-wrap; font-size: 13.5px; margin: 0; }
+.meta { font-size: 12.5px; color: var(--muted); margin-top: 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.irow { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.irow:last-child { border-bottom: 0; }
+.irow.draft-row { border: 1px dashed var(--ai-border); background: var(--ai-bg); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+.nlist { list-style: none; margin: 0; padding: 0; }
+.nlist li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.nlist li:last-child { border-bottom: 0; }
+.nlist small { display: block; color: var(--muted); font-size: 12px; }
+.emptyt { color: var(--muted); font-size: 13.5px; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo"><i class="pi pi-bars"></i><span>Veti<b>nity</b></span></div>
+  <div class="search"><i class="pi pi-search"></i> Ara (Ctrl+K)</div>
+  <span class="clinic">Merkez Klinik</span>
+  <i class="pi pi-bell ic"></i><i class="pi pi-moon ic" data-act="dark" style="cursor:pointer"></i><i class="pi pi-user ic"></i>
+</div>
+<div class="shell">
+  <nav class="side">
+    <h6>GÜNLÜK İŞ</h6>
+    <a data-nav="today"><i class="pi pi-calendar"></i>Bugün</a>
+    <a><i class="pi pi-calendar-plus"></i>Randevular</a>
+    <h6>MÜŞTERİ VE HASTA</h6>
+    <a data-nav="pets"><i class="pi pi-users"></i>Müşteri ve Hasta</a>
+    <h6>KLİNİK</h6>
+    <a data-nav="records"><i class="pi pi-book"></i>Kayıtlar</a>
+    <h6>YÖNETİM</h6>
+    <a><i class="pi pi-chart-line"></i>Raporlar</a>
+    <a><i class="pi pi-cog"></i>Ayarlar</a>
+  </nav>
+  <main id="main"></main>
+</div>
+<div id="overlay"></div>
+<div class="toast" id="toast"></div>
+<!-- Taslak paneli: ürünün parçası değil -->
+<div class="draft" id="draft"></div>
+
+<script>
+/* ================= Durum ================= */
+const SECS = {
+  G: { name: 'Geçmiş özeti', code: 'AI-002', scns: [['once', 'Başlangıç'], ['yuk', 'Yükleniyor'], ['sonuc', 'Özet'], ['kisitli', 'Eksik kapsam'], ['kota80', 'Kota %84'], ['bos', 'Kayıt yok'], ['sik', 'Çok sık'], ['hata', 'Hizmet hatası'], ['kota', 'Kota doldu'], ['kapali', 'Kapalı']] },
+  M: { name: 'Muayene notu', code: 'AI-001', scns: [['yaz', 'Not'], ['yuk', 'Yükleniyor'], ['taslak', 'Taslak'], ['aktarildi', 'Aktarıldı'], ['iz', 'Kayıtta iz']] },
+  S: { name: 'Sahibe açıklama', code: 'AI-003', scns: [['once', 'Başlangıç'], ['taslak', 'Taslak'], ['iz', 'Kaydedildi']] },
+  T: { name: 'Taburcu talimatı', code: 'AI-004', scns: [['once', 'Başlangıç'], ['taslak', 'Taslak'], ['iz', 'Kaydedildi']] }
+};
+const OPTS = { A: 'Yan panel', B: 'Sayfa içi', C: 'Pencere' };
+const START = { G: 'once', M: 'yaz', S: 'once', T: 'once' };
+const S = { sec: 'G', opt: 'A', scn: 'sonuc', dark: false, merge: 'append', mB: {}, cnav: 'Alerts', mhl: 'findings' };
+
+/* ================= Veri (uydurma) ================= */
+const TYPE = {
+  Pet: ['Hasta kartı', 'pi-id-card'], Examination: ['Muayene', 'pi-file-edit'], Prescription: ['Reçete', 'pi-file'],
+  LabResult: ['Laboratuvar', 'pi-chart-bar'], Vaccination: ['Aşı', 'pi-shield'], Treatment: ['Tedavi', 'pi-wrench'], Hospitalization: ['Yatış', 'pi-building']
+};
+const SUM = [
+  { k: 'Alerts', t: 'Uyarılar', items: [
+    ['Penisilin grubuna alerji kayıtlı: 2025\'te amoksisilin sonrası ürtiker.', [['Pet']]],
+    ['Kulak muayenesinde huzursuzlanıyor; hasta kartında uyarı olarak işaretli.', [['Pet']]] ] },
+  { k: 'ActiveIssues', t: 'Süren sorunlar', items: [
+    ['Hipotiroidi: Mart\'tan beri levotiroksin kullanıyor; Eylül kontrolünde T4 referans aralığında.', [['Examination', '2 Mar'], ['LabResult', '14 Eyl']]],
+    ['Sağ kulakta tekrarlayan dış kulak iltihabı; Haziran ve Kasım\'da iki atak kayıtlı.', [['Examination', '18 Haz'], ['Examination', '10 Kas']]] ] },
+  { k: 'RecentVisits', t: 'Son muayeneler', items: [
+    ['10 Kas: sağ kulakta kaşıntı ve kahverengi akıntı; otitis externa değerlendirilmiş, kulak temizliği ve damla planlanmış.', [['Examination', '10 Kas']]],
+    ['14 Eyl: hipotiroidi kontrolü; kilo 32,1 kg\'dan 31,4 kg\'a inmiş, genel durum iyi.', [['Examination', '14 Eyl']]],
+    ['18 Haz: kulak kaşıntısı; sitoloji Malassezia ile uyumlu bulunmuş.', [['Examination', '18 Haz'], ['LabResult', '18 Haz']]] ] },
+  { k: 'Medications', t: 'İlaçlar', items: [
+    ['Levotiroksin 0,8 mg, günde 2 kez (14 Eyl reçetesi).', [['Prescription', '14 Eyl']]],
+    ['Kulak damlası (mikonazol, polimiksin B, prednizolon), günde 2 kez, 10 gün (10 Kas reçetesi).', [['Prescription', '10 Kas']]] ] },
+  { k: 'Vaccinations', t: 'Aşılar', items: [
+    ['Kuduz aşısı 3 Mar 2026\'da yapılmış.', [['Vaccination', '3 Mar']]],
+    ['Karma aşı tekrarı 28 Kas için planlı.', [['Vaccination', '28 Kas']]],
+    ['İç-dış parazit uygulaması 1 Kas\'ta yapılmalıydı; gecikmiş görünüyor.', [['Vaccination', '1 Kas', 'od']]] ] },
+  { k: 'LabResults', t: 'Laboratuvar', items: [
+    ['14 Eyl total T4: 2,6 µg/dL (referans aralığında).', [['LabResult', '14 Eyl']]],
+    ['18 Haz kulak sitolojisi: yoğun Malassezia pachydermatis.', [['LabResult', '18 Haz']]] ] },
+  { k: 'FollowUps', t: 'Takipler', items: [
+    ['Kulak kontrolü 24 Kas\'a planlanmış.', [['Treatment', '10 Kas']]],
+    ['T4 ölçümünün Mart 2027\'de tekrarlanması planlanmış.', [['Examination', '14 Eyl']]] ] }
+];
+
+const LBL = { visitReason: 'Ziyaret sebebi / şikâyet', anamnesis: 'Anamnez', findings: 'Klinik bulgular', vitals: 'Vital değerler', assessment: 'Değerlendirme / tanı', plan: 'Plan / tedavi planı', notes: 'Ek notlar' };
+const KEYS = ['visitReason', 'anamnesis', 'findings', 'vitals', 'assessment', 'plan'];
+const D = {
+  visitReason: '2 gündür sağ kulakta kaşıntı ve baş sallama.',
+  anamnesis: 'Sahip kulakta kötü koku fark etmiş. İştah normal. Levotiroksin düzenli veriliyor. Önceki sitolojide Malassezia saptanmış.',
+  findings: 'Sağ kulak kanalı eritemli, kahverengi akıntı mevcut. Sol kulak temiz.',
+  vitals: { w: '31,4', t: '38,6', h: '96', r: '24' },
+  assessment: 'Sağ otitis externa; Malassezia nüksü olası.',
+  plan: 'Kulak sitolojisi alındı. Kulak temizliği yapıldı. Kulak damlası günde 2 kez, 10 gün. 10 gün sonra kontrol.'
+};
+const FORM0 = { visitReason: 'Kulak kaşıntısı' };
+const NOTE = [
+  ['Karamel 2 gündür sağ kulağını kaşıyor, başını sallıyor.', 'visitReason'],
+  ['Sahibi kulakta kötü koku fark etmiş.', 'anamnesis'],
+  ['İştah normal, levotiroksini düzenli veriyor.', 'anamnesis'],
+  ['Muayenede sağ kulak kanalı eritemli, kahverengi akıntı var, sol kulak temiz.', 'findings'],
+  ['Ateş 38,6, nabız 96, solunum 24, kilo 31,4.', 'vitals'],
+  ['Önceki sitolojide malassezia vardı.', 'anamnesis'],
+  ['Değerlendirme: sağ otitis externa, muhtemelen malassezia nüksü.', 'assessment'],
+  ['Plan: sitoloji alındı, kulak temizliği yapıldı, kulak damlası günde 2 kez 10 gün, 10 gün sonra kontrol.', 'plan']
+];
+const NOTE_TEXT = NOTE.map(n => n[0]).join(' ');
+
+const TXT = {
+  S: {
+    title: 'Hasta sahibine açıklama',
+    btn: 'Taslak hazırla',
+    empty: 'Bu muayeneden hasta sahibinin anlayacağı dilde bir açıklama taslağı hazırlanır. Siz okuyup düzenler, sonra kaydedersiniz.',
+    srcLine: 'Kaynak: bu muayenenin değerlendirme ve plan alanları, 10 Kas reçetesi',
+    src: [['Değerlendirme / tanı', D.assessment], ['Plan / tedavi planı', D.plan], ['Reçete 10 Kas', 'Kulak damlası (mikonazol, polimiksin B, prednizolon), günde 2 kez, 10 gün']],
+    draft: 'Karamel\'in sağ kulağında dış kulak yolu iltihabı (otitis externa) var. Kulakta doğal olarak bulunan bir maya mantarının çoğalmasıyla ilişkili görünüyor; Karamel\'de haziran ayında da görülmüştü.\n\nBugün kulağını temizledik ve incelemek için örnek aldık.\n\nEvde:\n• Kulak damlasını günde 2 kez, 10 gün boyunca sağ kulağa damlatın.\n• Tiroit ilacına her zamanki gibi devam edin.\n\n10 gün sonra (29 Kas) kontrole bekliyoruz. Sorunuz olursa kliniği arayabilirsiniz.',
+    saved: 'Açıklama kaydedildi.'
+  },
+  T: {
+    title: 'Bakım talimatı taslağı',
+    btn: 'Taslak hazırla',
+    empty: '',
+    srcLine: 'Kaynak: yatış notları (17–19 Kas), 19 Kas reçetesi, 22 Kas kontrol randevusu',
+    src: [['Yatış notu 19 Kas 08:30', 'Kusma yok, 24 saattir sıvı alıyor. Az ve sık beslemeye geçilecek. Taburcu sonrası kusma tekrarlar ya da 24 saat yemezse başvuru.'], ['Reçete 19 Kas', 'Maropitant 8 mg tablet, günde 1, 3 gün'], ['Randevu', 'Kontrol 22 Kas 11:00']],
+    draft: 'Duman için evde bakım\n\n• İlk gün az ve sık besleyin: akşam bir yemek kaşığı ıslak mama verin. Kusma olmazsa ertesi gün 3–4 öğüne bölerek normal miktara çıkın.\n• Kusma önleyici tablet (maropitant 8 mg): günde 1 kez, 3 gün.\n• Temiz suyu her zaman açık tutun.\n• Kontrol: 22 Kas Pazar 11:00.\n\nHemen arayın: kusma yeniden başlarsa ya da 24 saat hiç yemezse.',
+    saved: 'Bakım talimatı kaydedildi.'
+  }
+};
+
+/* ================= Yardımcılar ================= */
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const src = s => { const [l, ic] = TYPE[s[0]]; const txt = s[1] ? `${l} · ${s[1]}` : l; return `<a class="src ${s[2] === 'od' ? 'od' : ''}" data-src="${txt}" title="Kaydı aç: ${txt}"><i class="pi ${ic}"></i>${txt}</a>`; };
+const tagAi = (t = 'Taslak') => `<span class="tag-ai"><i class="pi pi-sparkles"></i>${t}</span>`;
+const chipAi = (edited, who = 'Dr. Ayşe Kaya 19 Kas 14:36') => `<span class="chip-ai" title="AI taslağından alındı; ${who}'da kabul etti.${edited ? ' Kabulden önce düzenlendi.' : ''}"><i class="pi pi-sparkles"></i>AI taslağından${edited ? ' · düzenlendi' : ''}</span>`;
+const strip = (title, text) => `<div class="dstrip"><i class="pi pi-sparkles"></i><div><b>${title}</b><span>${text}</span></div></div>`;
+const loading = (t) => `<div class="loadh"><i class="pi pi-spin pi-spinner"></i><span>${t}<br><span class="muted" style="font-size:12.5px">Genellikle birkaç saniye sürer. Bu sırada sayfada çalışmaya devam edebilirsiniz.</span></span></div><div class="skel"><i style="width:40%"></i><i style="width:92%"></i><i style="width:80%"></i><i style="width:30%;margin-top:8px"></i><i style="width:88%"></i><i style="width:70%"></i><i style="width:84%"></i></div>`;
+const msg = (ic, t, p, act = '', warn = false) => `<div class="aimsg ${warn ? 'warn' : ''}"><span class="mi"><i class="pi ${ic}"></i></span><div><b>${t}</b><p>${p}</p>${act}</div></div>`;
+const kotaNote = () => `<div class="cnote warn"><i class="pi pi-chart-pie"></i><span>Kliniğin bu ayki AI kullanımı <b>%84</b>. Sınır dolunca yalnız AI özellikleri durur; diğer işler etkilenmez.</span></div>`;
+
+/* ================= G · Hasta geçmişi özeti ================= */
+const gOpen = () => ['yuk', 'sonuc', 'kisitli', 'kota80', 'bos', 'sik', 'hata'].includes(S.scn);
+// Eksik kapsam: laboratuvar okunmadığı için ne bölümü ne de kaynağı görünür.
+function gSections() {
+  if (S.scn !== 'kisitli') return SUM;
+  return SUM.filter(s => s.k !== 'LabResults').map(s => ({ ...s, items: s.items.map(it => [it[0].replace('; Eylül kontrolünde T4 referans aralığında', ''), it[1].filter(x => x[0] !== 'LabResult')]).filter(it => it[1].length) }));
+}
+function gCoverage(stack) {
+  const k = S.scn === 'kisitli';
+  return `<div class="cov" ${stack ? '' : ''}><span><i class="pi pi-calendar"></i><b>${k ? '11 Ağu 2025' : '2 Mar 2026'} – 10 Kas 2026</b></span><span><b>${k ? '27' : '14'} kayıt:</b> ${k ? '10 muayene · 8 reçete · 9 aşı' : '5 muayene · 3 reçete · 4 aşı · 2 laboratuvar'}</span><span>Hazırlandı 14:32</span></div>`;
+}
+function gNotes() {
+  if (S.scn !== 'kisitli') return '';
+  return `<div class="cnote"><i class="pi pi-lock"></i><span>Görme yetkiniz olmadığı için <b>laboratuvar</b> kayıtları özete girmedi.</span></div>
+  <div class="cnote"><i class="pi pi-history"></i><span>Geçmiş uzun olduğu için en eski kayıtlar özete sığmadı; özet 11 Ağu 2025'ten başlıyor.</span></div>
+  <div class="cnote"><i class="pi pi-filter-slash"></i><span>Kaynağı doğrulanamayan 1 madde özetten çıkarıldı.</span></div>`;
+}
+function secHtml(s) {
+  return `<div class="sec ${s.k === 'Alerts' ? 'alert' : ''}" id="sec-${s.k}"><h6>${s.k === 'Alerts' ? '<i class="pi pi-exclamation-triangle"></i>' : ''}${s.t} <span class="n">${s.items.length}</span></h6><ul>${s.items.map(it => `<li>${esc(it[0])}<div class="srcs">${it[1].map(src).join('')}</div></li>`).join('')}</ul></div>`;
+}
+const stripG = () => strip('Taslak — kontrol edin', 'Yalnız bu klinikteki kayıtlardan hazırlandı ve kaydedilmez. Tanı ya da tedavi önermez; her maddenin kaynağını açıp doğrulayın.');
+function gState(v) {
+  switch (S.scn) {
+    case 'yuk': return loading('Karamel\'in kayıtları okunuyor ve özetleniyor…');
+    case 'bos': return msg('pi-inbox', 'Özetlenecek klinik kayıt yok', 'Bu klinikte Karamel için muayene, tedavi, reçete, aşı, laboratuvar ya da yatış kaydı bulunmuyor. Hasta kartındaki bilgiler tek başına özetlenmez; kota da harcanmadı.');
+    case 'sik': return msg('pi-clock', 'Kısa sürede çok fazla istek gönderildi', 'Bir dakika içinde yeniden deneyebilirsiniz. Hasta kartı ve kayıtlar etkilenmedi.', `<button class="btn sm" disabled><i class="pi pi-refresh"></i>Yeniden dene · <span class="tnum">0:42</span></button>`, true);
+    case 'hata': return msg('pi-exclamation-circle', 'Özet şu an hazırlanamadı', 'Yapay zekâ hizmetine ulaşılamadı. Hasta kartı ve kayıtlar etkilenmedi; birazdan yeniden deneyebilirsiniz.', `<button class="btn sm" data-act="g-start"><i class="pi pi-refresh"></i>Tekrar dene</button>`, true);
+  }
+  return null;
+}
+function gSummary(v) {
+  const st = gState(v); if (st) return st;
+  const secs = gSections();
+  if (v === 'B') return `<div class="head2">${gCoverage()}</div><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">${stripG()}${gNotes()}${S.scn === 'kota80' ? kotaNote() : ''}</div><div class="cols">${secs.map(secHtml).join('')}</div>`;
+  if (v === 'C') return `<div class="split"><nav class="snav">${secs.map(s => `<a data-cnav="${s.k}" class="${s.k === 'Alerts' ? 'alert ' : ''}${S.cnav === s.k ? 'on' : ''}">${s.t}<span>${s.items.length}</span></a>`).join('')}<div class="cov">${gCoverage().replace(/^<div class="cov"[^>]*>|<\/div>$/g, '')}</div></nav><div class="scont" id="scont">${stripG()}${gNotes()}${S.scn === 'kota80' ? kotaNote() : ''}${secs.map(secHtml).join('')}</div></div>`;
+  return `${stripG()}${gCoverage()}${gNotes()}<div class="secs">${secs.map(secHtml).join('')}</div>${S.scn === 'kota80' ? kotaNote() : ''}`;
+}
+function gBtn(small) {
+  if (S.scn === 'kapali') return '';
+  if (S.scn === 'kota') return `<span class="aioff"><button class="btn ${small ? 'sm' : ''}" disabled title="Bu ayın AI kotası doldu"><i class="pi pi-sparkles"></i>Geçmişi özetle</button><small>Bu ayın AI kotası doldu · 1 Aralık'ta yenilenir</small></span>`;
+  return `<button class="btn aib ${small ? 'sm' : ''} ${gOpen() ? 'act' : ''}" data-act="g-start"><i class="pi pi-sparkles"></i>Geçmişi özetle</button>`;
+}
+const gResultReady = () => ['sonuc', 'kisitli', 'kota80'].includes(S.scn);
+function gFootBtns() {
+  return gResultReady() ? `<button class="btn sm" data-act="copy"><i class="pi pi-copy"></i>Kopyala</button><button class="btn sm" data-act="g-start"><i class="pi pi-refresh"></i>Yeniden özetle</button>` : (S.scn === 'yuk' ? `<button class="btn sm" data-act="g-close">Vazgeç</button>` : '');
+}
+
+function petPage() {
+  const o = S.opt;
+  return `
+  <a class="backl">← Hasta listesine dön</a>
+  <section class="card">
+    <div class="hrow">
+      <div class="av">🐕</div>
+      <div class="hmain">
+        <h1>Karamel</h1>
+        <p class="idl">Köpek · Golden Retriever · Erkek (kısır) · 9 yaş · 31,4 kg · Çip ••• 4417</p>
+        <p class="own"><span><span class="muted">Müşteri:</span> <a class="pl">Selin Aydın</a></span><a class="pl ph tnum"><i class="pi pi-phone"></i>0532 418 •• ••</a></p>
+        <div class="badges"><span class="bdg red"><i class="pi pi-exclamation-triangle"></i>Alerji</span><span class="bdg red">Muayenede huzursuz</span></div>
+        <p class="anote">Penisilin grubuna alerji (2025, amoksisilin sonrası ürtiker).</p>
+      </div>
+      <div class="hacts">${o !== 'B' ? gBtn() : ''}<button class="btn txt"><i class="pi pi-minus-circle"></i>Vefat olarak işaretle</button><button class="btn"><i class="pi pi-pencil"></i>Düzenle</button></div>
+    </div>
+    <dl class="kpis"><div><dt>Açık borç</dt><dd class="tnum">₺0,00</dd></div><div><dt>Son geliş</dt><dd>10 Kas 2026 11:30 <span class="muted">· Tamamlandı</span></dd></div><div><dt>Sonraki randevu</dt><dd>24 Kas 2026 10:00 <span class="muted">· Kulak kontrolü</span></dd></div></dl>
+  </section>
+  <div class="abar"><button class="btn sm"><i class="pi pi-calendar-plus"></i>Randevu ver</button><button class="btn sm"><i class="pi pi-sign-in"></i>Geliş aç</button><button class="btn sm"><i class="pi pi-file-edit"></i>Muayene aç</button><button class="btn sm"><i class="pi pi-shield"></i>Aşı ekle</button><button class="btn sm"><i class="pi pi-wallet"></i>Ödeme al</button><button class="btn sm"><i class="pi pi-ellipsis-h"></i>Diğer</button></div>
+  ${o === 'B' && gOpen() ? gCardB() : ''}
+  <div class="g12">
+    <section class="card"><div class="ch"><h5>Klinik özet</h5><span class="grow"></span>${o === 'B' && !gOpen() ? gBtn(true) : ''}</div>
+      <dl class="tiles">
+        <div><dt>Son kilo</dt><dd>31,4 kg <small>· 10 Kas</small></dd></div>
+        <div><dt>Vital (son muayene)</dt><dd class="tnum">38,6 °C · 96/dk · 24/dk</dd></div>
+        <div><dt>Son tanı / değerlendirme</dt><dd>Sağ otitis externa; Malassezia nüksü olası</dd></div>
+        <div><dt>Takipli tedavi</dt><dd>Kulak kontrolü <small>· 24 Kas</small></dd></div>
+        <div><dt>Aşılar</dt><dd>Karma aşı <small>· 28 Kas planlı</small></dd></div>
+        <div><dt>Son muayene</dt><dd>10 Kas <small>· Kulak kaşıntısı</small></dd></div>
+      </dl></section>
+    <section class="card"><div class="ch"><h5>Yapılacaklar</h5></div><ul class="todo">
+      <li><i class="pi pi-exclamation-circle" style="color:var(--amber)"></i><div>İç-dış parazit uygulaması<small>1 Kas'ta yapılmalıydı · gecikti</small></div></li>
+      <li><i class="pi pi-calendar"></i><div>Kulak kontrolü<small>24 Kas 10:00 · randevu</small></div></li>
+      <li><i class="pi pi-shield"></i><div>Karma aşı tekrarı<small>28 Kas · planlı</small></div></li></ul></section>
+  </div>
+  <div class="g12">
+    <section class="card"><div class="ch"><h5>Zaman çizelgesi</h5></div>
+      <div class="fchips"><a class="on">Tümü</a><a>Muayene</a><a>Aşı</a><a>Reçete</a><a>Laboratuvar</a><a>Yatış</a></div>
+      <ul class="tl">
+        <li><span class="d">10 Kas 2026</span><span class="t"><i class="pi pi-file-edit"></i></span><div><b>Muayene</b> · Kulak kaşıntısı<small>Sağ otitis externa; Malassezia nüksü olası</small></div></li>
+        <li><span class="d">10 Kas 2026</span><span class="t"><i class="pi pi-file"></i></span><div><b>Reçete</b> · Kulak damlası<small>Günde 2 kez, 10 gün</small></div></li>
+        <li><span class="d">14 Eyl 2026</span><span class="t"><i class="pi pi-chart-bar"></i></span><div><b>Laboratuvar</b> · Total T4<small>2,6 µg/dL · referans aralığında</small></div></li>
+        <li><span class="d">14 Eyl 2026</span><span class="t"><i class="pi pi-file-edit"></i></span><div><b>Muayene</b> · Hipotiroidi kontrolü<small>Genel durum iyi</small></div></li>
+        <li><span class="d">18 Haz 2026</span><span class="t"><i class="pi pi-file-edit"></i></span><div><b>Muayene</b> · Kulak kaşıntısı<small>Sitoloji: Malassezia</small></div></li>
+      </ul></section>
+    <section class="card"><div class="ch"><h5>Kayıt bilgileri</h5></div><dl class="dl">
+      <div><dt>Tür</dt><dd>Köpek</dd></div><div><dt>Irk</dt><dd>Golden Retriever</dd></div><div><dt>Doğum tarihi</dt><dd>4 Nis 2017</dd></div><div><dt>Renk</dt><dd>Sarı</dd></div><div><dt>Kısırlaştırma</dt><dd>Evet</dd></div></dl></section>
+  </div>`;
+}
+function gCardB() {
+  return `<section class="card aicard"><div class="ch"><i class="pi pi-sparkles aic"></i><h5>Geçmiş özeti</h5>${tagAi()}<span class="grow"></span>${gFootBtns()}<button class="btn ico" data-act="g-close" title="Kapat"><i class="pi pi-times"></i></button></div>${gSummary('B')}</section>`;
+}
+function gOverlay() {
+  if (!gOpen()) return '';
+  if (S.opt === 'A') return panel('Geçmiş özeti', gSummary('A'), `<span class="grow">Özet kayda geçmez.</span>${gFootBtns()}`);
+  if (S.opt === 'C') {
+    const body = gResultReady() ? gSummary('C') : `<div style="max-width:560px;margin:30px auto;width:100%">${gSummary('C')}</div>`;
+    return modal('Geçmiş özeti · Karamel', body, `<span class="grow">Özet kayda geçmez. Kaynak bağlantıları yeni sekmede açılır.</span>${gFootBtns()}<button class="btn sm" data-act="g-close">Kapat</button>`);
+  }
+  return '';
+}
+
+/* ================= Kaplar ================= */
+function panel(title, body, foot) {
+  return `<aside class="apanel" aria-label="${title}"><div class="ap-h"><i class="pi pi-sparkles aic"></i><h4>${title}</h4>${tagAi()}<button class="btn ico" data-act="close" title="Kapat"><i class="pi pi-times"></i></button></div><div class="ap-b">${body}</div>${foot ? `<div class="ap-f">${foot}</div>` : ''}</aside>`;
+}
+function modal(title, body, foot, cls = '') {
+  return `<div class="mask"><div class="dlg ${cls}" role="dialog"><div class="dlg-h"><i class="pi pi-sparkles aic"></i><h3>${title}</h3>${tagAi()}<button class="btn ico" data-act="close" title="Kapat"><i class="pi pi-times"></i></button></div><div class="dlg-b">${body}</div><div class="dlg-f">${foot}</div></div></div>`;
+}
+
+/* ================= M · Muayene notu (AI-001) ================= */
+const merged = () => S.merge === 'append' ? FORM0.visitReason + '\n' + D.visitReason : D.visitReason;
+function mDraftField(k, opt) {
+  if (k === 'vitals') return `<div class="dfld" data-f="vitals"><div class="dl1">${LBL.vitals}<span class="edt">· düzenlendi</span></div><div class="vit4"><div><label>Kilo (kg)</label><input value="${D.vitals.w}"></div><div><label>Sıcaklık (°C)</label><input value="${D.vitals.t}"></div><div><label>Nabız</label><input value="${D.vitals.h}"></div><div><label>Solunum</label><input value="${D.vitals.r}"></div></div></div>`;
+  const cfl = k === 'visitReason' ? `<div class="cfl">Formda yazılı: “${FORM0.visitReason}” <span class="seg2"><a data-merge="append" class="${S.merge === 'append' ? 'on' : ''}">Sona ekle</a><a data-merge="replace" class="${S.merge === 'replace' ? 'on' : ''}">Yerine yaz</a></span></div>` : '';
+  const rows = k === 'visitReason' || k === 'findings' || k === 'assessment' ? 2 : 3;
+  return `<div class="dfld ${S.opt === 'C' && S.mhl === k ? 'hl' : ''}" data-f="${k}"><div class="dl1">${LBL[k]}<span class="edt">· düzenlendi</span></div>${cfl}<textarea class="dta" rows="${rows}" data-k="${k}">${esc(D[k])}</textarea></div>`;
+}
+const mNotesEmpty = () => `<div class="dfld empty"><b>${LBL.notes}</b><span>Notta karşılığı yok · boş kalır</span></div>`;
+const stripM = () => strip('Taslak — kontrol edin', 'Yalnız notunuzda yazanı alanlara taşır; bilgi eklemez, tanı ya da doz önermez. Formdaki metniniz siz seçmeden silinmez.');
+function mPanelA() {
+  if (S.scn === 'yaz') return panel('Notu alanlara ayır', `<div class="hintl"><i class="pi pi-info-circle"></i><span>Muayene notunu tek parça yazın ya da yapıştırın. Şikâyet, anamnez, bulgu, vital, değerlendirme ve plan alanlarına ayrılmış bir taslak hazırlanır; forma siz aktarırsınız.</span></div><textarea class="ta" rows="12">${NOTE_TEXT}</textarea>`, `<span class="grow">Not kaydedilmez; yalnız aktardığınız alanlar.</span><button class="btn sm pri" data-act="m-split"><i class="pi pi-sparkles"></i>Alanlara ayır</button>`);
+  if (S.scn === 'yuk') return panel('Notu alanlara ayır', loading('Not alanlara ayrılıyor…'), `<span class="grow"></span><button class="btn sm" data-act="m-discard">Vazgeç</button>`);
+  if (S.scn === 'taslak') return panel('Notu alanlara ayır', `${stripM()}<details class="nt"><summary>Serbest not</summary><p>${NOTE_TEXT}</p></details>${KEYS.map(k => mDraftField(k)).join('')}${mNotesEmpty()}`, `<button class="btn sm txt" data-act="m-discard"><i class="pi pi-trash"></i>At</button><span class="grow"></span><button class="btn sm pri" data-act="m-accept"><i class="pi pi-check"></i>Kabul et ve forma aktar</button>`);
+  return '';
+}
+function mModalC() {
+  const right = S.scn === 'taslak' ? `<div class="colh"><i class="pi pi-sparkles aic"></i>Alanlar · taslak</div>${KEYS.map(k => mDraftField(k)).join('')}${mNotesEmpty()}`
+    : S.scn === 'yuk' ? `<div class="colh">Alanlar</div>${loading('Not alanlara ayrılıyor…')}`
+    : `<div class="colh">Alanlar</div><div class="cnote"><i class="pi pi-arrow-left"></i><span>Notu yazıp “Alanlara ayır”a basınca şikâyet, anamnez, bulgu, vital, değerlendirme ve plan burada ayrı ayrı görünür.</span></div>`;
+  const left = S.scn === 'taslak'
+    ? `<div class="colh">Serbest not <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">· alanın üstüne gelince kaynağı vurgulanır</span></div><div class="notebox">${NOTE.map(n => `<span data-f="${n[1]}" class="${n[1] === S.mhl ? 'hl' : ''}">${n[0]}</span>`).join(' ')}</div>${stripM()}`
+    : `<div class="colh">Serbest not</div><textarea class="ta" rows="14">${NOTE_TEXT}</textarea><div class="hintl"><i class="pi pi-info-circle"></i><span>Not kaydedilmez; yalnız forma aktardığınız alanlar muayeneyle kaydedilir.</span></div>`;
+  const foot = S.scn === 'taslak'
+    ? `<button class="btn sm txt" data-act="m-discard"><i class="pi pi-trash"></i>At</button><span class="grow"></span><button class="btn sm" data-act="m-discard">Vazgeç</button><button class="btn sm pri" data-act="m-accept"><i class="pi pi-check"></i>Kabul et ve forma aktar</button>`
+    : `<span class="grow"></span><button class="btn sm" data-act="m-close">Vazgeç</button><button class="btn sm pri" data-act="m-split" ${S.scn === 'yuk' ? 'disabled' : ''}><i class="pi pi-sparkles"></i>Alanlara ayır</button>`;
+  return modal('Notu alanlara ayır', `<div class="split2"><div>${left}</div><div>${right}</div></div>`, foot);
+}
+function ff(k, rows, val, mark, sugHtml = '', req = false) {
+  return `<div class="ff ${mark ? 'aim' : ''}"><label>${LBL[k]}${req ? '<span class="req">*</span>' : ''}${mark ? chipAi(k === 'plan') : ''}</label>${sugHtml}<textarea rows="${rows}">${esc(val || '')}</textarea></div>`;
+}
+function sugB(k) {
+  if (S.opt !== 'B' || S.scn !== 'taslak' || S.mB[k]) return '';
+  const val = k === 'vitals' ? `Kilo ${D.vitals.w} kg · Sıcaklık ${D.vitals.t} °C · Nabız ${D.vitals.h} · Solunum ${D.vitals.r}` : esc(D[k]);
+  const old = k === 'visitReason' ? `<div class="old">Formda yazılı: “${FORM0.visitReason}”</div>` : '';
+  const acts = k === 'visitReason'
+    ? `<button class="btn xs" data-fk="${k}:append"><i class="pi pi-plus"></i>Sona ekle</button><button class="btn xs" data-fk="${k}:replace">Yerine yaz</button>`
+    : `<button class="btn xs" data-fk="${k}:ok"><i class="pi pi-check"></i>Kabul</button>`;
+  return `<div class="sug"><div class="sh"><i class="pi pi-sparkles"></i>Önerilen<span class="grow"></span>${acts}<button class="btn xs txt" data-fk="${k}:no" title="Bu öneriyi at"><i class="pi pi-times"></i></button></div>${val}${old}</div>`;
+}
+function examForm() {
+  const o = S.opt, sc = S.scn;
+  const all = sc === 'aktarildi';
+  const acc = k => all || (o === 'B' && S.mB[k] && S.mB[k] !== 'no');
+  const val = k => {
+    if (!acc(k)) return k === 'visitReason' ? FORM0.visitReason : '';
+    if (k === 'visitReason') { const m = o === 'B' && !all ? S.mB[k] : S.merge; return m === 'replace' ? D.visitReason : FORM0.visitReason + '\n' + D.visitReason; }
+    return D[k];
+  };
+  const pending = KEYS.filter(k => !S.mB[k]).length;
+  const accCount = KEYS.filter(k => S.mB[k] && S.mB[k] !== 'no').length;
+  let top = '';
+  if (o === 'B' && (sc === 'yaz' || sc === 'yuk')) top = `<section class="card fcard" style="border:1px dashed var(--ai-border)"><div class="ch"><i class="pi pi-sparkles aic"></i><h5 style="margin:0">Serbest not</h5><span class="muted" style="font-size:13px">· isteğe bağlı</span></div>${sc === 'yuk' ? loading('Not alanlara ayrılıyor…') : `<textarea class="ta" rows="4">${NOTE_TEXT}</textarea><div style="display:flex;align-items:center;gap:10px;margin-top:10px"><span class="hintl grow"><i class="pi pi-info-circle"></i><span>Not kaydedilmez. Aşağıdaki alanlara öneri olarak dağıtılır; her birini siz kabul edersiniz.</span></span><button class="btn sm pri" data-act="m-split"><i class="pi pi-sparkles"></i>Alanlara ayır</button></div>`}</section>`;
+  if (o === 'B' && sc === 'taslak') top = `<div class="stickyb"><i class="pi pi-sparkles"></i><span><b>Serbest nottan ${KEYS.length} alan önerildi</b> <span class="muted">· ${accCount} kabul · ${pending} bekliyor · Ek notlar için notta karşılık yok</span></span><span class="grow"></span><button class="btn sm txt" data-act="m-discard">Tümünü at</button><button class="btn sm pri" data-act="m-accept"><i class="pi pi-check-square"></i>Kalanları kabul et</button></div>`;
+  if (all) top = `<div class="infob"><i class="pi pi-sparkles"></i><span><b>6 alan AI taslağından dolduruldu.</b> <span class="muted">Kaydetmeden önce kontrol edin. Kaydedince alanlarda “AI taslağından” izi kalır.</span></span><span class="grow"></span><a class="pl" data-act="m-undo">Geri al</a></div>`;
+  const hdrBtn = o !== 'B' ? `<button class="btn aib ${(o === 'A' && ['yaz', 'yuk', 'taslak'].includes(sc)) || (o === 'C' && sc !== 'aktarildi') ? 'act' : ''}" data-act="m-open"><i class="pi pi-sparkles"></i>Notu alanlara ayır</button>` : '';
+  const vm = acc('vitals');
+  return `
+  <div class="pgh"><div><h1>Yeni Muayene</h1><p>Muayene kaydı oluşturun.</p></div><div class="acts">${hdrBtn}</div></div>
+  <section class="card pstrip"><div class="av">🐕</div><div><b>Karamel</b> <span class="muted">· Köpek · Golden Retriever · 9 yaş</span><div class="muted" style="font-size:13px">Selin Aydın · Geliş 19 Kas 14:10</div></div><span class="grow"></span><span class="bdg red"><i class="pi pi-exclamation-triangle"></i>Alerji: penisilin</span></section>
+  ${top}
+  <section class="card fcard"><h5>Şikâyet ve anamnez</h5>${ff('visitReason', 2, val('visitReason'), acc('visitReason'), sugB('visitReason'), true)}${ff('anamnesis', 4, val('anamnesis'), acc('anamnesis'), sugB('anamnesis'))}</section>
+  <section class="card fcard"><h5>Klinik bulgular ve vital değerler</h5>${ff('findings', 3, val('findings'), acc('findings'), sugB('findings'))}
+    <div class="ff ${vm ? 'aim' : ''}"><label>Vital değerler${vm ? chipAi(false) : ''}</label>${sugB('vitals')}<div class="vrow"><div><label class="muted" style="font-size:12.5px">Kilo (kg)</label><input value="${vm ? D.vitals.w : ''}"></div><div><label class="muted" style="font-size:12.5px">Sıcaklık (°C)</label><input value="${vm ? D.vitals.t : ''}"></div><div><label class="muted" style="font-size:12.5px">Nabız (atım/dk)</label><input value="${vm ? D.vitals.h : ''}"></div><div><label class="muted" style="font-size:12.5px">Solunum (soluk/dk)</label><input value="${vm ? D.vitals.r : ''}"></div></div></div></section>
+  <section class="card fcard"><h5>Değerlendirme / tanı</h5>${ff('assessment', 2, val('assessment'), acc('assessment'), sugB('assessment'))}</section>
+  <section class="card fcard"><h5>Plan / tedavi planı</h5>${ff('plan', 3, val('plan'), acc('plan'), sugB('plan'))}${ff('notes', 2, '', false)}
+    <div class="fsave"><button class="btn pri" data-act="m-save"><i class="pi pi-check"></i>Kaydet</button><button class="btn"><i class="pi pi-times"></i>Vazgeç</button></div></section>`;
+}
+function mOverlay() {
+  if (S.scn === 'aktarildi' || S.scn === 'iz') return '';
+  if (S.opt === 'A') return mPanelA();
+  if (S.opt === 'C' && S.copen) return mModalC();
+  return '';
+}
+
+/* ================= Muayene özeti (M iz, S) ================= */
+function examDetail() {
+  const mk = S.sec === 'M';
+  const rs = (k, t, ed) => `<div class="rs"><h6>${LBL[k]}${mk ? chipAi(ed) : ''}</h6><p>${esc(t)}</p></div>`;
+  return `
+  <div class="pgh"><div><h1>Muayene</h1><p>19 Kas 2026 14:10 · Dr. Ayşe Kaya</p></div><div class="acts"><span class="bdg green"><i class="pi pi-check-circle"></i>Kesinleştirildi</span></div></div>
+  <section class="card pstrip"><div class="av">🐕</div><div><b>Karamel</b> <span class="muted">· Köpek · Golden Retriever · 9 yaş</span><div class="muted" style="font-size:13px">Selin Aydın</div></div><span class="grow"></span><span class="bdg red"><i class="pi pi-exclamation-triangle"></i>Alerji: penisilin</span></section>
+  <div class="wgrid">
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="card rec"><div class="ch"><h5>Muayene kaydı</h5></div>
+        ${mk ? `<div class="cnote" style="margin-bottom:12px"><i class="pi pi-sparkles aic"></i><span>6 alan serbest nottan AI taslağıyla dolduruldu; <b>Dr. Ayşe Kaya</b> 19 Kas 14:36'da kabul etti. Plan, kabulden sonra düzenlendi.</span></div>` : ''}
+        ${rs('visitReason', FORM0.visitReason + '\n' + D.visitReason)}${rs('anamnesis', D.anamnesis)}${rs('findings', D.findings)}
+        <div class="rs"><h6>Vital${mk ? chipAi(false) : ''}</h6><div class="vits tnum"><span><small>Kilo</small>31,4 kg</span><span><small>Sıcaklık</small>38,6 °C</span><span><small>Nabız</small>96/dk</span><span><small>Solunum</small>24/dk</span></div></div>
+        ${rs('assessment', D.assessment)}${rs('plan', D.plan + (mk ? ' Kontrol 29 Kas.' : ''), true)}
+        <p class="muted" style="margin:0;font-size:13px">Girilmemiş: Ek notlar</p></section>
+      <section class="card"><div class="ch"><h5>İşlemler</h5></div><ul class="nlist"><li>Kulak temizliği<small>19 Kas 14:25</small></li><li>Kulak sitolojisi örneği<small>19 Kas 14:28</small></li></ul></section>
+    </div>
+    <aside style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      ${S.sec === 'S' ? textCard('S') : ''}
+      <section class="card"><div class="ch"><h5>Kesinleştirme</h5></div><div class="okl"><i class="pi pi-check-circle"></i>Kayıt kesinleştirildi</div><p class="muted" style="font-size:13px;margin:6px 0 0">Düzeltme için ek not ekleyebilirsiniz.</p></section>
+      <section class="card"><div class="ch"><h5>Hasta bağlamı</h5></div><ul class="nlist"><li>Levotiroksin 0,8 mg · günde 2<small>14 Eyl reçetesi</small></li><li>Önceki muayene 10 Kas<small>Kulak kaşıntısı</small></li></ul></section>
+    </aside>
+  </div>`;
+}
+
+/* ================= S / T · Metin taslağı (AI-003 / AI-004) ================= */
+function textDraftBody(sec, compact) {
+  const t = TXT[sec];
+  if (S.scn === 'yuk') return loading(sec === 'S' ? 'Muayene notu sade dile çevriliyor…' : 'Yatış kayıtlarından talimat hazırlanıyor…');
+  return `${strip('Taslak — kontrol edin', sec === 'S' ? 'Muayene kaydında yazanı sade dille anlatır; kayıtta olmayan bilgi eklemez. Hasta sahibine vermeden önce okuyun.' : 'Yatış notu, reçete ve kontrol randevusundan hazırlandı; kayıtta olmayan ilaç ya da doz eklemez. Hasta sahibine vermeden önce okuyun.')}
+  <div class="dfld" data-f="text"><div class="dl1">${sec === 'S' ? 'Açıklama' : 'Talimat'}<span class="edt">· düzenlendi</span></div><textarea class="dta" rows="${compact ? 11 : 13}" data-k="text">${esc(t.draft)}</textarea></div>
+  <div class="hintl"><i class="pi pi-link"></i><span>${t.srcLine}</span></div>`;
+}
+const textFoot = (sec) => `<button class="btn sm txt" data-act="t-discard"><i class="pi pi-trash"></i>At</button><span class="grow"></span><button class="btn sm" data-act="t-start"><i class="pi pi-refresh"></i>Yeniden</button><button class="btn sm pri" data-act="t-accept"><i class="pi pi-check"></i>Kabul et ve kaydet</button>`;
+function textSaved(sec) {
+  const t = TXT[sec];
+  return `<p class="saved">${esc(t.draft.replace('günde 1 kez, 3 gün.', 'günde 1 kez, 3 gün; 20 Kas sabahından başlayarak.'))}</p><div class="meta">${chipAi(true, 'Dr. Ayşe Kaya 19 Kas 14:41')}<span>Dr. Ayşe Kaya · 19 Kas 14:41</span></div>`;
+}
+function textCard(sec) {
+  // S: muayene özeti yan sütunundaki kart. T'de bakım talimatları kartı hospDetail içinde.
+  const t = TXT.S, o = S.opt, sc = S.scn;
+  let body;
+  if (sc === 'iz') body = `${textSaved('S')}<div style="display:flex;gap:6px;margin-top:10px"><button class="btn sm"><i class="pi pi-copy"></i>Kopyala</button><button class="btn sm"><i class="pi pi-print"></i>Yazdır</button><button class="btn sm txt"><i class="pi pi-pencil"></i>Düzenle</button></div>`;
+  else if (o === 'B' && (sc === 'taslak' || sc === 'yuk')) body = `<div style="display:flex;flex-direction:column;gap:10px">${textDraftBody('S', true)}<div style="display:flex;gap:6px;align-items:center">${textFoot('S')}</div></div>`;
+  else body = `<p class="emptyt">${t.empty}</p><button class="btn sm aib ${o !== 'B' && sc !== 'once' ? 'act' : ''}" data-act="t-start"><i class="pi pi-sparkles"></i>${t.btn}</button>`;
+  return `<section class="card" ${o === 'B' && sc === 'taslak' ? 'style="border:1px dashed var(--ai-border)"' : ''}><div class="ch"><h5>Hasta sahibine açıklama</h5>${o === 'B' && sc === 'taslak' ? tagAi() : ''}</div>${body}</section>`;
+}
+function hospDetail() {
+  const o = S.opt, sc = S.scn;
+  const rows = `<div class="irow"><p class="saved">Yatış boyunca kafes içinde dinlendirin; kafes 3'teki battaniyesi sahibine iade edildi.</p><div class="meta">Dr. Murat Er · 17 Kas 10:05</div></div>`;
+  let list;
+  if (sc === 'iz') list = `<div class="irow">${textSaved('T')}</div>${rows}`;
+  else if (o === 'B' && (sc === 'taslak' || sc === 'yuk')) list = `<div class="irow draft-row"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><i class="pi pi-sparkles aic"></i><b style="font-size:13.5px">Yeni talimat</b>${tagAi()}</div><div style="display:flex;flex-direction:column;gap:10px">${textDraftBody('T', true)}<div style="display:flex;gap:6px;align-items:center">${textFoot('T')}</div></div></div>${rows}`;
+  else list = rows;
+  const aiActive = o !== 'B' && (sc === 'taslak' || sc === 'yuk');
+  return `
+  <div class="pgh"><div><h1>Yatış</h1><p>Duman · 17 Kas 2026 09:10'dan beri · Kafes 3</p></div><div class="acts"><button class="btn"><i class="pi pi-pencil"></i>Düzenle</button><button class="btn pri"><i class="pi pi-sign-out"></i>Taburcu et</button></div></div>
+  <section class="card pstrip"><div class="av">🐈</div><div><b>Duman</b> <span class="muted">· Kedi · Tekir · Dişi (kısır) · 4 yaş · 3,9 kg</span><div class="muted" style="font-size:13px">Okan Tunç · Neden: kusma ve iştahsızlık</div></div><span class="grow"></span><span class="bdg amber">Yatışta · 2 gün 6 saat</span></section>
+  <div class="wgrid">
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="card"><div class="ch"><h5>Bakım talimatları</h5><span class="grow"></span><button class="btn sm aib ${aiActive ? 'act' : ''}" data-act="t-start"><i class="pi pi-sparkles"></i>Taslak hazırla</button><button class="btn sm pri"><i class="pi pi-plus"></i>Talimat ekle</button></div>
+        <p class="muted" style="font-size:13px;margin:-4px 0 10px">Hasta sahibine verilecek taburcu / evde bakım talimatları; yatış notundan ayrıdır.</p>${list}</section>
+      <section class="card"><div class="ch"><h5>Yatış notları</h5></div><ul class="nlist">
+        <li>Kusma yok, 24 saattir sıvı alıyor. Az ve sık beslemeye geçilecek. Taburcu sonrası kusma tekrarlar ya da 24 saat yemezse başvuru.<small>19 Kas 08:30 · Dr. Murat Er</small></li>
+        <li>Sıvı tedavisi sürüyor, bir kez kusma.<small>18 Kas 09:00 · Dr. Murat Er</small></li>
+        <li>Yatış: 2 gündür kusma, iştahsızlık. Dehidrasyon %6.<small>17 Kas 09:10 · Dr. Murat Er</small></li></ul></section>
+    </div>
+    <aside style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="card"><div class="ch"><h5>Reçete ve uygulamalar</h5></div><ul class="nlist"><li>Maropitant 8 mg tablet · günde 1, 3 gün<small>Reçete 19 Kas</small></li><li>Ringer laktat IV<small>17–19 Kas</small></li></ul></section>
+      <section class="card"><div class="ch"><h5>Kontrol</h5></div><ul class="nlist"><li>22 Kas 2026 11:00<small>Randevu · Dr. Murat Er</small></li></ul></section>
+    </aside>
+  </div>`;
+}
+function textOverlay() {
+  const sec = S.sec, t = TXT[sec];
+  if (!(S.scn === 'taslak' || S.scn === 'yuk')) return '';
+  if (S.opt === 'A') return panel(sec === 'S' ? 'Hasta sahibine açıklama' : 'Bakım talimatı', textDraftBody(sec), textFoot(sec));
+  if (S.opt === 'C') {
+    const left = `<div class="colh">Kaynak kayıtlar</div><div class="srcbox">${t.src.map(s => `<b>${s[0]}</b><p>${esc(s[1])}</p>`).join('')}</div>`;
+    return modal(sec === 'S' ? 'Hasta sahibine açıklama' : 'Bakım talimatı', `<div class="split2"><div>${left}</div><div>${textDraftBody(sec)}</div></div>`, textFoot(sec), 'fit');
+  }
+  return '';
+}
+
+/* ================= Çizim ================= */
+const $ = s => document.querySelector(s);
+function render() {
+  document.documentElement.classList.toggle('dark', S.dark);
+  const navKey = S.sec === 'G' ? 'pets' : 'records';
+  document.querySelectorAll('.side a').forEach(a => a.classList.toggle('on', a.dataset.nav === navKey));
+  let page = '', ov = '';
+  if (S.sec === 'G') { page = petPage(); ov = gOverlay(); }
+  else if (S.sec === 'M') { page = S.scn === 'iz' ? examDetail() : examForm(); ov = mOverlay(); }
+  else if (S.sec === 'S') { page = examDetail(); ov = textOverlay(); }
+  else { page = hospDetail(); ov = textOverlay(); }
+  const main = $('#main');
+  const st = main.scrollTop;
+  main.innerHTML = page;
+  main.classList.toggle('pushed', S.opt === 'A' && ov.includes('apanel'));
+  $('#overlay').innerHTML = ov;
+  main.scrollTop = st;
+  drawDraft();
+  history.replaceState(null, '', `#${S.sec}-${S.opt}-${S.scn}${S.dark ? '-koyu' : ''}`);
+}
+const NOTES = {
+  kapali: 'Yapılandırılmamış, klinikte kapalı ya da kullanıcının Ai.Use izni yok: düğme hiç görünmez.',
+  kota: 'Klinik kotası ya da sistem bütçesi doldu: düğme soluk ve nedeni altında yazar.',
+  once: 'Düğmeye basınca yükleniyor, sonra özet gelir.'
+};
+function drawDraft() {
+  const sec = SECS[S.sec];
+  $('#draft').innerHTML = `<div class="dh"><b>TASLAK · ${sec.code}</b><span><button class="lnk" data-act="dark">${S.dark ? 'Açık' : 'Koyu'}</button><button class="lnk" data-act="reset">Sıfırla</button></span></div>
+  <div class="row r2">${Object.keys(SECS).map(k => `<a data-sec="${k}" class="${S.sec === k ? 'on' : ''}">${SECS[k].name}</a>`).join('')}</div>
+  <div class="lbl">Seçenek</div><div class="row r3">${Object.keys(OPTS).map(k => `<a data-opt="${k}" class="${S.opt === k ? 'on' : ''}" title="${OPTS[k]}">${k} · ${OPTS[k].split(' ')[0]}</a>`).join('')}</div>
+  <div class="lbl">Durum</div><div class="row r3">${sec.scns.map(s => `<a data-scn="${s[0]}" class="${S.scn === s[0] ? 'on' : ''}" title="${s[1]}">${s[1]}</a>`).join('')}</div>
+  ${S.sec === 'G' && NOTES[S.scn] ? `<div class="dnote">${NOTES[S.scn]}</div>` : ''}`;
+}
+let tt;
+function toast(t) { const el = $('#toast'); el.innerHTML = t; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2600); }
+function later(scn, ms = 1300) { const from = S.scn; setTimeout(() => { if (S.scn === 'yuk') { S.scn = scn; render(); } }, ms); }
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act],[data-sec],[data-opt],[data-scn],[data-src],[data-merge],[data-fk],[data-cnav]');
+  if (!t || t.disabled) return;
+  if (t.dataset.sec) { S.sec = t.dataset.sec; S.scn = S.sec === 'G' ? 'sonuc' : 'taslak'; S.mB = {}; S.copen = true; return render(); }
+  if (t.dataset.opt) { S.opt = t.dataset.opt; S.copen = true; return render(); }
+  if (t.dataset.scn) { S.scn = t.dataset.scn; S.mB = {}; S.copen = true; return render(); }
+  if (t.dataset.src) return toast(`<i class="pi pi-external-link"></i>Kayıt açılır: ${t.dataset.src}`);
+  if (t.dataset.merge) { S.merge = t.dataset.merge; return render(); }
+  if (t.dataset.cnav) { S.cnav = t.dataset.cnav; document.querySelectorAll('.snav a').forEach(a => a.classList.toggle('on', a === t)); const el = document.getElementById('sec-' + S.cnav); if (el) el.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+  if (t.dataset.fk) {
+    const [k, v] = t.dataset.fk.split(':'); S.mB[k] = v;
+    if (KEYS.every(x => S.mB[x])) { toast(v === 'no' ? 'Öneri atıldı.' : 'Tüm öneriler işlendi. Muayeneyi kaydedince kayda geçer.'); }
+    return render();
+  }
+  switch (t.dataset.act) {
+    case 'dark': S.dark = !S.dark; return render();
+    case 'reset': S.scn = START[S.sec]; S.mB = {}; S.merge = 'append'; S.copen = false; return render();
+    case 'close': if (S.sec === 'G') S.scn = 'once'; else if (S.sec === 'M') { S.scn = 'yaz'; S.copen = false; } else S.scn = 'once'; return render();
+    case 'g-start': S.scn = 'yuk'; render(); return later('sonuc');
+    case 'g-close': S.scn = 'once'; return render();
+    case 'copy': return toast('<i class="pi pi-copy"></i>Özet panoya kopyalandı (kaynak tarihleriyle).');
+    case 'm-open': S.copen = true; if (S.scn === 'aktarildi') S.scn = 'yaz'; return render();
+    case 'm-close': S.copen = false; return render();
+    case 'm-split': S.scn = 'yuk'; S.copen = true; render(); return later('taslak');
+    case 'm-accept': S.scn = 'aktarildi'; S.copen = false; render(); return toast('<i class="pi pi-check"></i>Taslak forma aktarıldı. Muayeneyi kaydedince kayda geçer.');
+    case 'm-discard': S.scn = 'yaz'; S.mB = {}; S.copen = false; render(); return toast('Taslak atıldı; form değişmedi.');
+    case 'm-undo': S.scn = 'taslak'; S.copen = true; render(); return toast('Aktarım geri alındı; taslak yeniden açıldı.');
+    case 'm-save': S.scn = 'iz'; render(); return toast('<i class="pi pi-check"></i>Muayene kaydedildi.');
+    case 't-start': S.scn = 'yuk'; render(); return later('taslak');
+    case 't-accept': S.scn = 'iz'; render(); return toast(`<i class="pi pi-check"></i>${TXT[S.sec].saved}`);
+    case 't-discard': S.scn = 'once'; render(); return toast('Taslak atıldı; hiçbir şey kaydedilmedi.');
+  }
+});
+document.addEventListener('input', e => { const f = e.target.closest('.dfld'); if (f) f.classList.add('ed'); });
+document.addEventListener('mouseover', e => {
+  const f = e.target.closest('.dfld[data-f]');
+  if (!f || !document.querySelector('.notebox')) return;
+  S.mhl = f.dataset.f;
+  document.querySelectorAll('.notebox span').forEach(s => s.classList.toggle('hl', s.dataset.f === S.mhl));
+  document.querySelectorAll('.dfld').forEach(d => d.classList.toggle('hl', d === f));
+});
+
+/* Adresten başla: #G-A-sonuc, #M-C-taslak-koyu … */
+(function init() {
+  const p = location.hash.slice(1).split('-');
+  if (p[0] && SECS[p[0]]) S.sec = p[0];
+  if (p[1] && OPTS[p[1]]) S.opt = p[1];
+  if (p[2] && SECS[S.sec].scns.some(s => s[0] === p[2])) S.scn = p[2]; else S.scn = S.sec === 'G' ? 'sonuc' : 'taslak';
+  S.dark = p.includes('koyu') || (!location.hash && matchMedia('(prefers-color-scheme: dark)').matches);
+  S.copen = true;
+  render();
+})();
+</script>
+</body>
+</html>
