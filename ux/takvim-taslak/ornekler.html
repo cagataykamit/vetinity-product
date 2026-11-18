@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Takvim örnekleri</title>
+<!-- Başka uygulamalardan takvim örnekleri (2026-11-18). Görseller kaynaklarından bağlantıyla gösterilir, kopyalanmadı; seçim için. -->
+<style>
+:root { --bg: #f4f6f7; --surface: #fff; --border: #e2e6e8; --text: #182226; --muted: #637078; --primary: #0f766e; --soft: #e7f3f1; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 "Segoe UI", system-ui, sans-serif; }
+header { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+header h1 { margin: 0; font-size: 18px; }
+header p { margin: 0; color: var(--muted); font-size: 13px; }
+.pick { margin-left: auto; background: var(--soft); border: 1px solid var(--primary); border-radius: 8px; padding: 6px 12px; font-weight: 600; }
+.pick span { color: var(--primary); }
+main { padding: 8px 24px 40px; }
+h2 { font-size: 15px; margin: 22px 0 4px; }
+h2 + p { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+.card.on { border-color: var(--primary); box-shadow: 0 0 0 3px var(--soft); }
+.shot { display: block; aspect-ratio: 4 / 3; background: #eef1f2; overflow: hidden; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.meta { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.meta .t { font-weight: 600; display: flex; gap: 8px; align-items: baseline; }
+.meta .n { background: var(--text); color: #fff; border-radius: 5px; padding: 0 7px; font-size: 12px; }
+.meta .why { color: var(--muted); font-size: 12.5px; }
+.meta .row { margin-top: auto; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; }
+.meta a { color: var(--primary); font-weight: 600; font-size: 12.5px; text-decoration: none; }
+.meta label { font-size: 12.5px; font-weight: 600; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+.tag { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 0 5px; margin-left: auto; font-weight: 400; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Takvim örnekleri</h1><p>Görsele tıklayınca büyük hâli açılır. Beğendiklerinizi işaretleyin; numaraları bana yazmanız yeterli. Görünümü kopyalamayacağız, fikir alacağız.</p></div>
+  <div class="pick">Seçtikleriniz: <span id="sel">henüz yok</span></div>
+</header>
+<main id="m"></main>
+<script>
+const D = 'https://cdn.dribbble.com/userupload/';
+const GROUPS = [
+  ['Veteriner yazılımları (gerçek ürün)', 'Kliniklerin bugün kullandığı programlardan; yardım sayfalarındaki ekran görüntüleri.', [
+    ['Vetspire: program ekranı', 'Hekim sütunlu gün programı, tam ekran.', 'https://manual.vetspire.com/__attachments/a_20777b2f15ff8dcb6d1c4c880f833d65fd34a6262f4949b03ff3cfcaeabc322f/NAV_SCHED_FullScreen-Example_MRK.png?cb=95730504520af54a0497c3e20e0481f1', 'https://manual.vetspire.com/vetspire-user-manual/ok/Commercial/schedule', 'ABD'],
+    ['Digitail: takvim', 'Hekim sütunları, geçmiş saatler soluk; ay/hafta/gün/liste.', 'https://downloads.intercomcdn.com/i/o/tkml81dc/1285759901/57db2cdc3bf6167a2cccd67be7f8/Screenshot%2B2024-12-08%2Bat%2B12_08_34-E2-80-AFPM.png?expires=1794963600&signature=556bc55c0ad999e51d3b714c20c559825fd0d706840c701f88c4278c22bc7424&req=dSIvE857lIhfWPMW1HO4zaC0aqVyBmXppXuqgsFhg9L1w8JqWGeaQnio6kgc%0AED7cewol6IamWtSwteE%3D%0A', 'https://help.digitail.io/en/articles/4991707-calendar-overview', 'Avrupa'],
+    ['Digitail: geçmiş saatler soluk', 'Geçen randevular soluklaşıyor, gelecek öne çıkıyor (hareketli).', 'https://downloads.intercomcdn.com/i/o/tkml81dc/1446614465/129c5a7983b094b6df691112b06f/Faded-past-events-calendar.gif?expires=1794963600&signature=389a2c46caac67f0201e7812439f0c13eaedd7e62c10de16ca5592f7e75fb033&req=dSQjEM9%2FmYVZXPMW1HO4zW7%2BhdA14hN48k6DLFmlsmVa6dO4Zl%2B4Z7OXpkM7%0A65MNwsoX%2FMC1kPOxb88%3D%0A', 'https://help.digitail.io/en/articles/4991707-calendar-overview', 'Avrupa']
+  ]],
+  ['Veteriner takvim tasarımları (konsept)', 'Tasarımcıların veteriner kliniği için çizdiği takvimler (Dribbble).', [
+    ['Veterinary Clinic Calendar', 'Sade hafta takvimi, yumuşak renkler.', D + '37124228/file/original-b9a63b8ae6cc81a234f3fbc999509876.png', 'https://dribbble.com/shots/14994519-Veterinary-Clinic-Calendar', 'konsept'],
+    ['VeteraSky: takvim bileşeni', 'Hayvan simgeli randevu kartları.', D + '10015045/file/original-b55b81c0e8a1101c49087c8dbb926088.png', 'https://dribbble.com/shots/22539765-VeteraSky-Calendar-Component', 'konsept'],
+    ['VeteraSky: duyarlı takvim', 'Masaüstü ve telefon birlikte.', D + '9708625/file/original-56f7f663c2982e08e7d206bb1d0d9f7d.png', 'https://dribbble.com/shots/22427038-VeteraSky-Responsive-Vet-Calendar', 'konsept'],
+    ['SmartDVM: randevu takvimi', 'Veteriner programı için yeniden tasarım.', D + '14612813/file/original-077201bea140d45dd66fed4d9f65b0aa.png', 'https://dribbble.com/shots/24184323-SmartDVM-Appointment-Calendar', 'konsept'],
+    ['Veterinary Clinic Dashboard', 'Pano ve günün randevuları bir arada.', D + '30330969/file/original-f30000c8eb305dab8bb5eb60f59325c9.png', 'https://dribbble.com/shots/14964970-Veterinary-Clinic-Dashboard', 'konsept']
+  ]],
+  ['Klinik ve diş hekimi takvimleri (konsept)', 'Çok hekimli klinik programları; yoğun günü okunur kılma denemeleri.', [
+    ['Healthcare Clinic Schedule', 'Hekim sütunları, büyük ve okunur kartlar.', D + '49469405/file/098cb2241d1c91baf885924d3d6aa28b.png', 'https://dribbble.com/shots/27849464-Healthcare-Clinic-Schedule-UI-UX-Design', 'konsept'],
+    ['Medline: klinik programı', 'Program panosu, durum renkleri.', D + '49370097/file/e700f92da46c4235a5b5520d0a791d61.png', 'https://dribbble.com/shots/27823254-Medline-Clinic-Schedule-Dashboard', 'konsept'],
+    ['Multi-Doctor Scheduling', 'Birden çok hekimin günü yan yana.', D + '48591637/file/626825359c2a5d9a88c6c17886a27968.png', 'https://dribbble.com/shots/27615183-Multi-Doctor-Appointment-Scheduling-Dashboard', 'konsept'],
+    ['Dental Clinic Schedule', 'Diş kliniği haftası, renkli bloklar.', D + '18239397/file/original-584eb4d6dc4219944658ab4a800b3de0.png', 'https://dribbble.com/shots/25411156-Dental-Clinic-Schedule', 'konsept'],
+    ['Dentify: randevular', 'Gün programı ve yan panel.', D + '49362939/file/still-69bfedbfd13ba31f3a65380c25c55bc9.png', 'https://dribbble.com/shots/27821543-Seamless-Schedule-Management-Dentify-Appointments-UI-Design', 'konsept'],
+    ['Clinic schedule', 'Sade, bol boşluklu program.', D + '37958165/file/original-fe0fb0e2b37500e990cb0905782f3ca9.png', 'https://dribbble.com/shots/18440809-Clinic-schedule', 'konsept']
+  ]],
+  ['Genel takvim düzenleri (konsept)', 'Sektör dışı ama takvim okunurluğu için iyi fikirler.', [
+    ['Salon CRM: randevu takvimi', 'Personel sütunları, kartta hizmet ve müşteri.', D + '47707239/file/56c3388e156c0208b603ad03b50ed8d9.png', 'https://dribbble.com/shots/27370047-Salon-CRM-Appointment-Calendar-Booking-Platform-Design', 'konsept'],
+    ['WeCraft: hafta görünümü', 'Temiz hafta ızgarası.', D + '7635439/file/original-a39aa35249e3017c124239b84b9638af.jpg', 'https://dribbble.com/shots/21673830-WeCraft-Week-Calendar-View', 'konsept'],
+    ['Gün / Hafta / Ay panosu', 'Üç görünüm bir arada.', D + '48446643/file/666609abf37498fbd2b1d11461b4fb0e.jpg', 'https://dribbble.com/shots/27575868-Calendar-Dashboard-Day-Week-Month-View', 'konsept'],
+    ['Durum zaman çizelgesi', 'Randevular yatay zaman çizgisinde, durumla.', D + '26833071/file/original-429b55d05efd684e1d8db336b4f1e57a.png', 'https://dribbble.com/shots/11078843-Appointment-Booking-Status-Timeline-View-Calendars', 'konsept'],
+    ['Appointment Schedule UI', 'Sade ve duyarlı randevu takvimi.', D + '44369954/file/9dace8dca015a5f5084261f74a6fddd2.png', 'https://dribbble.com/shots/26360190-Appointment-Schedule-UI-Clean-Responsive-Calendar-View', 'konsept'],
+    ['Calendar Dashboard', 'Takvim ve yan liste.', D + '45727827/file/8824e969d0936cf27b153773da071cb7.png', 'https://dribbble.com/shots/26779887-Calendar-Dashboard', 'konsept']
+  ]]
+];
+const KEY = 'vetinity.takvim.ornek-secim';
+let picked = [];
+try { picked = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { picked = []; }
+let n = 0;
+document.getElementById('m').innerHTML = GROUPS.map(([g, d, list]) => `<h2>${g}</h2><p>${d}</p><div class="grid">${list.map(([t, why, img, url, tag]) => {
+  n++;
+  return `<div class="card ${picked.includes(n) ? 'on' : ''}" data-n="${n}"><a class="shot" href="${img}" target="_blank" rel="noopener"><img loading="lazy" src="${img}" alt="${t}"></a>
+    <div class="meta"><div class="t"><span class="n">${n}</span>${t}<span class="tag">${tag}</span></div><div class="why">${why}</div>
+    <div class="row"><a href="${url}" target="_blank" rel="noopener">Kaynağı aç ›</a><label><input type="checkbox" ${picked.includes(n) ? 'checked' : ''}> Beğendim</label></div></div></div>`;
+}).join('')}</div>`).join('');
+const show = () => { document.getElementById('sel').textContent = picked.length ? picked.sort((a, b) => a - b).join(', ') : 'henüz yok'; };
+document.querySelectorAll('.card input').forEach((cb) => cb.addEventListener('change', (e) => {
+  const card = e.target.closest('.card'), k = +card.dataset.n;
+  picked = e.target.checked ? [...new Set([...picked, k])] : picked.filter((x) => x !== k);
+  card.classList.toggle('on', e.target.checked);
+  try { localStorage.setItem(KEY, JSON.stringify(picked)); } catch { /* seçim yalnız bu sekmede kalır */ }
+  show();
+}));
+show();
+</script>
+</body>
+</html>
