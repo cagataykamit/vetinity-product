@@ -127,7 +127,7 @@ Adresler `#E-A-one`, `#E-B-three`, `#E-C-noperm` biçimindedir. "Aç" ya da biri
 - Öneri: `EDocumentPreviewDto.clinicSetupIssues: { code: 'TaxpayerTypeMissing' | 'TaxpayerIdentityMissing' | 'NotConnected' }[]`.
 - **Kesme ucu** aynı kontrolleri yapmaya ve reddetmeye devam eder. Önizleme yalnız bilgi verir.
 - **Grup sorunu:** Mükellef türü yokken gruplar (belge türü) hesaplanamaz, çünkü `BuildGroups` `taxpayerType` ister. Önizleme bu durumda boş `groups` ile birlikte satır ve tutar özetini döndürmelidir; C seçeneği bunu ister. A ve B için satır özeti gerekmez.
-- **VKN / TCKN kuralı:** Bugün `BuildAsync` VKN / TCKN eksikliğini denetlemiyor. Bunun bir kesme koşulu olup olmadığı (entegratör hesabındaki vergi no yeterli mi) backend'de karar verilecek bir kuraldır; taslak onu örnek olarak gösteriyor. Kural eklenmezse listede yalnız mükellef türü ve bağlantı kalır.
+- **VKN / TCKN kuralı (karar, 2026-11-19):** Kliniğin VKN / TCKN numarası zorunlu kesme koşuludur, çünkü e-belgede düzenleyenin vergi kimliği zorunlu alandır. Bugün `BuildAsync` bunu denetlemiyor. Önizleme bunu `TaxpayerIdentityMissing` sorunu olarak listelemeli, kesme ucu da reddetmeli. Kontrol sınırı: alan boş mu, biçimi doğru mu (VKN 10, TCKN 11 hane). Entegratör hesabındaki vergi numarasıyla eşleşme denetimi bu işin dışında kalır.
 - **Bağlantı durumu:** Bugün önizlemede `connection.status` olarak geliyor; aynı listeye alınabilir. Böylece pencerede tek bir "eksikler" kaynağı olur.
 
 **Rotalar (frontend):**
