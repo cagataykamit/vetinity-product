@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Takvim taslağı 3</title>
+<!--
+  Randevu takvimi 3. tur (2026-11-18). Kullanıcının beğendiği örneklerden fikir alındı, görünüm kopyalanmadı:
+  9 (klinik programı: günün özeti, hekim sütunları, klinikte bekleyenler, boş saatler), 3 (Digitail: hafta/ay hücresinde
+  küçük kartlar ve "+N daha", geçmiş soluk), 15 (büyük okunur ad, saat üstte, havadar beyaz kart, süren randevu koyu).
+  Veriler uydurmadır. Görünüm: #gun (varsayılan), #hafta, #ay. Sağ üstten açık/koyu tema.
+-->
+<style>
+:root {
+  --bg: #f3f5f6; --surface: #ffffff; --surface-2: #f7f9f9; --border: #e3e7e9; --line: #eef1f2; --dot: #d9dfe2;
+  --text: #16211f; --muted: #5f6c72; --faint: #97a2a8;
+  --primary: #0f766e; --primary-2: #115e59; --primary-soft: #e6f3f1; --on-primary: #ffffff;
+  --up: #27343a; --today: #d99a00; --today-soft: #fff7e0; --overdue: #d92d20; --overdue-soft: #fdeeec; --done: #16a34a;
+  --shadow: 0 1px 2px rgba(16, 32, 40, .06), 0 2px 8px rgba(16, 32, 40, .05); --shadow-lg: 0 12px 32px rgba(16, 32, 40, .16);
+}
+html.dark {
+  --bg: #0e1416; --surface: #161e21; --surface-2: #1a2427; --border: #29353a; --line: #1e282b; --dot: #2a363b;
+  --text: #e9efef; --muted: #9ba8ad; --faint: #6b797e;
+  --primary: #2bb3a3; --primary-2: #1f8f83; --primary-soft: #133330; --on-primary: #06201c;
+  --up: #d5dde0; --today: #f2c230; --today-soft: #2f2a14; --overdue: #f2665a; --overdue-soft: #3a1d1b; --done: #3ccf73;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3); --shadow-lg: 0 12px 32px rgba(0, 0, 0, .5);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.4 "Segoe UI", Inter, system-ui, sans-serif; overflow: hidden; }
+a { color: inherit; text-decoration: none; cursor: pointer; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+.top { height: 46px; display: flex; align-items: center; gap: 14px; padding: 0 18px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.logo { font-weight: 700; font-size: 19px; width: 160px; } .logo b { color: var(--primary); }
+.search { margin-left: auto; width: 220px; height: 30px; border: 1px solid var(--border); border-radius: 8px; color: var(--faint); padding: 6px 10px; font-size: 12.5px; }
+.top .theme { font-size: 12.5px; color: var(--primary); font-weight: 600; }
+.clinic { font-weight: 600; font-size: 12px; color: var(--muted); }
+.shell { display: flex; height: calc(100% - 46px); }
+.side { width: 190px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 14px 0; }
+.side h6 { margin: 12px 18px 6px; font-size: 10.5px; letter-spacing: .6px; color: var(--muted); }
+.side a { display: block; padding: 7px 18px; font-size: 13.5px; }
+.side a.on { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
+main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Başlık satırı */
+.head { display: flex; align-items: center; gap: 14px; flex: none; }
+.head h1 { margin: 0; font-size: 20px; }
+.tabs { display: flex; gap: 4px; }
+.tabs a { padding: 4px 10px; border-radius: 6px; color: var(--muted); font-size: 13px; }
+.tabs a.on { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: var(--shadow); }
+.tabs i { font-style: normal; background: var(--overdue); color: #fff; border-radius: 9px; padding: 0 6px; font-size: 11px; margin-left: 4px; }
+.sp { flex: 1; }
+.btn { height: 34px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn.pri { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+
+/* Günün özeti (9'dan fikir) */
+.kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; flex: none; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.kpi .bar { width: 3px; align-self: stretch; border-radius: 2px; background: var(--faint); }
+.kpi b { font-size: 22px; line-height: 1; }
+.kpi .l { min-width: 0; }
+.kpi .l div { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi .l small { display: block; color: var(--muted); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Ana alan */
+.body { flex: 1; min-height: 0; display: flex; gap: 12px; }
+.cal { flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
+.calbar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--line); flex: none; }
+.nav a { width: 30px; height: 30px; border: 1px solid var(--border); border-radius: 8px; display: inline-grid; place-items: center; color: var(--muted); }
+.date { font-size: 16.5px; font-weight: 700; margin-left: 4px; }
+.today-chip { font-size: 12px; font-weight: 600; color: var(--primary); background: var(--primary-soft); border-radius: 6px; padding: 2px 8px; }
+.seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 2px; }
+.seg a { padding: 4px 12px; border-radius: 6px; font-size: 13px; color: var(--muted); }
+.seg a.on { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: var(--shadow); }
+.filter { height: 30px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.legend { display: flex; gap: 10px; font-size: 12px; color: var(--muted); margin-right: 6px; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 3px; height: 12px; border-radius: 2px; }
+
+/* Gün: hekim sütunları */
+.dhead { display: grid; border-bottom: 1px solid var(--line); flex: none; }
+.ph { display: flex; align-items: center; gap: 10px; padding: 8px 12px; min-width: 0; border-left: 1px solid var(--line); }
+.av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--on-primary); background: var(--primary); flex: none; }
+.av.vx { background: var(--today); color: #2a2000; }
+.ph .n { font-weight: 600; font-size: 14px; white-space: nowrap; }
+.ph small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ph small b { color: var(--text); font-weight: 600; }
+.dscroll { flex: 1; min-height: 0; overflow-y: auto; position: relative; }
+.dgrid { display: grid; position: relative; }
+.tcol { position: relative; }
+.tl { position: absolute; right: 8px; font-size: 11.5px; color: var(--muted); transform: translateY(-50%); }
+.col { position: relative; border-left: 1px solid var(--line); }
+.hl { position: absolute; left: 0; right: 0; border-top: 1px solid var(--line); }
+.hl.q { border-top: 1px dotted var(--dot); }
+.closed { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--faint) 14%, transparent) 6px 8px); }
+.now { position: absolute; left: 0; right: 0; height: 2px; background: var(--primary); z-index: 2; pointer-events: none; }
+.nowpill { position: absolute; left: 4px; z-index: 5; transform: translateY(-50%); background: var(--primary); color: var(--on-primary); font-size: 11px; font-weight: 700; border-radius: 6px; padding: 1px 6px; }
+
+/* Kart (15'ten fikir: saat üstte küçük, ad büyük; beyaz, havadar) */
+.cd { position: absolute; z-index: 3; padding: 2px 4px; }
+.card { height: 100%; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--up); border-radius: 8px; box-shadow: var(--shadow); padding: 4px 9px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; gap: 1px; }
+.card .t { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; gap: 6px; align-items: center; }
+.card .t b { color: var(--text); font-weight: 600; }
+.card .nm { font-size: 14.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.25; }
+.card .nm span { font-weight: 400; font-size: 13px; color: var(--muted); }
+.card .ty { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .st { margin-left: auto; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 0 5px; flex: none; }
+.card.today { border-left-color: var(--today); }
+.card.overdue { border-left-color: var(--overdue); background: var(--overdue-soft); }
+.card.overdue .st { background: var(--overdue); color: #fff; }
+.card.done { border-left-color: var(--done); background: var(--surface-2); box-shadow: none; }
+.card.done .nm, .card.done .t b { color: var(--muted); }
+.card.done .st { color: var(--done); }
+.card.wait { border-left-color: var(--today); background: var(--today-soft); }
+.card.wait .st { background: var(--today); color: #2a2000; }
+.card.room { background: var(--primary); border-color: var(--primary-2); border-left-color: var(--primary-2); box-shadow: var(--shadow-lg); }
+.card.room .t, .card.room .ty, .card.room .nm span, .card.room .t b, .card.room .nm { color: var(--on-primary); }
+.card.room .st { background: rgba(255, 255, 255, .22); color: var(--on-primary); }
+.card.noshow { border-left-color: var(--faint); background: var(--surface-2); box-shadow: none; }
+.card.noshow .nm { text-decoration: line-through; color: var(--muted); }
+.card.vac { border-radius: 8px; padding: 3px 9px; justify-content: center; }
+.card.vac .nm { font-size: 13.5px; }
+.shield { flex: none; vertical-align: -1px; }
+
+/* Sağ panel (9'dan fikir) */
+.rail { width: 290px; flex: none; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; min-height: 0; display: flex; flex-direction: column; }
+.box h3 { margin: 0; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.box h3 .c { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--today); }
+.box > small { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+.who { display: flex; gap: 10px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); }
+.who .av { width: 34px; height: 34px; font-size: 13px; }
+.who .av.w { background: var(--today); color: #2a2000; }
+.who b { font-size: 14px; display: block; }
+.who small { display: block; font-size: 12px; color: var(--muted); }
+.who small.r { color: var(--primary); font-weight: 600; }
+.who small.w { color: var(--today); font-weight: 600; }
+.call { margin-top: 8px; height: 34px; border-radius: 8px; background: var(--primary); color: var(--on-primary); font-weight: 600; font-size: 13px; display: grid; place-items: center; }
+.slot { display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; margin-top: 8px; }
+.slot b { font-size: 16px; }
+.slot div { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; }
+.slot div small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.slot .plus { color: var(--primary); font-size: 20px; line-height: 1; }
+
+/* Hafta (3'ten fikir: küçük kartlar, "+N daha", geçmiş soluk) */
+.wk { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.wd { border-left: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.wd:first-child { border-left: 0; }
+.wd.today { background: color-mix(in srgb, var(--primary-soft) 50%, transparent); }
+.wd.off { background: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--faint) 10%, transparent) 6px 8px); }
+.wdh { padding: 8px 10px 6px; display: flex; align-items: baseline; gap: 6px; }
+.wdh .d { font-size: 20px; font-weight: 700; }
+.wd.today .wdh .d { color: var(--primary); }
+.wdh .dn { font-weight: 600; color: var(--muted); font-size: 13px; }
+.wdh .c { margin-left: auto; font-size: 12px; color: var(--muted); }
+.wlist { flex: 1; min-height: 0; overflow-y: auto; padding: 2px 6px 8px; display: flex; flex-direction: column; gap: 5px; }
+.mini { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--up); border-radius: 7px; padding: 4px 8px; box-shadow: var(--shadow); flex: none; }
+.mini .t { font-size: 11.5px; color: var(--muted); display: flex; gap: 5px; white-space: nowrap; overflow: hidden; }
+.mini .t b { color: var(--text); font-weight: 600; }
+.mini .t .vet { margin-left: auto; font-size: 10.5px; font-weight: 700; flex: none; padding-left: 4px; }
+.mini .t .ty2 { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.mini .nm { font-size: 13.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini .nm span { font-weight: 400; font-size: 12.5px; color: var(--muted); }
+.mini.today { border-left-color: var(--today); }
+.mini.overdue { border-left-color: var(--overdue); background: var(--overdue-soft); }
+.mini.done { border-left-color: var(--done); opacity: .62; box-shadow: none; }
+.mini.noshow { border-left-color: var(--faint); opacity: .62; box-shadow: none; }
+.mini.noshow .nm { text-decoration: line-through; }
+.mini.room { background: var(--primary); border-color: var(--primary-2); }
+.mini.room .t, .mini.room .t b, .mini.room .nm, .mini.room .nm span { color: var(--on-primary); }
+.vsum { flex: none; display: flex; align-items: center; gap: 6px; border: 1px dashed var(--border); border-radius: 7px; padding: 5px 8px; font-size: 12.5px; background: var(--surface-2); }
+.vsum b { font-weight: 700; }
+.vsum .od { color: var(--overdue); font-weight: 700; }
+.vsum .chev { margin-left: auto; color: var(--faint); }
+.more { flex: none; font-size: 12px; font-weight: 600; color: var(--primary); padding: 2px 4px; }
+.nowsep { flex: none; display: flex; align-items: center; gap: 6px; color: var(--primary); font-size: 11px; font-weight: 700; }
+.nowsep::after { content: ""; flex: 1; height: 2px; background: var(--primary); }
+
+/* Ay */
+.mwk { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--line); flex: none; }
+.mwk div { padding: 6px 10px; font-size: 12px; color: var(--muted); font-weight: 600; }
+.mg { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); }
+.mc { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4px 6px 3px; display: flex; flex-direction: column; gap: 2px; min-width: 0; overflow: hidden; }
+.mc:nth-child(7n) { border-right: 0; }
+.mc > * { flex: none; }
+.mc.out > * { opacity: .45; }
+.mc.today { background: color-mix(in srgb, var(--primary-soft) 60%, transparent); }
+.mh { display: flex; align-items: center; gap: 6px; }
+.mh .d { font-weight: 700; font-size: 13.5px; min-width: 22px; height: 20px; display: grid; place-items: center; border-radius: 10px; }
+.mc.today .mh .d { background: var(--primary); color: var(--on-primary); }
+.mh small { margin-left: auto; color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+.chip { display: flex; gap: 5px; align-items: center; font-size: 12px; line-height: 16px; border-radius: 5px; padding: 1px 6px; border-left: 3px solid var(--up); background: var(--surface-2); white-space: nowrap; overflow: hidden; }
+.chip b { font-weight: 600; flex: none; }
+.chip span { overflow: hidden; text-overflow: ellipsis; }
+.chip.today { border-left-color: var(--today); } .chip.overdue { border-left-color: var(--overdue); background: var(--overdue-soft); } .chip.done { border-left-color: var(--done); opacity: .6; }
+.mv { margin-top: auto; font-size: 11.5px; color: var(--muted); display: flex; gap: 4px; align-items: center; white-space: nowrap; overflow: hidden; }
+.mv .od { color: var(--overdue); font-weight: 600; }
+</style>
+</head>
+<body>
+<header class="top"><div class="logo">Vet<b>inity</b></div><div class="search">Hasta, sahip ya da randevu ara…</div><a class="theme" onclick="document.documentElement.classList.toggle('dark')">Açık / koyu</a><div class="clinic">ÖRNEK KLİNİK</div></header>
+<div class="shell">
+  <nav class="side"><h6>GÜNLÜK İŞ</h6><a>Bugün</a><a class="on">Randevular</a><h6>MÜŞTERİ VE HASTA</h6><a>Müşteri ve hasta</a><h6>KLİNİK</h6><a>Kayıtlar</a><h6>PARA VE STOK</h6><a>Para</a><a>Stok</a></nav>
+  <main id="main"></main>
+</div>
+<script>
+const SH = '<svg class="shield" width="12" height="12" viewBox="0 0 16 16" aria-label="Aşı"><path d="M8 1.2 2.5 3.3v4.2c0 3.4 2.3 6.1 5.5 7.3 3.2-1.2 5.5-3.9 5.5-7.3V3.3z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const H = (h, m = 0) => h * 60 + m;
+const clock = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+const NOW = H(14, 20);
+const VETS = { EA: ['Dr. Ece Arslan', 'Hekim'], MK: ['Dr. Murat Kaya', 'Hekim'] };
+const short = (n) => { const p = n.split(' '); return p.length > 1 ? p[0][0] + '. ' + p.slice(1).join(' ') : n; };
+
+// a(saat, dk, süre, hasta, sahip, hekim, tür, durum) — durum: up, today, wait (klinikte bekliyor), room (muayenede), done, overdue, noshow
+const a = (h, m, d, pet, owner, vet, type, st, extra) => ({ s: H(h, m), e: H(h, m) + d, pet, owner, vet, type, st, extra });
+const DAYS = [
+  { num: 16, name: 'Pazartesi', short: 'Pzt', open: [H(9), H(18)], vx: [13, 3], appts: [
+    a(9, 30, 30, 'Zeytin', 'Selin Aydın', 'EA', 'Kontrol', 'done'), a(10, 15, 45, 'Tarçın', 'Kerem Öztürk', 'MK', 'Muayene', 'done'),
+    a(11, 0, 30, 'Pamuk', 'Deniz Kurt', 'EA', 'Aşı · Kuduz', 'overdue'), a(14, 0, 60, 'Boncuk', 'Hakan Şahin', 'MK', 'Kısırlaştırma', 'done'),
+    a(16, 30, 30, 'Fıstık', 'Elif Demir', 'EA', 'Kontrol', 'noshow')] },
+  { num: 17, name: 'Salı', short: 'Sal', open: [H(9), H(18)], vx: [8, 2], appts: [
+    a(9, 0, 30, 'Limon', 'Burak Çelik', 'EA', 'Aşı · Karma', 'done'), a(9, 0, 30, 'Maya', 'Gizem Tekin', 'MK', 'Muayene', 'done'),
+    a(11, 30, 30, 'Fırtına', 'Okan Polat', 'MK', 'Kontrol', 'done'), a(13, 0, 90, 'Şans', 'Aslı Koç', 'EA', 'Operasyon', 'done'),
+    a(15, 30, 30, 'Bal', 'Cem Erdem', 'MK', 'Kontrol', 'overdue'), a(17, 0, 45, 'Reis', 'Nur Yalçın', 'EA', 'Muayene', 'done')] },
+  { num: 18, name: 'Çarşamba', short: 'Çar', today: true, open: [H(9), H(18)], vx: [17, 0], appts: [
+    a(9, 0, 30, 'Karamel', 'Emre Aksoy', 'EA', 'Aşı · Karma (DHPPi+L)', 'done'), a(9, 30, 30, 'Kurabiye', 'Sevgi Arslan', 'MK', 'Kontrol', 'done'),
+    a(10, 30, 45, 'Odin', 'Tolga Kılıç', 'EA', 'Muayene', 'done'), a(11, 30, 30, 'Leo', 'Merve Can', 'MK', 'Aşı · Kuduz', 'done'),
+    a(12, 30, 30, 'Kuki', 'Barış Öz', 'EA', 'Kontrol', 'done'), a(14, 0, 60, 'Cesur', 'Ahmet Güneş', 'MK', 'Diş taşı temizliği', 'room', '18 dk'),
+    a(14, 0, 30, 'Minnoş', 'Zeynep Aras', 'EA', 'Aşı · Kedi karma (FVRCP)', 'wait', '8 dk'), a(15, 30, 30, 'Sansa', 'Fatma Uçar', 'EA', 'Kontrol', 'today'),
+    a(16, 0, 30, 'Garfield', 'Ali Rıza Er', 'MK', 'Muayene', 'today'), a(17, 0, 45, 'Pati', 'Ceren Ay', 'EA', 'Muayene', 'today')] },
+  { num: 19, name: 'Perşembe', short: 'Per', open: [H(9), H(18)], vx: [15, 0], appts: [
+    a(9, 30, 30, 'Karabaş', 'Ozan Bilgin', 'EA', 'Kontrol', 'up'), a(10, 0, 60, 'Lokum', 'İrem Sarı', 'MK', 'Kısırlaştırma', 'up'),
+    a(13, 30, 30, 'Mavi', 'Kaan Ateş', 'EA', 'Aşı · Kuduz', 'up'), a(16, 30, 30, 'Pırtık', 'Esra Tuna', 'MK', 'Kontrol', 'up')] },
+  { num: 20, name: 'Cuma', short: 'Cum', open: [H(9), H(18)], vx: [14, 0], appts: [
+    a(9, 0, 30, 'Pofuduk', 'Seda Ekinci', 'EA', 'Aşı · İç-dış parazit', 'up'), a(11, 0, 45, 'Rocky', 'Mert Önal', 'MK', 'Muayene', 'up'),
+    a(12, 0, 30, 'Tekir', 'Yasemin Bora', 'EA', 'Kontrol', 'up'), a(15, 0, 30, 'Çakıl', 'Volkan Er', null, 'Aşı · Karma', 'up')] },
+  { num: 21, name: 'Cumartesi', short: 'Cmt', open: [H(9), H(14)], vx: [6, 0], appts: [
+    a(10, 0, 30, 'Tarzan', 'Gül Oral', 'MK', 'Kontrol', 'up'), a(12, 30, 30, 'Prenses', 'Sinan Uz', 'MK', 'Aşı · Kedi karma', 'up')] },
+  { num: 22, name: 'Pazar', short: 'Paz', open: null, vx: [4, 0], appts: [] }
+];
+// Bugünün aşıları (saatli olanlar sütunda, saatsizler başlıkta).
+const v = (t, pet, owner, vac, st) => ({ s: t, pet, owner, vac, st });
+const VAX = [
+  v(H(9, 4), 'Nane', 'Aylin Su', 'İç-dış parazit', 'done'), v(H(10, 12), 'Badem', 'Selda Kurt', 'İç-dış parazit', 'done'),
+  v(H(10, 30), 'Pamuk', 'Deniz Kurt', 'Kuduz', 'today'), v(H(11, 0), 'Sarman', 'Hülya Aktaş', 'İç-dış parazit', 'today'),
+  v(H(12, 5), 'Tarçın', 'Gökhan İnce', 'Kedi karma', 'done'), v(H(12, 40), 'Rex', 'Cengiz Uysal', 'Karma, 2. doz', 'today'),
+  v(H(13, 20), 'Kont', 'Rıza Bal', 'Kuduz', 'done'), v(H(13, 50), 'Fındık', 'Melis Kara', 'Bronşin (KC)', 'today'),
+  v(H(14, 40), 'Tontiş', 'Pınar Gök', 'Kedi lösemisi', 'today'), v(H(15, 10), 'Zeus', 'Onur Taş', 'Kuduz', 'today'),
+  v(H(15, 50), 'Kömür', 'Sibel Ateş', 'İç-dış parazit', 'today'), v(H(16, 40), 'Lucy', 'Can Yurt', 'Karma', 'today'),
+  v(H(20, 21), 'Simit', 'Levent Ak', 'Kuduz', 'today'), v(null, 'Mırmır', 'Ebru Dağ', 'Kedi karma', 'today'), v(null, 'Şila', 'Hande Sezer', 'Mantar', 'today')
+];
+const ST_LABEL = { done: '✓', overdue: 'Gecikmiş', noshow: 'Gelmedi', wait: 'Bekliyor', room: 'Muayenede' };
+
+const route = () => (location.hash || '#gun').slice(1);
+const main = document.getElementById('main');
+
+function head(view) {
+  return `<div class="head"><h1>Randevular</h1>
+    <div class="tabs"><a class="on">Takvim</a><a>Liste</a><a>Talepler<i>2</i></a><a>Bekleme listesi</a></div>
+    <span class="sp"></span><a class="btn">⌕ Boş saat bul</a><a class="btn pri">+ Yeni randevu</a></div>`;
+}
+function calbar(view) {
+  const title = view === 'gun' ? '18 Kasım 2026, Çarşamba' : view === 'ay' ? 'Kasım 2026' : '16 – 22 Kasım 2026';
+  const legend = [['Gelecek', 'var(--up)'], ['Bugün', 'var(--today)'], ['Gecikmiş', 'var(--overdue)'], ['Tamamlandı', 'var(--done)']].map(([l, c]) => `<span><i style="background:${c}"></i>${l}</span>`).join('');
+  return `<div class="calbar"><span class="nav"><a>‹</a> <a>›</a></span><span class="date tnum">${title}</span><span class="today-chip">Bugün</span>
+    <span class="sp"></span><span class="legend">${legend}</span><a class="filter">⚲ Filtre: tüm hekimler ▾</a>
+    <span class="seg">${[['gun', 'Gün'], ['hafta', 'Hafta'], ['ay', 'Ay']].map(([k, l]) => `<a href="#${k}" class="${k === view ? 'on' : ''}">${l}</a>`).join('')}</span></div>`;
+}
+function kpis() {
+  const k = (n, l, s, c) => `<div class="kpi"><span class="bar" style="background:${c}"></span><b class="tnum">${n}</b><div class="l"><div>${l}</div><small>${s}</small></div></div>`;
+  return `<div class="kpis">${k(10, 'Randevu', 'bugün toplam', 'var(--primary)')}${k(5, 'Tamamlandı', '%50', 'var(--done)')}${k(2, 'Klinikte', '1 bekliyor · 1 muayenede', 'var(--today)')}${k('15:30', 'Sıradaki', 'Sansa · Dr. Ece Arslan', 'var(--up)')}${k(11, 'Aşı bekliyor', '6 uygulandı · 2 saatsiz', 'var(--today)')}${k(0, 'Gelmedi', 'bugün yok', 'var(--overdue)')}</div>`;
+}
+
+// ---- Gün ----
+const PPM = 84 / 60; // saat başı 84 px: 30 dk = 42 px, iki satır rahat sığar
+function card(it, h) {
+  const st = ST_LABEL[it.st] ? `<span class="st">${ST_LABEL[it.st]}${it.extra ? ' · ' + it.extra : ''}</span>` : '';
+  const vac = it.type.startsWith('Aşı') ? SH + ' ' : '';
+  if (h >= 58) return `<div class="card ${it.st}"><div class="t tnum"><b>${clock(it.s)} – ${clock(it.e)}</b>${st}</div><div class="nm">${it.pet} <span>· ${it.owner}</span></div><div class="ty">${vac}${it.type}</div></div>`;
+  return `<div class="card ${it.st}"><div class="t tnum"><b>${clock(it.s)} – ${clock(it.e)}</b><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">· ${vac}${it.type}</span>${st}</div><div class="nm">${it.pet} <span>· ${it.owner}</span></div></div>`;
+}
+function renderDay() {
+  main.innerHTML = head() + kpis() + `<div class="body"><section class="cal">${calbar('gun')}<div id="d" style="display:flex;flex-direction:column;flex:1;min-height:0"></div></section>${rail()}</div>`;
+  const d = DAYS[2], start = H(9), end = H(18);
+  const cols = [
+    ...Object.entries(VETS).map(([k, [n, r]]) => { const ap = d.appts.filter((x) => x.vet === k); return { head: `<div class="ph"><span class="av">${k}</span><div><div class="n">${n}</div><small><b>${ap.length}</b> randevu · ${ap.filter((x) => !['done', 'noshow'].includes(x.st)).length} kaldı</small></div></div>`, appts: ap }; }),
+    { head: `<div class="ph"><span class="av vx">${SH}</span><div><div class="n">Aşılar</div><small><b>11</b> bekliyor · 6 uygulandı · <a style="color:var(--primary);font-weight:600">2 saatsiz, 1 mesai dışı ▾</a></small></div></div>`, vax: true }
+  ];
+  const tpl = `56px repeat(${cols.length}, minmax(0, 1fr))`;
+  const H0 = (end - start) * PPM;
+  const y = (m) => (m - start) * PPM;
+  let html = `<div class="dhead" style="grid-template-columns:${tpl}"><div></div>${cols.map((c) => c.head).join('')}</div><div class="dscroll" id="ds"><div class="dgrid" style="grid-template-columns:${tpl};height:${H0 + 8}px"><div class="tcol">`;
+  for (let m = start; m <= end; m += 60) html += `<div class="tl tnum" style="top:${y(m) + (m === start ? 8 : 0)}px">${clock(m)}</div>`;
+  html += `<div class="nowpill tnum" style="top:${y(NOW)}px">${clock(NOW)}</div></div>`;
+  for (const c of cols) {
+    html += '<div class="col">';
+    for (let m = start; m < end; m += 15) html += `<div class="hl ${m % 60 ? 'q' : ''}" style="top:${y(m)}px"></div>`;
+    if (c.vax) {
+      let last = -99;
+      for (const x of VAX.filter((q) => q.s !== null && q.s >= start && q.s < end)) {
+        const top = Math.max(y(x.s), last + 34);
+        html += `<div class="cd" style="top:${top}px;height:32px;left:0;right:0"><div class="card vac ${x.st}"><div class="t tnum"><b>${clock(x.s)}</b>${SH}<span style="overflow:hidden;text-overflow:ellipsis">${x.vac}</span>${x.st === 'done' ? '<span class="st">✓</span>' : ''}</div></div></div>`;
+        last = top;
+      }
+    } else {
+      const list = [...c.appts].sort((p, q) => p.s - q.s);
+      for (const it of list) {
+        const lane = list.filter((o) => o !== it && o.s < it.e && it.s < o.e);
+        const h = (it.e - it.s) * PPM;
+        html += `<div class="cd" style="top:${y(it.s)}px;height:${h}px;left:0;right:0">${card(it, h - 4)}</div>`;
+      }
+    }
+    html += `<div class="now" style="top:${y(NOW)}px"></div></div>`;
+  }
+  html += '</div></div>';
+  document.getElementById('d').innerHTML = html;
+  // Aşı kartlarına hasta adı: tek satır "10:30 · Kuduz" üstte, ad altta.
+  document.querySelectorAll('.card.vac').forEach((el, i) => {
+    const x = VAX.filter((q) => q.s !== null && q.s >= start && q.s < end)[i];
+    el.innerHTML = `<div class="nm" style="display:flex;gap:6px;align-items:baseline"><span class="tnum" style="font-size:12px;font-weight:600;color:var(--muted)">${clock(x.s)}</span>${x.pet} <span>· ${x.vac}</span>${x.st === 'done' ? '<span class="st" style="margin-left:auto">✓</span>' : ''}</div>`;
+  });
+  const ds = document.getElementById('ds');
+  ds.scrollTop = Math.max(0, y(NOW) - ds.clientHeight * 0.4);
+}
+function rail() {
+  return `<aside class="rail">
+    <div class="box"><h3>Klinikte <span class="c">2 hasta</span></h3><small>Kabulden canlı · 14:20</small>
+      <div class="who"><span class="av w">MA</span><div><b>Minnoş · Zeynep Aras</b><small class="w">Bekliyor 8 dk · Dr. Ece Arslan</small><small>14:12'de geldi · Aşı randevusu</small></div></div>
+      <div class="who"><span class="av">CG</span><div><b>Cesur · Ahmet Güneş</b><small class="r">Muayenede · Dr. Murat Kaya</small><small>14:02'den beri</small></div></div>
+      <a class="call">Minnoş'u içeri al</a></div>
+    <div class="box"><h3>Boş saatler</h3><small>Bugün öğleden sonra</small>
+      <div class="slot"><b class="tnum">15:00</b><div>Dr. Ece Arslan<small>30 dk</small></div><span class="plus">+</span></div>
+      <div class="slot"><b class="tnum">15:00</b><div>Dr. Murat Kaya<small>60 dk</small></div><span class="plus">+</span></div>
+      <div class="slot"><b class="tnum">16:30</b><div>Dr. Ece Arslan<small>30 dk</small></div><span class="plus">+</span></div></div>
+  </aside>`;
+}
+
+// ---- Hafta ----
+function mini(it) {
+  const st = it.st === 'wait' || it.st === 'room' ? ` · ${ST_LABEL[it.st]}` : it.st === 'overdue' ? ' · gecikmiş' : '';
+  return `<div class="mini ${it.st === 'wait' ? 'today' : it.st}"><div class="t tnum"><b>${clock(it.s)}</b><span class="ty2">· ${it.type.startsWith('Aşı') ? SH + ' ' : ''}${it.type}${st}</span><span class="vet">${it.vet || '–'}</span></div><div class="nm">${it.pet} <span>· ${short(it.owner)}</span></div></div>`;
+}
+function renderWeek() {
+  main.innerHTML = head() + `<div class="body"><section class="cal">${calbar('hafta')}<div class="wk" id="w"></div></section></div>`;
+  document.getElementById('w').innerHTML = DAYS.map((d) => {
+    const items = [...d.appts].sort((p, q) => p.s - q.s);
+    let list = `<a class="vsum">${SH}<b>${d.vx[0]} aşı</b>${d.vx[1] ? `<span class="od">· ${d.vx[1]} gecikmiş</span>` : ''}<span class="chev">›</span></a>`;
+    let nowDone = !d.today;
+    for (const it of items) { if (!nowDone && it.s > NOW) { list += `<div class="nowsep tnum">${clock(NOW)}</div>`; nowDone = true; } list += mini(it); }
+    if (!items.length) list += `<div style="font-size:12px;color:var(--muted);padding:4px">${d.open ? 'Randevu yok' : 'Kapalı'}</div>`;
+    return `<div class="wd ${d.today ? 'today' : ''} ${d.open ? '' : 'off'}"><div class="wdh"><span class="d">${d.num}</span><span class="dn">${d.name}</span><span class="c">${d.appts.length} rnd</span></div><div class="wlist">${list}</div></div>`;
+  }).join('');
+}
+
+// ---- Ay ----
+function renderMonth() {
+  main.innerHTML = head() + `<div class="body"><section class="cal">${calbar('ay')}<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div><div class="mg" id="mg"></div></section></div>`;
+  const names = ['Zeytin', 'Tarçın', 'Pamuk', 'Boncuk', 'Limon', 'Maya', 'Fırtına', 'Şans', 'Bal', 'Reis', 'Karamel', 'Leo', 'Kuki', 'Cesur', 'Karabaş', 'Lokum', 'Mavi', 'Rocky', 'Tekir', 'Tarzan'];
+  const types = ['Kontrol', 'Muayene', 'Aşı', 'Kontrol', 'Operasyon'];
+  const first = new Date(2026, 9, 26);
+  let cells = '';
+  for (let i = 0; i < 42; i++) {
+    const dt = new Date(first); dt.setDate(first.getDate() + i);
+    const dn = dt.getDate(), mon = dt.getMonth(), dow = i % 7, out = mon !== 10;
+    const past = mon < 10 || (mon === 10 && dn < 18);
+    const wk = mon === 10 ? DAYS.find((x) => x.num === dn) : null;
+    let ap, vx, od;
+    if (wk) { ap = wk.appts.filter((x) => !['done', 'noshow'].includes(x.st)).map((x) => ({ s: x.s, pet: x.pet, type: x.type.split(' · ')[0], st: x.st === 'wait' || x.st === 'room' ? 'today' : x.st })); vx = wk.vx[0]; od = wk.vx[1] + wk.appts.filter((x) => x.st === 'overdue').length; var total = wk.appts.length; }
+    else {
+      const s = (dn * 7 + mon * 3) % 11; total = dow === 6 ? 0 : dow === 5 ? 2 : 3 + (s % 5); vx = dow === 6 ? 2 + (s % 3) : 6 + ((s * 5) % 12); od = past ? s % 3 : 0;
+      ap = past ? Array.from({ length: od ? 1 : 0 }, () => ({ s: H(10, 30), pet: names[dn % 20], type: 'Kontrol', st: 'overdue' })) : Array.from({ length: total }, (_, k) => ({ s: H(9 + k, k % 2 ? 30 : 0), pet: names[(dn + k) % 20], type: types[(dn + k) % 5], st: 'up' }));
+    }
+    const shown = ap.slice(0, 2).map((x) => `<div class="chip ${x.st}"><b class="tnum">${clock(x.s)}</b><span>${x.pet} · ${x.type}</span></div>`).join('');
+    const rest = ap.length - Math.min(2, ap.length);
+    const done = past && !ap.length && total ? `<div class="chip done"><span>✓ hepsi tamamlandı</span></div>` : '';
+    cells += `<div class="mc ${out ? 'out' : ''} ${mon === 10 && dn === 18 ? 'today' : ''}"><div class="mh"><span class="d">${dn}</span><small>${dow === 6 ? 'kapalı' : total + ' randevu'}</small></div>${shown}${done}
+      <div class="mv">${SH} ${vx} aşı${od ? `<span class="od">· ${od} gecikmiş</span>` : ''}${rest > 0 ? `<a class="more" style="margin-left:auto">+${rest} randevu</a>` : ''}</div></div>`;
+  }
+  document.getElementById('mg').innerHTML = cells;
+}
+
+function render() { const v2 = route(); if (v2 === 'hafta') renderWeek(); else if (v2 === 'ay') renderMonth(); else renderDay(); }
+render();
+addEventListener('hashchange', render);
+</script>
+</body>
+</html>
