@@ -142,6 +142,59 @@ main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direc
 .demo a.on { background: var(--primary); color: var(--on-primary); }
 .av.c2 { background: #7c5cc4; } .av.c3 { background: #c2410c; } .av.c4 { background: #0369a1; } .av.c5 { background: #be185d; } .av.c6 { background: #4d7c0f; } .av.c7 { background: #6b7280; }
 
+/* Ay seçenekleri */
+.msw { display: flex; gap: 6px; align-items: center; padding: 6px 12px; border-bottom: 1px solid var(--line); font-size: 12.5px; flex: none; }
+.msw > span { color: var(--muted); }
+.msw a { padding: 3px 10px; border: 1px dashed var(--primary); border-radius: 6px; font-weight: 600; background: var(--primary-soft); }
+.msw a small { font-weight: 400; color: var(--muted); margin-left: 4px; }
+.msw a.on { background: var(--primary); color: var(--on-primary); border-style: solid; }
+.msw a.on small { color: var(--on-primary); opacity: .85; }
+.mgrid2 { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); }
+.mx2 { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; overflow: hidden; position: relative; }
+.mx2:nth-child(7n) { border-right: 0; }
+.mx2.out { opacity: .4; }
+.mx2 .dn { position: absolute; top: 6px; left: 8px; font-weight: 700; font-size: 13.5px; }
+.mx2.today .dn { background: var(--primary); color: var(--on-primary); border-radius: 11px; min-width: 22px; height: 22px; display: grid; place-items: center; top: 4px; left: 5px; }
+.mx2.off { background: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--faint) 10%, transparent) 6px 8px); }
+.mx2 .off-l { position: absolute; top: 7px; right: 8px; font-size: 11.5px; color: var(--muted); }
+/* A: doluluk haritası */
+.ha { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ha .big { font-size: 26px; font-weight: 700; line-height: 1; }
+.ha .lbl { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.ha .ft { position: absolute; left: 8px; right: 8px; bottom: 5px; display: flex; gap: 6px; align-items: center; font-size: 11.5px; color: var(--muted); }
+.ha .ft .od { margin-left: auto; background: var(--overdue); color: #fff; border-radius: 9px; padding: 0 6px; font-weight: 700; font-size: 11px; }
+.ha.today { box-shadow: inset 0 0 0 2px var(--primary); }
+.heat { display: flex; align-items: center; gap: 6px; margin-left: auto; color: var(--muted); }
+.heat i { width: 18px; height: 12px; border-radius: 3px; display: inline-block; }
+/* B: ay + gün listesi */
+.mbwrap { flex: 1; min-height: 0; display: flex; }
+.mbwrap .mgrid2 { flex: 1; }
+.mb { padding: 6px 8px; cursor: pointer; }
+.mb .dn { position: static; display: inline-block; }
+.mb .cnt { margin-top: 18px; font-size: 12.5px; font-weight: 600; }
+.mb .cnt span { color: var(--muted); font-weight: 400; }
+.mb .dots { display: flex; gap: 3px; margin-top: 4px; flex-wrap: wrap; }
+.mb .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--up)); }
+.mb.sel { box-shadow: inset 0 0 0 2px var(--primary); background: var(--primary-soft); }
+.mb.today .dn { position: absolute; }
+.mday { width: 360px; flex: none; border-left: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
+.mday .hd { padding: 10px 14px 8px; border-bottom: 1px solid var(--line); }
+.mday .hd b { font-size: 16px; display: block; }
+.mday .hd small { color: var(--muted); font-size: 12.5px; }
+.mday .ls { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+.mday .go { padding: 9px 14px; border-top: 1px solid var(--line); color: var(--primary); font-weight: 600; font-size: 13px; }
+/* C: özet kartlar */
+.hc { padding: 5px 8px 6px; display: flex; flex-direction: column; justify-content: space-between; }
+.hc .row1 { display: flex; align-items: baseline; gap: 6px; }
+.hc .row1 .dn { position: static; }
+.hc .row1 .od { margin-left: auto; color: var(--overdue); font-weight: 700; font-size: 11.5px; }
+.hc .n { font-size: 13px; line-height: 1.2; }
+.hc .n b { font-size: 19px; }
+.hc .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; display: flex; margin: 2px 0; flex: none; }
+.hc .bar i { display: block; height: 100%; }
+.hc .sub { font-size: 11.5px; line-height: 14px; color: var(--muted); display: flex; gap: 6px; white-space: nowrap; overflow: hidden; flex: none; }
+.hc.today { background: color-mix(in srgb, var(--primary-soft) 70%, transparent); }
+
 /* Başlık satırı */
 .head { display: flex; align-items: center; gap: 14px; flex: none; }
 .head h1 { margin: 0; font-size: 20px; }
@@ -545,7 +598,66 @@ function renderMonth() {
   document.getElementById('mg').innerHTML = cells;
 }
 
-function render() { const v2 = route(); document.body.className = 'v' + V; if (v2 === 'hafta') renderWeek(); else if (v2 === 'ay') renderMonth(); else renderDay(); }
+/** Ayın 42 günü (deneme verisi): randevu, tamamlanan, aşı, gecikmiş, doluluk. */
+function monthData() {
+  const first = new Date(2026, 9, 26), out = [];
+  for (let i = 0; i < 42; i++) {
+    const dt = new Date(first); dt.setDate(first.getDate() + i);
+    const dn = dt.getDate(), mon = dt.getMonth(), dow = i % 7;
+    const past = mon < 10 || (mon === 10 && dn < 18), today = mon === 10 && dn === 18;
+    const wk = mon === 10 ? DAYS.find((x) => x.num === dn) : null;
+    const sd = (dn * 7 + mon * 3) % 11;
+    const cap = dow === 6 ? 0 : dow === 5 ? 8 : 16;
+    let total, done, vx, od;
+    if (wk) { total = wk.appts.length; done = wk.appts.filter((x) => x.st === 'done').length; vx = wk.vx[0]; od = wk.vx[1] + wk.appts.filter((x) => x.st === 'overdue').length; }
+    else { total = dow === 6 ? 0 : dow === 5 ? 2 + (sd % 3) : 4 + ((sd * 3) % 11); done = past ? total - (sd % 2) : 0; vx = dow === 6 ? 2 + (sd % 3) : 6 + ((sd * 5) % 12); od = past ? sd % 3 : 0; }
+    out.push({ dn, mon, dow, past, today, out: mon !== 10, total, done, vx, od, cap, closed: dow === 6, appts: wk ? wk.appts : null });
+  }
+  return out;
+}
+const MONTH_OPTS = { A: ['Doluluk haritası', 'gün ne kadar dolu, tek bakışta'], B: ['Ay + gün listesi', 'güne tıkla, yanda o günün listesi'], C: ['Özet kartlar', 'sayı, ilerleme çubuğu, aşı'] };
+function renderMonth2(mv) {
+  const sw = `<div class="msw"><span>Ay düzeni (taslak):</span>${Object.entries(MONTH_OPTS).map(([k, [t, d]]) => `<a href="#${V}-ay-${k}" class="${k === mv ? 'on' : ''}">${k} · ${t}<small>${d}</small></a>`).join('')}${mv === 'A' ? '<span class="heat">az <i style="background:color-mix(in srgb, var(--primary) 6%, var(--surface))"></i><i style="background:color-mix(in srgb, var(--primary) 18%, var(--surface))"></i><i style="background:color-mix(in srgb, var(--primary) 32%, var(--surface))"></i> dolu</span>' : ''}</div>`;
+  const wkh = `<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div>`;
+  const data = monthData();
+  let grid = '';
+  if (mv === 'A') {
+    grid = data.map((d) => {
+      const load = d.cap ? Math.min(1, d.total / d.cap) : 0;
+      const bg = d.closed ? '' : `background:color-mix(in srgb, var(--primary) ${Math.round(4 + load * 30)}%, var(--surface))`;
+      return `<div class="mx2 ha ${d.out ? 'out' : ''} ${d.today ? 'today' : ''} ${d.closed ? 'off' : ''}" style="${bg}"><span class="dn">${d.dn}</span>
+        ${d.closed ? '<span class="off-l">kapalı</span>' : `<span class="big tnum">${d.total}</span><span class="lbl">randevu</span>`}
+        <div class="ft">${SH} ${d.vx}${d.od ? `<span class="od">${d.od} gecikmiş</span>` : ''}</div></div>`;
+    }).join('');
+    return sw + wkh + `<div class="mgrid2">${grid}</div>`;
+  }
+  if (mv === 'B') {
+    grid = data.map((d) => {
+      const states = d.appts ? d.appts.map((x) => (x.st === 'wait' || x.st === 'room' ? 'today' : x.st)) : Array.from({ length: Math.min(d.total, 12) }, (_, k) => (d.past ? (k < d.od ? 'overdue' : 'done') : 'up'));
+      return `<div class="mx2 mb ${d.out ? 'out' : ''} ${d.today ? 'today sel' : ''} ${d.closed ? 'off' : ''}"><span class="dn">${d.dn}</span>
+        ${d.closed ? '<span class="off-l">kapalı</span>' : `<div class="cnt">${d.total} <span>rnd · ${d.vx} aşı</span></div><div class="dots">${states.map((st) => `<i class="${st}"></i>`).join('')}</div>`}</div>`;
+    }).join('');
+    const d = DAYS[2];
+    const list = `<a class="vsum">${SH}<b>17 aşı</b> · 11 bekliyor · 6 uygulandı<span class="chev">›</span></a>` + [...d.appts].sort((p, q) => p.s - q.s).map(mini).join('');
+    return sw + `<div class="mbwrap"><div style="flex:1;min-width:0;display:flex;flex-direction:column">${wkh}<div class="mgrid2">${grid}</div></div>
+      <aside class="mday"><div class="hd"><b>18 Kasım, Çarşamba</b><small>10 randevu · 17 aşı · bugün</small></div><div class="ls">${list}</div><a class="go">Bu günü aç ›</a></aside></div>`;
+  }
+  grid = data.map((d) => {
+    const pct = d.cap ? Math.round((d.total / d.cap) * 100) : 0;
+    const doneW = d.cap ? (d.done / d.cap) * 100 : 0, restW = d.cap ? ((d.total - d.done) / d.cap) * 100 : 0;
+    return `<div class="mx2 hc ${d.out ? 'out' : ''} ${d.today ? 'today' : ''} ${d.closed ? 'off' : ''}"><div class="row1"><span class="dn">${d.dn}</span>${d.od ? `<span class="od">! ${d.od} gecikmiş</span>` : ''}</div>
+      ${d.closed ? '<span class="off-l">kapalı</span><div class="sub" style="margin-top:auto">' + SH + ' ' + d.vx + ' aşı</div>' : `<div class="n"><b class="tnum">${d.total}</b> randevu</div>
+      <div class="bar"><i style="width:${doneW}%;background:var(--done)"></i><i style="width:${restW}%;background:var(--primary)"></i></div>
+      <div class="sub"><span>%${pct} dolu</span><span>·</span><span>${SH} ${d.vx} aşı</span></div>`}</div>`;
+  }).join('');
+  return sw + wkh + `<div class="mgrid2">${grid}</div>`;
+}
+function renderMonthView(mv) {
+  main.innerHTML = head('ay') + `<div class="body">${V === '3' ? agendaPanel() : ''}<section class="cal">${calbar('ay')}<div id="mm" style="flex:1;min-height:0;display:flex;flex-direction:column"></div></section></div>`;
+  document.getElementById('mm').innerHTML = renderMonth2(mv);
+}
+
+function render() { const v2 = route(); document.body.className = 'v' + V; if (v2 === 'hafta') renderWeek(); else if (v2.startsWith('ay')) renderMonthView(v2.split('-')[1] || 'A'); else renderDay(); }
 render();
 addEventListener('hashchange', render);
 </script>

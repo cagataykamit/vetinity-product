@@ -251,3 +251,22 @@ Kullanıcının sorusu: "4 doktor olduğunda ne olacak, daha fazlasında komple 
 5. **Hafta ve ay görünümleri** hekim sayısından etkilenmez: kartta hekimin baş harfleri var, filtre de mevcut.
 
 Taslakta, takvimin üstündeki "Deneme, hekim sayısı: 2 · 4 · 6 · 8" düğmeleriyle denenebilir. Adres biçimi `#1-gun@6`. Görüntüler: `3-1-gun-6.png`, `3-2-gun-8.png`, `3-3-gun-4.png`.
+
+### Ay görünümü: üç yeni seçenek
+
+Kullanıcının değerlendirmesi: gün görünümü beğenildi, hafta "fena değil", ay görünümü beğenilmedi. Ay için üç seçenek hazırlandı. Takvimin üstündeki "Ay düzeni" şeridinden seçilir; adres biçimi `#1-ay-A`.
+
+| Seçenek | Hücrede ne var | Ne için iyi |
+|---|---|---|
+| **A · Doluluk haritası** | Büyük randevu sayısı, aşı sayısı, kırmızı "N gecikmiş" rozeti; hücrenin rengi günün doluluğuyla koyulaşır | Ayın hangi günlerinin dolu, hangilerinin boş olduğunu tek bakışta görmek |
+| **B · Ay + gün listesi** | Sayı ("10 rnd · 17 aşı") ve her randevu için durum renginde bir nokta; sağda seçilen günün listesi | Ay görünümünden çıkmadan bir günün içine bakmak |
+| **C · Özet kartlar** | Randevu sayısı, ilerleme çubuğu (tamamlanan yeşil, kalan ana renk), "%62 dolu", aşı sayısı, gecikmiş uyarısı | Sayıyla takip: doluluk yüzdesi ve gecikmişler |
+
+Ortak olanlar:
+- Hücrede tek tek randevu satırı yok, kalabalık bu yüzden azaldı.
+- Kapalı gün taralı gösterilir.
+- Hücreye tıklanınca o güne geçilir.
+
+Doluluk hesabı için günlük kapasite gerekir (kaç randevu sığar). Bu, çalışma saati ve randevu süresinden hesaplanabilir; taslakta hafta içi 16, cumartesi 8 varsayıldı. Gerçek hesap backend tarafında yapılmalı; kural tek yerde, `AppointmentAvailabilityCalculator` ile aynı kaynaktan.
+
+Görüntüler: `3-1-ay-A.png`, `3-1-ay-B.png`, `3-1-ay-C.png`.
