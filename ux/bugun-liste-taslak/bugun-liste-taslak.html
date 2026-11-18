@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bugün listesi taslağı</title>
+<title>Bugün ve e-belge taslağı</title>
 <!--
-  Panel > Bugün (/panel/today) günlük liste için üç seçenek (2026-11-18). Statik, tıklanır taslak; veriler uydurmadır.
-  Üst çubuktaki çizgili şeritten A, B, C seçilir; adres #A, #B, #C. Saat 15:20 sabit kabul edilir.
-  Geldi → Başlat → Tamamla ve Ödeme al gerçekten durumu değiştirir; "Sıfırla" başa döndürür.
+  İki tasarım, her birinde üç seçenek (2026-11-18). Statik, tıklanır taslak; veriler uydurmadır.
+  Sol alttaki çizgili "Taslak" panelinden bölüm (Bugün listesi / E-belge uyarısı), seçenek (A, B, C) ve e-belgede senaryo seçilir.
+  Bugün listesi: adres #A, #B, #C; saat 15:20 sabit. Geldi → Başlat → Tamamla ve Ödeme al durumu gerçekten değiştirir.
+  E-belge uyarısı: adres #E-A-one, #E-B-three, #E-C-noperm…; "Aç" ayar sayfasına gider, kaydedip dönünce pencere kaldığı yerden sürer.
+  "Sıfırla" başa döndürür.
   Ölçü: 1536×730 CSS piksel (1920×1080 ekran, %125 ölçek). Renkler vetinity-preset.ts'ten (primary.600 #0c8079).
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css">
@@ -58,14 +60,99 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .side a.on i { color: var(--primary); }
 main { flex: 1; min-width: 0; overflow-y: auto; padding: 14px 24px 24px; }
 
-/* ---------- Taslak şeridi (ürünün parçası değil) ---------- */
-.draft { display: flex; align-items: center; gap: 6px; padding: 4px 6px 4px 10px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-50); font-size: 12.5px; }
-.draft b { margin-right: 2px; }
-.draft a { padding: 3px 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; white-space: nowrap; }
+/* ---------- Taslak paneli (ürünün parçası değil; menünün altında, her şeyin üstünde) ---------- */
+.draft { position: fixed; left: 10px; bottom: 10px; width: 220px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-50); font-size: 12px; box-shadow: var(--shadow); }
+.draft .dh { display: flex; align-items: center; justify-content: space-between; font-size: 11px; letter-spacing: .6px; }
+.draft a { display: block; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .draft a small { font-weight: 400; color: var(--muted); margin-left: 3px; }
 .draft a.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
 .draft a.on small { color: var(--on-primary); opacity: .85; }
-.draft .lnk { border: 0; background: none; color: var(--primary); padding: 3px 6px; font-weight: 600; }
+.draft .dsec, .draft .dscn { display: flex; gap: 4px; }
+.draft .dsec a, .draft .dscn a { flex: 1; text-align: center; padding: 3px 4px; }
+.draft .dopts { display: flex; flex-direction: column; gap: 3px; }
+.draft .dscn:empty { display: none; }
+.draft .dscn span { align-self: center; color: var(--muted); }
+.draft .lnk { border: 0; background: none; color: var(--primary); padding: 0 0 0 8px; font-weight: 600; font-size: 11.5px; }
+
+/* ---------- E-belge: Ücretler sayfası, pencere ve ayar sayfası ---------- */
+.ctab { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.ctab th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 8px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.ctab td { padding: 0 12px; height: 44px; border-bottom: 1px solid var(--line); }
+.ctab td.r, .ctab th.r { text-align: right; }
+.ctab tr.sel td { background: var(--primary-50); }
+.cb { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--faint); display: inline-grid; place-items: center; vertical-align: middle; }
+.cb.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); font-size: 10px; }
+.selbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--border); font-size: 13.5px; }
+.selbar .btn { margin-left: auto; }
+.mask { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); z-index: 40; display: grid; place-items: center; }
+.dlg { width: 560px; max-width: 95vw; max-height: calc(100vh - 40px); background: var(--surface); border-radius: 12px; box-shadow: var(--pop); display: flex; flex-direction: column; overflow: hidden; }
+.dlg-h { display: flex; align-items: center; gap: 10px; padding: 16px 20px 8px; }
+.dlg-h h3 { margin: 0; font-size: 17px; }
+.dlg-h .btn.ico { margin-left: auto; }
+.dlg-b { padding: 4px 20px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+.dlg-f { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 20px 16px; border-top: 1px solid var(--line); }
+.dlg-f .grow { margin-right: auto; font-size: 12.5px; color: var(--muted); }
+.btn.txt { border-color: transparent; background: transparent; color: var(--muted); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.lead { display: flex; gap: 12px; align-items: flex-start; }
+.lead .bub { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-50); color: var(--primary); display: grid; place-items: center; flex: none; font-size: 17px; }
+.lead h4 { margin: 2px 0 4px; font-size: 15.5px; }
+.lead p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.chk { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 10px; }
+.chk li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 11px 14px; }
+.chk li + li { border-top: 1px solid var(--line); }
+.chk .n { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.chk .ok { width: 24px; height: 24px; border-radius: 50%; background: var(--green-bg); color: var(--green); font-size: 11px; display: grid; place-items: center; }
+.chk b { display: block; font-size: 14px; }
+.chk small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+.chk li.done b { font-weight: 500; color: var(--muted); }
+.chk .val { font-size: 12.5px; color: var(--muted); }
+.hint { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--muted); background: var(--surface-2); border-radius: 8px; padding: 8px 10px; }
+.hint i { margin-top: 2px; }
+.steps { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-weight: 600; }
+.steps i { width: 22px; height: 4px; border-radius: 2px; background: var(--line); }
+.steps i.on { background: var(--primary); }
+.steps i.ok { background: var(--green-dot); }
+.radios { display: flex; flex-direction: column; gap: 8px; }
+.radio { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+.radio:hover { border-color: var(--primary); }
+.radio.on { border-color: var(--primary); background: var(--primary-50); box-shadow: inset 0 0 0 1px var(--primary); }
+.radio .rd { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--faint); margin-top: 1px; }
+.radio.on .rd { border: 5px solid var(--primary); }
+.radio b { display: block; font-size: 14px; }
+.radio small { color: var(--muted); font-size: 12.5px; }
+.fld label { display: block; font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
+.fld input, .fld select { width: 100%; height: 36px; border: 1px solid var(--border); border-radius: 6px; padding: 0 10px; font: inherit; background: var(--surface); color: var(--text); }
+.fld input:focus, .fld select:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+.fld small { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
+.lnk2 { color: var(--primary); font-weight: 600; font-size: 13px; }
+.banner { display: grid; grid-template-columns: 22px 1fr; gap: 10px; border-radius: 10px; padding: 12px 14px; background: var(--amber-bg); border: 1px solid color-mix(in srgb, var(--amber-dot) 45%, transparent); }
+.banner > i { color: var(--amber); margin-top: 2px; }
+.banner b { display: block; font-size: 14px; }
+.banner p { margin: 2px 0 8px; font-size: 13px; color: var(--text); }
+.banner .chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.banner .chips a { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; padding: 3px 9px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+.banner .chips a:hover { border-color: var(--primary); color: var(--primary); }
+.pv-sec .k { font-size: 12.5px; color: var(--muted); margin-bottom: 3px; }
+.pv-lines { border: 1px solid var(--border); border-radius: 10px; }
+.pv-lines div { display: flex; justify-content: space-between; padding: 7px 12px; font-size: 13.5px; }
+.pv-lines div + div { border-top: 1px solid var(--line); }
+.pv-lines div.tot { font-weight: 700; background: var(--surface-2); }
+.grp { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+.grp b { display: block; }
+.grp small { color: var(--muted); font-size: 12.5px; }
+.ready { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--green); font-weight: 600; }
+.back { display: flex; align-items: center; gap: 12px; border-radius: 10px; padding: 10px 14px; background: var(--primary-50); border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent); margin-bottom: 14px; font-size: 13.5px; }
+.back i.lead-i { color: var(--primary); font-size: 16px; }
+.back .btn { margin-left: auto; }
+.crumb { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.scard { padding: 16px 18px; margin-bottom: 14px; }
+.scard h5 { margin: 0 0 4px; font-size: 15px; }
+.scard > p { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+.scard.focus { box-shadow: 0 0 0 2px var(--primary); }
+.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.fld.need select, .fld.need input { border-color: var(--amber-dot); background: color-mix(in srgb, var(--amber-bg) 50%, var(--surface)); }
+.fld .needt { color: var(--amber); font-weight: 600; }
 
 /* ---------- Sayfa başı (üç seçenekte ortak) ---------- */
 .ph { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -234,14 +321,6 @@ table.ta { width: 100%; border-collapse: collapse; table-layout: fixed; }
 <body>
 <div class="top">
   <div class="logo"><i class="pi pi-bars"></i><span><b>V</b>etinity</span></div>
-  <div class="draft" role="group" aria-label="Taslak seçenekleri">
-    <b>Taslak</b>
-    <a data-opt="A">A <small>Sıkı tablo</small></a>
-    <a data-opt="B">B <small>Durum şeritleri</small></a>
-    <a data-opt="C">C <small>Gün akışı</small></a>
-    <button class="lnk" id="reset" type="button">Sıfırla</button>
-    <button class="lnk" id="theme" type="button">Koyu tema</button>
-  </div>
   <div class="search"><i class="pi pi-search"></i>&nbsp; Ara…</div>
   <span class="clinic"><i class="pi pi-building"></i> Merkez Pati</span>
   <i class="pi pi-bell ic"></i><i class="pi pi-sun ic"></i><i class="pi pi-user ic"></i>
@@ -249,18 +328,19 @@ table.ta { width: 100%; border-collapse: collapse; table-layout: fixed; }
 <div class="shell">
   <nav class="side">
     <h6>GÜNLÜK İŞ</h6>
-    <a class="on"><i class="pi pi-calendar"></i>Bugün</a>
+    <a data-nav="bugun"><i class="pi pi-calendar"></i>Bugün</a>
     <a><i class="pi pi-calendar-plus"></i>Randevular</a>
     <h6>MÜŞTERİ VE HASTA</h6>
     <a><i class="pi pi-users"></i>Müşteri ve Hasta</a>
     <h6>KLİNİK</h6>
-    <a><i class="pi pi-book"></i>Kayıtlar</a>
+    <a data-nav="charges"><i class="pi pi-book"></i>Kayıtlar</a>
     <h6>YÖNETİM</h6>
     <a><i class="pi pi-chart-line"></i>Raporlar</a>
     <a><i class="pi pi-th-large"></i>Özet</a>
-    <a><i class="pi pi-cog"></i>Ayarlar</a>
+    <a data-nav="settings"><i class="pi pi-cog"></i>Ayarlar</a>
     <a><i class="pi pi-whatsapp"></i>WhatsApp destek</a>
   </nav>
+  <main id="pageEbelge" hidden></main>
   <main id="main">
     <div class="ph">
       <h1>Bugün</h1>
@@ -284,7 +364,15 @@ table.ta { width: 100%; border-collapse: collapse; table-layout: fixed; }
   </main>
 </div>
 <div class="menu" id="menu" hidden></div>
+<div id="modal"></div>
 <div class="toast" id="toast"></div>
+<!-- Taslak paneli: ürünün parçası değil; menünün boş alt kısmında durur -->
+<div class="draft" role="group" aria-label="Taslak seçenekleri">
+  <div class="dh"><b>TASLAK</b><span><button class="lnk" id="reset" type="button">Sıfırla</button><button class="lnk" id="theme" type="button">Koyu tema</button></span></div>
+  <div class="dsec"><a data-sec="bugun">Bugün listesi</a><a data-sec="ebelge">E-belge uyarısı</a></div>
+  <div class="dopts" id="dopts"></div>
+  <div class="dscn" id="dscn"></div>
+</div>
 
 <script>
 const NOW = 15 * 60 + 20;
@@ -532,8 +620,184 @@ function renderC(v) {
 }
 
 /* ---------- Ortak çizim ---------- */
+/* ================= E-belge: eksik ayar penceresi ================= */
+const REQ = {
+  taxpayerType: { title: 'Mükellef türü', why: 'Belgenin e-SMM mi fatura mı olacağı bu seçimden çıkar.', btn: 'Mükellef bilgilerini aç', target: 'taxpayer', done: 'Serbest meslek' },
+  taxId: { title: 'Kliniğin VKN / TCKN numarası', why: 'Belgede düzenleyen olarak kliniğin vergi kimliği yazılır.', btn: 'Mükellef bilgilerini aç', target: 'taxpayer', done: 'VKN ••••••4521' },
+  provider: { title: 'e-Belge entegratörü bağlantısı', why: 'Belge GİB’e entegratör hesabınız üzerinden gönderilir.', btn: 'Entegratörü bağla', target: 'provider', done: 'Bağlı · canlı ortam' }
+};
+const REQ_ORDER = ['taxpayerType', 'taxId', 'provider'];
+const SCN = { one: ['taxpayerType'], three: ['taxpayerType', 'taxId', 'provider'], noperm: ['taxpayerType'] };
+const CHARGES = [
+  ['18.11 13:20', 'Gece · Buse Tan', 'Muayene', 600, true],
+  ['18.11 13:35', 'Gece · Buse Tan', 'Kan tahlili (hemogram)', 550, true],
+  ['18.11 13:40', 'Gece · Buse Tan', 'Enjeksiyon', 300, true],
+  ['18.11 11:20', 'Badem · Tolga Işık', 'Deri kazıntısı', 450, false],
+  ['18.11 10:05', 'Bulut · Can Demir', 'Kontrol muayenesi', 400, false],
+  ['17.11 16:40', 'Paşa · Okan Tuna', 'Karma aşı', 750, false]
+];
+const SEL_TOTAL = 1450;
+let sec = 'bugun', eopt = 'A', scn = 'one';
+let eb = null;
+function ebReset() { eb = { missing: [...SCN[scn]], view: 'charges', dialog: true, target: null, fromDialog: false, issued: false, pick: null, vkn: '' }; }
+ebReset();
+const canFix = () => scn !== 'noperm';
+
+function chargesPage() {
+  const rows = CHARGES.map(([d, who, what, amt, sel]) => `<tr class="${sel ? 'sel' : ''}"><td><span class="cb ${sel ? 'on' : ''}">${sel ? '<i class="pi pi-check" style="font-size:9px"></i>' : ''}</span></td><td class="tnum muted">${d}</td><td>${who}</td><td>${what}</td><td class="r tnum">${money(amt)}</td><td><span class="tag prep">Belgesiz</span></td></tr>`).join('');
+  return `<div class="ph"><h1>Ücretler</h1><span class="date">Belgesi kesilmemiş ücretler</span>
+      <div class="acts"><button class="btn" type="button"><i class="pi pi-plus"></i>Ücret ekle</button></div></div>
+    <section class="card"><table class="ctab"><thead><tr><th style="width:44px"><span class="cb"></span></th><th style="width:130px">Tarih</th><th>Hasta · müşteri</th><th>Kalem</th><th class="r">Tutar</th><th style="width:110px">Belge</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="selbar"><b>3 ücret seçildi</b><span class="muted">Buse Tan · ${money(SEL_TOTAL)}</span><button class="btn pri" data-eb="open"><i class="pi pi-send"></i>Belge kes</button></div></section>`;
+}
+
+function settingsPage() {
+  const t = eb.target;
+  const back = eb.fromDialog ? `<div class="back"><i class="pi pi-reply lead-i"></i><span>Belge kesmek için buraya geldiniz. Kaydettikten sonra seçtiğiniz <b>3 ücrete (${money(SEL_TOTAL)})</b> dönüp belgeyi kesebilirsiniz.</span>
+      <button class="btn ${needsFor(t).length ? '' : 'pri'}" data-eb="back"><i class="pi pi-arrow-left"></i>${needsFor(t).length ? 'Ücretlere dön' : 'Ücretlere dön ve belgeyi kes'}</button></div>` : '';
+  if (t === 'provider') {
+    const need = eb.missing.includes('provider');
+    return `${back}<div class="crumb">Ayarlar › e-Belge</div><div class="ph"><h1>e-Belge</h1></div>
+      <section class="card scard focus" id="entegrator"><h5>Entegratör bağlantısı</h5><p>Belgeler GİB’e bu hesap üzerinden gönderilir. Bağlantı sağlayıcının kendi sayfasında onaylanır.</p>
+      ${need ? '<button class="btn pri" data-eb="connect"><i class="pi pi-link"></i>Entegratör hesabını bağla</button>' : '<span class="ready"><i class="pi pi-check-circle"></i>Bağlı · canlı ortam</span>'}</section>`;
+  }
+  const needType = eb.missing.includes('taxpayerType'), needId = eb.missing.includes('taxId');
+  return `${back}<div class="crumb">Ayarlar › Klinikler › Merkez Pati</div><div class="ph"><h1>Merkez Pati</h1></div>
+    <section class="card scard" style="opacity:.55"><h5>Çalışma saatleri</h5><p>Pazartesi–Cumartesi 09:00–19:00</p></section>
+    <section class="card scard focus" id="mukellef-bilgileri"><h5>Mükellef bilgileri</h5><p>Fatura ve e-belge düzenlenirken kliniğin vergi kimliği, adresi ve varsayılan oranlar olarak kullanılır.</p>
+      <div class="sgrid">
+        <div class="fld ${needType ? 'need' : ''}"><label for="tt">Mükellef türü</label><select id="tt" data-eb-in="type"><option value="">Belirtilmemiş</option><option ${needType ? '' : 'selected'}>Serbest meslek</option><option>Şirket</option><option>İkisi (hizmet serbest meslek, ürün şirket)</option></select>${needType ? '<small class="needt">Belge kesmek için gerekli</small>' : ''}</div>
+        <div class="fld ${needId ? 'need' : ''}"><label for="vk">VKN / TCKN</label><input id="vk" inputmode="numeric" maxlength="11" value="${needId ? '' : '1234564521'}" placeholder="10 ya da 11 hane">${needId ? '<small class="needt">Belge kesmek için gerekli</small>' : '<small>Şirkette 10 haneli VKN, serbest meslekte VKN veya 11 haneli TCKN.</small>'}</div>
+        <div class="fld"><label>Vergi dairesi</label><input value="Kadıköy"></div>
+        <div class="fld"><label>Varsayılan KDV oranı (%)</label><input value="20"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn pri" data-eb="saveTax"><i class="pi pi-save"></i>Mükellef bilgilerini kaydet</button></div></section>`;
+}
+function needsFor(target) { return eb.missing.filter((k) => REQ[k].target === target); }
+
+/* Hazır pencere (eksik kalmadı): bugünkü önizleme, değişmeden */
+function readyBody() {
+  return `<div class="ready"><i class="pi pi-check-circle"></i>Ayarlar tamam; belge kesilebilir.</div>
+    <div class="pv-sec"><div class="k">Alıcı</div><b>Buse Tan</b><div class="muted" style="font-size:13px">TCKN •••••••••12</div></div>
+    <div class="grp"><div><b>e-SMM (serbest meslek makbuzu)</b><small>3 kalem · ${money(SEL_TOTAL)}</small>${eb.issued ? '<div style="font-size:13px">No: VSM2026000000123</div>' : ''}</div>
+      ${eb.issued ? '<span class="st s-done">Kesildi</span><button class="btn sm"><i class="pi pi-file-pdf"></i>PDF</button>' : '<button class="btn pri sm" data-eb="issue"><i class="pi pi-send"></i>Kes</button>'}</div>
+    <div class="fld"><label>Belge notu (isteğe bağlı)</label><input ${eb.issued ? 'disabled' : ''}></div>`;
+}
+const noPermHint = (n) => `<div class="hint"><i class="pi pi-lock"></i><span>${n > 1 ? 'Bu ayarları' : 'Bu ayarı'} klinik ayarlarını düzenleme yetkisi olan biri tamamlayabilir. Klinik yöneticinize <b>“${eb.missing.map((k) => REQ[k].title).join(', ')}”</b> eksik deyin; tamamlanınca buradan belgeyi kesebilirsiniz.</span></div>`;
+
+/* A · Hazırlık listesi */
+function dialogA() {
+  const n = eb.missing.length;
+  const first = REQ[eb.missing[0]];
+  const items = REQ_ORDER.map((k, i) => {
+    const miss = eb.missing.includes(k), r = REQ[k];
+    return miss
+      ? `<li><span class="n">${eb.missing.indexOf(k) + 1}</span><div><b>${r.title}</b><small>${r.why}</small></div>${canFix() ? `<button class="btn sm" data-eb="go" data-k="${k}">Aç<i class="pi pi-angle-right"></i></button>` : ''}</li>`
+      : `<li class="done"><span class="ok"><i class="pi pi-check"></i></span><div><b>${r.title}</b></div><span class="val">${r.done}</span></li>`;
+  }).join('');
+  return {
+    body: `<div class="lead"><span class="bub"><i class="pi pi-list-check"></i></span><div><h4>Belge kesmeden önce ${n === 1 ? 'bir ayar' : n + ' ayar'} gerekli</h4>
+        <p>${n === 1 ? 'Bu, kliniğin bir kerelik ayarı' : 'Bunlar kliniğin bir kerelik ayarları'}; tamamlandıktan sonra bir daha sorulmaz. Seçtiğiniz 3 ücret (${money(SEL_TOTAL)}) belgesiz olarak bekler, bir şey kaybolmaz.</p></div></div>
+      <ul class="chk">${items}</ul>${canFix() ? '' : noPermHint(n)}`,
+    foot: `<span class="grow">${REQ_ORDER.length - n} / ${REQ_ORDER.length} hazır</span><button class="btn txt" data-eb="close">Kapat</button>${canFix() ? `<button class="btn pri" data-eb="go" data-k="${eb.missing[0]}"><i class="pi pi-arrow-right"></i>${first.btn}</button>` : ''}`
+  };
+}
+
+/* B · Yerinde tamamla: eksikler pencerede tek tek, ayar sayfasına gitmeden */
+function dialogB() {
+  const total = SCN[scn].length, k = eb.missing[0], idx = total - eb.missing.length;
+  const steps = total > 1 ? `<div class="steps">${SCN[scn].map((_, i) => `<i class="${i < idx ? 'ok' : i === idx ? 'on' : ''}"></i>`).join('')}<span>Adım ${idx + 1} / ${total}</span></div>` : '';
+  if (!canFix()) {
+    return { body: `<div class="lead"><span class="bub"><i class="pi pi-id-card"></i></span><div><h4>Önce kliniğin mükellef türü seçilmeli</h4><p>${REQ[k].why}</p></div></div>${noPermHint(eb.missing.length)}`, foot: '<button class="btn pri" data-eb="close">Tamam</button>' };
+  }
+  let q = '', canNext = false, btn = '<i class="pi pi-check"></i>Kaydet ve devam et';
+  if (k === 'taxpayerType') {
+    const opts = [['Serbest meslek', 'Hizmetler için e-SMM (serbest meslek makbuzu) kesilir.'], ['Şirket', 'Hizmet ve ürünler için fatura (e-Arşiv / e-Fatura) kesilir.'], ['İkisi', 'Hizmet serbest meslek (e-SMM), ürün şirket (fatura).']];
+    q = `<div class="lead"><span class="bub"><i class="pi pi-id-card"></i></span><div><h4>Kliniğiniz hangi mükellef türünde?</h4><p>${REQ[k].why} Emin değilseniz mali müşavirinize sorun; sonradan Ayarlar’dan değiştirebilirsiniz.</p></div></div>
+      <div class="radios">${opts.map(([t, d], i) => `<div class="radio ${eb.pick === i ? 'on' : ''}" data-eb="pick" data-i="${i}"><span class="rd"></span><div><b>${t}</b><small>${d}</small></div></div>`).join('')}</div>`;
+    canNext = eb.pick != null;
+  } else if (k === 'taxId') {
+    q = `<div class="lead"><span class="bub"><i class="pi pi-hashtag"></i></span><div><h4>Kliniğin vergi kimlik numarası</h4><p>${REQ[k].why}</p></div></div>
+      <div class="fld"><label for="vkn">VKN / TCKN</label><input id="vkn" inputmode="numeric" maxlength="11" placeholder="10 ya da 11 hane" value="${eb.vkn}" data-eb-in="vkn"><small>Şirkette 10 haneli VKN, serbest meslekte VKN veya 11 haneli TCKN.</small></div>`;
+    canNext = /^\d{10,11}$/.test(eb.vkn);
+  } else {
+    q = `<div class="lead"><span class="bub"><i class="pi pi-link"></i></span><div><h4>Son adım: entegratör hesabınızı bağlayın</h4><p>${REQ[k].why} Bağlantı, sağlayıcının kendi sayfasında onaylanır; bu yüzden ayar sayfasında açılır. Döndüğünüzde bu pencere kaldığı yerden sürer.</p></div></div>`;
+    canNext = true; btn = '<i class="pi pi-external-link"></i>Entegratörü bağla';
+  }
+  return {
+    body: `${steps}${q}`,
+    foot: `<a class="lnk2 grow" data-eb="go" data-k="${k}" style="color:var(--primary)">Tüm ayarları sayfada aç</a><button class="btn txt" data-eb="close">Kapat</button><button class="btn pri" data-eb="${k === 'provider' ? 'go' : 'next'}" data-k="${k}" ${canNext ? '' : 'disabled'}>${btn}</button>`
+  };
+}
+
+/* C · Önizlemede şerit: belge önizlemesi görünür, eksikler üstte tek şeritte */
+function dialogC() {
+  const n = eb.missing.length;
+  const typeKnown = !eb.missing.includes('taxpayerType');
+  const first = REQ[eb.missing[0]];
+  return {
+    body: `<div class="banner"><i class="pi pi-info-circle"></i><div><b>Belge kesmeye ${n === 1 ? 'bir adım' : n + ' adım'} kaldı</b>
+        <p>Kliniğin ${n === 1 ? 'şu ayarı' : 'şu ayarları'} henüz girilmemiş. Tamamlayınca bu önizleme aynen kesilir.</p>
+        <div class="chips">${eb.missing.map((k) => canFix() ? `<a data-eb="go" data-k="${k}" title="${REQ[k].why}">${REQ[k].title}<i class="pi pi-angle-right"></i></a>` : `<a title="${REQ[k].why}" style="cursor:default">${REQ[k].title}</a>`).join('')}</div></div></div>
+      ${canFix() ? '' : noPermHint(n)}
+      <div class="pv-sec"><div class="k">Alıcı</div><b>Buse Tan</b><div class="muted" style="font-size:13px">TCKN •••••••••12</div></div>
+      <div class="pv-sec"><div class="k">Belgeye girecek kalemler</div><div class="pv-lines"><div><span>Muayene</span><span class="tnum">${money(600)}</span></div><div><span>Kan tahlili (hemogram)</span><span class="tnum">${money(550)}</span></div><div><span>Enjeksiyon</span><span class="tnum">${money(300)}</span></div><div class="tot"><span>Toplam</span><span class="tnum">${money(SEL_TOTAL)}</span></div></div></div>
+      <div class="pv-sec"><div class="k">Belge türü</div><span class="muted" style="font-size:13px">${typeKnown ? 'e-SMM (serbest meslek makbuzu)' : 'Mükellef türü seçilince belirlenir (e-SMM ya da fatura).'}</span></div>`,
+    foot: `<button class="btn txt" data-eb="close">Kapat</button>${canFix() ? `<button class="btn" disabled title="Önce eksik ayarları tamamlayın"><i class="pi pi-send"></i>Kes</button><button class="btn pri" data-eb="go" data-k="${eb.missing[0]}"><i class="pi pi-arrow-right"></i>${first.btn}</button>` : '<button class="btn" disabled><i class="pi pi-send"></i>Kes</button>'}`
+  };
+}
+
+function renderEbelge() {
+  const page = document.getElementById('pageEbelge');
+  page.innerHTML = eb.view === 'settings' ? settingsPage() : chargesPage();
+  const modal = document.getElementById('modal');
+  if (eb.view !== 'charges' || !eb.dialog) { modal.innerHTML = ''; return; }
+  const d = eb.missing.length === 0 ? { body: readyBody(), foot: '<button class="btn txt" data-eb="close">Kapat</button>' } : eopt === 'A' ? dialogA() : eopt === 'B' ? dialogB() : dialogC();
+  modal.innerHTML = `<div class="mask" data-eb="maskclick"><div class="dlg" role="dialog" aria-modal="true" aria-label="e-belge kes">
+    <div class="dlg-h"><h3>e-belge kes</h3><button class="btn ico" data-eb="close" aria-label="Kapat"><i class="pi pi-times"></i></button></div>
+    <div class="dlg-b">${d.body}</div><div class="dlg-f">${d.foot}</div></div></div>`;
+}
+
+function ebAction(a, e) {
+  const k = a.dataset.k;
+  switch (a.dataset.eb) {
+    case 'open': eb.dialog = true; break;
+    case 'close': eb.dialog = false; break;
+    case 'maskclick': if (e.target === a) eb.dialog = false; else return; break;
+    case 'go': eb.target = REQ[k].target; eb.view = 'settings'; eb.fromDialog = true; eb.dialog = false; document.getElementById('pageEbelge').scrollTop = 0; break;
+    case 'back': eb.view = 'charges'; eb.dialog = true; eb.fromDialog = false; break;
+    case 'saveTax': {
+      const type = document.getElementById('tt').value, vkn = document.getElementById('vk').value.trim();
+      if (type) eb.missing = eb.missing.filter((x) => x !== 'taxpayerType');
+      if (/^\d{10,11}$/.test(vkn)) eb.missing = eb.missing.filter((x) => x !== 'taxId');
+      toast(needsFor('taxpayer').length ? 'Kaydedildi; hâlâ eksik alan var' : 'Mükellef bilgileri kaydedildi');
+      break;
+    }
+    case 'connect': eb.missing = eb.missing.filter((x) => x !== 'provider'); toast('Entegratör bağlandı (taslak)'); break;
+    case 'pick': eb.pick = +a.dataset.i; break;
+    case 'next': eb.missing = eb.missing.filter((x) => x !== k); toast(REQ[k].title + ' kaydedildi'); break;
+    case 'issue': eb.issued = true; toast('Belge kesildi (taslak)'); break;
+  }
+  render();
+}
+
+function renderDraft() {
+  document.querySelectorAll('.draft [data-sec]').forEach((a) => a.classList.toggle('on', a.dataset.sec === sec));
+  const labels = sec === 'bugun' ? { A: 'Sıkı tablo', B: 'Durum şeritleri', C: 'Gün akışı' } : { A: 'Hazırlık listesi', B: 'Yerinde tamamla', C: 'Önizlemede şerit' };
+  const cur = sec === 'bugun' ? opt : eopt;
+  document.getElementById('dopts').innerHTML = ['A', 'B', 'C'].map((o) => `<a data-opt="${o}" class="${o === cur ? 'on' : ''}">${o} <small>${labels[o]}</small></a>`).join('');
+  document.getElementById('dscn').innerHTML = sec === 'ebelge' ? [['one', '1 eksik'], ['three', '3 eksik'], ['noperm', 'Yetkisiz']].map(([v, t]) => `<a data-scn="${v}" class="${v === scn ? 'on' : ''}">${t}</a>`).join('') : '';
+  const nav = sec === 'bugun' ? 'bugun' : eb.view === 'settings' ? 'settings' : 'charges';
+  document.querySelectorAll('.side a').forEach((a) => a.classList.toggle('on', a.dataset.nav === nav));
+  history.replaceState(null, '', sec === 'bugun' ? '#' + opt : `#E-${eopt}-${scn}`);
+}
+
 function render() {
-  document.querySelectorAll('.draft a[data-opt]').forEach((a) => a.classList.toggle('on', a.dataset.opt === opt));
+  renderDraft();
+  document.getElementById('main').hidden = sec !== 'bugun';
+  document.getElementById('pageEbelge').hidden = sec !== 'ebelge';
+  if (sec === 'ebelge') { renderEbelge(); return; }
+  document.getElementById('modal').innerHTML = '';
   document.querySelectorAll('#segList a').forEach((a) => a.classList.toggle('on', a.dataset.v === list));
   document.querySelectorAll('#segScope a').forEach((a) => a.classList.toggle('on', a.dataset.v === scope));
   const v = visible();
@@ -573,8 +837,14 @@ document.addEventListener('click', (e) => {
     menu.hidden = true; return;
   }
   menu.hidden = true;
+  const sc = e.target.closest('.draft a[data-sec]');
+  if (sc) { sec = sc.dataset.sec; render(); return; }
+  const sn = e.target.closest('.draft a[data-scn]');
+  if (sn) { scn = sn.dataset.scn; ebReset(); render(); return; }
   const o = e.target.closest('.draft a[data-opt]');
-  if (o) { opt = o.dataset.opt; history.replaceState(null, '', '#' + opt); render(); return; }
+  if (o) { if (sec === 'bugun') opt = o.dataset.opt; else { eopt = o.dataset.opt; ebReset(); } render(); return; }
+  const ea = e.target.closest('[data-eb]');
+  if (ea) { ebAction(ea, e); return; }
   const s1 = e.target.closest('#segList a'); if (s1) { list = s1.dataset.v; render(); return; }
   const s2 = e.target.closest('#segScope a'); if (s2) { scope = s2.dataset.v; render(); return; }
   const a = e.target.closest('[data-act]');
@@ -592,13 +862,29 @@ document.addEventListener('click', (e) => {
   }
   render();
 });
-document.getElementById('reset').addEventListener('click', (e) => { e.stopPropagation(); items = build(); showDone = false; openBins.clear(); list = 'today'; scope = 'all'; render(); });
+document.addEventListener('input', (e) => {
+  if (e.target.dataset.ebIn === 'vkn') {
+    eb.vkn = e.target.value.replace(/\D/g, '');
+    const btn = document.querySelector('.dlg-f [data-eb="next"]');
+    if (btn) btn.disabled = !/^\d{10,11}$/.test(eb.vkn);
+  }
+});
+document.getElementById('reset').addEventListener('click', (e) => { e.stopPropagation(); items = build(); showDone = false; openBins.clear(); list = 'today'; scope = 'all'; ebReset(); render(); });
 document.getElementById('theme').addEventListener('click', (e) => {
   e.stopPropagation();
   const d = document.documentElement.classList.toggle('dark');
   e.target.textContent = d ? 'Açık tema' : 'Koyu tema';
 });
-opt = ['A', 'B', 'C'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'A';
+/* Adres: #A / #B / #C (Bugün listesi) ya da #E-A-one, #E-B-three, #E-C-noperm (E-belge uyarısı) */
+{
+  const h = location.hash.slice(1).split('-');
+  if (h[0] === 'E') {
+    sec = 'ebelge';
+    if (['A', 'B', 'C'].includes(h[1])) eopt = h[1];
+    if (SCN[h[2]]) scn = h[2];
+    ebReset();
+  } else if (['A', 'B', 'C'].includes(h[0])) opt = h[0];
+}
 render();
 </script>
 </body>
