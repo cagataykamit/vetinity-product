@@ -4,7 +4,7 @@
 > **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `6cda9ba7`, panel ve tanıtım `3bdbb891` (`main-42FFWWBN.js`; 2026-11-17 22:50), portal `main-IUS6NQD7.js` (21:03). [Sürüm notu](../release-notes/2026-11-17-takvim-eszamanlilik.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
-**Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-14). Sıradaki adım (koordinatör, 2026-11-17): kullanıcı E-vet aktarmasını 2026-11-18'de kendisi deneyip pilot kliniğe verecek. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
+**Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-19). Kullanıcı E-vet aktarmasını canlıda kendisi denedi ve aktardı; pilot kliniğe henüz verilmedi. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
 
 Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı · Dalda, birleşmedi · Geliştiriliyor · Karar bekliyor (kullanıcı) · Dış yanıt bekliyor · Planlandı · Araştırılacak · Ertelendi.
 
