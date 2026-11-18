@@ -33,6 +33,56 @@ html.dark {
 html, body { margin: 0; height: 100%; }
 body { background: var(--bg); color: var(--text); font: 13px/1.35 "Segoe UI", Inter, system-ui, sans-serif; overflow: hidden; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; cursor: pointer; }
+/* Taslak seçici (ürünün parçası değil) */
+.draft { display: flex; align-items: center; gap: 10px; padding: 6px 10px; margin-bottom: 6px; border: 1px dashed var(--primary); border-radius: 8px; background: var(--primary-soft); flex: none; font-size: 12.5px; }
+.draft b { font-weight: 700; }
+.draft .opt { padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; }
+.draft .opt.on { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.draft .opt small { font-weight: 400; opacity: .8; margin-left: 4px; }
+.draft .lnk { color: var(--primary); font-weight: 600; }
+/* B: ajanda (tablo) */
+.ag { flex: 1; min-height: 0; overflow-y: auto; }
+.ag-dh { position: sticky; top: 0; z-index: 2; display: flex; align-items: baseline; gap: 8px; padding: 7px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line-strong); border-top: 1px solid var(--line-strong); }
+.ag-day:first-child .ag-dh { border-top: 0; }
+.ag-day.today .ag-dh { background: var(--primary-soft); }
+.ag-dh .num { font-size: 17px; font-weight: 700; }
+.ag-day.today .ag-dh .num { color: var(--primary); }
+.ag-dh .dn { font-weight: 600; }
+.ag-dh .cnt { margin-left: auto; color: var(--muted); font-size: 12px; }
+.ag-dh .cnt b { color: var(--text); }
+.ag-dh .cnt .od { color: var(--st-overdue); font-weight: 600; }
+.ag-row { display: grid; grid-template-columns: 104px 250px minmax(0, 1fr) 150px 110px 96px; align-items: center; gap: 10px; padding: 0 14px 0 10px; min-height: 30px; border-bottom: 1px solid var(--line); border-left: 4px solid var(--st-up); }
+.ag-row.vxr { min-height: 26px; background: var(--surface-2); font-size: 12.5px; }
+.ag-row.s-today { border-left-color: var(--st-today); }
+.ag-row.s-overdue { border-left-color: var(--st-overdue); background: var(--soft-overdue); }
+.ag-row.s-done { border-left-color: var(--st-done); color: var(--muted); }
+.ag-row.s-noshow { border-left-color: var(--st-noshow); color: var(--muted); }
+.ag-row.s-noshow .ag-t, .ag-row.s-noshow .ag-who b { text-decoration: line-through; }
+.ag-t { font-weight: 700; font-variant-numeric: tabular-nums; }
+.ag-row.s-overdue .ag-t { color: var(--st-overdue); }
+.ag-ty { display: flex; gap: 6px; align-items: center; white-space: nowrap; overflow: hidden; }
+.ag-ty .k { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 0 4px; flex: none; }
+.ag-who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag-who b { font-weight: 600; color: var(--text); }
+.ag-row.s-done .ag-who b { color: var(--muted); }
+.ag-vet { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag-st { display: flex; align-items: center; gap: 6px; font-size: 12px; white-space: nowrap; }
+.ag-st i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.ag-act { text-align: right; }
+.ag-act a { font-size: 12px; font-weight: 600; color: var(--primary); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; background: var(--surface); }
+.ag-sub { padding: 4px 14px 2px; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; color: var(--muted); text-transform: uppercase; }
+.ag-fold { padding: 5px 14px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--line); }
+.ag-fold b { color: var(--st-done); }
+.ag-now { display: flex; align-items: center; gap: 8px; padding: 2px 14px; color: var(--now); font-weight: 700; font-size: 11.5px; }
+.ag-now::after { content: ""; flex: 1; height: 2px; background: var(--now); }
+.ag-empty { padding: 8px 14px; color: var(--muted); font-size: 12px; }
+/* C: ızgarada aşı metin şeridi */
+.vlane { position: absolute; top: 0; bottom: 0; right: 0; border-left: 1px dashed var(--line-strong); }
+.vt { position: absolute; height: 15px; font-size: 10.5px; line-height: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 4px; border-left: 2px solid var(--st-up); background: var(--surface-2); z-index: 3; }
+.vt.s-today { border-left-color: var(--st-today); }
+.vt.s-overdue { border-left-color: var(--st-overdue); color: var(--st-overdue); }
+.vt b { font-weight: 700; }
 .tnum { font-variant-numeric: tabular-nums; }
 
 /* Panel çerçevesi (sadeleştirilmiş) */
@@ -80,7 +130,7 @@ main { flex: 1; min-width: 0; padding: 8px 20px 10px; display: flex; flex-direct
 /* ===== Hafta: liste (tek akış) ===== */
 .wl-head, .wl-body { display: grid; }
 .wl-head { border-bottom: 1px solid var(--line-strong); flex: none; }
-.wl-body { flex: 1; min-height: 0; overflow: hidden; }
+.wl-body { flex: 1; min-height: 0; overflow-y: auto; }
 .dh { padding: 6px 8px 6px; border-left: 1px solid var(--line); min-width: 0; }
 .dh:first-child { border-left: 0; }
 .dh.today { background: var(--primary-soft); }
@@ -194,7 +244,7 @@ main { flex: 1; min-width: 0; padding: 8px 20px 10px; display: flex; flex-direct
 .mmore { font-size: 11px; color: var(--primary); font-weight: 600; padding-left: 7px; }
 
 /* ===== Görünüm ayarları ===== */
-.pop { position: absolute; z-index: 30; top: 82px; right: 236px; width: 350px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 14px 10px; }
+.pop { position: absolute; z-index: 30; top: 128px; right: 236px; width: 350px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 14px 10px; }
 .pop h4 { margin: 0 0 8px; font-size: 13.5px; }
 .prow { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 8px; margin-bottom: 8px; }
 .prow > span:first-child { font-size: 12px; color: var(--muted); }
@@ -324,11 +374,25 @@ const vaxCount = (d) => d.vaxList.length + d.appts.filter((x) => x.vac).length;
 const vaxOverdue = (d) => d.vaxList.filter((x) => x.st === 'overdue').length + d.appts.filter((x) => x.vac && x.st === 'overdue').length;
 
 // ---- Ortak araç çubuğu ----
-const view = (location.hash || '#hafta').slice(1);
+let OPT = 'A', view = 'hafta';
+/** Adres: #A-hafta, #B-gun, #C-ay, #A-renkler … (harfsiz eski adresler A sayılır). */
+function route() {
+  const h = (location.hash || '#A-hafta').slice(1);
+  const m = /^([ABC])-(.+)$/.exec(h);
+  OPT = m ? m[1] : 'A';
+  view = m ? m[2] : h || 'hafta';
+}
+const OPTS = { A: ['Sütun akış', 'gün sütununda saat sırası'], B: ['Ajanda', 'satır satır tablo'], C: ['Saat ızgarası', 'aşı ızgarada, yan şeritte'] };
+function draftBar() {
+  const v = view.startsWith('hafta') || view === 'renkler' ? 'hafta' : view;
+  return `<div class="draft"><b>Taslak seçeneği:</b>${Object.entries(OPTS).map(([k, [t, d]]) => `<a class="opt ${k === OPT ? 'on' : ''}" href="#${k}-${v}">${k} · ${t}<small>${d}</small></a>`).join('')}
+    <span class="sp"></span><a class="lnk" href="#${OPT}-renkler">Renk açıklaması</a><a class="lnk" onclick="document.documentElement.classList.toggle('dark')">Açık / koyu tema</a></div>`;
+}
 if (location.search.includes('dark')) document.documentElement.classList.add('dark');
 const main = document.getElementById('main');
 
 function toolbar(kind, layoutLabel, popOpen) {
+  if (OPT !== 'A') layoutLabel = null;
   const on = (x) => (kind === 'gun' && x === 'Gün') || (kind === 'ay' && x === 'Ay') || (kind === 'hafta' && x === 'Hafta');
   const title = kind === 'gun' ? '18 Kasım 2026, Çarşamba' : kind === 'ay' ? 'Kasım 2026' : '16–22 Kasım 2026';
   const total = DAYS.reduce((s, d) => s + vaxCount(d), 0);
@@ -336,13 +400,14 @@ function toolbar(kind, layoutLabel, popOpen) {
   const chips = [['Bugün', 'today'], ['Gelecek', 'up'], ['Gecikmiş', 'overdue'], ['Tamamlanan', 'done']]
     .map(([l, k]) => `<span class="chip"><span class="b4" style="background:${COLOR[k]}"></span>${l}</span>`).join('');
   return `
+    ${draftBar()}
     <div class="tabs"><span>Liste</span><span class="on">Takvim</span><span>Talepler<i>2</i></span><span>Bekleme listesi</span></div>
     <div class="bar">
-      <span class="seg">${['Gün', 'Hafta', 'Ay'].map((x) => `<span class="${on(x) ? 'on' : ''}">${x}</span>`).join('')}</span>
+      <span class="seg">${[['Gün', 'gun'], ['Hafta', 'hafta'], ['Ay', 'ay']].map(([x, k]) => `<a href="#${OPT}-${k}"><span class="${on(x) ? 'on' : ''}">${x}</span></a>`).join('')}</span>
       <span class="nav"><span class="ib">‹</span><span class="tb">Bugün</span><span class="ib">›</span></span>
       <span class="range tnum">${title}<small>${sub}</small></span>
       <span class="sp"></span>
-      ${layoutLabel ? `<button class="btn ${popOpen ? 'on' : ''}">☷ Görünüm <em>${layoutLabel}</em> ▾</button>` : ''}
+      ${layoutLabel ? `<a class="btn ${popOpen ? 'on' : ''}" href="#A-${popOpen ? 'hafta' : 'hafta-ayarlar'}">☷ Görünüm <em>${layoutLabel}</em> ▾</a>` : ''}
       <button class="btn">⌕ Boş saat bul</button>
       <button class="btn pri">+ Yeni randevu</button>
     </div>
@@ -409,11 +474,11 @@ function settingsPop() {
   return `<div class="pop"><h4>Takvim görünümü</h4>
     ${row('Hafta', ['Liste', 'Saat ızgarası'], 0)}
     ${row('Gün', ['Saat ızgarası', 'Liste'], 0)}
-    ${row('Ayrıntı', ['Kısa', 'Ayrıntılı'], 0)}
+    <div class="prow"><span>Ayrıntı</span><span class="seg"><a href="#A-hafta-ayarlar"><span class="on">Kısa</span></a><a href="#A-hafta-ayrintili"><span>Ayrıntılı</span></a></span></div>
     ${row('Aşılar', ['Akışta', 'Gizli'], 0)}
     ${row('Uygulanan aşılar', ['Tek satırda', 'Hepsi'], 0)}
     <div class="note">Seçim size özel; bu tarayıcıda hatırlanır. Hekim ızgarayı, resepsiyon listeyi seçebilir.</div>
-    <span class="reset">Varsayılana dön</span></div>`;
+    <a class="reset" href="#A-hafta">Varsayılana dön · kapat</a></div>`;
 }
 
 // ---- Saat ızgarası (hafta seçeneği ve gün) ----
@@ -456,18 +521,20 @@ function grid(host, cols, opts) {
         if (c.open[0] > start) h += `<div class="hatch" style="top:${y(start)}px;height:${y(c.open[0]) - y(start)}px"></div>`;
         if (c.open[1] < end) h += `<div class="hatch" style="top:${y(c.open[1])}px;height:${y(end) - y(c.open[1])}px"></div>`;
       }
-      const railW = c.rail ? 28 : 0;
+      const railW = c.lane ? c.lane : c.rail ? 28 : 0;
       for (const it of layout(c.appts)) {
         const ht = (it.e - it.s) * ppm;
         h += `<div class="gb" style="top:${y(it.s)}px;height:${ht}px;left:calc((100% - ${railW}px) * ${it.lane / it.lanes});width:calc((100% - ${railW}px) / ${it.lanes})">${gridCard(it, ht - 2, opts, it.lanes > 1)}</div>`;
       }
-      if (c.rail) h += railHtml(c.vax, start, end, y);
+      if (c.lane) h += laneHtml(c.vax, start, end, y, c.lane);
+      else if (c.rail) h += railHtml(c.vax, start, end, y);
     } else h += vaxColumn(c.vax, start, end, y, ppm);
     if (c.today) h += `<div class="nowline" style="top:${y(NOW) - 1}px"></div>`;
     el.innerHTML = h;
   });
 }
 function gridCard(it, h, opts, narrow) {
+  narrow = narrow || !!opts.petOnly;
   const nest = it.vac && opts.wide ? ` · ${SHIELD} ${it.vac}` : '';
   const live = it.st === 'today' && it.s <= NOW && it.e > NOW ? ' live' : '';
   const vet = opts.showVet && !narrow ? vetChip(it) : '';
@@ -478,6 +545,21 @@ function gridCard(it, h, opts, narrow) {
 }
 const worst = (list) => ['overdue', 'today', 'up', 'done'].find((s) => list.some((x) => x.st === s));
 /** Hafta ızgarasında aşı: sütunun sağında ince şerit, yarım saatlik dilimde sayı; mesai dışı kenarda ↑/↓. */
+/** C: aşı metni saatinde, sütunun sağındaki şeritte; çakışan satırlar aşağı kayar; uygulanan, saatsiz ve mesai dışı altta sayı. */
+function laneHtml(vax, start, end, y, w) {
+  let h = `<div class="vlane" style="width:${w}px"></div>`, last = -99;
+  const timed = vax.filter((x) => x.s !== null && x.st !== 'done').sort((p, q) => p.s - q.s);
+  const done = vax.filter((x) => x.st === 'done').length;
+  const out = timed.filter((x) => x.s < start || x.s >= end).length, untimed = vax.filter((x) => x.s === null).length;
+  for (const x of timed.filter((x) => x.s >= start && x.s < end)) {
+    const top = Math.max(y(x.s) - 7, last + 16);
+    h += `<div class="vt s-${x.st}" style="top:${top}px;right:2px;width:${w - 5}px" title="${clock(x.s)} ${x.pet} · ${x.vac}"><b>${clock(x.s)}</b> ${x.pet}</div>`;
+    last = top;
+  }
+  const foot = [done ? '✓' + done : '', untimed ? untimed + ' saatsiz' : '', out ? out + ' dışı' : ''].filter(Boolean).join(' · ');
+  if (foot) h += `<div class="edge" style="bottom:2px;right:2px;width:${w - 4}px;font-size:10px">${foot}</div>`;
+  return h;
+}
 function railHtml(vax, start, end, y) {
   let h = '<div class="rail"></div>';
   const timed = vax.filter((x) => x.s !== null);
@@ -589,7 +671,62 @@ function renderColors() {
     </div>`;
 }
 
+function stPill(st) {
+  const m = { up: ['Gelecek', 'var(--st-up)'], today: ['Bugün', 'var(--st-today)'], overdue: ['Gecikmiş', 'var(--st-overdue)'], done: ['Tamamlandı', 'var(--st-done)'], noshow: ['Gelmedi', 'var(--st-noshow)'] }[st];
+  return `<span class="ag-st"><i style="background:${m[1]}"></i>${m[0]}</span>`;
+}
+function agRow(it) {
+  if (it.kind === 'ap') return `<div class="ag-row s-${it.st}"><span class="ag-t">${clock(it.s)}–${clock(it.e)}</span>
+    <span class="ag-ty"><span class="k">Randevu</span>${it.type}${it.vac ? ' · ' + SHIELD + ' ' + it.vac : ''}</span>
+    <span class="ag-who"><b>${it.pet}</b> · ${it.owner}</span><span class="ag-vet">${VETS[it.vet] || 'Hekim seçilmedi'}</span>${stPill(it.st)}
+    <span class="ag-act">${it.st === 'today' ? '<a>Kabul et</a>' : ''}</span></div>`;
+  return `<div class="ag-row vxr s-${it.st}"><span class="ag-t">${it.s === null ? '<span style="color:var(--muted);font-weight:400">saatsiz</span>' : clock(it.s)}</span>
+    <span class="ag-ty">${SHIELD}${it.vac}</span><span class="ag-who"><b>${it.pet}</b> · ${it.owner}</span><span class="ag-vet">—</span>${stPill(it.st)}
+    <span class="ag-act">${it.st === 'today' || it.st === 'overdue' ? '<a>Aşıyı yap</a>' : ''}</span></div>`;
+}
+/** B: gün başlıkları altında satır satır; sütunlar saat, iş, hasta · sahip, hekim, durum, eylem. */
+function renderAgenda(days, kind) {
+  main.innerHTML = toolbar(kind) + '<section class="cal"><div class="ag" id="ag"></div></section>';
+  document.getElementById('ag').innerHTML = days.map((d) => {
+    const n = vaxCount(d), od = vaxOverdue(d);
+    const untimed = d.vaxList.filter((x) => x.s === null);
+    const doneVx = d.vaxList.filter((x) => x.s !== null && x.st === 'done');
+    const flow = [...d.appts, ...d.vaxList.filter((x) => x.s !== null && x.st !== 'done')].sort((x, y) => x.s - y.s || (x.kind === 'ap' ? -1 : 1));
+    let rows = '';
+    if (doneVx.length) rows += `<div class="ag-fold"><b>✓</b> ${doneVx.length} aşı uygulandı ▸</div>`;
+    if (untimed.length) rows += `<div class="ag-sub">Saatsiz aşılar · ${untimed.length}</div>` + untimed.map(agRow).join('');
+    let nowDone = !d.today;
+    for (const it of flow) {
+      if (!nowDone && it.s > NOW) { rows += `<div class="ag-now">${clock(NOW)}</div>`; nowDone = true; }
+      rows += agRow(it);
+    }
+    if (!flow.length && !untimed.length) rows += '<div class="ag-empty">Kayıt yok.</div>';
+    return `<div class="ag-day ${d.today ? 'today' : ''}" id="day-${d.num}"><div class="ag-dh"><span class="num">${d.num}</span><span class="dn">${d.name}${d.today ? ' · bugün' : ''}${!d.open ? ' · kapalı' : ''}</span>
+      <span class="cnt"><b>${d.appts.length}</b> randevu · <b>${n}</b> aşı${od ? ` · <span class="od">${od} gecikmiş</span>` : ''}</span></div>${rows}</div>`;
+  }).join('');
+  const t = document.getElementById('day-18');
+  if (t && days.length > 1) document.getElementById('ag').scrollTop = t.offsetTop;
+}
+/** C: hafta saat ızgarası; randevu blok, aşı sağ şeritte saatiyle metin. */
+function renderWeekGridC() {
+  main.innerHTML = toolbar('hafta') + '<section class="cal" id="cal"></section>';
+  const cols = DAYS.map((d) => ({ head: dayHead(d), open: d.open, appts: d.appts, vax: d.vaxList, today: d.today, lane: 64 }));
+  grid(document.getElementById('cal'), cols, { showVet: false, petOnly: true });
+}
+
 function render() {
+  route();
+  if (view === 'renkler') return renderColors();
+  if (OPT === 'B') {
+    if (view === 'gun') return renderAgenda([DAYS[2]], 'gun');
+    if (view === 'ay') return renderMonth();
+    return renderAgenda(DAYS, 'hafta');
+  }
+  if (OPT === 'C') {
+    if (view === 'gun') return renderDay();
+    if (view === 'ay') return renderMonth();
+    return renderWeekGridC();
+  }
   if (view === 'gun') renderDay();
   else if (view === 'ay') renderMonth();
   else if (view === 'renkler') renderColors();
@@ -598,6 +735,7 @@ function render() {
 }
 render();
 addEventListener('resize', render);
+addEventListener('hashchange', render);
 </script>
 </body>
 </html>

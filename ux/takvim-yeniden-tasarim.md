@@ -2,7 +2,28 @@
 
 **Durum:** Taslak, onay bekliyor. Kod yazılmadı. Onaydan sonra kodu Opus yazacak.
 **Kapsam:** Panelde `/panel/appointments/calendar`: hafta, gün ve ay görünümleri.
-**Taslak:** [`takvim-taslak/takvim-taslak.html`](takvim-taslak/takvim-taslak.html). Statik bir sayfa; veriler uydurmadır, gerçek hasta ya da sahip adı yoktur. Görünüm adresin sonundaki `#` ile seçilir: `#hafta`, `#hafta-ayrintili`, `#hafta-izgara`, `#hafta-ayarlar`, `#gun`, `#ay`, `#renkler`. Koyu tema için `?dark` eklenir.
+**Taslak:** [`takvim-taslak/takvim-taslak.html`](takvim-taslak/takvim-taslak.html). Tıklanır, statik bir sayfa; veriler uydurmadır, gerçek hasta ya da sahip adı yoktur.
+- Üstteki çizgili şeritten A, B ya da C seçilir. Gün, Hafta ve Ay düğmeleri her seçenekte çalışır.
+- "Renk açıklaması" ve "Açık / koyu tema" bağlantıları da aynı şeritte.
+- Adres biçimi `#A-hafta`, `#B-gun`, `#C-ay`.
+
+## Seçim: üç düzen (kullanıcı seçecek)
+
+Hepsinde ortak olanlar:
+- Aşı ve randevu saate göre tek akışta durur, saat satırın başındadır.
+- Durum renkle gösterilir (sol şerit), tür biçimle ayrılır.
+- Uygulanan aşılar tek satıra toplanır.
+- Saati bilinmeyen aşılar "Saatsiz" başlığı altında durur.
+
+Seçenekler arasındaki fark, haftanın ve günün nasıl dizildiği:
+
+| | Hafta | Gün | Kimin işine yarar | Zayıf yanı |
+|---|---|---|---|---|
+| **A · Sütun akış** | Her gün bir sütun, içinde saat sırasıyla randevu kartları ve tek satırlık aşılar | Saat ızgarası: hekim sütunları ve ayrı bir "Aşılar" sütunu | Haftayı bir bakışta görmek isteyen | Dar sütunda sahip adı kısalır; yoğun gün kaydırılır |
+| **B · Ajanda** | Günler alt alta, her iş bir satır: saat, iş, hasta · sahip, hekim, durum, eylem ("Kabul et", "Aşıyı yap") | Aynı tablo, tek gün | Resepsiyon: hiçbir şey kısalmaz, satırdan iş yapılır | Haftanın tamamı bir ekrana sığmaz; açılışta bugüne kayar |
+| **C · Saat ızgarası** | Bugünkü ızgara korunur; randevu blok, aşı her gün sütununun sağındaki şeritte saatiyle metin | Saat ızgarası (A ile aynı) | Boş saat ve doluluk görmek isteyen, hekim | Kartta yalnız hasta adı sığar; sahip balonda |
+
+Ay görünümü üç seçenekte de aynı.
 **Ekran görüntüleri:** `takvim-taslak/1536-*.png`. Kullanıcının ekranı 1920×1080, ölçek %125 (tarayıcı içi 1536×728 CSS piksel). Görüntüler bu boyutta, başsız Chrome ile alındı.
 
 **2. turda ne değişti:** 1. turda aşılar gün başlığında bir sayaç ve yan panelde bir listeydi. Kullanıcı, aynı klinik ve aynı hafta için E-vet takviminin ekran görüntülerini gönderdi ve şu düzeni istedi: **aşı ve randevu tek akışta, saatler görünür**. Yönlendirmesi "kopyalamasın, daha iyisini, kullanıcı dostu olanı yapalım; olmadı kullanıcıya seçenek sunarız" oldu. Bu tur o yönde kuruldu. 1. turun sayaç ve panel önerisi geri çekildi.
