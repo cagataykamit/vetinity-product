@@ -211,3 +211,31 @@ Takvim tek akışa geçerse aşının bir saati olması gerekir. Bugün sorun ik
 | `1536-ay.png` | Ay: yalnız dikkat isteyenler, tamamlananlar sayıda |
 | `1536-renkler.png` | Durum (renk) ve tür (biçim) eksenleri |
 | `1536-hafta-koyu.png` | Hafta, koyu tema |
+
+## 3. tur: kullanıcının seçtiği örneklerden üç seçenek (2026-11-18)
+
+Kullanıcı 2. turdaki A/B/C düzenlerinin hiçbirini beğenmedi. Başka uygulamalardan örnek istedi ([`takvim-taslak/ornekler.html`](takvim-taslak/ornekler.html)) ve 3, 9 ve 15 numaraları seçti:
+
+- **3:** Digitail ay görünümü.
+- **9:** Bir klinik programı tasarımı.
+- **15:** Bir salon randevu takvimi tasarımı.
+
+Bu örneklerin görünümü kopyalanmadı, yalnız fikirleri alındı. Taslak: [`takvim-taslak/takvim-taslak-3.html`](takvim-taslak/takvim-taslak-3.html). Adres biçimi `#1-gun`, `#2-hafta`, `#3-ay`.
+
+| Seçenek | Gün görünümü | Hafta ve ay |
+|---|---|---|
+| **1 · Klinik panosu** (9) | Üstte günün özeti (randevu, tamamlandı, klinikte, sıradaki, aşı, gelmedi); hekim sütunlarının yanında bir "Aşılar" sütunu; sağda "Klinikte" ve "Boş saatler" | Gün sütunlarında küçük kartlar; her günün başında aşı sayısı |
+| **2 · Ferah kartlar** (15) | Özet ve sağ panel yok; çerçevesiz, gölgeli büyük kartlar, ad 16 px; durum renkli nokta ile gösterilir; saat başı 104 px | Aynı sade kart dili |
+| **3 · Ajanda + takvim** (3) | Solda küçük ay takvimi ve "Bugün" listesi: randevu ve aşı saat sırasıyla tek listede, saatsizler başta; kart zemini durum renginde | Sol panel kalır; kartlar durum renginde dolgulu |
+
+Ortak olanlar:
+- Kartta hasta adı büyük, saat adın üstünde küçük.
+- Muayenedeki randevu koyu ana renkte; klinikte bekleyen sarı ve kaç dakikadır beklediği yazılı.
+- Geçmiş işler soluk.
+- Şimdi çizgisi ana renkte.
+
+Gün görünümünde yazı büyük olduğu için mesai saatleri ekrana sığmaz. Sayfa şimdiki saate kaydırılmış açılır.
+
+"Klinikte" bilgisi Bugün sayfasındaki kabul kuyruğundan alınacak (`waitingVisits`); takvimde kullanılıp kullanılamayacağı doğrulanmadı.
+
+Görüntüler `takvim-taslak/3-<seçenek>-<görünüm>.png` dosyalarında.

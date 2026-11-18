@@ -43,6 +43,86 @@ a { color: inherit; text-decoration: none; cursor: pointer; }
 .side a.on { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
 main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direction: column; gap: 10px; }
 
+/* Seçenek şeridi (taslağın parçası, ürünün değil) */
+.draft { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-soft); flex: none; font-size: 13px; }
+.draft b { margin-right: 4px; }
+.draft a { padding: 4px 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; }
+.draft a small { font-weight: 400; color: var(--muted); margin-left: 4px; }
+.draft a.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.draft a.on small { color: var(--on-primary); opacity: .85; }
+/* Durum rengi tek değişkende: --c (nokta, şerit), --soft (seçenek 3 dolgusu) */
+.card, .mini, .chip, .ar { --c: var(--up); --soft: var(--surface-2); }
+.today, .wait { --c: var(--today); --soft: var(--today-soft); }
+.overdue { --c: var(--overdue); --soft: var(--overdue-soft); }
+.done { --c: var(--done); --soft: color-mix(in srgb, var(--done) 10%, var(--surface)); }
+.room { --c: var(--primary); }
+.noshow { --c: var(--faint); }
+
+/* Seçenek 2: ferah kartlar (15) — çerçevesiz yüzen kart, renk noktada, büyük ad, noktalı çizgiler */
+.v2 .hl { border-top: 1px dotted var(--dot); }
+.v2 .hl.q { border-top-color: transparent; }
+.v2 .col { border-left: 0; }
+.v2 .ph { border-left: 0; margin: 8px 6px; padding: 4px 16px 4px 4px; border: 1px solid var(--border); border-radius: 26px; box-shadow: var(--shadow); }
+.v2 .dhead { border-bottom: 0; }
+.v2 .cd { padding: 3px 6px; }
+.v2 .card { border: 0; border-radius: 12px; padding: 7px 12px; box-shadow: 0 1px 2px rgba(16, 32, 40, .05), 0 6px 18px rgba(16, 32, 40, .08); }
+.v2 .card .t::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+.v2 .card .nm { font-size: 16px; }
+.v2 .card.done { opacity: .6; box-shadow: none; background: var(--surface-2); }
+.v2 .card.overdue { background: var(--surface); }
+.v2 .card.room { background: var(--primary); }
+.v2 .card.room .t::before { background: var(--on-primary); }
+.v2 .cal { border: 0; background: transparent; }
+.v2 .calbar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 6px; }
+.v2 .mini { border: 0; border-radius: 10px; padding: 7px 10px; box-shadow: 0 1px 2px rgba(16, 32, 40, .05), 0 4px 12px rgba(16, 32, 40, .07); }
+.v2 .mini .t::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex: none; align-self: center; }
+.v2 .mini .nm { font-size: 15px; }
+.v2 .wk, .v2 .mg, .v2 .mwk { background: var(--surface); border-radius: 12px; }
+.v2 .wd { border-left-color: transparent; }
+.v2 .chip { background: var(--surface); border-left: 0; box-shadow: var(--shadow); }
+.v2 .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c); flex: none; }
+.pillbtn { height: 34px; padding: 0 12px; border-radius: 17px; border: 1px solid var(--border); background: var(--surface); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.pillbtn i { width: 8px; height: 8px; border-radius: 50%; background: var(--today); }
+
+/* Seçenek 3: ajanda + takvim (3) — solda ay ve bugünün listesi, kart dolgusu durum renginde */
+.v3 .card { border: 0; background: var(--soft); box-shadow: none; border-radius: 8px; }
+.v3 .card .t::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--c); flex: none; box-sizing: border-box; }
+.v3 .card.done .t::before { background: var(--c); }
+.v3 .card.room { background: var(--primary); }
+.v3 .card.room .t::before { border-color: var(--on-primary); }
+.v3 .mini { border: 0; background: var(--soft); box-shadow: none; }
+.v3 .mini.done { opacity: .55; }
+.v3 .chip { border-left: 0; background: var(--soft); }
+.lrail { width: 270px; flex: none; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.mcal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; flex: none; }
+.mcal .hd { display: flex; align-items: center; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.mcal .hd span { margin-left: auto; color: var(--muted); font-weight: 400; letter-spacing: 6px; }
+.mcal .g { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 12px; row-gap: 2px; }
+.mcal .g .w { color: var(--muted); font-size: 11px; font-weight: 600; }
+.mcal .g a { height: 26px; display: grid; place-items: center; border-radius: 13px; position: relative; }
+.mcal .g a.o { color: var(--faint); }
+.mcal .g a.t { background: var(--primary); color: var(--on-primary); font-weight: 700; }
+.mcal .g a.wkd { background: var(--primary-soft); }
+.mcal .g a i { position: absolute; bottom: 2px; width: 4px; height: 4px; border-radius: 50%; background: var(--overdue); }
+.agenda { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 10px 6px; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.agenda h3 { margin: 0 4px 2px; font-size: 15px; display: flex; gap: 6px; align-items: baseline; }
+.agenda h3 small { margin-left: auto; font-weight: 400; color: var(--muted); font-size: 12px; }
+.agenda .seg2 { display: flex; gap: 4px; margin: 6px 4px 6px; }
+.agenda .seg2 a { font-size: 12px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border); color: var(--muted); }
+.agenda .seg2 a.on { background: var(--text); color: var(--surface); border-color: var(--text); }
+.alist { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+.ar { display: grid; grid-template-columns: 44px 1fr; gap: 8px; align-items: center; border-radius: 8px; padding: 5px 8px; background: var(--soft); }
+.ar b.tm { font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.ar .x { min-width: 0; }
+.ar .x div { font-weight: 600; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ar .x small { display: block; color: var(--muted); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ar.room { background: var(--primary); color: var(--on-primary); }
+.ar.room .x small { color: var(--on-primary); opacity: .85; }
+.ar.done { opacity: .55; }
+.agrp { font-size: 10.5px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); margin: 4px 4px 0; }
+.anow { display: flex; align-items: center; gap: 6px; color: var(--primary); font-size: 11px; font-weight: 700; }
+.anow::after { content: ""; flex: 1; height: 2px; background: var(--primary); }
+
 /* Başlık satırı */
 .head { display: flex; align-items: center; gap: 14px; flex: none; }
 .head h1 { margin: 0; font-size: 20px; }
@@ -149,7 +229,7 @@ main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direc
 .wd:first-child { border-left: 0; }
 .wd.today { background: color-mix(in srgb, var(--primary-soft) 50%, transparent); }
 .wd.off { background: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--faint) 10%, transparent) 6px 8px); }
-.wdh { padding: 8px 10px 6px; display: flex; align-items: baseline; gap: 6px; }
+.wdh { padding: 8px 10px 6px; display: flex; align-items: baseline; gap: 6px; white-space: nowrap; overflow: hidden; }
 .wdh .d { font-size: 20px; font-weight: 700; }
 .wd.today .wdh .d { color: var(--primary); }
 .wdh .dn { font-weight: 600; color: var(--muted); font-size: 13px; }
@@ -169,7 +249,7 @@ main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direc
 .mini.noshow .nm { text-decoration: line-through; }
 .mini.room { background: var(--primary); border-color: var(--primary-2); }
 .mini.room .t, .mini.room .t b, .mini.room .nm, .mini.room .nm span { color: var(--on-primary); }
-.vsum { flex: none; display: flex; align-items: center; gap: 6px; border: 1px dashed var(--border); border-radius: 7px; padding: 5px 8px; font-size: 12.5px; background: var(--surface-2); }
+.vsum { flex: none; display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; border: 1px dashed var(--border); border-radius: 7px; padding: 5px 8px; font-size: 12.5px; background: var(--surface-2); }
 .vsum b { font-weight: 700; }
 .vsum .od { color: var(--overdue); font-weight: 700; }
 .vsum .chev { margin-left: auto; color: var(--faint); }
@@ -252,20 +332,25 @@ const VAX = [
 ];
 const ST_LABEL = { done: '✓', overdue: 'Gecikmiş', noshow: 'Gelmedi', wait: 'Bekliyor', room: 'Muayenede' };
 
-const route = () => (location.hash || '#gun').slice(1);
+let V = '1';
+const route = () => { const h = (location.hash || '#1-gun').slice(1); const m = /^([123])-(.+)$/.exec(h); V = m ? m[1] : '1'; return m ? m[2] : h || 'gun'; };
+const VARIANTS = { 1: ['Klinik panosu', 'özet, hekim sütunları, sağ panel'], 2: ['Ferah kartlar', 'büyük kart, sade, panelsiz'], 3: ['Ajanda + takvim', 'solda ay ve bugünün listesi'] };
+function draft(view) {
+  return `<div class="draft"><b>Seçenek:</b>${Object.entries(VARIANTS).map(([k, [t, d]]) => `<a href="#${k}-${view}" class="${k === V ? 'on' : ''}">${k} · ${t}<small>${d}</small></a>`).join('')}</div>`;
+}
 const main = document.getElementById('main');
 
 function head(view) {
-  return `<div class="head"><h1>Randevular</h1>
+  return draft(view || 'gun') + `<div class="head"><h1>Randevular</h1>
     <div class="tabs"><a class="on">Takvim</a><a>Liste</a><a>Talepler<i>2</i></a><a>Bekleme listesi</a></div>
-    <span class="sp"></span><a class="btn">⌕ Boş saat bul</a><a class="btn pri">+ Yeni randevu</a></div>`;
+    <span class="sp"></span>${V === '2' && view === 'gun' ? '<a class="pillbtn"><i></i>Klinikte 2</a>' : ''}<a class="btn">⌕ Boş saat bul</a><a class="btn pri">+ Yeni randevu</a></div>`;
 }
 function calbar(view) {
   const title = view === 'gun' ? '18 Kasım 2026, Çarşamba' : view === 'ay' ? 'Kasım 2026' : '16 – 22 Kasım 2026';
   const legend = [['Gelecek', 'var(--up)'], ['Bugün', 'var(--today)'], ['Gecikmiş', 'var(--overdue)'], ['Tamamlandı', 'var(--done)']].map(([l, c]) => `<span><i style="background:${c}"></i>${l}</span>`).join('');
   return `<div class="calbar"><span class="nav"><a>‹</a> <a>›</a></span><span class="date tnum">${title}</span><span class="today-chip">Bugün</span>
     <span class="sp"></span><span class="legend">${legend}</span><a class="filter">⚲ Filtre: tüm hekimler ▾</a>
-    <span class="seg">${[['gun', 'Gün'], ['hafta', 'Hafta'], ['ay', 'Ay']].map(([k, l]) => `<a href="#${k}" class="${k === view ? 'on' : ''}">${l}</a>`).join('')}</span></div>`;
+    <span class="seg">${[['gun', 'Gün'], ['hafta', 'Hafta'], ['ay', 'Ay']].map(([k, l]) => `<a href="#${V}-${k}" class="${k === view ? 'on' : ''}">${l}</a>`).join('')}</span></div>`;
 }
 function kpis() {
   const k = (n, l, s, c) => `<div class="kpi"><span class="bar" style="background:${c}"></span><b class="tnum">${n}</b><div class="l"><div>${l}</div><small>${s}</small></div></div>`;
@@ -273,7 +358,7 @@ function kpis() {
 }
 
 // ---- Gün ----
-const PPM = 84 / 60; // saat başı 84 px: 30 dk = 42 px, iki satır rahat sığar
+let PPM = 84 / 60; // saat başı 84 px: 30 dk = 42 px, iki satır rahat sığar
 function card(it, h) {
   const st = ST_LABEL[it.st] ? `<span class="st">${ST_LABEL[it.st]}${it.extra ? ' · ' + it.extra : ''}</span>` : '';
   const vac = it.type.startsWith('Aşı') ? SH + ' ' : '';
@@ -281,13 +366,14 @@ function card(it, h) {
   return `<div class="card ${it.st}"><div class="t tnum"><b>${clock(it.s)} – ${clock(it.e)}</b><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">· ${vac}${it.type}</span>${st}</div><div class="nm">${it.pet} <span>· ${it.owner}</span></div></div>`;
 }
 function renderDay() {
-  main.innerHTML = head() + kpis() + `<div class="body"><section class="cal">${calbar('gun')}<div id="d" style="display:flex;flex-direction:column;flex:1;min-height:0"></div></section>${rail()}</div>`;
+  PPM = (V === '2' ? 104 : 84) / 60;
+  main.innerHTML = head('gun') + (V === '1' ? kpis() : '') + `<div class="body">${V === '3' ? agendaPanel() : ''}<section class="cal">${calbar('gun')}<div id="d" style="display:flex;flex-direction:column;flex:1;min-height:0"></div></section>${V === '1' ? rail() : ''}</div>`;
   const d = DAYS[2], start = H(9), end = H(18);
   const cols = [
     ...Object.entries(VETS).map(([k, [n, r]]) => { const ap = d.appts.filter((x) => x.vet === k); return { head: `<div class="ph"><span class="av">${k}</span><div><div class="n">${n}</div><small><b>${ap.length}</b> randevu · ${ap.filter((x) => !['done', 'noshow'].includes(x.st)).length} kaldı</small></div></div>`, appts: ap }; }),
-    { head: `<div class="ph"><span class="av vx">${SH}</span><div><div class="n">Aşılar</div><small><b>11</b> bekliyor · 6 uygulandı · <a style="color:var(--primary);font-weight:600">2 saatsiz, 1 mesai dışı ▾</a></small></div></div>`, vax: true }
-  ];
-  const tpl = `56px repeat(${cols.length}, minmax(0, 1fr))`;
+    V === '3' ? null : { head: `<div class="ph"><span class="av vx">${SH}</span><div><div class="n">Aşılar</div><small><b>11</b> bekliyor · 6 uygulandı · <a style="color:var(--primary);font-weight:600">2 saatsiz, 1 mesai dışı ▾</a></small></div></div>`, vax: true }
+  ].filter(Boolean);
+  const tpl = '56px ' + cols.map((c) => (c.vax && V === '2' ? '250px' : 'minmax(0, 1fr)')).join(' ');
   const H0 = (end - start) * PPM;
   const y = (m) => (m - start) * PPM;
   let html = `<div class="dhead" style="grid-template-columns:${tpl}"><div></div>${cols.map((c) => c.head).join('')}</div><div class="dscroll" id="ds"><div class="dgrid" style="grid-template-columns:${tpl};height:${H0 + 8}px"><div class="tcol">`;
@@ -336,13 +422,39 @@ function rail() {
   </aside>`;
 }
 
+// ---- Seçenek 3: solda küçük ay ve bugünün listesi (randevu + aşı tek listede) ----
+function agendaPanel() {
+  const first = new Date(2026, 9, 26);
+  let g = ['P', 'S', 'Ç', 'P', 'C', 'C', 'P'].map((x) => `<span class="w">${x}</span>`).join('');
+  for (let i = 0; i < 42; i++) {
+    const dt = new Date(first); dt.setDate(first.getDate() + i);
+    const dn = dt.getDate(), out = dt.getMonth() !== 10;
+    const cls = out ? 'o' : dn === 18 ? 't' : dn >= 16 && dn <= 22 ? 'wkd' : '';
+    g += `<a class="${cls}">${dn}${!out && dn < 18 && (dn * 7) % 3 === 0 ? '<i></i>' : ''}</a>`;
+  }
+  const d = DAYS[2];
+  const items = [...d.appts.map((x) => ({ s: x.s, st: x.st, pet: x.pet, sub: `${x.type.startsWith('Aşı') ? '' : x.type + ' · '}${short(x.owner)} · ${x.vet}${x.st === 'wait' ? ' · bekliyor ' + x.extra : x.st === 'room' ? ' · muayenede' : ''}`, vac: x.type.startsWith('Aşı') ? x.type.replace('Aşı · ', '') : null })),
+    ...VAX.filter((x) => x.s !== null && x.s < H(18)).map((x) => ({ s: x.s, st: x.st, pet: x.pet, sub: short(x.owner), vac: x.vac }))].sort((p, q) => p.s - q.s);
+  const open = items.filter((x) => x.st !== 'done');
+  const done = items.length - open.length;
+  let list = `<div class="ar done" style="grid-template-columns:1fr"><div class="x"><div>✓ ${done} iş tamamlandı ▸</div></div></div><div class="agrp">Saatsiz aşılar · 2</div>`;
+  list += VAX.filter((x) => x.s === null).map((x) => `<div class="ar today"><b class="tm">—</b><div class="x"><div>${SH} ${x.pet} · ${x.vac}</div><small>${short(x.owner)}</small></div></div>`).join('');
+  let nowDone = false;
+  for (const x of open) {
+    if (!nowDone && x.s > NOW) { list += `<div class="anow tnum">${clock(NOW)}</div>`; nowDone = true; }
+    list += `<div class="ar ${x.st === 'wait' ? 'today' : x.st}"><b class="tm">${clock(x.s)}</b><div class="x"><div>${x.vac ? SH + ' ' : ''}${x.pet}${x.vac ? ' · ' + x.vac : ''}</div><small>${x.sub}</small></div></div>`;
+  }
+  return `<aside class="lrail"><div class="mcal"><div class="hd">Kasım 2026<span>‹ ›</span></div><div class="g">${g}</div></div>
+    <div class="agenda"><h3>Bugün<small>10 randevu · 17 aşı</small></h3><div class="seg2"><a class="on">Hepsi</a><a>Randevu</a><a>Aşı</a></div><div class="alist">${list}</div></div></aside>`;
+}
+
 // ---- Hafta ----
 function mini(it) {
   const st = it.st === 'wait' || it.st === 'room' ? ` · ${ST_LABEL[it.st]}` : it.st === 'overdue' ? ' · gecikmiş' : '';
   return `<div class="mini ${it.st === 'wait' ? 'today' : it.st}"><div class="t tnum"><b>${clock(it.s)}</b><span class="ty2">· ${it.type.startsWith('Aşı') ? SH + ' ' : ''}${it.type}${st}</span><span class="vet">${it.vet || '–'}</span></div><div class="nm">${it.pet} <span>· ${short(it.owner)}</span></div></div>`;
 }
 function renderWeek() {
-  main.innerHTML = head() + `<div class="body"><section class="cal">${calbar('hafta')}<div class="wk" id="w"></div></section></div>`;
+  main.innerHTML = head('hafta') + `<div class="body">${V === '3' ? agendaPanel() : ''}<section class="cal">${calbar('hafta')}<div class="wk" id="w"></div></section></div>`;
   document.getElementById('w').innerHTML = DAYS.map((d) => {
     const items = [...d.appts].sort((p, q) => p.s - q.s);
     let list = `<a class="vsum">${SH}<b>${d.vx[0]} aşı</b>${d.vx[1] ? `<span class="od">· ${d.vx[1]} gecikmiş</span>` : ''}<span class="chev">›</span></a>`;
@@ -355,7 +467,7 @@ function renderWeek() {
 
 // ---- Ay ----
 function renderMonth() {
-  main.innerHTML = head() + `<div class="body"><section class="cal">${calbar('ay')}<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div><div class="mg" id="mg"></div></section></div>`;
+  main.innerHTML = head('ay') + `<div class="body">${V === '3' ? agendaPanel() : ''}<section class="cal">${calbar('ay')}<div class="mwk">${['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((x) => `<div>${x}</div>`).join('')}</div><div class="mg" id="mg"></div></section></div>`;
   const names = ['Zeytin', 'Tarçın', 'Pamuk', 'Boncuk', 'Limon', 'Maya', 'Fırtına', 'Şans', 'Bal', 'Reis', 'Karamel', 'Leo', 'Kuki', 'Cesur', 'Karabaş', 'Lokum', 'Mavi', 'Rocky', 'Tekir', 'Tarzan'];
   const types = ['Kontrol', 'Muayene', 'Aşı', 'Kontrol', 'Operasyon'];
   const first = new Date(2026, 9, 26);
@@ -380,7 +492,7 @@ function renderMonth() {
   document.getElementById('mg').innerHTML = cells;
 }
 
-function render() { const v2 = route(); if (v2 === 'hafta') renderWeek(); else if (v2 === 'ay') renderMonth(); else renderDay(); }
+function render() { const v2 = route(); document.body.className = 'v' + V; if (v2 === 'hafta') renderWeek(); else if (v2 === 'ay') renderMonth(); else renderDay(); }
 render();
 addEventListener('hashchange', render);
 </script>
