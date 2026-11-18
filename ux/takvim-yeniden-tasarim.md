@@ -239,3 +239,15 @@ Gün görünümünde yazı büyük olduğu için mesai saatleri ekrana sığmaz.
 "Klinikte" bilgisi Bugün sayfasındaki kabul kuyruğundan alınacak (`waitingVisits`); takvimde kullanılıp kullanılamayacağı doğrulanmadı.
 
 Görüntüler `takvim-taslak/3-<seçenek>-<görünüm>.png` dosyalarında.
+
+### Çok hekimli klinik (4 ve daha fazla hekim)
+
+Kullanıcının sorusu: "4 doktor olduğunda ne olacak, daha fazlasında komple karışır." Gün görünümü için kurallar:
+
+1. **Sütunun en az genişliği 220 px.** Ekrana sığmayan hekimler için takvim yana kayar. Saat sütunu solda, hekim başlıkları üstte sabit kalır, bu yüzden kaydırınca saat ve hekim adı kaybolmaz. Kart, hekim sayısı arttı diye küçülmez.
+2. **Hekim seçici:** Takvimin üstünde bir şerit var: "Yalnız benim" düğmesi ve hekim çipleri. Çipe tıklanınca o hekimin sütunu açılır ya da kapanır. Seçim kullanıcı başına hatırlanır; hekim kendi gününü, resepsiyon herkesi görür.
+3. **Bugün randevusu olmayan hekim gösterilmez.** Bunun yerine "+2 hekimin bugün randevusu yok" yazar, tıklanınca gösterilir. Hekim bazında çalışma saati modeli yok (sözleşme §4), bu yüzden kural randevuya bakar.
+4. **Aşılar sütunu:** 4'ten fazla hekimde soldan ilk sütun olur ve daralır. Sağ uçta kalsaydı kaydırmadan görünmezdi.
+5. **Hafta ve ay görünümleri** hekim sayısından etkilenmez: kartta hekimin baş harfleri var, filtre de mevcut.
+
+Taslakta, takvimin üstündeki "Deneme, hekim sayısı: 2 · 4 · 6 · 8" düğmeleriyle denenebilir. Adres biçimi `#1-gun@6`. Görüntüler: `3-1-gun-6.png`, `3-2-gun-8.png`, `3-3-gun-4.png`.

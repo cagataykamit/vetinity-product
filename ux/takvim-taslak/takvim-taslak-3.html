@@ -123,6 +123,25 @@ main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direc
 .anow { display: flex; align-items: center; gap: 6px; color: var(--primary); font-size: 11px; font-weight: 700; }
 .anow::after { content: ""; flex: 1; height: 2px; background: var(--primary); }
 
+/* Çok hekim: tek kaydırma alanı; başlık üstte, saat solda sabit */
+.dwrap { flex: 1; min-height: 0; overflow: auto; position: relative; }
+.dwrap .dhead { position: sticky; top: 0; z-index: 8; background: var(--surface); }
+.dwrap .dhead > div:first-child { position: sticky; left: 0; z-index: 9; background: var(--surface); }
+.dwrap .tcol { position: sticky; left: 0; z-index: 7; background: var(--surface); border-right: 1px solid var(--line); }
+.v2 .dwrap .dhead { background: var(--bg); }
+.vetbar { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-bottom: 1px solid var(--line); flex: none; flex-wrap: nowrap; overflow-x: auto; font-size: 12.5px; }
+.vetbar > span { color: var(--muted); white-space: nowrap; }
+.vchip { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 3px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); white-space: nowrap; font-weight: 600; }
+.vchip .av { width: 22px; height: 22px; font-size: 10px; }
+.vchip.off { opacity: .45; font-weight: 400; }
+.vchip small { color: var(--muted); font-weight: 400; }
+.vchip.me { border-color: var(--primary); color: var(--primary); padding: 0 10px; }
+.vlink { color: var(--primary); font-weight: 600; white-space: nowrap; }
+.demo { display: inline-flex; gap: 4px; align-items: center; margin-left: auto; border: 1px dashed var(--primary); border-radius: 8px; padding: 2px 6px; background: var(--primary-soft); white-space: nowrap; }
+.demo a { padding: 1px 7px; border-radius: 5px; font-weight: 600; }
+.demo a.on { background: var(--primary); color: var(--on-primary); }
+.av.c2 { background: #7c5cc4; } .av.c3 { background: #c2410c; } .av.c4 { background: #0369a1; } .av.c5 { background: #be185d; } .av.c6 { background: #4d7c0f; } .av.c7 { background: #6b7280; }
+
 /* Başlık satırı */
 .head { display: flex; align-items: center; gap: 14px; flex: none; }
 .head h1 { margin: 0; font-size: 20px; }
@@ -164,6 +183,8 @@ main { flex: 1; min-width: 0; padding: 10px 20px 12px; display: flex; flex-direc
 .av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--on-primary); background: var(--primary); flex: none; }
 .av.vx { background: var(--today); color: #2a2000; }
 .ph .n { font-weight: 600; font-size: 14px; white-space: nowrap; }
+.ph > div { min-width: 0; overflow: hidden; }
+.ph .n { overflow: hidden; text-overflow: ellipsis; }
 .ph small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ph small b { color: var(--text); font-weight: 600; }
 .dscroll { flex: 1; min-height: 0; overflow-y: auto; position: relative; }
@@ -290,6 +311,8 @@ const H = (h, m = 0) => h * 60 + m;
 const clock = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
 const NOW = H(14, 20);
 const VETS = { EA: ['Dr. Ece Arslan', 'Hekim'], MK: ['Dr. Murat Kaya', 'Hekim'] };
+const ALL_VETS = [['EA', 'Dr. Ece Arslan'], ['MK', 'Dr. Murat Kaya'], ['SY', 'Dr. Selin Yıldız'], ['KD', 'Dr. Kaan Demir'], ['EŞ', 'Dr. Elif Şen'], ['BT', 'Dr. Burak Tan'], ['DA', 'Dr. Deniz Aksu'], ['OK', 'Dr. Ozan Kılıç']];
+let NV = 2;
 const short = (n) => { const p = n.split(' '); return p.length > 1 ? p[0][0] + '. ' + p.slice(1).join(' ') : n; };
 
 // a(saat, dk, süre, hasta, sahip, hekim, tür, durum) — durum: up, today, wait (klinikte bekliyor), room (muayenede), done, overdue, noshow
@@ -330,10 +353,26 @@ const VAX = [
   v(H(15, 50), 'Kömür', 'Sibel Ateş', 'İç-dış parazit', 'today'), v(H(16, 40), 'Lucy', 'Can Yurt', 'Karma', 'today'),
   v(H(20, 21), 'Simit', 'Levent Ak', 'Kuduz', 'today'), v(null, 'Mırmır', 'Ebru Dağ', 'Kedi karma', 'today'), v(null, 'Şila', 'Hande Sezer', 'Mantar', 'today')
 ];
+// Ek hekimlerin bugünkü randevuları (deneme verisi).
+const EXTRA = (() => {
+  const pets = ['Zilli', 'Paspas', 'Kaju', 'Bıdık', 'Hera', 'Tosun', 'Şeker', 'Pırpır', 'Kartopu', 'Simit', 'Badem', 'Nane', 'Kont', 'Lucy', 'Rex', 'Zeus'];
+  const owners = ['Derya Çam', 'Tuncay Ilgaz', 'Nihan Özer', 'Barış Yel', 'Oya Tan', 'Kemal Sav', 'Figen Er', 'Levent Ak', 'Aylin Su', 'Selda Kurt', 'Rıza Bal', 'Gökhan İnce'];
+  const types = ['Kontrol', 'Muayene', 'Aşı · Kuduz', 'Kontrol', 'Pansuman', 'Muayene'];
+  const out = [];
+  ALL_VETS.slice(2, 6).forEach(([k], vi) => {
+    const slots = [[9, 0], [10, 0], [11, 30], [13, 0], [14, 0], [15, 30], [16, 30]].filter((_, i) => (i + vi) % 3 !== 2);
+    slots.forEach(([h, m], i) => {
+      const st0 = H(h, m + vi * 10), e0 = st0 + (i % 3 === 1 ? 45 : 30);
+      const st = e0 <= NOW ? 'done' : st0 <= NOW ? (vi === 1 ? 'room' : 'wait') : 'today';
+      out.push({ s: st0, e: e0, pet: pets[(vi * 5 + i) % pets.length], owner: owners[(vi * 3 + i) % owners.length], vet: k, type: types[(vi + i) % types.length], st, extra: st === 'room' ? '6 dk' : st === 'wait' ? '3 dk' : '' });
+    });
+  });
+  return out;
+})();
 const ST_LABEL = { done: '✓', overdue: 'Gecikmiş', noshow: 'Gelmedi', wait: 'Bekliyor', room: 'Muayenede' };
 
 let V = '1';
-const route = () => { const h = (location.hash || '#1-gun').slice(1); const m = /^([123])-(.+)$/.exec(h); V = m ? m[1] : '1'; return m ? m[2] : h || 'gun'; };
+const route = () => { let h = (location.hash || '#1-gun').slice(1); const n = /@(\d)$/.exec(h); NV = n ? +n[1] : 2; h = h.replace(/@\d$/, ''); const m = /^([123])-(.+)$/.exec(h); V = m ? m[1] : '1'; return m ? m[2] : h || 'gun'; };
 const VARIANTS = { 1: ['Klinik panosu', 'özet, hekim sütunları, sağ panel'], 2: ['Ferah kartlar', 'büyük kart, sade, panelsiz'], 3: ['Ajanda + takvim', 'solda ay ve bugünün listesi'] };
 function draft(view) {
   return `<div class="draft"><b>Seçenek:</b>${Object.entries(VARIANTS).map(([k, [t, d]]) => `<a href="#${k}-${view}" class="${k === V ? 'on' : ''}">${k} · ${t}<small>${d}</small></a>`).join('')}</div>`;
@@ -370,13 +409,16 @@ function renderDay() {
   main.innerHTML = head('gun') + (V === '1' ? kpis() : '') + `<div class="body">${V === '3' ? agendaPanel() : ''}<section class="cal">${calbar('gun')}<div id="d" style="display:flex;flex-direction:column;flex:1;min-height:0"></div></section>${V === '1' ? rail() : ''}</div>`;
   const d = DAYS[2], start = H(9), end = H(18);
   const cols = [
-    ...Object.entries(VETS).map(([k, [n, r]]) => { const ap = d.appts.filter((x) => x.vet === k); return { head: `<div class="ph"><span class="av">${k}</span><div><div class="n">${n}</div><small><b>${ap.length}</b> randevu · ${ap.filter((x) => !['done', 'noshow'].includes(x.st)).length} kaldı</small></div></div>`, appts: ap }; }),
+    ...shownVets().map(([k, n], i) => { const ap = [...d.appts, ...EXTRA].filter((x) => x.vet === k); return { head: `<div class="ph"><span class="av c${i}">${k}</span><div><div class="n">${n}</div><small><b>${ap.length}</b> randevu · ${ap.filter((x) => !['done', 'noshow'].includes(x.st)).length} kaldı</small></div></div>`, appts: ap }; }),
     V === '3' ? null : { head: `<div class="ph"><span class="av vx">${SH}</span><div><div class="n">Aşılar</div><small><b>11</b> bekliyor · 6 uygulandı · <a style="color:var(--primary);font-weight:600">2 saatsiz, 1 mesai dışı ▾</a></small></div></div>`, vax: true }
   ].filter(Boolean);
-  const tpl = '56px ' + cols.map((c) => (c.vax && V === '2' ? '250px' : 'minmax(0, 1fr)')).join(' ');
+  // Çok hekimde aşı sütunu sona düşüp kaybolmasın: soldan ilk sütun olur (dar).
+  if (cols.length > 4 && cols[cols.length - 1].vax) cols.unshift(cols.pop());
+  const many = cols.length > 4;
+  const tpl = '56px ' + cols.map((c) => (c.vax ? (many ? '210px' : V === '2' ? '250px' : 'minmax(220px, 1fr)') : 'minmax(220px, 1fr)')).join(' ');
   const H0 = (end - start) * PPM;
   const y = (m) => (m - start) * PPM;
-  let html = `<div class="dhead" style="grid-template-columns:${tpl}"><div></div>${cols.map((c) => c.head).join('')}</div><div class="dscroll" id="ds"><div class="dgrid" style="grid-template-columns:${tpl};height:${H0 + 8}px"><div class="tcol">`;
+  let html = vetBar() + `<div class="dwrap" id="ds"><div class="dhead" style="grid-template-columns:${tpl}"><div></div>${cols.map((c) => c.head).join('')}</div><div class="dgrid" style="grid-template-columns:${tpl};height:${H0 + 8}px"><div class="tcol">`;
   for (let m = start; m <= end; m += 60) html += `<div class="tl tnum" style="top:${y(m) + (m === start ? 8 : 0)}px">${clock(m)}</div>`;
   html += `<div class="nowpill tnum" style="top:${y(NOW)}px">${clock(NOW)}</div></div>`;
   for (const c of cols) {
@@ -408,6 +450,17 @@ function renderDay() {
   });
   const ds = document.getElementById('ds');
   ds.scrollTop = Math.max(0, y(NOW) - ds.clientHeight * 0.4);
+}
+/** Deneme için gösterilen hekimler: ilk NV hekim; bugün randevusu olmayanlar gizli. */
+function shownVets() {
+  return ALL_VETS.slice(0, NV).filter(([k]) => [...DAYS[2].appts, ...EXTRA].some((x) => x.vet === k));
+}
+function vetBar() {
+  const all = ALL_VETS.slice(0, NV), shown = shownVets();
+  const hidden = all.length - shown.length;
+  const chips = shown.map(([k, n], i) => `<a class="vchip"><span class="av c${i}">${k}</span>${n.replace('Dr. ', '')}</a>`).join('');
+  const demo = [2, 4, 6, 8].map((x) => `<a href="#${V}-gun@${x}" class="${x === NV ? 'on' : ''}">${x}</a>`).join('');
+  return `<div class="vetbar"><span>Hekimler:</span><a class="vchip me">Yalnız benim</a>${chips}${hidden ? `<a class="vlink">+${hidden} hekimin bugün randevusu yok</a>` : ''}<span class="demo">Deneme, hekim sayısı: ${demo}</span></div>`;
 }
 function rail() {
   return `<aside class="rail">
