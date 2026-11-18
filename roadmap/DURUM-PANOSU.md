@@ -55,6 +55,10 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Eşzamanlılık açıkları: token yenileme, randevu çakışması, sınırlar | BE `d807f4bc`, panel `0c2ac5e7`, portal `main-IUS6NQD7.js` (`feature/eszamanlilik-aciklari`) | Canlıda (2026-11-17 21:03) | Migration `RefreshTokenRevokedAtConcurrencyToken` (yalnız model özeti, şema değişmez) |
 | Aktarma geri almada kalan kayıtlar (adıyla, zincir hâlinde gruplu) ve kasa sayımında Ana kasa 500 hatası | BE `d807f4bc`, panel `0c2ac5e7` (`feature/geri-alma-kalan-kayitlar`, `fix/kasa-sayimi-kilit`) | Canlıda (2026-11-17 21:03) | |
 | Güncelleme aktarması: kaynak kimliğiyle eşleme, bakiye farkı, önizleme özeti; aktarma satırı ve parti saklama kuralı ([ADR-051](../decisions/ADR-051-guncelleme-aktarmasi.md), kabul) | BE `6cda9ba7`, panel `3bdbb891` (`feature/guncelleme-aktarmasi`) | Canlıda (2026-11-17 22:50) | Migration `AddImportSourceLinks` uygulandı, yedek 22:50 (koordinatör bildirimi; DB'de ben okumadım). `/health/ready` 200 |
+| Takvim yeniden tasarım: ay doluluğu için günlük kapasite, sağ panel açılıp kapanır, aşı takviminde saat bilgisi | BE `6a19c5ca` (+5), FE `b7e2ab11` (+15) (`feature/takvim-yeniden-tasarim`) | Geliştiriliyor | 2026-11-19 git taraması; bildirim gelmedi |
+| Bugün ekranında açık işler listesi (ücreti girilmemiş, önceki günden açık kalan gelişler) | BE `7776ea07` (+2), FE `11efb059` (+2) (`feature/acik-isler-liste`, FE `feature/bugun-liste-a` aynı) | Geliştiriliyor | 2026-11-19 git taraması; bildirim gelmedi |
+| e-Belge önizlemede eksik klinik ayarları hazırlık listesi | BE `4c82918b` (+2) (`feature/ebelge-hazirlik-listesi`; FE dalı henüz boş) | Geliştiriliyor | 2026-11-19 git taraması |
+| E-vet menü yolu metni: Rapor > Resmi > Aşı Bilgi | BE `5121b48d`, FE `f1f2cc45` (`fix/evet-asi-bilgi-menu`, +1) | Dalda, birleşmedi | 2026-11-19 git taraması; bildirim gelmedi |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
