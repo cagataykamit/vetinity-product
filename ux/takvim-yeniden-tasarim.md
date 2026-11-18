@@ -270,3 +270,15 @@ Ortak olanlar:
 Doluluk hesabı için günlük kapasite gerekir (kaç randevu sığar). Bu, çalışma saati ve randevu süresinden hesaplanabilir; taslakta hafta içi 16, cumartesi 8 varsayıldı. Gerçek hesap backend tarafında yapılmalı; kural tek yerde, `AppointmentAvailabilityCalculator` ile aynı kaynaktan.
 
 Görüntüler: `3-1-ay-A.png`, `3-1-ay-B.png`, `3-1-ay-C.png`.
+
+## Kullanıcı seçimi (2026-11-18)
+
+- **Gün:** Seçenek 1 · Klinik panosu, çok hekim kurallarıyla birlikte. Kullanıcı "gün görünümü hoşuma gitti" dedi; 6 hekimli 1. seçeneğe bakıyordu.
+- **Hafta:** "Fena değil". Seçenek 1'in hafta düzeni olduğu gibi kalıyor: gün sütunlarında küçük kartlar, her günün başında aşı sayısı.
+- **Ay:** **A · Doluluk haritası.**
+
+Kodlamadan önce açık kalanlar:
+1. `DueTimeSpecified` migration'ı ve pilot klinik verisinin yeniden aktarılması için onay (2. turdaki backend maddesi).
+2. Randevu takvimi yanıtına `state` alanının eklenmesi.
+3. Günlük kapasite hesabının nereden geleceği (doluluk rengi için).
+4. "Klinikte" panelinin kabul kuyruğundan (`waitingVisits`) beslenip beslenemeyeceğinin doğrulanması.
