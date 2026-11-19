@@ -61,6 +61,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | e-Belge kes hazırlık listesi (taslak A): önizlemede eksik klinik ayarları liste olarak; VKN/TCKN zorunlu (kullanıcı kararı 2026-11-19) | BE `0adbd22c`, panel `dffd1592` (`feature/ebelge-hazirlik-listesi`) | Canlıda (2026-11-19 06:11) | |
 | E-vet menü yolu metni: Rapor > Resmi > Aşı Bilgi | BE `0adbd22c`, panel `dffd1592` (`fix/evet-asi-bilgi-menu`) | Canlıda (2026-11-19 06:11) | |
 | Sözlükte benzer terim önerisi ve Kaynak filtresi; Windows sesle yazma (Win+H) ipucu | BE `0adbd22c`, panel `dffd1592` | Canlıda (2026-11-19 06:11) | Sürüm notunda |
+| Bugün akışı Karar 1 A ve Karar 2 A: bugünkü gelişsiz muayene açık gelişe bağlanır ya da yeni geliş açar; yatan hastanın gelişi taburcuya kadar açık sayılır ("Unutulmuş olabilir" dışında), taburcuda "Gelişi tamamla" önerisi | BE `a2c0ab2e`, panel `cd0ce138` (`feature/muayene-gelis-yatis`) | Yerel main'de, yayında değil | Denetim düzeltmeleriyle birlikte; push ve yayın kullanıcı onayı bekliyor (BE 5, FE 7 commit origin'in önünde) |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -69,7 +70,8 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-Yapıldı: 2026-11-16 03:47, 15:28, 18:40 ve 2026-11-17 21:03, 22:50 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50 ve 2026-11-19 06:11 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında).
+Bekliyor: yerel main'deki Bugün akışı (Karar 1 A, Karar 2 A) ve denetim düzeltmeleri; BE `a2c0ab2e`, panel `cd0ce138`. Push ve yayın kullanıcı onayında.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
