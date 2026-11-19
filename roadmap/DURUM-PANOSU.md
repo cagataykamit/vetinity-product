@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-16 (durum panosu oturumu; tanıtım sitesi C oturumu bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `0adbd22c`, panel ve tanıtım `dffd1592` (`main-TYOEXXHO.js`; 2026-11-19 06:11), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-19-takvim-bugun-ebelge.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-20 (durum panosu oturumu; koordinatör yayın bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `a2c0ab2e`, panel ve tanıtım `cd0ce138` (`main-GZEXW47L.js`; 2026-11-20 01:43), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-bugun-akisi-muayene-yatis.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-19). Kullanıcı E-vet aktarmasını canlıda kendisi denedi ve aktardı; pilot kliniğe henüz verilmedi. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -61,7 +61,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | e-Belge kes hazırlık listesi (taslak A): önizlemede eksik klinik ayarları liste olarak; VKN/TCKN zorunlu (kullanıcı kararı 2026-11-19) | BE `0adbd22c`, panel `dffd1592` (`feature/ebelge-hazirlik-listesi`) | Canlıda (2026-11-19 06:11) | |
 | E-vet menü yolu metni: Rapor > Resmi > Aşı Bilgi | BE `0adbd22c`, panel `dffd1592` (`fix/evet-asi-bilgi-menu`) | Canlıda (2026-11-19 06:11) | |
 | Sözlükte benzer terim önerisi ve Kaynak filtresi; Windows sesle yazma (Win+H) ipucu | BE `0adbd22c`, panel `dffd1592` | Canlıda (2026-11-19 06:11) | Sürüm notunda |
-| Bugün akışı Karar 1 A ve Karar 2 A: bugünkü gelişsiz muayene açık gelişe bağlanır ya da yeni geliş açar; yatan hastanın gelişi taburcuya kadar açık sayılır ("Unutulmuş olabilir" dışında), taburcuda "Gelişi tamamla" önerisi | BE `a2c0ab2e`, panel `cd0ce138` (`feature/muayene-gelis-yatis`) | Yerel main'de, yayında değil | Denetim düzeltmeleriyle birlikte; push ve yayın kullanıcı onayı bekliyor (BE 5, FE 7 commit origin'in önünde) |
+| Bugün akışı Karar 1 A ve Karar 2 A: bugünkü gelişsiz muayene açık gelişe bağlanır ya da yeni geliş açar; yatan hastanın gelişi taburcuya kadar açık sayılır ("Unutulmuş olabilir" dışında), taburcuda "Gelişi tamamla" önerisi | BE `a2c0ab2e`, panel `cd0ce138` (`feature/muayene-gelis-yatis`) | Canlıda (2026-11-20 01:43) | Denetim düzeltmeleriyle birlikte; migration yok. [Sürüm notu](../release-notes/2026-11-20-bugun-akisi-muayene-yatis.md). `/health/ready` 200 |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -70,8 +70,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50 ve 2026-11-19 06:11 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında).
-Bekliyor: yerel main'deki Bugün akışı (Karar 1 A, Karar 2 A) ve denetim düzeltmeleri; BE `a2c0ab2e`, panel `cd0ce138`. Push ve yayın kullanıcı onayında.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11 ve 2026-11-20 01:43 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
