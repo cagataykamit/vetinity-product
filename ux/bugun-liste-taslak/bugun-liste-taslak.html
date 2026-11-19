@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bugün ve e-belge taslağı</title>
+<!--
+  İki tasarım, her birinde üç seçenek (2026-11-18). Statik, tıklanır taslak; veriler uydurmadır.
+  Sol alttaki çizgili "Taslak" panelinden bölüm (Bugün listesi / E-belge uyarısı), seçenek (A, B, C) ve e-belgede senaryo seçilir.
+  Bugün listesi: adres #A, #B, #C; saat 15:20 sabit. Geldi → Başlat → Tamamla ve Ödeme al durumu gerçekten değiştirir.
+  E-belge uyarısı: adres #E-A-one, #E-B-three, #E-C-noperm…; "Aç" ayar sayfasına gider, kaydedip dönünce pencere kaldığı yerden sürer.
+  "Sıfırla" başa döndürür.
+  Ölçü: 1536×730 CSS piksel (1920×1080 ekran, %125 ölçek). Renkler vetinity-preset.ts'ten (primary.600 #0c8079).
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css">
+<style>
+:root {
+  --bg: #f4f6f8; --surface: #ffffff; --surface-2: #f8fafc; --border: #e2e8f0; --line: #eef2f6;
+  --text: #0f172a; --muted: #475569; --faint: #94a3b8;
+  --primary: #0c8079; --primary-h: #0a655f; --primary-50: #eefcfb; --primary-100: #d3f4f0; --on-primary: #ffffff;
+  --amber: #b45309; --amber-bg: #fef3c7; --amber-dot: #f59e0b;
+  --green: #15803d; --green-dot: #22c55e; --green-bg: #dcfce7;
+  --red: #b91c1c; --red-bg: #fee2e2;
+  --slate-dot: #94a3b8;
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05);
+  --pop: 0 10px 30px rgba(15, 23, 42, .18);
+}
+html.dark {
+  --bg: #09090b; --surface: #18181b; --surface-2: #1f1f23; --border: #3f3f46; --line: #27272a;
+  --text: #f4f4f5; --muted: #a1a1aa; --faint: #71717a;
+  --primary: #2dd4bf; --primary-h: #5eead4; --primary-50: #0d2b29; --primary-100: #123a37; --on-primary: #042f2e;
+  --amber: #fcd34d; --amber-bg: #3a2c0b; --amber-dot: #f59e0b;
+  --green: #86efac; --green-dot: #22c55e; --green-bg: #12301d;
+  --red: #fca5a5; --red-bg: #3b1515;
+  --slate-dot: #71717a;
+  --shadow: none; --pop: 0 10px 30px rgba(0, 0, 0, .6);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.4 Inter, "Segoe UI", system-ui, sans-serif; overflow: hidden; }
+a { color: inherit; text-decoration: none; cursor: pointer; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.tnum { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+
+/* ---------- Kabuk (panelin bugünkü üst çubuğu ve menüsü, kısaltılmış) ---------- */
+.top { height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.logo { width: 200px; font-weight: 700; font-size: 22px; display: flex; align-items: center; gap: 12px; }
+.logo i { font-size: 18px; color: var(--muted); }
+.logo b { color: var(--primary); }
+.search { width: 190px; height: 34px; border: 1px solid var(--border); border-radius: 8px; color: var(--faint); padding: 7px 10px; font-size: 13px; margin-left: auto; }
+.clinic { font-weight: 600; font-size: 14px; }
+.top .ic { color: var(--muted); font-size: 17px; }
+.shell { display: flex; height: calc(100% - 56px); }
+.side { width: 240px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 10px 0; overflow: hidden; }
+.side h6 { margin: 14px 20px 4px; font-size: 11.5px; letter-spacing: .8px; font-weight: 700; }
+.side a { display: flex; align-items: center; gap: 10px; padding: 8px 20px; font-size: 14.5px; }
+.side a i { width: 18px; color: var(--text); }
+.side a.on { background: var(--primary-50); color: var(--primary); font-weight: 600; }
+.side a.on i { color: var(--primary); }
+main { flex: 1; min-width: 0; overflow-y: auto; padding: 14px 24px 24px; }
+
+/* ---------- Taslak paneli (ürünün parçası değil; menünün altında, her şeyin üstünde) ---------- */
+.draft { position: fixed; left: 10px; bottom: 10px; width: 220px; z-index: 100; display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-50); font-size: 12px; box-shadow: var(--shadow); }
+.draft .dh { display: flex; align-items: center; justify-content: space-between; font-size: 11px; letter-spacing: .6px; }
+.draft a { display: block; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.draft a small { font-weight: 400; color: var(--muted); margin-left: 3px; }
+.draft a.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.draft a.on small { color: var(--on-primary); opacity: .85; }
+.draft .dsec, .draft .dscn { display: flex; gap: 4px; }
+.draft .dsec a, .draft .dscn a { flex: 1; text-align: center; padding: 3px 4px; }
+.draft .dopts { display: flex; flex-direction: column; gap: 3px; }
+.draft .dscn:empty { display: none; }
+.draft .dscn span { align-self: center; color: var(--muted); }
+.draft .lnk { border: 0; background: none; color: var(--primary); padding: 0 0 0 8px; font-weight: 600; font-size: 11.5px; }
+
+/* ---------- E-belge: Ücretler sayfası, pencere ve ayar sayfası ---------- */
+.ctab { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.ctab th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 8px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.ctab td { padding: 0 12px; height: 44px; border-bottom: 1px solid var(--line); }
+.ctab td.r, .ctab th.r { text-align: right; }
+.ctab tr.sel td { background: var(--primary-50); }
+.cb { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--faint); display: inline-grid; place-items: center; vertical-align: middle; }
+.cb.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); font-size: 10px; }
+.selbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--border); font-size: 13.5px; }
+.selbar .btn { margin-left: auto; }
+.mask { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); z-index: 40; display: grid; place-items: center; }
+.dlg { width: 560px; max-width: 95vw; max-height: calc(100vh - 40px); background: var(--surface); border-radius: 12px; box-shadow: var(--pop); display: flex; flex-direction: column; overflow: hidden; }
+.dlg-h { display: flex; align-items: center; gap: 10px; padding: 16px 20px 8px; }
+.dlg-h h3 { margin: 0; font-size: 17px; }
+.dlg-h .btn.ico { margin-left: auto; }
+.dlg-b { padding: 4px 20px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+.dlg-f { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 20px 16px; border-top: 1px solid var(--line); }
+.dlg-f .grow { margin-right: auto; font-size: 12.5px; color: var(--muted); }
+.btn.txt { border-color: transparent; background: transparent; color: var(--muted); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.lead { display: flex; gap: 12px; align-items: flex-start; }
+.lead .bub { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-50); color: var(--primary); display: grid; place-items: center; flex: none; font-size: 17px; }
+.lead h4 { margin: 2px 0 4px; font-size: 15.5px; }
+.lead p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.chk { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 10px; }
+.chk li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 11px 14px; }
+.chk li + li { border-top: 1px solid var(--line); }
+.chk .n { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.chk .ok { width: 24px; height: 24px; border-radius: 50%; background: var(--green-bg); color: var(--green); font-size: 11px; display: grid; place-items: center; }
+.chk b { display: block; font-size: 14px; }
+.chk small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+.chk li.done b { font-weight: 500; color: var(--muted); }
+.chk .val { font-size: 12.5px; color: var(--muted); }
+.hint { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--muted); background: var(--surface-2); border-radius: 8px; padding: 8px 10px; }
+.hint i { margin-top: 2px; }
+.steps { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-weight: 600; }
+.steps i { width: 22px; height: 4px; border-radius: 2px; background: var(--line); }
+.steps i.on { background: var(--primary); }
+.steps i.ok { background: var(--green-dot); }
+.radios { display: flex; flex-direction: column; gap: 8px; }
+.radio { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+.radio:hover { border-color: var(--primary); }
+.radio.on { border-color: var(--primary); background: var(--primary-50); box-shadow: inset 0 0 0 1px var(--primary); }
+.radio .rd { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--faint); margin-top: 1px; }
+.radio.on .rd { border: 5px solid var(--primary); }
+.radio b { display: block; font-size: 14px; }
+.radio small { color: var(--muted); font-size: 12.5px; }
+.fld label { display: block; font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
+.fld input, .fld select { width: 100%; height: 36px; border: 1px solid var(--border); border-radius: 6px; padding: 0 10px; font: inherit; background: var(--surface); color: var(--text); }
+.fld input:focus, .fld select:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+.fld small { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
+.lnk2 { color: var(--primary); font-weight: 600; font-size: 13px; }
+.banner { display: grid; grid-template-columns: 22px 1fr; gap: 10px; border-radius: 10px; padding: 12px 14px; background: var(--amber-bg); border: 1px solid color-mix(in srgb, var(--amber-dot) 45%, transparent); }
+.banner > i { color: var(--amber); margin-top: 2px; }
+.banner b { display: block; font-size: 14px; }
+.banner p { margin: 2px 0 8px; font-size: 13px; color: var(--text); }
+.banner .chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.banner .chips a { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; padding: 3px 9px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+.banner .chips a:hover { border-color: var(--primary); color: var(--primary); }
+.pv-sec .k { font-size: 12.5px; color: var(--muted); margin-bottom: 3px; }
+.pv-lines { border: 1px solid var(--border); border-radius: 10px; }
+.pv-lines div { display: flex; justify-content: space-between; padding: 7px 12px; font-size: 13.5px; }
+.pv-lines div + div { border-top: 1px solid var(--line); }
+.pv-lines div.tot { font-weight: 700; background: var(--surface-2); }
+.grp { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+.grp b { display: block; }
+.grp small { color: var(--muted); font-size: 12.5px; }
+.ready { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--green); font-weight: 600; }
+.back { display: flex; align-items: center; gap: 12px; border-radius: 10px; padding: 10px 14px; background: var(--primary-50); border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent); margin-bottom: 14px; font-size: 13.5px; }
+.back i.lead-i { color: var(--primary); font-size: 16px; }
+.back .btn { margin-left: auto; }
+.crumb { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.scard { padding: 16px 18px; margin-bottom: 14px; }
+.scard h5 { margin: 0 0 4px; font-size: 15px; }
+.scard > p { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+.scard.focus { box-shadow: 0 0 0 2px var(--primary); }
+.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.fld.need select, .fld.need input { border-color: var(--amber-dot); background: color-mix(in srgb, var(--amber-bg) 50%, var(--surface)); }
+.fld .needt { color: var(--amber); font-weight: 600; }
+
+/* ---------- Sayfa başı (üç seçenekte ortak) ---------- */
+.ph { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ph h1 { margin: 0; font-size: 22px; font-weight: 700; }
+.ph .date { color: var(--muted); font-size: 14px; }
+.ph .acts { margin-left: auto; display: flex; gap: 8px; }
+.btn { height: 34px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; color: var(--text); }
+.btn:hover { background: var(--surface-2); }
+.btn.pri { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.btn.pri:hover { background: var(--primary-h); }
+.btn.out { border-color: var(--primary); color: var(--primary); background: transparent; }
+.btn.out:hover { background: var(--primary-50); }
+.btn.sm { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn.ico { width: 30px; padding: 0; justify-content: center; border-color: transparent; background: transparent; color: var(--muted); border-radius: 50%; }
+.btn.ico:hover { background: var(--surface-2); color: var(--text); }
+.btn.ico.on { color: var(--red); }
+
+.bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+.seg { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.seg .sb { display: inline-flex; border: 1px solid var(--border); border-radius: 7px; padding: 2px; background: var(--surface); gap: 2px; }
+.seg .sb a { padding: 4px 11px; border-radius: 5px; color: var(--text); font-size: 13px; font-weight: 500; }
+.seg .sb a.on { background: var(--primary); color: var(--on-primary); }
+.vsep { width: 1px; height: 24px; background: var(--border); }
+.open { display: flex; align-items: center; gap: 6px; margin-left: auto; font-size: 13px; }
+.open > span:first-child { font-weight: 600; margin-right: 2px; }
+.oi { display: inline-flex; align-items: center; gap: 5px; border: 1px solid; border-radius: 6px; padding: 2px 8px; font-size: 12.5px; }
+.oi.d { color: var(--red); border-color: color-mix(in srgb, var(--red) 40%, transparent); }
+.oi.w { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 40%, transparent); }
+.note { font-size: 13px; color: var(--muted); margin: -4px 0 10px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+
+/* ---------- Durum: nokta + tek satır metin (gri kutu yok) ---------- */
+.st { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.st::before { content: ""; width: 9px; height: 9px; border-radius: 50%; flex: none; background: var(--dot); box-shadow: inset 0 0 0 2px var(--ring, transparent); }
+.st .sub { font-weight: 400; color: var(--muted); }
+.s-planned { --dot: transparent; --ring: var(--slate-dot); color: var(--text); }
+.s-waiting { --dot: var(--amber-dot); color: var(--amber); }
+.s-inprogress { --dot: var(--primary); color: var(--primary); }
+.s-done { --dot: var(--green-dot); color: var(--green); font-weight: 500; }
+.s-noshow { --dot: var(--faint); color: var(--muted); font-weight: 500; }
+
+.pet { font-weight: 600; color: var(--primary); }
+.pet:hover, .own:hover { text-decoration: underline; }
+.sp { color: var(--muted); font-size: 12.5px; font-weight: 400; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+.tag.alert { background: var(--red-bg); color: var(--red); }
+.tag.ok { background: var(--green-bg); color: var(--green); }
+.tag.debt { background: var(--amber-bg); color: var(--amber); }
+.tag.prep { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); font-weight: 500; }
+.due { color: var(--amber); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.vet { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.av { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-100); color: var(--primary-h); font-size: 10.5px; font-weight: 700; display: grid; place-items: center; flex: none; }
+html.dark .av { color: var(--primary); }
+.none { color: var(--faint); }
+.ell { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- A · Sıkı tablo ---------- */
+.ta-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px 10px; }
+.ta-head h2 { margin: 0; font-size: 16px; }
+.cnt { font-size: 12px; border-radius: 10px; padding: 1px 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); font-weight: 600; }
+.sum { margin-left: auto; display: flex; gap: 16px; }
+table.ta { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.ta th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 7px 10px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface-2); position: sticky; top: -14px; z-index: 1; }
+.ta td { padding: 0 10px; height: 46px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.ta tr.gh td { height: 30px; font-size: 11.5px; font-weight: 700; letter-spacing: .6px; color: var(--muted); background: var(--surface); padding-top: 8px; border-bottom: 1px solid var(--border); }
+.ta tr.gh td span { font-weight: 600; letter-spacing: 0; margin-left: 6px; }
+.ta tr.done td { height: 38px; }
+.ta tr.done .tm { color: var(--muted); font-weight: 500; }
+.ta tr.done .pet { color: var(--text); font-weight: 500; }
+.ta tr:not(.gh):hover td { background: var(--surface-2); }
+.ta .tm { font-weight: 700; font-size: 14.5px; }
+.ta .tm small { display: block; font-size: 11.5px; font-weight: 400; color: var(--muted); margin-top: -1px; }
+.ta .acts { display: flex; gap: 6px; justify-content: flex-end; align-items: center; }
+.ta tr.more td { height: 38px; color: var(--primary); font-weight: 600; font-size: 13px; cursor: pointer; }
+.ta tr.more td i { margin-right: 6px; font-size: 11px; }
+.ta tr.more:hover td { background: var(--primary-50); }
+.ta .cell2 { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.ta .ownsub { font-size: 12px; color: var(--muted); }
+
+/* ---------- B · Durum şeritleri ---------- */
+.bb { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 14px; align-items: start; }
+.lane { display: flex; flex-direction: column; max-height: calc(100vh - 56px - 150px); min-height: 380px; }
+.lane-h { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.lane-h h3 { margin: 0; font-size: 15px; }
+.lane-h .st { margin-left: 0; }
+.lane-h .hint { margin-left: auto; font-size: 12px; color: var(--muted); }
+.lane-b { padding: 10px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.bc { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: var(--surface); border-left: 4px solid var(--bl, var(--border)); }
+.bc.s-waiting, .bc.s-inprogress, .bc.s-planned, .bc.s-done { color: var(--text); font-weight: 400; }
+.bc.s-planned { --bl: var(--slate-dot); }
+.bc.s-waiting { --bl: var(--amber-dot); }
+.bc.s-inprogress { --bl: var(--primary); }
+.bc.s-done { --bl: var(--amber-dot); }
+.bc .r1 { display: flex; align-items: center; gap: 10px; }
+.bc .r1 .tm { font-size: 18px; font-weight: 700; }
+.bc .r1 .btn.ico { margin-left: auto; }
+.bc .r2 { margin-top: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 15px; }
+.bc .r3 { font-size: 13px; color: var(--muted); margin-top: 2px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.bc .r3 a { color: var(--text); }
+.bc .r4 { font-size: 12.5px; color: var(--muted); margin-top: 6px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.bc .r5 { display: flex; gap: 8px; margin-top: 10px; }
+.empty { text-align: center; color: var(--muted); font-size: 13px; padding: 28px 10px; }
+.empty i { display: block; font-size: 22px; color: var(--faint); margin-bottom: 6px; }
+.dl-h { font-size: 11.5px; font-weight: 700; letter-spacing: .6px; color: var(--muted); margin: 6px 4px 0; }
+.dl { display: grid; grid-template-columns: 46px minmax(0, 1fr) minmax(0, 1.1fr) 28px; align-items: center; gap: 8px; padding: 0 4px 0 8px; height: 34px; border-radius: 7px; font-size: 13px; }
+.dl:hover { background: var(--surface-2); }
+.dl .tm { color: var(--muted); }
+.dl .pet { color: var(--text); font-weight: 500; }
+.dl .btn.ico { width: 26px; height: 26px; }
+
+/* ---------- C · Gün akışı ---------- */
+.cc { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+.flow { padding: 6px 0 10px; }
+.flow-h { display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px; }
+.flow-h h2 { margin: 0; font-size: 16px; }
+.flow-h .lnk { margin-left: auto; color: var(--primary); font-weight: 600; font-size: 13px; }
+.fr { display: grid; grid-template-columns: 62px 22px minmax(0, 1fr) 190px 230px; align-items: center; column-gap: 8px; padding: 0 16px 0 12px; position: relative; }
+.fr::before { content: ""; position: absolute; left: 83px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+.fr > .tmc { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 14.5px; }
+.fr > .tmc small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+.fr > .dt { width: 12px; height: 12px; border-radius: 50%; justify-self: center; z-index: 1; background: var(--dot); box-shadow: 0 0 0 3px var(--surface), inset 0 0 0 2px var(--ring, transparent); }
+.fr.big { min-height: 66px; padding-top: 8px; padding-bottom: 8px; }
+.fr.big .main .l1 { display: flex; align-items: center; gap: 7px; font-size: 15.5px; }
+.fr.big .main .l2 { font-size: 13px; color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 2px; }
+.fr.big .main .l2 a { color: var(--text); }
+.fr .acts { display: flex; gap: 6px; justify-content: flex-end; align-items: center; }
+.fr.bin { height: 40px; cursor: pointer; }
+.fr.bin:hover { background: var(--surface-2); }
+.fr.bin .main { font-size: 13px; display: flex; gap: 8px; align-items: center; min-width: 0; }
+.fr.bin .main b { color: var(--green); font-weight: 600; white-space: nowrap; }
+.fr.bin .main .names { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fr.bin .tmc { color: var(--muted); font-weight: 500; font-size: 13px; }
+.fr.bin .chev { color: var(--muted); justify-self: end; grid-column: 5; font-size: 12px; }
+.fr.sm { height: 34px; font-size: 13px; }
+.fr.sm .tmc { color: var(--muted); font-weight: 500; font-size: 13px; }
+.fr.sm .main { display: flex; gap: 8px; align-items: center; min-width: 0; }
+.fr.sm .pet { color: var(--text); font-weight: 500; }
+.fr.sm .dt { width: 8px; height: 8px; }
+.fr.focus { background: color-mix(in srgb, var(--primary) 5%, transparent); }
+.nowl { display: grid; grid-template-columns: 62px 22px 1fr; align-items: center; column-gap: 8px; padding: 6px 16px 6px 12px; }
+.nowl b { text-align: right; color: var(--primary); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.nowl i { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); justify-self: center; }
+.nowl span { height: 2px; background: var(--primary); position: relative; }
+.nowl span em { position: absolute; left: 0; top: -9px; background: var(--primary); color: var(--on-primary); font-style: normal; font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 9px; letter-spacing: .4px; }
+.rail { display: flex; flex-direction: column; gap: 12px; }
+.rc { padding: 14px 16px; }
+.rc h4 { margin: 0 0 10px; font-size: 14px; }
+.prog { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; display: flex; }
+.prog i { background: var(--green-dot); }
+.prog i.ip { background: var(--primary); }
+.kv { display: grid; grid-template-columns: 92px 1fr; gap: 8px 10px; font-size: 13px; margin-top: 12px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; min-width: 0; }
+.rail .oi { display: flex; margin-bottom: 6px; }
+
+/* ---------- Menü ve bildirim ---------- */
+.menu { position: fixed; z-index: 50; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--pop); padding: 4px; min-width: 210px; }
+.menu a { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 6px; font-size: 13.5px; }
+.menu a:hover { background: var(--surface-2); }
+.menu a i { width: 16px; color: var(--muted); }
+.toast { position: fixed; right: 20px; top: 70px; z-index: 60; background: var(--text); color: var(--surface); padding: 10px 14px; border-radius: 8px; font-size: 13px; box-shadow: var(--pop); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo"><i class="pi pi-bars"></i><span><b>V</b>etinity</span></div>
+  <div class="search"><i class="pi pi-search"></i>&nbsp; Ara…</div>
+  <span class="clinic"><i class="pi pi-building"></i> Merkez Pati</span>
+  <i class="pi pi-bell ic"></i><i class="pi pi-sun ic"></i><i class="pi pi-user ic"></i>
+</div>
+<div class="shell">
+  <nav class="side">
+    <h6>GÜNLÜK İŞ</h6>
+    <a data-nav="bugun"><i class="pi pi-calendar"></i>Bugün</a>
+    <a><i class="pi pi-calendar-plus"></i>Randevular</a>
+    <h6>MÜŞTERİ VE HASTA</h6>
+    <a><i class="pi pi-users"></i>Müşteri ve Hasta</a>
+    <h6>KLİNİK</h6>
+    <a data-nav="charges"><i class="pi pi-book"></i>Kayıtlar</a>
+    <h6>YÖNETİM</h6>
+    <a><i class="pi pi-chart-line"></i>Raporlar</a>
+    <a><i class="pi pi-th-large"></i>Özet</a>
+    <a data-nav="settings"><i class="pi pi-cog"></i>Ayarlar</a>
+    <a><i class="pi pi-whatsapp"></i>WhatsApp destek</a>
+  </nav>
+  <main id="pageEbelge" hidden></main>
+  <main id="main">
+    <div class="ph">
+      <h1>Bugün</h1>
+      <span class="date">Çarşamba, 18 Kasım · <span class="tnum">15:20</span></span>
+      <div class="acts">
+        <button class="btn" type="button"><i class="pi pi-refresh"></i>Yenile</button>
+        <button class="btn pri" type="button"><i class="pi pi-plus"></i>Randevusuz geliş</button>
+        <button class="btn" type="button"><i class="pi pi-calendar-plus"></i>Yeni randevu</button>
+        <button class="btn" type="button"><i class="pi pi-file-edit"></i>Yeni muayene</button>
+        <button class="btn" type="button"><i class="pi pi-shopping-cart"></i>Hızlı satış</button>
+      </div>
+    </div>
+    <div class="bar">
+      <span class="seg">Liste <span class="sb" id="segList"><a data-v="today">Günlük liste</a><a data-v="voided">Yanlış işaretlenenler</a></span></span>
+      <span class="vsep"></span>
+      <span class="seg">Hastalar <span class="sb" id="segScope"><a data-v="mine">Benim hastalarım</a><a data-v="all">Tümü</a></span></span>
+      <div class="open" id="openTop"></div>
+    </div>
+    <div id="scopeNote"></div>
+    <div id="view"></div>
+  </main>
+</div>
+<div class="menu" id="menu" hidden></div>
+<div id="modal"></div>
+<div class="toast" id="toast"></div>
+<!-- Taslak paneli: ürünün parçası değil; menünün boş alt kısmında durur -->
+<div class="draft" role="group" aria-label="Taslak seçenekleri">
+  <div class="dh"><b>TASLAK</b><span><button class="lnk" id="reset" type="button">Sıfırla</button><button class="lnk" id="theme" type="button">Koyu tema</button></span></div>
+  <div class="dsec"><a data-sec="bugun">Bugün listesi</a><a data-sec="ebelge">E-belge uyarısı</a></div>
+  <div class="dopts" id="dopts"></div>
+  <div class="dscn" id="dscn"></div>
+</div>
+
+<script>
+const NOW = 15 * 60 + 20;
+const ME = 'Dr. Ece Yılmaz';
+
+/* 26 kayıt: 24 tamamlandı (biri ödeme bekliyor, biri randevusuz), 1 muayenede, 1 bekleniyor. Adlar uydurmadır. */
+const SEED = [
+  ['09:00', 'Pamuk', 'Kedi', 'Selin Aydın', 'Karma aşı'],
+  ['09:15', 'Karamel', 'Köpek', 'Burak Şen', 'Kontrol'],
+  ['09:15', 'Duman', 'Kedi', 'Elif Koç', 'Kontrol'],
+  ['09:30', 'Zeytin', 'Köpek', 'Hakan Er', 'Kuduz aşısı'],
+  ['09:45', 'Fıstık', 'Kedi', 'Melis Uçar', 'İç parazit'],
+  ['10:00', 'Bulut', 'Köpek', 'Can Demir', 'Kontrol', { vet: ME }],
+  ['10:15', 'Tekir', 'Kedi', 'Aylin Şahin', 'Kısırlaştırma kontrolü'],
+  ['10:30', 'Paşa', 'Köpek', 'Okan Tuna', 'Karma aşı', { alert: 'Isırır' }],
+  ['10:30', 'Mırmır', 'Kedi', 'Derya Kılıç', 'Kontrol'],
+  ['10:45', 'Rocky', 'Köpek', 'Kerem Ateş', 'Dış parazit'],
+  ['11:00', 'Lokum', 'Kedi', 'Sevgi Bal', 'Karma aşı'],
+  ['11:15', 'Badem', 'Köpek', 'Tolga Işık', 'Deri muayenesi', { vet: 'Dr. Arda Kaya' }],
+  ['11:30', 'Misket', 'Kedi', 'Nazlı Ekin', 'Kontrol'],
+  ['11:45', 'Odin', 'Köpek', 'Emre Gök', 'Kuduz aşısı'],
+  ['12:00', 'Şeker', 'Kedi', 'Ceren Ak', 'Diş kontrolü'],
+  ['12:15', 'Kahve', 'Köpek', 'Volkan Sarp', 'Kontrol'],
+  ['12:40', 'Pofuduk', 'Tavşan', 'İpek Yel', 'İştahsızlık', { walkIn: true }],
+  ['13:00', 'Max', 'Köpek', 'Serkan Ay', 'Karma aşı'],
+  ['13:15', 'Gece', 'Kedi', 'Buse Tan', 'Kusma', { due: 850, vet: ME, arrived: '13:12' }],
+  ['13:30', 'Bal', 'Kedi', 'Ufuk Er', 'Kontrol'],
+  ['13:45', 'Toprak', 'Köpek', 'Gizem Oral', 'Topallama kontrolü', { vet: 'Dr. Arda Kaya' }],
+  ['14:00', 'Limon', 'Kedi', 'Arda Kılınç', 'Karma aşı'],
+  ['14:15', 'Çakıl', 'Köpek', 'Pelin Soy', 'Kontrol'],
+  ['14:45', 'Mia', 'Kedi', 'Deniz Ova', 'İç parazit'],
+  ['15:00', 'Hera', 'Köpek', 'Cem Uslu', 'Topallama', { status: 'inprogress', arrived: '14:56', started: '14:58', vet: ME, alert: 'Alerjik: penisilin' }],
+  ['15:30', 'Çomar', 'Köpek', 'Mert Aksoy', 'Karma aşı', { status: 'planned', clientDebt: 1000, confirmed: true, prep: 'Karma aşı paketi' }]
+];
+const PHONES = ['532 410 22 18', '505 118 40 72', '542 903 11 65', '533 270 84 09', '555 614 33 20', '530 452 76 11'];
+
+function build() {
+  return SEED.map(([time, pet, species, owner, reason, x = {}], i) => ({
+    id: i, time, pet, species, owner, reason, phone: '+90 ' + PHONES[i % PHONES.length],
+    status: x.status || 'done', vet: x.vet || null, alert: x.alert || null, due: x.due || 0,
+    clientDebt: x.clientDebt || 0, confirmed: !!x.confirmed, prep: x.prep || null, walkIn: !!x.walkIn,
+    arrived: x.arrived || (x.status ? null : (x.walkIn ? time : addMin(time, -3))), started: x.started || null, urgent: false
+  }));
+}
+function toMin(t) { const [h, m] = t.split(':').map(Number); return h * 60 + m; }
+function fmt(n) { return String(Math.floor(n / 60)).padStart(2, '0') + ':' + String(n % 60).padStart(2, '0'); }
+function addMin(t, d) { return fmt(toMin(t) + d); }
+function money(n) { return '₺' + n.toLocaleString('tr-TR', { minimumFractionDigits: 2 }); }
+function moneyShort(n) { return '₺' + n.toLocaleString('tr-TR'); }
+function initials(n) { return n.replace('Dr. ', '').split(' ').map((s) => s[0]).join(''); }
+
+let items = build();
+let opt = 'A', list = 'today', scope = 'all', showDone = false, openBins = new Set();
+
+const LABEL = { planned: 'Bekleniyor', waiting: 'Sırada', inprogress: 'Muayenede', done: 'Tamamlandı', noshow: 'Gelmedi' };
+
+function statusHtml(it) {
+  let sub = '';
+  if (it.status === 'planned') {
+    const d = toMin(it.time) - NOW;
+    sub = d > 0 ? d + ' dk sonra' : (-d) + ' dk gecikti';
+  } else if (it.status === 'waiting') sub = (NOW - toMin(it.arrived)) + ' dk';
+  else if (it.status === 'inprogress') sub = (NOW - toMin(it.started || it.arrived)) + ' dk';
+  return `<span class="st s-${it.status}">${LABEL[it.status]}${sub ? ` <span class="sub">· ${sub}</span>` : ''}</span>`;
+}
+function petHtml(it, withSpecies = true) {
+  return `<a class="pet">${it.pet}</a>${withSpecies ? ` <span class="sp">${it.species}</span>` : ''}${it.alert ? ` <span class="tag alert" title="Hasta uyarısı"><i class="pi pi-exclamation-triangle" style="font-size:10px"></i>${it.alert}</span>` : ''}${it.urgent ? ' <span class="tag alert">Acil</span>' : ''}`;
+}
+function vetHtml(it) {
+  return it.vet ? `<span class="vet"><span class="av">${initials(it.vet)}</span>${it.vet}</span>` : '<span class="none" title="Sorumlu hekim atanmadı">—</span>';
+}
+function debtTag(it) { return it.clientDebt ? `<span class="tag debt" title="Müşterinin toplam açık borcu — tıklayınca ödeme al">Borç ${moneyShort(it.clientDebt)}</span>` : ''; }
+/* A'nın dar "Neden / not" hücresi: ödeme kalanı ya da neden; onay ve hazırlık yalnız simge (tam metin ipucunda). */
+function infoHtml(it) {
+  if (it.due) return `<span class="due">Kalan ${money(it.due)}</span>`;
+  const icons = [];
+  if (it.confirmed && it.status === 'planned') icons.push('<i class="pi pi-check-circle" style="color:var(--green)" title="Müşteri hatırlatma e-postasından onayladı"></i>');
+  if (it.prep && it.status !== 'done') icons.push(`<i class="pi pi-clone muted" title="Hazırlık: ${it.prep}"></i>`);
+  return `<span class="muted ell" title="${it.reason}">${it.reason}</span>${icons.join('')}`;
+}
+/* Satırın tek birincil sonraki adımı (+ hekim için "Muayene aç"); en fazla iki düğme, sonra ⋯ */
+function actionsHtml(it, size = 'sm') {
+  const b = [];
+  if (it.status === 'planned') b.push(`<button class="btn pri ${size}" data-act="arrive" data-id="${it.id}"><i class="pi pi-sign-in"></i>Geldi</button>`);
+  if (it.status === 'waiting') {
+    b.push(`<button class="btn ${size}" data-act="exam" data-id="${it.id}"><i class="pi pi-file-edit"></i>Muayene aç</button>`);
+    b.push(`<button class="btn pri ${size}" data-act="start" data-id="${it.id}"><i class="pi pi-play"></i>Başlat</button>`);
+  }
+  if (it.status === 'inprogress') {
+    b.push(`<button class="btn ${size}" data-act="exam" data-id="${it.id}"><i class="pi pi-file-edit"></i>Muayene aç</button>`);
+    b.push(`<button class="btn pri ${size}" data-act="complete" data-id="${it.id}"><i class="pi pi-check"></i>Tamamla</button>`);
+  }
+  if (it.status === 'done' && it.due) b.push(`<button class="btn out ${size}" data-act="pay" data-id="${it.id}"><i class="pi pi-wallet"></i>Ödeme al</button>`);
+  b.push(`<button class="btn ico" data-act="menu" data-id="${it.id}" title="Diğer işlemler" aria-label="Diğer işlemler"><i class="pi pi-ellipsis-h"></i></button>`);
+  return b.join('');
+}
+function timeHtml(it) {
+  if (it.walkIn) return `${it.arrived}<small>randevusuz</small>`;
+  if (it.arrived && it.status !== 'done') return `${it.time}<small>geldi ${it.arrived}</small>`;
+  return it.time;
+}
+
+function visible() {
+  let v = items;
+  if (scope === 'mine') v = v.filter((i) => i.vet === ME && i.status !== 'planned');
+  return v;
+}
+function counts(v) {
+  const c = { planned: 0, waiting: 0, inprogress: 0, done: 0, due: 0, dueSum: 0 };
+  v.forEach((i) => { c[i.status]++; if (i.due) { c.due++; c.dueSum += i.due; } });
+  return c;
+}
+function summaryHtml(c) {
+  const s = [];
+  if (c.planned) s.push(`<span class="st s-planned">${c.planned} bekleniyor</span>`);
+  if (c.waiting) s.push(`<span class="st s-waiting">${c.waiting} sırada</span>`);
+  if (c.inprogress) s.push(`<span class="st s-inprogress">${c.inprogress} muayenede</span>`);
+  s.push(`<span class="st s-done">${c.done} tamamlandı</span>`);
+  return s.join('');
+}
+function openItemsHtml(c) {
+  const due = c.due ? `<span class="oi w"><i class="pi pi-wallet"></i>Ödeme bekliyor: ${c.due} · ${money(c.dueSum)}</span>` : '';
+  return `<span class="oi d"><i class="pi pi-exclamation-circle"></i>Ücret yok: 2 ziyaret</span><span class="oi d"><i class="pi pi-clock"></i>Lab bekliyor: 1</span>${due}`;
+}
+
+/* ---------- A ---------- */
+function renderA(v) {
+  const c = counts(v);
+  const clinic = v.filter((i) => i.status === 'waiting' || i.status === 'inprogress');
+  const planned = v.filter((i) => i.status === 'planned');
+  const done = v.filter((i) => i.status === 'done');
+  const pinned = done.filter((i) => i.due);
+  const hasVet = v.some((i) => i.vet);
+  const row = (it) => `<tr class="${it.status === 'done' ? 'done' : ''}">
+      <td class="tm tnum">${timeHtml(it)}</td>
+      <td><div class="cell2 ell">${petHtml(it)}</div></td>
+      <td><div class="cell2"><a class="own ell">${it.owner}</a> ${debtTag(it)}</div>${it.status !== 'done' ? `<div class="ownsub tnum">${it.phone}</div>` : ''}</td>
+      ${hasVet ? `<td>${vetHtml(it)}</td>` : ''}
+      <td>${statusHtml(it)}</td>
+      <td><div class="cell2 ell">${infoHtml(it)}</div></td>
+      <td><div class="acts">${actionsHtml(it)}</div></td></tr>`;
+  const cols = hasVet ? 7 : 6;
+  const gh = (t, n) => `<tr class="gh"><td colspan="${cols}">${t}<span>${n}</span></td></tr>`;
+  let body = '';
+  if (clinic.length) body += gh('KLİNİKTE', clinic.length) + clinic.map(row).join('');
+  if (planned.length) body += gh('SIRADAKİ RANDEVULAR', planned.length) + planned.map(row).join('');
+  if (done.length) {
+    body += gh('TAMAMLANDI', done.length);
+    if (showDone) body += done.map(row).join('') + `<tr class="more" data-act="toggleDone"><td colspan="${cols}"><i class="pi pi-chevron-up"></i>Tamamlananları gizle</td></tr>`;
+    else body += pinned.map(row).join('') + `<tr class="more" data-act="toggleDone"><td colspan="${cols}"><i class="pi pi-chevron-down"></i>${done.length - pinned.length} tamamlanan kayıt daha göster</td></tr>`;
+  }
+  return `<section class="card">
+    <div class="ta-head"><h2>Günlük liste</h2><span class="cnt">${v.length}</span><div class="sum">${summaryHtml(c)}</div></div>
+    <table class="ta"><colgroup><col style="width:80px"><col style="width:220px"><col style="width:230px">${hasVet ? '<col style="width:160px">' : ''}<col style="width:180px"><col><col style="width:230px"></colgroup>
+    <thead><tr><th>Saat</th><th>Hasta</th><th>Müşteri</th>${hasVet ? '<th>Hekim</th>' : ''}<th>Durum</th><th>Neden / not</th><th style="text-align:right">İşlem</th></tr></thead>
+    <tbody>${body}</tbody></table></section>`;
+}
+
+/* ---------- B ---------- */
+function cardB(it) {
+  return `<div class="bc s-${it.status === 'done' ? 'done' : it.status}">
+    <div class="r1"><span class="tm tnum">${it.walkIn ? it.arrived : it.time}</span>${statusHtml(it)}<button class="btn ico" data-act="menu" data-id="${it.id}" title="Diğer işlemler"><i class="pi pi-ellipsis-h"></i></button></div>
+    <div class="r2">${petHtml(it)}</div>
+    <div class="r3"><a class="own">${it.owner}</a><span class="tnum">· ${it.phone}</span>${debtTag(it)}</div>
+    <div class="r4">${it.status === 'done' ? `<span class="due">Ödeme bekliyor · ${money(it.due)}</span>` : `<span>${it.reason}</span>`}${it.arrived && it.status !== 'done' ? `<span>· geldi ${it.arrived}</span>` : ''}${it.vet ? `<span>· ${it.vet}</span>` : ''}${it.confirmed && it.status === 'planned' ? '<span class="tag ok"><i class="pi pi-check" style="font-size:10px"></i>Onayladı</span>' : ''}${it.prep && it.status !== 'done' ? `<span class="tag prep"><i class="pi pi-clone" style="font-size:10px"></i>${it.prep}</span>` : ''}</div>
+    <div class="r5">${actionsHtml(it).replace(/<button class="btn ico"[\s\S]*$/, '')}</div>
+  </div>`;
+}
+function renderB(v) {
+  const planned = v.filter((i) => i.status === 'planned');
+  const clinic = v.filter((i) => i.status === 'waiting').concat(v.filter((i) => i.status === 'inprogress'));
+  const done = v.filter((i) => i.status === 'done');
+  const pinned = done.filter((i) => i.due);
+  const rest = done.filter((i) => !i.due).reverse();
+  const empty = (icon, t) => `<div class="empty"><i class="pi ${icon}"></i>${t}</div>`;
+  const dl = (it) => `<div class="dl"><span class="tm tnum">${it.walkIn ? it.arrived : it.time}</span><span class="ell">${petHtml(it, false)}</span><span class="ell muted">${it.owner}</span><button class="btn ico" data-act="menu" data-id="${it.id}" title="Diğer işlemler"><i class="pi pi-ellipsis-h"></i></button></div>`;
+  return `<div class="bb">
+    <section class="card lane"><div class="lane-h"><h3>Sıradaki randevular</h3><span class="cnt">${planned.length}</span><span class="hint">Gelince "Geldi"</span></div>
+      <div class="lane-b">${planned.length ? planned.map(cardB).join('') : empty('pi-calendar', 'Bugün gelecek randevu kalmadı.')}</div></section>
+    <section class="card lane"><div class="lane-h"><h3>Klinikte</h3><span class="cnt">${clinic.length}</span><span class="hint">Sırada → Muayenede</span></div>
+      <div class="lane-b">${clinic.length ? clinic.map(cardB).join('') : empty('pi-check-circle', 'Klinikte bekleyen hasta yok.')}</div></section>
+    <section class="card lane"><div class="lane-h"><h3>Tamamlandı</h3><span class="cnt">${done.length}</span><span class="hint">Yeniden eskiye</span></div>
+      <div class="lane-b">${pinned.length ? `<div class="dl-h">İŞİ KALAN</div>${pinned.map(cardB).join('')}<div class="dl-h">BİTENLER</div>` : ''}${rest.map(dl).join('')}</div></section>
+  </div>`;
+}
+
+/* ---------- C ---------- */
+function bigC(it) {
+  const s = it.status;
+  return `<div class="fr big ${s !== 'done' ? 'focus' : ''}">
+    <div class="tmc">${timeHtml(it)}</div><span class="dt s-${s}"></span>
+    <div class="main"><div class="l1">${petHtml(it)}</div>
+      <div class="l2"><a class="own">${it.owner}</a><span class="tnum">· ${it.phone}</span>${debtTag(it)}<span>· ${it.reason}</span>${it.vet ? `<span>· ${it.vet}</span>` : ''}${it.confirmed && s === 'planned' ? '<span class="tag ok"><i class="pi pi-check" style="font-size:10px"></i>Onayladı</span>' : ''}${it.prep && s !== 'done' ? `<span class="tag prep"><i class="pi pi-clone" style="font-size:10px"></i>${it.prep}</span>` : ''}</div></div>
+    <div>${s === 'done' ? `<span class="due">Ödeme bekliyor · ${money(it.due)}</span>` : statusHtml(it)}</div>
+    <div class="acts">${actionsHtml(it)}</div></div>`;
+}
+function smC(it) {
+  return `<div class="fr sm"><div class="tmc tnum">${it.walkIn ? it.arrived : it.time}</div><span class="dt s-done"></span>
+    <div class="main"><span class="ell">${petHtml(it)}</span><span class="muted ell">· ${it.owner} · ${it.reason}</span></div>
+    <div>${it.vet ? vetHtml(it) : ''}</div><div class="acts"><button class="btn ico" data-act="menu" data-id="${it.id}" title="Diğer işlemler"><i class="pi pi-ellipsis-h"></i></button></div></div>`;
+}
+function renderC(v) {
+  const c = counts(v);
+  const sorted = [...v].sort((a, b) => toMin(a.walkIn ? a.arrived : a.time) - toMin(b.walkIn ? b.arrived : b.time));
+  let html = '', bin = null, nowDone = false;
+  const flushBin = () => {
+    if (!bin) return;
+    const k = bin.h, open = openBins.has(k) || showDone;
+    const plain = bin.items.filter((i) => !i.due);
+    if (plain.length) {
+      html += `<div class="fr bin" data-act="bin" data-k="${k}"><div class="tmc tnum">${fmt(k * 60)}</div><span class="dt s-done"></span>
+        <div class="main"><b>✓ ${plain.length} tamamlandı</b><span class="names">${plain.map((i) => i.pet).join(', ')}</span></div><div></div><i class="pi ${open ? 'pi-chevron-up' : 'pi-chevron-down'} chev"></i></div>`;
+      if (open) html += plain.map(smC).join('');
+    }
+    html += bin.items.filter((i) => i.due).map(bigC).join('');
+    bin = null;
+  };
+  sorted.forEach((it) => {
+    const t = toMin(it.walkIn ? it.arrived : it.time);
+    if (!nowDone && t > NOW) { flushBin(); html += '<div class="nowl"><b>15:20</b><i></i><span><em>ŞİMDİ</em></span></div>'; nowDone = true; }
+    if (it.status === 'done') {
+      const h = Math.floor(t / 60);
+      if (!bin || bin.h !== h) { flushBin(); bin = { h, items: [] }; }
+      bin.items.push(it);
+    } else { flushBin(); html += bigC(it); }
+  });
+  flushBin();
+  if (!nowDone) html += '<div class="nowl"><b>15:20</b><i></i><span><em>ŞİMDİ</em></span></div>';
+  const next = sorted.find((i) => i.status === 'planned');
+  const clinic = v.filter((i) => i.status === 'waiting' || i.status === 'inprogress');
+  const pct = (n) => (v.length ? (n / v.length) * 100 : 0);
+  return `<div class="cc">
+    <section class="card flow"><div class="flow-h"><h2>Gün akışı</h2><span class="cnt">${v.length}</span><a class="lnk" data-act="toggleDone">${showDone ? 'Tamamlananları topla' : 'Tamamlananları aç'}</a></div>${html}</section>
+    <aside class="rail">
+      <section class="card rc"><h4>Günün durumu</h4>
+        <div class="prog"><i style="width:${pct(c.done)}%"></i><i class="ip" style="width:${pct(c.inprogress + c.waiting)}%"></i></div>
+        <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">${summaryHtml(c)}</div>
+        <dl class="kv">
+          <dt>Sıradaki</dt><dd>${next ? `<b class="tnum">${next.time}</b> ${next.pet} <span class="muted">· ${toMin(next.time) - NOW} dk sonra</span>` : '<span class="muted">Randevu kalmadı</span>'}</dd>
+          <dt>Klinikte</dt><dd>${clinic.length ? clinic.map((i) => `${i.pet} <span class="muted">· ${LABEL[i.status].toLowerCase()}</span>`).join('<br>') : '<span class="muted">Kimse yok</span>'}</dd>
+          <dt>Tahsilat</dt><dd>${c.due ? `<span class="due">${money(c.dueSum)} bekliyor</span>` : '<span class="muted">Açık ödeme yok</span>'}</dd>
+        </dl></section>
+      <section class="card rc"><h4>Açık işler</h4>${openItemsHtml(c)}</section>
+    </aside></div>`;
+}
+
+/* ---------- Ortak çizim ---------- */
+/* ================= E-belge: eksik ayar penceresi ================= */
+const REQ = {
+  taxpayerType: { title: 'Mükellef türü', why: 'Belgenin e-SMM mi fatura mı olacağı bu seçimden çıkar.', btn: 'Mükellef bilgilerini aç', target: 'taxpayer', done: 'Serbest meslek' },
+  taxId: { title: 'Kliniğin VKN / TCKN numarası', why: 'Belgede düzenleyen olarak kliniğin vergi kimliği yazılır.', btn: 'Mükellef bilgilerini aç', target: 'taxpayer', done: 'VKN ••••••4521' },
+  provider: { title: 'e-Belge entegratörü bağlantısı', why: 'Belge GİB’e entegratör hesabınız üzerinden gönderilir.', btn: 'Entegratörü bağla', target: 'provider', done: 'Bağlı · canlı ortam' }
+};
+const REQ_ORDER = ['taxpayerType', 'taxId', 'provider'];
+const SCN = { one: ['taxpayerType'], three: ['taxpayerType', 'taxId', 'provider'], noperm: ['taxpayerType'] };
+const CHARGES = [
+  ['18.11 13:20', 'Gece · Buse Tan', 'Muayene', 600, true],
+  ['18.11 13:35', 'Gece · Buse Tan', 'Kan tahlili (hemogram)', 550, true],
+  ['18.11 13:40', 'Gece · Buse Tan', 'Enjeksiyon', 300, true],
+  ['18.11 11:20', 'Badem · Tolga Işık', 'Deri kazıntısı', 450, false],
+  ['18.11 10:05', 'Bulut · Can Demir', 'Kontrol muayenesi', 400, false],
+  ['17.11 16:40', 'Paşa · Okan Tuna', 'Karma aşı', 750, false]
+];
+const SEL_TOTAL = 1450;
+let sec = 'bugun', eopt = 'A', scn = 'one';
+let eb = null;
+function ebReset() { eb = { missing: [...SCN[scn]], view: 'charges', dialog: true, target: null, fromDialog: false, issued: false, pick: null, vkn: '' }; }
+ebReset();
+const canFix = () => scn !== 'noperm';
+
+function chargesPage() {
+  const rows = CHARGES.map(([d, who, what, amt, sel]) => `<tr class="${sel ? 'sel' : ''}"><td><span class="cb ${sel ? 'on' : ''}">${sel ? '<i class="pi pi-check" style="font-size:9px"></i>' : ''}</span></td><td class="tnum muted">${d}</td><td>${who}</td><td>${what}</td><td class="r tnum">${money(amt)}</td><td><span class="tag prep">Belgesiz</span></td></tr>`).join('');
+  return `<div class="ph"><h1>Ücretler</h1><span class="date">Belgesi kesilmemiş ücretler</span>
+      <div class="acts"><button class="btn" type="button"><i class="pi pi-plus"></i>Ücret ekle</button></div></div>
+    <section class="card"><table class="ctab"><thead><tr><th style="width:44px"><span class="cb"></span></th><th style="width:130px">Tarih</th><th>Hasta · müşteri</th><th>Kalem</th><th class="r">Tutar</th><th style="width:110px">Belge</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="selbar"><b>3 ücret seçildi</b><span class="muted">Buse Tan · ${money(SEL_TOTAL)}</span><button class="btn pri" data-eb="open"><i class="pi pi-send"></i>Belge kes</button></div></section>`;
+}
+
+function settingsPage() {
+  const t = eb.target;
+  const back = eb.fromDialog ? `<div class="back"><i class="pi pi-reply lead-i"></i><span>Belge kesmek için buraya geldiniz. Kaydettikten sonra seçtiğiniz <b>3 ücrete (${money(SEL_TOTAL)})</b> dönüp belgeyi kesebilirsiniz.</span>
+      <button class="btn ${needsFor(t).length ? '' : 'pri'}" data-eb="back"><i class="pi pi-arrow-left"></i>${needsFor(t).length ? 'Ücretlere dön' : 'Ücretlere dön ve belgeyi kes'}</button></div>` : '';
+  if (t === 'provider') {
+    const need = eb.missing.includes('provider');
+    return `${back}<div class="crumb">Ayarlar › e-Belge</div><div class="ph"><h1>e-Belge</h1></div>
+      <section class="card scard focus" id="entegrator"><h5>Entegratör bağlantısı</h5><p>Belgeler GİB’e bu hesap üzerinden gönderilir. Bağlantı sağlayıcının kendi sayfasında onaylanır.</p>
+      ${need ? '<button class="btn pri" data-eb="connect"><i class="pi pi-link"></i>Entegratör hesabını bağla</button>' : '<span class="ready"><i class="pi pi-check-circle"></i>Bağlı · canlı ortam</span>'}</section>`;
+  }
+  const needType = eb.missing.includes('taxpayerType'), needId = eb.missing.includes('taxId');
+  return `${back}<div class="crumb">Ayarlar › Klinikler › Merkez Pati</div><div class="ph"><h1>Merkez Pati</h1></div>
+    <section class="card scard" style="opacity:.55"><h5>Çalışma saatleri</h5><p>Pazartesi–Cumartesi 09:00–19:00</p></section>
+    <section class="card scard focus" id="mukellef-bilgileri"><h5>Mükellef bilgileri</h5><p>Fatura ve e-belge düzenlenirken kliniğin vergi kimliği, adresi ve varsayılan oranlar olarak kullanılır.</p>
+      <div class="sgrid">
+        <div class="fld ${needType ? 'need' : ''}"><label for="tt">Mükellef türü</label><select id="tt" data-eb-in="type"><option value="">Belirtilmemiş</option><option ${needType ? '' : 'selected'}>Serbest meslek</option><option>Şirket</option><option>İkisi (hizmet serbest meslek, ürün şirket)</option></select>${needType ? '<small class="needt">Belge kesmek için gerekli</small>' : ''}</div>
+        <div class="fld ${needId ? 'need' : ''}"><label for="vk">VKN / TCKN</label><input id="vk" inputmode="numeric" maxlength="11" value="${needId ? '' : '1234564521'}" placeholder="10 ya da 11 hane">${needId ? '<small class="needt">Belge kesmek için gerekli</small>' : '<small>Şirkette 10 haneli VKN, serbest meslekte VKN veya 11 haneli TCKN.</small>'}</div>
+        <div class="fld"><label>Vergi dairesi</label><input value="Kadıköy"></div>
+        <div class="fld"><label>Varsayılan KDV oranı (%)</label><input value="20"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn pri" data-eb="saveTax"><i class="pi pi-save"></i>Mükellef bilgilerini kaydet</button></div></section>`;
+}
+function needsFor(target) { return eb.missing.filter((k) => REQ[k].target === target); }
+
+/* Hazır pencere (eksik kalmadı): bugünkü önizleme, değişmeden */
+function readyBody() {
+  return `<div class="ready"><i class="pi pi-check-circle"></i>Ayarlar tamam; belge kesilebilir.</div>
+    <div class="pv-sec"><div class="k">Alıcı</div><b>Buse Tan</b><div class="muted" style="font-size:13px">TCKN •••••••••12</div></div>
+    <div class="grp"><div><b>e-SMM (serbest meslek makbuzu)</b><small>3 kalem · ${money(SEL_TOTAL)}</small>${eb.issued ? '<div style="font-size:13px">No: VSM2026000000123</div>' : ''}</div>
+      ${eb.issued ? '<span class="st s-done">Kesildi</span><button class="btn sm"><i class="pi pi-file-pdf"></i>PDF</button>' : '<button class="btn pri sm" data-eb="issue"><i class="pi pi-send"></i>Kes</button>'}</div>
+    <div class="fld"><label>Belge notu (isteğe bağlı)</label><input ${eb.issued ? 'disabled' : ''}></div>`;
+}
+const noPermHint = (n) => `<div class="hint"><i class="pi pi-lock"></i><span>${n > 1 ? 'Bu ayarları' : 'Bu ayarı'} klinik ayarlarını düzenleme yetkisi olan biri tamamlayabilir. Klinik yöneticinize <b>“${eb.missing.map((k) => REQ[k].title).join(', ')}”</b> eksik deyin; tamamlanınca buradan belgeyi kesebilirsiniz.</span></div>`;
+
+/* A · Hazırlık listesi */
+function dialogA() {
+  const n = eb.missing.length;
+  const first = REQ[eb.missing[0]];
+  const items = REQ_ORDER.map((k, i) => {
+    const miss = eb.missing.includes(k), r = REQ[k];
+    return miss
+      ? `<li><span class="n">${eb.missing.indexOf(k) + 1}</span><div><b>${r.title}</b><small>${r.why}</small></div>${canFix() ? `<button class="btn sm" data-eb="go" data-k="${k}">Aç<i class="pi pi-angle-right"></i></button>` : ''}</li>`
+      : `<li class="done"><span class="ok"><i class="pi pi-check"></i></span><div><b>${r.title}</b></div><span class="val">${r.done}</span></li>`;
+  }).join('');
+  return {
+    body: `<div class="lead"><span class="bub"><i class="pi pi-list-check"></i></span><div><h4>Belge kesmeden önce ${n === 1 ? 'bir ayar' : n + ' ayar'} gerekli</h4>
+        <p>${n === 1 ? 'Bu, kliniğin bir kerelik ayarı' : 'Bunlar kliniğin bir kerelik ayarları'}; tamamlandıktan sonra bir daha sorulmaz. Seçtiğiniz 3 ücret (${money(SEL_TOTAL)}) belgesiz olarak bekler, bir şey kaybolmaz.</p></div></div>
+      <ul class="chk">${items}</ul>${canFix() ? '' : noPermHint(n)}`,
+    foot: `<span class="grow">${REQ_ORDER.length - n} / ${REQ_ORDER.length} hazır</span><button class="btn txt" data-eb="close">Kapat</button>${canFix() ? `<button class="btn pri" data-eb="go" data-k="${eb.missing[0]}"><i class="pi pi-arrow-right"></i>${first.btn}</button>` : ''}`
+  };
+}
+
+/* B · Yerinde tamamla: eksikler pencerede tek tek, ayar sayfasına gitmeden */
+function dialogB() {
+  const total = SCN[scn].length, k = eb.missing[0], idx = total - eb.missing.length;
+  const steps = total > 1 ? `<div class="steps">${SCN[scn].map((_, i) => `<i class="${i < idx ? 'ok' : i === idx ? 'on' : ''}"></i>`).join('')}<span>Adım ${idx + 1} / ${total}</span></div>` : '';
+  if (!canFix()) {
+    return { body: `<div class="lead"><span class="bub"><i class="pi pi-id-card"></i></span><div><h4>Önce kliniğin mükellef türü seçilmeli</h4><p>${REQ[k].why}</p></div></div>${noPermHint(eb.missing.length)}`, foot: '<button class="btn pri" data-eb="close">Tamam</button>' };
+  }
+  let q = '', canNext = false, btn = '<i class="pi pi-check"></i>Kaydet ve devam et';
+  if (k === 'taxpayerType') {
+    const opts = [['Serbest meslek', 'Hizmetler için e-SMM (serbest meslek makbuzu) kesilir.'], ['Şirket', 'Hizmet ve ürünler için fatura (e-Arşiv / e-Fatura) kesilir.'], ['İkisi', 'Hizmet serbest meslek (e-SMM), ürün şirket (fatura).']];
+    q = `<div class="lead"><span class="bub"><i class="pi pi-id-card"></i></span><div><h4>Kliniğiniz hangi mükellef türünde?</h4><p>${REQ[k].why} Emin değilseniz mali müşavirinize sorun; sonradan Ayarlar’dan değiştirebilirsiniz.</p></div></div>
+      <div class="radios">${opts.map(([t, d], i) => `<div class="radio ${eb.pick === i ? 'on' : ''}" data-eb="pick" data-i="${i}"><span class="rd"></span><div><b>${t}</b><small>${d}</small></div></div>`).join('')}</div>`;
+    canNext = eb.pick != null;
+  } else if (k === 'taxId') {
+    q = `<div class="lead"><span class="bub"><i class="pi pi-hashtag"></i></span><div><h4>Kliniğin vergi kimlik numarası</h4><p>${REQ[k].why}</p></div></div>
+      <div class="fld"><label for="vkn">VKN / TCKN</label><input id="vkn" inputmode="numeric" maxlength="11" placeholder="10 ya da 11 hane" value="${eb.vkn}" data-eb-in="vkn"><small>Şirkette 10 haneli VKN, serbest meslekte VKN veya 11 haneli TCKN.</small></div>`;
+    canNext = /^\d{10,11}$/.test(eb.vkn);
+  } else {
+    q = `<div class="lead"><span class="bub"><i class="pi pi-link"></i></span><div><h4>Son adım: entegratör hesabınızı bağlayın</h4><p>${REQ[k].why} Bağlantı, sağlayıcının kendi sayfasında onaylanır; bu yüzden ayar sayfasında açılır. Döndüğünüzde bu pencere kaldığı yerden sürer.</p></div></div>`;
+    canNext = true; btn = '<i class="pi pi-external-link"></i>Entegratörü bağla';
+  }
+  return {
+    body: `${steps}${q}`,
+    foot: `<a class="lnk2 grow" data-eb="go" data-k="${k}" style="color:var(--primary)">Tüm ayarları sayfada aç</a><button class="btn txt" data-eb="close">Kapat</button><button class="btn pri" data-eb="${k === 'provider' ? 'go' : 'next'}" data-k="${k}" ${canNext ? '' : 'disabled'}>${btn}</button>`
+  };
+}
+
+/* C · Önizlemede şerit: belge önizlemesi görünür, eksikler üstte tek şeritte */
+function dialogC() {
+  const n = eb.missing.length;
+  const typeKnown = !eb.missing.includes('taxpayerType');
+  const first = REQ[eb.missing[0]];
+  return {
+    body: `<div class="banner"><i class="pi pi-info-circle"></i><div><b>Belge kesmeye ${n === 1 ? 'bir adım' : n + ' adım'} kaldı</b>
+        <p>Kliniğin ${n === 1 ? 'şu ayarı' : 'şu ayarları'} henüz girilmemiş. Tamamlayınca bu önizleme aynen kesilir.</p>
+        <div class="chips">${eb.missing.map((k) => canFix() ? `<a data-eb="go" data-k="${k}" title="${REQ[k].why}">${REQ[k].title}<i class="pi pi-angle-right"></i></a>` : `<a title="${REQ[k].why}" style="cursor:default">${REQ[k].title}</a>`).join('')}</div></div></div>
+      ${canFix() ? '' : noPermHint(n)}
+      <div class="pv-sec"><div class="k">Alıcı</div><b>Buse Tan</b><div class="muted" style="font-size:13px">TCKN •••••••••12</div></div>
+      <div class="pv-sec"><div class="k">Belgeye girecek kalemler</div><div class="pv-lines"><div><span>Muayene</span><span class="tnum">${money(600)}</span></div><div><span>Kan tahlili (hemogram)</span><span class="tnum">${money(550)}</span></div><div><span>Enjeksiyon</span><span class="tnum">${money(300)}</span></div><div class="tot"><span>Toplam</span><span class="tnum">${money(SEL_TOTAL)}</span></div></div></div>
+      <div class="pv-sec"><div class="k">Belge türü</div><span class="muted" style="font-size:13px">${typeKnown ? 'e-SMM (serbest meslek makbuzu)' : 'Mükellef türü seçilince belirlenir (e-SMM ya da fatura).'}</span></div>`,
+    foot: `<button class="btn txt" data-eb="close">Kapat</button>${canFix() ? `<button class="btn" disabled title="Önce eksik ayarları tamamlayın"><i class="pi pi-send"></i>Kes</button><button class="btn pri" data-eb="go" data-k="${eb.missing[0]}"><i class="pi pi-arrow-right"></i>${first.btn}</button>` : '<button class="btn" disabled><i class="pi pi-send"></i>Kes</button>'}`
+  };
+}
+
+function renderEbelge() {
+  const page = document.getElementById('pageEbelge');
+  page.innerHTML = eb.view === 'settings' ? settingsPage() : chargesPage();
+  const modal = document.getElementById('modal');
+  if (eb.view !== 'charges' || !eb.dialog) { modal.innerHTML = ''; return; }
+  const d = eb.missing.length === 0 ? { body: readyBody(), foot: '<button class="btn txt" data-eb="close">Kapat</button>' } : eopt === 'A' ? dialogA() : eopt === 'B' ? dialogB() : dialogC();
+  modal.innerHTML = `<div class="mask" data-eb="maskclick"><div class="dlg" role="dialog" aria-modal="true" aria-label="e-belge kes">
+    <div class="dlg-h"><h3>e-belge kes</h3><button class="btn ico" data-eb="close" aria-label="Kapat"><i class="pi pi-times"></i></button></div>
+    <div class="dlg-b">${d.body}</div><div class="dlg-f">${d.foot}</div></div></div>`;
+}
+
+function ebAction(a, e) {
+  const k = a.dataset.k;
+  switch (a.dataset.eb) {
+    case 'open': eb.dialog = true; break;
+    case 'close': eb.dialog = false; break;
+    case 'maskclick': if (e.target === a) eb.dialog = false; else return; break;
+    case 'go': eb.target = REQ[k].target; eb.view = 'settings'; eb.fromDialog = true; eb.dialog = false; document.getElementById('pageEbelge').scrollTop = 0; break;
+    case 'back': eb.view = 'charges'; eb.dialog = true; eb.fromDialog = false; break;
+    case 'saveTax': {
+      const type = document.getElementById('tt').value, vkn = document.getElementById('vk').value.trim();
+      if (type) eb.missing = eb.missing.filter((x) => x !== 'taxpayerType');
+      if (/^\d{10,11}$/.test(vkn)) eb.missing = eb.missing.filter((x) => x !== 'taxId');
+      toast(needsFor('taxpayer').length ? 'Kaydedildi; hâlâ eksik alan var' : 'Mükellef bilgileri kaydedildi');
+      break;
+    }
+    case 'connect': eb.missing = eb.missing.filter((x) => x !== 'provider'); toast('Entegratör bağlandı (taslak)'); break;
+    case 'pick': eb.pick = +a.dataset.i; break;
+    case 'next': eb.missing = eb.missing.filter((x) => x !== k); toast(REQ[k].title + ' kaydedildi'); break;
+    case 'issue': eb.issued = true; toast('Belge kesildi (taslak)'); break;
+  }
+  render();
+}
+
+function renderDraft() {
+  document.querySelectorAll('.draft [data-sec]').forEach((a) => a.classList.toggle('on', a.dataset.sec === sec));
+  const labels = sec === 'bugun' ? { A: 'Sıkı tablo', B: 'Durum şeritleri', C: 'Gün akışı' } : { A: 'Hazırlık listesi', B: 'Yerinde tamamla', C: 'Önizlemede şerit' };
+  const cur = sec === 'bugun' ? opt : eopt;
+  document.getElementById('dopts').innerHTML = ['A', 'B', 'C'].map((o) => `<a data-opt="${o}" class="${o === cur ? 'on' : ''}">${o} <small>${labels[o]}</small></a>`).join('');
+  document.getElementById('dscn').innerHTML = sec === 'ebelge' ? [['one', '1 eksik'], ['three', '3 eksik'], ['noperm', 'Yetkisiz']].map(([v, t]) => `<a data-scn="${v}" class="${v === scn ? 'on' : ''}">${t}</a>`).join('') : '';
+  const nav = sec === 'bugun' ? 'bugun' : eb.view === 'settings' ? 'settings' : 'charges';
+  document.querySelectorAll('.side a').forEach((a) => a.classList.toggle('on', a.dataset.nav === nav));
+  history.replaceState(null, '', sec === 'bugun' ? '#' + opt : `#E-${eopt}-${scn}`);
+}
+
+function render() {
+  renderDraft();
+  document.getElementById('main').hidden = sec !== 'bugun';
+  document.getElementById('pageEbelge').hidden = sec !== 'ebelge';
+  if (sec === 'ebelge') { renderEbelge(); return; }
+  document.getElementById('modal').innerHTML = '';
+  document.querySelectorAll('#segList a').forEach((a) => a.classList.toggle('on', a.dataset.v === list));
+  document.querySelectorAll('#segScope a').forEach((a) => a.classList.toggle('on', a.dataset.v === scope));
+  const v = visible();
+  document.getElementById('openTop').innerHTML = opt === 'C' ? '' : `<span>Açık işler</span>${openItemsHtml(counts(v))}`;
+  document.getElementById('scopeNote').innerHTML = scope === 'mine' ? `<p class="note">Yalnızca sorumlu hekimi siz olan kayıtlar gösterilir; planlı randevular bu görünümde yer almaz.</p>` : '';
+  const view = document.getElementById('view');
+  if (list === 'voided') { view.innerHTML = '<section class="card"><div class="empty" style="padding:48px"><i class="pi pi-calendar"></i>Bugün yanlış işaretlenen geliş yok.</div></section>'; return; }
+  view.innerHTML = opt === 'A' ? renderA(v) : opt === 'B' ? renderB(v) : renderC(v);
+}
+
+function toast(t) { const el = document.getElementById('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('on'), 2200); }
+function menuFor(it) {
+  const m = [];
+  if (it.status !== 'planned') m.push(['pi-plus', 'Ücret ekle'], ['pi-wallet', 'Ödeme al'], ['pi-calendar-plus', 'Randevu al']);
+  else m.push(['pi-wallet', 'Ödeme al']);
+  if (it.status === 'waiting' || it.status === 'inprogress') m.push(['pi-clipboard', 'Hazırlığı düzenle'], ['pi-exclamation-triangle', it.urgent ? 'Acil işaretini kaldır' : 'Acil olarak işaretle', 'urgent']);
+  if (it.status === 'planned') m.push(['pi-user-minus', 'Gelmedi olarak işaretle'], ['pi-calendar', 'Randevuyu aç']);
+  if (it.status !== 'planned') m.push(['pi-pencil', 'Düzelt']);
+  return m;
+}
+function openMenu(btn, it) {
+  const el = document.getElementById('menu');
+  el.innerHTML = menuFor(it).map(([i, t, k]) => `<a data-mk="${k || ''}" data-id="${it.id}"><i class="pi ${i}"></i>${t}</a>`).join('');
+  el.hidden = false;
+  const r = btn.getBoundingClientRect();
+  const h = el.offsetHeight;
+  el.style.left = Math.min(r.right - el.offsetWidth, window.innerWidth - el.offsetWidth - 8) + 'px';
+  el.style.top = (r.bottom + h + 8 > window.innerHeight ? r.top - h - 4 : r.bottom + 4) + 'px';
+}
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('menu');
+  const mk = e.target.closest('.menu a');
+  if (mk) {
+    const it = items[+mk.dataset.id];
+    if (mk.dataset.mk === 'urgent') { it.urgent = !it.urgent; render(); } else toast(mk.textContent.trim() + ' (taslak)');
+    menu.hidden = true; return;
+  }
+  menu.hidden = true;
+  const sc = e.target.closest('.draft a[data-sec]');
+  if (sc) { sec = sc.dataset.sec; render(); return; }
+  const sn = e.target.closest('.draft a[data-scn]');
+  if (sn) { scn = sn.dataset.scn; ebReset(); render(); return; }
+  const o = e.target.closest('.draft a[data-opt]');
+  if (o) { if (sec === 'bugun') opt = o.dataset.opt; else { eopt = o.dataset.opt; ebReset(); } render(); return; }
+  const ea = e.target.closest('[data-eb]');
+  if (ea) { ebAction(ea, e); return; }
+  const s1 = e.target.closest('#segList a'); if (s1) { list = s1.dataset.v; render(); return; }
+  const s2 = e.target.closest('#segScope a'); if (s2) { scope = s2.dataset.v; render(); return; }
+  const a = e.target.closest('[data-act]');
+  if (!a) return;
+  const it = a.dataset.id != null ? items[+a.dataset.id] : null;
+  switch (a.dataset.act) {
+    case 'menu': e.stopPropagation(); openMenu(a, it); return;
+    case 'arrive': it.status = 'waiting'; it.arrived = '15:20'; toast(it.pet + ' geldi: sıraya alındı'); break;
+    case 'start': it.status = 'inprogress'; it.started = '15:20'; break;
+    case 'complete': it.status = 'done'; toast(it.pet + ' tamamlandı'); break;
+    case 'pay': it.due = 0; toast('Ödeme alındı (taslak)'); break;
+    case 'exam': toast('Muayene formu açılır (taslak)'); return;
+    case 'toggleDone': showDone = !showDone; break;
+    case 'bin': { const k = +a.dataset.k; openBins.has(k) ? openBins.delete(k) : openBins.add(k); break; }
+  }
+  render();
+});
+document.addEventListener('input', (e) => {
+  if (e.target.dataset.ebIn === 'vkn') {
+    eb.vkn = e.target.value.replace(/\D/g, '');
+    const btn = document.querySelector('.dlg-f [data-eb="next"]');
+    if (btn) btn.disabled = !/^\d{10,11}$/.test(eb.vkn);
+  }
+});
+document.getElementById('reset').addEventListener('click', (e) => { e.stopPropagation(); items = build(); showDone = false; openBins.clear(); list = 'today'; scope = 'all'; ebReset(); render(); });
+document.getElementById('theme').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const d = document.documentElement.classList.toggle('dark');
+  e.target.textContent = d ? 'Açık tema' : 'Koyu tema';
+});
+/* Adres: #A / #B / #C (Bugün listesi) ya da #E-A-one, #E-B-three, #E-C-noperm (E-belge uyarısı) */
+{
+  const h = location.hash.slice(1).split('-');
+  if (h[0] === 'E') {
+    sec = 'ebelge';
+    if (['A', 'B', 'C'].includes(h[1])) eopt = h[1];
+    if (SCN[h[2]]) scn = h[2];
+    ebReset();
+  } else if (['A', 'B', 'C'].includes(h[0])) opt = h[0];
+}
+render();
+</script>
+</body>
+</html>
