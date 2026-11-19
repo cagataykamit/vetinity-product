@@ -1,0 +1,15 @@
+# Sürüm notu: 2026-11-19 06:11 (TSİ), takvim yeniden tasarımı, Bugün listesi ve akışı, e-Belge hazırlık listesi
+
+**Yayınlanan:** backend `main` `0adbd22c`, panel `main` `dffd1592` (`main-TYOEXXHO.js`). Portal ve site değişmedi, yeniden yayınlanmadı.
+**Migration:** `AddVaccinationDueTimeSpecified` (aşı vadesinde saat girildi mi; `bit`, varsayılan `false`) ve `AddVisitNoChargeConfirmed` (ziyaret bilinçli ücretsiz kapatıldı: zaman ve kullanıcı, boş bırakılabilir). Yalnız `migrate` çalıştırıldı; sorgu DB'sinde ve izinlerde değişiklik yok, `seed` gerekmedi.
+**Yedek:** Migration'dan önce elle yedek alındı (06:10, Drive kopyası doğrulandı).
+**Doğrulama:** API `/health/ready` 200; yayın sonrası günlükte hata yok (yalnız bilinen "https port" uyarısı); panel yeni `main` dosyasıyla açılıyor (`200 application/javascript`), www 200.
+
+- **Takvim yeniden tasarımı:** Gün, Hafta, Ay iç kaydırmasız, sayfa kayar; gün tam çalışma günü; hekim ve gün başlıkları üstte sabit. Sağ panel kenardaki dille açılıp kapanır, Klinikte ve Boş saat bul katlanır, seçimler saklanır. Gün/Hafta/Ay seçimi büyüdü, seçili olan dolu. Aşı katmanında vade saati girilmemiş aşılar saatli görünmez (`DueTimeSpecified`). Ay görünümü için günlük kapasite ucu. Alt bilgi kaldırıldı. Bildirim (toast) yerleşimi düzeltildi.
+- **Bugün listesi (A, sıkı tablo):** tek tablo, ara başlıklar (Klinikte, Sıradaki randevular, Tamamlandı) sayı rozetiyle; tamamlananlar katlı. Liste ve Hastalar seçimi etiketli, seçili olan dolu; seçim tarayıcıda hatırlanır. Açık iş çiplerinin hepsi tıklanır (Ücret yok ve Önceki günden açık geliş küçük listeyle açılır).
+- **Bugün akışı:** "Başlat" ve "Muayene aç" tek adım oldu: **Muayeneye al** (başlatır ve muayene formunu açar). Muayene ve ücret kaydı olmayan gelişte **Tamamla** önce sorar: Muayene aç / Ücret ekle / Ücretsiz tamamla. Tamamlanmış ve hiç ücreti olmayan gelişte satırda **Ücret ekle** çıkar ve geliş Açık işler "Ücret yok" listesine girer (bilinçli ücretsiz kapatılan girmez; OPEN_ITEMS madde 1a, K-D2-7).
+- **e-Belge kes penceresi:** eksik klinik ayarları numaralı hazırlık listesinde, her biri ayarı açan düğmeyle; ayar sayfasından "Ücretlere dön ve belgeyi kes". Kliniğin VKN/TCKN'si artık kesme koşulu.
+- **Tanı ve şikâyet sözlüğü:** aramada bulunamayan terim için kelime kökünden benzer terim önerilir ("topallama" → "Topallık"); sözlük ekranında Kaynak filtresi (Tümü / Kliniğe özel / Sistem).
+- **Muayene formu:** Windows'ta "Sesle yazmak için alana tıklayıp Win + H" ipucu.
+- **E-vet aktarması:** menü yolu "Rapor > Resmi > Aşı Bilgi".
+- **Bilinen sınırlar:** Ekranlar canlıda tarayıcıda denenmedi. Canlıdaki son 30 günde muayenesiz ve ücretsiz tamamlanmış gelişler artık "Ücret yok" sayılır; gerekiyorsa "Ücretsiz tamamla" ile listeden çıkarılır. Pilot aşı saatlerinin geri yüklenmesi bu yayında yok (ayrı onay). Yapay zekâ serisi kendi dallarında, yayında değil. Testler: backend 1345 domain, 4413 uygulama ve ilgili 254 entegrasyon testi geçti (tam entegrasyon paketi bu yayın için koşulmadı); panel 439 dosya, 3474 testin hepsi geçti.
