@@ -1,0 +1,13 @@
+# Sürüm notu: 2026-11-20 08:20 (TSİ), takvim düzeltmeleri, çalışma saati kısıtı, panelin kendini güncellemesi
+
+**Yayınlanan:** backend `main` `42d907f2`, panel `main` `87ccf7a4` (`main-NISKVANT.js`). Portal ve site değişmedi, yeniden yayınlanmadı.
+**Migration:** `AddClinicEnforceWorkingHours` (klinik randevu ayarı `EnforceWorkingHours`, varsayılan açık; mevcut klinikler değişmez). Yalnız `migrate`; ikinci `migrate` "No migrations were applied. The database is already up to date." Sorgu DB'si ve izinlerde değişiklik yok, `seed` gerekmedi.
+**Yedek:** Migration'dan hemen önce elle yedek alındı (08:16, Drive kopyası doğrulandı).
+**Doğrulama:** API `/health/ready` 200, yayın sonrası günlükte ERR/FTL yok; panel yeni `main` dosyasıyla açılıyor (`200 application/javascript`), www 200. Canlı `ngsw.json` zaman damgası ve `main` hash'i yerel build ile aynı; `ngsw.json` ve `ngsw-worker.js` `Cache-Control: no-cache`.
+
+- **Panel kendini günceller:** yeni sürüm Ctrl+F5'siz yüklenir. Açılışın ilk 10 saniyesinde hemen yenilenir; sonra bir sonraki gezinmede yenilenir ve sayfadaki kullanıcıya kapatılabilir "Yeni sürüm hazır · Yenile" bildirimi çıkar; güncelleme açılışta, sekme öne gelince ve 30 dakikada bir sorulur. Form ortasında zorla yenileme yok. Kılavuz §5.3 madde 5 buna göre güncellendi.
+- **Çalışma saati kısıtı:** Ayarlar > Çalışma Saatleri kartında "Çalışma saati kısıtı" kutusu. Kapalıyken panelden her saate randevu verilir (takvim tüm günü gösterir, ızgara 08:00'e kayar); online randevu tanımlı saatlere göre devam eder. Kural tek yerde (`AppointmentWorkingHoursValidation`).
+- **Takvim:** aşı listesinde satırlar büzülmez, liste kendi içinde kayar; ay görünümünde kapalı gün, boş gün ve gecikmiş gösterimi düzeltildi; randevu listesinde Yaklaşan / Geçmiş / Tümü.
+- **Saat alanı (ortak):** Enter panelde görünen saati seçer, saat alanında "Bugün" yok, alana özgü varsayılan saat (çalışma saatlerinde 09:00 / 18:00, mola 12:00 / 13:00).
+- **Birleşmede düzeltilenler:** layout'ta yapay zekâ paneli ve sürüm bildirimi birlikte; saat alanı testleri sabit bekleme yerine koşul bekler; müşteri özeti IDOR testinin temizliği sahibe açıklamaları önce siler (yapay zekâ yayınından kalan test eksiği; ürün kodu etkilenmedi).
+- **Bilinen sınırlar:** Açık eski bir sekmenin kendiliğinden güncellenmesi tarayıcıda uçtan uca denenmedi (kod ve sunucu başlıkları doğrulandı). Bu sürümden önce açılmış sekmelerde bir kez Ctrl+F5 gerekebilir. Ekranlar canlıda tarayıcıda denenmedi. Testler: backend 4510 uygulama, 1360 domain, 2227 entegrasyon (4 atlandı); panel 3647, portal 268, site 42 testin hepsi geçti; `ng build vetinity-web` uyarısız.
