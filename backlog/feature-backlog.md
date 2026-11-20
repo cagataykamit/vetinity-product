@@ -687,7 +687,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esnek paket uygulama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
+| **Durum** | Sıraya alındı (kullanıcı kararı 2026-11-20: yürüyen işler bitince kodlanacak). Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
 | **Bağımlılıklar** | EXAM-007 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 

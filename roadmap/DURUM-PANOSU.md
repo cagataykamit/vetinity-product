@@ -278,7 +278,7 @@ Planlandı: 15 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 27 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [UX-009](../backlog/feature-backlog.md#ux-009--menü-görünümünün-son-hali-satırlar-netleşince) | Menü görünümünün son hali (satırlar netleşince) | Planlandı |  |
-| [CHECKOUT-001](../backlog/feature-backlog.md#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu) | Ziyaret kapanışı ve tahsilat orkestrasyonu | Planlandı | "Hesabı kapat" ekranı: muayene bitince resepsiyon ücretleri, ödemeyi (kısmi ya da borç bırakarak) ve bilgi fişini tek yan panelde bitirir. Tasarım onaylı (`taslak/hesabi-kapat`); kodlamaya hazır, ~5 dilim |
+| [CHECKOUT-001](../backlog/feature-backlog.md#checkout-001--ziyaret-kapanışı-ve-tahsilat-orkestrasyonu) | Ziyaret kapanışı ve tahsilat orkestrasyonu | Planlandı | "Hesabı kapat" ekranı: muayene bitince resepsiyon ücretleri, ödemeyi (kısmi ya da borç bırakarak) ve bilgi fişini tek yan panelde bitirir. Tasarım onaylı (`taslak/hesabi-kapat`); kodlamaya hazır, ~5 dilim. Sıraya alındı (kullanıcı, 2026-11-20): yürüyen işler bitince yapılacak |
 | [APPT-023](../backlog/feature-backlog.md#appt-023--sms-bildirimleri) | SMS bildirimleri | Planlandı |  |
 | [APPT-024](../backlog/feature-backlog.md#appt-024--randevu-talebi-geçmişi-ve-denetim-izi) | Randevu talebi geçmişi ve denetim izi | Planlandı |  |
 | [APPT-025](../backlog/feature-backlog.md#appt-025--kaynak-bazlı-takvim) | Kaynak bazlı takvim | Planlandı |  |
