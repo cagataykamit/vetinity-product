@@ -53,10 +53,15 @@ FE kodundan çıkarıldı (`features/dashboard`, `features/visits/pages/today-pa
 
 ## Açık noktalar
 
-- K6'da uç seçimi (yeniden adlandırma mı, tek özet ucu mu): BE sözleşme taslağında karara bağlanır.
-- "Bugün iptal edilen randevular" Bugün listesinde görünüyor mu? Uygulamada kontrol edilecek.
+- ~~K6'da uç seçimi~~: tek uç `GET /reports/hub-summary` (sözleşme onaylandı 2026-11-20; aşağıda).
+- ~~"Bugün iptal edilen randevular" Bugün listesinde görünüyor mu?~~ Görünmüyordu (`VisitTodayReader`, `Status != Cancelled`); gün listesi başlığına sayaç eklendi (kullanıcı: "açık noktaları da önerine göre yap").
 - Pilot kliniklerde Özet'i düzenli açan bir yönetici var mı? Kullanım verisine bakılmadı.
 
-## Uygulama notu
+## Uygulama notu (2026-11-20)
 
-Henüz yok.
+Hiçbiri `main`'e alınmadı, push edilmedi; yayın kullanıcı onayıyla.
+
+- **BE** (`feature/rapor-merkezi-ozet`): sözleşme `docs/REPORT_HUB_SUMMARY_API_CONTRACT.md` (`3a33518b`, `2ebf269a`); uç ve testler (`39883c31`, `e4bef940`); Bugün `openItems.overdueAppointmentCount` ve `TodayDto.cancelledAppointmentCount` (`f4df3960`, `b4caf212`, `25e81b39`). Bölüm başına izin, tek şube; her sayı aynı veriyi gösteren raporun kuralıyla. Migration ve yeni izin yok. Testler: Domain 1360, Application 4513, entegrasyon 2232 (+4 atlanan) geçti.
+- **Panel, 1. yayın** (`feature/rapor-merkezi-b`): B ana ekranı ve kurallar (`1bc754e0`, `bc2e0368`, düzeltme `4fffd95b`), Bugün çipi ve iptal sayacı (`715fc5e1`). Ekran yerel ortamda 1280 ve 375 px, açık ve koyu temada gerçek veriyle denendi.
+- **Panel, 2. yayın** (`feature/ozet-kaldirma`, 1. yayının üstünde): Özet menüden kalktı, `/panel/dashboard` → `/panel/reports`, açılış yedeği Raporlar (`7458508d`); `features/dashboard` ve kullanılmayan uç/metinler silindi (`aa0d11a7`). K7 gereği 1. yayından sonra.
+- **Kalan:** BE `/dashboard/*` uçlarının silinmesi (K6, ayrı iş). Aylık dönem yerel geliştirme veritabanında 2,5–6 sn sürdü (aynı ortamda basit sorgular da yavaş); gerçek veride ölçülmedi.
