@@ -13,7 +13,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 101 | 2 | 2 (MOBILE-002 geliştiriliyor; AI-005 araştırılacak) | 0 |
+| P1 | 105 | 102 | 1 | 2 (MOBILE-002 geliştiriliyor; AI-005 araştırılacak) | 0 |
 | P2 | 62 | 27 | 5 | 25 (15 planlı, 10 araştırılacak) | 5 |
 | P3 | 11 | 0 | 0 | 10 (3 planlı, 7 araştırılacak) | 1 |
 
@@ -154,19 +154,19 @@ Canlıda: 27
 
 ## P1 (105 madde)
 
-Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (kısmen): 2 · Canlıda: 101
+Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (kısmen): 1 · Canlıda: 102
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | Kod FE main'de, web portalı canlıda (`fc24ebc0`); Apple/Google hesap türü kararı ve Firebase bekliyor |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
-| [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle "Belge kes", ödeme alırken kesme ve otomatik kesme (varsayılan kapalı) Nilvera ile canlıda. Eksik: resepsiyon hastanın hesabını kapatırken panelin "Bu ziyaret için e-belge kesilsin mi?" diye sorması; bu soru "Hesabı kapat" ekranıyla (CHECKOUT-001) gelecek. Canlıda gerçek belge kesilmedi |
 | [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Araştırılacak | Değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme` (+1). Ayrı ücretli ses→yazı hizmeti gerekir; ücretli hesaplar ertelendi |
 
-<details><summary>Canlıda olanlar (101)</summary>
+<details><summary>Canlıda olanlar (102)</summary>
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
+| [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda | Elle "Belge kes", ödeme alırken kesme, otomatik kesme (varsayılan kapalı) ve ziyaret kapanınca öneri Nilvera ile canlıda. Bugün ekranında ziyaret "Tamamla" ile kapanınca belgesi kesilmemiş ücret varsa "Ziyaret kapandı: e-belge kes" penceresi kendiliğinden açılır (FE `dc97e7d2`, 2026-11-11; sekreter izni düzeltmesi `81dd69e0`, 2026-11-20 01:43). Önceki "eksik" notu yanlıştı (2026-11-20 düzeltildi). "Hesabı kapat" ekranı (CHECKOUT-001) gelince aynı öneri orada da çıkacak. Canlıda gerçek belge kesimi denenmedi |
 | [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
 | [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
 | [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
