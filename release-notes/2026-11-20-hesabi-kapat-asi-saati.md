@@ -1,9 +1,16 @@
-# Sürüm notu (taslak): Hesabı kapat, aşı saati, kayıtlı takvim filtreleri
+# Sürüm notu: Hesabı kapat, aşı saati, kayıtlı takvim filtreleri
 
-> **Durum:** taslak, **yayınlanmadı**. Dallar main'e alınmadı; birleştirme, push ve yayın kullanıcı onayıyla yapılır. Yayında commit'ler ve doğrulama bu nota yazılır.
-> **Önce backend, sonra panel.** Migration yok, yeni izin yok, `seed` gerekmez.
+> **Durum:** yayınlandı, 2026-11-20. API 20:27, panel 20:28. Kullanıcı onayıyla, önce backend, sonra panel.
+> Migration yok, yeni izin yok, `seed` gerekmez.
 
-## Dallar
+## Yayınlanan sürüm
+
+| | Commit | Not |
+|---|---|---|
+| Backend (`api`) | `6931231a` (main) | Sonraki `749224e4` (HOSP-004 vital ölçümü, migration'lı), `a51507bd` (eşzamanlılıkta hayalet geçmiş satırı), `17b9ff3f`, `7baa16a7` bu yayında **yok** |
+| Panel (`web`) | `209307f8` (main) | `d5edb75a` birleştirmesi ve tarayıcı denemesinde bulunan iki düzeltme: `c237698c` (kapanıştan sonra panel başlığı "Tamamlandı"), `209307f8` (kayıtlı filtre "Filtreleri temizle" sonrası yeniden uygulanır; ortak bileşen, Rapor Merkezi'ni de etkiler) |
+
+## Birleştirilen dallar
 
 | İş | Backend | Panel |
 |---|---|---|
@@ -11,11 +18,16 @@
 | Aşı saati (form ve takvim) | `fix/asi-saat-belirtildi`: `762f43af`, `7a570508`, `96e423a6` | `fix/asi-saat-alani`: `388326d1`, `f1b7fafd` |
 | APPT-026 kayıtlı takvim filtreleri | `docs/kayitli-filtre-ekran-anahtari`: `98a19316` (yalnız sözleşme) | `feature/kayitli-takvim-filtreleri`: `c048a151`, `039a9aee`, `ef41b3b6`, `317d49b5` |
 
-Testler (dal başına, gerçek çıktı):
-- Hesabı kapat: backend Domain 1360, Application 4523, Integration 2236 (4 atlandı); panel 463 dosya, 3676 test; `ng build` başarılı; ESLint temiz.
-- Aşı saati: backend Domain 1361, Application 4522, Integration 2235 (4 atlandı); panel 463 dosya, 3666 test; `ng build` başarılı.
-- APPT-026: panel 461 dosya, 3658 test; `ng build` başarılı.
-- Dallar birleştikten sonra testler birlikte yeniden koşulmalı (birlikte koşulmadı).
+## Testler (gerçek çıktı)
+
+- Backend `6931231a`: Domain 1361, Application 4523 geçti. Integration ayrı worktree'de tek başına: 2238 geçti, 0 düştü, 4 atlandı (trx). Aynı commit'in ilk koşusunda 1 test düşmüştü; koşu sırasında aynı klasörde başka bir `dotnet build` çalışıyordu, düşen testin adı kaydedilmedi.
+- Panel `209307f8`: 465 dosya, 3693 test geçti; `ng build` başarılı. ESLint'te tek hata `core/routing/panel-redirects.spec.ts` (önceki yayının `7458508d` commit'inden, yalnız test dosyası; bu yayınla gelmedi).
+
+## Canlı doğrulama
+
+- API: `vetinity-api` active, `/health/ready` 200; `GET /visits/{id}/checkout-summary` yetkisiz 401 (olmayan uç 404, yani yeni uç yayında); açılıştan sonra günlükte ERR/FTL yok.
+- Panel: `panel.vetinity.com` `main-AQQRMM4W.js` (yerel derlemeyle aynı), dosya 200 `application/javascript`; `ngsw.json` zaman damgası `1795194651400` yerel derlemeyle aynı, `Cache-Control: no-cache`; `www.vetinity.com` 200.
+- Geri alma: önceki paketler `api-eski` (`799e1cc7`) ve `web-eski` (`ea668ab9`); bir önceki yayının paketleri `api-eski-20261120a` ve `web-eski-20261120a` olarak saklandı.
 
 ## Hesabı kapat (CHECKOUT-001)
 
@@ -37,4 +49,5 @@ Testler (dal başına, gerçek çıktı):
 ## Bilinen sınırlar
 
 - Hesabı kapat Bugün satırından ve kesinleşmiş, gelişe bağlı muayeneden açılır.
-- Ekranlar gerçek veriyle tarayıcıda denenmedi.
+- Tarayıcı denemesi yerelde yapıldı (iki hata bulunup düzeltildi); canlıda giriş yapılarak denenmedi.
+- Backend ve panel `main`'leri push edilmedi; yayınlanan commit'ler yerel `main`'de.
