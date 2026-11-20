@@ -177,7 +177,7 @@ Komutlar geliştirici bilgisayarındaki Git Bash'te çalışır. `SSH="ssh -i ~/
 2. `tar czf web.tgz -C dist/vetinity-web browser`, sunucuya `/root/web-<tarih>.tgz` olarak gönder.
 3. Sunucuda: `web-yeni` klasörüne aç; `cp -rn web/. web-yeni/` ile **eski dosyaları da koru** (açık sekmeler ve service worker eski parçaları isteyebilir); `chown -R vetinity:vetinity web-yeni`; `mv web web-eski` (önceki `web-eski` silinir); `mv web-yeni web`; `.tgz` silinir.
 4. Doğrula: `curl -s https://panel.vetinity.com/auth/login | grep -o 'main-[A-Z0-9]*\.js'` yerel `dist/.../index.html` ile aynı; o dosya `200 application/javascript`; `https://www.vetinity.com/` 200.
-5. Kullanıcılar yeni sürümü iki yenilemede görür (ilki service worker'ı günceller): **Ctrl+F5 iki kez**.
+5. Panel yeni sürümü kendiliğinden alır (2026-11-20'den beri): güncelleme açılışta, sekme öne gelince ve 30 dakikada bir sorulur; açılışın ilk 10 saniyesinde sayfa hemen yenilenir, sonra bir sonraki gezinmede yenilenir ve sayfadaki kullanıcıya "Yeni sürüm hazır · Yenile" bildirimi çıkar (form ortasında zorla yenileme yok). Doğrula: `curl -s https://panel.vetinity.com/ngsw.json | grep -o '"timestamp": *[0-9]*'` yerel `dist/.../ngsw.json` ile aynı ve `ngsw.json` `Cache-Control: no-cache` ile geliyor. Bu sürümden önce açılmış ve hiç yenilenmemiş sekmelerde bir kez **Ctrl+F5 iki kez** gerekebilir.
 
 **Portal (`portal`)**: `npx ng build portal`, aynı yöntemle `/var/www/vetinity/production/portal`'a.
 
@@ -205,7 +205,7 @@ Komutlar geliştirici bilgisayarındaki Git Bash'te çalışır. `SSH="ssh -i ~/
 
 | Durum | Geri alma yolu |
 |---|---|
-| Ön yüz (`web`/`portal`) | `mv web web-bozuk; mv web-eski web` (portal için aynı); kullanıcılar Ctrl+F5 iki kez |
+| Ön yüz (`web`/`portal`) | `mv web web-bozuk; mv web-eski web` (portal için aynı); panel eski sürümü kendiliğinden alır (§5.3 madde 5), olmazsa Ctrl+F5 iki kez |
 | API, migration yok | `systemctl stop vetinity-api; mv api api-bozuk; mv api-eski api; systemctl start vetinity-api`; `/health/ready` ve giriş doğrulanır |
 | Ayar kaynaklı | `api.env`'deki değeri önceki hâline al, `systemctl restart vetinity-api` |
 | Migration uygulandı, veri yazılmadı veya önemsiz | Önceki API paketi + gerekirse yayın öncesi yedekten dönüş; şema geri alma kararı **ayrıca** verilir |
