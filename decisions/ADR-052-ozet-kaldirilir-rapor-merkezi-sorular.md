@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Taslak, kullanıcı onayı bekliyor (2026-11-20).** Kullanıcının yönü: "gerekirse komple kaldıralım dert değil". Rapor Merkezi için B seçeneği seçildi: "b yi beğendim ben".
+**Kabul edildi (2026-11-20, kullanıcı: "Onaylıyorum").** Kullanıcının yönü: "gerekirse komple kaldıralım dert değil". Rapor Merkezi için B seçeneği seçildi: "b yi beğendim ben".
 
 İlgili: [ADR-003](ADR-003-report-center.md) (Rapor Merkezi), [ADR-004](ADR-004-navigation-and-menu-philosophy.md), [ADR-017](ADR-017-workflow-centered-navigation.md) K5 ve "hiçbir rota silinmez" ilkesi, [ADR-030](ADR-030-acilis-sayfasi-ve-bugun-hizli-eylemleri.md) ve 2026-11-04 eki, [İşletme performans panosu](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Tasarım taslağı: FE deposu, `design/raporlar/B.html` ve `README.md` (dal `claude/raporlar-tasarim-7ebf18`).
 
