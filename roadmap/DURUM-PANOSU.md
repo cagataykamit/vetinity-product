@@ -1,7 +1,7 @@
 # Durum panosu
 
 > **Son güncelleme:** 2026-11-20 (durum panosu oturumu; koordinatör yayın bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `a2c0ab2e`, panel ve tanıtım `cd0ce138` (`main-GZEXW47L.js`; 2026-11-20 01:43), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-bugun-akisi-muayene-yatis.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `5a7e5b8e`, panel ve tanıtım `944ac06f` (`main-FRZC4FQ2.js`; 2026-11-20 06:30), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-19). Kullanıcı E-vet aktarmasını canlıda kendisi denedi ve aktardı; pilot kliniğe henüz verilmedi. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -13,8 +13,8 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 93 | 2 | 10 (8 AI dalda, birleşmedi; MOBILE-002 geliştiriliyor; AI-005 araştırılacak) | 0 |
-| P2 | 62 | 26 | 5 | 26 (AI-006 dalda, 15 planlı, 10 araştırılacak) | 5 |
+| P1 | 105 | 101 | 2 | 2 (MOBILE-002 geliştiriliyor; AI-005 araştırılacak) | 0 |
+| P2 | 62 | 27 | 5 | 25 (15 planlı, 10 araştırılacak) | 5 |
 | P3 | 11 | 0 | 0 | 10 (3 planlı, 7 araştırılacak) | 1 |
 
 Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları, tasarım taslakları) aşağıda "Şu an yürüyenler"de.
@@ -62,6 +62,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | E-vet menü yolu metni: Rapor > Resmi > Aşı Bilgi | BE `0adbd22c`, panel `dffd1592` (`fix/evet-asi-bilgi-menu`) | Canlıda (2026-11-19 06:11) | |
 | Sözlükte benzer terim önerisi ve Kaynak filtresi; Windows sesle yazma (Win+H) ipucu | BE `0adbd22c`, panel `dffd1592` | Canlıda (2026-11-19 06:11) | Sürüm notunda |
 | Bugün akışı Karar 1 A ve Karar 2 A: bugünkü gelişsiz muayene açık gelişe bağlanır ya da yeni geliş açar; yatan hastanın gelişi taburcuya kadar açık sayılır ("Unutulmuş olabilir" dışında), taburcuda "Gelişi tamamla" önerisi | BE `a2c0ab2e`, panel `cd0ce138` (`feature/muayene-gelis-yatis`) | Canlıda (2026-11-20 01:43) | Denetim düzeltmeleriyle birlikte; migration yok. [Sürüm notu](../release-notes/2026-11-20-bugun-akisi-muayene-yatis.md). `/health/ready` 200 |
+| Yapay zekâ serisi (AI-001…010, AI-006) ve KVKK metinleri: Gizlilik 1.2, VİS 1.1 (yeniden kabul), Anthropic PBC ile ABD'ye yurt dışı aktarım | BE `5a7e5b8e`, panel `944ac06f` (`feature/ai-birlesik`), ürün `071a921` | Canlıda (2026-11-20 06:30) | 4 AI migration uygulandı ve `Ai.Use` izni seed edildi, yedek 06:25 (koordinatör bildirimi; DB'de ben okumadım). Kullanıcılar izin için çıkış-giriş yapar. Doğrulanmadı: gerçek AI isteği, `anthropic-version` başlığı, KVKK m.9 mekanizması. `/health/ready` 200 |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -70,8 +71,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11 ve 2026-11-20 01:43 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
-Bekliyor: yapay zekâ serisinin main'e alınması ve yayını. BE ve FE `feature/ai-birlesik` (`5a7e5b8e`, `944ac06f`), ürün `docs/kvkk-ai-aktarim` (`071a921`, Anthropic PBC ile ABD'ye yurt dışı aktarım metni). Canlıda yeni izin `Ai.Use` için seed gerekir; Gizlilik 1.2 ve VİS 1.1 sürüm artışı kullanıcıların yeniden kabulünü ister; KVKK m.9 standart sözleşme ve bildirim doğrulanmadı. Claude API anahtarı girilene kadar AI kapalı çalışır.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11, 2026-11-20 01:43 ve 06:30 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
@@ -85,7 +85,7 @@ Bekliyor: yapay zekâ serisinin main'e alınması ve yayını. BE ve FE `feature
 
 **Sunucu ve hesap işleri (kullanıcıda)**
 1. iyzico canlı anahtarı yok: vergi kaydı ve üye işyeri başvurusu. Bu olmadan denemeden ücretli plana geçiş (TRIAL-007, BILL-*) canlıda çalışmaz.
-2. Claude Console API hesabı: **ertelendi** (2026-11-15, masraf yok). AI erken denemesi hesap açılınca.
+2. Claude Console API hesabı: açıldı (kullanıcı ekranı, 2026-11-20); bakiye ve anahtar yok. Yapay zekâ kodu canlıda (06:30) ama anahtar girilene ve klinikte açılana kadar kapalı.
 3. Firebase projesi ve FCM anahtarı (ücretsiz, ama yalnız mağaza uygulamasıyla anlamlı; MOBILE-002/003).
 4. ~~SSH~~ Yapıldı (2026-11-16 gecesi): parolayla giriş kapalı, root yalnız anahtarla (sunucuda doğrulandı).
 5. ~~SQL Server güncellemesi~~ Yapıldı (2026-11-16 gecesi): CU28 (16.0.4325).
@@ -150,27 +150,27 @@ Canlıda: 27
 
 ## P1 (105 madde)
 
-Dalda, birleşmedi: 8 · Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (kısmen): 2 · Canlıda: 93
+Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (kısmen): 2 · Canlıda: 101
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | Kod FE main'de, web portalı canlıda (`fc24ebc0`); Apple/Google hesap türü kararı ve Firebase bekliyor |
-| [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-gecmis-ozeti` (`79153675`, +4: AI altyapısı, özet ucu, `Ai.Use` izni), FE `feature/ai-yan-panel` (`bbf5572d`, +11). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
 | [INT-007](../backlog/feature-backlog.md#int-007--otomatik-fatura--e-belge-oluşturma) | Otomatik fatura / e-belge oluşturma | Canlıda (kısmen) | Elle "Belge kes", ödeme alırken kesme ve otomatik kesme (varsayılan kapalı) Nilvera ile canlıda. Eksik: resepsiyon hastanın hesabını kapatırken panelin "Bu ziyaret için e-belge kesilsin mi?" diye sorması; bu soru "Hesabı kapat" ekranıyla (CHECKOUT-001) gelecek. Canlıda gerçek belge kesilmedi |
-| [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-taslaklar` (`d660a1e1`, +13: muayene notu, sahibe açıklama, taburcu talimatı taslakları). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
-| [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-taslaklar` (`d660a1e1`, +13: muayene notu, sahibe açıklama, taburcu talimatı taslakları). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
-| [AI-004](../backlog/feature-backlog.md#ai-004--ai-taburcu-talimatı) | AI taburcu talimatı | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-taslaklar` (`d660a1e1`, +13: muayene notu, sahibe açıklama, taburcu talimatı taslakları). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
 | [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Araştırılacak | Değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme` (+1). Ayrı ücretli ses→yazı hizmeti gerekir; ücretli hesaplar ertelendi |
-| [AI-007](../backlog/feature-backlog.md#ai-007--ai-kullanım-kotası) | AI kullanım kotası | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-kota` (`6bdee270`, +18; migration `AddAiCredits`), FE `feature/ai-kota` (`afb1b39a`, +14). Kredi satışı ücretli ödeme canlıya açılınca. Denemedeki klinik 0 kredi alır (kullanıcı kararı 2026-11-20; dalda `6bdee270`). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
-| [AI-008](../backlog/feature-backlog.md#ai-008--ai-maliyet-takibi) | AI maliyet takibi | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. Kullanıcı bazlı kullanım dökümü eklendi. AI-007 ile aynı dal (`feature/ai-kota`): fon ve maliyet yönetimi. Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
-| [AI-009](../backlog/feature-backlog.md#ai-009--ai-çıktı-onay-akışı) | AI çıktı onay akışı | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-onay-akisi` (`3e777562`, +8: taslak getir, bekleyenler, kabul et, at). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
-| [AI-010](../backlog/feature-backlog.md#ai-010--ai-audit-metadatası) | AI audit metadatası | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. Onay akışı dalında denetim izi (`feature/ai-onay-akisi`). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
 
-<details><summary>Canlıda olanlar (93)</summary>
+<details><summary>Canlıda olanlar (101)</summary>
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
+| [AI-001](../backlog/feature-backlog.md#ai-001--ai-muayene-notu-yapılandırma) | AI muayene notu yapılandırma | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
+| [AI-002](../backlog/feature-backlog.md#ai-002--ai-hasta-geçmişi-özeti) | AI hasta geçmişi özeti | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
+| [AI-003](../backlog/feature-backlog.md#ai-003--ai-hasta-sahibi-bilgilendirmesi) | AI hasta sahibi bilgilendirmesi | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
+| [AI-004](../backlog/feature-backlog.md#ai-004--ai-taburcu-talimatı) | AI taburcu talimatı | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
+| [AI-007](../backlog/feature-backlog.md#ai-007--ai-kullanım-kotası) | AI kullanım kotası | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi. Denemedeki klinik 0 kredi alır (kullanıcı kararı 2026-11-20) |
+| [AI-008](../backlog/feature-backlog.md#ai-008--ai-maliyet-takibi) | AI maliyet takibi | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi. Platform yönetiminde klinik ve kullanıcı bazlı kullanım dökümü |
+| [AI-009](../backlog/feature-backlog.md#ai-009--ai-çıktı-onay-akışı) | AI çıktı onay akışı | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
+| [AI-010](../backlog/feature-backlog.md#ai-010--ai-audit-metadatası) | AI audit metadatası | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
 | [REPORT-008](../backlog/feature-backlog.md#report-008--işletme-performansı-panosu) | İşletme performansı panosu | Canlıda | Tamamlandı sayıldı (kullanıcı, 2026-11-16): üç bölüm canlıda; yeni gösterge istenirse ayrı iş açılır |
 | [EXAM-015](../backlog/feature-backlog.md#exam-015--medical-note-lock) | Medical note lock | Canlıda | Tamamlandı sayıldı (kullanıcı, 2026-11-16): kilit ve ek not var; kilit açma bilerek yok (ADR-013) |
 | [RECORD-006](../backlog/feature-backlog.md#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) | Birleşik record modeli ve tip-bazlı dinamik form | Canlıda | ADR-043 pilot öncesi dilimleri 2026-11-15 yayınında (BE `dc36b64d`, panel `da734556`) |
@@ -269,7 +269,7 @@ Dalda, birleşmedi: 8 · Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (
 
 ## P2 (62 madde)
 
-Dalda, birleşmedi: 1 · Planlandı: 15 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 26 · Ertelendi: 5
+Planlandı: 15 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 27 · Ertelendi: 5
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
@@ -288,7 +288,6 @@ Dalda, birleşmedi: 1 · Planlandı: 15 · Araştırılacak: 10 · Canlıda (kı
 | [TIER-012](../backlog/feature-backlog.md#tier-012--iys-ve-tarbil-araştırması) | İYS ve Tarbil araştırması | Planlandı | Araştırma bitti, ADR-046 kabul; ticari ileti gönderimi canlıda kapalı |
 | [TIER-013](../backlog/feature-backlog.md#tier-013--ai-eklentisi-kredi-kota-ve-fon) | AI eklentisi: kredi, kota ve fon | Planlandı | ADR-044 güncellendi (main'de): her pakette kullanıcı başına kota (örnek Temel 100 / Profesyonel 300 / Kurumsal 800 kredi/ay), ek kredi satışı |
 | [TIER-014](../backlog/feature-backlog.md#tier-014--ai-altyapısı-ve-ilk-özellik-denemesi) | AI altyapısı ve ilk özellik denemesi | Planlandı | ADR-044 güncellendi (main'de): her pakette kullanıcı başına kota (örnek Temel 100 / Profesyonel 300 / Kurumsal 800 kredi/ay), ek kredi satışı |
-| [AI-006](../backlog/feature-backlog.md#ai-006--doğal-dille-hasta-kayıtlarında-arama) | Doğal dille hasta kayıtlarında arama | Dalda, birleşmedi | Birleşik dal `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`; testler yeşil, koordinatör bildirimi), main'e alma kullanıcı onayı bekliyor. BE `feature/ai-dogal-arama` (`f2b3323a`, +21), FE `feature/ai-dogal-arama` (`7d42cc7e`, +17). Yayında değil; Claude API anahtarı girilene kadar kapalı çalışır |
 | [PORTAL-005](../backlog/feature-backlog.md#portal-005--dijital-onam-ve-imza) | Dijital onam ve imza | Araştırılacak |  |
 | [MSG-001](../backlog/feature-backlog.md#msg-001--klinik-inbox) | Klinik inbox | Araştırılacak |  |
 | [MSG-002](../backlog/feature-backlog.md#msg-002--iki-yönlü-mesajlaşma) | İki yönlü mesajlaşma | Araştırılacak |  |
@@ -310,10 +309,11 @@ Dalda, birleşmedi: 1 · Planlandı: 15 · Araştırılacak: 10 · Canlıda (kı
 | [FIN-009](../backlog/feature-backlog.md#fin-009--düzeltme-yetkisinin-kontrollü-gevşetilmesi) | Düzeltme yetkisinin kontrollü gevşetilmesi | Ertelendi |  |
 | [RECORD-007](../backlog/feature-backlog.md#record-007--muayene-yeniden-açma-ve-revizyon-geçmişi) | Muayene yeniden açma ve revizyon geçmişi | Ertelendi |  |
 
-<details><summary>Canlıda olanlar (26)</summary>
+<details><summary>Canlıda olanlar (27)</summary>
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
+| [AI-006](../backlog/feature-backlog.md#ai-006--doğal-dille-hasta-kayıtlarında-arama) | Doğal dille hasta kayıtlarında arama | Canlıda (2026-11-20 06:30) | Kod yayında (BE `5a7e5b8e`, panel `944ac06f`; [sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md)). Hiçbir klinikte açık değil, fon yok; Claude API anahtarı girilene kadar kapalı çalışır. Gerçek AI isteği denenmedi |
 | [TRIAL-009](../backlog/feature-backlog.md#trial-009--sürümlü-kullanım-şartları-ve-hukuki-metin-kabulü) | Sürümlü kullanım şartları ve hukuki metin kabulü | Canlıda | Metinler yayında; hukukçu görüşü beklenmiyor (2026-11-09) |
 | [EXAM-013](../backlog/feature-backlog.md#exam-013--bundle-kalem-seçimi-ve-miktar-düzenleme) | Bundle kalem seçimi ve miktar düzenleme | Canlıda | 2026-11-11 main, canlı sürümde |
 | [RECORD-004](../backlog/feature-backlog.md#record-004--record-duplicate) | Record duplicate | Canlıda | Reçete/tedavi kopyası; canlı sürümde |
