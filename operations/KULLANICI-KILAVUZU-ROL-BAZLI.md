@@ -176,19 +176,28 @@ Bkz. Bölüm 9.
 - Sık hata: miktar/fiyat 0 veya ondalık sınırı aşıyor → alanın altındaki kırmızı uyarıyı düzeltin.
 - Hekim ücret **ekleyemez**; yalnız görür.
 
-### 4.2 Ödeme almak (Resepsiyon, Yönetici)
+### 4.2 Hesabı kapat (Resepsiyon, Yönetici) — **yayın bekliyor (CHECKOUT-001)**
+Hasta çıkarken tek panel: **Bugün** satırında **Hesabı kapat** (muayenedeki hastada ve kalanı olan tamamlanmış gelişte satırın ana düğmesi; **Tamamla** ve **Ödeme al**'ın yerini alır, **Ödeme al** ⋯ menüsünde kalır).
+1. **Ücret bekleyen kalemler** ücrete çevrilecek olarak gelir. İstemediğinizi **Ücretsiz** ile gerekçe yazarak (en az 5 karakter, geri alınamaz) ücretsiz sayın. Fiyatı olmayan kaleme birim fiyat girin.
+2. **Açık ücretler:** bu gelişin ücretleri seçili gelir. Önceki gelişlerden kalan borç gösterilir ama seçili gelmez; birlikte almak için işaretleyin.
+3. **Tahsilat:** **Nakit (F2)**, **Kart (F3)**, **Havale (F4)** ile satır ekleyin; birden fazla satır parçalı ödemedir (ör. nakit + kart). **Kalanı** düğmesi kalan tutarı yazar. Müşterinin kredisi varsa **Krediden (F8)**. Fazla alınan tutar müşteri kredisine yazılır. Birden fazla kasa varsa nakitte kasa sorulur.
+4. **Kaydet (Ctrl+Enter):** kalemler çevrilir, ödemeler alınır, geliş tamamlanır (bekleyen geliş önce başlatılır). Tutarın bir kısmı alınmazsa düğme "borç bırak" der; geliş yine tamamlanır, kalan borç Bugün'de görünür.
+5. Bir adım hata verirse panel durur: kaydedilenler geçerlidir. **Tekrar dene** çift kayıt yapmaz; para alınmadıysa **Borçla kapat**.
+6. Bitince **Fişi yazdır** (ziyaret ve tahsilat özeti, A5; resmî belge değildir). Belge kesme izniniz ve bağlı e-Belge sağlayıcınız varsa Bugün'deki **Tamamla** ile aynı e-Belge önerisi açılır.
+- Muayene ve ücreti olmayan muayenedeki hastada satırda **Tamamla** kalır (önce sorar).
+
+### 4.3 Ödeme almak (Resepsiyon, Yönetici)
 Kısayol: **Bugün** satırı → **⋯** → **Ödeme al**. Ya da: Para → **Ödemeler** → **Yeni Ödeme**.
 1. Müşteriyi seçin; açık ücretleri listelenir.
 2. Her ücret için ne kadar ödendiğini girin (**Tamamı** düğmesi ücretin kalanını yazar).
 3. Yöntem ve tarihi kontrol edin, kaydedin.
-- **Kurallar:** her yeni ödeme en az bir ücrete bağlanır ve bağlanan toplam ödeme tutarına eşittir (avans/serbest ödeme yok). Borçtan fazla tahsilat **reddedilir** (para üstü verilir, kayıt borç kadar girilir). Çift tıklama aynı ödemeyi iki kez saymaz.
+- **Kurallar:** ödeme ücretlere bağlanır; bağlanmayan kısım (fazla ödeme ya da avans) müşteri kredisine yazılır ve sonraki ücretlerde **krediden** kullanılır (FIN-005). Çift tıklama aynı ödemeyi iki kez saymaz.
 - **Örnek:** 1.000 TL ücret, 400 TL ödeme → kalan 600 TL; sonraki 600 TL ödeme borcu kapatır.
-- Sık hata: ödeme tutarı borçtan fazla → tutarı borca indirin.
 - Ödeme sonrası Bugün'de rozet **Kısmi ödendi** / **Ödendi** olur.
 
-### 4.3 Bakiye nerede görülür
+### 4.4 Bakiye nerede görülür
 - Bugün'de satır bazında ücret / ödenen / kalan ve müşterinin toplam borcu.
-- Müşteri bazlı bakiye müşteri ekranında (**doğrulanacak** – tam yeri). Müşteri listesinde "borcu olanlar" süzgeci **yoktur** (karar).
+- Müşteri bazlı bakiye müşteri ekranında (**doğrulanacak** – tam yeri). Müşteri listesinde "borcu olanlar" filtresi **yoktur** (karar).
 - Ödeme yöntemi ve tarihe göre liste: Para → **Ödemeler** (arama, yöntem, tarih aralığı filtreleri).
 
 ---
