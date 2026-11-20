@@ -311,7 +311,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Dönem performansı tek ekranda; sayılar raporlarla birebir eşleşir |
 | **Öncelik** | P1 (öneri; zamanı kullanıcı kararı) |
 | **Tahmini zorluk** | Dilim 1 Orta, dilim 2 Orta, dilim 3 Yüksek (tahmin; ölçülmedi) |
-| **Durum** | Dilim 1 uygulandı (2026-10-28; backend `PERFORMANCE_SUMMARY_API_CONTRACT.md` + panel Rapor Merkezi > Yönetim). Dilim 2'nin bir kısmı (geliş, tekil hasta sahibi, hizmet/ürün) ve dilim 3 (hekim bazlı muayene ve ciro) TIER-004 ile Profesyonel ve Kurumsal'da uygulandı (2026-11-08); atama kuralı kapsam taslağındaki öneri (ziyaretin sorumlu hekimi, ziyaretsiz muayenede kesinleştiren, satış atanmamış). Şubeler özeti (tüm şubeler yan yana) TIER-007 ile Kurumsal'da uygulandı (2026-11-08); aynı dönem yüklemesini kullanır. Kalanlar pilot geri bildirimine göre |
+| **Durum** | Dilim 1 uygulandı (2026-10-28; backend `PERFORMANCE_SUMMARY_API_CONTRACT.md` + panel Rapor Merkezi > Yönetim). Dilim 2'nin bir kısmı (geliş, tekil hasta sahibi, hizmet/ürün) ve dilim 3 (hekim bazlı muayene ve ciro) TIER-004 ile Profesyonel ve Kurumsal'da uygulandı (2026-11-08); atama kuralı kapsam taslağındaki öneri (ziyaretin sorumlu hekimi, ziyaretsiz muayenede kesinleştiren, satış atanmamış). Şubeler özeti (tüm şubeler yan yana) TIER-007 ile Kurumsal'da uygulandı (2026-11-08); aynı dönem yüklemesini kullanır. Tamamlandı sayıldı (kullanıcı, 2026-11-16); yeni gösterge istenirse ayrı iş açılır |
 | **Bağımlılıklar** | REPORT-001, REPORT-005, REPORT-006 |
 | **Notlar** | Kapsam, metrik listesi (mevcut uçlarla karşılananlar işaretli), filtre, yetki, UX ve açık sorular → [İşletme performansı panosu kapsam taslağı](../ux/ISLETME-PERFORMANS-PANOSU-2026-10.md). Dilim 1–2 için ADR gerekmez (ADR-003 kapsamı, salt okuma, veri modeli/izin değişmez); dilim 3'te hekim ataması veri modelini değiştirirse ADR. Dilim 1'de yeni izin yok (bölüm bazlı mevcut okuma izinleri). Rakip: **E-Vet VKY** yönetim analitiği (aylık ciro/tahsilat değişimi, personel ve ürün tipi satışı, müşteri değişimi, aşı yapılan/bekleyen) — düzen kopyalanmaz → [e-vet.md](../competitors/e-vet.md#vky-modül); **DaySmart** Reports/Billing Dashboard göstergeleri → [daysmart.md](../competitors/daysmart.md#reports-dashboard). AI-101 aynı özet ucunu kullanır |
 
@@ -473,7 +473,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Problem** | Ürün yalnız Türkçe. Arayüz metinleri kodun içine yazılı; i18n altyapısı bilinçli olarak kurulmadı (roadmap/KOD-INCELEME-2026-10-27.md) |
 | **Önerilen çözüm** | Kapsam tasarlanacak: panel, hasta sahibi portalı, tanıtım sitesi, klinik siteleri, Veteriner bul, e-posta şablonları, PDF çıktıları, hata mesajları. Dil seçimi kullanıcı, klinik ya da hasta sahibi düzeyinde olabilir. Tarih, para ve sayı biçimi dile göre değişir. Türkiye'ye özgü kayıt defterleri, KVKK ve e-belge metinleri kapsam kararı ister. Angular i18n mi, çalışma anında yüklenen çeviri dosyaları mı, karar ADR ile verilir |
 | **Kullanıcı değeri** | İngilizce konuşan hekim, personel ve hasta sahipleri; yurt dışı pazara açılma |
-| **Öncelik** | Belirlenmedi |
+| **Öncelik** | P3 (kullanıcı, 2026-11-17: "sonra yapalım") |
 | **Tahmini zorluk** | Yüksek (tahmin; ölçülmedi). Bütün arayüz metinlerinin koddan çıkarılması gerekir |
 | **Durum** | Planlandı (kullanıcı isteği 2026-11-12: "Bir ara da ingilizce kısmını da yapıcaz projenin onu da yapılacaklara ekle") |
 | **Bağımlılıklar** | Kapsam ve dil seçimi kararı (ADR) |
@@ -687,7 +687,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Esnek paket uygulama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
+| **Durum** | Sıraya alındı (kullanıcı kararı 2026-11-20: yürüyen işler bitince kodlanacak). Araştırıldı (2026-11-09, [not](../research/p2-arastirma-2026-11-09.md)): uygulama önizlemesinde satır dahil/hariç ve miktar; uygulama komutuna isteğe bağlı satır listesi, migration yok; fiyatlı pakette fiyat sabit (ücrete çevirirken düzenlenir). **Tamamlandı (2026-11-11):** backend ve frontend `main`e birleşti (BE `6e940ad7`, FE `71633052`); **canlıda** (2026-11-14 git kontrolü: canlı sürümde) |
 | **Bağımlılıklar** | EXAM-007 |
 | **Notlar** | DaySmart gözlemi — sandbox doğrulanmadı. **Templates Module:** Bundle Items — dahil/hariç, quantity/price range (ör. 1–2 Tablets, $50–100) — → [daysmart.md](../competitors/daysmart.md#templates-bundles) |
 
@@ -719,7 +719,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Kayıt bütünlüğü |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Kısmen geliştirildi (main, 2026-10-24 kod incelemesi): kesinleştirme kilidi ve ek not var; kilit açma yok (ADR-013 bilinçli) |
+| **Durum** | Canlıda, tamamlandı sayıldı (kullanıcı, 2026-11-16): kesinleştirme kilidi ve ek not var; kilit açma bilerek yok (ADR-013), ihtiyaç doğarsa ayrı iş |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | DaySmart lock aksiyonu gözlemlendi — sandbox doğrulanmadı. **Patients Module:** Medical Notes History lock icon — finalized anlamı **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#medical-notes). **DaySmart (observed):** Lock Medical Notes clinic policy — → [daysmart.md](../competitors/daysmart.md#config-lock-medical-notes). **Vetinity (implication):** Draft → Finalized/Locked → audit-safe correction/addendum; DaySmart irreversible auto-lock otomatik requirement değil — → [PATTERN-019](../research/patterns.md#pattern-019--auditable-record-actions) |
 
@@ -1815,7 +1815,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlı kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | EXAM-001, AI-009 |
 | **Notlar** | → [AI roadmap Aşama 1](../ai/ai-roadmap.md) |
 
@@ -1831,7 +1831,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 1–2; BE `feature/ai-gecmis-ozeti`, FE `feature/ai-yan-panel`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | TIMELINE-001, AI-009 |
 | **Notlar** | Taslak; kullanıcı onayı gerekir |
 
@@ -1847,7 +1847,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1863,7 +1863,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1879,7 +1879,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eller serbest not alma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-11-20: "o şuan için fuzuli masraf", gerekirse bakılacak). Önceki durum: Araştırılacak, sıra 6 (değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme`): ayrı ücretli ses→yazı hizmeti gerekir, ücretli hesaplar ertelendi; önce değerlendirme (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [AI roadmap Aşama 2](../ai/ai-roadmap.md). DaySmart STT penceresi gözlemlendi (~20 dk süre); teknik sağlayıcı doğrulanmadı. **v1.0 dışı aday**; premium/ileri faz → [IDEA-022](../research/ideas.md#idea-022--voice-assisted-clinical-documentation). Snippet sisteminden ayrı. Bağlamsal özet yan paneli (Summarize/SOAP summary) STT değildir → [AI-102](#ai-102--patient-summary), [AI-103](#ai-103--examination-assistant), [IDEA-008](../research/ideas.md#idea-008--embedded-ai-instead-of-separate-ai-module) |
 
@@ -1895,7 +1895,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı kayıt bulma |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 5; BE ve FE `feature/ai-dogal-arama`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | |
 
@@ -1911,7 +1911,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 4; BE ve FE `feature/ai-kota`, migration `AddAiCredits`); kredi satışı ücretli ödeme canlıya açılınca. Kullanıcı kararı 2026-11-20: deneme süresinde hediye kredi yok (ADR-044 madde 5); dalda uygulandı `6bdee270` (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
@@ -1927,7 +1927,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel kontrol |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 4, maliyet ekranı; `feature/ai-kota`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-007 |
 | **Notlar** | |
 
@@ -1943,7 +1943,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1959,7 +1959,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; sorun giderme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Ertelendi (kullanıcı kararı 2026-10-30: pilottan sonra; kotalı, ücretli ek paket olarak açılacak — AI-007/008 ile; model ADR-044, TIER-013) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Hassas klinik veriler normal loglara yazılmaz |
 
@@ -2767,7 +2767,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yasal uyumluluk |
 | **Öncelik** | P1 (ilk ücretli canlı müşteriden önce; ADR-036 AK-7 kabul, 2026-10-21) |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Kısmen, canlıda (2026-11-14 git kontrolü): ADR-036 Dilim 1 (veri modeli) ve Dilim 3–4 (belge kes, liste, PDF, iptal) Nilvera ile canlı sürümde; e-SMM, e-Arşiv ve e-Fatura Nilvera test ortamında uçtan uca denendi (canlıda gerçek belge kesimi denenmedi). Paraşüt kodu var, canlıda ayarla kapalı (kullanıcı kararı 2026-11-13). e-Fatura ticari senaryo ve "Alıcı reddetti" durumu main'de (BE `6add514c`, panel `7b53100b`), canlıya çıkmadı. Diğer entegratörler: [görüşme paketi](../operations/hbs-e-belge-gorusme-paketi.md) |
+| **Durum** | Canlıda (2026-11-20 git kontrolü; önceki: kısmen, 2026-11-14): ADR-036 Dilim 1 (veri modeli) ve Dilim 3–4 (belge kes, liste, PDF, iptal) Nilvera ile canlı sürümde; e-SMM, e-Arşiv ve e-Fatura Nilvera test ortamında uçtan uca denendi (canlıda gerçek belge kesimi denenmedi). Paraşüt kodu var, canlıda ayarla kapalı (kullanıcı kararı 2026-11-13). e-Fatura ticari senaryo ve "Alıcı reddetti" durumu canlıda (BE `6add514c`, panel `7b53100b`; 2026-11-14 02:40). Diğer entegratörler: [görüşme paketi](../operations/hbs-e-belge-gorusme-paketi.md) |
 | **Bağımlılıklar** | TRIAL-004 |
 | **Notlar** | Trial'da gerçek işlem sınırlandırılır. **Settings Module:** Taxes config (rate, type, jurisdiction, applies-to) — US odaklı benchmark; Türkiye KDV/e-belge ayrı — → [daysmart.md](../competitors/daysmart.md#settings-taxes). **Inventory Module:** item-level tax applicability — → [daysmart.md](../competitors/daysmart.md#inventory-taxes). **E-Vet SMART (2026-09-27):** Doğrudan Satış e-Fatura\|SMM Notu alanları; **VIDEO OBSERVED** gelgeç müşteride e-Fatura düzenlenememe anlatımı — live kural **doğrulanmadı** — → [e-vet.md](../competitors/e-vet.md#ana-satış-ekranı). **E-Vet SMART (2026-10-04):** sol menü e-Fatura/e-SMM UI + Fatura Yönetim Paneli pre-send workflow; reviewed account config eksik → external lifecycle **NOT VERIFIED** — → [e-vet.md](../competitors/e-vet.md#e-fatura--e-smm-modül) (competitor evidence; scope değişmedi). **Keşif (2026-10-19):** kullanıcı beyanı "zorunlu"; serbest hekim hizmeti e-SMM, şirket klinik ve ayrı ticari satış fatura (e-Arşiv / e-Fatura), yol özel entegratör API'si — [keşif](../research/hbs-ve-e-belge-kesfi-2026-10.md), karar taslağı [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) (Dilim 3–5). Öncelik P1, ilk ücretli canlı müşteriden önce (ADR-036 AK-7 kabul, 2026-10-21). **E-Vet SMART (2026-11-08):** Ayarlar'da entegratör seçimi (Altair, UyumSoft) ve kliniğin kendi entegratör kullanıcı adı/şifresi; e-SMM ayrı ekran değil (kullanıcı beyanı) — → [e-vet.md](../competitors/e-vet.md#ayarlar--e-fatura-bilgileri-2026-11-08). **2026-11-08 netleştirmeleri** (başvuru listesi, ilk yol pilot kliniğe göre, Vetinity'nin kendi faturası ayrı, kontörün pakete dahil edilmesi sonra): [ADR-036 Sonuçlar](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md#sonuçlar) |
 
@@ -2799,7 +2799,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik, ayrı bir programda faturayı yeniden yazmaz; Vetinity eski sistemin yerini alabilir (canlıya geçiş koşulu) |
 | **Öncelik** | P1 (pilotun gölge döneminde gerekmez; eski sistemi bırakma aşamasında gerekli) |
 | **Tahmini zorluk** | Yüksek (tahmin: keşif + backend + entegratör + frontend; ölçülmedi) |
-| **Durum** | Kısmen, canlıda (2026-11-14 git kontrolü): elle "Belge kes", ödemede kes ve otomatik kesme (Kapalı / Ödeme alınınca / Gün sonunda; varsayılan kapalı; çift kesim koruması ve durdurma) Nilvera ile canlı sürümde (ADR-036, 2026-11-11/12 kararları). Ziyaret/satış kapanışında öneri CHECKOUT-001'e bağlı. Canlıda gerçek belge kesimi denenmedi |
+| **Durum** | Kısmen, canlıda (2026-11-14 git kontrolü): elle "Belge kes", ödemede kes ve otomatik kesme (Kapalı / Ödeme alınınca / Gün sonunda; varsayılan kapalı; çift kesim koruması ve durdurma) Nilvera ile canlı sürümde (ADR-036, 2026-11-11/12 kararları). Eksik: resepsiyon hastanın hesabını kapatırken panelin "Bu ziyaret için e-belge kesilsin mi?" diye sorması; bu soru "Hesabı kapat" ekranıyla (CHECKOUT-001) gelecek. Canlıda gerçek belge kesimi denenmedi |
 | **Bağımlılıklar** | [INT-005](#int-005--e-fatura--e-smm), FIN-008 hizmet kataloğu, müşteri kimlik/adres alanları, ADR-014 (pilot) |
 | **Notlar** | **Açık sorular (kullanıcıya, pilot kliniğe/muhasebeciye):** (1) hangi belge türü, (2) ne zaman kesilsin, (3) hangi entegratör, (4) hangi müşteriye hangi belge (bireysel/kurumsal). Hukuki/vergi tavsiyesi verilmez; ürün ekibi yalnız teknik uygunluğu çıkarır. Rakip ekran görüntüsü yorumu: Kimlik No zorunluluğu muhtemelen fatura ihtiyacından geliyor (doğrulanmadı). **2026-10-19:** açık sorular (1)–(4) [ADR-036](../decisions/ADR-036-hbs-ve-e-belge-entegrasyonu.md) AK-1…AK-4'e taşındı (öneri: elle "Belge kes" + kapanışta öneri v1, tam otomatik v2) |
 
