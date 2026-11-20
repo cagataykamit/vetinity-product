@@ -1879,7 +1879,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Eller serbest not alma |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Araştırılacak, sıra 6 (değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme`): ayrı ücretli ses→yazı hizmeti gerekir, ücretli hesaplar ertelendi; önce değerlendirme (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Ertelendi (kullanıcı kararı 2026-11-20: "o şuan için fuzuli masraf", gerekirse bakılacak). Önceki durum: Araştırılacak, sıra 6 (değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme`): ayrı ücretli ses→yazı hizmeti gerekir, ücretli hesaplar ertelendi; önce değerlendirme (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | EXAM-001 |
 | **Notlar** | → [AI roadmap Aşama 2](../ai/ai-roadmap.md). DaySmart STT penceresi gözlemlendi (~20 dk süre); teknik sağlayıcı doğrulanmadı. **v1.0 dışı aday**; premium/ileri faz → [IDEA-022](../research/ideas.md#idea-022--voice-assisted-clinical-documentation). Snippet sisteminden ayrı. Bağlamsal özet yan paneli (Summarize/SOAP summary) STT değildir → [AI-102](#ai-102--patient-summary), [AI-103](#ai-103--examination-assistant), [IDEA-008](../research/ideas.md#idea-008--embedded-ai-instead-of-separate-ai-module) |
 

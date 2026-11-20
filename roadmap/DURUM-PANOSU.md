@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-20 (durum panosu oturumu; 2026-11-20 08:20 yayın bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `42d907f2`, panel ve tanıtım `87ccf7a4` (`main-NISKVANT.js`; 2026-11-20 08:20), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-takvim-calisma-saati-panel-guncelleme.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-20 (durum panosu oturumu; 2026-11-20 11:09 yayını ve AI-005 ertelemesi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `799e1cc7`, panel ve tanıtım `ea668ab9` (`main-3A5QHQVF.js`; 2026-11-20 11:09), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-rapor-merkezi-b-ozet-kaldirma.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-19). Kullanıcı E-vet aktarmasını canlıda kendisi denedi ve aktardı; pilot kliniğe henüz verilmedi. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -13,7 +13,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 | Öncelik | Toplam | Canlıda | Kısmen canlıda | Açık (yürüyen, karar, planlı, araştırılacak) | Ertelendi |
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
-| P1 | 105 | 102 | 1 | 2 (MOBILE-002 geliştiriliyor; AI-005 araştırılacak) | 0 |
+| P1 | 105 | 102 | 1 | 1 (MOBILE-002 geliştiriliyor) | 1 |
 | P2 | 62 | 27 | 5 | 25 (15 planlı, 10 araştırılacak) | 5 |
 | P3 | 11 | 0 | 0 | 10 (3 planlı, 7 araştırılacak) | 1 |
 
@@ -66,7 +66,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Randevuda çalışma saati kısıtı (klinik ayarı `EnforceWorkingHours`; kapalıyken panel randevusu çalışma saatine bağlanmaz) | BE `42d907f2` (`feature/calisma-saati-kisiti`), panel `87ccf7a4` | Canlıda (2026-11-20 08:20) | Migration `AddClinicEnforceWorkingHours` uygulandı, seed yok, yedek 08:16 (bildirim; DB'de ben okumadım). Ekran canlıda tarayıcıda denenmedi |
 | Takvim ve randevu listesi düzeltmeleri: ay görünümünde kapalı ve boş gün, aşı listesi kaydırma, saat alanı, listede Yaklaşan / Geçmiş / Tümü | panel `87ccf7a4` (`claude/takvim-saatsiz-liste-fa8f8d`) | Canlıda (2026-11-20 08:20) | Ekranlar canlıda tarayıcıda denenmedi |
 | Panelde yeni sürüm bildirimi ("Yeni sürüm hazır · Yenile"; yeni sürüm Ctrl+F5'siz yüklenir) | panel `87ccf7a4` (`claude/panel-surum-guncelleme-525ae1`), kılavuz §5.3 | Canlıda (2026-11-20 08:20) | `ngsw.json` no-cache ve hash doğrulandı (bildirim). Açık eski sekmenin kendiliğinden güncellenmesi uçtan uca denenmedi; bu sürümden önce açılmış sekmede bir kez Ctrl+F5 gerekebilir |
-| Raporlar ana ekranı tasarımı: üç tıklanır taslak (A dizin, B sorular, C önizleme) | FE `claude/raporlar-tasarim-7ebf18` (`c9ce3841`, +2) | Karar bekliyor (kullanıcı) | Taslak; seçim kullanıcıda (2026-11-20 tarandı) |
+| Rapor Merkezi B (sorularla ana ekran, Bugün sayıları) ve Özet sayfasının kaldırılması ([ADR-052](../decisions/ADR-052-ozet-kaldirilir-rapor-merkezi-sorular.md)) | BE `799e1cc7`, panel `ea668ab9` | Canlıda (2026-11-20 11:09) | Migration yok; `/panel/dashboard` Raporlar'a yönlenir; Özet'teki uyarılar Rapor Merkezi'ne taşındı ([sürüm notu](../release-notes/2026-11-20-rapor-merkezi-b-ozet-kaldirma.md)). Taslak dalı `claude/raporlar-tasarim-7ebf18` birleşmedi (taslaktı). Ekranlar canlıda tarayıcıda denenmedi |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -75,7 +75,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11, 2026-11-20 01:43, 06:30 ve 08:20 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11, 2026-11-20 01:43, 06:30, 08:20 ve 11:09 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
@@ -154,13 +154,13 @@ Canlıda: 27
 
 ## P1 (105 madde)
 
-Geliştiriliyor: 1 · Araştırılacak: 1 · Canlıda (kısmen): 1 · Canlıda: 102
+Geliştiriliyor: 1 · Canlıda (kısmen): 1 · Canlıda: 102 · Ertelendi: 1
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
 | [MOBILE-002](../backlog/feature-backlog.md#mobile-002--hasta-sahibi-mobil-uygulaması-capacitor-mağaza) | Hasta sahibi mobil uygulaması (Capacitor, mağaza) | Geliştiriliyor | Kod FE main'de, web portalı canlıda (`fc24ebc0`); Apple/Google hesap türü kararı ve Firebase bekliyor |
 | [INT-005](../backlog/feature-backlog.md#int-005--e-fatura--e-smm) | e-Fatura / e-SMM | Canlıda (kısmen) | Nilvera ile canlıda (2026-11-14); ticari senaryo + "Alıcı reddetti" de canlıda (02:40); Paraşüt kapalı |
-| [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Araştırılacak | Değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme` (+1). Ayrı ücretli ses→yazı hizmeti gerekir; ücretli hesaplar ertelendi |
+| [AI-005](../backlog/feature-backlog.md#ai-005--speech-to-text) | Speech-to-text | Ertelendi | Kullanıcı kararı 2026-11-20: şimdilik gereksiz masraf, gerekirse bakılacak. Değerlendirme taslağı ürün dalı `docs/ai-005-ses-degerlendirme` (+1) duruyor |
 
 <details><summary>Canlıda olanlar (102)</summary>
 
