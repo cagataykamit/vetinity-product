@@ -22,7 +22,7 @@ AI maliyeti kullanım başına oluşur; pakete sınırsız gömülürse maliyet 
 | Yoğun | 40.000 | ~$36 | $69 |
 | Ek fon (tek seferlik) | 1.500 | ~$1,35 | $5 |
 
-5. **Üst paket hediyesi.** Temel 0, Profesyonel 500, Kurumsal 2.000 aylık kredi; eklentiyle toplanır.
+5. **Üst paket hediyesi.** Temel 0, Profesyonel 500, Kurumsal 2.000 aylık kredi; eklentiyle toplanır. **Deneme süresinde hediye kredi yok** (kullanıcı kararı 2026-11-20): denemedeki klinik hangi paketi denerse densin aylık kotası 0'dır; hediye ücretli abonelik başlayınca verilir.
 6. **Fon.** Eklentiyi alırken ya da sonradan eklenir; otomatik para çekilmez. Önce aylık kota, sonra fon harcanır. Aylık kota devretmez, satın alınan fon devreder.
 7. **Kota bitince** yalnız AI durur, klinik iş akışı devam eder (ADR-008 madde 6). %80'de ve bitişte uyarı verilir.
 8. **Maliyet sınırları.** İstek başına en fazla token, kullanıcı başına dakikalık istek sınırı, klinik başına aylık kredi sınırı, tüm sistem için aylık harcama alarmı ve durdurma. Her isteğin gerçek token ve maliyeti kaydedilir (AI-008); klinik verisi normal loglara yazılmaz.

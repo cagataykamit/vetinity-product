@@ -1911,7 +1911,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi (sıra 4; BE ve FE `feature/ai-kota`, migration `AddAiCredits`); kredi satışı ücretli ödeme canlıya açılınca (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Dalda, birleşmedi (sıra 4; BE ve FE `feature/ai-kota`, migration `AddAiCredits`); kredi satışı ücretli ödeme canlıya açılınca. Kullanıcı kararı 2026-11-20: deneme süresinde hediye kredi yok (ADR-044 madde 5); dal bunu henüz uygulamıyor, kota yalnız pakete bakıyor (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
