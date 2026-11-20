@@ -92,7 +92,7 @@ Gösterim **yerel bilgisayardan** yapılır (canlı sunucu henüz yok). Önceden
 6. **Hatırlatmalar:** aşı/randevu e-postası, onayla/iptal ve takvime ekle bağlantıları, otomatik hatırlatıcılar (kontrol, borç).
 7. **Hasta sahibi portalı:** aşı, randevu, bakiye; portaldan randevu talebi.
 8. **Klinik web sitesi:** sihirbaz, canlı önizleme, en yakın müsait saatler.
-9. **Raporlar:** gün sonu, borç raporu, işletme performansı ve kırılımlar, kayıt defterleri.
+9. **Raporlar:** ana ekranda soru kartları ve "Bakmanız gerekenler" bandı (ADR-052; Özet sayfası kaldırıldı), ardından gün sonu, borç raporu, işletme performansı ve kırılımlar, kayıt defterleri.
 10. **Stok ve satış, barkod:** mal kabul, satış, barkod (kamerayla okutma canlıda HTTPS'te çalışır; yerelde elle barkod girişi gösterilir).
 
 Gösterimde **söz verme**: e-fatura tarihi, SMS, mağaza uygulaması, otomatik HBS gönderimi, Veteriner bul yayın tarihi. Bunlar için "yol haritasında, tarih pilotla birlikte netleşecek" de.
