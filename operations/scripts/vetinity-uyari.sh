@@ -56,6 +56,13 @@ DISK_ESIK=$(esik UYARI_DISK_ESIK 85)
 ERR_ESIK=$(esik UYARI_ERR_ESIK 5)
 X5_ESIK=$(esik UYARI_5XX_ESIK 3)
 
+# Postada görünen sunucu adı ve SMTP EHLO adı sistem hostname'inden gelmez (sunucu başka bir uygulamayla ortak, onun
+# adını taşır): ops.env'deki değer, yoksa varsayılan. curl, URL'de yol verilmezse EHLO'da makinenin adını gönderir.
+SUNUCU_ETIKETI=$(env_degeri "$OPS_ENV" SUNUCU_ETIKETI) || SUNUCU_ETIKETI=""
+SUNUCU_ETIKETI=${SUNUCU_ETIKETI:-Vetinity canlı}
+EHLO_ADI=$(env_degeri "$OPS_ENV" SMTP_EHLO_ADI) || EHLO_ADI=""
+EHLO_ADI=${EHLO_ADI:-vetinity.com}
+
 # --- Girdi kaynakları (test modunda ortam değişkenlerinden) ---
 
 # saglik_kodu DENEME_NO
@@ -214,9 +221,9 @@ posta_gonder() {
     return 1
   fi
   if [[ ${starttls,,} == true ]]; then
-    url="smtp://$host:$port"
+    url="smtp://$host:$port/$EHLO_ADI"
   elif [[ ${ssl,,} == true ]]; then
-    url="smtps://$host:$port"
+    url="smtps://$host:$port/$EHLO_ADI"
   else
     gunluk ERROR "SMTP sifreli degil (EnableSsl/UseStartTls false), posta gonderilmedi"
     return 1
@@ -272,15 +279,14 @@ bildir() {
 
 # isle TUR BASLIK -> SORUN/DETAY'a göre uyar, kıs ya da düzeldi bildir
 isle() {
-  local tur=$1 baslik=$2 dosya=$DURUM_DIZIN/$1 son="" makine
-  makine=$(hostname)
+  local tur=$1 baslik=$2 dosya=$DURUM_DIZIN/$1 son=""
   [[ -f $dosya ]] && son=$(head -1 "$dosya")
   if [[ -n $SORUN ]]; then
     if [[ -z $son ]] || ((SIMDI - son >= YINELEME_SN)); then
       local ek=""
       [[ -n $son ]] && ek=" (suruyor)"
       if bildir "$tur" "[Vetinity UYARI] $baslik$ek: $SORUN" \
-        "Sunucu: $makine
+        "Sunucu: $SUNUCU_ETIKETI
 Zaman: $(date -d "@$SIMDI" -Iseconds)
 Sorun: $SORUN
 
@@ -292,7 +298,7 @@ $DETAY"; then
     fi
   elif [[ -n $son ]]; then
     if bildir "$tur" "[Vetinity DÜZELDİ] $baslik" \
-      "Sunucu: $makine
+      "Sunucu: $SUNUCU_ETIKETI
 Zaman: $(date -d "@$SIMDI" -Iseconds)
 $baslik denetimi yeniden normal."; then
       [[ $MOD == deneme ]] || rm -f -- "$dosya"
@@ -303,7 +309,7 @@ $baslik denetimi yeniden normal."; then
 }
 
 if [[ $MOD == posta-dene ]]; then
-  if posta_gonder "[Vetinity] Uyari postasi denemesi" "Sunucu: $(hostname)
+  if posta_gonder "[Vetinity] Uyari postasi denemesi" "Sunucu: $SUNUCU_ETIKETI
 Zaman: $(date -Iseconds)
 Bu posta vetinity-uyari.sh --posta-dene ile gonderildi; SMTP ayarlari calisiyor."; then
     echo "deneme postasi gonderildi"

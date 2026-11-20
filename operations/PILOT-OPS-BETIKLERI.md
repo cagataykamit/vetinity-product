@@ -47,6 +47,8 @@ ters bölü kaçışları işlenmez). Kurulum ön denetimi izni ve zorunlu anaht
 | `UYARI_DISK_ESIK` | hayır | Varsayılan 85 |
 | `UYARI_ERR_ESIK` | hayır | Varsayılan 5 (5 dk'da ERR/FTL) |
 | `UYARI_5XX_ESIK` | hayır | Varsayılan 3 (5 dk'da 5xx) |
+| `SUNUCU_ETIKETI` | hayır | Uyarı postasındaki "Sunucu:" satırı. Varsayılan `Vetinity canlı`. Sistem hostname'i kullanılmaz: sunucu başka bir uygulamayla ortak ve onun adını taşır |
+| `SMTP_EHLO_ADI` | hayır | SMTP EHLO'da gönderilen ad (alıcının ham başlıklarında `Received: from ...` olarak görünür). Varsayılan `vetinity.com` |
 
 Parolaları ekrana basmadan doldurmak için (önce `grep -n 'db-pass\|vetinity-sa' /opt/vetinity/yedek.sh`
 ile mevcut betiğin bu dosyaları düz `cat` ile okuduğunu doğrulayın; dosyalar yalnız parolayı içermelidir):
