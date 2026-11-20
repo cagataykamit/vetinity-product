@@ -1815,7 +1815,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hız; tutarlı kayıt |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | EXAM-001, AI-009 |
 | **Notlar** | → [AI roadmap Aşama 1](../ai/ai-roadmap.md) |
 
@@ -1831,7 +1831,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Muayene öncesi hızlı hazırlık |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 1–2; BE `feature/ai-gecmis-ozeti`, FE `feature/ai-yan-panel`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 1–2; BE `feature/ai-gecmis-ozeti`, FE `feature/ai-yan-panel`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | TIMELINE-001, AI-009 |
 | **Notlar** | Taslak; kullanıcı onayı gerekir |
 
@@ -1847,7 +1847,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | İletişim hızı |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1863,7 +1863,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Zaman tasarrufu |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 3; BE `feature/ai-taslaklar`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-009 |
 | **Notlar** | Taslak statüsü |
 
@@ -1895,7 +1895,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hızlı kayıt bulma |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 5; BE ve FE `feature/ai-dogal-arama`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 5; BE ve FE `feature/ai-dogal-arama`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | |
 
@@ -1911,7 +1911,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Öngörülebilir maliyet |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 4; BE ve FE `feature/ai-kota`, migration `AddAiCredits`); kredi satışı ücretli ödeme canlıya açılınca. Kullanıcı kararı 2026-11-20: deneme süresinde hediye kredi yok (ADR-044 madde 5); dalda uygulandı `6bdee270` (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 4; BE ve FE `feature/ai-kota`, migration `AddAiCredits`); kredi satışı ücretli ödeme canlıya açılınca. Kullanıcı kararı 2026-11-20: deneme süresinde hediye kredi yok (ADR-044 madde 5); dalda uygulandı `6bdee270` (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Claim ve abonelik planı ile sınırlandırılabilir |
 
@@ -1927,7 +1927,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Operasyonel kontrol |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 4, maliyet ekranı; `feature/ai-kota`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 4, maliyet ekranı; `feature/ai-kota`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | AI-007 |
 | **Notlar** | |
 
@@ -1943,7 +1943,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Klinik güvenlik |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [AI stratejisi](../ai/ai-strategy.md) |
 
@@ -1959,7 +1959,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Uyumluluk; sorun giderme |
 | **Öncelik** | P1 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Dalda, birleşmedi; seri birleşik dalda `feature/ai-birlesik` (BE `5a7e5b8e`, FE `944ac06f`), main'e alma kullanıcı onayı bekliyor (2026-11-20) (sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
+| **Durum** | Canlıda (2026-11-20 06:30; BE `5a7e5b8e`, panel `944ac06f`; hiçbir klinikte açık değil, Claude API anahtarı girilene kadar kapalı) (önceki: sıra 2; BE `feature/ai-onay-akisi`) (kullanıcı kararı 2026-11-19: ertelenen AI işleri sırayla yapılır; Claude API anahtarı girilene kadar kapalı çalışır; önceki karar 2026-10-30 pilottan sonra) |
 | **Bağımlılıklar** | — |
 | **Notlar** | Hassas klinik veriler normal loglara yazılmaz |
 
