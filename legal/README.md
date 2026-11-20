@@ -16,9 +16,9 @@ Bu klasör Vetinity'nin ve kliniklerin kullanacağı hukuki metinleri tutar; met
 |---|---|---|---|
 | [aydinlatma-metni.md](aydinlatma-metni.md) | Klinik → müşteri (hayvan sahibi) | Müşteri kartı, yazdırma; Ayarlar'da klinik başına şablon | Yürürlükte (1.0) |
 | [acik-riza-metni.md](acik-riza-metni.md) | Klinik → müşteri | ADR-021 formu; varsayılan metin (backend `ClinicKvkkFormTemplateDefaults`) | Yürürlükte (1.0) |
-| [gizlilik-politikasi.md](gizlilik-politikasi.md) | Vetinity → kullanıcılar | Herkese açık sayfa ve kayıt/giriş bağlantısı | Yürürlükte (1.0) |
+| [gizlilik-politikasi.md](gizlilik-politikasi.md) | Vetinity → kullanıcılar | Herkese açık sayfa ve kayıt/giriş bağlantısı | Yürürlükte (1.2, 2026-11-20: yapay zekâ ve yurt dışı aktarım) |
 | [kullanim-sartlari.md](kullanim-sartlari.md) | Vetinity ↔ klinik | Herkese açık sayfa, sürümlü kabul (TRIAL-009) | Yürürlükte (1.0) |
-| [veri-isleme-sozlesmesi.md](veri-isleme-sozlesmesi.md) | Klinik ↔ Vetinity | Kayıtta kabul edilir, PDF olarak indirilebilir | Yürürlükte (1.0) |
+| [veri-isleme-sozlesmesi.md](veri-isleme-sozlesmesi.md) | Klinik ↔ Vetinity | Kayıtta kabul edilir, PDF olarak indirilebilir | Yürürlükte (1.1, 2026-11-20: yapay zekâ alt işleyeni) |
 | [saklama-ve-imha-politikasi.md](saklama-ve-imha-politikasi.md) | Klinik iç belgesi / Vetinity | Klinik için şablon, Vetinity için iç politika | Yürürlükte (1.0) |
 | [portal-kullanim-sartlari.md](portal-kullanim-sartlari.md) | Vetinity ↔ hasta sahibi (portal kullanıcısı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında ve güncellemede sürümlü kabul (ADR-031 K4, ADR-029) | Yürürlükte (1.0) |
 | [portal-gizlilik-politikasi.md](portal-gizlilik-politikasi.md) | Vetinity → hasta sahibi (portal hesabı) | Hasta sahibi portalı/mobil uygulama: hesap açılışında sürümlü kabul, portal içi bağlantı (ADR-031 K4, ADR-029) | Yürürlükte (1.0) |
