@@ -29,7 +29,7 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 
 ### 0.2 Giriş ve ilk ekran
 
-- Giriş sonrası ilk sayfa izninize göre değişir: **Bugün** (geliş okuma izni varsa) veya **Özet**. (Kodda: giriş sonrası `Bugün` veya `Özet` yönlendirmesi; Aşama 8 kararı D-M2: Resepsiyon ve Hekim → Bugün, Yönetici → Özet.)
+- Giriş sonrası ilk sayfa izninize göre değişir: geliş okuma izni varsa **Bugün** (yönetici dahil herkes); yoksa ve bir rapora izniniz varsa **Raporlar**; o da yoksa menüdeki ilk sayfa. (ADR-030 eki, ADR-052.) **Özet** sayfası kaldırıldı; eski `/panel/dashboard` adresi **Raporlar**'ı açar.
 - Çıkış üst çubuktaki **kullanıcı menüsünden** yapılır.
 - Üstte **klinik seçici** vardır; çok klinikli hesapta doğru kliniği seçili tutun.
 - Abonelik süresi bitmişse yazma düğmeleri "(salt okunur)" olur: kayıt eklenemez/değiştirilemez, görüntülenir. Yönetici **Ayarlar → Abonelik** sayfasına bakar.
@@ -130,9 +130,10 @@ Muayene ayrıntı sayfasındaki düğmelerle (yetkinize göre): **Tedavi Oluştu
 
 Yönetici, resepsiyon ve hekim işlerinin tümünü yapabilir; ek olarak **düzeltme ve iptal** yetkileri vardır.
 
-### 3.1 Sabah: Özet ve Bugün
-- **Menü:** Panel → **Özet** (hedef menü: üstte **Özet**) klinik göstergelerini gösterir. **Bugün**'den kuyruğu izleyin.
+### 3.1 Sabah: Bugün ve Raporlar
+- **Bugün**'den kuyruğu izleyin. **Açık işler** satırı önceki günlerden kalan işleri toplar; **Gecikmiş randevu: N** çipi son 30 günde gelinmemiş ve hâlâ planlı randevuları takvimde açar. Gün listesinin başlığında o gün iptal edilen randevu sayısı yazar.
 - Bugün'de müşteri bazında **toplam borç** ve satır bazında ücret/ödenen/kalan görünür.
+- Sayılara **Raporlar**'dan bakın (bölüm 9): kasa, ciro, tahsilat, borç, randevu ve klinik iş hacmi seçili şubeye göre, eğilim çizgisiyle görünür.
 
 ### 3.2 Müşteri ve hayvan kayıtları
 - **Menü:** Klinik → **Müşteriler**, **Hayvanlar**. Hayvan sayfası hasta özeti ve zaman çizelgesini (muayene, tedavi, reçete, lab, aşı, yatış, geliş) gösterir.
@@ -263,7 +264,11 @@ Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; y
 
 ## 9. Raporlar
 
-- **Menü (şu anki):** Raporlar → **Ödeme Raporu**, **Randevu Raporu**, **Muayene Raporu**, **Aşı Raporu**. **Hedef:** tek **Raporlar** girişi (Rapor Merkezi, kategori kartları); mevcut rapor adresleri çalışmaya devam eder.
+- **Menü:** tek **Raporlar** girişi (Rapor Merkezi). Ana ekran raporları iş sorularının altında toplar: "Bugünün kasası tuttu mu?", "Bu dönem nasıl geçti?", "Para hangi yolla geldi?", "Kimin bize borcu var?", "Randevular boşa gidiyor mu?", "Klinikte ne kadar iş yaptık?", "HBS'e girilmemiş kayıt kaldı mı?", "Denetim gelse defterler hazır mı?" (ADR-052).
+  - Her kartta özet sayı, çoğunda eğilim çizgisi ve cevabı veren raporlar vardır. Üstteki **Bugün / Bu hafta / Bu ay** seçicisi sayıları değiştirir; kasa, borç ve HBS kartları dönemden bağımsızdır. Sayılar seçili şubeye göredir.
+  - **Bakmanız gerekenler** bandı yalnız iş bekliyorsa görünür: HBS'e girilmemiş reçete ve aşı, bugün ücreti kapanmamış iş, zamanı geçmiş aşı, asgari seviyenin altındaki stok. Her satır ilgili listeyi açar.
+  - Raporu ☆ ile favorilere ekleyin; favoriler en üstte kısayol olur. **Rapor adıyla bul** kutusu eşleşen raporun kartını vurgular.
+  - Kart ve uyarı, bağlandığı raporun izniyle görünür; izniniz olmayan kart çizilmez. Mevcut rapor adresleri değişmedi.
 - Her rapor kendi okuma iznine bağlıdır (yetkiniz yoksa görünmez).
 - Filtreleri seçin; sonuç tablosu sayfalıdır. Yetkiniz varsa **Excel indir** / **CSV indir** düğmeleri vardır. Dışa aktarma ekrandaki filtreyle aynı olmalıdır; farklı görürseniz bildirin (**doğrulanacak**).
 - Dışa aktarılan dosya kişisel veri içerir: paylaşılan bilgisayarda bırakmayın, e-postayla kontrolsüz göndermeyin.
