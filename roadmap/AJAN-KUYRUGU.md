@@ -130,3 +130,10 @@ Bu özet, yukarıdaki eski "Aşama 2/3/4 geliştirmeye hazır" notlarının YER�
 ## Tanıtım sitesi (2026-10-16)
 
 Analiz ve karar: `research/tanitim-sitesi-analizi-2026-10.md`, `ux/tanitim-sitesi-onerisi.md`, `ux/tanitim-sitesi-tasarim.md`, ADR-034 (kabul edildi; hastane sonraki hedef, ayrı paket; AK-6 iletişim bilgileri/tüzel kişi bekliyor). Backlog WEB-001…008. Frontend: çok sayfalı tanıtım (WEB-001/002/003/004) dal `claude/tanitim-sitesi-cok-sayfali-c22489` main'e rebase + ff birleşti (kullanıcı onayı), son commit `0b6107a`; `ng build` hatasız, ESLint 0/0, tam `ng test` 1662/1663 (tek Today testi eşzamanlı koşuda düştü, tek başına geçti; ajan raporu). **Push yok, canlıda değil.** Kritik: `www.vetinity.com` alan adı park sayfasına gidiyor; tanıtım yalnız staging'de ve 2 Temmuz derlemesi (kullanıcı eylemi, ADR-033). Sırada: WEB-005 gerçek ekran görüntüleri (sentetik veri), WEB-006 sayfa içerik derinleştirme, WEB-007 paket sınırı tek kaynak, WEB-008 ayrı derleme (ADR-033 ile). Koyu tema tarayıcıda görülmedi; bundle bütçe uyarısı 1.16/1 MB (önceden var mıydı doğrulanmadı).
+
+## Sırada (2026-11-20, kullanıcı kararı)
+
+**CHECKOUT-001 "Hesabı kapat"** — kullanıcı: "sıraya alsın şu işler bitince onu da yapalım". Şu an yürüyen işler bitince kodlanacak: çalışma saati kısıtı, takvim/liste düzeltmeleri, panel sürüm bildirimi (yayında), Raporlar yeniden tasarımı (B seçildi, Özet kararı bekliyor).
+- Tasarım onaylı (2026-11-09; FE taslak dalı `taslak/hesabi-kapat`, `07e25890`). Araştırma: `research/p2-arastirma-2026-11-09.md`. Yaklaşık 5 dilim; önce backend sözleşmesi.
+- Kapanış panelinde ziyaret kapanışındaki e-Belge önerisi aynen çıkmalı (o öneri 2026-11-11'den beri canlıda, FE `dc97e7d2`; belge kesme izniyle açılır).
+- Pano ve backlog: `docs/durum-panosu-4` `3bc7cd2` (push yok).
