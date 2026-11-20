@@ -82,7 +82,7 @@ Bunlar netleşmeden kliniğe söz verme; görüşmede "bunu size yazılı iletec
 
 ## 4. Gösterim akışı
 
-Gösterim **yerel bilgisayardan** yapılır (canlı sunucu henüz yok). Önceden bir prova yapılmalı (bölüm 7).
+Gösterim **canlıdan** yapılır (`https://panel.vetinity.com`, 2026-11-10'dan beri yayında): gizli pencerede yeni deneme kaydı, "Örnek klinikle başla". İnternet yoksa yedek olarak yerel bilgisayar kullanılır. Önceden bir prova yapılmalı (bölüm 7).
 
 1. **Kayıt ve örnek klinik:** yeni deneme kaydı, "Örnek klinikle başla" (sentetik veri, gerçek kişi yok; EXAMPLE_CLINIC sözleşmesi). Klinik verisiyle başlarken örnek veri tek düğmeyle temizlenir.
 2. **Bugün ekranı:** randevulu ve randevusuz geliş, bekleme, acil işareti, hasta uyarı rozetleri, "Sahip onayladı" rozeti.
@@ -104,19 +104,19 @@ Gösterimde **söz verme**: e-fatura tarihi, SMS, mağaza uygulaması, otomatik 
 - **Çıkış ölçütleri (klinikle anlaşılır):** iki hafta boyunca ciddi hata yok, fark listesi kapanmış, personel günlük akışı yardımsız yapıyor, bakiyeler tutuyor.
 - **Eğitim:** ilk gün bir oturum (rol bazlı kılavuz), ilk hafta her gün kısa görüşme.
 - **Destek:** bölüm 1 madde 5'teki kanal ve saatler.
-- **Veri ve KVKK:** klinik veri sorumlusu, Vetinity veri işleyen. Veri işleme sözleşmesi, kullanım şartları ve gizlilik politikası **taslaktır**, hukukçu onayı bekliyor (HUKUKI-ONAY-LISTESI A1–A6). Öneri: gerçek müşteri verisi girilmeden önce hukukçu onayı alınır; alınmadan başlanacaksa bu kliniğe açıkça söylenir.
-- **Bırakma hakkı:** klinik pilotu istediği an bırakabilir; zaten eski yöntemde olduğu için iş durmaz. Veri talep edilirse dışa aktarılır (tam veri dışa aktarma biçimi henüz yok, kılavuz §10).
+- **Veri ve KVKK:** klinik veri sorumlusu, Vetinity veri işleyen. Veri işleme sözleşmesi, kullanım şartları ve gizlilik politikası yayında; kayıtta onaylanır (kullanıcı kararı 2026-11-09). Unvan ve vergi numarası yer tutucuları şahıs işletmesi kaydı tamamlanınca doldurulur; klinikle yazılı anlaşmadan önce gerekir.
+- **Bırakma hakkı:** klinik pilotu istediği an bırakabilir; zaten eski yöntemde olduğu için iş durmaz. Klinik verisini kendisi indirir: panelde **Verimi dışa aktar** (tam veri dışa aktarma, `DATA_EXPORT` sözleşmesi).
 - **Yedek:** her gün yedek alınır; yedekten geri dönüş provası canlıdan önce yapılır (ADR-014 K2).
 
 ## 6. Bizim taraftaki durum (dürüst özet)
 
 | Konu | Durum |
 |---|---|
-| Ürün kodu (Aşama 1–3 ve çoğu P1) | Hazır, testli; yerelde çalışıyor |
-| Canlı sunucu (VPS, SQL Server, alan adları, e-posta, yedek) | **Yok, senin işin.** Kurulunca migration, ayar ve ilk doğrulama 1–2 gün (kılavuz §11.1) |
-| Hukuk metinleri | Taslak, hukukçu onayı bekliyor |
+| Ürün kodu (Aşama 1–3 ve çoğu P1) | Hazır, testli; canlıda |
+| Canlı sunucu (VPS, SQL Server, alan adları, e-posta, yedek) | **Kurulu** (2026-11-10). Gece yedeği şifreli Drive kopyasıyla, geri yükleme provası 2026-11-10'da geçti (kılavuz §9, §11.1). Uyarılar (yedek başarısızlığı, `/health/ready`, disk, hata e-postası) henüz kurulu değil (kılavuz §7.2) |
+| Hukuk metinleri | Yayında (kullanıcı kararı 2026-11-09); unvan ve vergi no yer tutucuları şahıs işletmesi kaydından sonra dolar |
 | iyzico canlı anahtar | Yenilenmedi; pilot ücretsizse ödeme pilot başında gerekmez |
-| e-Fatura | Belge kesme yok; gölge dönemde eski yerden kesilir, ilk ücretli müşteriden önce gerekli (ADR-036). Hazır olan: müşteride fatura bilgileri, klinikte mükellef bilgileri, ücrette KDV. Kesme, aracı firma seçilip test hesabı gelince yapılır |
+| e-Belge | Kesme kodu, hazırlık listesi ve kapanıştaki öneri canlıda (2026-11-19). Sağlayıcı hesabı (aracı firma) henüz açılmadı; canlıda gerçek belge kesilmedi. Kullanıcı kararı (2026-11-20, koordinatör oturumu üzerinden iletildi): pilot ilk günden belgeyi Vetinity'den keser; sağlayıcı hesabını kullanıcı açar |
 | SMS / WhatsApp otomatik | Yok; e-posta var, WhatsApp elle bağlantı |
 | Mağaza uygulaması | Yok; panel ve portal telefon tarayıcısında çalışır |
 | Klinik sitesi, Veteriner bul | Kod hazır; yayın alan adı geçişine (ADR-033) bağlı |
@@ -124,7 +124,7 @@ Gösterimde **söz verme**: e-fatura tarihi, SMS, mağaza uygulaması, otomatik 
 
 ## 7. Görüşmeden önce prova
 
-- [ ] Backend ve panel yerelde güncel main'den açılır, örnek klinikle yeni bir deneme kaydı yapılır, bölüm 4'teki akış baştan sona bir kez tıklanır.
+- [ ] Canlıda (`https://panel.vetinity.com`) gizli pencerede örnek klinikle yeni bir deneme kaydı yapılır, bölüm 4'teki akış baştan sona bir kez tıklanır. İnternet yoksa yedek: yerelde güncel main.
   - Açma: Claude uygulamasında "backend-api" ve "frontend-web" sunucuları (ya da API için `dotnet run --project src/Backend.Veteriner.Api --launch-profile https`, panel için `npm start`; `FileStorage__RootPath` ortam değişkeni verilmezse dosya yükleme ve veri dışa aktarma çalışmaz). Panel `http://localhost:4200`.
   - Koordinatör provası (2026-11-09, güncel main BE `ae9c123e`, FE `74feaf82`): Bugün (uyarı rozetleri dahil), Randevular, Bekleme listesi, Hastalar, Muayeneler, Ücretler, Ürünler, Raporlar, İşletme performansı, Gün sonu, Şubeler özeti, Özet, Hatırlatmalar, Web sayfam, Verimi dışa aktar, API erişimi, Size özel geliştirmeler, Veteriner bul, Geçiş desteği ve Ayarlar açıldı; hata veren istek yok. Tek küçük bulgu: Temel/Profesyonel kiracıda "Şubeler özeti" kilit kutusu doğru görünüyor ama arkada bir istek 403 dönüyor (ekranda etkisi yok). Örnek klinikle kayıt tarayıcıda denenmedi (yerel oturum açıktı); entegrasyon testi geçiyor. Portal ve klinik sitesi bu provada açılmadı.
   - Gösterimden önce tarayıcıda gizli pencere aç ve "Ücretsiz dene" > "Örnek klinikle başla" ile yeni kayıt yap; mevcut test hesabına girme.
