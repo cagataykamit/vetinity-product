@@ -1,8 +1,8 @@
 # Vetinity kullanıcı kılavuzu (rol bazlı)
 
-**Durum:** Taslak v0.1 (2026-10-13). Aşama 9 Dilim 11. Pilot klinik eğitimi için.
+**Durum:** Sürüm 0.2 (2026-11-20; ilk sürüm 2026-10-13). Pilot klinik eğitimi için.
 
-> **Menü yeniden düzenleme sürüyor (Aşama 8).** Menü adları aşağıda iki kaynaktan verilir: (a) frontend yerel `main`'deki **şu anki** menü (kodu okuyarak), (b) Aşama 8 menü taslağındaki **hedef** adlar (`docs/ASAMA8_DISCOVERY.md` bölüm 3.2; kullanıcı onayı D-M1: ~16 öğe, 6 grup). Pilot başlamadan menü son hâlini alacaktır; bu kılavuz o zaman gözden geçirilmelidir. Adresler (rotalar) taşınmaz; bir ekranı bulamazsanız menüde "Klinik", "Para", "Stok", "Raporlar" ve "Ayarlar" gruplarına bakın.
+> **Menü (canlıdaki panel, 2026-11-20):** **Bugün** · **Randevular** (Liste, Takvim, Talepler, Bekleme listesi) · **Müşteri ve Hasta** (Ara, Müşteriler, Hastalar, Portal gelen kutusu) · **Kayıtlar** (Muayeneler, Tedaviler, Reçeteler, Aşılar, Lab sonuçları, Görüntüleme, Yatışlar, Uygulamalar) · **Para** (Ücretler, Ücret bekleyenler, Ödemeler, Satışlar, e-Belgeler) · **Stok** (Ürünler, Stok durumu, Stok hareketleri, Mal kabul) · **Raporlar** · **Ayarlar**. Sekmeler yetkinize göre görünür. Menü adları kodu okuyarak yazıldı (`panel-navigation.ts`).
 
 > **Bu kılavuz ekran görüntüsü içermez.** Ekran ve düğme adları koddan okundu; gerçek ekranda küçük farklar olabilir. Uygulama tarayıcıda uçtan uca denenmedi (bkz. Bölüm 13 "Doğrulanacaklar"). Kılavuzla ekran uyuşmazsa bunu destek kanalına bildirin.
 
@@ -47,7 +47,7 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 ## 1. Resepsiyon (Sekreter) – gün akışı
 
 ### 1.1 Sabah: Bugün ekranını aç
-- **Menü:** Panel → **Bugün** (hedef menü: üstte **Bugün**).
+- **Menü:** **Bugün** (menünün en üstü).
 - Ekranda bölümler: **Bekliyor**, **Devam ediyor**, **Planlı randevular**, **Tamamlandı**, **Gelmedi**; en altta **Aktif yatışlar**. Görünüm anahtarı: **Bugün / Yanlış işaretlenenler**; kapsam anahtarı: **Benim hastalarım / Tümü**. Resepsiyon sorumlu hekim olmadığı için **Tümü** ile çalışır.
 - Süre sütunu **Bekliyor** satırlarında bekleme süresini gösterir (30 dk üstü uyarı, 60 dk üstü kritik renk).
 - Sık hata: Liste boş görünüyor → kapsamın "Benim hastalarım" olmadığına ve doğru kliniğin seçili olduğuna bakın, **Yenile** düğmesine basın.
@@ -71,7 +71,7 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 - Sık hata: aynı telefonla müşteri zaten varsa yinelenen kayıt uyarısı alırsınız; var olan müşteriyi seçin. (Kural backend'de var; ekrandaki tam mesaj **doğrulanacak**.)
 
 ### 1.4 Randevu verme / erteleme / iptal
-- **Menü:** Klinik → **Randevular** (liste), **Randevu Takvimi** (şu anki menüde ayrı öğe; Aşama 8 taslağında Randevular içine alınacak).
+- **Menü:** **Randevular** → **Liste**, **Takvim**, **Talepler** (online randevu talepleri), **Bekleme listesi** sekmeleri. Takvimin gün görünümünde hekim sütunlarının yanında saatli **Aşılar** sütunu durur; saati girilmemiş aşılar "Saatsiz" başlığında görünür.
 - Yeni randevu, erteleme ve iptal bu ekrandan yapılır. Durum etiketleri: Planlandı / Tamamlandı / İptal. Resepsiyon **tamamlama** yapmaz (muayene başlayınca randevu otomatik tamamlanır; **doğrulanacak**).
 
 ### 1.5 Yanlış geliş / durum düzeltme
@@ -90,12 +90,12 @@ Bkz. Bölüm 4.1. Resepsiyon ücret ve ödeme **ekler**, **düzeltemez/iptal ede
 ## 2. Hekim (Veteriner) – gün akışı
 
 ### 2.1 Bugün: benim hastalarım
-- **Menü:** Panel → **Bugün**. Kapsam varsayılan olarak **Benim hastalarım** gelir (size atanmış gelişler); tümünü görmek için **Tümü**.
+- **Menü:** **Bugün**. Kapsam varsayılan olarak **Benim hastalarım** gelir (size atanmış gelişler); tümünü görmek için **Tümü**.
 - Satırdaki **Başlat** düğmesi bakımı başlatır (Bekliyor → Devam ediyor), **Tamamla** bakımı bitirir. **Acil işaretle / Acili kaldır** ikonu acil durumunu değiştirir.
 - Hekim, Bugün'de ücret/ödenen/kalan bilgisini **görür** ama **Ödeme al** menüsü yoktur (ödeme alma yetkisi yoktur).
 
 ### 2.2 Muayene açmak
-- Bugün satırında **Muayene aç** düğmesi (geliş kaydından muayene taslağı açar; hasta tekrar seçilmez). Alternatif: Klinik → **Muayeneler** → **Yeni** (hedef menü adı aynı) ya da randevu detayından.
+- Bugün satırında **Muayene aç** düğmesi (geliş kaydından muayene taslağı açar; hasta tekrar seçilmez). Alternatif: **Kayıtlar** → **Muayeneler** → **Yeni** ya da randevu detayından.
 - Muayene çalışma alanı bölümleri: **Anamnez**, **Değerlendirme / tanı**, **Plan / tedavi planı**, bulgular ve vitaller. Kaydedince ayrıntı sayfasına döner.
 - Sık hata: Başka biri aynı muayeneyi kaydettiyse çakışma uyarısı çıkar. **"Yazdıklarımı atıp güncel kaydı yükle"** yazdıklarınızı siler; önce metninizi kopyalayın.
 - Aynı gün iki sekmede aynı muayeneyi düzenlemeyin.
@@ -118,11 +118,11 @@ Muayene ayrıntı sayfasındaki düğmelerle (yetkinize göre): **Tedavi Oluştu
 - Bölüm görünmüyorsa "Ek not ekleme" yetkiniz yoktur (yönetici verir).
 
 ### 2.6 Aşı, tedavi, reçete
-- **Menü:** Klinik → **Aşılar**, **Tedaviler**, **Reçeteler** (şu anki menüde ayrı öğeler). Reçete **dış temindir**: yazmak stoktan **düşmez**. Stoktan düşen kayıt **Uygulama**'dır (Bölüm 8).
+- **Menü:** **Kayıtlar** → **Aşılar**, **Tedaviler**, **Reçeteler** sekmeleri. Reçete **dış temindir**: yazmak stoktan **düşmez**. Stoktan düşen kayıt **Uygulama**'dır (Bölüm 8).
 
 ### 2.7 Gün sonu
 - **Devam ediyor** bölümündeki gelişleri **Tamamla**.
-- Taslakta kalan muayeneleri kesinleştirin (Klinik → Muayeneler → durum filtresi).
+- Taslakta kalan muayeneleri kesinleştirin (Kayıtlar → Muayeneler → durum filtresi).
 
 ---
 
@@ -136,7 +136,7 @@ Yönetici, resepsiyon ve hekim işlerinin tümünü yapabilir; ek olarak **düze
 - Sayılara **Raporlar**'dan bakın (bölüm 9): kasa, ciro, tahsilat, borç, randevu ve klinik iş hacmi seçili şubeye göre, eğilim çizgisiyle görünür.
 
 ### 3.2 Müşteri ve hayvan kayıtları
-- **Menü:** Klinik → **Müşteriler**, **Hayvanlar**. Hayvan sayfası hasta özeti ve zaman çizelgesini (muayene, tedavi, reçete, lab, aşı, yatış, geliş) gösterir.
+- **Menü:** **Müşteri ve Hasta** → **Ara**, **Müşteriler**, **Hastalar**. Hayvan sayfası hasta özeti ve zaman çizelgesini (muayene, tedavi, reçete, lab, aşı, yatış, geliş) gösterir.
 
 ### 3.3 Ayarlar
 - **Menü:** **Ayarlar** (tek giriş; kartlar):
@@ -189,7 +189,7 @@ Kısayol: **Bugün** satırı → **⋯** → **Ödeme al**. Ya da: Para → **�
 ### 4.3 Bakiye nerede görülür
 - Bugün'de satır bazında ücret / ödenen / kalan ve müşterinin toplam borcu.
 - Müşteri bazlı bakiye müşteri ekranında (**doğrulanacak** – tam yeri). Müşteri listesinde "borcu olanlar" süzgeci **yoktur** (karar).
-- Ödeme yöntemi ve tarihe göre liste: Para → **Ödemeler** (arama, yöntem, tarih aralığı süzgeçleri).
+- Ödeme yöntemi ve tarihe göre liste: Para → **Ödemeler** (arama, yöntem, tarih aralığı filtreleri).
 
 ---
 
@@ -222,7 +222,7 @@ Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; y
 
 ## 6. Laboratuvar
 
-- **Menü:** Klinik → **Lab sonuçları** (hedef menü adı aynı). Muayeneden: **Lab İstemi Oluştur**.
+- **Menü:** **Kayıtlar** → **Lab sonuçları**. Muayeneden: **Lab İstemi Oluştur**.
 - **Yeni kayıt** ile: ya yalnız **istem** (sonuçsuz) ya da sonuçla birlikte kayıt girilir. Durumlar: **İstendi** → **Sonuçlandı**; ikisinden de **İptal**. İstek zamanı sunucuda atanır.
 - Sonuç gelince kaydı açıp **Düzenle** ile sonuç metnini ve tarihini girin; kayıt **Sonuçlandı** olur.
 - Hekim yorum yazmalıysa kayıt "değerlendirme bekliyor" işaretiyle görünür; yorum yazınca işaret kalkar. (Ekrandaki tam etiket **doğrulanacak**.)
@@ -235,7 +235,7 @@ Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; y
 
 ## 7. Yatış
 
-- **Menü:** Klinik → **Yatışlar**. Aktif yatışlar **Bugün** ekranının altında da listelenir; ilgili satırda **Yatışta** rozeti görünür.
+- **Menü:** **Kayıtlar** → **Yatışlar**. Aktif yatışlar **Bugün** ekranının altında da listelenir; ilgili satırda **Yatışta** rozeti görünür.
 - **Yeni yatış** (veya muayeneden **Yatış Başlat**). Düzenlemek için **Düzenle**.
 - Taburcu: yatış ayrıntısı → **Taburcu et** → **Taburcu işlemi** penceresi.
 - Yatış ücreti: ayrıntı sayfasında **Ödeme Oluştur** (ödeme akışına gider; ücretin ayrıca yazılması gerekebilir – **doğrulanacak**).
@@ -308,7 +308,7 @@ Gerçek iş eski yöntemle sürer; Vetinity'ye paralel girilir. Gerçek ödeme y
 
 Aşağıdaki maddeler koddan/belgelerden **kesin doğrulanamadı** veya uygulama tarayıcıda uçtan uca denenmedi; pilot öncesi test hesabıyla ekran ekran teyit edilmelidir:
 
-1. **Menü adları ve yapısı:** Aşama 8 sürüyor. Şu anki yerel menüde Randevu Takvimi, Stok Durumu, Stok hareketleri ve dört rapor ayrı öğe; hedef taslakta bunlar sekme/kart olacak. Rapor Merkezi sayfası ve Stok/Randevu sekmeleri henüz kodda yok.
+1. **Menü adları ve yapısı:** sekmeli menü ve Rapor Merkezi canlıda (2026-11-20); kılavuzdaki yollar koddan okundu, ekranda rol rol teyit edilmedi.
 2. **Rol-izin tablosu** (bölüm 0.1) backend varsayılanından; pilot kliniğin gerçek rolleri elle doğrulanmadı.
 3. **Muayene aç** düğmesinin görünme koşulları, randevudan açılışta randevunun otomatik "Tamamlandı" olması (kuyruk notuna göre backend davranışı; tarayıcıda denenmedi).
 4. **Kesinleşmiş muayenede** Tedavi/Reçete/Aşı düğmelerinin görünür kalması ve basınca alınan hata mesajının metni.
