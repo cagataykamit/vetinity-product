@@ -59,7 +59,9 @@ FE kodundan çıkarıldı (`features/dashboard`, `features/visits/pages/today-pa
 
 ## Uygulama notu (2026-11-20)
 
-Hiçbiri `main`'e alınmadı, push edilmedi; yayın kullanıcı onayıyla.
+**`main`'e alındı** (kullanıcı, PR'sız: "birleştir mainler", "Şimdi al"): backend `main` `799e1cc7`; panel `main` `b4679184` (Rapor Merkezi B ve Bugün) ve `ea668ab9` (Özet kaldırma). Birleşik hâlde backend Application 4522, Domain 1360, ilgili entegrasyon 292; panel tam takım 3654 test geçti, üretim derlemesi temiz. **Yayın yapılmadı.**
+
+K7 notu: Özet kaldırma da `main`'de olduğu için bir sonraki panel yayını ikisini birlikte götürür. Taşınan uyarılar (Bakmanız gerekenler, Bugün'deki gecikmiş randevu) aynı yayındadır, arada uyarı kaybolmaz. **Önce backend yayınlanmalı:** panel yeni `/reports/hub-summary` ve Bugün alanlarını kullanır; backend eskiyse Raporlar sayıları yüklenemez (bağlantılar yine çalışır).
 
 - **BE** (`feature/rapor-merkezi-ozet`): sözleşme `docs/REPORT_HUB_SUMMARY_API_CONTRACT.md` (`3a33518b`, `2ebf269a`); uç ve testler (`39883c31`, `e4bef940`); Bugün `openItems.overdueAppointmentCount` ve `TodayDto.cancelledAppointmentCount` (`f4df3960`, `b4caf212`, `25e81b39`). Bölüm başına izin, tek şube; her sayı aynı veriyi gösteren raporun kuralıyla. Migration ve yeni izin yok. Testler: Domain 1360, Application 4513, entegrasyon 2232 (+4 atlanan) geçti.
 - **Panel, 1. yayın** (`feature/rapor-merkezi-b`): B ana ekranı ve kurallar (`1bc754e0`, `bc2e0368`, düzeltme `4fffd95b`), Bugün çipi ve iptal sayacı (`715fc5e1`). Ekran yerel ortamda 1280 ve 375 px, açık ve koyu temada gerçek veriyle denendi.
