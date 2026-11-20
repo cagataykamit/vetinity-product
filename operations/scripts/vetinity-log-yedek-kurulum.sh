@@ -73,7 +73,7 @@ db_listesi=$(printf "N'%s'," "${VETINITY_DBLER[@]}")
 
 db_durumu() {
   sql_calistir "$SQL_SA_KULLANICI" "$SA_PAROLA" "
-SELECT d.name + '|' + d.recovery_model_desc + '|' +
+SELECT d.name COLLATE DATABASE_DEFAULT + '|' + d.recovery_model_desc COLLATE DATABASE_DEFAULT + '|' +
        CASE WHEN rs.last_log_backup_lsn IS NULL THEN '0' ELSE '1' END
 FROM sys.databases d
 JOIN sys.database_recovery_status rs ON rs.database_id = d.database_id
