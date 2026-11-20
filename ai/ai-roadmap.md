@@ -71,7 +71,7 @@ Klinik verimliliğini artıran iş akışı destek yetenekleri.
 
 | Alan | Açıklama | Not |
 |---|---|---|
-| Kontrollü ayırıcı tanı desteği | Olası tanılar listesi (hekim onaylı) | Kesin tanı değil; destek aracı |
+| Kontrollü ayırıcı tanı desteği | Olası tanılar listesi (hekim onaylı) | Kesin tanı değil; destek aracı. Yön seçildi (2026-11-16, [ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) karar 8): AI-105 genişletmesi, yüzdesiz ve kanıtlı taslak; kural tabanlı ekran yok |
 | Laboratuvar yorum desteği | Lab sonuçlarının bağlamsal yorumu | Yanlış yorum riski yüksek |
 | Görüntüleme AI desteği | Röntgen/görüntü analizi | Düzenleyici ve doğruluk gereksinimleri |
 | İlaç etkileşimi kontrolleri | İlaç-ilaç etkileşim uyarıları | Veri kaynağı güvenilirliği kritik |

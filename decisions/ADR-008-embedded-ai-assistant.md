@@ -4,6 +4,8 @@
 
 Kabul edildi. Kota, maliyet ve paket modeli (madde 11, 12): [ADR-044](ADR-044-ai-eklentisi-kredi-ve-fon.md).
 
+Ek (2026-11-16, kullanıcı kararı): AI, hekime **ayırıcı tanı taslağı** sunabilir ([ADR-049](ADR-049-ilac-rehberi-ve-klinik-basvuru.md) açık karar 8). Madde 3–5 değişmez: taslak hastanın kendi verisine dayanır, "teşhis", olasılık ve yüzde kullanmaz, hekim onaylamadan kayda yazılmaz, tedavi ve doz önermez. Pilotta doğruluk ölçülmeden satış ve tanıtım metnine girmez.
+
 ## Bağlam
 
 Veteriner SaaS pazarında AI yetenekleri giderek öne çıkmaktadır. AI'nin yanlış konumlandırılması (ayrı modül, otomatik klinik kararlar, frontend'den doğrudan çağrı) klinik güvenlik ve kullanıcı güveni riskleri taşır.
