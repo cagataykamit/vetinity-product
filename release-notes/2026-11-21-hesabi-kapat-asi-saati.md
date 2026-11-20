@@ -7,12 +7,12 @@
 
 | İş | Backend | Panel |
 |---|---|---|
-| CHECKOUT-001 Hesabı kapat | `feature/hesabi-kapat`: `b13cc6ec`, `f64b86c4`, `85d49188` | `feature/hesabi-kapat`: `ef4b971c`, `85b91d0b`, `f0cdf1f8`, `d8061439` |
+| CHECKOUT-001 Hesabı kapat | `feature/hesabi-kapat`: `b13cc6ec`, `f64b86c4`, `85d49188` | `feature/hesabi-kapat`: `ef4b971c`, `85b91d0b`, `f0cdf1f8`, `d8061439`, `5ffc27c1`, `d23f7662`, `106224b8` |
 | Aşı saati (form ve takvim) | `fix/asi-saat-belirtildi`: `762f43af`, `7a570508`, `96e423a6` | `fix/asi-saat-alani`: `388326d1`, `f1b7fafd` |
 | APPT-026 kayıtlı takvim filtreleri | `docs/kayitli-filtre-ekran-anahtari`: `98a19316` (yalnız sözleşme) | `feature/kayitli-takvim-filtreleri`: `c048a151`, `039a9aee`, `ef41b3b6`, `317d49b5` |
 
 Testler (dal başına, gerçek çıktı):
-- Hesabı kapat: backend Domain 1360, Application 4523, Integration 2236 (4 atlandı); panel 463 dosya, 3675 test; `ng build` başarılı.
+- Hesabı kapat: backend Domain 1360, Application 4523, Integration 2236 (4 atlandı); panel 463 dosya, 3676 test; `ng build` başarılı; ESLint temiz.
 - Aşı saati: backend Domain 1361, Application 4522, Integration 2235 (4 atlandı); panel 463 dosya, 3666 test; `ng build` başarılı.
 - APPT-026: panel 461 dosya, 3658 test; `ng build` başarılı.
 - Dallar birleştikten sonra testler birlikte yeniden koşulmalı (birlikte koşulmadı).
@@ -21,6 +21,7 @@ Testler (dal başına, gerçek çıktı):
 
 - Bugün satırında **Hesabı kapat**: tek yan panelde ücret bekleyen kalemler (çevir ya da gerekçeyle ücretsiz), açık ücretler (eski borçlar seçili gelmez), parçalı tahsilat (nakit, kart, havale; nakitte kasa), krediden ödeme, fazlası krediye, gelişi tamamlama (bekleyen geliş önce başlatılır), bilgi fişi ve kapanıştaki e-Belge önerisi (Bugün'deki **Tamamla** ile aynı bileşen ve kural).
 - Okuma tek uçtan: `GET /visits/{id}/checkout-summary` (BE `docs/VISIT_CHECKOUT_API_CONTRACT.md`). Yazma mevcut uçlarla adım adım. Hata olursa panel durur; tekrar deneme aynı istek kimliğiyle gider, ödeme satırı borçla kapatılabilir.
+- Kesinleşmiş, gelişe bağlı muayenenin eylem şeridinde de **Hesabı kapat** var.
 - Ön büro yetkisinde (tahsilat ya da ücrete çevirme) satırın ana düğmesi **Hesabı kapat** olur; **Tamamla** ve **Ödeme al**'ın yerini alır (**Ödeme al** ⋯ menüsünde). Muayene ve ücreti olmayan muayenedeki hastada **Tamamla** kalır.
 
 ## Aşı saati
@@ -35,5 +36,5 @@ Testler (dal başına, gerçek çıktı):
 
 ## Bilinen sınırlar
 
-- Hesabı kapat muayene kesinleştirme sonrasından açılmıyor; yalnız Bugün'den.
+- Hesabı kapat Bugün satırından ve kesinleşmiş, gelişe bağlı muayeneden açılır.
 - Ekranlar gerçek veriyle tarayıcıda denenmedi.
