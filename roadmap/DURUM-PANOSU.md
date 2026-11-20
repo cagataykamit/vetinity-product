@@ -1,7 +1,7 @@
 # Durum panosu
 
-> **Son güncelleme:** 2026-11-20 (durum panosu oturumu; koordinatör yayın bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
-> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `5a7e5b8e`, panel ve tanıtım `944ac06f` (`main-FRZC4FQ2.js`; 2026-11-20 06:30), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-yapay-zeka-ve-kvkk.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
+> **Son güncelleme:** 2026-11-20 (durum panosu oturumu; 2026-11-20 08:20 yayın bildirimi). Tek bakışta neredeyiz: P0–P3 işleri, yürüyenler, onay ve dış yanıt bekleyenler.
+> **Kaynak:** [backlog](../backlog/feature-backlog.md) + git. "Canlıda" = commit, canlı sürümün atası. Canlı (sunucuda okundu): backend `42d907f2`, panel ve tanıtım `87ccf7a4` (`main-NISKVANT.js`; 2026-11-20 08:20), portal `main-IUS6NQD7.js` (2026-11-17 21:03). [Sürüm notu](../release-notes/2026-11-20-takvim-calisma-saati-panel-guncelleme.md). Üç depoda main = origin = canlı (push edildi). Ekranlar canlıda denenmedi.
 > **Güncelleme kuralı:** iş bitince, canlıya çıkınca ya da karar verilince bu dosya ve backlog'daki Durum satırı aynı dalda, ayrı commit'le güncellenir.
 
 **Pilot klinik henüz canlıda değil** (kullanıcı, 2026-11-19). Kullanıcı E-vet aktarmasını canlıda kendisi denedi ve aktardı; pilot kliniğe henüz verilmedi. "Canlıda" etiketi kodun yayında olduğunu söyler, klinikte kullanıldığını değil.
@@ -63,9 +63,9 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Sözlükte benzer terim önerisi ve Kaynak filtresi; Windows sesle yazma (Win+H) ipucu | BE `0adbd22c`, panel `dffd1592` | Canlıda (2026-11-19 06:11) | Sürüm notunda |
 | Bugün akışı Karar 1 A ve Karar 2 A: bugünkü gelişsiz muayene açık gelişe bağlanır ya da yeni geliş açar; yatan hastanın gelişi taburcuya kadar açık sayılır ("Unutulmuş olabilir" dışında), taburcuda "Gelişi tamamla" önerisi | BE `a2c0ab2e`, panel `cd0ce138` (`feature/muayene-gelis-yatis`) | Canlıda (2026-11-20 01:43) | Denetim düzeltmeleriyle birlikte; migration yok. [Sürüm notu](../release-notes/2026-11-20-bugun-akisi-muayene-yatis.md). `/health/ready` 200 |
 | Yapay zekâ serisi (AI-001…010, AI-006) ve KVKK metinleri: Gizlilik 1.2, VİS 1.1 (yeniden kabul), Anthropic PBC ile ABD'ye yurt dışı aktarım | BE `5a7e5b8e`, panel `944ac06f` (`feature/ai-birlesik`), ürün `071a921` | Canlıda (2026-11-20 06:30) | 4 AI migration uygulandı ve `Ai.Use` izni seed edildi, yedek 06:25 (koordinatör bildirimi; DB'de ben okumadım). Kullanıcılar izin için çıkış-giriş yapar. Doğrulanmadı: gerçek AI isteği, `anthropic-version` başlığı, KVKK m.9 mekanizması. `/health/ready` 200 |
-| Randevuda çalışma saati kısıtı (klinik ayarı `EnforceWorkingHours`; kapalıyken panel randevusu çalışma saatine bağlanmaz) | BE `feature/calisma-saati-kisiti` (`91993f41`, +3) | Dalda, birleşmedi | 2026-11-20 tarandı; FE dalı görülmedi |
-| Takvim ve randevu listesi düzeltmeleri: ay görünümünde kapalı ve boş gün, aşı listesi kaydırma, saat alanı, listede Yaklaşan / Geçmiş / Tümü | FE `claude/takvim-saatsiz-liste-fa8f8d` (`f88a1bff`, +4) | Dalda, birleşmedi | 2026-11-20 tarandı |
-| Panelde yeni sürüm bildirimi ("Yeni sürüm hazır · Yenile"; yeni sürüm Ctrl+F5'siz yüklenir) | FE `claude/panel-surum-guncelleme-525ae1` (`a67cc1d7`, +2) | Dalda, birleşmedi | 2026-11-20 tarandı |
+| Randevuda çalışma saati kısıtı (klinik ayarı `EnforceWorkingHours`; kapalıyken panel randevusu çalışma saatine bağlanmaz) | BE `42d907f2` (`feature/calisma-saati-kisiti`), panel `87ccf7a4` | Canlıda (2026-11-20 08:20) | Migration `AddClinicEnforceWorkingHours` uygulandı, seed yok, yedek 08:16 (bildirim; DB'de ben okumadım). Ekran canlıda tarayıcıda denenmedi |
+| Takvim ve randevu listesi düzeltmeleri: ay görünümünde kapalı ve boş gün, aşı listesi kaydırma, saat alanı, listede Yaklaşan / Geçmiş / Tümü | panel `87ccf7a4` (`claude/takvim-saatsiz-liste-fa8f8d`) | Canlıda (2026-11-20 08:20) | Ekranlar canlıda tarayıcıda denenmedi |
+| Panelde yeni sürüm bildirimi ("Yeni sürüm hazır · Yenile"; yeni sürüm Ctrl+F5'siz yüklenir) | panel `87ccf7a4` (`claude/panel-surum-guncelleme-525ae1`), kılavuz §5.3 | Canlıda (2026-11-20 08:20) | `ngsw.json` no-cache ve hash doğrulandı (bildirim). Açık eski sekmenin kendiliğinden güncellenmesi uçtan uca denenmedi; bu sürümden önce açılmış sekmede bir kez Ctrl+F5 gerekebilir |
 | Raporlar ana ekranı tasarımı: üç tıklanır taslak (A dizin, B sorular, C önizleme) | FE `claude/raporlar-tasarim-7ebf18` (`c9ce3841`, +2) | Karar bekliyor (kullanıcı) | Taslak; seçim kullanıcıda (2026-11-20 tarandı) |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
@@ -75,7 +75,7 @@ Boşta, işi bitmiş oturumlar: Paraşüt e-belge oturumu (Paraşüt canlıda ka
 ## Kullanıcının onayını bekleyenler
 
 **Canlıya çıkış**
-Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11, 2026-11-20 01:43 ve 06:30 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
+Yapıldı: 2026-11-16 03:47, 15:28, 18:40, 2026-11-17 21:03, 22:50, 2026-11-19 06:11, 2026-11-20 01:43, 06:30 ve 08:20 yayınları (ayrıntı "Şu an yürüyenler"de ve sürüm notlarında). Bekleyen yayın yok.
 
 **Ürün kararı**
 1. ~~RECORD-006 / ADR-043~~ Karar verildi (2026-11-14, Fable önerileri kabul). ADR dalı `docs/adr043-fable-degerlendirme` main'e alınmadı; kodlama "Şu an yürüyenler"de.
