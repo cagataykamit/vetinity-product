@@ -1,6 +1,6 @@
 # Müşteri Aydınlatma Metni (klinik şablonu)
 
-Sürüm: 1.1 · Tarih: 2026-11-16
+Sürüm: 1.2 · Tarih: 2026-11-20
 Bu metin backend `ClinicKvkkFormTemplateDefaults.TextFor(Disclosure, clinic)` varsayılanıdır; klinik Ayarlar > KVKK metinlerinden değiştirebilir.
 Yer tutucular: `{{clinicName}}`, `{{clientName}}`, `{{date}}`. Klinik bilgileri (adres, telefon, e-posta) sunucuda klinik kaydından yazılır; boş olan bilgi cümleden düşer ve Ayarlar'da "eksik bilgi" uyarısı çıkar (`missingClinicDetails`). Metinde köşeli parantezli alan yoktur.
 
@@ -30,7 +30,7 @@ Kanun'un 5/2 maddesindeki şu sebeplere dayanılır: (c) hizmet sözleşmesinin 
 Verileriniz sizden sözlü, yazılı veya elektronik ortamda (kayıt formu, telefon, e-posta, yüz yüze görüşme) ve hizmetin yürütülmesi sırasında oluşan kayıtlardan elde edilir.
 
 **6. Kişisel verilerin aktarılması**
-Verileriniz, hizmetin gereği ve mevzuatın izin verdiği ölçüde şu alıcı gruplarına aktarılabilir: mevzuatın zorunlu kıldığı hallerde yetkili kamu kurum ve kuruluşları (örneğin Tarım ve Orman Bakanlığı ve bağlı birimleri, vergi ve adli makamlar); kliniğin yetkili çalışanları; hizmet aldığımız yazılım, barındırma, ödeme, e-belge (özel entegratör) ve bildirim (SMS/e-posta) sağlayıcıları (veri işleyen olarak, yalnız bizim talimatımızla); laboratuvarlar ve sevk edilen sağlık kuruluşları; hukuk, mali müşavirlik ve denetim danışmanlarımız.
+Verileriniz, hizmetin gereği ve mevzuatın izin verdiği ölçüde şu alıcı gruplarına aktarılabilir: mevzuatın zorunlu kıldığı hallerde yetkili kamu kurum ve kuruluşları (örneğin Tarım ve Orman Bakanlığı ve bağlı birimleri, vergi ve adli makamlar); kliniğin yetkili çalışanları; hizmet aldığımız yazılım, barındırma, ödeme, e-belge (özel entegratör) ve bildirim (SMS/e-posta) sağlayıcıları (veri işleyen olarak, yalnız bizim talimatımızla); laboratuvarlar ve sevk edilen sağlık kuruluşları; hukuk, mali müşavirlik ve denetim danışmanlarımız. Kliniğimiz yapay zekâ destekli özellikleri (örneğin hasta geçmişi özeti veya not taslağı) kullandığında, hayvanınıza ilişkin klinik kayıtlar yazılım sağlayıcımızın alt işleyeni olan yapay zekâ sağlayıcısına (Anthropic PBC, Amerika Birleşik Devletleri) yurt dışına aktarılır; göndermeden önce adınız, iletişim bilgileriniz, kimlik numaranız ve hayvanınızın adı metinden çıkarılır.
 
 **7. Saklama süresi**
 Verileriniz, işleme amacının gerektirdiği ve ilgili mevzuatta öngörülen süre boyunca saklanır; süre sonunda silinir, yok edilir veya anonim hale getirilir.
@@ -52,6 +52,10 @@ Bilgilendirilen: {{clientName}}
 
 - Madde 1: boş olan "Adres / Telefon / E-posta" parçası düşer; üçü de boşsa parantez de düşer ("Veri sorumlusu {{clinicName}}'dır.").
 - Madde 9: adres ve e-posta varsa yukarıdaki cümle; yalnız adres varsa "… ‹klinik adresi› adresine elden veya noter aracılığıyla iletebilirsiniz"; yalnız e-posta varsa "… yazılı olarak veri sorumlusuna ya da ‹klinik e-postası› adresine e-postayla …"; ikisi de yoksa "… yazılı olarak veri sorumlusuna iletebilirsiniz".
+
+## v1.2 (2026-11-20, yapay zekâ)
+
+- Madde 6'ya yapay zekâ sağlayıcısına (Anthropic PBC, ABD) yurt dışı aktarım cümlesi eklendi. Cümle koşulludur ("kullandığında"); yapay zekâ her klinikte kapalı başlar. Kendi metnini kaydetmiş klinikler etkilenmez; yapay zekâ açılan klinik kendi metnine bu cümleyi ekler.
 
 ## v1.0'a göre değişenler (2026-11-16, kullanıcı dostu denetim H8)
 
