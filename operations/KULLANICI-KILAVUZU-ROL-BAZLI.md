@@ -250,7 +250,7 @@ Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; y
 - Yatış ücreti: ayrıntı sayfasında **Ödeme Oluştur** (ödeme akışına gider; ücretin ayrıca yazılması gerekebilir – **doğrulanacak**).
 - Yatışı yalnız hekim ve yönetici oluşturur/taburcu eder; resepsiyon okur.
 
-### 7.1 Vital ölçümü (ateş, nabız, solunum, kilo) — **yayın bekliyor (HOSP-004)**
+### 7.1 Vital ölçümü (ateş, nabız, solunum, kilo)
 
 Aynı **Vital ölçümleri** bölümü üç yerde durur:
 - **Yatış ayrıntısı:** Taburcu et düğmelerinin altında. Ölçümler bu yatışa bağlanır. Grafikler yatıştan bugüne kadar olan süreyi gösterir.

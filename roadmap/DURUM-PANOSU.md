@@ -14,7 +14,7 @@ Durum etiketleri: Canlıda · Canlıda (kısmen) · Main'de, canlıya çıkmadı
 |---|---|---|---|---|---|
 | P0 | 27 | 27 | 0 | 0 | 0 |
 | P1 | 105 | 102 | 1 | 1 (MOBILE-002 geliştiriliyor) | 1 |
-| P2 | 62 | 27 | 6 | 24 (14 planlı, 10 araştırılacak) | 5 |
+| P2 | 62 | 28 | 5 | 24 (14 planlı, 10 araştırılacak) | 5 |
 | P3 | 11 | 0 | 0 | 10 (3 planlı, 7 araştırılacak) | 1 |
 
 Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları, tasarım taslakları) aşağıda "Şu an yürüyenler"de.
@@ -67,7 +67,7 @@ Backlog dışında yürüyen işler (E-vet aktarma düzeltmeleri, menü yolları
 | Takvim ve randevu listesi düzeltmeleri: ay görünümünde kapalı ve boş gün, aşı listesi kaydırma, saat alanı, listede Yaklaşan / Geçmiş / Tümü | panel `87ccf7a4` (`claude/takvim-saatsiz-liste-fa8f8d`) | Canlıda (2026-11-20 08:20) | Ekranlar canlıda tarayıcıda denenmedi |
 | Panelde yeni sürüm bildirimi ("Yeni sürüm hazır · Yenile"; yeni sürüm Ctrl+F5'siz yüklenir) | panel `87ccf7a4` (`claude/panel-surum-guncelleme-525ae1`), kılavuz §5.3 | Canlıda (2026-11-20 08:20) | `ngsw.json` no-cache ve hash doğrulandı (bildirim). Açık eski sekmenin kendiliğinden güncellenmesi uçtan uca denenmedi; bu sürümden önce açılmış sekmede bir kez Ctrl+F5 gerekebilir |
 | Rapor Merkezi B (sorularla ana ekran, Bugün sayıları) ve Özet sayfasının kaldırılması ([ADR-052](../decisions/ADR-052-ozet-kaldirilir-rapor-merkezi-sorular.md)) | BE `799e1cc7`, panel `ea668ab9` | Canlıda (2026-11-20 11:09) | Migration yok; `/panel/dashboard` Raporlar'a yönlenir; Özet'teki uyarılar Rapor Merkezi'ne taşındı ([sürüm notu](../release-notes/2026-11-20-rapor-merkezi-b-ozet-kaldirma.md)). Taslak dalı `claude/raporlar-tasarim-7ebf18` birleşmedi (taslaktı). Ekranlar canlıda tarayıcıda denenmedi |
-| Vital ölçümü ve yatış izlemi ([HOSP-004](../backlog/feature-backlog.md#hosp-004--vital-ölçümü-ve-yatış-izlemi)): yatış detayı, muayene ve hasta kartında eğilim bölümü (tasarım B) | BE `e667628d`, panel `dd8ad7e2` (`feature/vital-olcumu-ekrani`) | Canlıda (kısmen) | Backend canlıda (2026-11-21 13:31, migration `AddVitalMeasurements` ve izin seed'i). Ekran main'de, panel yayını bekliyor. [Sürüm notu](../release-notes/2026-11-21-vital-olcumu-ekrani.md) |
+| Vital ölçümü ve yatış izlemi ([HOSP-004](../backlog/feature-backlog.md#hosp-004--vital-ölçümü-ve-yatış-izlemi)): yatış detayı, muayene ve hasta kartında eğilim bölümü (tasarım B) | BE `e667628d`, panel `dd8ad7e2` (`feature/vital-olcumu-ekrani`) | Canlıda (2026-11-21 14:55) | Backend 13:31 (migration `AddVitalMeasurements` ve izin seed'i), ekran 14:55. [Sürüm notu](../release-notes/2026-11-21-panel-vital-asi-saati.md). Sekreter, salt okunur hesap ve koyu tema tarayıcıda denenmedi |
 
 Taslak dallar (main'e alınmaz, bilgi için): FE `taslak/hesabi-kapat` (CHECKOUT-001 tasarımı, onaylı), `taslak/klinik-web-sayfasi` (kliniğe özel web sayfası sihirbazı), `taslak/ozellik-tablosu`, `taslak/talep-baslik`.
 
@@ -274,7 +274,7 @@ Geliştiriliyor: 1 · Canlıda (kısmen): 1 · Canlıda: 102 · Ertelendi: 1
 
 ## P2 (62 madde)
 
-Planlandı: 14 · Araştırılacak: 10 · Canlıda (kısmen): 6 · Canlıda: 27 · Ertelendi: 5
+Planlandı: 14 · Araştırılacak: 10 · Canlıda (kısmen): 5 · Canlıda: 28 · Ertelendi: 5
 
 | Kimlik | Başlık | Durum | Not |
 |---|---|---|---|
@@ -285,7 +285,7 @@ Planlandı: 14 · Araştırılacak: 10 · Canlıda (kısmen): 6 · Canlıda: 27 
 | [APPT-025](../backlog/feature-backlog.md#appt-025--kaynak-bazlı-takvim) | Kaynak bazlı takvim | Planlandı |  |
 | [APPT-026](../backlog/feature-backlog.md#appt-026--kayıtlı-filtreler-ve-talep-görünüm-tercihleri) | Kayıtlı filtreler ve talep görünüm tercihleri | Planlandı |  |
 | [INT-003](../backlog/feature-backlog.md#int-003--sms-entegrasyonu) | SMS entegrasyonu | Planlandı | Deneme dalında ertelendi olarak işaretleniyor (SMS deneme kaydından çıkarıldı) |
-| [HOSP-004](../backlog/feature-backlog.md#hosp-004--vital-ölçümü-ve-yatış-izlemi) | Vital ölçümü ve yatış izlemi | Canlıda (kısmen) | Backend canlıda (2026-11-21, `e667628d`); ekran panel main `dd8ad7e2`, canlıya çıkmadı |
+| [HOSP-004](../backlog/feature-backlog.md#hosp-004--vital-ölçümü-ve-yatış-izlemi) | Vital ölçümü ve yatış izlemi | Canlıda | Backend `e667628d` (2026-11-21 13:31), ekran panel `dd8ad7e2` (14:55) |
 | [INT-004](../backlog/feature-backlog.md#int-004--whatsapp-entegrasyonu) | WhatsApp entegrasyonu | Planlandı |  |
 | [INT-006](../backlog/feature-backlog.md#int-006--pos-ve-online-ödeme) | POS ve online ödeme | Planlandı |  |
 | [WEB-008](../backlog/feature-backlog.md#web-008--tanıtım-sitesinin-ayrı-derlemesi-ve-çerezsiz-ziyaret-sayacı) | Tanıtım sitesinin ayrı derlemesi ve çerezsiz ziyaret sayacı | Planlandı |  |
