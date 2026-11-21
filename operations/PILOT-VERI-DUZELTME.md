@@ -1,6 +1,10 @@
 # Pilot kliniğin aktarılmış verisi: tek seferlik düzeltmeler
 
 Tarih: 2026-11-20 (uygulama 2026-11-21 sabahı planlandı). Canlı veriye yazar: **her uygulama adımı kullanıcı onayıyla**.
+
+> **Durum (2026-11-21):** B canlıda uygulandı: pilot klinikte 5 745 aşı (değer dosyası 2026-11-18 yedeğinden), yedek 14:50.
+> Ayrıntı: `release-notes/2026-11-21-panel-vital-asi-saati.md`. **A uygulanmadı ve uygulanmayacak** (kullanıcı kararı:
+> toplu veri düzeltmesi yerine kodda "1 ay kuralı").
 Dosyalar: `operations/scripts/veri-duzeltme/`.
 
 | Dosya | Ne yapar |
@@ -109,7 +113,9 @@ Sıra **önce B, sonra A**: A'nın önceki görüntüsü saatli vadeyi tutsun, A
 2. **Yedek:** `/opt/vetinity/yedek.sh`; `tail -5 /var/log/vetinity-yedek.log` içinde `INFO: bitti` görülmeden devam edilmez.
 3. Oturum: `sa` parolası komut satırına yazılmaz, `SQLCMDPASSWORD` ortam değişkeniyle verilir (`/root/.vetinity-sa`'dan;
    örn. `read -rs SQLCMDPASSWORD && export SQLCMDPASSWORD`). Kısayol:
-   `sq() { /opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1,1433 -U sa -C -d VetinityCommandDb -f 65001 -b -W -s '|' "$@"; }`
+   `sq() { /opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1,1433 -U sa -C -I -d VetinityCommandDb -f 65001 -b -W -s '|' "$@"; }`
+   `-I` zorunlu: sqlcmd `QUOTED_IDENTIFIER`'ı kapalı açar; `Vaccinations`'taki filtreli dizin yüzünden UPDATE "Msg 1934" ile
+   düşer (2026-11-21'de B'nin ilk denemesi böyle düştü, `XACT_ABORT` ile hiçbir şey yazılmadı).
 4. **B kuru:** `sq -i 02-asi-saati-geri-getir.sql -v UYGULA=HAYIR KLINIK_ID=HEPSI DEGER_DOSYASI=/root/veri-duzeltme/02-asi-saati-degerleri.sql -o b-kuru.txt`
    Bak: pilot kliniğin kimliği (kırılım tablosu), "güncellenecek" sayısı, "kaynak satırın günü farklı" / "vade günü farklı" az mı.
    Eşleşme beklenenden çok düşükse dur ve sor.
