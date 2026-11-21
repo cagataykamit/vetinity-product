@@ -18,7 +18,7 @@ Rol adları uygulamada **Sekreter** (resepsiyon), **Veteriner** (hekim) ve yöne
 | Randevu | Ekler, iptal eder, gelmedi işaretler, erteler | Ekler, erteler, tamamlar | Evet |
 | Geliş kaydı (Bugün) | Ekler, günceller | Ekler, günceller | Evet + **düzeltir** |
 | Muayene | Yalnız **okur** | Açar, düzenler, **kesinleştirir**, ek not ekler | Evet |
-| Aşı, tedavi, reçete, lab, yatış | Yalnız okur | Ekler/günceller (yatışta taburcu) | Evet |
+| Aşı, tedavi, reçete, lab, yatış, vital ölçümü | Yalnız okur | Ekler/günceller (yatışta taburcu; vital ölçümünü düzeltir/iptal eder) | Evet |
 | Uygulama (stoktan düşen) | Okur | Ekler, **düzeltir/iptal eder** | Evet |
 | Ücret | Ekler | Yalnız okur | Ekler, **düzeltir/iptal eder** |
 | Ödeme | Ekler, düzenler | Yalnız okur | Ekler, düzenler, **iptal eder** |
@@ -250,6 +250,29 @@ Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; y
 - Yatış ücreti: ayrıntı sayfasında **Ödeme Oluştur** (ödeme akışına gider; ücretin ayrıca yazılması gerekebilir – **doğrulanacak**).
 - Yatışı yalnız hekim ve yönetici oluşturur/taburcu eder; resepsiyon okur.
 
+### 7.1 Vital ölçümü (ateş, nabız, solunum, kilo) — **yayın bekliyor (HOSP-004)**
+
+Aynı **Vital ölçümleri** bölümü üç yerde durur:
+- **Yatış ayrıntısı:** Taburcu et düğmelerinin altında. Ölçümler bu yatışa bağlanır. Grafikler yatıştan bugüne kadar olan süreyi gösterir.
+- **Muayene ayrıntısı:** muayene kaydının altında. Muayenenin ilk ölçümü eskisi gibi muayene formundaki vital alanlarında kalır. Aynı muayenede yeniden ölçtüğünüzde buradan ekleyin.
+- **Hasta kartı:** başlığı **Vital ve kilo eğilimi**. Buradan eklenen ölçüm yatışa ya da muayeneye bağlı değildir. Üstten **Son 7 gün / 1 yıl / Tümü** seçilir.
+
+Bölümün işleyişi:
+1. **Hızlı giriş:** ölçtüğünüz değerleri yazın; boş bıraktığınız alan kaydedilmez, en az bir değer yeter. Ondalıkta virgül de nokta da olur (38,6). **Ölçüm zamanı** boş kalırsa şimdi sayılır. **Enter** kaydeder. Kutuların altında son değer ve zamanı görünür.
+2. **Grafikler:** ateş, nabız, solunum ve kilo yan yana dört grafikte, aynı zaman ekseninde. Başlıkta son değer ve bir önceki ölçüme göre fark yazar. Dolu nokta vital ölçümü, içi boş nokta muayeneden gelen değerdir.
+3. Bir noktaya tıklayın: o saatin bütün değerleri, not ve bağlı olduğu kayıt açılır. Buradan **Düzenle**, **İptal et** ve **Değişiklikleri gör**. Muayeneden gelen değer burada düzenlenmez, **Muayeneyi aç** ile muayenede düzeltilir.
+4. **Tablo olarak göster:** bütün ölçümler liste hâlinde. **İptal edilenleri göster** ile iptal edilmiş ölçümler üstü çizili görünür.
+
+Kurallar:
+- Değer sınırları: ateş 25–45 °C, nabız 1–400, solunum 1–200, kilo 0,01–9.999,99 kg. Nabız ve solunum tam sayıdır.
+- Ölçüm zamanı ileri olamaz, en çok **7 gün** geriye girilir. Yatışta zaman yatıştan önce olamaz.
+- **Silme yoktur.** Yanlış girilen ölçüm **İptal et** ile gerekçe yazılarak (en az 5 karakter) iptal edilir; geri alınamaz.
+- **Kesinleşmiş muayene:** yeni ölçüm **Sonradan ekleme gerekçesi** ister. Bu muayeneye bağlı ölçüm düzenlenemez; düzeltmek için iptal edip yeniden girin.
+- Taburcu edilmiş ya da iptal edilmiş yatışta yeni ölçüm girilmez; mevcut ölçümler düzeltilebilir. Hasta kartında, vefat olarak işaretlenmiş hastaya yeni ölçüm girilmez.
+- Resepsiyon ölçümleri görür, ekleyemez ve düzenleyemez.
+- Ölçümler hasta zaman çizelgesinde **Vital ölçümü** olarak görünür.
+- Sık hata: iki kişi aynı ölçümü düzenlerse çakışma uyarısı çıkar → **Yazdıklarımı atıp güncel kaydı yükle**, sonra yeniden düzenleyin.
+
 ---
 
 ## 8. Stok ve uygulama
@@ -333,6 +356,7 @@ Aşağıdaki maddeler koddan/belgelerden **kesin doğrulanamadı** veya uygulama
 14. **Hasta özeti/timeline** ekranı adım adım anlatılmadı (okunmadı).
 15. **Tarih/saat dilimi** (İstanbul günü sınırı) ve Bugün'ün 500 satır sınırı yalnız birim testle kapsandı.
 16. **E-posta/hatırlatma**: gerçek gönderim doğrulanmadı; ekran var, teslim garantisi yok.
+17. **Vital ölçümü** (bölüm 7.1): yerelde hekim hesabıyla ekleme, düzenleme, iptal, yatış öncesi zaman reddi denendi. Resepsiyon hesabı, salt okunur kiracı, koyu tema ve iki kişinin aynı anda düzenlemesi tarayıcıda denenmedi.
 
 ## 14. Kullanıcı kararı gerektirenler
 
