@@ -790,7 +790,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Yatış izlemi; klinik eğilimin görünürlüğü |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta (tahmin; ölçülmedi) |
-| **Durum** | Canlıda (kısmen). Backend canlıda (2026-11-21 13:31, `e667628d`; sözleşme `docs/VITAL_SIGNS_API_CONTRACT.md`). Ekran tasarım B · Eğilim ile yazıldı (kullanıcı seçimi 2026-11-20; taslaklar FE `taslak/vital-olcumu`), panel `main` `dd8ad7e2`; canlıya çıkmadı. Yatış detayı, muayene ve hasta kartında hızlı giriş, dört eğilim grafiği, düzenleme, gerekçeli iptal |
+| **Durum** | Canlıda (2026-11-21). Backend 13:31 (`e667628d`; sözleşme `docs/VITAL_SIGNS_API_CONTRACT.md`), ekran 14:55 (panel `dd8ad7e2`; [sürüm notu](../release-notes/2026-11-21-panel-vital-asi-saati.md)). Ekran tasarım B · Eğilim (kullanıcı seçimi 2026-11-20; taslaklar FE `taslak/vital-olcumu`). Yatış detayı, muayene ve hasta kartında hızlı giriş, dört eğilim grafiği, düzenleme, gerekçeli iptal |
 | **Bağımlılıklar** | HOSP-001, [RECORD-006](#record-006--birleşik-record-modeli-ve-tip-bazlı-dinamik-form) |
 | **Notlar** | DaySmart History "Vitals" filtresi → [daysmart.md](../competitors/daysmart.md#records). Prosedür ayrı tür olarak açılmadı (ADR-043 AK-9); hizmet bağı gerekirse tedavi kaydına eklenir |
 
