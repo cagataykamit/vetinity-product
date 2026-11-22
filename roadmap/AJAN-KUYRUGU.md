@@ -137,3 +137,27 @@ Analiz ve karar: `research/tanitim-sitesi-analizi-2026-10.md`, `ux/tanitim-sites
 - Tasarım onaylı (2026-11-09; FE taslak dalı `taslak/hesabi-kapat`, `07e25890`). Araştırma: `research/p2-arastirma-2026-11-09.md`. Yaklaşık 5 dilim; önce backend sözleşmesi.
 - Kapanış panelinde ziyaret kapanışındaki e-Belge önerisi aynen çıkmalı (o öneri 2026-11-11'den beri canlıda, FE `dc97e7d2`; belge kesme izniyle açılır).
 - Pano ve backlog: `docs/durum-panosu-4` `3bc7cd2` (push yok).
+
+## Sırada: engelsiz P2 işleri (2026-11-22, kullanıcı kararı)
+
+Kullanıcı: "Sirayla yapalim bunlari". Liste pano oturumundan geldi; pilota yarar ve dış engel yok. İşler bu sırayla, birer birer yapılır; her iş önce backend sözleşmesiyle başlar.
+
+1. **REF-001:** Önce lab değeri işareti (Dilim 3): yapılandırılmış satır, düşük/normal/yüksek işareti, önceki sonuçla karşılaştırma. Ardından ilaç rehberinin model ve ekranı (Dilim 1–2). Toplu ilaç listesi Bakanlık iznini bekler ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md)). **Geliştiriliyor** (2026-11-22).
+2. **APPT-024:** Randevu talebi geçmişi ve denetim izi (küçük).
+3. **APPT-025:** Kaynak bazlı takvim (oda ve cihaz; orta).
+4. **WEB-008:** Tanıtım sitesinin ayrı derlemesi ve çerezsiz ziyaret sayacı.
+5. **MSG-001…006:** Mesajlaşma. Önce araştırma ve tasarım (büyük).
+6. **PORTAL-005:** Dijital onam. "Okudum, onaylıyorum" biçimi mi, e-imza mı? Ürün kararı; başlamadan kullanıcıya sorulur.
+
+**Engelli, kapsam dışı:**
+- SMS ve WhatsApp (ücretli hesap).
+- INT-006 POS (iyzico canlı anahtarı).
+- TIER-011 (mağaza hesabı).
+- TIER-012 İYS (unvan ve vergi no).
+- TIER-013 kredi satışı.
+- UX-009 (menü kararı).
+- IMG-005, IMG-006, INT-001 (cihaz gerekir).
+
+Ertelenen FIN-006, FIN-007, FIN-009, RECORD-007 ve UX-007 açılmadı.
+
+**Aynı gün yayına hazırlanan:** Yerel tam testin düzeltmeleri. Backend ve panel dalı `fix/tam-test-duzeltmeler`, P3 dalı onun içine birleştirildi. Kılavuz dalı `docs/kilavuz-guncel`. Yayın kullanıcı onayı bekliyor.
