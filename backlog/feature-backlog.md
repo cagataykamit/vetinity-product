@@ -2510,7 +2510,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Gerçekçi planlama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı |
+| **Durum** | Planlandı — [ADR-053](../decisions/ADR-053-kaynak-bazli-takvim.md) **önerildi** (2026-11-22); 1. dilim `feature/appt-025-kaynak-takvim` dallarında, onay bekliyor |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar). **E-Vet SMART:** Yeni Randevu — Bölüm + Veteriner seçimi; slot ızgarası — → [e-vet.md](../competitors/e-vet.md#randevular). Global **Randevular** Ay/Hafta/Gün + Bölüm/Veteriner filtre — → [e-vet.md](../competitors/e-vet.md#randevular--global-calendar) |
 
