@@ -1,6 +1,6 @@
 # Vetinity kullanıcı kılavuzu (rol bazlı)
 
-**Durum:** Sürüm 0.2 (2026-11-20; ilk sürüm 2026-10-13). Pilot klinik eğitimi için.
+**Durum:** Sürüm 0.3 (2026-11-22; önceki 0.2 2026-11-20, ilk sürüm 2026-10-13). Pilot klinik eğitimi için. 0.3'te yerel tam testteki (2026-11-22) ekranlara göre Bugün, Hesabı kapat, fazla tahsilat, Ayarlar ve salt okunur mod güncellendi.
 
 > **Menü (canlıdaki panel, 2026-11-20):** **Bugün** · **Randevular** (Liste, Takvim, Talepler, Bekleme listesi) · **Müşteri ve Hasta** (Ara, Müşteriler, Hastalar, Portal gelen kutusu) · **Kayıtlar** (Muayeneler, Tedaviler, Reçeteler, Aşılar, Lab sonuçları, Görüntüleme, Yatışlar, Uygulamalar) · **Para** (Ücretler, Ücret bekleyenler, Ödemeler, Satışlar, e-Belgeler) · **Stok** (Ürünler, Stok durumu, Stok hareketleri, Mal kabul) · **Raporlar** · **Ayarlar**. Sekmeler yetkinize göre görünür. Menü adları kodu okuyarak yazıldı (`panel-navigation.ts`).
 
@@ -29,17 +29,19 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 
 ### 0.2 Giriş ve ilk ekran
 
-- Giriş sonrası ilk sayfa izninize göre değişir: geliş okuma izni varsa **Bugün** (yönetici dahil herkes); yoksa ve bir rapora izniniz varsa **Raporlar**; o da yoksa menüdeki ilk sayfa. (ADR-030 eki, ADR-052.) **Özet** sayfası kaldırıldı; eski `/panel/dashboard` adresi **Raporlar**'ı açar.
+- Giriş sonrası ilk sayfa **Bugün**'dür (geliş okuma izni olan herkes, yönetici dahil); bu izin yoksa ve bir rapora izniniz varsa **Raporlar**; o da yoksa menüdeki ilk sayfa. (ADR-030 eki, ADR-052.) **Özet** sayfası kaldırıldı; eski `/panel/dashboard` adresi **Raporlar**'ı açar.
+- İlk 14 gün Bugün'ün üstünde rolünüze göre kısa adımlı **İlk hafta** rehberi görünür; kullanıcı menüsünden yeniden açılır.
 - Çıkış üst çubuktaki **kullanıcı menüsünden** yapılır.
 - Üstte **klinik seçici** vardır; çok klinikli hesapta doğru kliniği seçili tutun.
-- Abonelik süresi bitmişse yazma düğmeleri "(salt okunur)" olur: kayıt eklenemez/değiştirilemez, görüntülenir. Yönetici **Ayarlar → Abonelik** sayfasına bakar.
+- Abonelik süresi bitmişse kiracı **salt okunur** olur: üstte salt okunur bandı çıkar, kayıtlar görüntülenir ama eklenemez/değiştirilemez. Yazma düğmeleri pasiftir; sayfa düzeyindeki düğmelerin yanında "Salt okunur modda kapalı" yazar. Yönetici **Ayarlar → Abonelik** sayfasından devam eder.
 
 ### 0.3 Kısa sözlük
 
 - **Geliş (ziyaret):** hastanın klinikte bugünkü kaydı. Randevulu veya randevusuz olabilir.
-- **Bakım durumu:** Bekliyor → Devam ediyor → Tamamlandı. **Ödeme durumundan bağımsızdır.**
+- **Bakım durumu:** **Sırada** (geldi, bekliyor) → **Muayenede** → **Tamamlandı**. Gelişi olmayan randevu **Bekleniyor**, gelmeyen **Gelmedi** görünür. **Ödeme durumundan bağımsızdır.**
 - **Muayene:** Taslak → **Kesinleştirildi**. Kesinleşen muayene değiştirilmez; sonradan yalnız **ek not** eklenir.
-- **Ücret:** müşteriye yazılan borç satırı (ödeme sayılmaz). **Ödeme:** tahsilat; mutlaka bir/bir kaç ücrete **bağlanır**.
+- **Ücret:** müşteriye yazılan borç satırı (ödeme sayılmaz). **Ödeme:** tahsilat; ücretlere **bağlanır**, ücretlerden fazla kısım **müşteri kredisine** yazılır.
+- **Müşteri kredisi:** müşterinin fazla ödemesi ya da avansı; sonraki ücretlerde **Krediden** kullanılır.
 - Para birimi yalnız **TRY**.
 
 ---
@@ -47,16 +49,20 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 ## 1. Resepsiyon (Sekreter) – gün akışı
 
 ### 1.1 Sabah: Bugün ekranını aç
-- **Menü:** **Bugün** (menünün en üstü).
-- Ekranda bölümler: **Bekliyor**, **Devam ediyor**, **Planlı randevular**, **Tamamlandı**, **Gelmedi**; en altta **Aktif yatışlar**. Görünüm anahtarı: **Bugün / Yanlış işaretlenenler**; kapsam anahtarı: **Benim hastalarım / Tümü**. Resepsiyon sorumlu hekim olmadığı için **Tümü** ile çalışır.
-- Süre sütunu **Bekliyor** satırlarında bekleme süresini gösterir (30 dk üstü uyarı, 60 dk üstü kritik renk).
+- **Menü:** **Bugün** (menünün en üstü; girişte açılan sayfa).
+- **Başlıktaki düğmeler** (yetkinize göre): **Yenile**, **Randevusuz geliş**, **Yeni randevu**, **Yeni muayene**, **Hızlı satış**. Başlıkta günün durum sayıları yazar.
+- **Üst kutular:** bekleyen **online randevu talepleri** (kutucuk ya da Açık işler satırında çip; talep Bugün'den ayrılmadan açılır ve onaylanır), **bekleme listesi** özeti (iptal edilen saate uyan kişi varsa).
+- **Liste** seçimi: **Günlük liste / Yanlış işaretlenenler**. **Hastalar** seçimi (yalnız hekim kaydı olan kullanıcıda): **Benim hastalarım / Tümü**. Resepsiyon **Tümü** ile çalışır. Aynı satırda sağda **Açık işler** (önceki günlerden kalan işler).
+- **Günlük liste** tek tablodur; ara başlıklar: **Klinikte** (Sırada ve Muayenede olanlar), **Sıradaki randevular** (Bekleniyor), **Tamamlandı** (katlıdır; ödemesi ya da işi kalan satır açık kalır, "… tamamlanan kayıt daha göster" ile hepsi açılır), **Gelmedi**. Ayrı bölümde **Aktif yatışlar**.
+- Her satırda sağda **tek ana düğme**, yanında **⋯** (diğer işlemler): randevuda **Geldi**; sıradaki hastada **Muayeneye al** (bakımı başlatır ve muayeneyi açar); muayenedeki hastada **Muayene aç** ve **Hesabı kapat** (ödeme/ücret yetkisi olmayanda **Tamamla**); tamamlanmış ama kalanı olan gelişte **Hesabı kapat**, hiç ücreti yoksa **Ücret ekle**.
+- Klinikteki satırda gelişten bu yana süre yazar; **Sırada** bekleyende 30 dk üstü uyarı, 60 dk üstü kritik renk. 12 saatten uzun açık gelişte "Unutulmuş olabilir" notu çıkar.
 - Sık hata: Liste boş görünüyor → kapsamın "Benim hastalarım" olmadığına ve doğru kliniğin seçili olduğuna bakın, **Yenile** düğmesine basın.
 
 ### 1.2 Hasta geldi – randevulu geliş
-1. **Planlı randevular** bölümünde hastanın satırını bulun.
+1. **Sıradaki randevular** başlığı altında hastanın satırını bulun.
 2. **Geldi** düğmesine basın; açılan pencere **Hasta geldi**.
 3. Gerekirse **Sorumlu hekim** seçin (randevudaki hekim varsayılan gelir), acil ise **Acil** anahtarını açın.
-4. **Geldi olarak kaydet**. Satır **Bekliyor** bölümüne geçer; bilgi mesajı "Geliş kaydedildi".
+4. **Geldi olarak kaydet**. Satır **Klinikte** başlığına **Sırada** durumuyla geçer; bilgi mesajı "Geliş kaydedildi".
 
 - Sık hata: "Açık geliş kaydı zaten var" → aynı hasta için yeni kayıt açılmadı; mevcut kayıt listede, onu kullanın. İki kez tıklamak ikinci kayıt üretmez.
 - Hasta randevuya gelmedi ve saati geçtiyse: satırdaki **⋯** menüsü → **Gelmedi olarak işaretle**. Yanlışlıkla işaretlendiyse **Gelmedi işaretini geri al** (gerekçe ister).
@@ -71,18 +77,18 @@ Menüde bir öğenin görünmesi o modülün **okuma** izninize bağlıdır. Rap
 - Sık hata: aynı telefonla müşteri zaten varsa yinelenen kayıt uyarısı alırsınız; var olan müşteriyi seçin. (Kural backend'de var; ekrandaki tam mesaj **doğrulanacak**.)
 
 ### 1.4 Randevu verme / erteleme / iptal
-- **Menü:** **Randevular** → **Liste**, **Takvim**, **Talepler** (online randevu talepleri), **Bekleme listesi** sekmeleri. Takvimin gün görünümünde hekim sütunlarının yanında saatli **Aşılar** sütunu durur; saati girilmemiş aşılar "Saatsiz" başlığında görünür.
+- **Menü:** **Randevular** → **Liste**, **Takvim**, **Talepler** (online randevu talepleri), **Bekleme listesi** sekmeleri. Takvim ayrı menü öğesi değildir, Randevular içinde bir sekmedir. Takvimin gün görünümünde hekim sütunlarının yanında saatli **Aşılar** sütunu durur; saati girilmemiş aşılar "Saatsiz" başlığında görünür.
 - Yeni randevu, erteleme ve iptal bu ekrandan yapılır. Durum etiketleri: Planlandı / Tamamlandı / İptal. Resepsiyon **tamamlama** yapmaz (muayene başlayınca randevu otomatik tamamlanır; **doğrulanacak**).
 
 ### 1.5 Yanlış geliş / durum düzeltme
 - Yanlışlıkla açılan gelişi **silemezsiniz**. Bunu **yönetici** düzeltir (Bölüm 3.6). Resepsiyon yönetici istemelidir; "Düzelt" menüsü sizde görünmeyebilir.
 
-### 1.6 Ücret girmek
-Bkz. Bölüm 4.1. Resepsiyon ücret ve ödeme **ekler**, **düzeltemez/iptal edemez**.
+### 1.6 Ücret girmek ve hesabı kapatmak
+Hasta çıkarken **Bugün** satırında **Hesabı kapat** (Bölüm 4.2): ücret bekleyen kalemler, açık ücretler ve tahsilat tek panelde. Ayrı ücret için Bölüm 4.1. Resepsiyon ücret ve ödeme **ekler**, **düzeltemez/iptal edemez**.
 
 ### 1.7 Gün sonu
-- **Bugün**'de **Bekliyor/Devam ediyor** bölümlerinde unutulmuş kayıt kaldı mı? (12 saatten uzun açık kayıt "önceki günden" ipucu gösterir.)
-- **Tamamlandı** satırlarında ödeme rozeti (**Ödendi / Kısmi ödendi / Ödenmedi / Ücret yok**) borç kalanları gösterir; ödeme alınacaksa **⋯ → Ödeme al**.
+- **Bugün**'de **Klinikte** başlığı altında unutulmuş kayıt kaldı mı? (12 saatten uzun açık gelişte "Unutulmuş olabilir" notu; önceki günden kalan gelişte saat tarihle yazar.)
+- **Tamamlandı** satırlarında açık iş çipleri (**Ücret bekliyor (N)**, **Ücret yok**, **Lab bekliyor (N)**, **Ödeme bekliyor**, **Kısmi ödeme**) ve borç/kalan tutarı işi kalanları gösterir; kalanı olan satırda ana düğme **Hesabı kapat**'tır (**⋯ → Ödeme al** da kullanılabilir).
 - Gölge dönemde (ilk 2 hafta) günün sonunda eski defterle karşılaştırın (canlı işletim kılavuzu bölüm 10).
 
 ---
@@ -91,11 +97,11 @@ Bkz. Bölüm 4.1. Resepsiyon ücret ve ödeme **ekler**, **düzeltemez/iptal ede
 
 ### 2.1 Bugün: benim hastalarım
 - **Menü:** **Bugün**. Kapsam varsayılan olarak **Benim hastalarım** gelir (size atanmış gelişler); tümünü görmek için **Tümü**.
-- Satırdaki **Başlat** düğmesi bakımı başlatır (Bekliyor → Devam ediyor), **Tamamla** bakımı bitirir. **Acil işaretle / Acili kaldır** ikonu acil durumunu değiştirir.
-- Hekim, Bugün'de ücret/ödenen/kalan bilgisini **görür** ama **Ödeme al** menüsü yoktur (ödeme alma yetkisi yoktur).
+- **Sırada** olan hastada satırın ana düğmesi **Muayeneye al**: bakımı başlatır (Sırada → Muayenede) ve muayene formunu gelişe bağlı açar. Muayenedeki hastada **Muayene aç** ve **Tamamla** (bakımı bitirir). Acil durumu **⋯ → Acil olarak işaretle / Acil işaretini kaldır** ile değişir.
+- Hekim, Bugün'de ücret/ödenen/kalan bilgisini **görür** ama **Hesabı kapat** ve **Ödeme al** yoktur (ödeme alma yetkisi yoktur).
 
 ### 2.2 Muayene açmak
-- Bugün satırında **Muayene aç** düğmesi (geliş kaydından muayene taslağı açar; hasta tekrar seçilmez). Alternatif: **Kayıtlar** → **Muayeneler** → **Yeni** ya da randevu detayından.
+- Bugün satırında **Muayeneye al** (sıradaki hasta) ya da **Muayene aç** (muayenedeki hasta): geliş kaydından muayene taslağı açılır, hasta tekrar seçilmez. Alternatif: **Kayıtlar** → **Muayeneler** → **Yeni** ya da randevu detayından.
 - Muayene çalışma alanı bölümleri: **Anamnez**, **Değerlendirme / tanı**, **Plan / tedavi planı**, bulgular ve vitaller. Kaydedince ayrıntı sayfasına döner.
 - Sık hata: Başka biri aynı muayeneyi kaydettiyse çakışma uyarısı çıkar. **"Yazdıklarımı atıp güncel kaydı yükle"** yazdıklarınızı siler; önce metninizi kopyalayın.
 - Aynı gün iki sekmede aynı muayeneyi düzenlemeyin.
@@ -121,7 +127,7 @@ Muayene ayrıntı sayfasındaki düğmelerle (yetkinize göre): **Tedavi Oluştu
 - **Menü:** **Kayıtlar** → **Aşılar**, **Tedaviler**, **Reçeteler** sekmeleri. Reçete **dış temindir**: yazmak stoktan **düşmez**. Stoktan düşen kayıt **Uygulama**'dır (Bölüm 8).
 
 ### 2.7 Gün sonu
-- **Devam ediyor** bölümündeki gelişleri **Tamamla**.
+- **Muayenede** durumundaki gelişleri **Tamamla** (ödeme resepsiyonda **Hesabı kapat** ile alınır).
 - Taslakta kalan muayeneleri kesinleştirin (Kayıtlar → Muayeneler → durum filtresi).
 
 ---
@@ -133,17 +139,19 @@ Yönetici, resepsiyon ve hekim işlerinin tümünü yapabilir; ek olarak **düze
 ### 3.1 Sabah: Bugün ve Raporlar
 - **Bugün**'den kuyruğu izleyin. **Açık işler** satırı önceki günlerden kalan işleri toplar; **Gecikmiş randevu: N** çipi son 30 günde gelinmemiş ve hâlâ planlı randevuları takvimde açar. Gün listesinin başlığında o gün iptal edilen randevu sayısı yazar.
 - Bugün'de müşteri bazında **toplam borç** ve satır bazında ücret/ödenen/kalan görünür.
-- Sayılara **Raporlar**'dan bakın (bölüm 9): kasa, ciro, tahsilat, borç, randevu ve klinik iş hacmi seçili şubeye göre, eğilim çizgisiyle görünür.
+- Sayılara **Raporlar** (Rapor Merkezi, bölüm 9) üzerinden bakın: kasa, ciro, tahsilat, borç, randevu ve klinik iş hacmi seçili şubeye göre, eğilim çizgisiyle görünür.
 
 ### 3.2 Müşteri ve hayvan kayıtları
 - **Menü:** **Müşteri ve Hasta** → **Ara**, **Müşteriler**, **Hastalar**. Hayvan sayfası hasta özeti ve zaman çizelgesini (muayene, tedavi, reçete, lab, aşı, yatış, geliş) gösterir.
 
 ### 3.3 Ayarlar
 - **Menü:** **Ayarlar** (tek giriş; kartlar):
-  - **Hesap:** Hesabım, Abonelik.
-  - **Klinik ve kurum:** Klinikler, Organizasyon Ayarları, Kurum üyeleri, Davetler, Davet oluştur.
+  - **Hesap:** Hesabım, Abonelik, Size özel geliştirmeler.
+  - **Klinik ve kurum:** Klinikler, KVKK metinleri, Online randevu, Web sayfam, Veteriner bul, e-Belge, Hasta sahibi portalı, Organizasyon Ayarları, Kurum üyeleri, Davetler, Davet oluştur.
   - **İletişim:** Hatırlatmalar, Hatırlatma Geçmişi.
-  - **Tanımlar:** Türler, Irklar, Ürün kategorileri (adresleri `/panel/settings/definitions/...`; eski `/panel/species` vb. adresler yeni adrese yönlenir).
+  - **Tanımlar:** Türler, Irklar, Ürün kategorileri, Tanı ve şikâyet sözlüğü, Muayene şablonları, Metin parçaları, Yatış konumları, Randevu nedenleri, Aşı takvimi (adresleri `/panel/settings/definitions/...`; eski `/panel/species` vb. adresler yeni adrese yönlenir).
+  - **Veri:** Veri içe aktarma, API erişimi, Verimi dışa aktar.
+  - Kartlar yetkinize ve paketinize göre görünür.
 - Yeni kullanıcı: **Davet oluştur**. Rol değişikliği: **Kurum üyeleri**. İzin değişikliği açık oturuma hemen yansımayabilir: kullanıcı **çıkış-giriş** yapsın.
 - Hatırlatma e-postaları şu an gerçek gönderim doğrulamasından geçmedi (**doğrulanacak**, canlı işletim kılavuzu bölüm 1).
 
@@ -155,13 +163,13 @@ Bkz. Bölüm 9.
 
 ### 3.6 Geliş düzeltme (yanlış geliş, durum geri alma)
 1. **Bugün** → ilgili satırda **⋯** menüsü → **Düzelt**.
-2. **Yapılacak düzeltme** seçin: "Durumu … yap" (Bekliyor / Devam ediyor / Tamamlandı) veya **Yanlış geliş olarak işaretle**.
+2. **Yapılacak düzeltme** seçin: "Durumu … yap" (Sırada / Muayenede / Tamamlandı) veya **Yanlış geliş olarak işaretle**.
 3. **Gerekçe** (5–500 karakter) yazın → **Düzeltmeyi kaydet**.
 4. Yanlış işaretlenmişleri görmek için görünümü **Yanlış işaretlenenler**'e alın; yanlış gelişi geri almak için satırda **⋯ → Geri al** (gerekçe ister).
 - Düzeltme izinli ve **kayıt altına alınır** (kim, ne zaman, gerekçe).
 
 ### 3.7 Gün sonu / hafta sonu
-- Açık bakiyeleri **Ücretler** ve **Ödemeler** raporlarıyla kontrol edin.
+- Kasayı ve açık bakiyeleri **Raporlar** (Rapor Merkezi) → "Bugünün kasası tuttu mu?" (Gün sonu, Kasa) ve "Kimin bize borcu var?" (Borç Raporu) kartlarından kontrol edin.
 - Düşük stok için **Stok Durumu** (Bölüm 8).
 - Gölge dönemde fark listesini gözden geçirin.
 
@@ -176,8 +184,8 @@ Bkz. Bölüm 9.
 - Sık hata: miktar/fiyat 0 veya ondalık sınırı aşıyor → alanın altındaki kırmızı uyarıyı düzeltin.
 - Hekim ücret **ekleyemez**; yalnız görür.
 
-### 4.2 Hesabı kapat (Resepsiyon, Yönetici) — **yayın bekliyor (CHECKOUT-001)**
-Hasta çıkarken tek panel: **Bugün** satırında **Hesabı kapat** (muayenedeki hastada ve kalanı olan tamamlanmış gelişte satırın ana düğmesi; **Tamamla** ve **Ödeme al**'ın yerini alır, **Ödeme al** ⋯ menüsünde kalır).
+### 4.2 Hesabı kapat (Resepsiyon, Yönetici)
+Hasta çıkarken tek panel (CHECKOUT-001, yayında 2026-11-20): **Bugün** satırında **Hesabı kapat** (muayenedeki hastada ve kalanı olan tamamlanmış gelişte satırın ana düğmesi; **Tamamla** ve **Ödeme al**'ın yerini alır, **Ödeme al** ⋯ menüsünde kalır). Panel sağdan çekmece olarak açılır; üstünde hasta, müşteri ve telefonu, geliş saati ve sorumlu hekim yazar.
 1. **Ücret bekleyen kalemler** ücrete çevrilecek olarak gelir. İstemediğinizi **Ücretsiz** ile gerekçe yazarak (en az 5 karakter, geri alınamaz) ücretsiz sayın. Fiyatı olmayan kaleme birim fiyat girin.
 2. **Açık ücretler:** bu gelişin ücretleri seçili gelir. Önceki gelişlerden kalan borç gösterilir ama seçili gelmez; birlikte almak için işaretleyin.
 3. **Tahsilat:** **Nakit (F2)**, **Kart (F3)**, **Havale (F4)** ile satır ekleyin; birden fazla satır parçalı ödemedir (ör. nakit + kart). **Kalanı** düğmesi kalan tutarı yazar. Müşterinin kredisi varsa **Krediden (F8)**. Fazla alınan tutar müşteri kredisine yazılır. Birden fazla kasa varsa nakitte kasa sorulur.
@@ -185,15 +193,17 @@ Hasta çıkarken tek panel: **Bugün** satırında **Hesabı kapat** (muayenedek
 5. Bir adım hata verirse panel durur: kaydedilenler geçerlidir. **Tekrar dene** çift kayıt yapmaz; para alınmadıysa **Borçla kapat**.
 6. Bitince **Fişi yazdır** (ziyaret ve tahsilat özeti, A5; resmî belge değildir). Belge kesme izniniz ve bağlı e-Belge sağlayıcınız varsa Bugün'deki **Tamamla** ile aynı e-Belge önerisi açılır.
 - Muayene ve ücreti olmayan muayenedeki hastada satırda **Tamamla** kalır (önce sorar).
+- Çekmecede **yeni hizmet/ürün kalemi eklenmez**; yalnız ücret bekleyen kalemler ve açık ücretler gelir. Hekim aşı/reçeteyi ürünsüz girdiyse çekmece "ücret bekleyen kalem yok" der; ücreti önce **Ücret ekle** (Bölüm 4.1) ile yazın.
+- Alt toplam: **Hesap**, varsa **Krediden** ve **Alınan**, sonra **Kalan** (fazla alınmışsa **Krediye yazılacak**).
 
 ### 4.3 Ödeme almak (Resepsiyon, Yönetici)
 Kısayol: **Bugün** satırı → **⋯** → **Ödeme al**. Ya da: Para → **Ödemeler** → **Yeni Ödeme**.
 1. Müşteriyi seçin; açık ücretleri listelenir.
 2. Her ücret için ne kadar ödendiğini girin (**Tamamı** düğmesi ücretin kalanını yazar).
 3. Yöntem ve tarihi kontrol edin, kaydedin.
-- **Kurallar:** ödeme ücretlere bağlanır; bağlanmayan kısım (fazla ödeme ya da avans) müşteri kredisine yazılır ve sonraki ücretlerde **krediden** kullanılır (FIN-005). Çift tıklama aynı ödemeyi iki kez saymaz.
+- **Kurallar:** ödeme ücretlere bağlanır; bağlanmayan kısım (fazla ödeme ya da avans) **reddedilmez**, müşteri kredisine yazılır ve sonraki ücretlerde **krediden** kullanılır (FIN-005). Formda "Fazlası (₺…) müşteri kredisine yazılır" notu görünür. Çift tıklama aynı ödemeyi iki kez saymaz.
 - **Örnek:** 1.000 TL ücret, 400 TL ödeme → kalan 600 TL; sonraki 600 TL ödeme borcu kapatır.
-- Ödeme sonrası Bugün'de rozet **Kısmi ödendi** / **Ödendi** olur.
+- Ödeme sonrası Bugün satırında kalan varsa **Kısmi ödeme** çipi ve kalan tutar görünür; borç kapanınca çip kalkar.
 
 ### 4.4 Bakiye nerede görülür
 - Bugün'de satır bazında ücret / ödenen / kalan ve müşterinin toplam borcu.
@@ -225,7 +235,7 @@ Kısayol: **Bugün** satırı → **⋯** → **Ödeme al**. Ya da: Para → **�
 
 **Kısıtlar:** ödeme **tahsisliyse** (ücrete bağlıysa) tutar, müşteri, klinik ve para birimi kilitlidir; yanlış tutar için ödemeyi iptal edip doğrusunu girin.
 
-Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; yöneticiye haber verin. Düğmeler "(salt okunur)" → abonelik süresi dolmuş olabilir.
+Sık hata: "İptal et" düğmesini göremiyorum → yönetici yetkiniz yoktur; yöneticiye haber verin. Düğmeler pasif ve yanında "Salt okunur modda kapalı" → abonelik süresi dolmuş olabilir.
 
 ---
 
@@ -313,12 +323,12 @@ Kurallar:
 | Belirti | Olası neden | Ne yapılır |
 |---|---|---|
 | Bir düğme/menü yok | Yetkiniz yok | Yöneticiden yetki isteyin; izin değişince çıkış-giriş yapın |
-| Düğmeler "(salt okunur)" | Abonelik/erişim durumu salt okunur | Yönetici Ayarlar → Abonelik'e baksın |
+| Düğmeler pasif, yanında "Salt okunur modda kapalı" | Abonelik/erişim durumu salt okunur | Yönetici Ayarlar → Abonelik'e baksın |
 | "Açık geliş kaydı zaten var" | Aynı hasta için geliş açık | Mevcut satırı kullanın |
 | Hasta listede yok | Kayıtlı değil / yazım farkı | Mikroçip veya telefonla arayın; yoksa **Yeni müşteri ve hasta ekle** |
 | Muayene değiştirilemiyor | Kesinleşti | **Ek not ekle** |
 | Kaydetme çakışması | Başkası aynı kaydı değiştirdi | Metni kopyalayın, güncel kaydı yükleyin, yeniden düzenleyin |
-| Ödeme kaydedilmiyor | Tutar borçtan fazla / ücret yok | Önce ücret girin; tutarı borca indirin |
+| Ödeme borçtan fazla girildi | Fazlası reddedilmez | Fazlası müşteri kredisine yazılır; sonraki ücrette **Krediden** kullanılır |
 | Ücret iptal edilmiyor | Üzerinde ödeme var | Önce ödemeyi iptal edin (yönetici) |
 | Yanlış geliş / yanlış durum | Hatalı tıklama | Yönetici **Düzelt** ile düzeltir |
 | Uygulama kaydedilmiyor | Stok yetersiz / ürün pasif | Stok girişi yapın / ürünü aktifleştirin |
@@ -330,7 +340,9 @@ Bildirimde nelerin istendiği için canlı işletim kılavuzu bölüm 4'e bakın
 
 ## 11. Bu kılavuzda olmayan konular
 
-Aşağıdakiler ilk sürümde yoktur veya bu kılavuzda anlatılmaz: müşteri kredisi/avans/mahsup, çoklu para birimi, hizmet kataloğu, e-fatura/POS, görüntüleme (dosya yükleme), yönetici onayı akışı, kişiye özel bildirim zili, global arama, rol bazlı farklı menüler (UX-007, ertelendi), hesap kilitleme.
+Aşağıdakiler yoktur veya bu kılavuzda ayrıntılı anlatılmaz: çoklu para birimi, POS, görüntüleme (dosya yükleme), yönetici onayı akışı, kişiye özel bildirim zili, rol bazlı farklı menüler (UX-007, ertelendi), hesap kilitleme.
+
+Panelde olan ama bu kılavuzda yalnız değinilenler: **müşteri kredisi** (fazla ödeme ve avans; Bölüm 4.2–4.3), **hizmet kataloğu** (Stok → Ürünler, ürün türü "Hizmet"; ücret formu açıklamada katalogdan öneri verir), **e-Belge** (e-fatura/e-arşiv; Ayarlar → e-Belge ve Para → e-Belgeler), **online randevu**, **hasta sahibi portalı**, **klinik web sayfası** ve **veri içe aktarma** (Ayarlar kartları).
 
 ## 12. Gölge dönem (ilk 2 hafta) hatırlatması
 
@@ -357,6 +369,7 @@ Aşağıdaki maddeler koddan/belgelerden **kesin doğrulanamadı** veya uygulama
 15. **Tarih/saat dilimi** (İstanbul günü sınırı) ve Bugün'ün 500 satır sınırı yalnız birim testle kapsandı.
 16. **E-posta/hatırlatma**: gerçek gönderim doğrulanmadı; ekran var, teslim garantisi yok.
 17. **Vital ölçümü** (bölüm 7.1): yerelde hekim hesabıyla ekleme, düzenleme, iptal, yatış öncesi zaman reddi denendi. Resepsiyon hesabı, salt okunur kiracı, koyu tema ve iki kişinin aynı anda düzenlemesi tarayıcıda denenmedi.
+18. **Bugün ve Hesabı kapat** (bölüm 1.1, 4.2): yerel tam testte (2026-11-22, canlıyla aynı sürüm) randevusuz geliş → Muayeneye al → kısmi nakit ödeme → Hesabı kapat ile kalanın kartla alınması denendi; ekran adları bu denemeye göre yazıldı. Bilgi fişinin önceki ödemeyi göstermemesi düzeltildi, yayın bekliyor.
 
 ## 14. Kullanıcı kararı gerektirenler
 
