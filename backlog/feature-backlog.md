@@ -2494,7 +2494,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Hesap verebilirlik |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
-| **Durum** | Planlandı |
+| **Durum** | Yayında (2026-11-22): talep ayrıntısında durum geçmişi ve oluşan randevu satırı. Randevudan talebe geri bağlantı ve portal "taleplerim" geçmişi kapsam dışı |
 | **Bağımlılıklar** | APPT-011 |
 | **Notlar** | DaySmart sandbox — Census satırından Appointment History: gözlemlenen örnekte created olayı, zaman ve kullanıcı; tam randevu yaşam döngüsü **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#appointment-history) |
 
@@ -2510,7 +2510,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Gerçekçi planlama |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Yüksek |
-| **Durum** | Planlandı — [ADR-053](../decisions/ADR-053-kaynak-bazli-takvim.md) **önerildi** (2026-11-22); 1. dilim `feature/appt-025-kaynak-takvim` dallarında, onay bekliyor |
+| **Durum** | 1. dilim yayında (2026-11-22) — [ADR-053](../decisions/ADR-053-kaynak-bazli-takvim.md) kabul edildi; sonraki dilimler ADR'de |
 | **Bağımlılıklar** | — |
 | **Notlar** | → [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar). DaySmart sandbox: gün/hafta, hekim + Tech Appts kolonları, All Columns, boş hücre → randevu modalı — sandbox gözlemi. **Canlı sandbox — Boarding:** oda-kaynak timeline; Max:N kapasite; gün/hafta/ay — **doğrulanmadı** → [daysmart.md](../competitors/daysmart.md#reservation-calendar). **E-Vet SMART:** Yeni Randevu — Bölüm + Veteriner seçimi; slot ızgarası — → [e-vet.md](../competitors/e-vet.md#randevular). Global **Randevular** Ay/Hafta/Gün + Bölüm/Veteriner filtre — → [e-vet.md](../competitors/e-vet.md#randevular--global-calendar) |
 
@@ -3562,7 +3562,7 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Kullanıcı değeri** | Reçete ve stokta doğru ürün bilgisi iş akışının içinde; lab sonuçları okunur ve karşılaştırılabilir; cihaz entegrasyonu ve AI lab özeti için yapılandırılmış veri |
 | **Öncelik** | P2 (öneri) |
 | **Tahmini zorluk** | Orta (Dilim 1–2), Orta (Dilim 3) |
-| **Durum** | Planlandı ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) kabul edildi, 2026-11-16; tanı desteği AI-105 ile, kural tabanlı ekran yok). Dilim 1'in verisi Bakanlık iznine bağlı: talebi kullanıcı gönderir, izin gelmeden toplu alım yok; model ve ekran işi paralel başlayabilir. Roadmap'e alınmadı |
+| **Durum** | Dilim 2–3 yayında (2026-11-22): lab değer satırları, düşük/normal/yüksek işareti, önceki değer ve eğilim; ilaç rehberi modeli, arama ekranı, ürün bağı ve reçetede hedef tür notu. Katalog boş; toplu veri Bakanlık izniyle. ([ADR-049](../decisions/ADR-049-ilac-rehberi-ve-klinik-basvuru.md) kabul edildi, 2026-11-16; tanı desteği AI-105 ile, kural tabanlı ekran yok). Dilim 1'in verisi Bakanlık iznine bağlı: talebi kullanıcı gönderir, izin gelmeden toplu alım yok; model ve ekran işi paralel başlayabilir. Roadmap'e alınmadı |
 | **Bağımlılıklar** | ADR-049; Dilim 3 için INT-001 isteğe bağlı; AI-105 bu veriyi sonradan kullanır |
 | **Notlar** | Kaynak HBS sorgusu 2026-11-15'te 1.749 kayıt; etken madde adları normalize değil, eşleme bizde. Rakip içeriği alınmaz; görünüm kopyalanmaz. Tanı, doz ve tedavi önermez; "olası teşhis", "%" ifadesi kullanılmaz (ADR-008, AI-105 ile tutarlı). Global referans aralığı tablosu sunulmaz (aralık laboratuvara özgü). Paket önerisi: her pakette. Nekropsi ve semptom "olası hastalık" ekranları için madde açılmadı → [e-vet.md](../competitors/e-vet.md#nekropsi-modül) |
 

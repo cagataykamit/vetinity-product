@@ -2,9 +2,7 @@
 
 ## Durum
 
-**Önerildi (2026-11-22).** Kullanıcı onayı bekliyor; onaylanmadan main'e alınmaz. Kararlar ajan önerisidir (rakip pratiğinden ve mevcut
-desenlerden türetildi). Kullanıcı farklı derse yalnız ilgili K maddesi değişir. 1. dilim bu önerilerle `feature/appt-025-kaynak-takvim`
-dallarında kodlandı (backend + panel); birleştirme onaydan sonra.
+**Kabul edildi (2026-11-22).** Kullanıcı birleştirme ve yayını onayladı ("Evet, hepsini"). Kararlar rakip pratiğinden ve mevcut desenlerden türetildi. 1. dilim main'e birleştirildi.
 
 Kapsam: [APPT-025](../backlog/feature-backlog.md#appt-025--kaynak-bazlı-takvim), [PATTERN-012](../research/patterns.md#pattern-012--configurable-resource-calendar),
 [IDEA-014](../research/ideas.md#idea-014--configurable-scheduling-resources). APPT-007'nin "kaynak" yarısı (neden → kaynak) sonraki dilimdir.
