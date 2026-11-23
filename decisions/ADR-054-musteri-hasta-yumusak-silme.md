@@ -2,7 +2,7 @@
 
 ## Durum
 
-**Kabul edildi (2026-11-23).** Kullanıcı kararı: "Müşteri ve hasta için kalıcı silme olmasın. Soft delete koy, veritabanımızda kalsın." Ayrıntılar rakip pratiğinden ve mevcut koddan türetildi (klinik pratiği sorusu sorulmaz). Önce backend (`feature/musteri-hasta-yumusak-silme`), sonra panel. İlgili: [ADR-020](ADR-020-clinic-staff-centered-patient-card.md) S5 (vefat), [ADR-031](ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) (portal bağı), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md) (adlı sorgu filtreleri), [ADR-041](ADR-041-portal-hesap-silme.md) (bağ kapatma, anonimleştirme), [ADR-043](ADR-043-birlesik-klinik-kayit-modeli.md), [ADR-048](ADR-048-tam-veri-gecisi.md) (devir borcu/alacağı).
+**Kabul edildi (2026-11-23).** Kullanıcı kararı: "Müşteri ve hasta için kalıcı silme olmasın. Soft delete koy, veritabanımızda kalsın." Ayrıntılar rakip pratiğinden ve mevcut koddan türetildi (klinik pratiği sorusu sorulmaz). Önce backend (`feature/musteri-hasta-yumusak-silme`), sonra panel. Backend dalında uygulandı (birleştirilmedi): migration'lar `AddClientPetSoftDelete` (komut DB) ve `AddClientPetReadModelIsDeleted` (Query DB) yalnız yerel geliştirme DB'sinde; sözleşme backend `docs/CLIENT_PET_DELETION_API_CONTRACT.md`. İlgili: [ADR-020](ADR-020-clinic-staff-centered-patient-card.md) S5 (vefat), [ADR-031](ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) (portal bağı), [ADR-040](ADR-040-kiraci-izolasyonu-global-filtre.md) (adlı sorgu filtreleri), [ADR-041](ADR-041-portal-hesap-silme.md) (bağ kapatma, anonimleştirme), [ADR-043](ADR-043-birlesik-klinik-kayit-modeli.md), [ADR-048](ADR-048-tam-veri-gecisi.md) (devir borcu/alacağı).
 
 ## Bağlam
 
@@ -32,6 +32,7 @@
 
 - **Görünmez:** müşteri ve hasta listeleri ve aramaları (panel seçicileri bu listeleri kullanır), AI hasta arama, özet sayıları ve son kayıtlar, hatırlatma adayları (otomatik ve elle), gecikmiş/yaklaşan aşı listeleri ve operasyonel uyarılar (`Pet.ReceivesCare` silinmeyi de kapsar), portal hasta listesi ve hasta ayrıntısı, mükerrer kayıt denetimi.
 - **Görünmeye devam eder:** geçmiş kayıtlar ve raporları (randevu, muayene, aşı, tedavi, reçete, lab, görüntüleme, yatış, ücret, ödeme, satış, belge, e-belge, kasa, defterler, HBS, rapor merkezi, borç raporu), bu listelerin ad araması, tam veri dışa aktarma. Ad ve hasta bilgisi bu yüzeylerde aynen görünür.
+- **Dış API (TIER-009):** silinen müşteri ve hasta listede kalır, `deletedAtUtc` dolu gelir. Gerekçe: eşitleyen sistem silmeyi ancak böyle görür; kaydı listeden düşürmek karşı tarafta eski kaydı sonsuza dek bırakır.
 - Kart kimlikle açılır: `GET /clients/{id}` ve `GET /pets/{id}` silinen kaydı `deletedAtUtc` dolu olarak döner. Panel kartta "Silindi" bandı gösterir.
 
 ### K3 — Silinen kayda yeni iş yazılmaz
