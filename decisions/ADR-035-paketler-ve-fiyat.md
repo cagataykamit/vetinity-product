@@ -59,3 +59,7 @@
 ## Ek (2026-11-23)
 
 Kullanıcı kararı: kamerayla barkod okutma (TIER-006, `MobileBarcode`) premium özellik değil, **Temel dahil tüm paketlerde**; 2026-11-08 ve 2026-11-09 notlarındaki "Profesyonel ve Kurumsal" dağılımının yerine geçer. Gerekçe: barkod okutma stok ve satıştaki günlük veri girişini hızlandırır, küçük klinikte de temel iş akışının parçasıdır. Paketler tablosunda satır "tüm paketler"e açıldı, üst paket kartlarındaki fark listesinden çıktı. `PlanFeature` değeri ileride yeniden kilitleme için durur. BE `51e1f48f`, FE `3546fa86` (dal `feature/barkod-tum-paketler`).
+
+## Ek (2026-11-23): Tanıtımda olumsuz dil yok
+
+Kullanıcı kararı: "eksikleri tamamla tanıtımda negatif dil istemiyorum". Bu ek, "Şu an olmayanlar: dürüst kısa liste" kararını değiştirir. Tanıtım sitesi, Paketler ve SSS ürünün yaptığını söyler; olmayan özellik listelenmez ve "şu an yok" diye anılmaz (ör. "Hatırlatmalar e-postayla gider", "Telefonda tarayıcıdan tam çalışır", "Siteniz Vetinity adresinde yayınlanır"). Paket karşılaştırmasında pakette olmayan özellik nötr işaretle gösterilir. Yanlış vaat yine yazılmaz: olmayan bir özellik var gibi anlatılmaz; yapay zekâ "talep üzerine açılır" diye anlatılır. "14 gün ücretsiz · kart gerekmez · satış görüşmesi yok" olumlu vaat olarak kalır. Hukuki metinler bu ekin kapsamında değildir.
