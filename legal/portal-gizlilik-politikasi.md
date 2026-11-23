@@ -1,11 +1,11 @@
 # Vetinity Hasta Sahibi Portalı Gizlilik Politikası
 
-Sürüm: 1.1 · Tarih: 2026-11-15
+Sürüm: 1.2 · Tarih: 2026-11-23
 
 Bu politika, hasta sahibi portalını (web ve mobil uygulama) kullanan kişilerin **portal hesabına** ilişkin verilerinin nasıl işlendiğini anlatır ([ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md) K4). Portal'da gördüğünüz klinik kayıtlarının veri sorumlusu ilgili kliniktir; o kayıtlar için kliniğinizin aydınlatma metni geçerlidir ([aydınlatma metni şablonu](aydinlatma-metni.md)). Klinik çalışanları ve site ziyaretçileri için ayrı [gizlilik politikası](gizlilik-politikasi.md) geçerlidir.
 
 **1. Veri sorumlusu**
-[Şirket unvanı], [adres], [MERSİS/ticaret sicil no], [iletişim e-postası]. Klinik kayıtları (bölüm 2b) bakımından Vetinity, kliniğin talimatıyla veri işleyendir.
+Portal hesabı verilerinin veri sorumlusu: Vetinity. İletişim: vetinity.app@gmail.com. Klinik kayıtları (bölüm 2b) bakımından Vetinity, kliniğin talimatıyla veri işleyendir.
 
 **2. Hangi verileri işleriz**
 
@@ -25,7 +25,7 @@ Hesabın açılması, girişin sağlanması ve klinik kayıtlarının size göst
 
 **4. Aktarım**
 - **Bağlı klinik:** hesabınızın o klinikteki bağ durumu (davet, bağlı, erişim kapatıldı) ve Portal'dan ilettiğiniz talepler yalnız ilgili kliniğe görünür. Parolanız, oturum ve cihaz bilgileriniz kliniğe aktarılmaz.
-- **Hizmet sağlayıcılar:** barındırma ve altyapı, güvenlik doğrulaması (Cloudflare Turnstile; Cloudflare, Inc., ABD), e-posta gönderim sağlayıcısı [sağlayıcı belirlenmedi], bildirim (push) hizmeti — v1'de, uygulama mağazası platformlarının bildirim altyapısı [yurt dışına aktarım: sağlayıcı, ülke ve Kanun m.9 mekanizması buraya yazılır].
+- **Hizmet sağlayıcılar:** barındırma ve altyapı, güvenlik doğrulaması (Cloudflare Turnstile; Cloudflare, Inc., ABD), e-posta gönderimi (Google LLC, ABD) ve mobil uygulamada bildirim (push) açıldığında uygulama mağazası platformlarının bildirim altyapısı. Yurt dışına aktarım: giriş kodu, parola sıfırlama ve hatırlatma e-postaları için Google LLC (ABD); güvenlik doğrulaması için Cloudflare, Inc. (ABD). Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz.
 - **Yetkili kurumlar:** mevzuatın zorunlu kıldığı hallerde.
 Verileriniz satılmaz ve reklam amacıyla paylaşılmaz.
 
@@ -42,13 +42,13 @@ Birden fazla Vetinity kliniğinden hizmet alıyorsanız tek portal hesabınız h
 Tek kullanımlık ve süreli kodlar, deneme sınırı ve geçici kilitleme, parolanın geri döndürülemez özetle saklanması, kısa ömürlü oturum jetonları, iletişimde şifreleme, yalnız kendi kayıtlarınıza erişim kontrolü ve erişim kaydı uygulanır. Hiçbir sistem tamamen risksizdir; ihlal halinde Kanun m.12 uyarınca ilgili kişilere ve Kurul'a bildirim yapılır.
 
 **8. Çerezler ve yerel depolama**
-Portal, oturumunuzu sürdürmek için tarayıcı veya uygulama içi yerel depolamada oturum bilgisi ve dil/görünüm gibi zorunlu ayarları tutar. Analitik veya reklam çerezi kullanılmaz; kullanılması gerekirse önceden açık rızanız alınır [çerez politikası eklenecek]. Çıkış yaptığınızda oturum bilgisi cihazdan silinir.
+Portal, oturumunuzu sürdürmek için tarayıcı veya uygulama içi yerel depolamada oturum bilgisi ve dil/görünüm gibi zorunlu ayarları tutar. Yalnız zorunlu çerezler ve zorunlu yerel depolama kullanılır; analitik, ölçüm veya reklam çerezi kullanılmaz. Çıkış yaptığınızda oturum bilgisi cihazdan silinir.
 
 **9. Haklarınız (Kanun m.11)**
 Kişisel verilerinizin işlenip işlenmediğini öğrenme; işlenmişse bilgi talep etme; işlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme; aktarıldığı üçüncü kişileri bilme; eksik veya yanlış işlenmişse düzeltilmesini isteme; Kanun'daki şartlarla silinmesini veya yok edilmesini ve bunun aktarılanlara bildirilmesini isteme; münhasıran otomatik sistemlerle analiz sonucu aleyhinize bir sonuca itiraz etme; kanuna aykırı işleme nedeniyle zararın giderilmesini isteme haklarına sahipsiniz.
 
 **10. Başvuru yolu**
-- Portal hesabı verileri için: [başvuru e-postası/adresi]. Hesabınızı ve bildirim tercihlerinizi Portal'dan kendiniz de silebilir veya değiştirebilirsiniz.
+- Portal hesabı verileri için: vetinity.app@gmail.com. Hesabınızı ve bildirim tercihlerinizi Portal'dan kendiniz de silebilir veya değiştirebilirsiniz.
 - Klinik kayıtları için: doğrudan ilgili kliniğe veya Portal'daki "Verilerimle ilgili talep" bölümünden (v1) başvurabilirsiniz; talep kliniğin KVKK talep sürecine iletilir ve klinik yanıtlar. Vetinity'ye gelen klinik kaydı talepleri ilgili kliniğe yönlendirilir.
 Başvurular en geç 30 gün içinde ücretsiz yanıtlanır; ayrıca maliyet gerekirse Kurul tarifesi uygulanabilir. Yanıtı yetersiz bulursanız veya süresinde yanıt verilmezse Kanun m.14 uyarınca Kişisel Verileri Koruma Kurulu'na şikâyet hakkınız saklıdır.
 
