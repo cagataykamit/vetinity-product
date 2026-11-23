@@ -184,6 +184,22 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Bağımlılıklar** | TRIAL-001 |
 | **Notlar** | Trial/onboarding girişinde de uygulanır; yalnızca trial'a özgü değildir. DaySmart sandbox gözlemi (giriş akışı) — tenant/kullanıcı kapsamı ve audit **doğrulanmadı** → [IDEA-028](../research/ideas.md#idea-028--versioned-legal-terms-acceptance) |
 
+### TRIAL-010 — Kiracı kapatma ve veri imha akışı
+
+| Alan | Değer |
+|---|---|
+| **Kimlik** | TRIAL-010 |
+| **Başlık** | Kiracı kapatma ve veri imha akışı |
+| **Kategori** | Trial |
+| **Problem** | Hukuki metinler (kullanım şartları 1.1, veri işleme sözleşmesi 1.2) yazılı kapatma talebinden itibaren 30 gün dışa aktarma, sonra 90 gün içinde silme/anonimleştirme diyor; kodda kapatma talebi, dışa aktarma penceresi ve kiracı verisini silen/anonimleştiren iş yok. Bugün süresi dolan hesap salt okunur kalır, veri süresiz saklanır |
+| **Önerilen çözüm** | Kapatma talebinin kaydı; talepten itibaren 30 gün dışa aktarma penceresi; süre sonunda kiracı verisinin silinmesi/anonimleştirilmesi (yasal saklama yükümlülüğü olanlar ayrı tutulur) ve yazılı teyit; otomatik saklama süresi işi |
+| **Kullanıcı değeri** | Metindeki taahhüdün kodla karşılanması; KVKK imha yükümlülüğü |
+| **Öncelik** | P2 |
+| **Tahmini zorluk** | Orta |
+| **Durum** | Planlandı |
+| **Bağımlılıklar** | TRIAL-009 |
+| **Notlar** | Kaynak: 2026-11-23 hukuki metin denetimi. Dışa aktarma bugün salt okunur hesapta da çalışır; `Tenant.Deactivate` girişi kapattığı için kapatılan kiracı dışa aktaramaz. Portal gizlilik metnindeki "giriş ve erişim kayıtları 2 yıl sonra silinir" için de temizleme işi yok |
+
 ---
 
 ## REPORT — Raporlama
