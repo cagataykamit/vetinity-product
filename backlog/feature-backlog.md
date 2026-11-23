@@ -3248,13 +3248,13 @@ Kod-belge kuralı (WORKFLOW.md): kod main'e alınınca ilgili maddenin Durum sat
 | **Başlık** | Mobil barkod |
 | **Kategori** | TIER |
 | **Problem** | Stok ve satışta ürün elle aranıyor |
-| **Önerilen çözüm** | Paket: Profesyonel ve Kurumsal. Telefon kamerasıyla barkod okutarak stok ve satışta ürün bulma |
+| **Önerilen çözüm** | Paket: tüm paketler (2026-11-23 kullanıcı kararı; önce Profesyonel ve Kurumsal). Telefon kamerasıyla barkod okutarak stok ve satışta ürün bulma |
 | **Kullanıcı değeri** | Mal kabul ve satış hızlanır, yanlış ürün seçimi azalır |
 | **Öncelik** | P2 |
 | **Tahmini zorluk** | Orta |
 | **Durum** | Geliştirildi (2026-11-08): main'de BE `878d5eab`, FE `0d76a443`; **canlıda** (2026-11-14 git kontrolü: canlı sürümde). Gerçek telefon kamerasıyla doğrulama bekliyor |
 | **Bağımlılıklar** | TIER-001, MOBILE-004 |
-| **Notlar** | Ürün kartındaki barkod kiracı içinde benzersiz (pasif dahil), boş bırakılabilir; barkod alanı ve elle/okuyucuyla barkod araması her pakette açık. Kamerayla okutma Profesyonel ve Kurumsal'da (`MobileBarcode`); mal kabul, satış, ürün listesi ve ürün kartında. Önce tarayıcının yerel BarcodeDetector'ı, yoksa `barcode-detector` 3.2.3 (MIT) kütüphanesi; WASM dosyası kendi sunucumuzdan. Kamera yalnız HTTPS/localhost'ta açılır, izin reddinde elle giriş kalır. İlaç karekodundan (GS1 DataMatrix) yalnız GTIN alınır. Sözleşme backend `docs/MOBILE_BARCODE_API_CONTRACT.md`. Migration `AddProductBarcodeUniqueIndex`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı); paylaşılan/üretim DB'de önce çift barkod kontrolü (sözleşme §6). Çalışma varsayımları (kullanıcı onayı bekliyor): pasif ürün dahil benzersizlik, ürün başına tek barkod, karekoddaki parti/SKT'nin mal kabule yazılmaması. Öneri (ayrı iş): karekoddan parti ve SKT'yi mal kabul satırına doldurmak |
+| **Notlar** | Ürün kartındaki barkod kiracı içinde benzersiz (pasif dahil), boş bırakılabilir; barkod alanı ve elle/okuyucuyla barkod araması her pakette açık. Kamerayla okutma 2026-11-23'ten beri Temel dahil tüm paketlerde (`MobileBarcode`, ADR-035 ek; dal `feature/barkod-tum-paketler`, BE `51e1f48f`, FE `3546fa86`, yayında değil); mal kabul, satış, ürün listesi ve ürün kartında. Önce tarayıcının yerel BarcodeDetector'ı, yoksa `barcode-detector` 3.2.3 (MIT) kütüphanesi; WASM dosyası kendi sunucumuzdan. Kamera yalnız HTTPS/localhost'ta açılır, izin reddinde elle giriş kalır. İlaç karekodundan (GS1 DataMatrix) yalnız GTIN alınır. Sözleşme backend `docs/MOBILE_BARCODE_API_CONTRACT.md`. Migration `AddProductBarcodeUniqueIndex`: canlı sürüm bu şemayı kullanıyor (canlı DB'ye bakılmadı); paylaşılan/üretim DB'de önce çift barkod kontrolü (sözleşme §6). Çalışma varsayımları (kullanıcı onayı bekliyor): pasif ürün dahil benzersizlik, ürün başına tek barkod, karekoddaki parti/SKT'nin mal kabule yazılmaması. Öneri (ayrı iş): karekoddan parti ve SKT'yi mal kabul satırına doldurmak |
 
 ### TIER-007 — Patron ekranı
 
