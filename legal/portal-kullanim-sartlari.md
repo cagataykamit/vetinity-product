@@ -1,17 +1,17 @@
 # Vetinity Hasta Sahibi Portalı Kullanım Şartları
 
-Sürüm: 1.0 · Tarih: 2026-11-09
+Sürüm: 1.1 · Tarih: 2026-11-23
 
 Bu şartlar, veteriner kliniğinin müşterisi olarak hasta sahibi portalını (web ve mobil uygulama) kullanan kişilere ilişkindir ([ADR-031](../decisions/ADR-031-hasta-sahibi-portali-ve-mobil-uygulama.md)). Kliniklerin Vetinity'yi kullanma koşulları ayrı belgededir ([kullanım şartları](kullanim-sartlari.md)).
 
 **1. Taraflar ve kapsam**
-Bu şartlar, [Şirket unvanı] ("Vetinity") ile portal hesabı açan hasta sahibi ("Kullanıcı") arasındadır. Portal, Kullanıcı'nın hizmet aldığı ve kendisini davet eden veteriner kliniğinin ("Klinik") kayıtlarından türetilen bilgileri Kullanıcı'ya gösteren bir yazılım hizmetidir ("Portal"). Hesap açarken veya şartların yeni sürümünü onaylarken bu şartları kabul etmiş olursunuz. Portal ücretsizdir; Klinik'in veteriner hizmetlerinin ücreti Klinik ile Kullanıcı arasındadır.
+Bu şartlar, Vetinity ile portal hesabı açan hasta sahibi ("Kullanıcı") arasındadır. Portal, Kullanıcı'nın hizmet aldığı ve kendisini davet eden veteriner kliniğinin ("Klinik") kayıtlarından türetilen bilgileri Kullanıcı'ya gösteren bir yazılım hizmetidir ("Portal"). Hesap açarken veya şartların yeni sürümünü onaylarken bu şartları kabul etmiş olursunuz. Portal ücretsizdir; Klinik'in veteriner hizmetlerinin ücreti Klinik ile Kullanıcı arasındadır.
 
 **2. Hizmetin niteliği**
 Portal **bilgilendirme amaçlıdır; veteriner hekim muayenesi, teşhis veya tedavi tavsiyesi değildir.** Portalda gösterilen aşı, randevu, bakiye, reçete ve tedavi özeti bilgileri Klinik'in kaydından aktarılır; tedavi kararları için Klinik'inize danışın. **Acil bir durumda Portal'a güvenmeyin; Klinik'i telefonla arayın veya en yakın veteriner acil servisine başvurun.** Portal üzerinden gönderilen bir bildirim ya da talebin Klinik tarafından anında görüleceği garanti edilmez.
 
 **3. Hesap ve giriş güvenliği**
-Hesap yalnız Klinik'in gönderdiği tek kullanımlık, süreli davetle açılır. Giriş, e-postanıza gelen tek kullanımlık kodla veya e-posta ve parolanızla yapılır. Kod ve parolanızı kimseyle paylaşmayın; Vetinity veya Klinik çalışanları kodunuzu ya da parolanızı sizden istemez. Cihazınızın ve e-posta hesabınızın güvenliğinden siz sorumlusunuz. Hesabınızın izinsiz kullanıldığından şüphelenirseniz parolanızı değiştirin, "tüm cihazlardan çıkış" yapın ve [destek e-postası] adresine bildirin. Güvenlik için çok sayıda hatalı denemeden sonra giriş geçici olarak kilitlenebilir. Hesap kişiseldir; başkası adına açılamaz ve devredilemez. Hesabın sahibi, Klinik'in müşteri kaydındaki kişidir.
+Hesap yalnız Klinik'in gönderdiği tek kullanımlık, süreli davetle açılır. Giriş, e-postanıza gelen tek kullanımlık kodla veya e-posta ve parolanızla yapılır. Kod ve parolanızı kimseyle paylaşmayın; Vetinity veya Klinik çalışanları kodunuzu ya da parolanızı sizden istemez. Cihazınızın ve e-posta hesabınızın güvenliğinden siz sorumlusunuz. Hesabınızın izinsiz kullanıldığından şüphelenirseniz parolanızı değiştirin, "tüm cihazlardan çıkış" yapın ve vetinity.app@gmail.com adresine bildirin. Güvenlik için çok sayıda hatalı denemeden sonra giriş geçici olarak kilitlenebilir. Hesap kişiseldir; başkası adına açılamaz ve devredilemez. Hesabın sahibi, Klinik'in müşteri kaydındaki kişidir.
 
 **4. Klinik ile Vetinity'nin ilişkisi**
 Hayvanınıza ve size ilişkin klinik kayıtlarının (hasta kaydı, aşı, randevu, bakiye, reçete ve tedavi özeti) **veri sorumlusu Klinik'tir**; Vetinity bu kayıtları Klinik adına veri işleyen olarak barındırır ve Portal'da gösterir. Kayıtların içeriği, düzeltilmesi ve silinmesi Klinik'in kararıdır; bu konudaki talepleriniz Klinik'e iletilir. Birden çok Vetinity kliniğinden hizmet alıyorsanız tek hesabınız her kliniğe ayrı ayrı bağlanır; her klinik yalnız kendi kayıtlarından sorumludur ve bir klinik diğerinin kayıtlarını görmez. Portal hesabının kendisine ilişkin veriler (giriş bilgileri, cihaz ve oturum, bildirim tercihi) [portal gizlilik politikası](portal-gizlilik-politikasi.md) kapsamındadır.
@@ -35,4 +35,4 @@ Portal yazılımı, arayüzü ve Vetinity markası Vetinity'ye; Klinik adı ve l
 Portal ve bu şartlar değiştirilebilir. Şartların yeni sürümü yayımlandığında bir sonraki girişinizde gösterilir; Portal'ı kullanmaya devam etmek için yeni sürümü onaylamanız gerekir. Her onay, sürüm numarası ve zamanıyla kaydedilir ([ADR-029](../decisions/ADR-029-surumlu-hukuki-kabul.md)). Onaylamazsanız hesabınızı silebilirsiniz.
 
 **11. Uygulanacak hukuk**
-Türkiye Cumhuriyeti hukuku uygulanır. Tüketici sıfatıyla yasal haklarınız ve tüketici hakem heyeti ile tüketici mahkemelerine başvuru hakkınız saklıdır; diğer uyuşmazlıklarda [şehir] mahkemeleri ve icra daireleri yetkilidir. İletişim: [Şirket unvanı], [adres], [iletişim e-postası].
+Türkiye Cumhuriyeti hukuku uygulanır. Türkiye Cumhuriyeti mahkemeleri ve icra daireleri yetkilidir; tüketici işlemlerinde emredici hükümler saklıdır. Tüketici sıfatıyla tüketici hakem heyeti ile tüketici mahkemelerine başvuru hakkınız saklıdır. İletişim: Vetinity, vetinity.app@gmail.com.
