@@ -15,7 +15,7 @@ a) Verileri yalnız Klinik'in yazılı (Hizmet kullanımıyla verilen) talimatla
 Aydınlatma yükümlülüğünü, hukuki sebebin (gerekirse açık rızanın) varlığını, VERBİS ve saklama kararlarını, ilgili kişi taleplerinin yanıtlanmasını üstlenir; kullanıcı hesaplarını yetkili kişilere verir.
 
 **5. Yurt dışı aktarım**
-Veriler Vetinity'nin kiraladığı sunucularda barındırılır. Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz. Hizmetin gönderdiği e-postalar (hatırlatma, bildirim, giriş kodu) Google LLC'nin (Amerika Birleşik Devletleri) e-posta altyapısıyla iletilir; alıcı adresi ve e-posta içeriği bu aktarıma girer. Klinik için yapay zekâ özellikleri açıldığında madde 3(h)'deki veriler, işlemin yapılması için Anthropic PBC'ye (Amerika Birleşik Devletleri) aktarılır; özellik kapalı klinikte bu aktarım olmaz.
+Veriler Vetinity'nin Türkiye'de kiraladığı sunucularda barındırılır. Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz. Hizmetin gönderdiği e-postalar (hatırlatma, bildirim, giriş kodu) Google LLC'nin (Amerika Birleşik Devletleri) e-posta altyapısıyla iletilir; alıcı adresi ve e-posta içeriği bu aktarıma girer. Klinik için yapay zekâ özellikleri açıldığında madde 3(h)'deki veriler, işlemin yapılması için Anthropic PBC'ye (Amerika Birleşik Devletleri) aktarılır; özellik kapalı klinikte bu aktarım olmaz.
 
 **6. Süre sonu**
 Abonelik ya da deneme bittiğinde hesap salt okunur olur; veriler silinmez ve Klinik verisini dışa aktarabilir. Klinik hesabın kapatılmasını yazılı olarak (e-postayla) talep ederse talepten itibaren 30 gün içinde verisini dışa aktarabilir; bu süre sonunda Vetinity verileri 90 gün içinde siler ya da anonimleştirir ve talep halinde yazılı teyit verir. Yasal saklama yükümlülüğü bulunanlar o süre kadar ayrı tutulur.
