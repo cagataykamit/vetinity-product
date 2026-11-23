@@ -12,7 +12,7 @@ Vetinity bir kayıt ve yönetim aracıdır; **veterinerlik, hukuk, mali müşavi
 Klinik, kullanıcı hesaplarının güvenliğinden ve yetkilendirmeden sorumludur; parolalar paylaşılmaz. Kullanıcıların yetkisi Klinik tarafından yönetilir. Yetkisiz erişim şüphesi derhal Vetinity'ye bildirilir.
 
 **4. Deneme, abonelik ve ödeme**
-Deneme süresi 14 gündür; süre sonunda ücretli pakete geçilmezse hesap salt okunur olur ve veriler 90 gün boyunca saklanır. Ücretler, paket ve fatura dönemi uygulama içinde belirtilir; ödeme iyzico aracılığıyla alınır. İptal ve iade: abonelik ödenen dönem için peşin alınır; iptal edilen abonelik ödenmiş dönemin sonuna kadar kullanılır, kısmi iade yapılmaz. Fiyat değişikliği, yürürlüğe girmeden en az 30 gün önce bildirilir.
+Deneme süresi 14 gündür; süre sonunda ücretli pakete geçilmezse ya da ücretli dönem yenilenmezse hesap salt okunur olur; veriler silinmez ve Klinik bu süre boyunca verisini dışa aktarabilir. Ücretler, paket ve fatura dönemi uygulama içinde belirtilir; ödeme iyzico aracılığıyla alınır. İptal ve iade: abonelik ödenen dönem için peşin alınır; iptal edilen abonelik ödenmiş dönemin sonuna kadar kullanılır, kısmi iade yapılmaz. Fiyat değişikliği, yürürlüğe girmeden en az 30 gün önce bildirilir.
 
 **5. Kullanım kuralları**
 Hizmet hukuka aykırı amaçla, başkalarının haklarını ihlal edecek biçimde, güvenliği aşmaya, tersine mühendisliğe, otomatik toplu veri çekmeye veya Hizmeti aksatmaya yönelik kullanılamaz. Klinik, yüklediği içeriğin hukuka uygunluğundan sorumludur.
@@ -30,7 +30,7 @@ Vetinity makul çabayla kesintisiz hizmet hedefler; bakım ve mücbir sebepler h
 Kasıt ve ağır kusur hariç, Vetinity'nin toplam sorumluluğu son 12 ayda ödenen bedelle sınırlıdır; dolaylı zararlar (kâr kaybı, itibar kaybı, klinik hekimlik sonuçları) kapsam dışıdır.
 
 **10. Fesih**
-Taraflar 30 gün önceden yazılı bildirimle sona erdirebilir; şartların ağır ihlalinde Vetinity erişimi derhal askıya alabilir. Fesihte Klinik'e verisini dışa aktarması için 30 gün süre tanınır.
+Taraflar 30 gün önceden yazılı bildirimle sona erdirebilir; şartların ağır ihlalinde Vetinity erişimi derhal askıya alabilir. Klinik hesabın kapatılmasını yazılı olarak (e-postayla) talep ederse talepten itibaren 30 gün içinde verisini dışa aktarabilir; bu süre sonunda veriler 90 gün içinde silinir ya da anonimleştirilir. Yasal saklama yükümlülüğü bulunanlar o süre kadar ayrı tutulur.
 
 **11. Uygulanacak hukuk**
 Türkiye Cumhuriyeti hukuku uygulanır. Türkiye Cumhuriyeti mahkemeleri ve icra daireleri yetkilidir; tüketici işlemlerinde emredici hükümler saklıdır.

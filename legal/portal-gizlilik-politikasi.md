@@ -25,7 +25,7 @@ Hesabın açılması, girişin sağlanması ve klinik kayıtlarının size göst
 
 **4. Aktarım**
 - **Bağlı klinik:** hesabınızın o klinikteki bağ durumu (davet, bağlı, erişim kapatıldı) ve Portal'dan ilettiğiniz talepler yalnız ilgili kliniğe görünür. Parolanız, oturum ve cihaz bilgileriniz kliniğe aktarılmaz.
-- **Hizmet sağlayıcılar:** barındırma ve altyapı, güvenlik doğrulaması (Cloudflare Turnstile; Cloudflare, Inc., ABD), e-posta gönderim sağlayıcısı ve mobil uygulamada bildirim (push) açıldığında uygulama mağazası platformlarının bildirim altyapısı. Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz.
+- **Hizmet sağlayıcılar:** barındırma ve altyapı, güvenlik doğrulaması (Cloudflare Turnstile; Cloudflare, Inc., ABD), e-posta gönderimi (Google LLC, ABD) ve mobil uygulamada bildirim (push) açıldığında uygulama mağazası platformlarının bildirim altyapısı. Yurt dışına aktarım: giriş kodu, parola sıfırlama ve hatırlatma e-postaları için Google LLC (ABD); güvenlik doğrulaması için Cloudflare, Inc. (ABD). Yurt dışına aktarım Kanun m.9'a uygun olmadıkça yapılmaz.
 - **Yetkili kurumlar:** mevzuatın zorunlu kıldığı hallerde.
 Verileriniz satılmaz ve reklam amacıyla paylaşılmaz.
 
