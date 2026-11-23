@@ -67,3 +67,12 @@ K7 notu: Özet kaldırma da `main`'de olduğu için bir sonraki panel yayını i
 - **Panel, 1. yayın** (`feature/rapor-merkezi-b`): B ana ekranı ve kurallar (`1bc754e0`, `bc2e0368`, düzeltme `4fffd95b`), Bugün çipi ve iptal sayacı (`715fc5e1`). Ekran yerel ortamda 1280 ve 375 px, açık ve koyu temada gerçek veriyle denendi.
 - **Panel, 2. yayın** (`feature/ozet-kaldirma`, 1. yayının üstünde): Özet menüden kalktı, `/panel/dashboard` → `/panel/reports`, açılış yedeği Raporlar (`7458508d`); `features/dashboard` ve kullanılmayan uç/metinler silindi (`aa0d11a7`). K7 gereği 1. yayından sonra.
 - **Kalan:** BE `/dashboard/*` uçlarının silinmesi (K6, ayrı iş). Aylık dönem yerel geliştirme veritabanında 2,5–6 sn sürdü (aynı ortamda basit sorgular da yavaş); gerçek veride ölçülmedi.
+
+## Ek (2026-11-23): K5 değişikliği — B-02, seçenek A
+
+Kullanıcı tasarım taramasındaki B-02 için A'yı seçti (çiplerin görünümü B'deki gibi). Zamanı geçmiş randevular ile HBS'e girilmemiş reçete ve aşılar birikmiş iş sayılır; Bugün'ün açık iş çiplerinden çıkar, Rapor Merkezi "Bakmanız gerekenler" bandında durur (`attention.overdueAppointmentCount`, `attention.hbsNotEntered*`). Sayı ve izin Bugün'deki eski çiple aynıdır (`OpenItemsSummaryRequest.ForToday`; `Visits.Read` ve `Appointments.Read`). Bugün'de yalnız sessiz bir "Birikmiş n iş Raporlar'da →" bağlantısı kalır; bugünü etkileyen çiplerde kırmızı yalnız "Ücret yok" ve "Lab bekliyor"dadır.
+
+`GET /visits/today` yanıtındaki eski alanlar geriye uyum için kalır; eski panel sürümü yayından çıkınca ayrı işte kaldırılır. Önce backend yayınlanır.
+
+- **BE** (`feature/b02-acik-isler-rapor`): `e0d7ba5c`, `4a1ccbae`.
+- **Panel** (`feature/tasarim-telefon`): `e9092e24`, `a9b9a70e`, `6c8dcd91`.
