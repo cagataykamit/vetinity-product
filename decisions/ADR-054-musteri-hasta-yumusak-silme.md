@@ -54,6 +54,7 @@ Silme şu durumlarda `409 Clients.DeleteBlocked` / `409 Pets.DeleteBlocked` ile 
 
 - **Açık hesap** (yalnız müşteri): kalan borçlu ücret (devir borcu dahil), tahsis edilmemiş ödeme ya da açık kredi (devir alacağı dahil). Hesap kiracı genelinde değerlendirilir. Gerekçe: kapanmamış alacak/verecek listeden kaybolursa tahsil ve iade izlenemez; E-Vet'in "ilişkisi vardır" engeliyle aynı aile.
 - **Aktif yatış** (müşterinin herhangi bir hastası ya da silinen hasta): taburcu edilmemiş, iptal edilmemiş yatış.
+- **Açık geliş** (koordinatör kararı, 2026-11-23): bugün (İstanbul günü) kliniğe gelmiş, tamamlanmamış ve iptal edilmemiş geliş (`OpenVisit`, ek `openVisitCount`). Gerekçe: hasta şu an klinikte işlem görüyor; geliş tamamlanır ya da yanlış girişse iptal edilir. Önceki günlerden açık kalan geliş engellemez, "Açık işler"de izlenir; aksi hâlde unutulmuş bir geliş silmeyi süresiz kilitlerdi.
 - **Gelecek planlı randevu**: zamanı gelmemiş `Scheduled` randevu. **Engellenir, otomatik iptal edilmez.** Gerekçe:
   - Silme tam geri alınabilir kalmalı; otomatik iptal geri yüklemeyle geri gelmez.
   - İptal sahibine bildirim ve bekleme listesi teklifi tetikleyebilir; bunun kararı kullanıcınındır.
