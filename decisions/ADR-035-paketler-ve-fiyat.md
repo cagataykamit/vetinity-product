@@ -55,3 +55,7 @@
 - Frontend: `pricing-plan.utils.ts` bu tablodan beslenir; paketler sayfası 3 kademe, özellik karşılaştırma tablosu, Aylık/Yıllık anahtarı (varsayılan aylık; ana sayfa yalnız aylık), SSS (fiyat, KDV, deneme, kademe geçişi); ana sayfa ve SEO/JSON-LD aynı verilerden.
 - Fiyat ve limitler değişince tek dosya güncellenir; sitedeki sayılar kopyalanmaz.
 - Faturalandırma/abonelik altyapısı (iyzico) bu kararın kapsamı dışındadır; kademe limitlerinin (kullanıcı/klinik sayısı) ürün içinde zorlanması ayrı iştir (backlog).
+
+## Ek (2026-11-23)
+
+Kullanıcı kararı: kamerayla barkod okutma (TIER-006, `MobileBarcode`) premium özellik değil, **Temel dahil tüm paketlerde**; 2026-11-08 ve 2026-11-09 notlarındaki "Profesyonel ve Kurumsal" dağılımının yerine geçer. Gerekçe: barkod okutma stok ve satıştaki günlük veri girişini hızlandırır, küçük klinikte de temel iş akışının parçasıdır. Paketler tablosunda satır "tüm paketler"e açıldı, üst paket kartlarındaki fark listesinden çıktı. `PlanFeature` değeri ileride yeniden kilitleme için durur. BE `51e1f48f`, FE `3546fa86` (dal `feature/barkod-tum-paketler`).
