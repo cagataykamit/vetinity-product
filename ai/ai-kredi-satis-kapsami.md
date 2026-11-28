@@ -1,6 +1,6 @@
 # Yapay zekâ: klinik ayarı ve ek kredi satışı — kapsam (TIER-013)
 
-**Durum:** Kararlar alındı (kullanıcı, 2026-11-28). Kod yok. İlgili: [ADR-044](../decisions/ADR-044-ai-eklentisi-kredi-ve-fon.md), backlog TIER-013, TIER-014, AI-007, AI-008, TIER-001.
+**Durum:** Kararlar alındı (kullanıcı, 2026-11-28). Dilim 1 geliştirildi (2026-11-28): BE `feature/ai-klinik-ayari` (`bd15662d`, `2f7b86a8`, `f63933d1`), FE `feature/ai-klinik-ayari` (`591c8927`, `7cc708d0`, `d8032fbe`, `4293be93`). Main'e birleşmedi, push yok. Migration `AddClinicAiAcknowledgement` yalnız yerel DB'de. Tarayıcıda yerel demo klinikte denendi (masaüstü ve 375 px). Dilim 2 ve 3 için kod yok. İlgili: [ADR-044](../decisions/ADR-044-ai-eklentisi-kredi-ve-fon.md), backlog TIER-013, TIER-014, AI-007, AI-008, TIER-001.
 
 ## Neden
 
@@ -55,12 +55,12 @@ Ayarlar > Klinik ve kurum altında bir kart. Sayfayı `Clinics.Read` yetkisi ola
 
 Sözleşme backend'de `docs/AI_HISTORY_SUMMARY_API_CONTRACT.md`'ye yeni bölüm olarak eklenir (ya da ayrı `AI_CREDITS_API_CONTRACT.md`). Önce backend, sonra panel.
 
-**Klinik uçları (aktif klinik):**
+**Klinik uçları** (ayar uçları portal ve online randevu ayarları gibi klinik kimliğini adreste alır; sipariş uçları aktif kliniğe yazar):
 
 | Uç | İzin | Ne yapar |
 |---|---|---|
-| `GET /api/v1/ai/settings` | `Clinics.Read` | Durum, kredi alanları (`/ai/status` ile aynı hesap), kredi dilimleri (kalan, son tarih), son hareketler, paketler, açık sipariş, `cardPaymentAvailable` |
-| `PUT /api/v1/ai/settings` | `Clinics.Update` | `{ isEnabled, acknowledgementVersion }`. Açarken sürüm güncel değilse `400 Ai.AcknowledgementRequired`. Denetim kaydına yazılır |
+| `GET /api/v1/clinics/{clinicId}/ai-settings` | `Clinics.Read` | Durum, kredi alanları (`/ai/status` ile aynı hesap), bilgilendirme metni ve sürümü, eklenen krediler. Dilim 2'de kredi dilimleri (kalan, son tarih), paketler, açık sipariş ve `cardPaymentAvailable` eklenir |
+| `PUT /api/v1/clinics/{clinicId}/ai-settings` | `Clinics.Update` | `{ isEnabled, acknowledgementVersion }`. Açarken güncel sürüm kabul edilmemişse `400 Ai.AcknowledgementRequired`. Denetim kaydına yazılır |
 | `POST /api/v1/ai/credit-orders` | `Subscriptions.Manage` | `{ packCode, paymentMethod: BankTransfer \| Card }`. Havalede sipariş döner; kartta `checkoutUrl` döner |
 | `GET /api/v1/ai/credit-orders` | `Subscriptions.Read` | Kliniğin son siparişleri |
 | `POST /api/v1/ai/credit-orders/{id}/cancel` | `Subscriptions.Manage` | Açık havale talebini iptal eder |
@@ -78,7 +78,7 @@ Sözleşme backend'de `docs/AI_HISTORY_SUMMARY_API_CONTRACT.md`'ye yeni bölüm 
 
 | Dilim | Migration | Değişiklik |
 |---|---|---|
-| 1 | `AddClinicAiAcknowledgement` | `ClinicAiSettings`: `AcknowledgedAtUtc`, `AcknowledgedByUserId`, `AcknowledgementVersion` |
+| 1 | `AddClinicAiAcknowledgement` | `ClinicAiSettings`: `AcknowledgedVersion`, `AcknowledgedAtUtc`, `AcknowledgedByUserId` |
 | 2 | `AddAiCreditOrders` | Yeni `AiCreditOrders` tablosu: klinik, paket, kredi, tutar, para birimi, ödeme yolu, durum, açan, karar veren, gerekçe, fon kaydı. `AiCreditGrants`'e `ExpiresAtUtc` (boşsa süresiz) ve `OrderId` (benzersiz, boş olabilir) eklenir. `AiCreditGrantKind.Purchase = 2` |
 | 3 | `AddBillingCheckoutPurpose` | `BillingCheckoutSessions`'a `Purpose` (varsayılan abonelik) ve `AiCreditOrderId` eklenir |
 
@@ -96,8 +96,8 @@ Yeni izin yok; mevcut izinler kullanılır.
 
 **Backend** (`feature/ai-klinik-ayari`, main'den ayrı çalışma ağacında):
 
-1. `ClinicAiSettings`'e bilgilendirme kabulü eklenir: `Acknowledge(version, userId, now)`. Güncel sürüm kabul edilmeden açılamaz. Migration `AddClinicAiAcknowledgement` yazılır.
-2. Klinik uçları yazılır: `GetClinicAiSettingsQuery` ve `SetClinicAiSettingsCommand` (denetim kaydıyla). Kredi alanları mevcut `AiCreditAccount` hesabından gelir. Fon hareketleri kliniğe kendi kapsamında, iç not olmadan döner.
+1. `ClinicAiSettings`'e bilgilendirme kabulü eklenir: `SetEnabledByClinic(enabled, requiredVersion, acceptedVersion, userId, now)`. Güncel sürüm kabul edilmeden açılamaz. Migration `AddClinicAiAcknowledgement` yazılır.
+2. Klinik uçları yazılır: `GetClinicAiSettingsQuery` ve `UpdateClinicAiSettingsCommand` (denetim kaydıyla). Bilgilendirme metni backend'de tek yerde durur (`AiAcknowledgement`). Kredi alanları mevcut `AiCreditAccount` hesabından gelir. Fon hareketleri kliniğe kendi kapsamında, iç not olmadan döner.
 3. Platformun aç/kapa ucu aynen kalır. Ayar kaydını kimin değiştirdiği zaten tutuluyor.
 4. Birim ve entegrasyon testleri yazılır: yetki (Sekreter ve Veteriner açamaz, `Clinics.Read` okur), kabulsüz açma, kiracı izolasyonu, yanıtta dolar olmaması.
 5. Sözleşme güncellenir.
