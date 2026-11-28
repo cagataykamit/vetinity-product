@@ -47,6 +47,15 @@ Kullanıcı: "Her pakette küçük bir ücretsiz kota olsun, üst paketlerde kot
 - **D5 — API hesabı.** Kullanıcı Claude Console'da (platform.claude.com) kuruluş hesabı açar, kredi yükler, aylık harcama sınırı koyar ve API anahtarını sunucuya kendisi girer; anahtar sohbete ve depoya yazılmaz. Bireysel Claude aboneliği kullanılmaz (Bağlam).
 - **D6 — Kendi sunucuda açık model kullanılmaz** (2026-11-14 değerlendirmesi): canlı sunucuda çalıştırmak API/SQL'i yavaşlatır, ekran kartlı sunucu API maliyetinin çok üstündedir, küçük açık modeller Türkçe tıbbi metinde zayıftır. Yerel işleme yasal zorunluluk olursa yeniden değerlendirilir.
 
+## Değişiklik — 2026-11-28 (kullanıcı kararı): klinik açar, tek seferlik paket, 12 ay
+
+Kapsam ve dilimler: [ai-kredi-satis-kapsami](../ai/ai-kredi-satis-kapsami.md). Madde 1, 6 ve D2 şöyle somutlaşır; diğer maddeler geçerli.
+
+- **E1 — Açma.** AI'yi klinik yöneticisi (`Clinics.Update`) kendi kliniğinde açar ve kapatır; ilk açılışta sürümlü bilgilendirme kabul edilir. Platform yöneticisi yine kapatabilir.
+- **E2 — Satılan.** Yalnız tek seferlik ek kredi paketleri, üç boy (örnek 1.500 / 5.000 / 20.000; büyük paket kredi başına ucuz). Aylık eklenti (madde 4 tablosunun ilk üç satırı) yapılmaz. Fiyatlar backend ayarında; fiyatı girilmemiş paket listelenmez.
+- **E3 — Ödeme.** Havale talebi (platform yöneticisi elle faturalar, "Ödendi" deyince kredi eklenir) ve iyzico tek seferlik kart ödemesi birlikte; kart seçeneği canlı anahtar gelince görünür.
+- **E4 — Ömür.** Satın alınan kredi 12 ay geçerlidir, iade edilmez; önce süresi en erken dolan harcanır. Elle eklenen fon süresiz kalır. TIER-013'teki "fon ömrü ve iade kuralı" açık kararı kapanır.
+
 ## Riskler ve açık noktalar
 
 - **Hukuk (doğrulanmadı):** dövizle fiyatlama kısıtı (32 sayılı Karar, hatırlanan bilgi), yurt dışına veri aktarımı (KVKK), fonun iade koşulları ve satış metinleri. Çalışma varsayımı: TL satış; mümkün olduğunca kimlik bilgisi gönderilmez; klinik açıkça bilgilendirilir; çıktının hatalı olabileceği ve kontrol gerektiği söylenir (ticari koşullar D.3).
